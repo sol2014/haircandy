@@ -6,11 +6,11 @@ CREATE TABLE service
 	`name` VARCHAR(15) NOT NULL,
 	`description` VARCHAR(150),
 	`duration` SMALLINT(2),
-	`price` DECIMAL(4,2) NOT NULL, 
+	`price` DECIMAL(9,2) NOT NULL, 
 	`enabled` BOOLEAN,
 	
 	PRIMARY KEY (`service_no`)
-)TYPE=MyISAM;
+)ENGINE=MyISAM;
 
 /*!40000 ALTER TABLE `service` DISABLE KEYS */;
 /*!40000 ALTER TABLE `service` ENABLE KEYS */;

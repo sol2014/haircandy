@@ -23,10 +23,10 @@ DROP PROCEDURE IF EXISTS SearchSale //
 CREATE PROCEDURE SearchSale(IN p_client_no BIGINT(20),
 							IN p_employee_no BIGINT(20),
 							IN p_payment_type VARCHAR(10),
-							IN p_total_due DECIMAL(5,2),
-							IN p_total_tax DECIMAL(5,2),
+							IN p_total_due DECIMAL(9,2),
+							IN p_total_tax DECIMAL(9,2),
 							IN p_discount TINYINT,
-							IN p_payment DECIMAL(5,2),
+							IN p_payment DECIMAL(9,2),
 							IN p_is_complete BOOLEAN)
 BEGIN
 	SELECT * 
@@ -47,10 +47,10 @@ DROP PROCEDURE IF EXISTS CreateSale//
 CREATE PROCEDURE CreateSale(IN p_client_no BIGINT(20),
 							IN p_employee_no BIGINT(20),
 							IN p_payment_type VARCHAR(10),
-							IN p_total_due DECIMAL(5,2),
-							IN p_total_tax DECIMAL(5,2),
+							IN p_total_due DECIMAL(9,2),
+							IN p_total_tax DECIMAL(9,2),
 							IN p_discount TINYINT,
-							IN p_payment DECIMAL(5,2),
+							IN p_payment DECIMAL(9,2),
 							IN p_is_complete BOOLEAN,
                             OUT p_key BIGINT(20))
 BEGIN
@@ -76,10 +76,10 @@ CREATE PROCEDURE UpdateSale(IN p_transaction_no BIGINT(20),
 							IN p_client_no BIGINT(20),
 							IN p_employee_no BIGINT(20),
 							IN p_payment_type VARCHAR(10),
-							IN p_total_due DECIMAL(5,2),
-							IN p_total_tax DECIMAL(5,2),
+							IN p_total_due DECIMAL(9,2),
+							IN p_total_tax DECIMAL(9,2),
 							IN p_discount TINYINT,
-							IN p_payment DECIMAL(5,2),
+							IN p_payment DECIMAL(9,2),
 							IN p_is_complete BOOLEAN)
 BEGIN
 	UPDATE sale

@@ -120,8 +120,7 @@ public class SaleServlet extends DispatcherServlet
         if (sale != null)
         {
             userSession.setAttribute ("sale_load_result", sale);
-
-            LogController.write ("this is not going to the maintain page");
+			
             forward ("/maintain-sale.jsp", request, response);
         }
         else
@@ -352,12 +351,27 @@ public class SaleServlet extends DispatcherServlet
 		
         String isComplete = request.getParameter ("is_complete");
         sale.setIsComplete (Boolean.parseBoolean (isComplete));
-
-        if (inputFailed)
+		
+		boolean failed = false;
+		
+		// Now check some basics for the sale, did we get enough payment?
+		if (sale.getPayment () < sale.getTotalDue ())
+		{
+			userSession.setAttribute ("sale_error", "You must provide enough payment to cover the total ammount due!");
+			userSession.setAttribute ("sale_error_payment", "");
+			
+			failed = true;
+		}
+		else if (inputFailed)
         {
             userSession.setAttribute ("sale_error", "You have provided invalid input! Review the fields in red.");
 			
-            if (serialized_sale == null)
+			failed = true;
+        }
+		
+		if (failed)
+		{
+			if (serialized_sale == null)
             {
 				userSession.setAttribute ("temp_new_sale", sale);
 				
@@ -380,10 +394,10 @@ public class SaleServlet extends DispatcherServlet
 				
                 redirect ("sale?sale_action=Load&transaction_no=" + sale.getTransactionNo (), request, response);
             }
-
-            return;
-        }
-
+			
+			return;
+		}
+		
         if (SessionController.loadEmployee (userSession, employee) == null)
         {
             userSession.setAttribute ("sale_error", "The employee ID used is invalid! Review the fields in red.");

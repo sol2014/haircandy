@@ -7,7 +7,7 @@ CREATE TABLE employeeservice
 	CONSTRAINT `employee_no_fk` FOREIGN KEY(`employee_no`) REFERENCES employee(`employee_no`),
 	CONSTRAINT `service_no_fk` FOREIGN KEY(`service_no`) REFERENCES service(`service_no`),
 	PRIMARY KEY (`employee_no`, `service_no`)
-)TYPE=MyISAM;
+)ENGINE=MyISAM;
 
 /*!40000 ALTER TABLE `employeeservice` DISABLE KEYS */;
 /*!40000 ALTER TABLE `employeeservice` ENABLE KEYS */;

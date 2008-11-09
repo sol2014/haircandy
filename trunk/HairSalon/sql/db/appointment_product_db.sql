@@ -9,7 +9,7 @@ CREATE TABLE appointmentproduct
 	CONSTRAINT `appointment_no_fk` FOREIGN KEY (`appointment_no`) REFERENCES appointment(`appointment_no`),
 	CONSTRAINT `product_no_fk` FOREIGN KEY(`product_no`) REFERENCES product(`product_no`),
 	PRIMARY KEY (`appointment_no`, `product_no`)
-)TYPE=MYISAM;
+)ENGINE=MyISAM;
 
 /*!40000 ALTER TABLE `appointmentproduct` DISABLE KEYS */;
 /*!40000 ALTER TABLE `appointmentproduct` ENABLE KEYS */;

@@ -10,4 +10,4 @@ CREATE TABLE alert
 	`record_no` BIGINT(20),
 	
 	PRIMARY KEY (`alert_no`)
-)TYPE=MYISAM;
+)ENGINE=MyISAM;

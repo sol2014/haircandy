@@ -28,7 +28,7 @@ CREATE TABLE employee
 
 	CONSTRAINT `address_no_fk` FOREIGN KEY(`address_no`) REFERENCES address(`address_no`),
 	PRIMARY KEY (`employee_no`)
-)TYPE=MyISAM;
+)ENGINE=MyISAM;
 
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;

@@ -10,7 +10,7 @@ CREATE TABLE supplier
 	
 	CONSTRAINT `address_no_fk` FOREIGN KEY(`address_no`) REFERENCES address(`address_no`),
 	PRIMARY KEY (`supplier_no`)
-)TYPE=MYISAM;
+)ENGINE=MyISAM;
 
 /*!40000 ALTER TABLE `supplier` DISABLE KEYS */;
 /*!40000 ALTER TABLE `supplier` ENABLE KEYS */;

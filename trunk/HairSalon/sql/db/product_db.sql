@@ -9,12 +9,12 @@ CREATE TABLE `product`
 	`stock_qty` INTEGER NOT NULL, 
 	`min_level` INTEGER  NOT NULL,
 	`qty_per` INTEGER NOT NULL, 
-	`price` DECIMAL(4,2) NOT NULL, 
+	`price` DECIMAL(9,2) NOT NULL, 
 	`unit` VARCHAR(5) NOT NULL, 
 	`enabled` BOOLEAN,
 	
 	PRIMARY KEY (`product_no`)
-)TYPE=MyISAM;
+)ENGINE=MyISAM;
 
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;

@@ -27,7 +27,7 @@ CREATE TABLE `salon`
 	`saturday_end` TIME NOT NULL,
 	`sunday_start` TIME NOT NULL,
 	`sunday_end` TIME NOT NULL
-)TYPE=MyISAM;
+)ENGINE=MyISAM;
 
 /*!40000 ALTER TABLE `salon` DISABLE KEYS */;
 /*!40000 ALTER TABLE `salon` ENABLE KEYS */;

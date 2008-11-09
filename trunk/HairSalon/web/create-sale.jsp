@@ -225,14 +225,14 @@ String error_string = (String) userSession.moveAttribute("sale_error");
                 Enumeration<ProductBean> pe = sale.getProductSold().keys();
                 while (pe.hasMoreElements()) {
                     ProductBean pb = pe.nextElement();%>
-                        addInitialProduct ('<%=pb.getProductNo()%>', '<%=pb.getName()%>', '<%=sale.getProductSold().get(pb)%>');
+                        addInitialProduct ('<%=pb.getProductNo()%>', '<%=pb.getName()%>', '<%=pb.getPrice()%>', '<%=sale.getProductSold().get(pb)%>');
         <% }%>
             
         <%
                 Enumeration<ServiceBean> se = sale.getServiceSold().keys();
                 while (se.hasMoreElements()) {
                     ServiceBean sb = se.nextElement();%>
-                        addInitialService ('<%=sb.getServiceNo()%>', '<%=sb.getName()%>', '<%=sale.getServiceSold().get(sb)%>');
+                        addInitialService ('<%=sb.getServiceNo()%>', '<%=sb.getName()%>', '<%=sb.getPrice()%>', '<%=sale.getServiceSold().get(sb)%>');
         <% }
             }%>
 </script>

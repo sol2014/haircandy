@@ -5,7 +5,7 @@ CREATE TABLE scheduleexception
 	`reason` VARCHAR(150),
 	
 	PRIMARY KEY (`date`)
-)TYPE=MYISAM;
+)ENGINE=MyISAM;
 
 /*!40000 ALTER TABLE `scheduleexception` DISABLE KEYS */;
 /*!40000 ALTER TABLE `scheduleexception` ENABLE KEYS */;

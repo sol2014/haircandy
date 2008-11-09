@@ -99,6 +99,8 @@ function refillServicesList()
         {
             service.quantity = document.getElementById("st_"+service.id).value;
         }
+        if (service.quantity == null)
+            alert("service quantity is null in data");
         queryString+="quantity="+service.quantity+"&";
         queryString+="price="+service.price+"&";
     }
@@ -108,9 +110,9 @@ function refillServicesList()
     calculateTotal ();
 }
 
-function addInitialProduct (id, name, quantity)
+function addInitialProduct (id, name, price, quantity)
 {
-    products.push (new product (id, name, quantity));
+    products.push (new product (id, name, price, quantity));
 }
 
 function refillProductsList ()

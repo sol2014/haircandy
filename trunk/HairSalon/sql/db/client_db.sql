@@ -11,7 +11,7 @@ CREATE TABLE client
 	CONSTRAINT `client_address_no_fk` FOREIGN KEY (`address_no`) REFERENCES address(`address_no`),	
 	PRIMARY KEY (`client_no`),
 	UNIQUE KEY (`phone_number`)
-)TYPE=MYISAM;
+)ENGINE=MyISAM;
 
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;

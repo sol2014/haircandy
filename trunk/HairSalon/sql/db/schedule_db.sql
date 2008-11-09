@@ -10,7 +10,7 @@ CREATE TABLE schedule
 	
 	CONSTRAINT `employee_sch_no_fk` FOREIGN KEY(`employee_no`) REFERENCES employee(`employee_no`),
 	PRIMARY KEY (`schedule_no`)
-)TYPE=MyISAM;
+)ENGINE=MyISAM;
 
 /*!40000 ALTER TABLE `schedule` DISABLE KEYS */;
 /*!40000 ALTER TABLE `schedule` ENABLE KEYS */;

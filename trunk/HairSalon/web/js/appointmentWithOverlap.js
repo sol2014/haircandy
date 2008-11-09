@@ -54,6 +54,8 @@ var appointments = new Array();//array that holds all the appointments' informat
 
 function addIntialAppointment(duration, row, column, appointmentId)//function used to add entry on page load
 {
+    alert(duration+" "+row+ " "+column+" "+appointmentId);
+    return;
     ratio = duration;
     var appointmentCells = new Array();
     var start = row;
@@ -145,6 +147,7 @@ function addIntialAppointment(duration, row, column, appointmentId)//function us
 
 function addUnavailableEntry(duration, row, column)//function used to add entry on page load
 {
+    alert(duration+" "+row+" "+column);
     ratio = duration;
     var start = row;
     var end = parseInt(start) + parseInt(ratio);

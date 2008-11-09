@@ -12,7 +12,7 @@ CREATE TABLE address
 	`email` VARCHAR(50),
 	
 	PRIMARY KEY (`address_no`)
-)TYPE=MyISAM;
+)ENGINE=MyISAM;
 
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;

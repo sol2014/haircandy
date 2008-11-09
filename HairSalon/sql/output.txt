@@ -1013,3 +1013,5757 @@ Query OK, 0 rows affected (0.00 sec)
 Query OK, 0 rows affected (0.00 sec)
 
 mysql> quit
+mysql> source create_db.sql >output2.txt
+ERROR: 
+Failed to open file 'create_db.sql >output2.txt', error: 2
+mysql> source create_db.sql >output2.txt
+ERROR: 
+Failed to open file 'create_db.sql >output2.txt', error: 2
+mysql> source create_db.sql
+--------------
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET NAMES utf8 */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE=`NO_AUTO_VALUE_ON_ZERO` */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE DATABASE IF NOT EXISTS cmps350_hairsalon
+--------------
+
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+Note (Code 1007): Can't create database 'cmps350_hairsalon'; database exists
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+--------------
+DROP TABLE IF EXISTS `salon`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE `salon`
+(
+	`name` VARCHAR(50) NOT NULL,
+	`address1` VARCHAR(50),
+	`address2` VARCHAR(50),
+	`city` VARCHAR(15),
+	`province` VARCHAR(15),
+	`country` VARCHAR(15),
+	`postal_code` VARCHAR(6),
+	`phone_number` VARCHAR(10),
+	`email` VARCHAR(50),
+	`tax_rate` DECIMAL(2,2) NOT NULL,
+	`hair_stations` TINYINT NOT NULL,
+	`beauty_stations` TINYINT NOT NULL,
+	`monday_start` TIME NOT NULL,
+	`monday_end` TIME NOT NULL,
+	`tuesday_start` TIME NOT NULL,
+	`tuesday_end` TIME NOT NULL,
+	`wednesday_start` TIME NOT NULL,
+	`wednesday_end` TIME NOT NULL,
+	`thursday_start` TIME NOT NULL,
+	`thursday_end` TIME NOT NULL,
+	`friday_start` TIME NOT NULL,
+	`friday_end` TIME NOT NULL,
+	`saturday_start` TIME NOT NULL,
+	`saturday_end` TIME NOT NULL,
+	`sunday_start` TIME NOT NULL,
+	`sunday_end` TIME NOT NULL
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `salon` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `salon` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `product`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE `product`
+(
+	`product_no` BIGINT(20) UNSIGNED NOT NULL auto_increment,
+	
+	`brand` VARCHAR(25) NOT NULL,
+	`product_name` VARCHAR(25) NOT NULL,
+	`product_type` VARCHAR(25),
+	`stock_qty` INTEGER NOT NULL, 
+	`min_level` INTEGER  NOT NULL,
+	`qty_per` INTEGER NOT NULL, 
+	`price` DECIMAL(4,2) NOT NULL, 
+	`unit` VARCHAR(5) NOT NULL, 
+	`enabled` BOOLEAN,
+	
+	PRIMARY KEY (`product_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `product` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `product` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `client`
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+
+--------------
+CREATE TABLE client
+(
+	`client_no` BIGINT(20) UNSIGNED NOT NULL auto_increment,
+	`first_name` VARCHAR(15) NOT NULL,
+	`last_name` VARCHAR(15) NOT NULL,
+	`address_no` BIGINT(20) UNSIGNED NOT NULL,	
+	`phone_number` VARCHAR(10) NOT NULL,
+	`enabled` BOOLEAN,
+	
+	CONSTRAINT `client_address_no_fk` FOREIGN KEY (`address_no`) REFERENCES address(`address_no`),	
+	PRIMARY KEY (`client_no`),
+	UNIQUE KEY (`phone_number`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `client` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `client` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `schedule`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE schedule
+(
+	`schedule_no` BIGINT(20) UNSIGNED NOT NULL auto_increment,
+	
+	`employee_no` BIGINT(20) UNSIGNED NOT NULL,
+	`date` DATE NOT NULL,
+	`start_time` TIME NOT NULL,
+	`end_time` TIME NOT NULL,
+	
+	CONSTRAINT `employee_sch_no_fk` FOREIGN KEY(`employee_no`) REFERENCES employee(`employee_no`),
+	PRIMARY KEY (`schedule_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `schedule` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `schedule` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `service`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE service
+(
+	`service_no` BIGINT(20) UNSIGNED NOT NULL auto_increment,
+	
+	`name` VARCHAR(15) NOT NULL,
+	`description` VARCHAR(150),
+	`duration` SMALLINT(2),
+	`price` DECIMAL(4,2) NOT NULL, 
+	`enabled` BOOLEAN,
+	
+	PRIMARY KEY (`service_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `service` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `service` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `address`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE address
+(
+	`address_no` BIGINT(20) UNSIGNED NOT NULL auto_increment,
+	
+	`address1` VARCHAR(50),
+	`address2` VARCHAR(50),
+	`city` VARCHAR(15),
+        `province` VARCHAR(15),
+	`country` VARCHAR(15),
+	`postal_code` VARCHAR(6),
+	`email` VARCHAR(50),
+	
+	PRIMARY KEY (`address_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+
+--------------
+/*!40000 ALTER TABLE `address` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `address` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `employee`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE employee
+(
+    `employee_no` BIGINT(20) UNSIGNED NOT NULL auto_increment,
+    
+	`address_no` BIGINT(20) UNSIGNED NOT NULL,
+	`password` VARCHAR(15) NOT NULL,
+	`first_name` VARCHAR(25) NOT NULL,
+	`last_name` VARCHAR(25) NOT NULL,
+	`phone_number` VARCHAR(10),
+	`role` VARCHAR(15),
+	`enabled` BOOLEAN,
+	
+	`monday_start` TIME NOT NULL,
+	`monday_end` TIME NOT NULL,
+	`tuesday_start` TIME NOT NULL,
+	`tuesday_end` TIME NOT NULL,
+	`wednesday_start` TIME NOT NULL,
+	`wednesday_end` TIME NOT NULL,
+	`thursday_start` TIME NOT NULL,
+	`thursday_end` TIME NOT NULL,
+	`friday_start` TIME NOT NULL,
+	`friday_end` TIME NOT NULL,
+	`saturday_start` TIME NOT NULL,
+	`saturday_end` TIME NOT NULL,
+	`sunday_start` TIME NOT NULL,
+	`sunday_end` TIME NOT NULL,
+
+	CONSTRAINT `address_no_fk` FOREIGN KEY(`address_no`) REFERENCES address(`address_no`),
+	PRIMARY KEY (`employee_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `employee` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `employee` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `employeeservice`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE employeeservice
+(
+	`employee_no` BIGINT(20) UNSIGNED NOT NULL,
+	`service_no` BIGINT(20) UNSIGNED NOT NULL,
+	
+	CONSTRAINT `employee_no_fk` FOREIGN KEY(`employee_no`) REFERENCES employee(`employee_no`),
+	CONSTRAINT `service_no_fk` FOREIGN KEY(`service_no`) REFERENCES service(`service_no`),
+	PRIMARY KEY (`employee_no`, `service_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `employeeservice` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `employeeservice` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `serviceproduct`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE serviceproduct
+(
+	`product_no` BIGINT(20) UNSIGNED NOT NULL,
+	`service_no` BIGINT(20) UNSIGNED NOT NULL,
+	
+	`amount` INTEGER,
+	
+	CONSTRAINT `product_no_fk` FOREIGN KEY(`product_no`) REFERENCES product(`product_no`),
+	CONSTRAINT `service_no_fk` FOREIGN KEY(`service_no`) REFERENCES service(`service_no`),
+	PRIMARY KEY (`product_no`, `service_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `serviceproduct` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `serviceproduct` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `supplier`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE supplier
+(
+	`supplier_no` BIGINT(20) UNSIGNED NOT NULL auto_increment,
+	`address_no` BIGINT(20) UNSIGNED NOT NULL,
+	`supplier_name` VARCHAR(50) NOT NULL,
+	`description` VARCHAR(150),
+	`phone_number` VARCHAR(10),
+	`enabled` BOOLEAN,
+	
+	CONSTRAINT `address_no_fk` FOREIGN KEY(`address_no`) REFERENCES address(`address_no`),
+	PRIMARY KEY (`supplier_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `supplier` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `supplier` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `supplierproduct`
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+
+--------------
+CREATE TABLE supplierproduct
+(
+	`supplier_no` BIGINT(20) UNSIGNED NOT NULL,
+	`product_no`  BIGINT(20) UNSIGNED NOT NULL,
+	
+	CONSTRAINT `supplier_no_fk` FOREIGN KEY(`supplier_no`) REFERENCES supplier(`supplier_no`),
+	CONSTRAINT `product_no_fk` FOREIGN KEY(`product_no`) REFERENCES product(`product_no`),
+	PRIMARY KEY (`supplier_no`, `product_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `supplierproduct` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `supplierproduct` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `scheduleexception`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE scheduleexception
+(
+	`date` DATE NOT NULL,
+	`reason` VARCHAR(150),
+	
+	PRIMARY KEY (`date`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `scheduleexception` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `scheduleexception` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `availabilityexception`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE availabilityexception
+(
+	`employee_no` BIGINT(20) UNSIGNED NOT NULL,
+	`date` DATE NOT NULL,
+	`reason` VARCHAR(150),
+	
+	CONSTRAINT `employee_no_fk` FOREIGN KEY (`employee_no`) REFERENCES employee(`employee_no`),
+	PRIMARY KEY (`employee_no`, `date`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `availabilityexception` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `availabilityexception` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `sale`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE sale
+(
+	`transaction_no` BIGINT(20) UNSIGNED NOT NULL auto_increment,
+	
+	`client_no` BIGINT(20) UNSIGNED NOT NULL,
+	`employee_no` BIGINT(20) UNSIGNED NOT NULL,
+	`payment_type` VARCHAR(10) NOT NULL,
+	`total_due` DECIMAL(9,2),
+	`total_tax` DECIMAL(9,2),
+	`discount` TINYINT,
+	`payment` DECIMAL(9,2),
+	`is_complete` BOOLEAN,
+	
+	CONSTRAINT `client_sale_no_fk` FOREIGN KEY(`client_no`) REFERENCES client(`client_no`),
+	CONSTRAINT `employee_sale_no_fk` FOREIGN KEY(`employee_no`) REFERENCES employee(`employee_no`),
+	PRIMARY KEY (`transaction_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `sale` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `sale` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `saleproduct`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE saleproduct
+(
+	`transaction_no` BIGINT(20) UNSIGNED NOT NULL,
+	`product_no` BIGINT(20) UNSIGNED NOT NULL,
+
+	`amount` INTEGER,
+
+	CONSTRAINT `sp_transaction_no_fk` FOREIGN KEY (`transaction_no`) REFERENCES sale(`transaction_no`),
+	CONSTRAINT `product_no_fk` FOREIGN KEY(`product_no`) REFERENCES product(`product_no`),
+	PRIMARY KEY (`transaction_no`, `product_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `saleproduct` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `saleproduct` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `saleservice`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE saleservice
+(
+	`transaction_no` BIGINT(20) UNSIGNED NOT NULL,
+	`service_no` BIGINT(20) UNSIGNED NOT NULL,
+	
+	`amount` INTEGER,
+    
+	CONSTRAINT `ss_transaction_no_fk` FOREIGN KEY (`transaction_no`) REFERENCES sale(`transaction_no`),
+	CONSTRAINT `service_no_fk` FOREIGN KEY(`service_no`) REFERENCES service(`service_no`),
+	PRIMARY KEY (`transaction_no`, `service_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `saleservice` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `saleservice` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `appointment`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE appointment
+(
+	`appointment_no` BIGINT(20) UNSIGNED NOT NULL auto_increment,
+	
+	`client_no` BIGINT(20) UNSIGNED NOT NULL,
+	`employee_no` BIGINT(20) UNSIGNED NOT NULL,
+	`ap_date` DATE,
+	`start_time` TIME,
+	`end_time` TIME,
+	`is_complete` BOOLEAN,
+	
+	CONSTRAINT `client_appointment_no_fk` FOREIGN KEY(`client_no`) REFERENCES client(`client_no`),
+	CONSTRAINT `employee_appointment_no_fk` FOREIGN KEY(`employee_no`) REFERENCES employee(`employee_no`),
+	PRIMARY KEY (`appointment_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+
+--------------
+/*!40000 ALTER TABLE `appointment` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `appointment` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `appointmentservice`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE appointmentservice
+(
+	`appointment_no` BIGINT(20) UNSIGNED NOT NULL,
+	`service_no` BIGINT(20) UNSIGNED NOT NULL,
+	
+	`amount` INTEGER,
+
+	CONSTRAINT `appointment_ser_no_fk` FOREIGN KEY (`appointment_no`) REFERENCES appointment(`appointment_no`),
+	CONSTRAINT `service_no_fk` FOREIGN KEY(`service_no`) REFERENCES service(`service_no`),
+	PRIMARY KEY (`appointment_no`, `service_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `appointmentservice` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `appointmentservice` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `appointmentproduct`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE appointmentproduct
+(
+	`appointment_no` BIGINT(20) UNSIGNED NOT NULL,
+	`product_no` BIGINT(20) UNSIGNED NOT NULL,
+	
+	`amount` INTEGER,
+	
+	CONSTRAINT `appointment_no_fk` FOREIGN KEY (`appointment_no`) REFERENCES appointment(`appointment_no`),
+	CONSTRAINT `product_no_fk` FOREIGN KEY(`product_no`) REFERENCES product(`product_no`),
+	PRIMARY KEY (`appointment_no`, `product_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `appointmentproduct` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+
+--------------
+/*!40000 ALTER TABLE `appointmentproduct` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `alert`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE alert
+(
+	`alert_no` BIGINT(20) UNSIGNED NOT NULL auto_increment,
+	`alert_type` VARCHAR(10) NOT NULL,
+	`level` VARCHAR(10) NOT NULL,
+	`date` DATE NOT NULL,
+	`message` VARCHAR(15) NOT NULL,
+	`link` VARCHAR(100),
+	`record_no` BIGINT(20),
+	
+	PRIMARY KEY (`alert_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS LoadAddress
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE LoadAddress (IN p_address_no BIGINT(20))
+BEGIN
+	SELECT * FROM address
+		WHERE address_no = p_address_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS SearchAddress
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE SearchAddress (IN p_address1 VARCHAR(50),
+								IN p_address2 VARCHAR(50),
+								IN p_city VARCHAR(15),
+                                IN p_province VARCHAR(15),
+								IN p_country VARCHAR(15),
+								IN p_postal_code VARCHAR(6),
+								IN p_email VARCHAR(50))
+BEGIN
+	SELECT * FROM address
+		WHERE ((p_address1 IS NULL ) OR (address1 = p_address1))
+		AND ((p_address2 IS NULL) OR (address2 = p_address2))
+		AND ((p_city IS NULL ) OR (city = p_city))
+        AND ((p_province IS NULL) OR (province = p_province))
+		AND ((p_country IS NULL) OR (country = p_country))
+		AND ((p_postal_code IS NULL ) OR (postal_code = p_postal_code))
+		AND ((p_email IS NULL ) OR (email = p_email));
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS CreateAddress
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE CreateAddress (IN p_address1 VARCHAR(50),
+								IN p_address2 VARCHAR(50),
+								IN p_city VARCHAR(15),
+                                IN p_province VARCHAR(15),
+								IN p_country VARCHAR(15),
+								IN p_postal_code VARCHAR(6),
+								IN p_email VARCHAR(50), OUT p_key BIGINT(20))
+BEGIN
+	INSERT INTO address (address1, address2, city, province, country, postal_code, email)
+		VALUES (p_address1, p_address2, p_city, p_province, p_country, p_postal_code, p_email);
+
+    set p_key = LAST_INSERT_ID();
+
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS UpdateAddress
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+
+--------------
+CREATE PROCEDURE UpdateAddress (IN p_address_no BIGINT(20),
+								IN p_address1 VARCHAR(50),
+								IN p_address2 VARCHAR(50),
+								IN p_city VARCHAR(15),
+								IN p_province VARCHAR(15),
+								IN p_country VARCHAR(15),
+								IN p_postal_code VARCHAR(6),
+								IN p_email VARCHAR(50))
+BEGIN
+	UPDATE address
+    SET address1 = p_address1,
+      address2 = p_address2,
+      city = p_city,
+      province = p_province,
+      country = p_country,
+      postal_code = p_postal_code,
+      email = p_email
+    WHERE address_no = p_address_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteAddress
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteAddress (IN p_address_no BIGINT(20))
+BEGIN
+    DELETE FROM address
+        WHERE address_no = p_address_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS LoadAppointment
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE LoadAppointment (IN p_appointment_no BIGINT(20))
+BEGIN
+	SELECT * FROM appointment
+		WHERE appointment_no = p_appointment_no;
+
+	SELECT * FROM appointmentservice
+        WHERE appointment_no = p_appointment_no;
+
+    SELECT * FROM appointmentproduct
+        WHERE appointment_no = p_appointment_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS SearchAppointment
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE SearchAppointment (IN p_client_no BIGINT(20),
+									IN p_employee_no BIGINT(20),
+									IN p_ap_date DATE,
+									IN p_start_time TIME,
+									IN p_end_time TIME,
+									IN p_is_complete BOOLEAN)
+BEGIN
+	SELECT * 
+	FROM appointment
+	WHERE ((p_client_no IS NULL) OR (client_no =p_client_no))
+	AND ((p_employee_no IS NULL) OR (employee_no =p_employee_no))
+	AND ((p_ap_date IS NULL) OR (ap_date = p_ap_date))
+	AND ((p_start_time IS NULL) OR (start_time = p_start_time))
+	AND ((p_end_time IS NULL) OR (end_time = p_end_time))
+	AND ((p_is_complete IS NULL) OR (is_complete = p_is_complete));
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS CreateAppointment
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE CreateAppointment (IN p_client_no BIGINT(20),
+									IN p_employee_no BIGINT(20),
+                                    IN p_ap_date DATE,
+                                    IN p_start_time TIME,
+                                    IN p_end_time TIME,
+                                    IN p_is_complete BOOLEAN,
+									OUT p_key BIGINT(20))
+BEGIN
+    INSERT INTO appointment (client_no, employee_no, ap_date, start_time, end_time, is_complete)
+    VALUES (p_client_no, p_employee_no, p_ap_date, p_start_time, p_end_time, p_is_complete);
+
+	SET p_key = LAST_INSERT_ID();
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS UpdateAppointment
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE UpdateAppointment (IN p_appointment_no BIGINT(20),
+									IN p_client_no BIGINT(20),
+									IN p_employee_no BIGINT(20),
+									IN p_ap_date DATE,
+									IN p_start_time TIME,
+									IN p_end_time TIME,
+									IN p_is_complete BOOLEAN)
+BEGIN
+	UPDATE appointment
+	SET client_no = p_client_no,
+		employee_no = p_employee_no,
+		ap_date = p_ap_date,
+		start_time = p_start_time,
+		end_time = p_end_time,
+		is_complete = p_is_complete
+	WHERE appointment_no = p_appointment_no;
+	
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteAppointment
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteAppointment (IN p_appointment_no BIGINT(20))
+BEGIN
+    DELETE FROM appointment
+        WHERE appointment_no = p_appointment_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS AddAppointmentProduct
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE AddAppointmentProduct (IN p_appointment_no BIGINT(20), IN p_product_no BIGINT(20), IN p_amount INTEGER)
+BEGIN
+    INSERT INTO appointmentproduct (appointment_no, product_no, amount) VALUES (p_appointment_no, p_product_no, p_amount);
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteAppointmentProducts
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteAppointmentProducts (IN p_appointment_no BIGINT(20))
+BEGIN
+    DELETE FROM appointmentproduct
+    WHERE appointment_no = p_appointment_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS AddAppointmentService
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE AddAppointmentService (IN p_appointment_no BIGINT(20), IN p_service_no BIGINT(20), IN p_amount INTEGER)
+BEGIN
+    INSERT INTO appointmentservice (appointment_no, service_no, amount) VALUES (p_appointment_no, p_service_no, p_amount);
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteAppointmentServices
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteAppointmentServices (IN p_appointment_no BIGINT(20))
+BEGIN
+    DELETE FROM appointmentservice
+    WHERE appointment_no = p_appointment_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS LoadAvailabilityException
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE LoadAvailabilityException (IN p_employee_no BIGINT(20), IN p_date DATE)
+BEGIN
+	SELECT * FROM availabilityexception
+		WHERE employee_no = p_employee_no
+          AND date = p_date;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS SearchAvailabilityException
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE SearchAvailabilityException (IN p_employee_no BIGINT(20),
+												IN p_date DATE,
+												IN p_reason VARCHAR(150))
+BEGIN
+    SELECT * from availabilityexception
+    WHERE ((p_employee_no IS NULL) OR (employee_no = p_employee_no))
+		AND ((p_date IS NULL) OR (date = p_date))
+		AND ((p_reason IS NULL) OR (reason = p_reason));
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS CreateAvailabilityException
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE CreateAvailabilityException(IN p_employee_no BIGINT(20),
+                IN p_date DATE,
+				IN p_reason VARCHAR(150))
+BEGIN
+    DELETE FROM availabilityexception
+    WHERE employee_no = p_employee_no
+      AND date = p_date;
+    
+    INSERT INTO availabilityexception (employee_no, date, reason)
+    VALUES (p_employee_no, p_date, p_reason);
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteAvailabilityException
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteAvailabilityException(IN p_employee_no BIGINT(20), IN p_date DATE)
+BEGIN
+    DELETE FROM availabilityexception
+    WHERE employee_no = p_employee_no
+      AND date = p_date;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteAvailabilityExceptions
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteAvailabilityExceptions(IN p_employee_no BIGINT(20))
+BEGIN
+    DELETE FROM availabilityexception
+    WHERE employee_no = p_employee_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS LoadClient
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE LoadClient (IN p_client_no BIGINT)
+BEGIN
+	SELECT * FROM client
+		WHERE client_no = p_client_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS SearchClient
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE SearchClient (IN p_first_name VARCHAR(15),
+                                IN p_last_name VARCHAR(15),
+                                IN p_phone_number VARCHAR(10),
+								IN p_address1 VARCHAR(50),
+								IN p_address2 VARCHAR(50),
+								IN p_city VARCHAR(15),
+                                IN p_province VARCHAR(15),
+								IN p_country VARCHAR(15),
+								IN p_postal_code VARCHAR(6),
+								IN p_email VARCHAR(50),
+								IN p_enabled Boolean)
+BEGIN
+    SELECT * FROM client
+		WHERE ( address_no IN (
+			SELECT address_no FROM `address`
+                WHERE ((p_address1 IS NULL) OR (address1 LIKE CONCAT("%",p_address1,"%")))
+				AND ((p_address2 IS NULL) OR (address2 LIKE CONCAT("%",p_address2,"%")))
+				AND ((p_city IS NULL) OR (city LIKE CONCAT("%",p_city,"%")))
+				AND ((p_province IS NULL) OR (province LIKE CONCAT("%",p_province,"%")))
+				AND ((p_country IS NULL) OR (country LIKE CONCAT("%",p_country,"%")))
+				AND ((p_postal_code IS NULL) OR (postal_code LIKE CONCAT("%",p_postal_code,"%")))
+				AND ((p_email IS NULL) OR (email LIKE CONCAT("%",p_email,"%"))) ) )
+		AND ((p_first_name IS NULL) OR (first_name LIKE CONCAT("%",p_first_name,"%")))
+		AND ((p_last_name IS NULL) OR (last_name LIKE CONCAT("%",p_last_name,"%")))
+		AND ((p_phone_number IS NULL) OR (phone_number LIKE CONCAT("%",p_phone_number,"%")))
+		AND ((p_enabled IS NULL ) OR (enabled = p_enabled))
+		ORDER BY last_name ASC;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS CreateClient
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE CreateClient (IN p_first_name VARCHAR(15),
+                                 IN p_last_name VARCHAR(15),
+                                 IN p_address_no BIGINT(20),
+                                 IN p_phone_number VARCHAR(10),
+									IN p_enabled Boolean,
+									OUT p_key BIGINT(20))
+BEGIN
+    INSERT INTO client (first_name, last_name, address_no, phone_number,enabled)
+    VALUES (p_first_name, p_last_name, p_address_no, p_phone_number,p_enabled);
+
+	SET p_key = LAST_INSERT_ID();
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS UpdateClient
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE UpdateClient (IN p_client_no BIGINT(20),
+                                IN p_first_name VARCHAR(15),
+                                IN p_last_name VARCHAR(15),
+                                IN p_address_no BIGINT(20),
+                                IN p_phone_number VARCHAR(10),
+								IN p_enabled Boolean)
+BEGIN
+	UPDATE client
+	SET first_name = p_first_name,
+            last_name = p_last_name,
+            address_no = p_address_no,
+            phone_number = p_phone_number,
+			enabled = p_enabled
+	WHERE client_no = p_client_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteClient
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteClient(IN p_client_no BIGINT(20))
+BEGIN 
+    DELETE FROM client
+    WHERE client_no = p_client_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS LoadEmployee
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE LoadEmployee (IN p_employee_no BIGINT(20))
+BEGIN
+	SELECT * FROM employee
+		WHERE employee_no = p_employee_no;
+		
+	SELECT * FROM service
+        WHERE service_no IN
+        (
+            SELECT service_no FROM employeeservice
+                WHERE employee_no = p_employee_no
+        );
+	
+    SELECT * FROM availabilityexception
+        WHERE employee_no = p_employee_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS AuthenticateEmployee
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE AuthenticateEmployee (IN p_employee_no BIGINT(20),
+										IN p_password VARCHAR(15))
+BEGIN
+	SELECT * FROM employee
+		WHERE password = p_password
+		AND employee_no = p_employee_no
+		AND enabled = true;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS SearchEmployee
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE SearchEmployee (IN p_employee_no BIGINT(20),
+								IN p_password VARCHAR(15),
+								IN p_first_name VARCHAR(25),
+                                IN p_last_name VARCHAR(25),
+                                IN p_phone_number VARCHAR(10),
+                                IN p_role VARCHAR(15),
+                                IN p_address1 VARCHAR(50),
+								IN p_address2 VARCHAR(50),
+								IN p_city VARCHAR(15),
+                                IN p_province VARCHAR(15),
+								IN p_country VARCHAR(15),
+								IN p_postal_code VARCHAR(6),
+								IN p_email VARCHAR(50),
+								IN p_enabled BOOLEAN)
+BEGIN
+	SELECT * FROM employee
+        WHERE ( address_no IN (
+                SELECT address_no FROM `address`
+                  WHERE ((p_address1 IS NULL) OR (address1 LIKE CONCAT("%",p_address1,"%")))
+                  AND ((p_address2 IS NULL) OR (address2 LIKE CONCAT("%",p_address2,"%")))
+                  AND ((p_city IS NULL) OR (city LIKE CONCAT("%",p_city,"%")))
+                  AND ((p_province IS NULL) OR (province LIKE CONCAT("%",p_province,"%")))
+                  AND ((p_country IS NULL) OR (country LIKE CONCAT("%",p_country,"%")))
+                  AND ((p_postal_code IS NULL) OR (postal_code LIKE CONCAT("%",p_postal_code,"%")))
+                  AND ((p_email IS NULL) OR (email LIKE CONCAT("%",p_email,"%"))) ) )
+		AND ((p_employee_no IS NULL) OR (employee_no = p_employee_no))
+		AND ((p_password IS NULl) OR (password = p_password))
+		AND ((p_first_name IS NULL) OR (first_name LIKE CONCAT("%",p_first_name,"%")))
+		AND ((p_last_name IS NULL ) OR (last_name LIKE CONCAT("%",p_last_name,"%")))
+		AND ((p_phone_number IS NULL) OR (phone_number LIKE CONCAT("%",p_phone_number,"%")))
+		AND ((p_role IS NULL ) OR (role = p_role))
+		AND ((p_enabled IS NULL ) OR (enabled = p_enabled))
+		ORDER BY last_name ASC;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS CreateEmployee
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE CreateEmployee (IN p_address_no BIGINT(20),
+								IN p_password VARCHAR(15),
+								IN p_first_name VARCHAR(25),
+								IN p_last_name VARCHAR(25),
+								IN p_phone_number VARCHAR(10),
+								IN p_role VARCHAR(15),
+								IN p_monday_start TIME,
+								IN p_monday_end TIME,
+								IN p_tuesday_start TIME,
+								IN p_tuesday_end TIME,
+								IN p_wednesday_start TIME,
+								IN p_wednesday_end TIME,
+								IN p_thursday_start TIME,
+								IN p_thursday_end TIME,
+								IN p_friday_start TIME,
+								IN p_friday_end TIME,
+								IN p_saturday_start TIME,
+								IN p_saturday_end TIME,
+								IN p_sunday_start TIME,
+								IN p_sunday_end TIME,
+								IN p_enabled BOOLEAN,
+								OUT p_key BIGINT(20))
+BEGIN
+	INSERT INTO employee (address_no, password, first_name, last_name, phone_number, role,
+		monday_start, monday_end, tuesday_start, tuesday_end,wednesday_start,wednesday_end,
+		thursday_start,thursday_end,friday_start,friday_end,saturday_start,saturday_end,sunday_start,sunday_end,enabled)
+		VALUES (p_address_no, p_password, p_first_name, p_last_name, p_phone_number, p_role,
+		p_monday_start, p_monday_end, p_tuesday_start, p_tuesday_end, p_wednesday_start,
+		p_wednesday_end, p_thursday_start, p_thursday_end, p_friday_start, p_friday_end,
+		p_saturday_start, p_saturday_end, p_sunday_start, p_sunday_end,p_enabled);
+	
+	SET p_key = LAST_INSERT_ID();
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS AddEmployeeService
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE AddEmployeeService (IN p_employee_no BIGINT(20), IN p_service_no BIGINT(20))
+BEGIN
+    INSERT INTO employeeservice (employee_no, service_no) VALUES (p_employee_no, p_service_no);
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteEmployeeServices
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteEmployeeServices (IN p_employee_no BIGINT(20))
+BEGIN
+    DELETE FROM employeeservice
+    WHERE employee_no = p_employee_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS UpdateEmployee
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE UpdateEmployee (IN p_employee_no BIGINT(20),
+								IN p_address_no BIGINT(20),
+								IN p_password VARCHAR(15),
+								IN p_first_name VARCHAR(25),
+								IN p_last_name VARCHAR(25),
+								IN p_phone_number VARCHAR(10),
+								IN p_role VARCHAR(15),
+								IN p_monday_start TIME,
+								IN p_monday_end TIME,
+								IN p_tuesday_start TIME,
+								IN p_tuesday_end TIME,
+								IN p_wednesday_start TIME,
+								IN p_wednesday_end TIME,
+								IN p_thursday_start TIME,
+								IN p_thursday_end TIME,
+								IN p_friday_start TIME,
+								IN p_friday_end TIME,
+								IN p_saturday_start TIME,
+								IN p_saturday_end TIME,
+								IN p_sunday_start TIME,
+								IN p_sunday_end TIME,
+								IN p_enabled BOOLEAN)
+BEGIN
+	UPDATE employee 
+		SET password = p_password,
+			first_name = p_first_name,
+			last_name =p_last_name,
+			phone_number = p_phone_number,
+			role = p_role,
+			monday_start = p_monday_start,
+			monday_end = p_monday_end,
+			tuesday_start = p_tuesday_start,
+			tuesday_end = p_tuesday_end,
+			wednesday_start = p_wednesday_start,
+			wednesday_end = p_wednesday_end,
+			thursday_start = p_thursday_start,
+			thursday_end = p_thursday_end,
+			friday_start = p_friday_start,
+			friday_end = p_friday_end,
+			saturday_start = p_saturday_start,
+			saturday_end = p_saturday_end,
+			sunday_start = p_sunday_start,
+			sunday_end = p_sunday_end,
+			address_no = p_address_no,
+			enabled = p_enabled
+		WHERE employee_no = p_employee_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteEmployee
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteEmployee (IN p_employee_no BIGINT(20))
+BEGIN
+    DELETE FROM employee
+        WHERE employee_no = p_employee_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS LoadProduct
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE LoadProduct (IN p_product_no BIGINT(20))
+BEGIN
+	SELECT * FROM product
+		WHERE product_no = p_product_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS SearchProduct
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE SearchProduct (IN p_brand VARCHAR(25),
+                                IN p_product_name VARCHAR(25),
+                                IN p_product_type VARCHAR(25),
+                                IN p_stock_qty INTEGER,
+                                IN p_min_level INTEGER,
+                                IN p_qty_per INTEGER,
+                                IN p_price DECIMAL(5,2),
+                                IN p_unit VARCHAR(5),
+                                IN p_enabled Boolean)
+BEGIN
+    SELECT * FROM product
+        WHERE ((p_brand IS NULL) OR (brand LIKE CONCAT("%",p_brand,"%")))
+        AND ((p_product_name IS NULL)OR (product_name LIKE CONCAT("%",p_product_name,"%")))
+        AND ((p_product_type IS NULL) OR (product_type = p_product_type))
+        AND ((p_stock_qty IS NULL) OR (stock_qty = p_stock_qty))
+        AND ((p_min_level IS NULL) OR (min_level = p_min_level))
+        AND ((p_qty_per IS NULL) OR (qty_per = p_qty_per))
+        AND ((p_price IS NULL) OR (price = p_price))
+        AND ((p_unit IS NULL) OR (unit = p_unit))
+        AND ((p_enabled IS NULL ) OR (enabled = p_enabled))
+		ORDER BY product_name ASC;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS CreateProduct
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE CreateProduct (IN p_brand VARCHAR(25),
+							   IN p_product_name VARCHAR(25),
+							   IN p_product_type VARCHAR(25),
+							   IN p_stock_qty INTEGER,
+							   IN p_min_level INTEGER,
+							   IN p_qty_per INTEGER,
+							   IN p_price DECIMAL(5,2),
+							   IN p_unit VARCHAR(5),
+							   IN p_enabled Boolean, OUT p_key BIGINT(20))
+BEGIN 
+    INSERT INTO product(brand, product_name, product_type, stock_qty, min_level, qty_per, price, unit, enabled)
+        VALUES(p_brand, p_product_name, p_product_type, p_stock_qty, p_min_level, p_qty_per, p_price, p_unit, p_enabled);
+	
+	SET p_key = LAST_INSERT_ID();
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteProduct
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteProduct (IN p_product_no BIGINT(20))
+BEGIN
+    DELETE FROM product 
+        WHERE product_no = p_product_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS UpdateProduct
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE UpdateProduct (IN p_product_no BIGINT(20),
+							   IN p_brand VARCHAR(25),
+							   IN p_product_name VARCHAR(25),
+							   IN p_product_type VARCHAR(25),
+							   IN p_stock_qty INTEGER,
+							   IN p_min_level INTEGER,
+							   IN p_qty_per INTEGER,
+							   IN p_price DECIMAL(5,2),
+							   IN p_unit VARCHAR(5),
+							   IN p_enabled Boolean)
+BEGIN
+	UPDATE product 
+        SET brand = p_brand,
+		product_name = p_product_name,
+		product_type =p_product_type,
+		stock_qty = p_stock_qty,
+		min_level =p_min_level,
+		qty_per =p_qty_per,
+		price =p_price,
+		unit =p_unit,
+		enabled = p_enabled
+		WHERE product_no = p_product_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS LoadSale
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE LoadSale (IN p_transaction_no BIGINT(20))
+BEGIN
+	SELECT * FROM sale
+		WHERE transaction_no = p_transaction_no;
+
+    SELECT * FROM saleservice
+        WHERE transaction_no = p_transaction_no;
+
+    SELECT * FROM saleproduct
+        WHERE transaction_no = p_transaction_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS SearchSale
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE SearchSale(IN p_client_no BIGINT(20),
+							IN p_employee_no BIGINT(20),
+							IN p_payment_type VARCHAR(10),
+							IN p_total_due DECIMAL(9,2),
+							IN p_total_tax DECIMAL(9,2),
+							IN p_discount TINYINT,
+							IN p_payment DECIMAL(9,2),
+							IN p_is_complete BOOLEAN)
+BEGIN
+	SELECT * 
+	FROM sale
+        WHERE ((p_client_no IS NULL) OR (client_no = p_client_no))
+        AND ((p_employee_no IS NULL) OR (employee_no = p_employee_no))
+        AND ((p_payment_type IS NULL) OR (payment_type = p_payment_type))
+        AND ((p_total_due IS NULL )OR (total_due = p_total_due))
+		AND ((p_total_tax IS NULL) OR (total_tax = p_total_tax))
+		AND ((p_discount IS NULL) OR (discount = p_discount))
+        AND ((p_payment IS NULL) OR (payment = p_payment))
+        AND ((p_is_complete IS NULL) OR (is_complete = p_is_complete));
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS CreateSale
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE CreateSale(IN p_client_no BIGINT(20),
+							IN p_employee_no BIGINT(20),
+							IN p_payment_type VARCHAR(10),
+							IN p_total_due DECIMAL(9,2),
+							IN p_total_tax DECIMAL(9,2),
+							IN p_discount TINYINT,
+							IN p_payment DECIMAL(9,2),
+							IN p_is_complete BOOLEAN,
+                            OUT p_key BIGINT(20))
+BEGIN
+    INSERT INTO sale(client_no,employee_no,payment_type,total_due,total_tax,discount,payment,is_complete)
+    VALUES(p_client_no,p_employee_no,p_payment_type,p_total_due,p_total_tax,p_discount,p_payment,p_is_complete);
+
+    SET p_key = LAST_INSERT_ID();
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteSale
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteSale (IN p_transaction_no BIGINT(20))
+BEGIN
+    DELETE FROM sale
+    WHERE transaction_no = p_transaction_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS UpdateSale
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE UpdateSale(IN p_transaction_no BIGINT(20),
+							IN p_client_no BIGINT(20),
+							IN p_employee_no BIGINT(20),
+							IN p_payment_type VARCHAR(10),
+							IN p_total_due DECIMAL(9,2),
+							IN p_total_tax DECIMAL(9,2),
+							IN p_discount TINYINT,
+							IN p_payment DECIMAL(9,2),
+							IN p_is_complete BOOLEAN)
+BEGIN
+	UPDATE sale
+	SET client_no = p_client_no,
+		employee_no = p_employee_no,
+		payment_type =p_payment_type,
+		total_due = p_total_due,
+		total_tax = p_total_tax,
+		discount = p_discount,
+		payment =p_paymet,
+		is_complete = p_is_complete
+	WHERE transaction_no = p_transaction_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS AddSaleProduct
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE AddSaleProduct (IN p_transaction_no BIGINT(20), IN p_product_no BIGINT(20), IN p_amount INTEGER)
+BEGIN
+    INSERT INTO saleproduct (transaction_no, product_no, amount) VALUES (p_transaction_no, p_product_no, p_amount);
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteSaleProducts
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteSaleProducts (IN p_transaction_no BIGINT(20))
+BEGIN
+    DELETE FROM saleproduct
+    WHERE transaction_no = p_transaction_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS AddSaleService
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE AddSaleService (IN p_transaction_no BIGINT(20), IN p_service_no BIGINT(20), IN p_amount INTEGER)
+BEGIN
+    INSERT INTO saleservice (transaction_no, service_no, amount) VALUES (p_transaction_no, p_service_no, p_amount);
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteSaleServices
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteSaleServices (IN p_transaction_no BIGINT(20))
+BEGIN
+    DELETE FROM saleservice
+    WHERE transaction_no = p_transaction_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS LoadSalon
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE LoadSalon ()
+BEGIN
+	SELECT * FROM salon;
+
+	SELECT * FROM scheduleexception;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS AddScheduleException
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE AddScheduleException (IN p_date DATE, 
+										IN p_reason VARCHAR(50), 
+										IN p_start_time TIME,
+										IN p_end_time TIME)
+BEGIN
+    INSERT INTO scheduleexception (date, reason, start_time, end_time) 
+		VALUES (p_date, p_reason, p_start_time, p_end_time);
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteScheduleExceptions
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteScheduleExceptions ()
+BEGIN
+    DELETE FROM scheduleexception;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS UpdateSalon
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE UpdateSalon(IN p_name VARCHAR(50),
+							IN p_address1 VARCHAR(50),
+							IN p_address2 VARCHAR(50),
+							IN p_city VARCHAR(15),
+							IN p_province VARCHAR(15),
+							IN p_country VARCHAR(15),
+							IN p_postal_code VARCHAR(6),
+							IN p_phone_number VARCHAR(10),
+							IN p_email VARCHAR(50),
+							IN p_tax_rate DECIMAL(2,2),
+							IN p_hair_stations TINYINT,
+							IN p_beauty_stations TINYINT,
+							IN p_monday_start TIME,
+							IN p_monday_end TIME,
+							IN p_tuesday_start TIME,
+							IN p_tuesday_end TIME,
+							IN p_wednesday_start TIME,
+							IN p_wednesday_end TIME,
+							IN p_thursday_start TIME,
+							IN p_thursday_end TIME,
+							IN p_friday_start TIME,
+							IN p_friday_end TIME,
+							IN p_saturday_start TIME,
+							IN p_saturday_end TIME,
+							IN p_sunday_start TIME,
+							IN p_sunday_end TIME)
+BEGIN
+	UPDATE salon 
+	SET name = p_name,
+		address1 = p_address1,
+		address2 = p_address2,
+		city = p_city,
+		province = p_province,
+		country = p_country,
+		postal_code = p_postal_code,
+		phone_number = p_phone_number,
+		email = p_email,
+		tax_rate = p_tax_rate,
+		hair_stations = p_hair_stations,
+		beauty_stations = p_beauty_stations,
+		monday_start = p_monday_start,
+		monday_end = p_monday_end,
+		tuesday_start = p_tuesday_start,
+		tuesday_end = p_tuesday_end,
+		wednesday_start = p_wednesday_start,
+		wednesday_end = p_wednesday_end,
+		thursday_start = p_thursday_start,
+		thursday_end = p_thursday_end,
+		friday_start = p_friday_start,
+		friday_end = p_friday_end,
+		saturday_start = p_saturday_start,
+		saturday_end = p_saturday_end,
+		sunday_start = p_sunday_start,
+		sunday_end = p_sunday_end;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS LoadSchedule
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE LoadSchedule (IN p_schedule_no BIGINT)
+BEGIN
+	SELECT * FROM schedule
+		WHERE schedule_no = p_schedule_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS SearchSchedule
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE SearchSchedule(IN p_employee_no BIGINT(20),
+								   IN p_date DATE,
+								   IN p_start_time TIME,
+								   IN p_end_time TIME)
+BEGIN
+	SELECT * FROM schedule
+        WHERE ((p_employee_no IS NULL) OR (employee_no = p_employee_no))
+        AND ((p_date IS NULL) OR (date = p_date))
+        AND ((p_start_time IS NULL) OR (start_time = p_start_time))
+        AND ((p_end_time IS NULL) OR (end_time = p_end_time));
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS CreateSchedule
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+
+--------------
+CREATE PROCEDURE CreateSchedule(IN p_employee_no BIGINT(20),
+								   IN p_date DATE,
+								   IN p_start_time TIME,
+								   IN p_end_time TIME,
+								OUT p_key BIGINT(20))
+BEGIN
+    INSERT INTO schedule(employee_no,date,start_time,end_time)
+    VALUES(p_employee_no,p_date,p_start_time,p_end_time);
+	
+	SET p_key = LAST_INSERT_ID();
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS UpdateSchedule
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE UpdateSchedule(IN p_schedule_no BIGINT(20),
+								   IN p_employee_no BIGINT(20),
+								   IN p_date DATE,
+								   IN p_start_time TIME,
+								   IN p_end_time TIME)
+BEGIN
+	UPDATE schedule 
+	SET employee_no = p_employee_no,
+            date = p_date,
+			start_time = p_start_time,
+            end_time = p_end_time
+	WHERE schedule_no = p_schedule_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteSchedule
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteSchedule(IN p_schedule_no BIGINT(20))
+BEGIN
+    DELETE FROM schedule
+    WHERE schedule_no = p_schedule_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS LoadScheduleException
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE LoadScheduleException (IN p_date DATE)
+BEGIN
+	SELECT * FROM scheduleexception
+		WHERE date = p_date;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS SearchScheduleException
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE SearchScheduleException (IN p_date DATE,
+										IN p_reason VARCHAR(150))
+BEGIN
+    SELECT * from scheduleexception
+    WHERE ((p_date IS NULL) OR (date = p_date))
+		AND ((p_reason IS NULL) OR (reason = p_reason));
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS CreateScheduleException
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE CreateScheduleException(IN p_date DATE,
+				IN p_reason VARCHAR(150))
+BEGIN
+    DELETE FROM scheduleexception
+    WHERE date = p_date;
+    
+    INSERT INTO scheduleexception (date, reason)
+    VALUES (p_date, p_reason);
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteScheduleException
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteScheduleException(IN p_date DATE)
+BEGIN
+    DELETE FROM scheduleexception
+    WHERE date = p_date;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteScheduleExceptions
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteScheduleExceptions()
+BEGIN
+    DELETE FROM scheduleexception;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS LoadService
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE LoadService (IN p_service_no BIGINT(20))
+BEGIN
+	SELECT * FROM service
+		WHERE service_no = p_service_no;
+
+	SELECT * FROM serviceproduct lnk
+		JOIN `product` p ON lnk.`product_no` = p.`product_no`
+		WHERE lnk.`service_no` = p_service_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS SearchService
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE SearchService (IN p_name VARCHAR(15),
+						  IN p_description VARCHAR(150),
+						  IN p_duration SMALLINT,
+						  IN p_price DECIMAL(5,2),
+						  IN p_enabled BOOLEAN)
+BEGIN 
+    SELECT * from service
+		WHERE ((p_name IS NULL) OR (name LIKE CONCAT("%",p_name,"%")))
+		AND ((p_description IS NULL) OR (description LIKE CONCAT("%",p_description,"%")))
+		AND ((p_duration IS NULL) OR (duration = p_duration))
+		AND ((p_price IS NULL) OR (price = p_price))
+		AND ((p_enabled IS NULL) OR (enabled = p_enabled))
+		ORDER BY name ASC;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS CreateService
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE CreateService(IN p_name VARCHAR(15),
+				IN p_description VARCHAR(150),
+                IN p_duration SMALLINT,
+				IN p_price DECIMAL(5,2),
+				IN p_enabled BOOLEAN, OUT p_key BIGINT(20))
+BEGIN
+    INSERT INTO service(name,description,duration,price,enabled)
+    VALUES(p_name,p_description,p_duration,p_price,p_enabled);
+	
+	SET p_key = LAST_INSERT_ID();
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS AddServiceProduct
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE AddServiceProduct (IN p_service_no BIGINT(20), IN p_product_no BIGINT(20), IN p_amount INTEGER)
+BEGIN
+    INSERT INTO serviceproduct (service_no, product_no, amount) VALUES (p_service_no, p_product_no, p_amount);
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteServiceProducts
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteServiceProducts (IN p_service_no BIGINT(20))
+BEGIN
+    DELETE FROM serviceproduct
+    WHERE service_no = p_service_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS UpdateService
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE UpdateService(IN p_service_no BIGINT(20),
+							   IN p_name VARCHAR(15),
+							   IN p_description VARCHAR(150),
+							   IN p_duration SMALLINT,
+								IN p_price DECIMAL(5,2),
+								IN p_enabled BOOLEAN)
+BEGIN
+	UPDATE service
+	SET name = p_name,
+		description = p_description,
+		duration = p_duration,
+		price = p_price,
+		enabled = p_enabled
+	WHERE service_no = p_service_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteService
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteService(IN p_service_no BIGINT(20))
+BEGIN
+    DELETE FROM service
+    WHERE service_no = p_service_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS LoadSupplier
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE LoadSupplier (IN p_supplier_no BIGINT(20))
+BEGIN
+	SELECT * FROM supplier
+		WHERE supplier_no = p_supplier_no;
+        
+        SELECT * FROM product
+                WHERE product_no IN
+        (
+            SELECT product_no FROM supplierproduct
+                WHERE supplier_no = p_supplier_no
+        );
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS SearchSupplier
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE SearchSupplier(IN p_address1 VARCHAR(50),
+								IN p_address2 VARCHAR(50),
+								IN p_city VARCHAR(15),
+								IN p_province VARCHAR(15),
+								IN p_country VARCHAR(15),
+								IN p_postal_code VARCHAR(6),
+								IN p_email VARCHAR(50),
+								IN p_supplier_name VARCHAR(50),
+								IN p_description VARCHAR(150),
+								IN p_phone_number VARCHAR(10),
+								IN p_enabled BOOLEAN)
+BEGIN
+	SELECT * FROM supplier
+		WHERE (address_no IN (
+			SELECT address_no FROM `address`
+				WHERE ((p_address1 IS NULL) OR (address1 LIKE CONCAT("%",p_address1,"%")))
+				AND ((p_address2 IS NULL) OR (address2 LIKE CONCAT("%",p_address2,"%")))
+				AND ((p_city IS NULL) OR (city LIKE CONCAT("%",p_city,"%")))
+				AND ((p_province IS NULL) OR (province LIKE CONCAT("%",p_province,"%")))
+				AND ((p_country IS NULL) OR (country LIKE CONCAT("%",p_country,"%")))
+				AND ((p_postal_code IS NULL) OR (postal_code LIKE CONCAT("%",p_postal_code,"%")))
+				AND ((p_email IS NULL) OR (email LIKE CONCAT("%",p_email,"%"))) ))
+		AND ((p_supplier_name IS NULL) OR (supplier_name LIKE CONCAT("%",p_supplier_name,"%")))
+		AND ((p_description IS NULL) OR (description LIKE CONCAT("%",p_description,"%")))
+		AND ((p_phone_number IS NULL) OR (phone_number LIKE CONCAT("%",p_phone_number,"%")))
+		AND ((p_enabled IS NULL) OR (enabled = p_enabled))
+		ORDER BY supplier_name ASC;
+
+        SELECT *
+                  FROM `address`
+                  WHERE ((p_address1 IS NULL) OR (address1 = p_address1))
+                  AND ((p_address2 IS NULL) OR (address2 = p_address2))
+                  AND ((p_city IS NULL) OR (city = p_city))
+                  AND ((p_province IS NULL) OR (province = p_province))
+                  AND ((p_country IS NULL) OR (country = p_country))
+                  AND ((p_postal_code IS NULL) OR (postal_code = p_postal_code))
+                  AND ((p_email IS NULL) OR (email = p_email));
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS CreateSupplier
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE CreateSupplier(
+								IN p_address_no BIGINT(20),
+								IN p_supplier_name VARCHAR(50),
+								IN p_description VARCHAR(150),
+								IN p_phone_number VARCHAR(10),
+                                IN p_enabled BOOLEAN,
+								OUT p_supplier_no BIGINT(20))
+BEGIN
+    INSERT INTO supplier (address_no, supplier_name, description, phone_number,enabled)
+    VALUES (p_address_no, p_supplier_name, p_description, p_phone_number,p_enabled);
+    set p_supplier_no = LAST_INSERT_ID();
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS UpdateSupplier
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE UpdateSupplier(IN p_supplier_no BIGINT(20),
+								IN p_address_no BIGINT(20),
+								IN p_supplier_name VARCHAR(50),
+								IN p_description VARCHAR(150),
+								IN p_phone_number VARCHAR(10),
+								IN p_enabled BOOLEAN)
+BEGIN
+	UPDATE supplier
+        SET
+		address_no =p_address_no,
+		supplier_name =p_supplier_name,
+		description = p_description,
+		phone_number = p_phone_number,
+		enabled = p_enabled
+        WHERE supplier_no = p_supplier_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteSupplier
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteSupplier(IN p_supplier_no BIGINT(20))
+BEGIN
+    DELETE FROM supplier
+    WHERE supplier_no = p_supplier_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteSupplierProducts
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteSupplierProducts(IN p_supplier_no BIGINT(20))
+BEGIN
+    DELETE FROM supplierproduct
+    WHERE supplier_no = p_supplier_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS AddSupplierProduct
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE AddSupplierProduct(IN p_supplier_no BIGINT(20), IN p_product_no BIGINT(20))
+BEGIN
+    INSERT INTO 
+  `supplierproduct`
+(
+  `supplier_no`,
+  `product_no`
+) 
+VALUE (
+  p_supplier_no,
+  p_product_no
+);
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS ListAlerts
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE ListAlerts ()
+BEGIN
+	SELECT * FROM alert;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS CreateAlert
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE CreateAlert (IN p_alert_type VARCHAR(10),
+									IN p_date DATE,
+									IN p_message VARCHAR(100),
+									IN p_link VARCHAR(100),
+									IN p_level VARCHAR(10),
+									IN p_record_no BIGINT(20),
+									OUT p_key BIGINT(20))
+BEGIN
+	INSERT INTO alert (alert_type, date, message, link, level, record_no)
+		VALUES (p_alert_type, p_date, p_message, p_link, p_level, p_record_no);
+
+    set p_key = LAST_INSERT_ID();
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteAlert
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteAlert (IN p_alert_no BIGINT(20))
+BEGIN
+    DELETE FROM alert
+        WHERE alert_no = p_alert_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+insert into salon (name, address1,address2,city,province,country,postal_code,phone_number,email,tax_rate,hair_stations,beauty_stations,monday_start, monday_end, tuesday_start, tuesday_end,wednesday_start,wednesday_end,
+		thursday_start,thursday_end,friday_start,friday_end,saturday_start,saturday_end,sunday_start,sunday_end)
+values ('hair candy','110 Rocky Ridge Dr. N.W.', null,'Calgary','Alberta','Canada','T3G5H0','4035553322','haircandy@yahoo.ca',0.05,10,5,"11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00")
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into client (first_name, last_name, address_no, phone_number,enabled)
+values ('Fair','Lady', 1, '4035551234',true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into product (brand,product_name,product_type,stock_qty,min_level,qty_per,price,unit,enabled)
+values ('Garnier','HairShiny','Shampoo',10,3,700,7.99,'ml',true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into product (brand,product_name,product_type,stock_qty,min_level,qty_per,price,unit,enabled)
+values ('Maybelline','Biotherm','Conditioner',15,3,750,8.99,'ml',false)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into product (brand,product_name,product_type,stock_qty,min_level,qty_per,price,unit,enabled)
+values ('Softsheen Carson','vichy','Coloring',20,5,350,6.99,'g',true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into product (brand,product_name,product_type,stock_qty,min_level,qty_per,price,unit,enabled)
+values ('Matrix','redken','Conditioner',5,3,700,10.99,'ml',true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into product (brand,product_name,product_type,stock_qty,min_level,qty_per,price,unit,enabled)
+values ('Le Club des Creaturs','BrightPlus','Coloring',10,3,400,9.99,'g',false)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into service (name,description,duration,price,enabled) 
+values ('cuts','make hair short and clean',1,10.99,true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into service (name,description,duration,price,enabled) 
+values ('color','color and highlight hair',2,10.99,true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into service (name,description,duration,price,enabled) 
+values ('perm','make hair curly',3,10.99,true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into service (name,description,duration,price,enabled) 
+values ('makeup','the application of cosmetics',4,10.99,true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into address (address1,address2,city,province,country,postal_code,email)
+values ('800 Silver Spring way N.W.', '', 'Calgary', 'Alberta', 'Canada', '5R74J9', 'silver@canada.com')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into address (address1,address2,city,province,country,postal_code,email)
+values ('500 Royal Oak Groove N.W.', '', 'Calgary', 'Alberta', 'Canada', '5R44J9', 'royal@canada.com')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into address (address1,address2,city,province,country,postal_code,email)
+values ('8380 Brentwood way S.W.', '558 Somerset way S.W.', 'Alberta', 'Calgary', 'Canada', '4r74J9', 'brentwood@canada.com')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into address (address1,address2,city,province,country,postal_code,email)
+values ('199 Kingsland Court .W.', null, 'Calgary', 'Alberta', 'Canada', '5R74J9', 'kingsland@naver.com')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into address (address1,address2,city,province,country,postal_code,email)
+values ('114 Queens land S.E.', null, 'Calgary', 'Alberta', 'Canada', '5R74J9', 'queen@canada.com')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into address (address1,address2,city,province,country,postal_code,email)
+values ('630 Ranchland circle S.E.', '448 Kansinton way N.E.', 'Calgary', 'Alberta', 'Canada', '6R74J9', 'ranchland@canada.com')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into address (address1,address2,city,province,country,postal_code,email)
+values ('3300 Riverbend high N.e.', null, 'Calgary', 'Alberta', 'Canada', '5R44A1', 'river@canada.com')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into address (address1,address2,city,province,country,postal_code,email)
+values ('33 Bowvally road N.W.', '448 Airdrie View Center', 'Airdrie', 'Alberta', 'Canada', '3a75t1', 'bowvally@canada.com')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into address (address1,address2,city,province,country,postal_code,email)
+values ('696 Highland ave N.W.', null, 'Calgary', 'Alberta', 'Canada', '3g16h5', 'highland@canada.com')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into address (address1,address2,city,province,country,postal_code,email)
+values ('990 Dalhousie road N.W.', null, 'Calgary', 'Alberta', 'Canada', '6e35t6', 'dalhousie@canada.com')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into employee (address_no, password,first_name,last_name,phone_number,role,monday_start, monday_end, tuesday_start, tuesday_end,wednesday_start,wednesday_end,
+		thursday_start,thursday_end,friday_start,friday_end,saturday_start,saturday_end,sunday_start,sunday_end,enabled)
+values (1,'j1111','Joey','Ren','4033329696',"Receptionist","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00", true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into employee (address_no, password,first_name,last_name,phone_number,role,monday_start, monday_end, tuesday_start, tuesday_end,wednesday_start,wednesday_end,
+		thursday_start,thursday_end,friday_start,friday_end,saturday_start,saturday_end,sunday_start,sunday_end,enabled)
+values (2,'h2222','Horace','Wan','4034434444',"Manager","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00", true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into employee (address_no, password,first_name,last_name,phone_number,role,monday_start, monday_end, tuesday_start, tuesday_end,wednesday_start,wednesday_end,
+		thursday_start,thursday_end,friday_start,friday_end,saturday_start,saturday_end,sunday_start,sunday_end,enabled)
+values (3,'p3333','Philippe','Durand','4037720020',"Stylist","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00", true)
+--------------
+
+Query OK, 1 row affected (0.01 sec)
+
+--------------
+insert into employee (address_no, password,first_name,last_name,phone_number,role,monday_start, monday_end, tuesday_start, tuesday_end,wednesday_start,wednesday_end,
+		thursday_start,thursday_end,friday_start,friday_end,saturday_start,saturday_end,sunday_start,sunday_end,enabled)
+values (4,'n4444','Nuha','Bazara','4031124412',"Stylist","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00", true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into employee (address_no, password,first_name,last_name,phone_number,role,monday_start, monday_end, tuesday_start, tuesday_end,wednesday_start,wednesday_end,
+		thursday_start,thursday_end,friday_start,friday_end,saturday_start,saturday_end,sunday_start,sunday_end,enabled)
+values (5,'m5555','Miyoung','Han','4033335656',"Stylist","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00", true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into employeeservice values (2,1)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into employeeservice values (3,2)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into employeeservice values (5,3)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into serviceproduct values (1,1,50)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into serviceproduct values (2,1,50)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into serviceproduct values (3,2,350)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into serviceproduct values (4,4,5)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into serviceproduct values (5,3,400)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into supplier (address_no,supplier_name,description,phone_number,enabled)
+values (6,'Goofy','supply the product of shampoo, hairconditioner and coloring','3324493333', true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into supplier (address_no,supplier_name,description,phone_number,enabled)
+values (7,'Beauty Co.','supply the product of skin care','6633332233', true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into supplier (address_no,supplier_name,description,phone_number,enabled)
+values (6,'Shiny Co.','supply the product for perm','4035491303',true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO 
+  `supplierproduct`
+(
+  `supplier_no`,
+  `product_no`
+) 
+VALUE (
+  1,
+  1
+)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO 
+  `supplierproduct`
+(
+  `supplier_no`,
+  `product_no`
+) 
+VALUE (
+  1,
+  2
+)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO `schedule` (`employee_no`, `date`, `start_time`, `end_time`) VALUE (1, '2009-10-12', '11:00:00', '12:00:00')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO `schedule` (`employee_no`, `date`, `start_time`, `end_time`) VALUE (2, '2009-10-12', '11:00:00', '12:00:00')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO `schedule` (`employee_no`, `date`, `start_time`, `end_time`) VALUE (1, '2009-11-12', '11:00:00', '12:00:00')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO `schedule` (`employee_no`, `date`, `start_time`, `end_time`) VALUE (2, '2009-12-12', '11:00:00', '12:00:00')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO `scheduleexception` (`date`, `reason`) VALUE ('2009-11-12', 'Test')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO `availabilityexception` (`employee_no`,`date`,`reason`) VALUE (1, '2009-12-12', 'Test')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> exit
+mysql> source create_db.sql
+--------------
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET NAMES utf8 */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE=`NO_AUTO_VALUE_ON_ZERO` */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE DATABASE IF NOT EXISTS cmps350_hairsalon
+--------------
+
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+Note (Code 1007): Can't create database 'cmps350_hairsalon'; database exists
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+--------------
+DROP TABLE IF EXISTS `salon`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE `salon`
+(
+	`name` VARCHAR(50) NOT NULL,
+	`address1` VARCHAR(50),
+	`address2` VARCHAR(50),
+	`city` VARCHAR(15),
+	`province` VARCHAR(15),
+	`country` VARCHAR(15),
+	`postal_code` VARCHAR(6),
+	`phone_number` VARCHAR(10),
+	`email` VARCHAR(50),
+	`tax_rate` DECIMAL(2,2) NOT NULL,
+	`hair_stations` TINYINT NOT NULL,
+	`beauty_stations` TINYINT NOT NULL,
+	`monday_start` TIME NOT NULL,
+	`monday_end` TIME NOT NULL,
+	`tuesday_start` TIME NOT NULL,
+	`tuesday_end` TIME NOT NULL,
+	`wednesday_start` TIME NOT NULL,
+	`wednesday_end` TIME NOT NULL,
+	`thursday_start` TIME NOT NULL,
+	`thursday_end` TIME NOT NULL,
+	`friday_start` TIME NOT NULL,
+	`friday_end` TIME NOT NULL,
+	`saturday_start` TIME NOT NULL,
+	`saturday_end` TIME NOT NULL,
+	`sunday_start` TIME NOT NULL,
+	`sunday_end` TIME NOT NULL
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `salon` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `salon` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `product`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE `product`
+(
+	`product_no` BIGINT(20) UNSIGNED NOT NULL auto_increment,
+	
+	`brand` VARCHAR(25) NOT NULL,
+	`product_name` VARCHAR(25) NOT NULL,
+	`product_type` VARCHAR(25),
+	`stock_qty` INTEGER NOT NULL, 
+	`min_level` INTEGER  NOT NULL,
+	`qty_per` INTEGER NOT NULL, 
+	`price` DECIMAL(4,2) NOT NULL, 
+	`unit` VARCHAR(5) NOT NULL, 
+	`enabled` BOOLEAN,
+	
+	PRIMARY KEY (`product_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `product` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `product` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `client`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE client
+(
+	`client_no` BIGINT(20) UNSIGNED NOT NULL auto_increment,
+	`first_name` VARCHAR(15) NOT NULL,
+	`last_name` VARCHAR(15) NOT NULL,
+	`address_no` BIGINT(20) UNSIGNED NOT NULL,	
+	`phone_number` VARCHAR(10) NOT NULL,
+	`enabled` BOOLEAN,
+	
+	CONSTRAINT `client_address_no_fk` FOREIGN KEY (`address_no`) REFERENCES address(`address_no`),	
+	PRIMARY KEY (`client_no`),
+	UNIQUE KEY (`phone_number`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `client` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `client` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `schedule`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE schedule
+(
+	`schedule_no` BIGINT(20) UNSIGNED NOT NULL auto_increment,
+	
+	`employee_no` BIGINT(20) UNSIGNED NOT NULL,
+	`date` DATE NOT NULL,
+	`start_time` TIME NOT NULL,
+	`end_time` TIME NOT NULL,
+	
+	CONSTRAINT `employee_sch_no_fk` FOREIGN KEY(`employee_no`) REFERENCES employee(`employee_no`),
+	PRIMARY KEY (`schedule_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `schedule` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `schedule` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `service`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE service
+(
+	`service_no` BIGINT(20) UNSIGNED NOT NULL auto_increment,
+	
+	`name` VARCHAR(15) NOT NULL,
+	`description` VARCHAR(150),
+	`duration` SMALLINT(2),
+	`price` DECIMAL(4,2) NOT NULL, 
+	`enabled` BOOLEAN,
+	
+	PRIMARY KEY (`service_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `service` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `service` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `address`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE address
+(
+	`address_no` BIGINT(20) UNSIGNED NOT NULL auto_increment,
+	
+	`address1` VARCHAR(50),
+	`address2` VARCHAR(50),
+	`city` VARCHAR(15),
+        `province` VARCHAR(15),
+	`country` VARCHAR(15),
+	`postal_code` VARCHAR(6),
+	`email` VARCHAR(50),
+	
+	PRIMARY KEY (`address_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `address` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `address` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `employee`
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+
+--------------
+CREATE TABLE employee
+(
+    `employee_no` BIGINT(20) UNSIGNED NOT NULL auto_increment,
+    
+	`address_no` BIGINT(20) UNSIGNED NOT NULL,
+	`password` VARCHAR(15) NOT NULL,
+	`first_name` VARCHAR(25) NOT NULL,
+	`last_name` VARCHAR(25) NOT NULL,
+	`phone_number` VARCHAR(10),
+	`role` VARCHAR(15),
+	`enabled` BOOLEAN,
+	
+	`monday_start` TIME NOT NULL,
+	`monday_end` TIME NOT NULL,
+	`tuesday_start` TIME NOT NULL,
+	`tuesday_end` TIME NOT NULL,
+	`wednesday_start` TIME NOT NULL,
+	`wednesday_end` TIME NOT NULL,
+	`thursday_start` TIME NOT NULL,
+	`thursday_end` TIME NOT NULL,
+	`friday_start` TIME NOT NULL,
+	`friday_end` TIME NOT NULL,
+	`saturday_start` TIME NOT NULL,
+	`saturday_end` TIME NOT NULL,
+	`sunday_start` TIME NOT NULL,
+	`sunday_end` TIME NOT NULL,
+
+	CONSTRAINT `address_no_fk` FOREIGN KEY(`address_no`) REFERENCES address(`address_no`),
+	PRIMARY KEY (`employee_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `employee` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `employee` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `employeeservice`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE employeeservice
+(
+	`employee_no` BIGINT(20) UNSIGNED NOT NULL,
+	`service_no` BIGINT(20) UNSIGNED NOT NULL,
+	
+	CONSTRAINT `employee_no_fk` FOREIGN KEY(`employee_no`) REFERENCES employee(`employee_no`),
+	CONSTRAINT `service_no_fk` FOREIGN KEY(`service_no`) REFERENCES service(`service_no`),
+	PRIMARY KEY (`employee_no`, `service_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `employeeservice` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `employeeservice` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `serviceproduct`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE serviceproduct
+(
+	`product_no` BIGINT(20) UNSIGNED NOT NULL,
+	`service_no` BIGINT(20) UNSIGNED NOT NULL,
+	
+	`amount` INTEGER,
+	
+	CONSTRAINT `product_no_fk` FOREIGN KEY(`product_no`) REFERENCES product(`product_no`),
+	CONSTRAINT `service_no_fk` FOREIGN KEY(`service_no`) REFERENCES service(`service_no`),
+	PRIMARY KEY (`product_no`, `service_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `serviceproduct` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `serviceproduct` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `supplier`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE supplier
+(
+	`supplier_no` BIGINT(20) UNSIGNED NOT NULL auto_increment,
+	`address_no` BIGINT(20) UNSIGNED NOT NULL,
+	`supplier_name` VARCHAR(50) NOT NULL,
+	`description` VARCHAR(150),
+	`phone_number` VARCHAR(10),
+	`enabled` BOOLEAN,
+	
+	CONSTRAINT `address_no_fk` FOREIGN KEY(`address_no`) REFERENCES address(`address_no`),
+	PRIMARY KEY (`supplier_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `supplier` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `supplier` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `supplierproduct`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE supplierproduct
+(
+	`supplier_no` BIGINT(20) UNSIGNED NOT NULL,
+	`product_no`  BIGINT(20) UNSIGNED NOT NULL,
+	
+	CONSTRAINT `supplier_no_fk` FOREIGN KEY(`supplier_no`) REFERENCES supplier(`supplier_no`),
+	CONSTRAINT `product_no_fk` FOREIGN KEY(`product_no`) REFERENCES product(`product_no`),
+	PRIMARY KEY (`supplier_no`, `product_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `supplierproduct` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+
+--------------
+/*!40000 ALTER TABLE `supplierproduct` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `scheduleexception`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE scheduleexception
+(
+	`date` DATE NOT NULL,
+	`reason` VARCHAR(150),
+	
+	PRIMARY KEY (`date`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `scheduleexception` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `scheduleexception` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `availabilityexception`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE availabilityexception
+(
+	`employee_no` BIGINT(20) UNSIGNED NOT NULL,
+	`date` DATE NOT NULL,
+	`reason` VARCHAR(150),
+	
+	CONSTRAINT `employee_no_fk` FOREIGN KEY (`employee_no`) REFERENCES employee(`employee_no`),
+	PRIMARY KEY (`employee_no`, `date`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `availabilityexception` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `availabilityexception` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `sale`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE sale
+(
+	`transaction_no` BIGINT(20) UNSIGNED NOT NULL auto_increment,
+	
+	`client_no` BIGINT(20) UNSIGNED NOT NULL,
+	`employee_no` BIGINT(20) UNSIGNED NOT NULL,
+	`payment_type` VARCHAR(10) NOT NULL,
+	`total_due` DECIMAL(9,2),
+	`total_tax` DECIMAL(9,2),
+	`discount` TINYINT,
+	`payment` DECIMAL(9,2),
+	`is_complete` BOOLEAN,
+	
+	CONSTRAINT `client_sale_no_fk` FOREIGN KEY(`client_no`) REFERENCES client(`client_no`),
+	CONSTRAINT `employee_sale_no_fk` FOREIGN KEY(`employee_no`) REFERENCES employee(`employee_no`),
+	PRIMARY KEY (`transaction_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `sale` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `sale` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `saleproduct`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE saleproduct
+(
+	`transaction_no` BIGINT(20) UNSIGNED NOT NULL,
+	`product_no` BIGINT(20) UNSIGNED NOT NULL,
+
+	`amount` INTEGER,
+
+	CONSTRAINT `sp_transaction_no_fk` FOREIGN KEY (`transaction_no`) REFERENCES sale(`transaction_no`),
+	CONSTRAINT `product_no_fk` FOREIGN KEY(`product_no`) REFERENCES product(`product_no`),
+	PRIMARY KEY (`transaction_no`, `product_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `saleproduct` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `saleproduct` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `saleservice`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE saleservice
+(
+	`transaction_no` BIGINT(20) UNSIGNED NOT NULL,
+	`service_no` BIGINT(20) UNSIGNED NOT NULL,
+	
+	`amount` INTEGER,
+    
+	CONSTRAINT `ss_transaction_no_fk` FOREIGN KEY (`transaction_no`) REFERENCES sale(`transaction_no`),
+	CONSTRAINT `service_no_fk` FOREIGN KEY(`service_no`) REFERENCES service(`service_no`),
+	PRIMARY KEY (`transaction_no`, `service_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `saleservice` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `saleservice` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `appointment`
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+
+--------------
+CREATE TABLE appointment
+(
+	`appointment_no` BIGINT(20) UNSIGNED NOT NULL auto_increment,
+	
+	`client_no` BIGINT(20) UNSIGNED NOT NULL,
+	`employee_no` BIGINT(20) UNSIGNED NOT NULL,
+	`ap_date` DATE,
+	`start_time` TIME,
+	`end_time` TIME,
+	`is_complete` BOOLEAN,
+	
+	CONSTRAINT `client_appointment_no_fk` FOREIGN KEY(`client_no`) REFERENCES client(`client_no`),
+	CONSTRAINT `employee_appointment_no_fk` FOREIGN KEY(`employee_no`) REFERENCES employee(`employee_no`),
+	PRIMARY KEY (`appointment_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `appointment` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `appointment` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `appointmentservice`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE appointmentservice
+(
+	`appointment_no` BIGINT(20) UNSIGNED NOT NULL,
+	`service_no` BIGINT(20) UNSIGNED NOT NULL,
+	
+	`amount` INTEGER,
+
+	CONSTRAINT `appointment_ser_no_fk` FOREIGN KEY (`appointment_no`) REFERENCES appointment(`appointment_no`),
+	CONSTRAINT `service_no_fk` FOREIGN KEY(`service_no`) REFERENCES service(`service_no`),
+	PRIMARY KEY (`appointment_no`, `service_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+
+--------------
+/*!40000 ALTER TABLE `appointmentservice` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `appointmentservice` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `appointmentproduct`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE appointmentproduct
+(
+	`appointment_no` BIGINT(20) UNSIGNED NOT NULL,
+	`product_no` BIGINT(20) UNSIGNED NOT NULL,
+	
+	`amount` INTEGER,
+	
+	CONSTRAINT `appointment_no_fk` FOREIGN KEY (`appointment_no`) REFERENCES appointment(`appointment_no`),
+	CONSTRAINT `product_no_fk` FOREIGN KEY(`product_no`) REFERENCES product(`product_no`),
+	PRIMARY KEY (`appointment_no`, `product_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `appointmentproduct` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `appointmentproduct` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `alert`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE TABLE alert
+(
+	`alert_no` BIGINT(20) UNSIGNED NOT NULL auto_increment,
+	`alert_type` VARCHAR(10) NOT NULL,
+	`level` VARCHAR(10) NOT NULL,
+	`date` DATE NOT NULL,
+	`message` VARCHAR(15) NOT NULL,
+	`link` VARCHAR(100),
+	`record_no` BIGINT(20),
+	
+	PRIMARY KEY (`alert_no`)
+)ENGINE=MyISAM
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS LoadAddress
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE LoadAddress (IN p_address_no BIGINT(20))
+BEGIN
+	SELECT * FROM address
+		WHERE address_no = p_address_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS SearchAddress
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE SearchAddress (IN p_address1 VARCHAR(50),
+								IN p_address2 VARCHAR(50),
+								IN p_city VARCHAR(15),
+                                IN p_province VARCHAR(15),
+								IN p_country VARCHAR(15),
+								IN p_postal_code VARCHAR(6),
+								IN p_email VARCHAR(50))
+BEGIN
+	SELECT * FROM address
+		WHERE ((p_address1 IS NULL ) OR (address1 = p_address1))
+		AND ((p_address2 IS NULL) OR (address2 = p_address2))
+		AND ((p_city IS NULL ) OR (city = p_city))
+        AND ((p_province IS NULL) OR (province = p_province))
+		AND ((p_country IS NULL) OR (country = p_country))
+		AND ((p_postal_code IS NULL ) OR (postal_code = p_postal_code))
+		AND ((p_email IS NULL ) OR (email = p_email));
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS CreateAddress
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE CreateAddress (IN p_address1 VARCHAR(50),
+								IN p_address2 VARCHAR(50),
+								IN p_city VARCHAR(15),
+                                IN p_province VARCHAR(15),
+								IN p_country VARCHAR(15),
+								IN p_postal_code VARCHAR(6),
+								IN p_email VARCHAR(50), OUT p_key BIGINT(20))
+BEGIN
+	INSERT INTO address (address1, address2, city, province, country, postal_code, email)
+		VALUES (p_address1, p_address2, p_city, p_province, p_country, p_postal_code, p_email);
+
+    set p_key = LAST_INSERT_ID();
+
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS UpdateAddress
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE UpdateAddress (IN p_address_no BIGINT(20),
+								IN p_address1 VARCHAR(50),
+								IN p_address2 VARCHAR(50),
+								IN p_city VARCHAR(15),
+								IN p_province VARCHAR(15),
+								IN p_country VARCHAR(15),
+								IN p_postal_code VARCHAR(6),
+								IN p_email VARCHAR(50))
+BEGIN
+	UPDATE address
+    SET address1 = p_address1,
+      address2 = p_address2,
+      city = p_city,
+      province = p_province,
+      country = p_country,
+      postal_code = p_postal_code,
+      email = p_email
+    WHERE address_no = p_address_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteAddress
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+
+--------------
+CREATE PROCEDURE DeleteAddress (IN p_address_no BIGINT(20))
+BEGIN
+    DELETE FROM address
+        WHERE address_no = p_address_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS LoadAppointment
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE LoadAppointment (IN p_appointment_no BIGINT(20))
+BEGIN
+	SELECT * FROM appointment
+		WHERE appointment_no = p_appointment_no;
+
+	SELECT * FROM appointmentservice
+        WHERE appointment_no = p_appointment_no;
+
+    SELECT * FROM appointmentproduct
+        WHERE appointment_no = p_appointment_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS SearchAppointment
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE SearchAppointment (IN p_client_no BIGINT(20),
+									IN p_employee_no BIGINT(20),
+									IN p_ap_date DATE,
+									IN p_start_time TIME,
+									IN p_end_time TIME,
+									IN p_is_complete BOOLEAN)
+BEGIN
+	SELECT * 
+	FROM appointment
+	WHERE ((p_client_no IS NULL) OR (client_no =p_client_no))
+	AND ((p_employee_no IS NULL) OR (employee_no =p_employee_no))
+	AND ((p_ap_date IS NULL) OR (ap_date = p_ap_date))
+	AND ((p_start_time IS NULL) OR (start_time = p_start_time))
+	AND ((p_end_time IS NULL) OR (end_time = p_end_time))
+	AND ((p_is_complete IS NULL) OR (is_complete = p_is_complete));
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS CreateAppointment
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE CreateAppointment (IN p_client_no BIGINT(20),
+									IN p_employee_no BIGINT(20),
+                                    IN p_ap_date DATE,
+                                    IN p_start_time TIME,
+                                    IN p_end_time TIME,
+                                    IN p_is_complete BOOLEAN,
+									OUT p_key BIGINT(20))
+BEGIN
+    INSERT INTO appointment (client_no, employee_no, ap_date, start_time, end_time, is_complete)
+    VALUES (p_client_no, p_employee_no, p_ap_date, p_start_time, p_end_time, p_is_complete);
+
+	SET p_key = LAST_INSERT_ID();
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS UpdateAppointment
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE UpdateAppointment (IN p_appointment_no BIGINT(20),
+									IN p_client_no BIGINT(20),
+									IN p_employee_no BIGINT(20),
+									IN p_ap_date DATE,
+									IN p_start_time TIME,
+									IN p_end_time TIME,
+									IN p_is_complete BOOLEAN)
+BEGIN
+	UPDATE appointment
+	SET client_no = p_client_no,
+		employee_no = p_employee_no,
+		ap_date = p_ap_date,
+		start_time = p_start_time,
+		end_time = p_end_time,
+		is_complete = p_is_complete
+	WHERE appointment_no = p_appointment_no;
+	
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteAppointment
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteAppointment (IN p_appointment_no BIGINT(20))
+BEGIN
+    DELETE FROM appointment
+        WHERE appointment_no = p_appointment_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS AddAppointmentProduct
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE AddAppointmentProduct (IN p_appointment_no BIGINT(20), IN p_product_no BIGINT(20), IN p_amount INTEGER)
+BEGIN
+    INSERT INTO appointmentproduct (appointment_no, product_no, amount) VALUES (p_appointment_no, p_product_no, p_amount);
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteAppointmentProducts
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteAppointmentProducts (IN p_appointment_no BIGINT(20))
+BEGIN
+    DELETE FROM appointmentproduct
+    WHERE appointment_no = p_appointment_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS AddAppointmentService
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE AddAppointmentService (IN p_appointment_no BIGINT(20), IN p_service_no BIGINT(20), IN p_amount INTEGER)
+BEGIN
+    INSERT INTO appointmentservice (appointment_no, service_no, amount) VALUES (p_appointment_no, p_service_no, p_amount);
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteAppointmentServices
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteAppointmentServices (IN p_appointment_no BIGINT(20))
+BEGIN
+    DELETE FROM appointmentservice
+    WHERE appointment_no = p_appointment_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS LoadAvailabilityException
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+
+--------------
+CREATE PROCEDURE LoadAvailabilityException (IN p_employee_no BIGINT(20), IN p_date DATE)
+BEGIN
+	SELECT * FROM availabilityexception
+		WHERE employee_no = p_employee_no
+          AND date = p_date;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS SearchAvailabilityException
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE SearchAvailabilityException (IN p_employee_no BIGINT(20),
+												IN p_date DATE,
+												IN p_reason VARCHAR(150))
+BEGIN
+    SELECT * from availabilityexception
+    WHERE ((p_employee_no IS NULL) OR (employee_no = p_employee_no))
+		AND ((p_date IS NULL) OR (date = p_date))
+		AND ((p_reason IS NULL) OR (reason = p_reason));
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS CreateAvailabilityException
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE CreateAvailabilityException(IN p_employee_no BIGINT(20),
+                IN p_date DATE,
+				IN p_reason VARCHAR(150))
+BEGIN
+    DELETE FROM availabilityexception
+    WHERE employee_no = p_employee_no
+      AND date = p_date;
+    
+    INSERT INTO availabilityexception (employee_no, date, reason)
+    VALUES (p_employee_no, p_date, p_reason);
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteAvailabilityException
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteAvailabilityException(IN p_employee_no BIGINT(20), IN p_date DATE)
+BEGIN
+    DELETE FROM availabilityexception
+    WHERE employee_no = p_employee_no
+      AND date = p_date;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteAvailabilityExceptions
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteAvailabilityExceptions(IN p_employee_no BIGINT(20))
+BEGIN
+    DELETE FROM availabilityexception
+    WHERE employee_no = p_employee_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS LoadClient
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE LoadClient (IN p_client_no BIGINT)
+BEGIN
+	SELECT * FROM client
+		WHERE client_no = p_client_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS SearchClient
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE SearchClient (IN p_first_name VARCHAR(15),
+                                IN p_last_name VARCHAR(15),
+                                IN p_phone_number VARCHAR(10),
+								IN p_address1 VARCHAR(50),
+								IN p_address2 VARCHAR(50),
+								IN p_city VARCHAR(15),
+                                IN p_province VARCHAR(15),
+								IN p_country VARCHAR(15),
+								IN p_postal_code VARCHAR(6),
+								IN p_email VARCHAR(50),
+								IN p_enabled Boolean)
+BEGIN
+    SELECT * FROM client
+		WHERE ( address_no IN (
+			SELECT address_no FROM `address`
+                WHERE ((p_address1 IS NULL) OR (address1 LIKE CONCAT("%",p_address1,"%")))
+				AND ((p_address2 IS NULL) OR (address2 LIKE CONCAT("%",p_address2,"%")))
+				AND ((p_city IS NULL) OR (city LIKE CONCAT("%",p_city,"%")))
+				AND ((p_province IS NULL) OR (province LIKE CONCAT("%",p_province,"%")))
+				AND ((p_country IS NULL) OR (country LIKE CONCAT("%",p_country,"%")))
+				AND ((p_postal_code IS NULL) OR (postal_code LIKE CONCAT("%",p_postal_code,"%")))
+				AND ((p_email IS NULL) OR (email LIKE CONCAT("%",p_email,"%"))) ) )
+		AND ((p_first_name IS NULL) OR (first_name LIKE CONCAT("%",p_first_name,"%")))
+		AND ((p_last_name IS NULL) OR (last_name LIKE CONCAT("%",p_last_name,"%")))
+		AND ((p_phone_number IS NULL) OR (phone_number LIKE CONCAT("%",p_phone_number,"%")))
+		AND ((p_enabled IS NULL ) OR (enabled = p_enabled))
+		ORDER BY last_name ASC;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS CreateClient
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE CreateClient (IN p_first_name VARCHAR(15),
+                                 IN p_last_name VARCHAR(15),
+                                 IN p_address_no BIGINT(20),
+                                 IN p_phone_number VARCHAR(10),
+									IN p_enabled Boolean,
+									OUT p_key BIGINT(20))
+BEGIN
+    INSERT INTO client (first_name, last_name, address_no, phone_number,enabled)
+    VALUES (p_first_name, p_last_name, p_address_no, p_phone_number,p_enabled);
+
+	SET p_key = LAST_INSERT_ID();
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS UpdateClient
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE UpdateClient (IN p_client_no BIGINT(20),
+                                IN p_first_name VARCHAR(15),
+                                IN p_last_name VARCHAR(15),
+                                IN p_address_no BIGINT(20),
+                                IN p_phone_number VARCHAR(10),
+								IN p_enabled Boolean)
+BEGIN
+	UPDATE client
+	SET first_name = p_first_name,
+            last_name = p_last_name,
+            address_no = p_address_no,
+            phone_number = p_phone_number,
+			enabled = p_enabled
+	WHERE client_no = p_client_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteClient
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteClient(IN p_client_no BIGINT(20))
+BEGIN 
+    DELETE FROM client
+    WHERE client_no = p_client_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS LoadEmployee
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE LoadEmployee (IN p_employee_no BIGINT(20))
+BEGIN
+	SELECT * FROM employee
+		WHERE employee_no = p_employee_no;
+		
+	SELECT * FROM service
+        WHERE service_no IN
+        (
+            SELECT service_no FROM employeeservice
+                WHERE employee_no = p_employee_no
+        );
+	
+    SELECT * FROM availabilityexception
+        WHERE employee_no = p_employee_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS AuthenticateEmployee
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE AuthenticateEmployee (IN p_employee_no BIGINT(20),
+										IN p_password VARCHAR(15))
+BEGIN
+	SELECT * FROM employee
+		WHERE password = p_password
+		AND employee_no = p_employee_no
+		AND enabled = true;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS SearchEmployee
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE SearchEmployee (IN p_employee_no BIGINT(20),
+								IN p_password VARCHAR(15),
+								IN p_first_name VARCHAR(25),
+                                IN p_last_name VARCHAR(25),
+                                IN p_phone_number VARCHAR(10),
+                                IN p_role VARCHAR(15),
+                                IN p_address1 VARCHAR(50),
+								IN p_address2 VARCHAR(50),
+								IN p_city VARCHAR(15),
+                                IN p_province VARCHAR(15),
+								IN p_country VARCHAR(15),
+								IN p_postal_code VARCHAR(6),
+								IN p_email VARCHAR(50),
+								IN p_enabled BOOLEAN)
+BEGIN
+	SELECT * FROM employee
+        WHERE ( address_no IN (
+                SELECT address_no FROM `address`
+                  WHERE ((p_address1 IS NULL) OR (address1 LIKE CONCAT("%",p_address1,"%")))
+                  AND ((p_address2 IS NULL) OR (address2 LIKE CONCAT("%",p_address2,"%")))
+                  AND ((p_city IS NULL) OR (city LIKE CONCAT("%",p_city,"%")))
+                  AND ((p_province IS NULL) OR (province LIKE CONCAT("%",p_province,"%")))
+                  AND ((p_country IS NULL) OR (country LIKE CONCAT("%",p_country,"%")))
+                  AND ((p_postal_code IS NULL) OR (postal_code LIKE CONCAT("%",p_postal_code,"%")))
+                  AND ((p_email IS NULL) OR (email LIKE CONCAT("%",p_email,"%"))) ) )
+		AND ((p_employee_no IS NULL) OR (employee_no = p_employee_no))
+		AND ((p_password IS NULl) OR (password = p_password))
+		AND ((p_first_name IS NULL) OR (first_name LIKE CONCAT("%",p_first_name,"%")))
+		AND ((p_last_name IS NULL ) OR (last_name LIKE CONCAT("%",p_last_name,"%")))
+		AND ((p_phone_number IS NULL) OR (phone_number LIKE CONCAT("%",p_phone_number,"%")))
+		AND ((p_role IS NULL ) OR (role = p_role))
+		AND ((p_enabled IS NULL ) OR (enabled = p_enabled))
+		ORDER BY last_name ASC;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS CreateEmployee
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE CreateEmployee (IN p_address_no BIGINT(20),
+								IN p_password VARCHAR(15),
+								IN p_first_name VARCHAR(25),
+								IN p_last_name VARCHAR(25),
+								IN p_phone_number VARCHAR(10),
+								IN p_role VARCHAR(15),
+								IN p_monday_start TIME,
+								IN p_monday_end TIME,
+								IN p_tuesday_start TIME,
+								IN p_tuesday_end TIME,
+								IN p_wednesday_start TIME,
+								IN p_wednesday_end TIME,
+								IN p_thursday_start TIME,
+								IN p_thursday_end TIME,
+								IN p_friday_start TIME,
+								IN p_friday_end TIME,
+								IN p_saturday_start TIME,
+								IN p_saturday_end TIME,
+								IN p_sunday_start TIME,
+								IN p_sunday_end TIME,
+								IN p_enabled BOOLEAN,
+								OUT p_key BIGINT(20))
+BEGIN
+	INSERT INTO employee (address_no, password, first_name, last_name, phone_number, role,
+		monday_start, monday_end, tuesday_start, tuesday_end,wednesday_start,wednesday_end,
+		thursday_start,thursday_end,friday_start,friday_end,saturday_start,saturday_end,sunday_start,sunday_end,enabled)
+		VALUES (p_address_no, p_password, p_first_name, p_last_name, p_phone_number, p_role,
+		p_monday_start, p_monday_end, p_tuesday_start, p_tuesday_end, p_wednesday_start,
+		p_wednesday_end, p_thursday_start, p_thursday_end, p_friday_start, p_friday_end,
+		p_saturday_start, p_saturday_end, p_sunday_start, p_sunday_end,p_enabled);
+	
+	SET p_key = LAST_INSERT_ID();
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS AddEmployeeService
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE AddEmployeeService (IN p_employee_no BIGINT(20), IN p_service_no BIGINT(20))
+BEGIN
+    INSERT INTO employeeservice (employee_no, service_no) VALUES (p_employee_no, p_service_no);
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteEmployeeServices
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteEmployeeServices (IN p_employee_no BIGINT(20))
+BEGIN
+    DELETE FROM employeeservice
+    WHERE employee_no = p_employee_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS UpdateEmployee
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE UpdateEmployee (IN p_employee_no BIGINT(20),
+								IN p_address_no BIGINT(20),
+								IN p_password VARCHAR(15),
+								IN p_first_name VARCHAR(25),
+								IN p_last_name VARCHAR(25),
+								IN p_phone_number VARCHAR(10),
+								IN p_role VARCHAR(15),
+								IN p_monday_start TIME,
+								IN p_monday_end TIME,
+								IN p_tuesday_start TIME,
+								IN p_tuesday_end TIME,
+								IN p_wednesday_start TIME,
+								IN p_wednesday_end TIME,
+								IN p_thursday_start TIME,
+								IN p_thursday_end TIME,
+								IN p_friday_start TIME,
+								IN p_friday_end TIME,
+								IN p_saturday_start TIME,
+								IN p_saturday_end TIME,
+								IN p_sunday_start TIME,
+								IN p_sunday_end TIME,
+								IN p_enabled BOOLEAN)
+BEGIN
+	UPDATE employee 
+		SET password = p_password,
+			first_name = p_first_name,
+			last_name =p_last_name,
+			phone_number = p_phone_number,
+			role = p_role,
+			monday_start = p_monday_start,
+			monday_end = p_monday_end,
+			tuesday_start = p_tuesday_start,
+			tuesday_end = p_tuesday_end,
+			wednesday_start = p_wednesday_start,
+			wednesday_end = p_wednesday_end,
+			thursday_start = p_thursday_start,
+			thursday_end = p_thursday_end,
+			friday_start = p_friday_start,
+			friday_end = p_friday_end,
+			saturday_start = p_saturday_start,
+			saturday_end = p_saturday_end,
+			sunday_start = p_sunday_start,
+			sunday_end = p_sunday_end,
+			address_no = p_address_no,
+			enabled = p_enabled
+		WHERE employee_no = p_employee_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteEmployee
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteEmployee (IN p_employee_no BIGINT(20))
+BEGIN
+    DELETE FROM employee
+        WHERE employee_no = p_employee_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS LoadProduct
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE LoadProduct (IN p_product_no BIGINT(20))
+BEGIN
+	SELECT * FROM product
+		WHERE product_no = p_product_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS SearchProduct
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+
+--------------
+CREATE PROCEDURE SearchProduct (IN p_brand VARCHAR(25),
+                                IN p_product_name VARCHAR(25),
+                                IN p_product_type VARCHAR(25),
+                                IN p_stock_qty INTEGER,
+                                IN p_min_level INTEGER,
+                                IN p_qty_per INTEGER,
+                                IN p_price DECIMAL(5,2),
+                                IN p_unit VARCHAR(5),
+                                IN p_enabled Boolean)
+BEGIN
+    SELECT * FROM product
+        WHERE ((p_brand IS NULL) OR (brand LIKE CONCAT("%",p_brand,"%")))
+        AND ((p_product_name IS NULL)OR (product_name LIKE CONCAT("%",p_product_name,"%")))
+        AND ((p_product_type IS NULL) OR (product_type = p_product_type))
+        AND ((p_stock_qty IS NULL) OR (stock_qty = p_stock_qty))
+        AND ((p_min_level IS NULL) OR (min_level = p_min_level))
+        AND ((p_qty_per IS NULL) OR (qty_per = p_qty_per))
+        AND ((p_price IS NULL) OR (price = p_price))
+        AND ((p_unit IS NULL) OR (unit = p_unit))
+        AND ((p_enabled IS NULL ) OR (enabled = p_enabled))
+		ORDER BY product_name ASC;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS CreateProduct
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE CreateProduct (IN p_brand VARCHAR(25),
+							   IN p_product_name VARCHAR(25),
+							   IN p_product_type VARCHAR(25),
+							   IN p_stock_qty INTEGER,
+							   IN p_min_level INTEGER,
+							   IN p_qty_per INTEGER,
+							   IN p_price DECIMAL(5,2),
+							   IN p_unit VARCHAR(5),
+							   IN p_enabled Boolean, OUT p_key BIGINT(20))
+BEGIN 
+    INSERT INTO product(brand, product_name, product_type, stock_qty, min_level, qty_per, price, unit, enabled)
+        VALUES(p_brand, p_product_name, p_product_type, p_stock_qty, p_min_level, p_qty_per, p_price, p_unit, p_enabled);
+	
+	SET p_key = LAST_INSERT_ID();
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteProduct
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteProduct (IN p_product_no BIGINT(20))
+BEGIN
+    DELETE FROM product 
+        WHERE product_no = p_product_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS UpdateProduct
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE UpdateProduct (IN p_product_no BIGINT(20),
+							   IN p_brand VARCHAR(25),
+							   IN p_product_name VARCHAR(25),
+							   IN p_product_type VARCHAR(25),
+							   IN p_stock_qty INTEGER,
+							   IN p_min_level INTEGER,
+							   IN p_qty_per INTEGER,
+							   IN p_price DECIMAL(5,2),
+							   IN p_unit VARCHAR(5),
+							   IN p_enabled Boolean)
+BEGIN
+	UPDATE product 
+        SET brand = p_brand,
+		product_name = p_product_name,
+		product_type =p_product_type,
+		stock_qty = p_stock_qty,
+		min_level =p_min_level,
+		qty_per =p_qty_per,
+		price =p_price,
+		unit =p_unit,
+		enabled = p_enabled
+		WHERE product_no = p_product_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS LoadSale
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE LoadSale (IN p_transaction_no BIGINT(20))
+BEGIN
+	SELECT * FROM sale
+		WHERE transaction_no = p_transaction_no;
+
+    SELECT * FROM saleservice
+        WHERE transaction_no = p_transaction_no;
+
+    SELECT * FROM saleproduct
+        WHERE transaction_no = p_transaction_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS SearchSale
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE SearchSale(IN p_client_no BIGINT(20),
+							IN p_employee_no BIGINT(20),
+							IN p_payment_type VARCHAR(10),
+							IN p_total_due DECIMAL(9,2),
+							IN p_total_tax DECIMAL(9,2),
+							IN p_discount TINYINT,
+							IN p_payment DECIMAL(9,2),
+							IN p_is_complete BOOLEAN)
+BEGIN
+	SELECT * 
+	FROM sale
+        WHERE ((p_client_no IS NULL) OR (client_no = p_client_no))
+        AND ((p_employee_no IS NULL) OR (employee_no = p_employee_no))
+        AND ((p_payment_type IS NULL) OR (payment_type = p_payment_type))
+        AND ((p_total_due IS NULL )OR (total_due = p_total_due))
+		AND ((p_total_tax IS NULL) OR (total_tax = p_total_tax))
+		AND ((p_discount IS NULL) OR (discount = p_discount))
+        AND ((p_payment IS NULL) OR (payment = p_payment))
+        AND ((p_is_complete IS NULL) OR (is_complete = p_is_complete));
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS CreateSale
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE CreateSale(IN p_client_no BIGINT(20),
+							IN p_employee_no BIGINT(20),
+							IN p_payment_type VARCHAR(10),
+							IN p_total_due DECIMAL(9,2),
+							IN p_total_tax DECIMAL(9,2),
+							IN p_discount TINYINT,
+							IN p_payment DECIMAL(9,2),
+							IN p_is_complete BOOLEAN,
+                            OUT p_key BIGINT(20))
+BEGIN
+    INSERT INTO sale(client_no,employee_no,payment_type,total_due,total_tax,discount,payment,is_complete)
+    VALUES(p_client_no,p_employee_no,p_payment_type,p_total_due,p_total_tax,p_discount,p_payment,p_is_complete);
+
+    SET p_key = LAST_INSERT_ID();
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteSale
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteSale (IN p_transaction_no BIGINT(20))
+BEGIN
+    DELETE FROM sale
+    WHERE transaction_no = p_transaction_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS UpdateSale
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE UpdateSale(IN p_transaction_no BIGINT(20),
+							IN p_client_no BIGINT(20),
+							IN p_employee_no BIGINT(20),
+							IN p_payment_type VARCHAR(10),
+							IN p_total_due DECIMAL(9,2),
+							IN p_total_tax DECIMAL(9,2),
+							IN p_discount TINYINT,
+							IN p_payment DECIMAL(9,2),
+							IN p_is_complete BOOLEAN)
+BEGIN
+	UPDATE sale
+	SET client_no = p_client_no,
+		employee_no = p_employee_no,
+		payment_type =p_payment_type,
+		total_due = p_total_due,
+		total_tax = p_total_tax,
+		discount = p_discount,
+		payment =p_paymet,
+		is_complete = p_is_complete
+	WHERE transaction_no = p_transaction_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS AddSaleProduct
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE AddSaleProduct (IN p_transaction_no BIGINT(20), IN p_product_no BIGINT(20), IN p_amount INTEGER)
+BEGIN
+    INSERT INTO saleproduct (transaction_no, product_no, amount) VALUES (p_transaction_no, p_product_no, p_amount);
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteSaleProducts
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteSaleProducts (IN p_transaction_no BIGINT(20))
+BEGIN
+    DELETE FROM saleproduct
+    WHERE transaction_no = p_transaction_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS AddSaleService
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE AddSaleService (IN p_transaction_no BIGINT(20), IN p_service_no BIGINT(20), IN p_amount INTEGER)
+BEGIN
+    INSERT INTO saleservice (transaction_no, service_no, amount) VALUES (p_transaction_no, p_service_no, p_amount);
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteSaleServices
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteSaleServices (IN p_transaction_no BIGINT(20))
+BEGIN
+    DELETE FROM saleservice
+    WHERE transaction_no = p_transaction_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS LoadSalon
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE LoadSalon ()
+BEGIN
+	SELECT * FROM salon;
+
+	SELECT * FROM scheduleexception;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS AddScheduleException
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE AddScheduleException (IN p_date DATE, 
+										IN p_reason VARCHAR(50), 
+										IN p_start_time TIME,
+										IN p_end_time TIME)
+BEGIN
+    INSERT INTO scheduleexception (date, reason, start_time, end_time) 
+		VALUES (p_date, p_reason, p_start_time, p_end_time);
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteScheduleExceptions
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteScheduleExceptions ()
+BEGIN
+    DELETE FROM scheduleexception;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS UpdateSalon
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE UpdateSalon(IN p_name VARCHAR(50),
+							IN p_address1 VARCHAR(50),
+							IN p_address2 VARCHAR(50),
+							IN p_city VARCHAR(15),
+							IN p_province VARCHAR(15),
+							IN p_country VARCHAR(15),
+							IN p_postal_code VARCHAR(6),
+							IN p_phone_number VARCHAR(10),
+							IN p_email VARCHAR(50),
+							IN p_tax_rate DECIMAL(2,2),
+							IN p_hair_stations TINYINT,
+							IN p_beauty_stations TINYINT,
+							IN p_monday_start TIME,
+							IN p_monday_end TIME,
+							IN p_tuesday_start TIME,
+							IN p_tuesday_end TIME,
+							IN p_wednesday_start TIME,
+							IN p_wednesday_end TIME,
+							IN p_thursday_start TIME,
+							IN p_thursday_end TIME,
+							IN p_friday_start TIME,
+							IN p_friday_end TIME,
+							IN p_saturday_start TIME,
+							IN p_saturday_end TIME,
+							IN p_sunday_start TIME,
+							IN p_sunday_end TIME)
+BEGIN
+	UPDATE salon 
+	SET name = p_name,
+		address1 = p_address1,
+		address2 = p_address2,
+		city = p_city,
+		province = p_province,
+		country = p_country,
+		postal_code = p_postal_code,
+		phone_number = p_phone_number,
+		email = p_email,
+		tax_rate = p_tax_rate,
+		hair_stations = p_hair_stations,
+		beauty_stations = p_beauty_stations,
+		monday_start = p_monday_start,
+		monday_end = p_monday_end,
+		tuesday_start = p_tuesday_start,
+		tuesday_end = p_tuesday_end,
+		wednesday_start = p_wednesday_start,
+		wednesday_end = p_wednesday_end,
+		thursday_start = p_thursday_start,
+		thursday_end = p_thursday_end,
+		friday_start = p_friday_start,
+		friday_end = p_friday_end,
+		saturday_start = p_saturday_start,
+		saturday_end = p_saturday_end,
+		sunday_start = p_sunday_start,
+		sunday_end = p_sunday_end;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS LoadSchedule
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE LoadSchedule (IN p_schedule_no BIGINT)
+BEGIN
+	SELECT * FROM schedule
+		WHERE schedule_no = p_schedule_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS SearchSchedule
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE SearchSchedule(IN p_employee_no BIGINT(20),
+								   IN p_date DATE,
+								   IN p_start_time TIME,
+								   IN p_end_time TIME)
+BEGIN
+	SELECT * FROM schedule
+        WHERE ((p_employee_no IS NULL) OR (employee_no = p_employee_no))
+        AND ((p_date IS NULL) OR (date = p_date))
+        AND ((p_start_time IS NULL) OR (start_time = p_start_time))
+        AND ((p_end_time IS NULL) OR (end_time = p_end_time));
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS CreateSchedule
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE CreateSchedule(IN p_employee_no BIGINT(20),
+								   IN p_date DATE,
+								   IN p_start_time TIME,
+								   IN p_end_time TIME,
+								OUT p_key BIGINT(20))
+BEGIN
+    INSERT INTO schedule(employee_no,date,start_time,end_time)
+    VALUES(p_employee_no,p_date,p_start_time,p_end_time);
+	
+	SET p_key = LAST_INSERT_ID();
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS UpdateSchedule
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE UpdateSchedule(IN p_schedule_no BIGINT(20),
+								   IN p_employee_no BIGINT(20),
+								   IN p_date DATE,
+								   IN p_start_time TIME,
+								   IN p_end_time TIME)
+BEGIN
+	UPDATE schedule 
+	SET employee_no = p_employee_no,
+            date = p_date,
+			start_time = p_start_time,
+            end_time = p_end_time
+	WHERE schedule_no = p_schedule_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteSchedule
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteSchedule(IN p_schedule_no BIGINT(20))
+BEGIN
+    DELETE FROM schedule
+    WHERE schedule_no = p_schedule_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS LoadScheduleException
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE LoadScheduleException (IN p_date DATE)
+BEGIN
+	SELECT * FROM scheduleexception
+		WHERE date = p_date;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS SearchScheduleException
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE SearchScheduleException (IN p_date DATE,
+										IN p_reason VARCHAR(150))
+BEGIN
+    SELECT * from scheduleexception
+    WHERE ((p_date IS NULL) OR (date = p_date))
+		AND ((p_reason IS NULL) OR (reason = p_reason));
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS CreateScheduleException
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE CreateScheduleException(IN p_date DATE,
+				IN p_reason VARCHAR(150))
+BEGIN
+    DELETE FROM scheduleexception
+    WHERE date = p_date;
+    
+    INSERT INTO scheduleexception (date, reason)
+    VALUES (p_date, p_reason);
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteScheduleException
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+
+--------------
+CREATE PROCEDURE DeleteScheduleException(IN p_date DATE)
+BEGIN
+    DELETE FROM scheduleexception
+    WHERE date = p_date;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteScheduleExceptions
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteScheduleExceptions()
+BEGIN
+    DELETE FROM scheduleexception;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS LoadService
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE LoadService (IN p_service_no BIGINT(20))
+BEGIN
+	SELECT * FROM service
+		WHERE service_no = p_service_no;
+
+	SELECT * FROM serviceproduct lnk
+		JOIN `product` p ON lnk.`product_no` = p.`product_no`
+		WHERE lnk.`service_no` = p_service_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS SearchService
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE SearchService (IN p_name VARCHAR(15),
+						  IN p_description VARCHAR(150),
+						  IN p_duration SMALLINT,
+						  IN p_price DECIMAL(5,2),
+						  IN p_enabled BOOLEAN)
+BEGIN 
+    SELECT * from service
+		WHERE ((p_name IS NULL) OR (name LIKE CONCAT("%",p_name,"%")))
+		AND ((p_description IS NULL) OR (description LIKE CONCAT("%",p_description,"%")))
+		AND ((p_duration IS NULL) OR (duration = p_duration))
+		AND ((p_price IS NULL) OR (price = p_price))
+		AND ((p_enabled IS NULL) OR (enabled = p_enabled))
+		ORDER BY name ASC;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS CreateService
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE CreateService(IN p_name VARCHAR(15),
+				IN p_description VARCHAR(150),
+                IN p_duration SMALLINT,
+				IN p_price DECIMAL(5,2),
+				IN p_enabled BOOLEAN, OUT p_key BIGINT(20))
+BEGIN
+    INSERT INTO service(name,description,duration,price,enabled)
+    VALUES(p_name,p_description,p_duration,p_price,p_enabled);
+	
+	SET p_key = LAST_INSERT_ID();
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS AddServiceProduct
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE AddServiceProduct (IN p_service_no BIGINT(20), IN p_product_no BIGINT(20), IN p_amount INTEGER)
+BEGIN
+    INSERT INTO serviceproduct (service_no, product_no, amount) VALUES (p_service_no, p_product_no, p_amount);
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteServiceProducts
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteServiceProducts (IN p_service_no BIGINT(20))
+BEGIN
+    DELETE FROM serviceproduct
+    WHERE service_no = p_service_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS UpdateService
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE UpdateService(IN p_service_no BIGINT(20),
+							   IN p_name VARCHAR(15),
+							   IN p_description VARCHAR(150),
+							   IN p_duration SMALLINT,
+								IN p_price DECIMAL(5,2),
+								IN p_enabled BOOLEAN)
+BEGIN
+	UPDATE service
+	SET name = p_name,
+		description = p_description,
+		duration = p_duration,
+		price = p_price,
+		enabled = p_enabled
+	WHERE service_no = p_service_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteService
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteService(IN p_service_no BIGINT(20))
+BEGIN
+    DELETE FROM service
+    WHERE service_no = p_service_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS LoadSupplier
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE LoadSupplier (IN p_supplier_no BIGINT(20))
+BEGIN
+	SELECT * FROM supplier
+		WHERE supplier_no = p_supplier_no;
+        
+        SELECT * FROM product
+                WHERE product_no IN
+        (
+            SELECT product_no FROM supplierproduct
+                WHERE supplier_no = p_supplier_no
+        );
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS SearchSupplier
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE SearchSupplier(IN p_address1 VARCHAR(50),
+								IN p_address2 VARCHAR(50),
+								IN p_city VARCHAR(15),
+								IN p_province VARCHAR(15),
+								IN p_country VARCHAR(15),
+								IN p_postal_code VARCHAR(6),
+								IN p_email VARCHAR(50),
+								IN p_supplier_name VARCHAR(50),
+								IN p_description VARCHAR(150),
+								IN p_phone_number VARCHAR(10),
+								IN p_enabled BOOLEAN)
+BEGIN
+	SELECT * FROM supplier
+		WHERE (address_no IN (
+			SELECT address_no FROM `address`
+				WHERE ((p_address1 IS NULL) OR (address1 LIKE CONCAT("%",p_address1,"%")))
+				AND ((p_address2 IS NULL) OR (address2 LIKE CONCAT("%",p_address2,"%")))
+				AND ((p_city IS NULL) OR (city LIKE CONCAT("%",p_city,"%")))
+				AND ((p_province IS NULL) OR (province LIKE CONCAT("%",p_province,"%")))
+				AND ((p_country IS NULL) OR (country LIKE CONCAT("%",p_country,"%")))
+				AND ((p_postal_code IS NULL) OR (postal_code LIKE CONCAT("%",p_postal_code,"%")))
+				AND ((p_email IS NULL) OR (email LIKE CONCAT("%",p_email,"%"))) ))
+		AND ((p_supplier_name IS NULL) OR (supplier_name LIKE CONCAT("%",p_supplier_name,"%")))
+		AND ((p_description IS NULL) OR (description LIKE CONCAT("%",p_description,"%")))
+		AND ((p_phone_number IS NULL) OR (phone_number LIKE CONCAT("%",p_phone_number,"%")))
+		AND ((p_enabled IS NULL) OR (enabled = p_enabled))
+		ORDER BY supplier_name ASC;
+
+        SELECT *
+                  FROM `address`
+                  WHERE ((p_address1 IS NULL) OR (address1 = p_address1))
+                  AND ((p_address2 IS NULL) OR (address2 = p_address2))
+                  AND ((p_city IS NULL) OR (city = p_city))
+                  AND ((p_province IS NULL) OR (province = p_province))
+                  AND ((p_country IS NULL) OR (country = p_country))
+                  AND ((p_postal_code IS NULL) OR (postal_code = p_postal_code))
+                  AND ((p_email IS NULL) OR (email = p_email));
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS CreateSupplier
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+
+--------------
+CREATE PROCEDURE CreateSupplier(
+								IN p_address_no BIGINT(20),
+								IN p_supplier_name VARCHAR(50),
+								IN p_description VARCHAR(150),
+								IN p_phone_number VARCHAR(10),
+                                IN p_enabled BOOLEAN,
+								OUT p_supplier_no BIGINT(20))
+BEGIN
+    INSERT INTO supplier (address_no, supplier_name, description, phone_number,enabled)
+    VALUES (p_address_no, p_supplier_name, p_description, p_phone_number,p_enabled);
+    set p_supplier_no = LAST_INSERT_ID();
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS UpdateSupplier
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE UpdateSupplier(IN p_supplier_no BIGINT(20),
+								IN p_address_no BIGINT(20),
+								IN p_supplier_name VARCHAR(50),
+								IN p_description VARCHAR(150),
+								IN p_phone_number VARCHAR(10),
+								IN p_enabled BOOLEAN)
+BEGIN
+	UPDATE supplier
+        SET
+		address_no =p_address_no,
+		supplier_name =p_supplier_name,
+		description = p_description,
+		phone_number = p_phone_number,
+		enabled = p_enabled
+        WHERE supplier_no = p_supplier_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteSupplier
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteSupplier(IN p_supplier_no BIGINT(20))
+BEGIN
+    DELETE FROM supplier
+    WHERE supplier_no = p_supplier_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteSupplierProducts
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteSupplierProducts(IN p_supplier_no BIGINT(20))
+BEGIN
+    DELETE FROM supplierproduct
+    WHERE supplier_no = p_supplier_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS AddSupplierProduct
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE AddSupplierProduct(IN p_supplier_no BIGINT(20), IN p_product_no BIGINT(20))
+BEGIN
+    INSERT INTO 
+  `supplierproduct`
+(
+  `supplier_no`,
+  `product_no`
+) 
+VALUE (
+  p_supplier_no,
+  p_product_no
+);
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS ListAlerts
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE ListAlerts ()
+BEGIN
+	SELECT * FROM alert;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS CreateAlert
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE CreateAlert (IN p_alert_type VARCHAR(10),
+									IN p_date DATE,
+									IN p_message VARCHAR(100),
+									IN p_link VARCHAR(100),
+									IN p_level VARCHAR(10),
+									IN p_record_no BIGINT(20),
+									OUT p_key BIGINT(20))
+BEGIN
+	INSERT INTO alert (alert_type, date, message, link, level, record_no)
+		VALUES (p_alert_type, p_date, p_message, p_link, p_level, p_record_no);
+
+    set p_key = LAST_INSERT_ID();
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP PROCEDURE IF EXISTS DeleteAlert
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE PROCEDURE DeleteAlert (IN p_alert_no BIGINT(20))
+BEGIN
+    DELETE FROM alert
+        WHERE alert_no = p_alert_no;
+END
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+insert into salon (name, address1,address2,city,province,country,postal_code,phone_number,email,tax_rate,hair_stations,beauty_stations,monday_start, monday_end, tuesday_start, tuesday_end,wednesday_start,wednesday_end,
+		thursday_start,thursday_end,friday_start,friday_end,saturday_start,saturday_end,sunday_start,sunday_end)
+values ('hair candy','110 Rocky Ridge Dr. N.W.', null,'Calgary','Alberta','Canada','T3G5H0','4035553322','haircandy@yahoo.ca',0.05,10,5,"11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00")
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into client (first_name, last_name, address_no, phone_number,enabled)
+values ('Fair','Lady', 1, '4035551234',true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into product (brand,product_name,product_type,stock_qty,min_level,qty_per,price,unit,enabled)
+values ('Garnier','HairShiny','Shampoo',10,3,700,7.99,'ml',true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into product (brand,product_name,product_type,stock_qty,min_level,qty_per,price,unit,enabled)
+values ('Maybelline','Biotherm','Conditioner',15,3,750,8.99,'ml',false)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into product (brand,product_name,product_type,stock_qty,min_level,qty_per,price,unit,enabled)
+values ('Softsheen Carson','vichy','Coloring',20,5,350,6.99,'g',true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into product (brand,product_name,product_type,stock_qty,min_level,qty_per,price,unit,enabled)
+values ('Matrix','redken','Conditioner',5,3,700,10.99,'ml',true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into product (brand,product_name,product_type,stock_qty,min_level,qty_per,price,unit,enabled)
+values ('Le Club des Creaturs','BrightPlus','Coloring',10,3,400,9.99,'g',false)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into service (name,description,duration,price,enabled) 
+values ('cuts','make hair short and clean',1,10.99,true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into service (name,description,duration,price,enabled) 
+values ('color','color and highlight hair',2,10.99,true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into service (name,description,duration,price,enabled) 
+values ('perm','make hair curly',3,10.99,true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into service (name,description,duration,price,enabled) 
+values ('makeup','the application of cosmetics',4,10.99,true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into address (address1,address2,city,province,country,postal_code,email)
+values ('800 Silver Spring way N.W.', '', 'Calgary', 'Alberta', 'Canada', '5R74J9', 'silver@canada.com')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into address (address1,address2,city,province,country,postal_code,email)
+values ('500 Royal Oak Groove N.W.', '', 'Calgary', 'Alberta', 'Canada', '5R44J9', 'royal@canada.com')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into address (address1,address2,city,province,country,postal_code,email)
+values ('8380 Brentwood way S.W.', '558 Somerset way S.W.', 'Alberta', 'Calgary', 'Canada', '4r74J9', 'brentwood@canada.com')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into address (address1,address2,city,province,country,postal_code,email)
+values ('199 Kingsland Court .W.', null, 'Calgary', 'Alberta', 'Canada', '5R74J9', 'kingsland@naver.com')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into address (address1,address2,city,province,country,postal_code,email)
+values ('114 Queens land S.E.', null, 'Calgary', 'Alberta', 'Canada', '5R74J9', 'queen@canada.com')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into address (address1,address2,city,province,country,postal_code,email)
+values ('630 Ranchland circle S.E.', '448 Kansinton way N.E.', 'Calgary', 'Alberta', 'Canada', '6R74J9', 'ranchland@canada.com')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into address (address1,address2,city,province,country,postal_code,email)
+values ('3300 Riverbend high N.e.', null, 'Calgary', 'Alberta', 'Canada', '5R44A1', 'river@canada.com')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into address (address1,address2,city,province,country,postal_code,email)
+values ('33 Bowvally road N.W.', '448 Airdrie View Center', 'Airdrie', 'Alberta', 'Canada', '3a75t1', 'bowvally@canada.com')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into address (address1,address2,city,province,country,postal_code,email)
+values ('696 Highland ave N.W.', null, 'Calgary', 'Alberta', 'Canada', '3g16h5', 'highland@canada.com')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into address (address1,address2,city,province,country,postal_code,email)
+values ('990 Dalhousie road N.W.', null, 'Calgary', 'Alberta', 'Canada', '6e35t6', 'dalhousie@canada.com')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into employee (address_no, password,first_name,last_name,phone_number,role,monday_start, monday_end, tuesday_start, tuesday_end,wednesday_start,wednesday_end,
+		thursday_start,thursday_end,friday_start,friday_end,saturday_start,saturday_end,sunday_start,sunday_end,enabled)
+values (1,'j1111','Joey','Ren','4033329696',"Receptionist","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00", true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into employee (address_no, password,first_name,last_name,phone_number,role,monday_start, monday_end, tuesday_start, tuesday_end,wednesday_start,wednesday_end,
+		thursday_start,thursday_end,friday_start,friday_end,saturday_start,saturday_end,sunday_start,sunday_end,enabled)
+values (2,'h2222','Horace','Wan','4034434444',"Manager","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00", true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into employee (address_no, password,first_name,last_name,phone_number,role,monday_start, monday_end, tuesday_start, tuesday_end,wednesday_start,wednesday_end,
+		thursday_start,thursday_end,friday_start,friday_end,saturday_start,saturday_end,sunday_start,sunday_end,enabled)
+values (3,'p3333','Philippe','Durand','4037720020',"Stylist","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00", true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into employee (address_no, password,first_name,last_name,phone_number,role,monday_start, monday_end, tuesday_start, tuesday_end,wednesday_start,wednesday_end,
+		thursday_start,thursday_end,friday_start,friday_end,saturday_start,saturday_end,sunday_start,sunday_end,enabled)
+values (4,'n4444','Nuha','Bazara','4031124412',"Stylist","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00", true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into employee (address_no, password,first_name,last_name,phone_number,role,monday_start, monday_end, tuesday_start, tuesday_end,wednesday_start,wednesday_end,
+		thursday_start,thursday_end,friday_start,friday_end,saturday_start,saturday_end,sunday_start,sunday_end,enabled)
+values (5,'m5555','Miyoung','Han','4033335656',"Stylist","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00","11:00", "12:00", true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into employeeservice values (2,1)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into employeeservice values (3,2)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into employeeservice values (5,3)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into serviceproduct values (1,1,50)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into serviceproduct values (2,1,50)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into serviceproduct values (3,2,350)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into serviceproduct values (4,4,5)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into serviceproduct values (5,3,400)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into supplier (address_no,supplier_name,description,phone_number,enabled)
+values (6,'Goofy','supply the product of shampoo, hairconditioner and coloring','3324493333', true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into supplier (address_no,supplier_name,description,phone_number,enabled)
+values (7,'Beauty Co.','supply the product of skin care','6633332233', true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+insert into supplier (address_no,supplier_name,description,phone_number,enabled)
+values (6,'Shiny Co.','supply the product for perm','4035491303',true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO 
+  `supplierproduct`
+(
+  `supplier_no`,
+  `product_no`
+) 
+VALUE (
+  1,
+  1
+)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO 
+  `supplierproduct`
+(
+  `supplier_no`,
+  `product_no`
+) 
+VALUE (
+  1,
+  2
+)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO `schedule` (`employee_no`, `date`, `start_time`, `end_time`) VALUE (1, '2009-10-12', '11:00:00', '12:00:00')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO `schedule` (`employee_no`, `date`, `start_time`, `end_time`) VALUE (2, '2009-10-12', '11:00:00', '12:00:00')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO `schedule` (`employee_no`, `date`, `start_time`, `end_time`) VALUE (1, '2009-11-12', '11:00:00', '12:00:00')
+--------------
+
+Query OK, 1 row affected (0.01 sec)
+
+--------------
+INSERT INTO `schedule` (`employee_no`, `date`, `start_time`, `end_time`) VALUE (2, '2009-12-12', '11:00:00', '12:00:00')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO `scheduleexception` (`date`, `reason`) VALUE ('2009-11-12', 'Test')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO `availabilityexception` (`employee_no`,`date`,`reason`) VALUE (1, '2009-12-12', 'Test')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> \t

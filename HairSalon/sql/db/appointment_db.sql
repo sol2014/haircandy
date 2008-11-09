@@ -13,7 +13,7 @@ CREATE TABLE appointment
 	CONSTRAINT `client_appointment_no_fk` FOREIGN KEY(`client_no`) REFERENCES client(`client_no`),
 	CONSTRAINT `employee_appointment_no_fk` FOREIGN KEY(`employee_no`) REFERENCES employee(`employee_no`),
 	PRIMARY KEY (`appointment_no`)
-)TYPE=MYISAM;
+)ENGINE=MyISAM;
 
 /*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
 /*!40000 ALTER TABLE `appointment` ENABLE KEYS */;

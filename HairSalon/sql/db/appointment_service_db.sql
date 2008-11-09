@@ -9,7 +9,7 @@ CREATE TABLE appointmentservice
 	CONSTRAINT `appointment_ser_no_fk` FOREIGN KEY (`appointment_no`) REFERENCES appointment(`appointment_no`),
 	CONSTRAINT `service_no_fk` FOREIGN KEY(`service_no`) REFERENCES service(`service_no`),
 	PRIMARY KEY (`appointment_no`, `service_no`)
-)TYPE=MYISAM;
+)ENGINE=MyISAM;
 
 /*!40000 ALTER TABLE `appointmentservice` DISABLE KEYS */;
 /*!40000 ALTER TABLE `appointmentservice` ENABLE KEYS */;

@@ -271,7 +271,8 @@ public abstract class DispatcherServlet extends HttpServlet
 		}
 		catch (InvocationTargetException invokeEx)
 		{
-			LogController.write (this, "Exception while processing request: " + invokeEx.getMessage ());
+			LogController.write (this, "Exception while processing request: " + invokeEx.toString());
+			invokeEx.printStackTrace ();
 		}
 		catch (Exception ex)
 		{

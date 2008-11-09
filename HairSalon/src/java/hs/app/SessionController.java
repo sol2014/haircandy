@@ -913,14 +913,17 @@ public class SessionController
 						boolean added = false;
 
 						// we have inserted a time before, we will need to see where this fits in.
-						for (Date cycle : times)
+						for (int i = 0; i < times.size (); i++)
 						{
+							Date cycle = times.get (i);
+							
 							if (!st.after (cycle))
 							{
 								// This should be inserted before cycle
 								int index = times.indexOf (cycle);
 								times.add (index, et);
 								times.add (index, st);
+								i += 2;
 								added = true;
 							}
 						}

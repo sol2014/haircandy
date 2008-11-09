@@ -7,7 +7,7 @@ CREATE TABLE availabilityexception
 	
 	CONSTRAINT `employee_no_fk` FOREIGN KEY (`employee_no`) REFERENCES employee(`employee_no`),
 	PRIMARY KEY (`employee_no`, `date`)
-)TYPE=MYISAM;
+)ENGINE=MyISAM;
 
 /*!40000 ALTER TABLE `availabilityexception` DISABLE KEYS */;
 /*!40000 ALTER TABLE `availabilityexception` ENABLE KEYS */;

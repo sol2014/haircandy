@@ -19,6 +19,7 @@ import hs.app.*;
 import hs.presentation.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Employee presentation servlet that deals with searching, maintaining and
@@ -297,7 +298,8 @@ public class EmployeeServlet extends DispatcherServlet
 		String serialized_employee = (String) request.getParameter ("temp_employee");
 		EmployeeBean employee = null;
 		AddressBean address = null;
-
+		boolean exceptionFailed = false;
+		
 		if (serialized_employee == null)
 		{
 			employee = new EmployeeBean ();
@@ -335,9 +337,17 @@ public class EmployeeServlet extends DispatcherServlet
 					{
 						AvailabilityExceptionBean aeb = new AvailabilityExceptionBean ();
 						aeb.setEmployeeNo (employee.getEmployeeNo ());
-						aeb.setDate (CoreTools.getDate (dates[i]));
+						Date date = CoreTools.getDate (dates[i]);
+						aeb.setDate (date);
 						aeb.setReason (reasons[i]);
-						aebs.add (aeb);
+						
+						if (SessionController.getEmployeeSchedule (userSession, employee, date) != null)
+						{
+							// There is schedule data on this date.
+							exceptionFailed = true;
+						}
+						else
+							aebs.add (aeb);
 					}
 
 					employee.setAvailabilityExceptions (aebs);
@@ -540,6 +550,9 @@ public class EmployeeServlet extends DispatcherServlet
 		if (SessionController.saveEmployee (userSession, employee))
 		{
 			LogController.write (this, "[USER REQUEST] Performing save: "+employee.getEmployeeNo ());
+			
+			if (exceptionFailed)
+				userSession.setAttribute ("employee_error", "Some exceptions conflicted with existing schedule entries.");
 			
 			userSession.setAttribute ("employee_feedback", "Employee was saved successfully.");
 

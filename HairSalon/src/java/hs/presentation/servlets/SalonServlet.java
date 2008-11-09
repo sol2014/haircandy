@@ -275,7 +275,7 @@ public class SalonServlet extends DispatcherServlet
 		else
 		{
 			if (exceptionFailed)
-				userSession.setAttribute ("salon_error", "Some exceptions were not accepted, they conflict with schedule entries!");
+				userSession.setAttribute ("employee_error", "Some exceptions conflicted with existing schedule entries.");
 			
 			userSession.setAttribute ("salon_feedback", "Salon information saved successfully.");
 			

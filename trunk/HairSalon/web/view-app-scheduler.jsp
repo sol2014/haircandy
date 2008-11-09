@@ -48,6 +48,7 @@ Date date = CoreTools.getDate (request.getParameter("date"));
 <%@ include file="WEB-INF/jspf/footer.jspf" %>
 
 <script language="javascript" src="js/appointmentWithOverlap.js"></script>
+<script language="javascript" src="js/appointment-addin.js"></script>
 
 <script>
     function getMatrix()

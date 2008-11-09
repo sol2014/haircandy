@@ -21,6 +21,8 @@
 		    </tr>
 		    <tr height="100%">
 			<td valign="top">
+			    <table>
+			    <tr><td>
 			    <table border="0" cellpadding="0">
 				<tr>
 				    <td align="right"><img border="0" src="/HairSalon/images/icons/small/service_white.gif" width="16" height="16"></td>
@@ -31,6 +33,8 @@
 				    <td align="left"><input type="text" id="searchServiceName" name="searchServiceName" size="15"></td>
 				</tr>
 			    </table>
+		    </td></tr>
+		    <tr><td>
 			    <table width="100%" border="0" cellpadding="10">
 				<tr>
 				    <td align="center">
@@ -39,6 +43,7 @@
 				    </td>
 				</tr>
 			    </table>
+		</td></tr></table>
 			</td>
 			
 			<td id="serviceResult" width="100%" align="left" valign="top">

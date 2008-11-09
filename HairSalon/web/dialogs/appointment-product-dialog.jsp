@@ -21,6 +21,9 @@
 		    </tr>
 		    <tr height="100%">
 			<td align="left" valign="top">
+			    <table>
+				<tr>
+				    <td>
 			    <table valign="top" align="left" border="0" cellpadding="0">
 				<tr>
 				    <td align="right"><img border="0" src="/HairSalon/images/icons/small/product_white.gif" width="16" height="16"></td>
@@ -39,6 +42,10 @@
 				    <td align="left"><select size="1" id="product_type"><%= CoreTools.generateProductTypeOptions (null, true)%></select></td>
 				</tr>
 			    </table>
+			</td>
+		    </tr>
+		    <tr>
+			<td>
 			    <table width="100%" cellpadding="10">
 				<tr>
 				    <td align="center">
@@ -47,6 +54,9 @@
 				    </td>
 				</tr>
 			    </table>
+			</td>
+		    </tr>
+		</table>
 			</td>
 
 			<td id="searchResult" width="100%" align="left" valign="top">

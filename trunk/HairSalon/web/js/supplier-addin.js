@@ -97,6 +97,6 @@ function searchProducts(){
     var queryString="product_action=ProductSearch&";
     queryString+="product_name="+escape(document.getElementById("productName").value)+"&";
     queryString+="brand="+escape(document.getElementById("brand").value)+"&";
-    queryString+="product_type="+escape(document.getElementById("productType").value);
+    queryString+="product_type="+escape(document.getElementById("product_type").value);
     ajax.request("product",queryString);
 }

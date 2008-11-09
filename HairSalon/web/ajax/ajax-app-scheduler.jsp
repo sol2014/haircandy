@@ -198,7 +198,7 @@ int rowCount = 0;
                         int endOffset = (scheduleEndHour - startHour) * 4 + scheduleEndMinutes / 15;
                         int duration = endOffset - startOffset;
                     %>
-                        addIntialEntry(<%=duration%>,<%=startOffset%>,getColumnIDFromEmployeeNo(<%=eb.getEmployeeNo()%>),<%=sbb.getScheduleNo()%>);
+                        addIntialAppointment(<%=duration%>,<%=startOffset%>,getColumnIDFromEmployeeNo(<%=eb.getEmployeeNo()%>),<%=sbb.getScheduleNo()%>);
                     <%
                     }
                 }

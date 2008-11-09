@@ -52,7 +52,7 @@ var cells = new Array();//cells array that holds all cells' information
 //cells[cells.length] = new Cell("00", "empty"); needs to be initialized in jsp
 var appointments = new Array();//array that holds all the appointments' information
 
-function addIntialEntry(duration, row, column, appointmentId)//function used to add entry on page load
+function addIntialAppointment(duration, row, column, appointmentId)//function used to add entry on page load
 {
     ratio = duration;
     var appointmentCells = new Array();

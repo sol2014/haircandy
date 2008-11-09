@@ -290,6 +290,13 @@
 	background-image:url(../images/scheduler/scheduler_graycell2.gif);
 }
 
+.SchedulerCellSection_Unavailable
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_cell_unavailable.gif);
+}
+
 .SchedulerCellSectionMiddle_Stone
 {
 	width:90px;

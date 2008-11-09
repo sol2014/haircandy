@@ -24,7 +24,7 @@
         }
         var messager = new Ajaxer("text",null,fillDude,null);
         var queryString="appointment_action=Load&";
-        queryString += "employee_no="+employeeIDArray[getColumnId(previousFirstCell.id)];
+        queryString += "employee_no="+employeeIDArray[getColumnId(previousFirstCell.id)]+"&";
         if(draggableDiv.appointmentNo)
         {
             queryString+="appointment_no="+draggableDiv.appointmentNo+"&";

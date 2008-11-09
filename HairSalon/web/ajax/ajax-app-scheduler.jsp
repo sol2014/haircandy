@@ -18,30 +18,29 @@
 
 <%
 // Retrieve the UserSession object from the http session.
-UserSession userSession = (UserSession) session.getAttribute("user_session");
-userSession.setCurrentPosition(SessionPositions.AppScheduler);
+		UserSession userSession = (UserSession) session.getAttribute("user_session");
+		userSession.setCurrentPosition(SessionPositions.AppScheduler);
 
-Date date = CoreTools.getDate (request.getParameter("date"));
-SimpleDateFormat sdf = new SimpleDateFormat(CoreTools.DayMonthYearFormat);
+		Date date = CoreTools.getDate(request.getParameter("date"));
+		SimpleDateFormat sdf = new SimpleDateFormat(CoreTools.DayMonthYearFormat);
 
-Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions = SessionController.getAvailabilityExceptions(userSession, date);
-ArrayList<ScheduleExceptionBean> scheduleExceptions = SessionController.getScheduleExceptions(userSession, date);
-Hashtable<EmployeeBean, ArrayList<ScheduleBean>> unavailables = SessionController.getUnavailable (userSession, date, availabilityExceptions, scheduleExceptions);
-Hashtable<EmployeeBean, ArrayList<AppointmentBean>> appointments = SessionController.getAppointments (userSession, date, availabilityExceptions, scheduleExceptions);
-ArrayList<EmployeeBean> employees = new ArrayList<EmployeeBean>();
+		Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions = SessionController.getAvailabilityExceptions(userSession, date);
+		ArrayList<ScheduleExceptionBean> scheduleExceptions = SessionController.getScheduleExceptions(userSession, date);
+		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> unavailables = SessionController.getUnavailable(userSession, date, availabilityExceptions, scheduleExceptions);
+		Hashtable<EmployeeBean, ArrayList<AppointmentBean>> appointments = SessionController.getAppointments(userSession, date, availabilityExceptions, scheduleExceptions);
+		ArrayList<EmployeeBean> employees = new ArrayList<EmployeeBean>();
 
-for (EmployeeBean employee : unavailables.keySet ())
-{
-    employees.add (SessionController.loadEmployee (userSession, employee));
-}
+		for (EmployeeBean employee : unavailables.keySet()) {
+			employees.add(SessionController.loadEmployee(userSession, employee));
+		}
 
-SalonBean sb = SessionController.loadSalon(userSession, new SalonBean());
-int weekDay = CoreTools.getWeekDay(date);
-Date startTime = sb.getWeekdayStartTime(weekDay);
-Date endTime = sb.getWeekdayEndTime(weekDay);
-int startHour = CoreTools.getStartHour(startTime);
-int endHour = CoreTools.getEndHour(endTime);
-int rowCount = 0;
+		SalonBean sb = SessionController.loadSalon(userSession, new SalonBean());
+		int weekDay = CoreTools.getWeekDay(date);
+		Date startTime = sb.getWeekdayStartTime(weekDay);
+		Date endTime = sb.getWeekdayEndTime(weekDay);
+		int startHour = CoreTools.getStartHour(startTime);
+		int endHour = CoreTools.getEndHour(endTime);
+		int rowCount = 0;
 %>
 
 <table>
@@ -60,12 +59,12 @@ int rowCount = 0;
     </tr>
     <tr>
         <td>
-	    <% if (startTime.equals (endTime)) { %>
-	    <font size="3"><b>The salon is not taking any appointments on this date.</b></font>
-	    <% } else { %>
-		<% if (employees.size () < 1) { %>
-		<font size="3"><b>There are no scheduled employees to book appointments with on this date.</b></font>
-		<% } else { %>
+            <% if (startTime.equals(endTime)) {%>
+            <font size="3"><b>The salon is not taking any appointments on this date.</b></font>
+            <% } else {%>
+            <% if (employees.size() < 1) {%>
+            <font size="3"><b>There are no scheduled employees to book appointments with on this date.</b></font>
+            <% } else {%>
             <table border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td class="SchedulerTopLeft"></td>
@@ -74,7 +73,7 @@ int rowCount = 0;
                             <tr>
                                 <td class="SchedulerTimeHeader">&nbsp;</td>
                                 <% for (int i = 0; i < employees.size(); i++) {
-				    EmployeeBean eb = employees.get(i);%>
+		 EmployeeBean eb = employees.get(i);%>
                                 <td class="SchedulerColumn"><span class="HeaderFont"><%=eb.getFirstName()%></span></td>
                                 <% if (i != employees.size() - 1) {%>
                                 <td class="SchedulerHeaderSeparator"></td>
@@ -106,9 +105,9 @@ int rowCount = 0;
                                 <% if (j != employees.size() - 1) {%>
                                 <td class="SchedulerCellSeparator"><img src="images/site_blank.gif"></td>
                                 <% }
-     }%></tr>
+	 }%></tr>
                             <% rowCount = rowCount + 4;
-            }%>
+	 }%>
                         </table>
                     </td>
                     <td class="SchedulerRight"></td>
@@ -119,8 +118,8 @@ int rowCount = 0;
                     <td class="SchedulerBottomRight"></td>
                 </tr>
             </table>
-	    <% } %>
-	    <% } %>
+            <% }%>
+            <% }%>
         </td>
     </tr>
     <tr>
@@ -156,75 +155,83 @@ int rowCount = 0;
 <script>
     cells = new Array();
     <%
-            for (int i = 0; i < rowCount; i++) {
-                for (int j = 0; j < employees.size(); j++) {
+		for (int i = 0; i < rowCount; i++) {
+			for (int j = 0; j < employees.size(); j++) {
                     %>
                         cells[cells.length] = new Cell("<%=i + ""%>^-^<%=j + ""%>", "SchedulerCellSection", emptyState);
                     <%
-                }
-            }
+			}
+		}
     %>
 </script>
 <script>
     employeeIDArray = new Array();
     employeeNameArray = new Array();
     <%
-            for (EmployeeBean eb : employees) {
+		for (EmployeeBean eb : employees) {
             %>
                 employeeIDArray.push(<%=eb.getEmployeeNo()%>);
                 employeeNameArray.push('<%=eb.getFirstName()%>');
             <%
-            }
+		}
     %>
 </script>
 <script>
     <%
-	if (appointments != null) {
-            for (EmployeeBean eb : employees) {
-                ArrayList<AppointmentBean> abs = null;
-                for (EmployeeBean cycle : appointments.keySet()) {
-                    if (cycle.getEmployeeNo().equals(eb.getEmployeeNo())) {
-                        abs = appointments.get(cycle);
-                    }
-                }
+		if (appointments != null) {
+			for (EmployeeBean eb : employees) {
+				ArrayList<AppointmentBean> abs = null;
+				for (EmployeeBean cycle : appointments.keySet()) {
+					if (cycle.getEmployeeNo().equals(eb.getEmployeeNo())) {
+						abs = appointments.get(cycle);
+					}
+				}
 
-                if (abs != null) {
-                    for (AppointmentBean abb : abs) {
-                        int scheduleStartHour = CoreTools.getHour(abb.getStartTime());
-                        int scheduleStartMinutes = CoreTools.getMinutes(abb.getStartTime());
-                        int scheduleEndHour = CoreTools.getHour(abb.getEndTime());
-                        int scheduleEndMinutes = CoreTools.getMinutes(abb.getEndTime());
-                        int startOffset = (scheduleStartHour - startHour) * 4 + scheduleStartMinutes / 15;
-                        int endOffset = (scheduleEndHour - startHour) * 4 + scheduleEndMinutes / 15;
-                        int duration = endOffset - startOffset;
+				if (abs != null) {
+					for (AppointmentBean abb : abs) {
+						int scheduleStartHour = CoreTools.getHour(abb.getStartTime());
+						int scheduleStartMinutes = CoreTools.getMinutes(abb.getStartTime());
+						int scheduleEndHour = CoreTools.getHour(abb.getEndTime());
+						int scheduleEndMinutes = CoreTools.getMinutes(abb.getEndTime());
+						int startOffset = (scheduleStartHour - startHour) * 4 + scheduleStartMinutes / 15;
+						int endOffset = (scheduleEndHour - startHour) * 4 + scheduleEndMinutes / 15;
+						int duration = endOffset - startOffset;
                     %>
                         addIntialAppointment(<%=duration%>,<%=startOffset%>,getColumnIDFromEmployeeNo(<%=eb.getEmployeeNo()%>),<%=abb.getAppointmentNo()%>);
                     <%
-                    }
-                }
-            }
-	}
+					}
+				}
+			}
+		}
     %>
 </script>    
 <script>
     <%
-	if (availabilityExceptions != null) {
-            for (EmployeeBean eb : employees) {
-                ArrayList<AvailabilityExceptionBean> aebs = null;
-                for (EmployeeBean cycle : availabilityExceptions.keySet()) {
-                    if (cycle.getEmployeeNo().equals(eb.getEmployeeNo())) {
-                        aebs = availabilityExceptions.get(cycle);
-                    }
-                }
+		if (unavailables != null) {
+			for (EmployeeBean eb : employees) {
+				ArrayList<ScheduleBean> sbs = null;
+				for (EmployeeBean cycle : unavailables.keySet()) {
+					if (cycle.getEmployeeNo().equals(eb.getEmployeeNo())) {
+						sbs = unavailables.get(cycle);
+					}
+				}
 
-                if (aebs != null) {
-                    int duration = (endHour - startHour + 1)*4;
+				if (sbs != null) {
+					for (ScheduleBean sbb : sbs) {
+						int scheduleStartHour = CoreTools.getHour(sbb.getStartTime());
+						int scheduleStartMinutes = CoreTools.getMinutes(sbb.getStartTime());
+						int scheduleEndHour = CoreTools.getHour(sbb.getEndTime());
+						int scheduleEndMinutes = CoreTools.getMinutes(sbb.getEndTime());
+						int startOffset = (scheduleStartHour - startHour) * 4 + scheduleStartMinutes / 15;
+						int endOffset = (scheduleEndHour - startHour) * 4 + scheduleEndMinutes / 15;
+						int duration = endOffset - startOffset;
                     %>
                         addUnavailableEntry(<%=duration%>,0,getColumnIDFromEmployeeNo(<%=eb.getEmployeeNo()%>));
                     <%
-                }
-            }
-	}
+					}
+				}
+			}
+		}
     %>
 </script>    
 <script>disableSelection(document.body)</script>

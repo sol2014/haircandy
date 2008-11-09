@@ -168,18 +168,125 @@ function addUnavailableEntry(duration, row, column)//function used to add entry 
     }
 }
 
+function findAppointmentIndex(appointmentId)
+{
+    for(var i = 0; i<appointments.length;i++)
+    {
+        var appointment = appointments[i];
+        if(appointment.appointmentId+""==appointmentId+"")
+        {
+            return i;
+        }
+    }
+    return false;
+}
+
 function saveAppointment(appointmentId, duration)
 {
-    
+    var index = findAppointmentIndex(appointmentId);
+    if(index)
+    {
+        removeAppointment(index);
+    }
+    addAppointment(appointmentId, duration);
+}
+
+function deleteAppointment(appointmentId)
+{
+    var index = findAppointmentIndex(appointmentId);
+    if(index)
+    {
+        removeAppointment(index);
+    }
+}
+
+function removeAppointment(index)
+{
+    appointments.splice(index, 1);//remove the selected appointment
+    for(var k = 0; k < appointment.length; k++)
+    {
+        var previousAppointmentIndex = isCellUsed(appointment[k]);
+        if(previousAppointmentIndex!=-1)//cell used by other appointment
+        {
+            findCell(appointment[k]).state = bookingState;//reset the cell's state back to booking
+            var previousAppointment = appointments[previousAppointmentIndex];
+            var firstRow = getRowId(previousAppointment[0]);
+            var lastRow = getRowId(previousAppointment[previousAppointment.length-1]);
+            var currentRow = getRowId(appointment[k]);
+            var secondPreviousAppointmentIndex = isCellOverlapped(appointment[k], previousAppointmentIndex);
+            if(secondPreviousAppointmentIndex!=-1)//the cell was previously overlap
+            {
+                var thirdPreviousAppointmentIndex = isCellOverlappedTwice(appointment[k],previousAppointmentIndex,secondPreviousAppointmentIndex);
+                if(thirdPreviousAppointmentIndex!=-1)//the cell was previously overlap at least twice
+                {
+                    if(currentRow == firstRow)
+                    {
+                        document.getElementById(appointment[k]).className = overlapTwiceHeadClass;;//reset the td's class back to overlap head
+                    }
+                    else if (currentRow == lastRow)
+                    {
+                        document.getElementById(appointment[k]).className = overlapTwiceTailClass;;//reset the td's class back to overlap tail    
+                    }
+                    else
+                    {
+                        document.getElementById(appointment[k]).className = overlapTwiceBodyClass;;//reset the td's class back to overlap body  
+                    }
+                    if(firstRow == lastRow)
+                    {
+                        document.getElementById(appointment[k]).className = overlapTwiceComboClass;;//reset the td's class back to overlap combo
+                    }
+                }
+                else
+                {
+                    if(currentRow == firstRow)
+                    {
+                        document.getElementById(appointment[k]).className = overlapHeadClass;;//reset the td's class back to overlap head
+                    }
+                    else if (currentRow == lastRow)
+                    {
+                        document.getElementById(appointment[k]).className = overlapTailClass;;//reset the td's class back to overlap tail    
+                    }
+                    else
+                    {
+                        document.getElementById(appointment[k]).className = overlapBodyClass;;//reset the td's class back to overlap body  
+                    }
+                    if(firstRow == lastRow)
+                    {
+                        document.getElementById(appointment[k]).className = overlapComboClass;;//reset the td's class back to overlap combo
+                    }       
+                }
+            }
+            else//the cell was not previously overlap
+            {
+                if(currentRow == firstRow)
+                {
+                    document.getElementById(appointment[k]).className = bookingHeadClass;;//reset the td's class back to booking head
+                }
+                else if (currentRow == lastRow)
+                {
+                    document.getElementById(appointment[k]).className = bookingTailClass;;//reset the td's class back to booking tail    
+                }
+                else
+                {
+                    document.getElementById(appointment[k]).className = bookingBodyClass;;//reset the td's class back to booking body  
+                }
+                if(firstRow == lastRow)
+                {
+                    document.getElementById(appointment[k]).className = bookingComboClass;;//reset the td's class back to booking combo
+                } 
+            }
+        }
+        else//not used
+        {
+            findCell(appointment[k]).state = emptyState;//reset the cell's state back to empty
+            document.getElementById(appointment[k]).className = emptyClass;//reset the td's class back to empty
+        }
+    }
 }
 
 function addAppointment(appointmentId, duration)//function used to change the draggable div's size based on the service time
 {
     ratio = duration;
-    if(ratio != 0)
-    {
-        draggableDiv.style.height = heightUnit * ratio;
-    }
     var appointmentCells = new Array();
     var start = getRowId(previousFirstCell.id);
     var end = parseInt(start) + parseInt(ratio);

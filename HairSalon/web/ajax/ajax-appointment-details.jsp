@@ -82,10 +82,6 @@ if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo
         document.getElementById("appointment_dialog_shell").style.display="none";
     }
     
-    function doFinish ()
-    {
-	doSubmit();
-    }
 </script>
 
 <font face="Trebuchet MS" size="2">

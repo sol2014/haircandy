@@ -17,17 +17,36 @@ function setTaxPercent (percent)
     tax_percent = percent;
 }
 
+function finishDeleting(content)
+{
+    try
+    {
+        if(isNaN(content))
+        {
+            //screwed
+        }
+        else
+        {
+            deleteAppointment(appointmentNo);
+        }
+    }
+    catch(e)
+    {
+        document.getElementById("operResult").innerHTML=content; 
+    }
+}
+
 function operResultTable(content){
     try
     {
         var array = content.split(":");
         var appointmentNo = parseInt(array[0]);
         var duration = parseInt(array[1]);
-        addAppointment(appointmentNo, duration);
+        saveAppointment(appointmentNo, duration);
     }
     catch(e)
     {
-       document.getElementById("operResult").innerHTML=content; 
+        document.getElementById("operResult").innerHTML=content; 
     }
 }
 
@@ -256,9 +275,14 @@ function doSubmit()
     ajax.request("appointment",queryString);
 }
 
+function doFinish ()
+{
+    doSubmit();
+}
+
 function doDelete ()
 {
-    var ajax = new Ajaxer("text",null,operResultTable,null);
+    var ajax = new Ajaxer("text",null,finishDeleting,null);
     var queryString="appointment_action=Delete&";
     queryString+="appointment_no="+escape(document.getElementById("app_no").value)+"&";
     ajax.request("appointment",queryString);

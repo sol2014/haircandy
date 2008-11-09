@@ -53,7 +53,7 @@ var appointments = new Array();//array that holds all the appointments' informat
 
 function addAppointment(appointmentId, duration)//function used to change the draggable div's size based on the service time
 {
-    alert('wft');
+    alert(appointmentId+" "+duration);
     ratio = duration;
     if(ratio != 0)
     {

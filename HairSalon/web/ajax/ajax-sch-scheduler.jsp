@@ -19,81 +19,35 @@
 
 <%
 // Retrieve the UserSession object from the http session.
-            UserSession userSession = (UserSession) session.getAttribute("user_session");
-            userSession.setCurrentPosition(SessionPositions.SchScheduler);
+UserSession userSession = (UserSession) session.getAttribute("user_session");
+userSession.setCurrentPosition(SessionPositions.SchScheduler);
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            Date date = sdf.parse(request.getParameter("date"));
-            sdf = new SimpleDateFormat("EEEEEEEEE, MMMMMMMMM d, yyyy");
+SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+Date date = sdf.parse(request.getParameter("date"));
+sdf = new SimpleDateFormat("EEEEEEEEE, MMMMMMMMM d, yyyy");
 
-            EmployeeBean ebb = new EmployeeBean();
-            AddressBean ab = new AddressBean();
-            ebb.setAddress(ab);
+EmployeeBean ebb = new EmployeeBean();
+AddressBean ab = new AddressBean();
+ebb.setAddress(ab);
 
-            EmployeeBean[] arrayEmployees = SessionController.searchEmployees(userSession, ebb);
-            ArrayList<EmployeeBean> employees = new ArrayList<EmployeeBean>();
+EmployeeBean[] arrayEmployees = SessionController.searchEmployees(userSession, ebb);
+ArrayList<EmployeeBean> employees = new ArrayList<EmployeeBean>();
 
-            for (int i = 0; i < arrayEmployees.length; i++) {
-                employees.add(arrayEmployees[i]);
-            }
+for (int i = 0; i < arrayEmployees.length; i++) {
+    employees.add(arrayEmployees[i]);
+}
 
-            Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions = SessionController.getAvailabilityExceptions(userSession, date);
-            ArrayList<ScheduleExceptionBean> scheduleExceptions = SessionController.getScheduleExceptions(userSession, date);
-            Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedules = SessionController.getSchedule(userSession, date, availabilityExceptions, scheduleExceptions);
+Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions = SessionController.getAvailabilityExceptions(userSession, date);
+ArrayList<ScheduleExceptionBean> scheduleExceptions = SessionController.getScheduleExceptions(userSession, date);
+Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedules = SessionController.getSchedule(userSession, date, availabilityExceptions, scheduleExceptions);
 
-            SalonBean sb = SessionController.loadSalon(userSession, new SalonBean());
-            int weekDay = CoreTools.getWeekDay(date);
-            Date startTime = sb.getWeekdayStartTime(weekDay);
-            Date endTime = sb.getWeekdayEndTime(weekDay);
-            int startHour = CoreTools.getStartHour(startTime);
-            int endHour = CoreTools.getEndHour(endTime);
-            int rowCount = 0;
-%>
-
-<%!
-    private String getCSSClass(int startHour, int row, EmployeeBean eb, Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedules, Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions, ArrayList<ScheduleExceptionBean> scheduleExceptions) {
-        if (scheduleExceptions != null) {
-            return "SchedulerCellSectionMiddle_Stone";
-        }
-        if (availabilityExceptions != null) {
-            for (EmployeeBean cycle : availabilityExceptions.keySet()) {
-                if (cycle.getEmployeeNo().equals(eb.getEmployeeNo())) {
-                    return "SchedulerCellSectionMiddle_Stone";
-                }
-            }
-        }
-        if (schedules != null) {
-            ArrayList<ScheduleBean> sbs = null;
-            for (EmployeeBean cycle : schedules.keySet()) {
-                if (cycle.getEmployeeNo().equals(eb.getEmployeeNo())) {
-                    sbs = schedules.get(cycle);
-                }
-            }
-            if (sbs != null) {
-                for (ScheduleBean sbb : sbs) {
-                    int scheduleStartHour = CoreTools.getHour(sbb.getStartTime());
-                    int scheduleStartMinutes = CoreTools.getMinutes(sbb.getStartTime());
-                    int scheduleEndHour = CoreTools.getHour(sbb.getEndTime());
-                    int scheduleEndMinutes = CoreTools.getMinutes(sbb.getEndTime());
-                    int startOffset = (scheduleStartHour - startHour) * 4 + scheduleStartMinutes / 15;
-                    int endOffset = (scheduleEndHour - startHour) * 4 + scheduleEndMinutes / 15;
-                    if (row >= startOffset && row < endOffset) {
-                        if (startOffset == endOffset - 1) {
-                            return "SchedulerCellSectionSingle";
-                        }
-                        if (row == startOffset) {
-                            return "SchedulerCellSectionTop";
-                        } else if (row == endOffset - 1) {
-                            return "SchedulerCellSectionBottom";
-                        } else {
-                            return "SchedulerCellSectionMiddle";
-                        }
-                    }
-                }
-            }
-        }
-        return "SchedulerCellSection";
-    }
+SalonBean sb = SessionController.loadSalon(userSession, new SalonBean());
+int weekDay = CoreTools.getWeekDay(date);
+Date startTime = sb.getWeekdayStartTime(weekDay);
+Date endTime = sb.getWeekdayEndTime(weekDay);
+int startHour = CoreTools.getStartHour(startTime);
+int endHour = CoreTools.getEndHour(endTime);
+int rowCount = 0;
 %>
 
 <table>
@@ -102,7 +56,7 @@
             <table border="0" cellspacing="5" cellpadding="0">
                 <tr>
                     <td align="right" valign="top"><img border="0" src="/HairSalon/images/icons/big/schedule_white.gif" width="48" height="48"></td>
-                    <td align="left"><font size="3"><b>Employee Schedule: <%=sdf.format(date)%></b></font><br>
+                    <td align="left"><font size="3"><b>Employee Schedule: <%=sdf.format (date)%></b></font><br>
                         You may either create, delete or move schedule entries for different employees. Some areas may be
                         darkened which means there are exceptions blocking those employee.
                     </td>
@@ -112,9 +66,9 @@
     </tr>
     <tr>
         <td>
-            <% if (startTime.equals(endTime)) {%>
-            <font size="3"><b>The salon is not open on this date.</b></font>
-            <% } else {%>
+	    <% if (startTime.equals (endTime)) { %>
+	    <font size="3"><b>The salon is not open on this date.</b></font>
+	    <% } else { %>
             <table border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td class="SchedulerTopLeft"></td>
@@ -123,7 +77,7 @@
                             <tr>
                                 <td class="SchedulerTimeHeader">&nbsp;</td>
                                 <% for (int i = 0; i < employees.size(); i++) {
-         EmployeeBean eb = employees.get(i);%>
+				    EmployeeBean eb = employees.get(i);%>
                                 <td class="SchedulerColumn"><span class="HeaderFont"><%=eb.getFirstName()%></span></td>
                                 <% if (i != employees.size() - 1) {%>
                                 <td class="SchedulerHeaderSeparator"></td>
@@ -147,7 +101,7 @@
                                     <table border="0" width="100%" cellspacing="0" cellpadding="0" height="100%">
                                         <% for (int k = 0; k < 4; k++) {%>
                                         <tr>
-                                            <td id="<%=rowCount + k%>^-^<%=j%>" onclick="cellSingleClickHandler(this)" ondblclick="cellDoubleClickHandler(this)"  onmousedown="cellMouseDownHandler(event, this)" class="<%=getCSSClass(startHour, rowCount + k, employees.get(j), schedules, availabilityExceptions, scheduleExceptions)%>"><img src="images/site_blank.gif"></td>
+                                            <td id="<%=rowCount + k%>^-^<%=j%>" onclick="cellSingleClickHandler(this)" ondblclick="cellDoubleClickHandler(this)"  onmousedown="cellMouseDownHandler(event, this)" class="SchedulerCellSection"><img src="images/site_blank.gif"></td>
                                         </tr>
                                         <% }%>
                                     </table>
@@ -157,7 +111,7 @@
                                 <% }
      }%></tr>
                             <% rowCount = rowCount + 4;
-     }%>
+            }%>
                         </table>
                     </td>
                     <td class="SchedulerRight"></td>
@@ -168,7 +122,7 @@
                     <td class="SchedulerBottomRight"></td>
                 </tr>
             </table>
-            <% }%>
+	    <% } %>
         </td>
     </tr>
     <tr>
@@ -208,7 +162,7 @@
             for (int i = 0; i < rowCount; i++) {
                 for (int j = 0; j < employees.size(); j++) {
                     %>
-                        cells[cells.length] = new Cell("<%=i + ""%>^-^<%=j + ""%>", emptyState);
+                        cells[cells.length] = new Cell("<%=i + ""%>^-^<%=j + ""%>", "SchedulerCellSection", emptyState);
                     <%
                 }
             }
@@ -228,59 +182,59 @@
 </script>
 <script>
     <%
-            if (schedules != null) {
-                for (EmployeeBean eb : employees) {
-                    ArrayList<ScheduleBean> sbs = null;
-                    for (EmployeeBean cycle : schedules.keySet()) {
-                        if (cycle.getEmployeeNo().equals(eb.getEmployeeNo())) {
-                            sbs = schedules.get(cycle);
-                        }
+	if (schedules != null) {
+            for (EmployeeBean eb : employees) {
+                ArrayList<ScheduleBean> sbs = null;
+                for (EmployeeBean cycle : schedules.keySet()) {
+                    if (cycle.getEmployeeNo().equals(eb.getEmployeeNo())) {
+                        sbs = schedules.get(cycle);
                     }
+                }
 
-                    if (sbs != null) {
-                        for (ScheduleBean sbb : sbs) {
-                            int scheduleStartHour = CoreTools.getHour(sbb.getStartTime());
-                            int scheduleStartMinutes = CoreTools.getMinutes(sbb.getStartTime());
-                            int scheduleEndHour = CoreTools.getHour(sbb.getEndTime());
-                            int scheduleEndMinutes = CoreTools.getMinutes(sbb.getEndTime());
-                            int startOffset = (scheduleStartHour - startHour) * 4 + scheduleStartMinutes / 15;
-                            int endOffset = (scheduleEndHour - startHour) * 4 + scheduleEndMinutes / 15;
-                            int duration = endOffset - startOffset;
+                if (sbs != null) {
+                    for (ScheduleBean sbb : sbs) {
+                        int scheduleStartHour = CoreTools.getHour(sbb.getStartTime());
+                        int scheduleStartMinutes = CoreTools.getMinutes(sbb.getStartTime());
+                        int scheduleEndHour = CoreTools.getHour(sbb.getEndTime());
+                        int scheduleEndMinutes = CoreTools.getMinutes(sbb.getEndTime());
+                        int startOffset = (scheduleStartHour - startHour) * 4 + scheduleStartMinutes / 15;
+                        int endOffset = (scheduleEndHour - startHour) * 4 + scheduleEndMinutes / 15;
+                        int duration = endOffset - startOffset;
                     %>
                         addIntialEntry(<%=duration%>,<%=startOffset%>,getColumnIDFromEmployeeNo(<%=eb.getEmployeeNo()%>),<%=sbb.getScheduleNo()%>);
                     <%
-                        }
                     }
                 }
             }
+	}
     %>
 </script>    
 <script>
     <%
-            if (availabilityExceptions != null) {
-                for (EmployeeBean eb : employees) {
-                    ArrayList<AvailabilityExceptionBean> aebs = null;
-                    for (EmployeeBean cycle : availabilityExceptions.keySet()) {
-                        if (cycle.getEmployeeNo().equals(eb.getEmployeeNo())) {
-                            aebs = availabilityExceptions.get(cycle);
-                        }
+	if (availabilityExceptions != null) {
+            for (EmployeeBean eb : employees) {
+                ArrayList<AvailabilityExceptionBean> aebs = null;
+                for (EmployeeBean cycle : availabilityExceptions.keySet()) {
+                    if (cycle.getEmployeeNo().equals(eb.getEmployeeNo())) {
+                        aebs = availabilityExceptions.get(cycle);
                     }
+                }
 
-                    if (aebs != null) {
-                        int duration = (endHour - startHour + 1) * 4;
+                if (aebs != null) {
+                    int duration = (endHour - startHour + 1)*4;
                     %>
                         addExceptionEntry(<%=duration%>,0,getColumnIDFromEmployeeNo(<%=eb.getEmployeeNo()%>));
                     <%
-                    }
                 }
             }
+	}
     %>
 </script>    
 <script>
     <%
             if (scheduleExceptions != null) {
                 for (EmployeeBean eb : employees) {
-                    int duration = (endHour - startHour + 1) * 4;
+                    int duration = (endHour - startHour + 1)*4;
                     %>
                         addExceptionEntry(<%=duration%>,0,getColumnIDFromEmployeeNo(<%=eb.getEmployeeNo()%>));
                     <%

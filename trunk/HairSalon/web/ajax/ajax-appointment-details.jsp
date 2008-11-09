@@ -49,7 +49,7 @@ if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo
 	employeeNo = Integer.toString (appointment.getEmployee().getEmployeeNo());
 %>
 <!-- WILL DELETE FROM HERE -->
-<html>
+<!-- <html>
     <head>
 	<meta http-equiv="Content-Language" content="en-us">
 	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
@@ -65,7 +65,7 @@ if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo
 	<script type="text/javascript" language="javascript" src="js/epoch_classes.js"></script>
     </head>
     <body>
-	
+	 -->
 	<!-- WILL DELETE UNTIL HERE -->
 	
 	<div id="blackout" style="display:none; position: absolute;left: 0px; top: 0px; background-color: #000000;opacity: .5; filter: alpha(opacity=70); z-index: 1000;"></div>
@@ -245,15 +245,17 @@ if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo
     <%@ include file="../dialogs/appointment-product-dialog.jsp" %>
 </div>
 </font>
+<!--
 </body>
 </html>
+ -->
 
 <script>
     document.getElementById("appointment_dialog").style.left = (getScreenWidth() / 2) - 275 + "px";
     document.getElementById("appointment_dialog").style.top = (getScreenHeight() / 2) - 175 + "px";
 </script>
 
-<script language="javascript" src="js/appointment-addin.js"></script>
+<script language="javascript" src="../js/appointment-addin.js"></script>
 <script>
         <%
             Enumeration<ProductBean> pe = appointment.getProducts().keys();
@@ -269,5 +271,5 @@ if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo
                     addInitialService ('<%=sb.getServiceNo()%>', '<%=sb.getName()%>', '<%=sb.getPrice()%>','<%=appointment.getServices().get(sb)%>');
         <% }%>
 </script>
-<script>refillProductsList();</script>
-<script>refillServicesList();</script>
+<script>window.setTimeout(refillProductsList, 1000, "JavaScript");</script>
+<script>window.setTimeout(refillServicesList, 1000, "JavaScript");</script>

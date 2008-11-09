@@ -52,6 +52,18 @@ var cells = new Array();//cells array that holds all cells' information
 //cells[cells.length] = new Cell("00", "empty"); needs to be initialized in jsp
 var appointments = new Array();//array that holds all the appointments' information
 
+function getColumnIDFromEmployeeNo(id)
+{
+    for(var i = 0;i<employeeIDArray.length;i++)
+    {
+        if(employeeIDArray[i]+""==id+"")
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
 function addIntialAppointment(duration, row, column, appointmentId)//function used to add entry on page load
 {
     alert(duration+" "+row+ " "+column+" "+appointmentId);

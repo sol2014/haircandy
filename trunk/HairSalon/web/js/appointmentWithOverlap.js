@@ -34,7 +34,7 @@ var bookedHeadClass = "SchedulerCellSectionTop_Booked";//used to indicate the bo
 var bookedTailClass = "SchedulerCellSectionBottom_Booked";//used to indicate the booked tail cell's class name
 var bookedBodyClass = "SchedulerCellSectionMiddle_Booked";//used to indicate the booked body cell's class name
 var bookedComboClass = "SchedulerCellSectionSingle_Booked";//used to indicate the booked combo cell's class name
-var exceptionClass = "SchedulerCellSectionMiddle_Stone";//used to indicate the exception cell's class name
+var exceptionClass = "SchedulerCellSection_Unavailable";//used to indicate the exception cell's class name
 var emptyState = "empty";//used to indicate the cell element in the cells array's empty state
 var bookingState = "booking";//used to indicate the cell element in the cells array's booking state
 var bookedState = "booked";//used to indicate the cell element in the cells array's booked state
@@ -157,7 +157,6 @@ function addIntialAppointment(duration, row, column, appointmentId)//function us
 
 function addUnavailableEntry(duration, row, column)//function used to add entry on page load
 {
-    alert(duration+" "+row+" "+column);
     ratio = duration;
     var start = row;
     var end = parseInt(start) + parseInt(ratio);

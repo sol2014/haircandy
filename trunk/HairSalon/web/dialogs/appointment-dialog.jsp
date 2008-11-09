@@ -15,14 +15,14 @@
 </div>
 
 <script>
-    function getDude()
+    function getDialogShell()
     {
-        function fillDude(content)
+        function fillDialogShell(content)
         {
             document.getElementById("appointment_dialog_shell").innerHTML = "";
             setInnerHTML(document.getElementById("appointment_dialog_shell"),content);
         }
-        var messager = new Ajaxer("text",null,fillDude,null);
+        var messager = new Ajaxer("text",null,fillDialogShell,null);
         var queryString="appointment_action=Load&";
         queryString += "employee_no="+employeeIDArray[getColumnId(previousFirstCell.id)]+"&";
         if(draggableDiv.appointmentNo)

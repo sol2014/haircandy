@@ -758,7 +758,7 @@ function getColumnId(id)//function to get the column number from a given cell id
     return columnid;
 }
 
-function Cell(id, stateCssClass, state)//cell prototype
+function Cell(id, state)//cell prototype
 {
     if(navigator.userAgent.indexOf("MSIE")>0)//ie
     {
@@ -790,7 +790,6 @@ function Cell(id, stateCssClass, state)//cell prototype
         widthUnit = this.offsetWidth;
     }
     this.state = state;
-    document.getElementById(id).className = stateCssClass;
 }
 
 function isUsed(startRow, endRow, col)//function that checks to see if the any cells in the range has been used by another appointment

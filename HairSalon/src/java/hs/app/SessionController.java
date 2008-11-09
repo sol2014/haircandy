@@ -335,6 +335,16 @@ public class SessionController
 			sale.setEmployee (employee);
 		}
 		
+		for (ProductBean product : sale.getProductSold ().keySet ())
+		{
+			product.clone (loadProduct (session, product));
+		}
+		
+		for (ServiceBean service : sale.getServiceSold ().keySet ())
+		{
+			service.clone (loadService (session, service));
+		}
+		
 		return sale;
 	}
 

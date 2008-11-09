@@ -27,6 +27,7 @@ public class SaleServlet extends DispatcherServlet
         addExternalAction ("Load", "performLoad");
 		addExternalAction ("Save", "performSave");
         addExternalAction ("Finish", "performSave");
+		addExternalAction ("Revert", "performRevert");
         addExternalAction ("New Sale", "performNewSale");
     }
 
@@ -95,7 +96,47 @@ public class SaleServlet extends DispatcherServlet
 
         redirect ("search-sale.jsp", request, response);
     }
+	
+	public void performRevert (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException
+	{
+		String serialized_sale = (String) request.getParameter ("temp_sale");
+		SaleBean sale = null;
 
+		if (serialized_sale == null)
+		{
+			LogController.write (this, "Revert can only work when using the temporary bean system.");
+
+			userSession.setAttribute ("sale_error", "Unable to revert sale, temporary data lost!");
+
+			forward ("/create-sale.jsp", request, response);
+
+			return;
+		}
+		else
+		{
+			sale = (SaleBean) CoreTools.deserializeBase64 (serialized_sale);
+		}
+
+		sale = SessionController.loadSale (userSession, sale);
+
+		if (sale != null)
+		{
+			LogController.write (this, "[USER REQUEST] Performing revert: "+sale.getTransactionNo ());
+			
+			userSession.setAttribute ("sale_load_result", sale);
+			userSession.setAttribute ("employee_feedback", "Employee was reverted successfully.");
+
+			forward ("/maintain-employee.jsp", request, response);
+		}
+		else
+		{
+			userSession.setAttribute ("employee_error", "Unable to revert employee from the database!");
+
+			forward ("/search-employee.jsp", request, response);
+		}
+	}
+	
     public void performLoad (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException
     {

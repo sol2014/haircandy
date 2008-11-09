@@ -941,12 +941,14 @@ public class SessionController
 						for (int i = 0; i < times.size (); i++)
 						{
 							Date cycle = times.get (i);
+							int index = times.indexOf (cycle);
 							
 							if (!st.after (cycle))
 							{
 								// This should be inserted before cycle
-								int index = times.indexOf (cycle);
+								
 								LogController.write ("Adding schedule slot: "+st+":"+et);
+								
 								times.add (index, et);
 								times.add (index, st);
 								i += 2;
@@ -971,8 +973,8 @@ public class SessionController
 				ScheduleBean entry = new ScheduleBean ();
 				entry.setEmployee (employee);
 				entry.setDate (date);
-				entry.setEndTime (times.remove (0));
 				entry.setStartTime (times.remove (0));
+				entry.setEndTime (times.remove (0));
 				
 				// Make sure this entry has actual time.
 				if (!entry.getStartTime ().equals (entry.getEndTime()) && entry.getStartTime ().before (entry.getEndTime ()))

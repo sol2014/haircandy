@@ -169,9 +169,13 @@ function addUnavailableEntry(duration, row, column)//function used to add entry 
     }
 }
 
+function saveAppointment(appointmentId, duration)
+{
+    
+}
+
 function addAppointment(appointmentId, duration)//function used to change the draggable div's size based on the service time
 {
-    alert(appointmentId+" "+duration);
     ratio = duration;
     if(ratio != 0)
     {

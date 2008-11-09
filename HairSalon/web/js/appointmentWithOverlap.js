@@ -34,6 +34,7 @@ var bookedHeadClass = "SchedulerCellSectionTop_Booked";//used to indicate the bo
 var bookedTailClass = "SchedulerCellSectionBottom_Booked";//used to indicate the booked tail cell's class name
 var bookedBodyClass = "SchedulerCellSectionMiddle_Booked";//used to indicate the booked body cell's class name
 var bookedComboClass = "SchedulerCellSectionSingle_Booked";//used to indicate the booked combo cell's class name
+var exceptionClass = "SchedulerCellSectionMiddle_Stone";//used to indicate the exception cell's class name
 var emptyState = "empty";//used to indicate the cell element in the cells array's empty state
 var bookingState = "booking";//used to indicate the cell element in the cells array's booking state
 var bookedState = "booked";//used to indicate the cell element in the cells array's booked state
@@ -50,6 +51,110 @@ document.body.appendChild(draggableDiv);
 var cells = new Array();//cells array that holds all cells' information
 //cells[cells.length] = new Cell("00", "empty"); needs to be initialized in jsp
 var appointments = new Array();//array that holds all the appointments' information
+
+function addIntialEntry(duration, row, column, appointmentId)//function used to add entry on page load
+{
+    ratio = duration;
+    var appointmentCells = new Array();
+    var start = row;
+    var end = parseInt(start) + parseInt(ratio);
+    var ok = true;
+    if(end > rowCount)
+    {
+        ok = false;
+    }
+    if(isBooked(start, end, column))
+    {
+        ok = false;
+    }
+    var add;
+    if(ok)//save the current position
+    {
+        for(var j = start; j < end; j++)
+        {
+            add  = findCell(j+"^-^"+column);
+            var previousAppointmentIndex = isCellUsed(add.id);
+            if(previousAppointmentIndex!=-1)//cell used by other appointment
+            {
+                var secondPreviousAppointmentIndex = isCellOverlapped(add.id, previousAppointmentIndex);
+                if(secondPreviousAppointmentIndex!=-1)//the cell was previously overlap
+                {
+                    if(j == start)//appointment start
+                    {
+                        document.getElementById(add.id).className = overlapTwiceHeadClass;
+                    }
+                    else if(j == end - 1)//appointment tail
+                    {
+                        document.getElementById(add.id).className = overlapTwiceTailClass;
+                    }
+                    else//appointment body
+                    {
+                        document.getElementById(add.id).className = overlapTwiceBodyClass;
+                    }
+                    if(start == end -1)//only one cell
+                    {
+                        document.getElementById(add.id).className = overlapTwiceComboClass;
+                    }
+                }
+                else
+                {
+                    if(j == start)//appointment start
+                    {
+                        document.getElementById(add.id).className = overlapHeadClass;
+                    }
+                    else if(j == end - 1)//appointment tail
+                    {
+                        document.getElementById(add.id).className = overlapTailClass;
+                    }
+                    else//appointment body
+                    {
+                        document.getElementById(add.id).className = overlapBodyClass;
+                    }
+                    if(start == end -1)//only one cell
+                    {
+                        document.getElementById(add.id).className = overlapComboClass;
+                    }
+                }
+            }
+            else//not used by other appointments
+            {
+                if(j == start)//appointment start
+                {
+                    document.getElementById(add.id).className = bookingHeadClass;
+                }
+                else if(j == end - 1)//appointment tail
+                {
+                    document.getElementById(add.id).className = bookingTailClass;
+                }
+                else//appointment body
+                {
+                    document.getElementById(add.id).className = bookingBodyClass;
+                }
+                if(start == end -1)//only one cell
+                {
+                    document.getElementById(add.id).className = bookingComboClass;
+                }
+            }
+            add.state = bookingState;
+            appointmentCells.push(add.id);
+        }
+        appointmentCells.appointmentId=appointmentId;
+        appointments.push(appointmentCells);
+    }
+}
+
+function addExceptionEntry(duration, row, column)//function used to add entry on page load
+{
+    ratio = duration;
+    var start = row;
+    var end = parseInt(start) + parseInt(ratio);
+    for(var j = start; j < end; j++)
+    {
+        var cell = findCell(j+"^-^"+column);
+        cell.state = bookedState;
+        document.getElementById(cell.id).className = exceptionClass;
+    }
+}
 
 function addAppointment(appointmentId, duration)//function used to change the draggable div's size based on the service time
 {

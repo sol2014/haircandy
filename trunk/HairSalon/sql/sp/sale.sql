@@ -89,7 +89,7 @@ BEGIN
 		total_due = p_total_due,
 		total_tax = p_total_tax,
 		discount = p_discount,
-		payment =p_paymet,
+		payment =p_payment,
 		is_complete = p_is_complete
 	WHERE transaction_no = p_transaction_no;
 END

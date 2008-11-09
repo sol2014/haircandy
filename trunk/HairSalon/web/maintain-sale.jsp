@@ -101,8 +101,9 @@ String error_string = (String) userSession.moveAttribute ("sale_save_error");
                     <% }%>
                     
                     <%-- Now we want to add the button that will allow the user to save the entire record --%>
-                    <input type="submit" value="Finish" name="sale_action" class="StandardButton"/>
-                    
+                    <input type="submit" value="Save" name="sale_action" class="StandardButton"/>
+                    <input type="submit" value="Revert" name="sale_action" class="StandardButton"/>
+		    
                     <% if (error_string != null) {%>
 		    <font color="red"><%=CoreTools.display (error_string)%></font>
 		    <% }%>
@@ -259,4 +260,3 @@ String error_string = (String) userSession.moveAttribute ("sale_save_error");
 
 <script>refillServicesList();</script>
 <script>refillProductsList();</script>
-<script>calculateTotal();</script>

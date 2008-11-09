@@ -75,7 +75,21 @@ public class ProductBean extends DataBean implements Comparator
     public ProductBean ()
     {
     }
-
+	
+	public void clone (ProductBean bean)
+	{
+		this.setBrand (bean.getBrand ());
+		this.setEnabled (bean.getEnabled());
+		this.setMinLevel (bean.getMinLevel());
+		this.setName (bean.getName ());
+		this.setPrice (bean.getPrice());
+		this.setProductNo (bean.getProductNo ());
+		this.setQtyPer (bean.getQtyPer ());
+		this.setStockQty (bean.getStockQty ());
+		this.setType (bean.getType ());
+		this.setUnit (bean.getUnit ());
+	}
+	
     /**
      * Sets the brand of the product.
      * @param brand a string for the product brand.

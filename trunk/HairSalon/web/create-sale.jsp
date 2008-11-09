@@ -239,4 +239,3 @@ String error_string = (String) userSession.moveAttribute("sale_error");
 
 <script>refillServicesList();</script>
 <script>refillProductsList();</script>
-<script>calculateTotal();</script>

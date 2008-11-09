@@ -182,7 +182,7 @@ public class SaleBroker extends DatabaseBroker implements BrokerInterface
 			}
 			else
 			{
-				proc = connection.prepareCall ("{call UpdateSale(?,?,?,?,?,?,?,?,?}");
+				proc = connection.prepareCall ("{call UpdateSale(?,?,?,?,?,?,?,?,?)}");
 
 				proc.setInt (index++, sale.getTransactionNo ());
 			}

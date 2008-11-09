@@ -23,8 +23,11 @@
             setInnerHTML(document.getElementById("dude"),content);
         }
         var messager = new Ajaxer("text",null,fillDude,null);
-        //var queryString="date=<%=request.getParameter("date")%>";
-        //messager.request("ajax/ajax-appointment-service-dialog.jsp",queryString);
+        var queryString="appointment_action=Load&";
+        queryString+="date=<%=request.getParameter("date")%>&";
+        queryString+="start_time=ddd&";
+        queryString+="end_time=ddd&";
+        messager.request("appointment",queryString);
     }
 </script>
 

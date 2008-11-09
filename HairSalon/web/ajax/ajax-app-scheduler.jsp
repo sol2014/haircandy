@@ -233,5 +233,4 @@
 			}
 		}
     %>
-</script>    
-<script>disableSelection(document.body)</script>
+</script>

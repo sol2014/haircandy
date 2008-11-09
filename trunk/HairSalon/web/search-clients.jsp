@@ -13,10 +13,10 @@
 
 <%@page session="true" contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*" %>
-<%@page import="hairsalon.core.*" %>
-<%@page import="hairsalon.objects.*" %>
-<%@page import="hairsalon.application.*" %>
-<%@page import="hairsalon.presentation.*" %>
+<%@page import="hs.core.*" %>
+<%@page import="hs.objects.*" %>
+<%@page import="hs.app.*" %>
+<%@page import="hs.presentation.*" %>
 
 <%
 UserSession userSession = (UserSession) session.getAttribute ("user_session");

@@ -9,10 +9,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="hairsalon.objects.*" %>
-<%@page import="hairsalon.presentation.*" %>
+<%@page import="hs.objects.*" %>
+<%@page import="hs.presentation.*" %>
 <%@page import="java.util.*" %>
-<%@page import="hairsalon.core.*" %>
+<%@page import="hs.core.*" %>
 
 <% Hashtable<ProductBean, Integer> searchResults = (Hashtable<ProductBean, Integer>)request.getAttribute("searchResults"); %>
 

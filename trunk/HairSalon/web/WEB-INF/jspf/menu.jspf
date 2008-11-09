@@ -23,7 +23,7 @@ Manager:
 - Reports
 --%>
 
-<%@page import="hairsalon.core.*" %>
+<%@page import="hs.core.*" %>
 
 <%
 SessionPositions position = positions.get(0);

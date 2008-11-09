@@ -9,7 +9,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="hairsalon.core.*" %>
+<%@page import="hs.core.*" %>
 
 <div id="dude" class="DialogBox" style="width: 550px;height: 350px;">
 </div>

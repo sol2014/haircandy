@@ -9,11 +9,11 @@
 --%>
 
 <%@page session="true" contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="hairsalon.core.*" %>
-<%@page import="hairsalon.objects.*" %>
-<%@page import="hairsalon.application.*" %>
-<%@page import="hairsalon.presentation.*" %>
-<%@page import="hairsalon.presentation.tags.*" %>
+<%@page import="hs.core.*" %>
+<%@page import="hs.objects.*" %>
+<%@page import="hs.app.*" %>
+<%@page import="hs.presentation.*" %>
+<%@page import="hs.presentation.tags.*" %>
 <%@page import="java.util.*" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"

@@ -955,40 +955,38 @@ public class SessionController
 		return hash;
 	}
 	
-	public static Hashtable<EmployeeBean, ArrayList<ScheduleBean>> getSchedule (UserSession session, java.util.Date date)
+	public static ArrayList<ScheduleBean> getSchedule (UserSession session, java.util.Date date)
 	{
 		LogController.write ("SessionController->Getting unfiltered schedule...");
 		
-		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> hash = new Hashtable<EmployeeBean, ArrayList<ScheduleBean>> ();
+		ArrayList<ScheduleBean> hash = new ArrayList<ScheduleBean> ();
 		
 		ScheduleBean schedule = new ScheduleBean ();
 		schedule.setDate (date);
-		
 		ScheduleBean[] scheduleEntries = searchSchedule (session, schedule);
-
-		ArrayList<EmployeeBean> employees = new ArrayList<EmployeeBean> ();
-		for (ScheduleBean cycle : scheduleEntries)
-		{
-			if (!employees.contains (cycle.getEmployee ()))
-			{
-				employees.add (cycle.getEmployee ());
-			}
-		}
 		
-		for (EmployeeBean cycle : employees)
-		{
-			ArrayList<ScheduleBean> cycleEntries = new ArrayList<ScheduleBean> ();
-
-			for (ScheduleBean cycleEntry : scheduleEntries)
-			{
-				if (cycleEntry.getEmployee ().equals (cycle))
-				{
-					cycleEntries.add (cycleEntry);
-				}
-			}
-
-			hash.put (cycle, cycleEntries);
-		}
+		for (ScheduleBean bean : scheduleEntries)
+			hash.add (bean);
+		
+		if (hash.size() < 1)
+			return null;
+		
+		return hash;
+	}
+	
+	public static ArrayList<ScheduleBean> getEmployeeSchedule (UserSession session, EmployeeBean employee, java.util.Date date)
+	{
+		LogController.write ("SessionController->Getting employee schedule...");
+		
+		ArrayList<ScheduleBean> hash = new ArrayList<ScheduleBean> ();
+		
+		ScheduleBean schedule = new ScheduleBean ();
+		schedule.setDate (date);
+		schedule.setEmployee (employee);
+		ScheduleBean[] scheduleEntries = searchSchedule (session, schedule);
+		
+		for (ScheduleBean bean : scheduleEntries)
+			hash.add (bean);
 		
 		if (hash.size() < 1)
 			return null;

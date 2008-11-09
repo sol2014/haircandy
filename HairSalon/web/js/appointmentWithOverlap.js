@@ -190,6 +190,28 @@ function closeDialog()
     document.getElementById("dude").style.display="none";
 }
 
+function getAppointmentStartTime()
+{
+    var row = getRowId(previousFirstCell.id);
+    var hour = salonStartTime + (row-row%4)/4;
+    var minutes = row%4;
+    switch (minutes)
+    {
+        case 1:
+            minutes="15";
+            break;
+        case 2:
+            minutes="30";
+            break;
+        case 3:
+            minutes="45"
+            break;
+        default:
+            minutes="00";
+    }
+    return hour+":"+minutes;
+}
+
 function cellRealSingleClickHandler(element)
 {
     if (typeof(element.postponement) != "undefined")
@@ -228,6 +250,7 @@ function cellDoubleClickHandler(element)//function to deal with double click
             document.getElementById("blackout").style.display="block";
             document.getElementById("dude").style.display="block";
             previousFirstCell = document.getElementById(element.id);
+            alert(getAppointmentStartTime());
         } 
     }
 }

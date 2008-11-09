@@ -234,5 +234,5 @@ if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo
                     addInitialService ('<%=sb.getServiceNo()%>', '<%=sb.getName()%>', '<%=sb.getPrice()%>','<%=appointment.getServices().get(sb)%>');
         <% }%>
 </script>
-<script>window.setTimeout(refillProductsList, 10000, "JavaScript");</script>
-<script>window.setTimeout(refillServicesList, 10000, "JavaScript");</script>
+<script>window.setTimeout(refillProductsList, 500, "JavaScript");</script>
+<script>window.setTimeout(refillServicesList, 500, "JavaScript");</script>

@@ -3,7 +3,7 @@
 <!-- some examples of how to customize the build. -->
 <!-- (If you delete it and reopen the project it will be recreated.) -->
 <project name="HairSalon" default="default" basedir=".">
-    <description>Builds, tests, and runs the project HairSalon.</description>
+    <description>Builds, tests, and runs the project hs.</description>
     <import file="nbproject/build-impl.xml"/>
     <!--
 

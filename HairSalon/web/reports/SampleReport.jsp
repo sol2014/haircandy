@@ -10,11 +10,11 @@
 
 <%@ page import="java.util.*" %>
 
-<%@ page import="hairsalon.application.*"%>
-<%@ page import="hairsalon.core.*"%>
-<%@ page import="hairsalon.objects.*"%>
-<%@ page import="hairsalon.presentation.*"%>
-<%@ page import="hairsalon.persistence.*"%>
+<%@ page import="hs.app.*"%>
+<%@ page import="hs.core.*"%>
+<%@ page import="hs.objects.*"%>
+<%@ page import="hs.presentation.*"%>
+<%@ page import="hs.persistence.*"%>
 
 <%
     String typeOfReport = (String)request.getParameter("typeOfReport");
@@ -32,7 +32,7 @@
         <title>Sample Report</title>
     </head>
     <body>
-        <jsp:useBean id="productBean" class="hairsalon.object.ProductBean" />
+        <jsp:useBean id="productBean" class="hs.object.ProductBean" />
         
         <center>
             <h1>Sample Product Report</h1>

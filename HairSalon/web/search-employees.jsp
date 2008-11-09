@@ -10,10 +10,10 @@
 
 <%@page session="true" contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*" %>
-<%@page import="hairsalon.core.*" %>
-<%@page import="hairsalon.objects.*" %>
-<%@page import="hairsalon.application.*" %>
-<%@page import="hairsalon.presentation.*" %>
+<%@page import="hs.core.*" %>
+<%@page import="hs.objects.*" %>
+<%@page import="hs.app.*" %>
+<%@page import="hs.presentation.*" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">

@@ -3,22 +3,22 @@
 
 <!-- Listeners -->
     <listener>
-        <listener-class>hairsalon.application.ContextListener</listener-class>
+        <listener-class>hs.app.ContextListener</listener-class>
     </listener>
     <listener>
-        <listener-class>hairsalon.application.SessionListener</listener-class>
+        <listener-class>hs.app.SessionListener</listener-class>
     </listener>
     <listener>
-        <listener-class>hairsalon.application.ContextListener</listener-class>
+        <listener-class>hs.app.ContextListener</listener-class>
     </listener>
     <listener>
-        <listener-class>hairsalon.application.SessionListener</listener-class>
+        <listener-class>hs.app.SessionListener</listener-class>
     </listener>
     
 <!-- filters -->          
     <filter>
         <filter-name>RequestFilter</filter-name>
-        <filter-class>hairsalon.presentation.RequestFilter</filter-class>
+        <filter-class>hs.presentation.RequestFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>RequestFilter</filter-name>
@@ -42,54 +42,54 @@
 <!-- Servlets -->        
     <servlet>
         <servlet-name>SessionServlet</servlet-name>
-        <servlet-class>hairsalon.presentation.servlets.SessionServlet</servlet-class>
+        <servlet-class>hs.presentation.servlets.SessionServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ApplicationServlet</servlet-name>
-        <servlet-class>hairsalon.presentation.servlets.ApplicationServlet</servlet-class>
+        <servlet-class>hs.presentation.servlets.ApplicationServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SupplierServlet</servlet-name>
-        <servlet-class>hairsalon.presentation.servlets.SupplierServlet</servlet-class>
+        <servlet-class>hs.presentation.servlets.SupplierServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ClientServlet</servlet-name>
-        <servlet-class>hairsalon.presentation.servlets.ClientServlet</servlet-class>
+        <servlet-class>hs.presentation.servlets.ClientServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ProductServlet</servlet-name>
-        <servlet-class>hairsalon.presentation.servlets.ProductServlet</servlet-class>
+        <servlet-class>hs.presentation.servlets.ProductServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EmployeeServlet</servlet-name>
-        <servlet-class>hairsalon.presentation.servlets.EmployeeServlet</servlet-class>
+        <servlet-class>hs.presentation.servlets.EmployeeServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ServiceServlet</servlet-name>
-        <servlet-class>hairsalon.presentation.servlets.ServiceServlet</servlet-class>
+        <servlet-class>hs.presentation.servlets.ServiceServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SalonServlet</servlet-name>
-        <servlet-class>hairsalon.presentation.servlets.SalonServlet</servlet-class>
+        <servlet-class>hs.presentation.servlets.SalonServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AJAXSupplier</servlet-name>
-        <servlet-class>hairsalon.presentation.servlets.AJAXSupplier</servlet-class>
+        <servlet-class>hs.presentation.servlets.AJAXSupplier</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SaleServlet</servlet-name>
-        <servlet-class>hairsalon.presentation.servlets.SaleServlet</servlet-class>
+        <servlet-class>hs.presentation.servlets.SaleServlet</servlet-class>
     </servlet>
 	<servlet>
         <servlet-name>ScheduleServlet</servlet-name>
-        <servlet-class>hairsalon.presentation.servlets.ScheduleServlet</servlet-class>
+        <servlet-class>hs.presentation.servlets.ScheduleServlet</servlet-class>
     </servlet>
 	
 <!-- Servlet Mappings -->        
     
     <servlet>
         <servlet-name>AppointmentServlet</servlet-name>
-        <servlet-class>hairsalon.presentation.servlets.AppointmentServlet</servlet-class>
+        <servlet-class>hs.presentation.servlets.AppointmentServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SessionServlet</servlet-name>

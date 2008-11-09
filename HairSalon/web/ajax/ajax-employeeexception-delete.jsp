@@ -9,9 +9,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="hairsalon.objects.*" %>
-<%@page import="hairsalon.presentation.*" %>
-<%@page import="hairsalon.core.*" %>
+<%@page import="hs.objects.*" %>
+<%@page import="hs.presentation.*" %>
+<%@page import="hs.core.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.*" %>
 

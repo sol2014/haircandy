@@ -131,9 +131,12 @@ if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo
             <td height="100%" background="images/scheduler/scheduler_left.gif"><img src="images/scheduler/scheduler_left.gif" width="2" height="32" /></td>
             <td align="left" valign="top" width="100%">
                 <div valign="top" style="height:350px; overflow:auto; overflow-y: auto; overflow-x: hidden;">
-                    <table valign="top" border="0" width="100%" cellspacing="10" cellpadding="0">
+                    <table valign="top" border="1" width="100%" cellspacing="10" cellpadding="0">
                         <tr>
-                            <td valign="top">
+                            <td>
+				<table>
+				    <tr>
+					<td>
 				<% String firstName = null; %>
 				<% String lastName = null; %>
 				<% String phoneNumber = null; %>
@@ -188,11 +191,26 @@ if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo
                                         <td align="left"><b><%=tf.format (appointment.getEndTime())%></b></td>
                                     </tr>
                                 </table>
-			    </div>
+				</td>
+				</tr>
+				<tr>
+				    <td>
+				<table align="center">
+				    <tr>
+					<td>
+					    <input type="button" onclick="doFinish()" value="Finish" class="StandardButton" /><br/>
+					    <input type="button" onclick="doDelete()" id="deleteButton" value="Delete" class="StandardButton" /><br/>
+					    <input type="button" onclick="doClose()" value="Close" class="StandardButton" />
+					</td>
+				    </tr>
+				</table>
+					</td>
+				    </tr>
+				</table>
                             </td>
                             
-                            <td valign="top" width="100%">
-                                <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
+                            <td valign="top">
+                                <table valign="top" height="100%" align="left" border="1" cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td width="100%" align="left" valign="top">
                                             <div id="servicesList">
@@ -211,13 +229,6 @@ if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo
                                 </table>
                             </td>
                         </tr>
-			<tr>
-			    <td colspan="2">
-				<input type="button" onclick="doFinish()" value="Finish" class="StandardButton" />&nbsp;
-				<input type="button" onclick="doDelete()" id="deleteButton" value="Delete" class="StandardButton" />&nbsp;
-				<input type="button" onclick="doClose()" value="Close" class="StandardButton" />
-			    </td>
-			</tr>
                     </table>
                 </div>
             </td>

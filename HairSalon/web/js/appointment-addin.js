@@ -23,7 +23,7 @@ function operResultTable(content){
         var array = content.split(":");
         var appointmentNo = parseInt(array[0]);
         var duration = parseInt(array[1]);
-        addService(appointmentNo, duration);
+        addAppointment(appointmentNo, duration);
     }
     catch(e)
     {

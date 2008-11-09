@@ -51,8 +51,9 @@ var cells = new Array();//cells array that holds all cells' information
 //cells[cells.length] = new Cell("00", "empty"); needs to be initialized in jsp
 var appointments = new Array();//array that holds all the appointments' information
 
-function addService(appointmentId, duration)//function used to change the draggable div's size based on the service time
+function addAppointment(appointmentId, duration)//function used to change the draggable div's size based on the service time
 {
+    alert('wft');
     ratio = duration;
     if(ratio != 0)
     {

@@ -51,7 +51,7 @@ var cells = new Array();//cells array that holds all cells' information
 //cells[cells.length] = new Cell("00", "empty"); needs to be initialized in jsp
 var appointments = new Array();//array that holds all the appointments' information
 
-function addService(serviceId, duration)//function used to change the draggable div's size based on the service time
+function addService(appointmentId, duration)//function used to change the draggable div's size based on the service time
 {
     ratio = duration;
     if(ratio != 0)
@@ -142,7 +142,7 @@ function addService(serviceId, duration)//function used to change the draggable 
             add.state = bookingState;
             appointmentCells.push(add.id);
         }
-        appointmentCells.serviceId=serviceId;
+        appointmentCells.appointmentId=appointmentId;
         appointments.push(appointmentCells);
         closeDialog();
     }
@@ -283,7 +283,7 @@ function cellRealMouseDownHandler(element)
         previousFirstCell = document.getElementById(appointment[0]);
         previousLastCell = document.getElementById(appointment[appointment.length-1]);
         appointments.splice(index, 1);//remove the selected appointment
-        draggableDiv.serviceId = appointment.serviceId;
+        draggableDiv.appointmentId = appointment.appointmentId;
         for(var k = 0; k < appointment.length; k++)
         {
             if(appointment[k] == element.id)
@@ -584,7 +584,7 @@ function mouseUpHandler(e)//function to deal with mouse up event, hide draggable
                         appointmentCells.push(add.id);
                     }
                 }
-                appointmentCells.serviceId = draggableDiv.serviceId;
+                appointmentCells.appointmentId = draggableDiv.appointmentId;
                 appointments.push(appointmentCells);
                 find = true;
                 break;

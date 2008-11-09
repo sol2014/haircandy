@@ -18,7 +18,17 @@ function setTaxPercent (percent)
 }
 
 function operResultTable(content){
-    document.getElementById("operResult").innerHTML=content;
+    try
+    {
+        var array = content.split(":");
+        var appointmentNo = parseInt(array[0]);
+        var duration = parseInt(array[1]);
+        addService(appointmentNo, duration);
+    }
+    catch(e)
+    {
+       document.getElementById("operResult").innerHTML=content; 
+    }
 }
 
 function builtResultTable(content){

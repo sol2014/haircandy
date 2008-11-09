@@ -116,7 +116,7 @@ public class AppointmentServlet extends DispatcherServlet
 		PrintWriter pw = response.getWriter ();
 		if (SessionController.deleteAppointment (userSession, appointment))
 		{
-			pw.print ("it works");
+			pw.print (appointmentNo);
 		}
 		else
 		{

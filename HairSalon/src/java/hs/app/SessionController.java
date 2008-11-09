@@ -911,26 +911,32 @@ public class SessionController
 			ArrayList<Date> times = new ArrayList<Date> ();
 			ArrayList<ScheduleBean> unavailable = new ArrayList<ScheduleBean> ();
 			
+			LogController.write ("Adding Start Time of Day: "+startTime);
 			times.add (startTime);
 			
 			if (working != null && !startTime.equals (endTime))
 			{
+				LogController.write ("We have schedule data, and the daytime hours are valid.");
 				for (ScheduleBean entry : working)
 				{
+					LogController.write ("Processing slot.");
 					// This is 1 schedule entry.
 					Date st = entry.getStartTime ();
 					Date et = entry.getEndTime ();
-
+					
 					if (currentTime == null)
 					{
+						LogController.write ("Setting current time as end time of slot found: "+et);
 						currentTime = et;
+						
+						LogController.write ("Adding schedule slot: "+st+":"+et);
 						times.add (st);
 						times.add (et);
 					}
 					else
 					{
 						boolean added = false;
-
+						
 						// we have inserted a time before, we will need to see where this fits in.
 						for (int i = 0; i < times.size (); i++)
 						{
@@ -940,13 +946,14 @@ public class SessionController
 							{
 								// This should be inserted before cycle
 								int index = times.indexOf (cycle);
+								LogController.write ("Adding schedule slot: "+st+":"+et);
 								times.add (index, et);
 								times.add (index, st);
 								i += 2;
 								added = true;
 							}
 						}
-
+						
 						if (!added)
 						{
 							times.add (st);

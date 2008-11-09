@@ -369,7 +369,7 @@ function cellDoubleClickHandler(element)//function to deal with double click
             document.getElementById("blackout").style.display="block";
             document.getElementById("appointment_dialog_shell").style.display="block";
             previousFirstCell = document.getElementById(element.id);
-            getDude();
+            getDialogShell();
         } 
     }
 }

@@ -179,26 +179,26 @@ int rowCount = 0;
 </script>
 <script>
     <%
-	if (unavailables != null) {
+	if (appointments != null) {
             for (EmployeeBean eb : employees) {
-                ArrayList<ScheduleBean> sbs = null;
-                for (EmployeeBean cycle : unavailables.keySet()) {
+                ArrayList<AppointmentBean> abs = null;
+                for (EmployeeBean cycle : appointments.keySet()) {
                     if (cycle.getEmployeeNo().equals(eb.getEmployeeNo())) {
-                        sbs = unavailables.get(cycle);
+                        abs = appointments.get(cycle);
                     }
                 }
 
-                if (sbs != null) {
-                    for (ScheduleBean sbb : sbs) {
-                        int scheduleStartHour = CoreTools.getHour(sbb.getStartTime());
-                        int scheduleStartMinutes = CoreTools.getMinutes(sbb.getStartTime());
-                        int scheduleEndHour = CoreTools.getHour(sbb.getEndTime());
-                        int scheduleEndMinutes = CoreTools.getMinutes(sbb.getEndTime());
+                if (abs != null) {
+                    for (AppointmentBean abb : abs) {
+                        int scheduleStartHour = CoreTools.getHour(abb.getStartTime());
+                        int scheduleStartMinutes = CoreTools.getMinutes(abb.getStartTime());
+                        int scheduleEndHour = CoreTools.getHour(abb.getEndTime());
+                        int scheduleEndMinutes = CoreTools.getMinutes(abb.getEndTime());
                         int startOffset = (scheduleStartHour - startHour) * 4 + scheduleStartMinutes / 15;
                         int endOffset = (scheduleEndHour - startHour) * 4 + scheduleEndMinutes / 15;
                         int duration = endOffset - startOffset;
                     %>
-                        addIntialAppointment(<%=duration%>,<%=startOffset%>,getColumnIDFromEmployeeNo(<%=eb.getEmployeeNo()%>),<%=sbb.getScheduleNo()%>);
+                        addIntialAppointment(<%=duration%>,<%=startOffset%>,getColumnIDFromEmployeeNo(<%=eb.getEmployeeNo()%>),<%=abb.getAppointmentNo()%>);
                     <%
                     }
                 }
@@ -227,16 +227,4 @@ int rowCount = 0;
 	}
     %>
 </script>    
-<script>
-    <%
-            if (scheduleExceptions != null) {
-                for (EmployeeBean eb : employees) {
-                    int duration = (endHour - startHour + 1)*4;
-                    %>
-                        addUnavailableEntry(<%=duration%>,0,getColumnIDFromEmployeeNo(<%=eb.getEmployeeNo()%>));
-                    <%
-                }
-            }
-    %>
-</script>
 <script>disableSelection(document.body)</script>

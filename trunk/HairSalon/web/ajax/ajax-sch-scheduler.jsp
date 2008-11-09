@@ -22,9 +22,8 @@
 UserSession userSession = (UserSession) session.getAttribute("user_session");
 userSession.setCurrentPosition(SessionPositions.SchScheduler);
 
-SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-Date date = sdf.parse(request.getParameter("date"));
-sdf = new SimpleDateFormat("EEEEEEEEE, MMMMMMMMM d, yyyy");
+Date date = CoreTools.getDate (request.getParameter("date"));
+SimpleDateFormat sdf = new SimpleDateFormat(CoreTools.DayMonthYearFormat);
 
 EmployeeBean ebb = new EmployeeBean();
 AddressBean ab = new AddressBean();

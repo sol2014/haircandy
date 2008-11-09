@@ -16,7 +16,6 @@
 <%@ page import="java.text.*" %>
 
 <%
-            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             ArrayList<AvailabilityExceptionBean> searchResults = new ArrayList<AvailabilityExceptionBean>();
             String[] dates = request.getParameterValues("date");
             String[] reasons = request.getParameterValues("reason");
@@ -25,7 +24,7 @@
                 for (int i = 0; i < dates.length; i++) {
                     AvailabilityExceptionBean avb = new AvailabilityExceptionBean();
                     try {
-                        avb.setDate(df.parse(dates[i]));
+                        avb.setDate(CoreTools.getDate (dates[i]));
                     } catch (Exception e) {
                     }
                     try {

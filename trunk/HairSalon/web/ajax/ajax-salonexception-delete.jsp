@@ -16,7 +16,6 @@
 <%@page import="hs.core.*" %>
 
 <%
-            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             ArrayList<ScheduleExceptionBean> searchResults = new ArrayList<ScheduleExceptionBean>();
             String[] dates = request.getParameterValues("date");
             String[] reasons = request.getParameterValues("reason");
@@ -24,7 +23,7 @@
                 for (int i = 0; i < dates.length; i++) {
                     ScheduleExceptionBean seb = new ScheduleExceptionBean();
                     try {
-                        seb.setDate(df.parse(dates[i]));
+                        seb.setDate(CoreTools.getDate (dates[i]));
                     } catch (Exception e) {
                     }
                     try {

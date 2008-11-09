@@ -18,6 +18,13 @@ import hs.objects.*;
 
 public class CoreTools
 {
+	public static final String DateFormat = "dd/MM/yyyy";
+	public static final String TimeFormat = "HH:mm";
+	public static final String AMPMFormat = "KK:mm a";
+	public static final String FullTimeFormat = "KK:mm:ss";
+	public static final String MonthYearFormat = "MMMMMMMM, yyyy";
+	public static final String DayMonthYearFormat = "EEEEEEEEE, MMMMMMMMM d, yyyy";
+	
 	public static String display (Object o)
 	{
 		if (o == null)
@@ -28,7 +35,7 @@ public class CoreTools
 		{
 			if (o instanceof Date)
 			{
-				DateFormat df = new SimpleDateFormat ("dd/MM/yyyy");
+				DateFormat df = new SimpleDateFormat (DateFormat);
 				return df.format ((Date) o);
 			}
 			else
@@ -536,14 +543,14 @@ public class CoreTools
 	public static Date getDate (String datestr)
 			throws ParseException
 	{
-		SimpleDateFormat sdf = new SimpleDateFormat ("dd/MM/yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat (DateFormat);
 		return sdf.parse (datestr);
 	}
 
 	public static Date getTime (String timestr)
 			throws ParseException
 	{
-		SimpleDateFormat sdf = new SimpleDateFormat ("HH:mm");
+		SimpleDateFormat sdf = new SimpleDateFormat (TimeFormat);
 		return sdf.parse (timestr);
 	}
 }

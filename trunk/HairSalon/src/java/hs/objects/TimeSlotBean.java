@@ -19,8 +19,6 @@ import java.text.*;
  */
 public abstract class TimeSlotBean extends DataBean
 {
-    public static final String DATE_FORMAT = "mm-dd-yyyy";
-    public static final String TIME_FORMAT = "kk:mm";
     /*
      * This is the date of the time slot. 
      */
@@ -93,23 +91,5 @@ public abstract class TimeSlotBean extends DataBean
     public void setStartTime (Date startTime)
     {
         this.startTime = startTime;
-    }
-
-    /**
-     * Print the start date/time and end date/time in a string format.
-     * @return a string of the time slot information.
-     */
-    public String printTimeSlot ()
-    {
-        SimpleDateFormat showDate =
-            new java.text.SimpleDateFormat (DATE_FORMAT);
-
-        SimpleDateFormat showTime =
-            new java.text.SimpleDateFormat (TIME_FORMAT);
-
-        return "Start Date: " + showDate.format (startTime) + " - " +
-            "Start Time: " + showTime.format (getStartTime ()) + "\n" +
-            "End Date: " + showDate.format (endTime) + " - " +
-            "End time: " + showTime.format (getEndTime ()) + "\n";
     }
 }

@@ -22,14 +22,13 @@
 
 <%
 // Retrieve the UserSession object from the http session.
-            UserSession userSession = (UserSession) session.getAttribute("user_session");
-            int recordNo = 0;
+UserSession userSession = (UserSession) session.getAttribute("user_session");
+int recordNo = 0;
 
-            userSession.setCurrentPosition(SessionPositions.SchScheduler);
-            String page_title = "Employee Schedule";
+userSession.setCurrentPosition(SessionPositions.SchScheduler);
+String page_title = "Employee Schedule";
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            Date date = sdf.parse(request.getParameter("date"));
+Date date = CoreTools.getDate (request.getParameter("date"));
 %>
 
 <%-- Use the pre-set header file. --%>

@@ -38,11 +38,11 @@ if (appointment == null)
 ClientBean client = appointment.getClient();
 EmployeeBean employee = appointment.getEmployee();
 
-SimpleDateFormat tf = new SimpleDateFormat ("KK:mm a");
-SimpleDateFormat df = new SimpleDateFormat ("dd/MM/yyyy");
+SimpleDateFormat tf = new SimpleDateFormat (CoreTools.AMPMFormat);
+SimpleDateFormat df = new SimpleDateFormat (CoreTools.DateFormat);
 
-SimpleDateFormat tf2 = new SimpleDateFormat ("KK:mm:ss");
-SimpleDateFormat df2 = new SimpleDateFormat ("dd/MM/yyyy");
+SimpleDateFormat tf2 = new SimpleDateFormat (CoreTools.FullTimeFormat);
+SimpleDateFormat df2 = new SimpleDateFormat (CoreTools.DateFormat);
 
 String employeeNo = "";
 if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo () != null)

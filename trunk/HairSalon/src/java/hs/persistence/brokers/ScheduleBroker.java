@@ -14,7 +14,6 @@ import java.util.*;
 import hs.core.*;
 import hs.objects.*;
 import hs.persistence.*;
-import java.text.SimpleDateFormat;
 
 /**
  * The broker that provides the schedule beans to/from the database.

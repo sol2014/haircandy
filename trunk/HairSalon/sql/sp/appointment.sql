@@ -42,10 +42,13 @@ CREATE PROCEDURE CreateAppointment (IN p_client_no BIGINT(20),
                                     IN p_ap_date DATE,
                                     IN p_start_time TIME,
                                     IN p_end_time TIME,
-                                    IN p_is_complete BOOLEAN)
+                                    IN p_is_complete BOOLEAN,
+									OUT p_key BIGINT(20))
 BEGIN
     INSERT INTO appointment (client_no, employee_no, ap_date, start_time, end_time, is_complete)
     VALUES (p_client_no, p_employee_no, p_ap_date, p_start_time, p_end_time, p_is_complete);
+
+	SET p_key = LAST_INSERT_ID();
 END
 //
 

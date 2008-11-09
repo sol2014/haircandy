@@ -36,15 +36,69 @@ public class AppointmentServlet extends DispatcherServlet
 	public void performLoad (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
+		PrintWriter pw = response.getWriter ();
+		
 		String appointment_no = request.getParameter ("appointment_no");
+		String date = request.getParameter ("date");
+		String start_time = request.getParameter ("start_time");
+		String end_time = request.getParameter ("end_time");
+		String employee_no = request.getParameter ("employee_no");
 		
 		LogController.write (this, "[PAGE REQUEST] Performing load: "+appointment_no);
 		
 		AppointmentBean appointment = new AppointmentBean ();
-		appointment.setAppointmentNo (Integer.parseInt (appointment_no));
+				
+		if (appointment_no != null)
+		{
+			try
+			{
+				appointment.setAppointmentNo (Integer.parseInt (appointment_no));
+			}
+			catch (Exception e)
+			{
+				// BAD DATA
+				pw.write ("There was invalid data for appointment number.");
+				pw.close();
+				return;
+			}
+			
+			appointment = SessionController.loadAppointment (userSession, appointment);
+		}
+		else
+		{
+			EmployeeBean employee = new EmployeeBean ();
+			employee.setAddress (new AddressBean ());
+			
+			try
+			{
+				employee.setEmployeeNo (Integer.parseInt (employee_no));
+			}
+			catch (Exception e)
+			{
+				// BAD DATA
+				pw.write ("There was invalid data for employee number.");
+				pw.close();
+				return;
+			}
+			
+			employee = SessionController.loadEmployee (userSession, employee);
+			appointment.setEmployee (employee);
+		}
 		
-		appointment = SessionController.loadAppointment (userSession, appointment);
-
+		try
+		{
+			appointment.setDate (CoreTools.getDate (date));
+			appointment.setStartTime (CoreTools.getTime (start_time));
+			appointment.setEndTime (CoreTools.getTime (end_time));
+		}
+		catch (Exception e)
+		{
+			// ERROR with data.
+			pw.write ("There was invalid data for date and time information.");
+			pw.close();
+			return;
+		}
+		
 		request.setAttribute ("appointment_load_result", appointment);
 		forward ("ajax/ajax-appointment-details.jsp", request, response);
 	}
@@ -82,7 +136,7 @@ public class AppointmentServlet extends DispatcherServlet
 		
 		LogController.write (this, "[USER REQUEST] Performing save: "+appointmentNo);
 		
-		if (appointmentNo == "")
+		if (appointmentNo.equals ("") || appointmentNo.equals ("null"))
 		{
 			appointmentNo = null;
 		}
@@ -204,8 +258,7 @@ public class AppointmentServlet extends DispatcherServlet
 		Date date = null;
 		try
 		{
-			SimpleDateFormat sdf = new SimpleDateFormat ("dd/MM/yyyy");
-			date = sdf.parse (dateString);
+			date = CoreTools.getDate (dateString);
 		}
 		catch (Exception e)
 		{
@@ -216,8 +269,7 @@ public class AppointmentServlet extends DispatcherServlet
 		Date startTime = null;
 		try
 		{
-			SimpleDateFormat sdf = new SimpleDateFormat ("HH:mm");
-			startTime = sdf.parse (startString);
+			startTime = CoreTools.getTime (startString);
 		}
 		catch (Exception e)
 		{
@@ -228,8 +280,7 @@ public class AppointmentServlet extends DispatcherServlet
 		Date endTime = null;
 		try
 		{
-			SimpleDateFormat sdf = new SimpleDateFormat ("HH:mm");
-			endTime = sdf.parse (endString);
+			endTime = CoreTools.getTime (endString);
 		}
 		catch (Exception e)
 		{

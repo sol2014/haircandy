@@ -212,7 +212,7 @@ public class AppointmentBroker extends DatabaseBroker implements BrokerInterface
 			
 			if (appointment.getAppointmentNo () == null)
 			{
-				proc = connection.prepareCall ("{call CreateAppointment(?,?,?,?,?,?)}");
+				proc = connection.prepareCall ("{call CreateAppointment(?,?,?,?,?,?,?)}");
 			}
 			else
 			{

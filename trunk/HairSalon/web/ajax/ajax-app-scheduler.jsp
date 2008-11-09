@@ -147,7 +147,6 @@ int rowCount = 0;
         </td>
     </tr>
 </table>
-<script language="javascript" src="js/scheduler.js"></script>
 <script>
     rowCount = <%=rowCount%>;
     salonStartTime = '<%=startHour%>:00';

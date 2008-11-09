@@ -219,8 +219,6 @@ if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo
     <%@ include file="../dialogs/appointment-product-dialog.jsp" %>
 </div>
 </font>
-
-<script language="javascript" src="js/appointment-addin.js"></script>
 <script>
         <%
             Enumeration<ProductBean> pe = appointment.getProducts().keys();
@@ -236,5 +234,5 @@ if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo
                     addInitialService ('<%=sb.getServiceNo()%>', '<%=sb.getName()%>', '<%=sb.getPrice()%>','<%=appointment.getServices().get(sb)%>');
         <% }%>
 </script>
-<script>refillProductsList();</script>
-<script>refillServicesList();</script>
+<script>window.setTimeout(refillProductsList, 10000, "JavaScript");</script>
+<script>window.setTimeout(refillServicesList, 10000, "JavaScript");</script>

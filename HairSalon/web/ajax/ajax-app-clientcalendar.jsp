@@ -9,6 +9,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="hs.core.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.*" %>
 <%@ page import="java.io.*" %>
@@ -37,9 +38,8 @@ String monthS = request.getParameter("month");
 int year = Integer.parseInt(yearS);
 int month = Integer.parseInt(monthS);
 
-SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
-Date date2 = sdf2.parse("01/"+(month+1)+"/"+year);
-sdf2 = new SimpleDateFormat("MMMMMMMM, yyyy");
+Date date2 = CoreTools.getDate ("01/"+(month+1)+"/"+year);
+SimpleDateFormat sdf2 = new SimpleDateFormat(CoreTools.MonthYearFormat);
 
 Calendar calendar = Calendar.getInstance();
 calendar.set(year, month, 1);
@@ -101,9 +101,8 @@ int totalDaysOfGivenMonth = getTotalDaysOfGivenMonth(year, month);
 				<tr>
 				    <% for (int column = 0; column < 7; column++) { %>
 					<% if ((weekDayOfFirstDayOfTheGivenMonth <= dayIndexOfTheGivenMonth) && (dayIndexOfTheGivenMonth < totalDaysOfGivenMonth + weekDayOfFirstDayOfTheGivenMonth)) { %>
-					    <% SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy"); %>
 					    <% String datestr = (dayIndexOfTheGivenMonth - weekDayOfFirstDayOfTheGivenMonth + 1)+"/"+(month+1)+"/"+year; %>
-					    <% Date date = format.parse (datestr); %>
+					    <% Date date = CoreTools.getDate (datestr); %>
 					    
 					    <td id="<%=datestr%>" onmouseover="highlightDay('<%=datestr%>')" onmouseout="unlightDay('<%=datestr%>')" onclick="goToCalendarDay('<%=datestr%>')" class="CalendarCell">
 					    

@@ -29,8 +29,7 @@ int recordNo = 0;
 userSession.setCurrentPosition(SessionPositions.SchScheduler);
 String page_title = "Appointments";
 
-SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-Date date = sdf.parse(request.getParameter("date"));
+Date date = CoreTools.getDate (request.getParameter("date"));
 %>
 
 <%-- Use the pre-set header file. --%>

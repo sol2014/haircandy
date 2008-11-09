@@ -17,7 +17,6 @@ import hs.core.*;
 import hs.objects.*;
 import hs.app.*;
 import hs.presentation.*;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -173,7 +172,7 @@ public class EmployeeServlet extends DispatcherServlet
 			userSession.setAttribute ("employee_new_province", salon.getProvince ());
 			userSession.setAttribute ("employee_new_country", salon.getCountry ());
 			
-			SimpleDateFormat format = new SimpleDateFormat ("HH:mm");
+			SimpleDateFormat format = new SimpleDateFormat (CoreTools.TimeFormat);
 			
 			userSession.setAttribute ("employee_new_monday_start", format.format (salon.getMondayStart ()));
 			userSession.setAttribute ("employee_new_monday_end", format.format (salon.getMondayEnd ()));
@@ -310,7 +309,6 @@ public class EmployeeServlet extends DispatcherServlet
 			employee = (EmployeeBean) CoreTools.deserializeBase64 (serialized_employee);
 			address = employee.getAddress ();
 			
-			DateFormat df = new SimpleDateFormat ("dd/MM/yyyy");
 			String[] services = request.getParameterValues ("services");
 			String[] dates = request.getParameterValues ("dates");
 			String[] reasons = request.getParameterValues ("reasons");
@@ -337,7 +335,7 @@ public class EmployeeServlet extends DispatcherServlet
 					{
 						AvailabilityExceptionBean aeb = new AvailabilityExceptionBean ();
 						aeb.setEmployeeNo (employee.getEmployeeNo ());
-						aeb.setDate (df.parse (dates[i]));
+						aeb.setDate (CoreTools.getDate (dates[i]));
 						aeb.setReason (reasons[i]);
 						aebs.add (aeb);
 					}
@@ -470,20 +468,20 @@ public class EmployeeServlet extends DispatcherServlet
 		
 		try
 		{
-			employee.setMondayStart (new SimpleDateFormat ("HH:mm").parse (monday_start));
-			employee.setMondayEnd (new SimpleDateFormat ("HH:mm").parse (monday_end));
-			employee.setTuesdayStart (new SimpleDateFormat ("HH:mm").parse (tuesday_start));
-			employee.setTuesdayEnd (new SimpleDateFormat ("HH:mm").parse (tuesday_end));
-			employee.setWednesdayStart (new SimpleDateFormat ("HH:mm").parse (wednesday_start));
-			employee.setWednesdayEnd (new SimpleDateFormat ("HH:mm").parse (wednesday_end));
-			employee.setThursdayStart (new SimpleDateFormat ("HH:mm").parse (thursday_start));
-			employee.setThursdayEnd (new SimpleDateFormat ("HH:mm").parse (thursday_end));
-			employee.setFridayStart (new SimpleDateFormat ("HH:mm").parse (friday_start));
-			employee.setFridayEnd (new SimpleDateFormat ("HH:mm").parse (friday_end));
-			employee.setSaturdayStart (new SimpleDateFormat ("HH:mm").parse (saturday_start));
-			employee.setSaturdayEnd (new SimpleDateFormat ("HH:mm").parse (saturday_end));
-			employee.setSundayStart (new SimpleDateFormat ("HH:mm").parse (sunday_start));
-			employee.setSundayEnd (new SimpleDateFormat ("HH:mm").parse (sunday_end));
+			employee.setMondayStart (CoreTools.getTime (monday_start));
+			employee.setMondayEnd (CoreTools.getTime (monday_end));
+			employee.setTuesdayStart (CoreTools.getTime (tuesday_start));
+			employee.setTuesdayEnd (CoreTools.getTime (tuesday_end));
+			employee.setWednesdayStart (CoreTools.getTime (wednesday_start));
+			employee.setWednesdayEnd (CoreTools.getTime (wednesday_end));
+			employee.setThursdayStart (CoreTools.getTime (thursday_start));
+			employee.setThursdayEnd (CoreTools.getTime (thursday_end));
+			employee.setFridayStart (CoreTools.getTime (friday_start));
+			employee.setFridayEnd (CoreTools.getTime (friday_end));
+			employee.setSaturdayStart (CoreTools.getTime (saturday_start));
+			employee.setSaturdayEnd (CoreTools.getTime (saturday_end));
+			employee.setSundayStart (CoreTools.getTime (sunday_start));
+			employee.setSundayEnd (CoreTools.getTime (sunday_end));
 		}
 		catch (Exception e)
 		{
@@ -654,20 +652,20 @@ public class EmployeeServlet extends DispatcherServlet
 
 		try
 		{
-			employee.setMondayStart (new SimpleDateFormat ("HH:mm").parse (monday_start));
-			employee.setMondayEnd (new SimpleDateFormat ("HH:mm").parse (monday_end));
-			employee.setTuesdayStart (new SimpleDateFormat ("HH:mm").parse (tuesday_start));
-			employee.setTuesdayEnd (new SimpleDateFormat ("HH:mm").parse (tuesday_end));
-			employee.setWednesdayStart (new SimpleDateFormat ("HH:mm").parse (wednesday_start));
-			employee.setWednesdayEnd (new SimpleDateFormat ("HH:mm").parse (wednesday_end));
-			employee.setThursdayStart (new SimpleDateFormat ("HH:mm").parse (thursday_start));
-			employee.setThursdayEnd (new SimpleDateFormat ("HH:mm").parse (thursday_end));
-			employee.setFridayStart (new SimpleDateFormat ("HH:mm").parse (friday_start));
-			employee.setFridayEnd (new SimpleDateFormat ("HH:mm").parse (friday_end));
-			employee.setSaturdayStart (new SimpleDateFormat ("HH:mm").parse (saturday_start));
-			employee.setSaturdayEnd (new SimpleDateFormat ("HH:mm").parse (saturday_end));
-			employee.setSundayStart (new SimpleDateFormat ("HH:mm").parse (sunday_start));
-			employee.setSundayEnd (new SimpleDateFormat ("HH:mm").parse (sunday_end));
+			employee.setMondayStart (CoreTools.getTime (monday_start));
+			employee.setMondayEnd (CoreTools.getTime (monday_end));
+			employee.setTuesdayStart (CoreTools.getTime (tuesday_start));
+			employee.setTuesdayEnd (CoreTools.getTime (tuesday_end));
+			employee.setWednesdayStart (CoreTools.getTime (wednesday_start));
+			employee.setWednesdayEnd (CoreTools.getTime (wednesday_end));
+			employee.setThursdayStart (CoreTools.getTime (thursday_start));
+			employee.setThursdayEnd (CoreTools.getTime (thursday_end));
+			employee.setFridayStart (CoreTools.getTime (friday_start));
+			employee.setFridayEnd (CoreTools.getTime (friday_end));
+			employee.setSaturdayStart (CoreTools.getTime (saturday_start));
+			employee.setSaturdayEnd (CoreTools.getTime (saturday_end));
+			employee.setSundayStart (CoreTools.getTime (sunday_start));
+			employee.setSundayEnd (CoreTools.getTime (sunday_end));
 		}
 		catch (Exception e)
 		{

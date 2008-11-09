@@ -21,9 +21,8 @@
 UserSession userSession = (UserSession) session.getAttribute("user_session");
 userSession.setCurrentPosition(SessionPositions.AppScheduler);
 
-SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-Date date = sdf.parse(request.getParameter("date"));
-sdf = new SimpleDateFormat("EEEEEEEEE, MMMMMMMMM d, yyyy");
+Date date = CoreTools.getDate (request.getParameter("date"));
+SimpleDateFormat sdf = new SimpleDateFormat(CoreTools.DayMonthYearFormat);
 
 Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions = SessionController.getAvailabilityExceptions(userSession, date);
 ArrayList<ScheduleExceptionBean> scheduleExceptions = SessionController.getScheduleExceptions(userSession, date);

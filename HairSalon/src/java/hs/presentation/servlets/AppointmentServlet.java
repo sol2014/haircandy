@@ -17,9 +17,7 @@ import hs.core.*;
 import hs.app.*;
 import hs.objects.*;
 import hs.presentation.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Hashtable;
+import java.util.*;
 
 public class AppointmentServlet extends DispatcherServlet
 {

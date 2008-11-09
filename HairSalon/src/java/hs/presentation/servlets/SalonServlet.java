@@ -17,8 +17,6 @@ import hs.core.*;
 import hs.objects.*;
 import hs.presentation.*;
 import hs.app.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class SalonServlet extends DispatcherServlet
@@ -74,7 +72,6 @@ public class SalonServlet extends DispatcherServlet
 		{
 			salon = (SalonBean) CoreTools.deserializeBase64 (serialized_salon);
 			
-			DateFormat df = new SimpleDateFormat ("dd/MM/yyyy");
 			String[] dates = request.getParameterValues ("dates");
 			String[] reasons = request.getParameterValues ("reasons");
 
@@ -87,7 +84,7 @@ public class SalonServlet extends DispatcherServlet
 					for (int i = 0; i < dates.length; i++)
 					{
 						ScheduleExceptionBean seb = new ScheduleExceptionBean ();
-						seb.setDate (df.parse (dates[i]));
+						seb.setDate (CoreTools.getDate (dates[i]));
 						seb.setReason (reasons[i]);
 						
 						// We must check to make sure that the schedule exception is not going to
@@ -238,20 +235,20 @@ public class SalonServlet extends DispatcherServlet
 
 		try
 		{
-			salon.setMondayStart (new SimpleDateFormat ("HH:mm").parse (monday_start));
-			salon.setMondayEnd (new SimpleDateFormat ("HH:mm").parse (monday_end));
-			salon.setTuesdayStart (new SimpleDateFormat ("HH:mm").parse (tuesday_start));
-			salon.setTuesdayEnd (new SimpleDateFormat ("HH:mm").parse (tuesday_end));
-			salon.setWednesdayStart (new SimpleDateFormat ("HH:mm").parse (wednesday_start));
-			salon.setWednesdayEnd (new SimpleDateFormat ("HH:mm").parse (wednesday_end));
-			salon.setThursdayStart (new SimpleDateFormat ("HH:mm").parse (thursday_start));
-			salon.setThursdayEnd (new SimpleDateFormat ("HH:mm").parse (thursday_end));
-			salon.setFridayStart (new SimpleDateFormat ("HH:mm").parse (friday_start));
-			salon.setFridayEnd (new SimpleDateFormat ("HH:mm").parse (friday_end));
-			salon.setSaturdayStart (new SimpleDateFormat ("HH:mm").parse (saturday_start));
-			salon.setSaturdayEnd (new SimpleDateFormat ("HH:mm").parse (saturday_end));
-			salon.setSundayStart (new SimpleDateFormat ("HH:mm").parse (sunday_start));
-			salon.setSundayEnd (new SimpleDateFormat ("HH:mm").parse (sunday_end));
+			salon.setMondayStart (CoreTools.getTime (monday_start));
+			salon.setMondayEnd (CoreTools.getTime (monday_end));
+			salon.setTuesdayStart (CoreTools.getTime (tuesday_start));
+			salon.setTuesdayEnd (CoreTools.getTime (tuesday_end));
+			salon.setWednesdayStart (CoreTools.getTime (wednesday_start));
+			salon.setWednesdayEnd (CoreTools.getTime (wednesday_end));
+			salon.setThursdayStart (CoreTools.getTime (thursday_start));
+			salon.setThursdayEnd (CoreTools.getTime (thursday_end));
+			salon.setFridayStart (CoreTools.getTime (friday_start));
+			salon.setFridayEnd (CoreTools.getTime (friday_end));
+			salon.setSaturdayStart (CoreTools.getTime (saturday_start));
+			salon.setSaturdayEnd (CoreTools.getTime (saturday_end));
+			salon.setSundayStart (CoreTools.getTime (sunday_start));
+			salon.setSundayEnd (CoreTools.getTime (sunday_end));
 		}
 		catch (Exception e)
 		{

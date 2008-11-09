@@ -17,8 +17,6 @@ import hs.core.*;
 import hs.app.*;
 import hs.objects.*;
 import hs.presentation.*;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class ScheduleServlet extends DispatcherServlet
@@ -88,8 +86,7 @@ public class ScheduleServlet extends DispatcherServlet
 		Date date = null;
 		try
 		{
-			SimpleDateFormat sdf = new SimpleDateFormat ("dd/MM/yyyy");
-			date = sdf.parse (dateString);
+			date = CoreTools.getDate (dateString);
 		}
 		catch (Exception e)
 		{
@@ -100,8 +97,7 @@ public class ScheduleServlet extends DispatcherServlet
 		Date startTime = null;
 		try
 		{
-			SimpleDateFormat sdf = new SimpleDateFormat ("HH:mm");
-			startTime = sdf.parse (startString);
+			startTime = CoreTools.getTime (startString);
 		}
 		catch (Exception e)
 		{
@@ -112,8 +108,7 @@ public class ScheduleServlet extends DispatcherServlet
 		Date endTime = null;
 		try
 		{
-			SimpleDateFormat sdf = new SimpleDateFormat ("HH:mm");
-			endTime = sdf.parse (endString);
+			endTime = CoreTools.getTime (endString);
 		}
 		catch (Exception e)
 		{

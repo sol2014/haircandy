@@ -132,7 +132,7 @@ public class AlertBroker extends DatabaseBroker implements BrokerInterface
 		{
 			Connection connection = super.getConnection ();
 			
-			if (alert.getAlertNo () == null)
+			if (alert.getAlertNo () != null)
 			{
 				// We are going to be deleting all of them.
 				CallableStatement statement = connection.prepareCall ("{call DeleteAlert(?)}");
@@ -149,6 +149,11 @@ public class AlertBroker extends DatabaseBroker implements BrokerInterface
 				{
 					result = false;
 				}
+			}
+			else
+			{
+				LogController.write (this, "Attempted to delete an alert with no ID.");
+				result = false;
 			}
 			
 			super.returnConnection (connection);
@@ -175,6 +180,7 @@ public class AlertBroker extends DatabaseBroker implements BrokerInterface
 	{
 		AlertBean alert = new AlertBean ();
 		
+		alert.setAlertNo (result.getInt ("alert_no"));
 		alert.setType (result.getString ("alert_type"));
 		alert.setDate (result.getDate ("date"));
 		alert.setMessage (result.getString ("message"));

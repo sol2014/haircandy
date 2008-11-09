@@ -447,6 +447,14 @@ public class SessionController
 		return result;
 	}
 
+	public static boolean deleteAlert (UserSession session, AlertBean alert)
+	{
+		LogController.write ("SessionController->Deleting alert...");
+		boolean result = false;
+		result = PersistenceController.delete (alert);
+		return result;
+	}
+	
 	public static boolean deleteAppointment (UserSession session, AppointmentBean appointment)
 	{
 		LogController.write ("SessionController->Deleting appointment entry...");
@@ -614,15 +622,16 @@ public class SessionController
 			}
 			
 			// Deal with all the products that we have found to be low.
-			for (ProductBean low : lowProducts)
+			for (ProductBean lowProd : lowProducts)
 			{
 				AlertBean alert = new AlertBean ();
 				alert.setDate (new Date());
-				alert.setRecordNo (low.getProductNo ());
+				alert.setRecordNo (lowProd.getProductNo ());
 				alert.setType (AlertTypes.Inventory.toString ());
+				alert.setLink ("product?product_action=Load&product_no="+alert.getRecordNo ());
 				
-				double min = low.getMinLevel ();
-				double current = low.getStockQty ();
+				double min = lowProd.getMinLevel ();
+				double current = lowProd.getStockQty ();
 				double percent = current / min;
 				
 				if (percent <= 0.25)
@@ -634,11 +643,11 @@ public class SessionController
 				
 				if (current < 1)
 				{
-					alert.setMessage ("The product named ["+low.getName ()+"] is out of stock.");
+					alert.setMessage ("The product named ["+lowProd.getName ()+"] is out of stock.");
 				}
 				else
 				{
-					alert.setMessage ("The product named ["+low.getName ()+"] is currently under the minimum quantity levels.");
+					alert.setMessage ("The product named ["+lowProd.getName ()+"] is currently under the minimum quantity levels.");
 				}
 				
 				EmployeeBean manager = new EmployeeBean ();

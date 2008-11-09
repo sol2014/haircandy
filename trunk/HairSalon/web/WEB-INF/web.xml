@@ -84,13 +84,17 @@
         <servlet-name>ScheduleServlet</servlet-name>
         <servlet-class>hs.presentation.servlets.ScheduleServlet</servlet-class>
     </servlet>
-	
-<!-- Servlet Mappings -->        
-    
-    <servlet>
+	<servlet>
+        <servlet-name>AlertServlet</servlet-name>
+        <servlet-class>hs.presentation.servlets.AlertServlet</servlet-class>
+    </servlet>
+	<servlet>
         <servlet-name>AppointmentServlet</servlet-name>
         <servlet-class>hs.presentation.servlets.AppointmentServlet</servlet-class>
     </servlet>
+	
+<!-- Servlet Mappings -->        
+    
     <servlet-mapping>
         <servlet-name>SessionServlet</servlet-name>
         <url-pattern>/session</url-pattern>
@@ -147,12 +151,17 @@
         <servlet-name>ScheduleServlet</servlet-name>
         <url-pattern>/schedule</url-pattern>
     </servlet-mapping>
-	
-<!-- Session Configs -->  
-    <servlet-mapping>
+	<servlet-mapping>
+        <servlet-name>AlertServlet</servlet-name>
+        <url-pattern>/alert</url-pattern>
+    </servlet-mapping>
+	<servlet-mapping>
         <servlet-name>AppointmentServlet</servlet-name>
         <url-pattern>/appointment</url-pattern>
     </servlet-mapping>
+	
+<!-- Session Configs -->
+
     <session-config>
         <session-timeout>
                 30

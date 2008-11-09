@@ -220,7 +220,7 @@ int rowCount = 0;
                 if (aebs != null) {
                     int duration = (endHour - startHour + 1)*4;
                     %>
-                        addExceptionEntry(<%=duration%>,0,getColumnIDFromEmployeeNo(<%=eb.getEmployeeNo()%>));
+                        addUnavailableEntry(<%=duration%>,0,getColumnIDFromEmployeeNo(<%=eb.getEmployeeNo()%>));
                     <%
                 }
             }
@@ -233,7 +233,7 @@ int rowCount = 0;
                 for (EmployeeBean eb : employees) {
                     int duration = (endHour - startHour + 1)*4;
                     %>
-                        addExceptionEntry(<%=duration%>,0,getColumnIDFromEmployeeNo(<%=eb.getEmployeeNo()%>));
+                        addUnavailableEntry(<%=duration%>,0,getColumnIDFromEmployeeNo(<%=eb.getEmployeeNo()%>));
                     <%
                 }
             }

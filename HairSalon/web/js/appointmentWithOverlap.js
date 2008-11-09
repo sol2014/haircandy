@@ -143,7 +143,7 @@ function addIntialEntry(duration, row, column, appointmentId)//function used to 
     }
 }
 
-function addExceptionEntry(duration, row, column)//function used to add entry on page load
+function addUnavailableEntry(duration, row, column)//function used to add entry on page load
 {
     ratio = duration;
     var start = row;

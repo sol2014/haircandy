@@ -166,7 +166,7 @@ public class EmployeeServlet extends DispatcherServlet
 		
 		SalonBean salon = new SalonBean ();
 		salon = SessionController.loadSalon (userSession, salon);
-
+		
 		if (salon != null)
 		{
 			userSession.setAttribute ("employee_new_city", salon.getCity ());

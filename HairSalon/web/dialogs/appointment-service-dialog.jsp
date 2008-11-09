@@ -1,4 +1,4 @@
-<div id="appointment_service_dialog" class="DialogBox" style="width: 600px;height: 350px;">
+<div id="appointment_service_dialog" class="DialogBox">
      <table bgcolor="#FFFFFF" height="100%" width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 	    <td><img src="images/scheduler/scheduler_topleft.gif" width="2" height="33" /></td>
@@ -9,12 +9,12 @@
 	    <td height="100%" background="images/scheduler/scheduler_left.gif"><img src="images/scheduler/scheduler_left.gif" width="2" height="32" /></td>
 	    <td width="100%">
 		<div style="height:350px; overflow:auto; overflow-y: scroll; overflow-x: hidden;">
-		<table height="100%" width="97%" border="0" cellspacing="10" cellpadding="0">
+		<table height="100%" width="98%" border="0" cellspacing="5" cellpadding="0">
 		    <tr>
 			<td colspan="2">
 			    <table border="0" width="100%">
 				<tr>
-				    <td align="left" valign="top" width="100%">Click the add button beside services you want to add. You can filter the search results if necessary.</td>
+				    <td align="right" valign="top" width="100%"></td>
 				</tr>
 			    </table> 
 			</td>
@@ -34,8 +34,8 @@
 			    <table width="100%" border="0" cellpadding="10">
 				<tr>
 				    <td align="center">
-					<input type="button" onclick="searchServices()" value="Search" style="width: 80px"/><br />
-					<input type="button" onclick="closeAddService()" value="Close" style="width: 80px"/>
+					<input type="button" onclick="searchServices()" value="Search" class="StandardButton"/><br />
+					<input type="button" onclick="closeAddService()" value="Close" class="StandardButton"/>
 				    </td>
 				</tr>
 			    </table>
@@ -73,6 +73,6 @@
 </div>
 
 <script>
-    document.getElementById("appointment_service_dialog").style.left = (getScreenWidth() / 2) - 300 + "px";
-    document.getElementById("appointment_service_dialog").style.top = (getScreenHeight() / 2) - 175 + "px";
+    document.getElementById("appointment_service_dialog").style.left = (document.getElementById("appointment_dialog_shell").clientWidth / 2) - (document.getElementById("appointment_service_dialog").clientWidth / 2) + "px";
+    document.getElementById("appointment_service_dialog").style.top = (document.getElementById("appointment_dialog_shell").clientHeight / 2) - (document.getElementById("appointment_service_dialog").clientHeight / 2)  + "px";
 </script>

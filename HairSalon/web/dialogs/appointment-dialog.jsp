@@ -11,7 +11,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="hs.core.*" %>
 
-<div id="dude" class="DialogBox" style="width: 550px;height: 350px;">
+<div id="appointment_dialog_shell" class="DialogBox">
 </div>
 
 <script>
@@ -19,8 +19,8 @@
     {
         function fillDude(content)
         {
-            document.getElementById("dude").innerHTML = "";
-            setInnerHTML(document.getElementById("dude"),content);
+            document.getElementById("appointment_dialog_shell").innerHTML = "";
+            setInnerHTML(document.getElementById("appointment_dialog_shell"),content);
         }
         var messager = new Ajaxer("text",null,fillDude,null);
         var queryString="appointment_action=Load&";
@@ -35,12 +35,7 @@
             queryString+="start_time="+getAppointmentStartTime()+"&";
             queryString+="end_time="+getAppointmentStartTime()+"&";
         }
-        alert(queryString);
+        
         messager.request("appointment",queryString);   
     }
-</script>
-
-<script>
-    document.getElementById("dude").style.left = (getScreenWidth() / 2) - 275 + "px";
-    document.getElementById("dude").style.top = (getScreenHeight() / 2) - 175 + "px";
 </script>

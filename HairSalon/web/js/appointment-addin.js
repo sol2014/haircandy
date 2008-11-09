@@ -22,11 +22,13 @@ function operResultTable(content){
 }
 
 function builtResultTable(content){
+    document.getElementById("appointment_product_dialog").style.display="block";
     document.getElementById("searchResult").innerHTML=content;
 }
 
 function builtServiceResultTable(content)
 {
+    document.getElementById("appointment_service_dialog").style.display="block";
     document.getElementById("serviceResult").innerHTML=content;
 }
 
@@ -85,6 +87,9 @@ function refillServicesList()
     function refill(content)
     {
         document.getElementById ("servicesList").innerHTML = content;
+        
+        document.getElementById("appointment_dialog_shell").style.left = (getScreenWidth() / 2) - (document.getElementById("appointment_dialog_shell").clientWidth / 2) + "px";
+        document.getElementById("appointment_dialog_shell").style.top = (getScreenHeight() / 2) - (document.getElementById("appointment_dialog_shell").clientHeight / 2) + "px";
     }
     var messager = new Ajaxer("text",null,refill,null);
     var queryString="service_action=AppointmentServiceRefill&";
@@ -115,6 +120,8 @@ function refillProductsList ()
     
     function refill(content){
         document.getElementById ("productsList").innerHTML = content;
+        document.getElementById("appointment_dialog_shell").style.left = (getScreenWidth() / 2) - (document.getElementById("appointment_dialog_shell").clientWidth / 2) + "px";
+        document.getElementById("appointment_dialog_shell").style.top = (getScreenHeight() / 2) - (document.getElementById("appointment_dialog_shell").clientHeight / 2) + "px";
     }
     
     var messager = new Ajaxer("text",null,refill,null);
@@ -184,26 +191,22 @@ function findServiceIndex(id)
 }
 
 function showAddProduct(){
-    document.getElementById("blackout").style.display="block";
-    document.getElementById("appointment_product_dialog").style.display="block";
+    //document.getElementById("appointment_product_dialog").style.display="block";
     document.getElementById("searchResult").innerHTML="";
     searchProducts();
 }
 
 function showAddService(){
-    document.getElementById("blackout").style.display="block";
-    document.getElementById("appointment_service_dialog").style.display="block";
+    //document.getElementById("appointment_service_dialog").style.display="block";
     document.getElementById("searchResult").innerHTML="";
     searchServices();
 }
 
 function closeAddProduct(){
-    document.getElementById("blackout").style.display="none";
     document.getElementById("appointment_product_dialog").style.display="none";
 }
 
 function closeAddService(){
-    document.getElementById("blackout").style.display="none";
     document.getElementById("appointment_service_dialog").style.display="none";
 }
 

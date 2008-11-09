@@ -73,7 +73,7 @@ String error_string = (String) userSession.moveAttribute("sale_error");
                 <td align="Left" valign="top"><img border="0" src="/HairSalon/images/icons/big/sale_white.gif" width="48" height="48"></td>
                 <td align="left"><b><font size="3">Create new Sale</font></b><br>
                     Sales can be created for clients who just simply need to purchase products 
-                    from the salon. No specific appointments are necessary to perform this general sale.
+                    and services from the salon without an appointment.
                     <br><br>
                     
                     <% if (sale != null) {%>
@@ -84,7 +84,8 @@ String error_string = (String) userSession.moveAttribute("sale_error");
                     
                     <%-- Now we want to add the button that will allow the user to save the entire record --%>
                     <input type="submit" value="Finish" name="sale_action" class="StandardButton"/>
-                    
+                    <input type="submit" value="Search" name="sale_action" class="StandardButton"/>
+		    
                     <% if (error_string != null) {%>
                     <font color="red">
                         <%=error_string%>

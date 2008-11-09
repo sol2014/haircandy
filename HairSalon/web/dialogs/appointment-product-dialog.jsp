@@ -1,4 +1,4 @@
-<div id="appointment_product_dialog" class="DialogBox" style="width: 600px;height: 350px;">
+<div id="appointment_product_dialog" class="DialogBox">
     <table bgcolor="#FFFFFF" height="100%" width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 	    <td><img src="images/scheduler/scheduler_topleft.gif" width="2" height="33" /></td>
@@ -9,7 +9,7 @@
 	    <td height="100%" background="images/scheduler/scheduler_left.gif"><img src="images/scheduler/scheduler_left.gif" width="2" height="32" /></td>
 	    <td width="100%">
 		<div style="height:350px; overflow:auto; overflow-y: scroll; overflow-x: hidden;">
-		<table height="100%" width="97%" border="0" cellspacing="5" cellpadding="0">
+		<table height="100%" width="98%" border="0" cellspacing="5" cellpadding="0">
 		    <tr>
 			<td colspan="2">
 			    <table border="0" width="100%">
@@ -20,15 +20,15 @@
 			</td>
 		    </tr>
 		    <tr height="100%">
-			<td valign="top">
-			    <table border="0" cellpadding="0">
+			<td align="left" valign="top">
+			    <table valign="top" align="left" border="0" cellpadding="0">
 				<tr>
 				    <td align="right"><img border="0" src="/HairSalon/images/icons/small/product_white.gif" width="16" height="16"></td>
 				    <td align="left"><u><b>Product Details</b></u></td>
 				</tr>
 				<tr>
 				    <td align="right">Name:</td>
-				    <td align="left"><input type="text" id="productName" name="productName" size="15"></td>
+				    <td align="left"><input type="text" id="product_name" name="productName" size="15"></td>
 				</tr>
 				<tr>
 				    <td align="right">Brand:</td>
@@ -36,7 +36,7 @@
 				</tr>
 				<tr>
 				    <td align="right">Type:</td>
-				    <td align="left"><select size="1" id="productType"><%= CoreTools.generateProductTypeOptions (null, true)%></select></td>
+				    <td align="left"><select size="1" id="product_type"><%= CoreTools.generateProductTypeOptions (null, true)%></select></td>
 				</tr>
 			    </table>
 			    <table width="100%" cellpadding="10">
@@ -81,6 +81,6 @@
 </div>
 
 <script>
-    document.getElementById("appointment_product_dialog").style.left = (getScreenWidth() / 2) - 300 + "px";
-    document.getElementById("appointment_product_dialog").style.top = (getScreenHeight() / 2) - 175 + "px";
+    document.getElementById("appointment_product_dialog").style.left = (document.getElementById("appointment_dialog_shell").clientWidth / 2) - (document.getElementById("appointment_product_dialog").clientWidth / 2) + "px";
+    document.getElementById("appointment_product_dialog").style.top = (document.getElementById("appointment_dialog_shell").clientHeight / 2) - (document.getElementById("appointment_product_dialog").clientHeight / 2)  + "px";
 </script>

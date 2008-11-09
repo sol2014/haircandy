@@ -193,7 +193,7 @@ function closeDialog()
 function getAppointmentStartTime()
 {
     var row = getRowId(previousFirstCell.id);
-    var hour = salonStartTime + (row-row%4)/4;
+    var hour = parseInt(salonStartTime) + parseInt((row-row%4)/4);
     var minutes = row%4;
     switch (minutes)
     {
@@ -250,7 +250,7 @@ function cellDoubleClickHandler(element)//function to deal with double click
             document.getElementById("blackout").style.display="block";
             document.getElementById("dude").style.display="block";
             previousFirstCell = document.getElementById(element.id);
-            alert(getAppointmentStartTime());
+            getDude();
         } 
     }
 }

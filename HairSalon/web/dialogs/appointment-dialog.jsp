@@ -24,10 +24,19 @@
         }
         var messager = new Ajaxer("text",null,fillDude,null);
         var queryString="appointment_action=Load&";
-        queryString+="date=<%=request.getParameter("date")%>&";
-        queryString+="start_time=ddd&";
-        queryString+="end_time=ddd&";
-        messager.request("appointment",queryString);
+        queryString += "employee_no="+employeeIDArray[getColumnId(previousFirstCell.id)];
+        if(draggableDiv.appointmentNo)
+        {
+            queryString+="appointment_no="+draggableDiv.appointmentNo+"&";
+        }
+        else
+        {
+            queryString+="date="+date+"&";
+            queryString+="start_time="+getAppointmentStartTime()+"&";
+            queryString+="end_time="+getAppointmentStartTime()+"&";
+        }
+        alert(queryString);
+        messager.request("appointment",queryString);   
     }
 </script>
 

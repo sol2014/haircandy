@@ -226,7 +226,7 @@
 						int endOffset = (scheduleEndHour - startHour) * 4 + scheduleEndMinutes / 15;
 						int duration = endOffset - startOffset;
                     %>
-                        addUnavailableEntry(<%=duration%>,0,getColumnIDFromEmployeeNo(<%=eb.getEmployeeNo()%>));
+                        addUnavailableEntry(<%=duration%>,<%=startOffset%>,getColumnIDFromEmployeeNo(<%=eb.getEmployeeNo()%>));
                     <%
 					}
 				}

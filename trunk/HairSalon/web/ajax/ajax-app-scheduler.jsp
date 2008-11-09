@@ -198,7 +198,7 @@ int rowCount = 0;
                         int endOffset = (scheduleEndHour - startHour) * 4 + scheduleEndMinutes / 15;
                         int duration = endOffset - startOffset;
                     %>
-                        //addIntialEntry(<%=duration%>,<%=startOffset%>,getColumnIDFromEmployeeNo(<%=eb.getEmployeeNo()%>),<%=sbb.getScheduleNo()%>);
+                        addIntialEntry(<%=duration%>,<%=startOffset%>,getColumnIDFromEmployeeNo(<%=eb.getEmployeeNo()%>),<%=sbb.getScheduleNo()%>);
                     <%
                     }
                 }
@@ -220,7 +220,7 @@ int rowCount = 0;
                 if (aebs != null) {
                     int duration = (endHour - startHour + 1)*4;
                     %>
-                        //addExceptionEntry(<%=duration%>,0,getColumnIDFromEmployeeNo(<%=eb.getEmployeeNo()%>));
+                        addExceptionEntry(<%=duration%>,0,getColumnIDFromEmployeeNo(<%=eb.getEmployeeNo()%>));
                     <%
                 }
             }
@@ -233,10 +233,10 @@ int rowCount = 0;
                 for (EmployeeBean eb : employees) {
                     int duration = (endHour - startHour + 1)*4;
                     %>
-                        //addExceptionEntry(<%=duration%>,0,getColumnIDFromEmployeeNo(<%=eb.getEmployeeNo()%>));
+                        addExceptionEntry(<%=duration%>,0,getColumnIDFromEmployeeNo(<%=eb.getEmployeeNo()%>));
                     <%
                 }
             }
     %>
 </script>
-<script>//disableSelection(document.body)</script>
+<script>disableSelection(document.body)</script>

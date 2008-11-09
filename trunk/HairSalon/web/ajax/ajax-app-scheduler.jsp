@@ -88,9 +88,9 @@
                     <td class="SchedulerLeft"></td>
                     <td>
                         <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                            <% for (int i = startHour; i <= endHour; i++) {%>
+                            <% for (int i = startHour; i < endHour; i++) {%>
                             <tr>
-                                <td class="SchedulerTime"><span class="TimeFont"><%=CoreTools.getAMPMHour(i)%>:00<%=CoreTools.getAMPM(i)%></span></td>
+                                <td class="SchedulerTime"><span class="TimeFont"><%=CoreTools.getAMPMHour(i+1)%>:00<%=CoreTools.getAMPM(i)%></span></td>
                                 
                                 <% for (int j = 0; j < employees.size(); j++) {%>
                                 <td class="SchedulerCell" style="text-align: center; vertical-align: middle">

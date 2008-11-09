@@ -11,7 +11,7 @@
 <%@page session="true" contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="hs.core.*" %>
 <%@page import="hs.objects.*" %>
-<%@page import="hs.app.*" %>
+<%@page import="hs.application.*" %>
 <%@page import="hs.presentation.*" %>
 <%@page import="hs.presentation.tags.*" %>
 <%@page import="java.util.*" %>

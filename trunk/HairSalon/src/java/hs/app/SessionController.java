@@ -986,7 +986,7 @@ public class SessionController
 					cycleEntries.add (cycleEntry);
 				}
 			}
-			
+
 			hash.put (cycle, cycleEntries);
 		}
 		

@@ -13,7 +13,6 @@ package hs.app;
 import javax.servlet.*;
 
 import hs.core.*;
-import hs.objects.*;
 import hs.persistence.*;
 
 /**

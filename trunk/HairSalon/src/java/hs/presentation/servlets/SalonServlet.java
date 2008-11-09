@@ -64,6 +64,8 @@ public class SalonServlet extends DispatcherServlet
 		String serialized_salon = (String) request.getParameter ("temp_salon");
 		SalonBean salon = null;
 		
+		boolean exceptionFailed = false;
+		
 		if (serialized_salon == null)
 		{
 			salon = new SalonBean ();
@@ -87,7 +89,15 @@ public class SalonServlet extends DispatcherServlet
 						ScheduleExceptionBean seb = new ScheduleExceptionBean ();
 						seb.setDate (df.parse (dates[i]));
 						seb.setReason (reasons[i]);
-						sebs.add (seb);
+						
+						// We must check to make sure that the schedule exception is not going to
+						// violate already existing schedule entries.
+						if (SessionController.getSchedule (userSession, seb.getDate()) != null)
+						{
+							exceptionFailed = true;
+						}
+						else
+							sebs.add (seb);
 					}
 				}
 				
@@ -248,7 +258,7 @@ public class SalonServlet extends DispatcherServlet
 			LogController.write (this, "Unable to convert date information.");
 			inputFailed = true;
 		}
-
+		
 		if (inputFailed)
 		{
 			userSession.setAttribute ("salon_error", "You have provided invalid input! Review the fields in red.");
@@ -267,6 +277,9 @@ public class SalonServlet extends DispatcherServlet
 		}
 		else
 		{
+			if (exceptionFailed)
+				userSession.setAttribute ("salon_error", "Some exceptions were not accepted, they conflict with schedule entries!");
+			
 			userSession.setAttribute ("salon_feedback", "Salon information saved successfully.");
 			
 			userSession.removeAttribute ("temp_salon");

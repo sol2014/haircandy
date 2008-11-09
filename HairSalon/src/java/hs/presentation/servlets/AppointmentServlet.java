@@ -295,8 +295,21 @@ public class AppointmentServlet extends DispatcherServlet
 		appointment.setClient (client);
 		appointment.setDate (date);
 		appointment.setStartTime (startTime);
-		appointment.setEndTime (endTime);
-
+		
+		// Now we have to figure out the end time from the duration.
+		try
+		{
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime (startTime);
+			calendar.add(Calendar.MINUTE,duration);
+			appointment.setEndTime (calendar.getTime());
+		}
+		catch (Exception e)
+		{
+			LogController.write (this, "Unable to calculate end time for appointment.");
+			appointment.setEndTime (endTime);
+		}
+        
 		if (SessionController.saveAppointment (userSession, appointment))
 		{
 			LogController.write ("Save successfull.");
@@ -307,7 +320,7 @@ public class AppointmentServlet extends DispatcherServlet
 				duration = 1;
 			else
 				duration = duration / 15;
-				
+			
 			String sentstr = appointment.getAppointmentNo ()+":"+duration;
 			pw.print (sentstr);
 			pw.close ();

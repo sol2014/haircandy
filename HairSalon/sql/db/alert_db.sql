@@ -5,8 +5,8 @@ CREATE TABLE alert
 	`alert_type` VARCHAR(10) NOT NULL,
 	`level` VARCHAR(10) NOT NULL,
 	`date` DATE NOT NULL,
-	`message` VARCHAR(15) NOT NULL,
-	`link` VARCHAR(100),
+	`message` VARCHAR(250) NOT NULL,
+	`link` VARCHAR(250),
 	`record_no` BIGINT(20),
 	
 	PRIMARY KEY (`alert_no`)

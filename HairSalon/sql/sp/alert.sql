@@ -12,8 +12,8 @@ DROP PROCEDURE IF EXISTS CreateAlert//
 
 CREATE PROCEDURE CreateAlert (IN p_alert_type VARCHAR(10),
 									IN p_date DATE,
-									IN p_message VARCHAR(100),
-									IN p_link VARCHAR(100),
+									IN p_message VARCHAR(250),
+									IN p_link VARCHAR(250),
 									IN p_level VARCHAR(10),
 									IN p_record_no BIGINT(20),
 									OUT p_key BIGINT(20))

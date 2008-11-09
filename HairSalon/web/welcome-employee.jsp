@@ -26,11 +26,40 @@ SalonBean salon = SessionController.loadSalon (userSession, new SalonBean());
 userSession.setCurrentPosition(SessionPositions.EmployeeWelcome);
 String page_title = "Welcome Employee";
 int recordNo = 0;
+String error_string = (String) userSession.moveAttribute ("alert_error");
 %>
 
 <%@ include file="WEB-INF/jspf/header.jspf" %>
 
+<script>
+    var request;
+    try {
+        request = new XMLHttpRequest();
+    } catch (trymicrosoft) {
+        try {
+            request = new ActiveXObject("Msxml2.XMLHTTP.5.0");
+        } catch (othermicrosoft) {
+            try {
+                request = new ActiveXObject("Microsoft.XMLHTTP");
+            } catch (failed) {
+                request = false;
+            }
+        }
+    }
+    if(!request){
+        alert("Oh my, are you using safari?Come on, use a normal browser like CMonkey");
+    }
+    
+    function deleteAlert (element)
+    {
+	var queryString="alert_action=Delete&";
+	queryString+="alert_no="+escape(element.id)+"&";
+	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=utf-8');
+        request.send(queryString);
+    }
+</script>
 <font face="Trebuchet MS" size="2">
+    <form onsubmit="deleteAlert()" method="POST" action="product">
     <table height="100%" border="0" cellspacing="5" cellpadding="0">
 	<tr>
 	    <td align="left" valign="top">
@@ -41,13 +70,19 @@ int recordNo = 0;
 		<b>City: </b><%=CoreTools.display (salon.getCity ())%><br/><br/>
 	    </td>
 	</tr>
-    </table>
-    <font size="3"><b>System Alerts</b></font><br/>
+	<tr>
+	    <td align="left" valign="top"></td>
+	    <td align="left" valign="top">
+		<font size="3"><b>System Alerts</b></font><br/>
     The alerts listed below are created by events that occur in the system that you need to be aware of.<br/>
     <br/>
     <% AlertBean[] alerts = SessionController.loadAlerts (userSession); %>
     
-    <table align="center" width="90%" cellspacing="0" cellpadding="0" class="SearchLine">
+<% if (error_string != null) {%>
+		    <font color="red"><%=CoreTools.display (error_string)%></font>
+		    <% }%>
+		    
+    <table align="left" width="100%" cellspacing="0" cellpadding="0" class="SearchLine">
 	<tr align="left">
 	    <% if (alerts != null && alerts.length > 0) { %>
 	    <td height="25" nowrap="nowrap" class="Row44"><b><font color="#FFFFFF">&nbsp;Alerts Generated (<%=alerts.length%>)</b></td>
@@ -66,12 +101,18 @@ int recordNo = 0;
 		    <tr align="right">
 			<td height="20" nowrap="nowrap" class="Row1"></td>
 			<td width="100%" nowrap="nowrap" align="left" class="Row1"><b>Message</b></td>
+			<% if (userSession.getEmployee ().getRole ().equals ("Manager")) { %>
+			<td height="20" nowrap="nowrap" class="Row1"></td>
+			<% } %>
 		    </tr>
 
 		    <% for (AlertBean alert : alerts) { %>
 		    <tr align="right" valign="middle">
 			<td height="30" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/medium/<%=CoreTools.displayAlertIcon (alert.getLevel())%>.gif" width="16" height="16" />&nbsp;</td>
 			<td align="left" class="Row2"><span class="SearchLink"><a href="<%=CoreTools.display (alert.getLink ())%>" class="SearchLink"><%=CoreTools.display (alert.getMessage ())%></a></span></td>
+			<% if (userSession.getEmployee ().getRole ().equals ("Manager")) { %>
+			    <td nowrap="nowrap" class="Row7"><img style="cursor:pointer" id="<%=alert.getAlertNo ()%>" src="/HairSalon/images/icons/small/remove_white.gif" onclick="deleteAlert(this)" title="Delete this alert from the list." /></td>
+			<% } %>
 		    </tr>
 		    <% }%>
 		    <% }%>
@@ -79,6 +120,10 @@ int recordNo = 0;
 	    </td>
 	</tr>
     </table>
+	    </td>
+	</tr>
+    </table>
+</form>
 </font>
 
 <%@ include file="WEB-INF/jspf/footer.jspf" %>

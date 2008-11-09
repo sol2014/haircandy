@@ -1,7 +1,7 @@
 <%-- 
-    Document   : index
-    Created on : Nov 8, 2008, 5:33:14 PM
-    Author     : draek
+    Document   : export-excel
+    Created on : 25-Oct-2008, 6:45:36 AM
+    Author     : 353448
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -11,9 +11,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Export Excel</title>
     </head>
     <body>
-        <h2>Hello World!</h2>
+        <h2>Export the search result into an excel file.</h2>
+        
+        <input type="button" value="export-excel" onclick="" />
+        
+        
     </body>
 </html>

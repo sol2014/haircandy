@@ -1,0 +1,195 @@
+/*
+ * HairSalon: Scheduling and Management System
+ * Systems II - Southern Alberta Institute of Technology
+ * 
+ * File Author: Philippe Durand
+ * 
+ * System Developed by:
+ * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
+ */
+
+.SiteShadowLeft
+{
+	width:18px;
+	background-image:url(../images/site_leftshadow.gif);
+}
+
+.SiteShadowRight
+{
+	width:18px;
+	background-image:url(../images/site_rightshadow.gif);
+}
+
+.SiteShadowTop
+{
+	height:18px;
+	background-image:url(../images/site_topshadow.gif);
+}
+
+.SiteShadowTopLeft
+{
+	width:18px;
+	height:18px;
+	background-image:url(../images/site_topleftshadow.gif);
+}
+
+.SiteShadowTopRight
+{
+	width:18px;
+	height:18px;
+	background-image:url(../images/site_toprightshadow.gif);
+}
+
+.SiteShadowBottom
+{
+	height:18px;
+	background-image:url(../images/site_bottomshadow.gif);
+}
+
+.SiteShadowBottomLeft
+{
+	width:18px;
+	height:18px;
+	background-image:url(../images/site_bottomleftshadow.gif);
+}
+
+.SiteShadowBottomRight
+{
+	width:18px;
+	height:18px;
+	background-image:url(../images/site_bottomrightshadow.gif);
+}
+
+.ContentShadowTop
+{
+	height:10px;
+	background-image:url(../images/site_inner_topshadow.gif);
+	background-repeat: repeat-x
+}
+
+.ContentShadowBottom
+{
+	height:10px;
+	background-image:url(../images/site_inner_bottomshadow.gif);
+	background-repeat: repeat-x}
+
+.ContentShadowRight
+{
+	width:10px;
+	float:10px;
+	background-image:url(../images/site_inner_rightshadow.gif);
+	background-repeat: repeat-y}
+
+.ContentShadowLeft
+{
+	width:10px;
+	float:10px;
+	background-image:url(../images/site_inner_leftshadow.gif);
+}
+
+.ContentShadowTopLeft
+{
+	height:10px;
+	width:10px;
+	float:left;
+	border:0px none;
+	background-image:url(../images/site_inner_topleftshadow.gif);
+	background-repeat:repeat-x; background-position-y:50%
+}
+
+.ContentShadowBottomLeft
+{
+	height:10px;
+	width:10px;
+	float:left;
+	background-image:url(../images/site_inner_bottomleftshadow.gif);
+	background-repeat:repeat-x; background-position-y:50%
+}
+
+.ContentShadowTopRight
+{
+	height:10px;
+	width:10px;
+	background-image:url(../images/site_inner_toprightshadow.gif);
+	background-repeat:repeat-x; background-position-y:50%
+}
+
+.ContentShadowBottomRight
+{
+	height:10px;
+	width:10px;
+	float:right;
+	background-image:url(../images/site_inner_bottomrightshadow.gif);
+	background-repeat:repeat-x; background-position-y:50%
+}
+
+.InternalShadow
+{
+	border:0px;
+	cellspacing:0px;
+	cellpadding:0px;
+}
+
+.InternalShadowTop
+{
+	height:15px;
+	background-image:url(../images/shadow_top.gif);
+	background-repeat: repeat-x
+}
+
+.InternalShadowBottom
+{
+	height:15px;
+	background-image:url(../images/shadow_bottom.gif);
+	background-repeat: repeat-x}
+
+.InternalShadowRight
+{
+	width:15px;
+	float:right;
+	background-image:url(../images/shadow_right.gif);
+	background-repeat: repeat-y}
+
+.InternalShadowLeft
+{
+	width:15px;
+	float:left;
+	background-image:url(../images/shadow_left.gif);
+	background-repeat: repeat-y
+}
+
+.InternalShadowTopLeft
+{
+	height:15px;
+	width:15px;
+	float:left;
+	background-image:url(../images/shadow_topleft.gif);
+	background-repeat:repeat-x; background-position-y:50%
+}
+
+.InternalShadowBottomLeft
+{
+	height:15px;
+	width:15px;
+	float:left;
+	background-image:url(../images/shadow_bottomleft.gif);
+	background-repeat:repeat-x; background-position-y:50%
+}
+
+.InternalShadowTopRight
+{
+	height:15px;
+	width:15px;
+	float:right;
+	background-image:url(../images/shadow_topright.gif);
+	background-repeat:repeat-x; background-position-y:50%
+}
+
+.InternalShadowBottomRight
+{
+	height:15px;
+	width:15px;
+	float:right;
+	background-image:url(../images/shadow_bottomright.gif);
+	background-repeat:repeat-x; background-position-y:50%
+}

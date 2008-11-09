@@ -1,0 +1,181 @@
+<% ArrayList<SessionPositions> positions = userSession.getPositions ();
+int left = positions.size(); %>
+
+<table align="left" border="0" cellpadding="0" cellspacing="6">
+    <tr>
+	<td align="left"><img border="0" src="/HairSalon/images/icons/small/home_gray.gif" width="16" height="16"></td>
+	<td align="left"><a class="NavigationFont" href="/HairSalon/application">Home</a></td>
+	<td align="left"><span class="NavigationFont">&gt;</span></td>
+	
+	<% for (SessionPositions position : positions) {
+	    left--;
+	    
+	    String icon = "unknown_item.gif";
+	    String resource = "application";
+	    String title = "Unknown Page";
+	    
+	    switch (position)
+	    {
+		case Help:
+		    icon = "help_gray.gif";
+		    resource = "view-help.jsp";
+		    title = "Help";
+		    break;
+		case Login:
+		    icon = "login_gray.gif";
+		    resource = "login-employee.jsp";
+		    title = "Employee Login";
+		    break;
+		case EmployeeWelcome:
+		case GuestWelcome:
+		    icon = "welcome_gray.gif";
+		    resource = "application";
+		    title = "Welcome";
+		    break;
+		case AppScheduler:
+		    icon = "appointment_gray.gif";
+		    resource = "view-app-scheduler.jsp";
+		    title = "Appointments";
+		    break;
+		case AppCalendar:
+		    icon = "appointment_gray.gif";
+		    resource = "view-app-calendar.jsp";
+		    title = "Calendar";
+		    break;
+		case SchScheduler:
+		    icon = "schedule_gray.gif";
+		    resource = "view-sch-scheduler.jsp";
+		    title = "Schedule";
+		    break;
+		case SchCalendar:
+		    icon = "schedule_gray.gif";
+		    resource = "view-sch-calendar.jsp";
+		    title = "Calendar";
+		    break;
+		case Sales:
+		    icon = "sale_gray.gif";
+		    resource = "create-sale.jsp";
+		    title = "Create Sale";
+		    break;
+		case Salon:
+		    icon = "salon_gray.gif";
+		    resource = "view-salon.jsp";
+		    title = "Maintain Salon";
+		    break;
+		case Employees:
+		    icon = "employee_gray.gif";
+		    resource = "search-employees.jsp";
+		    title = "Search Employees";
+		    break;
+		case Products:
+		    icon = "product_gray.gif";
+		    resource = "search-products.jsp";
+		    title = "Search Products";
+		    break;
+		case Clients:
+		    icon = "client_gray.gif";
+		    resource = "search-clients.jsp";
+		    title = "Search Clients";
+		    break;
+		case Suppliers:
+		    icon = "supplier_gray.gif";
+		    resource = "search-suppliers.jsp";
+		    title = "Search Suppliers";
+		    break;
+		case Services:
+		    icon = "service_gray.gif";
+		    resource = "search-services.jsp";
+		    title = "Search Services";
+		    break;
+		case Reports:
+		    icon = "report_gray.gif";
+		    resource = "generate-reports.jsp";
+		    title = "Generate Reports";
+		    break;
+		
+		case MaintainEmployee:
+		    icon = "maintain_gray.gif";
+		    title = "Maintain Employee";
+		    resource = "employee?employee_action=Load&employee_no="+recordNo;
+		    break;
+		
+		case MaintainClient:
+		    icon = "maintain_gray.gif";
+		    title = "Maintain Client";
+		    resource = "client?client_action=Load&client_no="+recordNo;
+		    break;
+		
+		case MaintainProduct:
+		    icon = "maintain_gray.gif";
+		    title = "Maintain Product";
+		    resource = "product?product_action=Load&product_no="+recordNo;
+		    break;
+		
+		case MaintainSupplier:
+		    icon = "maintain_gray.gif";
+		    title = "Maintain Supplier";
+		    resource = "supplier?supplier_action=Load&supplier_no="+recordNo;
+		    break;
+		
+		case MaintainService:
+		    icon = "maintain_gray.gif";
+		    title = "Maintain Service";
+		    resource = "service?service_action=Load&service_no="+recordNo;
+		    break;
+			
+		case CreateEmployee:
+		    icon = "create_gray.gif";
+		    title = "Create Employee";
+		    resource = "create-employee.jsp";
+		    break;
+		
+		case CreateClient:
+		    icon = "create_gray.gif";
+		    title = "Create Client";
+		    resource = "create-client.jsp";
+		    break;
+		
+		case CreateProduct:
+		    icon = "create_gray.gif";
+		    title = "Create Product";
+		    resource = "create-product.jsp";
+		    break;
+		
+		case CreateSupplier:
+		    icon = "create_gray.gif";
+		    title = "Create Supplier";
+		    resource = "create-supplier.jsp";
+		    break;
+		
+		case CreateService:
+		    icon = "create_gray.gif";
+		    title = "Create Service";
+		    resource = "create-service.jsp";
+		    break;
+				
+		case CreateSale:
+			icon = "sale_gray.gif";
+			title = "Create Sale";
+			resource = "";
+	    } %>
+	    
+	<td align="left"><img border="0" src="/HairSalon/images/icons/small/<%= icon %>" width="16" height="16"></td>
+	<td align="left">
+	    <% if (left > 0) { %>
+	<a class="NavigationFont" href="/HairSalon/<%= resource %>">
+	    <% } else { %>
+	<span class="NavigationFont">
+	    <% } %>
+	<%= title %>
+	    <% if (left > 0) { %>
+	</a>
+	    <% } else { %>
+	    </span>
+	    <% } %>
+	</td>
+	    <% if (left > 0) { %>
+	<td align="left"><span class="NavigationFont">&gt;</span></td>
+	    <% } %>
+	<% } %>
+    </tr>
+</table>

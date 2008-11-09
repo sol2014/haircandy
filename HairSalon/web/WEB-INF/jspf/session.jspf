@@ -1,0 +1,27 @@
+<table width="100%" border="0" align="right" cellspacing="6" cellpadding="0">
+    <tr>
+	<% if (userSession.isGuest()) { %>
+	<td align="right"><img border="0" src="/HairSalon/images/icons/small/login_gray.gif" width="16" height="16"></td>
+	<td align="right"><a title="Log into the system." href="/HairSalon/login-employee.jsp" class="NavigationFont">Login</a></td>
+	<% } else { %>
+	<td align="right"><table width="150"><tr><td align="right"><span class="NavigationFont">Welcome, <%=userSession.getEmployee ().getFirstName ()%>!</span></td></tr></table></td>
+	<td align="right"><img border="0" src="/HairSalon/images/icons/small/preferences_gray.gif" width="16" height="16"></td>
+	<td align="right"><a style="cursor:pointer" title="Maintain your account preferences." onclick="showPreferences()" class="NavigationFont">Preferences</a></td>
+	<td align="right"><img border="0" src="/HairSalon/images/icons/small/logout_gray.gif" width="16" height="16"></td>
+	<td align="right"><a title="Log yourself out of the system." href="session?session_action=Logout" class="NavigationFont">Logout</a></td>
+	<% } %>
+    </tr>
+</table>
+
+<div id="blackout" style="display:none; position: absolute;left: 0px; top: 0px; background-color: #000000;opacity: .5; filter: alpha(opacity=70); z-index: 1000;"></div>
+
+<script>
+    document.getElementById("blackout").style.width = getScreenWidth() + "px";
+    document.getElementById("blackout").style.height = getScreenHeight() + "px";
+</script>
+
+<font face="Trebuchet MS" size="2">
+<% if (!userSession.isGuest ()) { %>
+<%@ include file="../../dialogs/preferences-dialog.jsp" %>
+<% } %>
+</font>

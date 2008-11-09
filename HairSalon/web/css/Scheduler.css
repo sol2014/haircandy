@@ -1,0 +1,327 @@
+/*
+ * HairSalon: Scheduling and Management System
+ * Systems II - Southern Alberta Institute of Technology
+ * 
+ * File Author: Philippe Durand
+ * 
+ * System Developed by:
+ * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
+ */
+
+.SchedulerLeft
+{
+	background-image:url(../images/scheduler/scheduler_left.gif);
+	width:2px;
+}
+
+.SchedulerRight
+{
+	background-image:url(../images/scheduler/scheduler_right.gif);
+	width:2px;
+}
+
+.SchedulerTopLeft
+{
+	width:2px;
+	height:33px;
+	background-image:url(../images/scheduler/scheduler_topleft.gif);
+}
+
+.SchedulerTopRight
+{
+	width:2px;
+	height:33px;
+	background-image:url(../images/scheduler/scheduler_topright.gif);
+}
+
+.SchedulerTimeHeader
+{
+	height:32px;
+	width:62px;
+	background-image:url(../images/scheduler/scheduler_topleftcorner.gif);
+}
+
+.SchedulerHeader
+{
+	height:33px;
+	background-image:url(../images/scheduler/scheduler_topheader.gif);
+	background-repeat:repeat-x;
+}
+
+.SchedulerBottom
+{
+	height:2px;
+	background-image:url(../images/scheduler/scheduler_bottom.gif);
+	background-repeat:repeat-x;
+}
+
+.SchedulerBottomLeft
+{
+	height:2px;
+	width:2px;
+	background-image:url(../images/scheduler/scheduler_bottomleft.gif);
+}
+
+.SchedulerBottomRight
+{
+	height:2px;
+	width:2px;
+	background-image:url(../images/scheduler/scheduler_bottomright.gif);
+}
+
+.SchedulerHeaderSeparator
+{
+	width:2px;
+	height:33px;
+	background-image:url(../images/scheduler/scheduler_topheaderseparator.gif);
+}
+
+.SchedulerTime
+{
+	width:62px;
+	height:32px;
+	text-align:center;
+	vertical-align:bottom;
+	background-image:url(../images/scheduler/scheduler_time.gif);
+}
+
+.SchedulerCell
+{
+	width:90px;
+	height:32px;
+	text-align:right;
+	vertical-align:bottom;
+        background-image:url(../images/scheduler/scheduler_cell.gif);
+}
+
+.SchedulerCellBottom
+{
+	width:90px;
+	height:32px;
+	text-align:right;
+	vertical-align:bottom;
+}
+
+.SchedulerCellSeparator
+{
+	width:2px;
+	background-image:url(../images/scheduler/scheduler_cellseparator.gif);
+}
+
+.SchedulerCellSection
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_cell_section.gif);
+}
+
+.SchedulerCellSectionTop
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_greencell2.gif);
+}
+
+.SchedulerCellSectionMiddle
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_greencell4.gif);
+}
+
+.SchedulerCellSectionBottom
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_greencell3.gif);
+}
+
+.SchedulerCellSectionSingle
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_greencell1.gif);
+}
+
+.SchedulerCellSectionTop_Overlap
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_yellowcell2.gif);
+}
+
+.SchedulerCellSectionMiddle_Overlap
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_yellowcell4.gif);
+}
+
+.SchedulerCellSectionBottom_Overlap
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_yellowcell3.gif);
+}
+
+.SchedulerCellSectionSingle_Overlap
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_yellowcell1.gif);
+}
+
+.SchedulerCellSectionTop_Booked
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_bluecell2.gif);
+}
+
+.SchedulerCellSectionMiddle_Booked
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_bluecell4.gif);
+}
+
+.SchedulerCellSectionBottom_Booked
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_bluecell3.gif);
+}
+
+.SchedulerCellSectionSingle_Booked
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_bluecell1.gif);
+}
+
+.SchedulerCellSectionTop_Error
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_redcell2.gif);
+}
+
+.SchedulerCellSectionMiddle_Error
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_redcell4.gif);
+}
+
+.SchedulerCellSectionBottom_Error
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_redcell3.gif);
+}
+
+.SchedulerCellSectionSingle_Error
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_redcell1.gif);
+}
+
+.SchedulerCellSectionTop_OverlapTwice
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_redcell2.gif);
+}
+
+.SchedulerCellSectionMiddle_OverlapTwice
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_redcell4.gif);
+}
+
+.SchedulerCellSectionBottom_OverlapTwice
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_redcell3.gif);
+}
+
+.SchedulerCellSectionSingle_OverlapTwice
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_redcell1.gif);
+}
+
+.SchedulerCellSectionTop_Selected
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_bluecell2.gif);
+}
+
+.SchedulerCellSectionMiddle_Selected
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_bluecell4.gif);
+}
+
+.SchedulerCellSectionBottom_Selected
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_bluecell3.gif);
+}
+
+.SchedulerCellSectionSingle_Selected
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_bluecell1.gif);
+}
+
+.SchedulerCellSectionTop_Stone
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_graycell2.gif);
+}
+
+.SchedulerCellSectionMiddle_Stone
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_graycell4.gif);
+}
+
+.SchedulerCellSectionBottom_Stone
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_graycell3.gif);
+}
+
+.SchedulerCellSectionSingle_Stone
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_graycell1.gif);
+}
+
+.SchedulerColumn
+{
+	width:90px;
+	align:center;
+	text-align:center;
+}
+
+.TimeFont
+{
+	alignment:center;
+    font-size:8pt;
+    color:white;
+    font-family: Trebuchet MS, trebuchet, Helvetica, sans-serif;
+}

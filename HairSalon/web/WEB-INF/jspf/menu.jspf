@@ -1,0 +1,216 @@
+<%--
+
+Menu Options:
+
+Three different types of menu will be available based on the session and role.
+- None, Guest Session
+- Employee, User Session
+- Manager, User Session
+
+None:
+- Appointments
+
+Employee:
+- Schedule
+- Availability
+
+Manager:
+- Salon
+- Employees
+- Products
+- Suppliers
+- Services
+- Reports
+--%>
+
+<%@page import="hairsalon.core.*" %>
+
+<%
+SessionPositions position = positions.get(0);
+boolean isGuest = true;
+if (userSession.getEmployee () != null)
+	isGuest = false;
+String roleString = "";
+if (!isGuest)
+	roleString = userSession.getEmployee ().getRole ();
+UserRoles role = UserRoles.Guest;
+if (!isGuest)
+	role = UserRoles.valueOf (roleString);
+%>
+
+<table border="0" width="130" cellspacing="0" cellpadding="0" height="100%">
+	<tr>
+	<% if (position == SessionPositions.AppCalendar) { %>
+	    <td class="SiteNavigationOptionSelected">
+	<% } else { %>
+	    <td class="SiteNavigationOption">
+	<% } %>
+	    <table border="0" cellspacing="6" cellpadding="0">
+		<tr>
+		    <td><img border="0" src="/HairSalon/images/icons/medium/appointment_blue.gif" width="22" height="22"></td>
+		    <td><a title="Book or view appointments." class="MenuFont" href = "/HairSalon/view-app-calendar.jsp">Appointments</a></span></td>
+		</tr>
+	    </table>
+	</td>
+    </tr>
+    
+	<% if (!isGuest && (role == UserRoles.Stylist || role == UserRoles.Manager || role == UserRoles.Receptionist)) { %>
+    <tr>
+	<% if (position == SessionPositions.SchCalendar) { %>
+	    <td class="SiteNavigationOptionSelected">
+	<% } else { %>
+	    <td class="SiteNavigationOption">
+	<% } %>
+	    <table border="0" cellspacing="6" cellpadding="0">
+		<tr>
+		    <td><img border="0" src="/HairSalon/images/icons/medium/schedule_blue.gif" width="22" height="22"></td>
+		    <td><a title="View or maintain the schedule." class="MenuFont" href = "/HairSalon/view-sch-calendar.jsp">Schedule</a></td>
+		</tr>
+	    </table>
+	</td>
+    </tr>
+    <% } %>
+	
+    <% if (!isGuest && (role == UserRoles.Stylist || role == UserRoles.Manager || role == UserRoles.Receptionist)) { %>
+    <tr>
+	<% if (position == SessionPositions.Sales) { %>
+	    <td class="SiteNavigationOptionSelected">
+	<% } else { %>
+	    <td class="SiteNavigationOption">
+	<% } %>
+	    <table border="0" cellspacing="6" cellpadding="0">
+		<tr>
+		    <td><img border="0" src="/HairSalon/images/icons/medium/sale_blue.gif" width="22" height="22"></td>
+		    <td><a title="Create a general sale." class="MenuFont" href = "sale?sale_action=New Sale">Sales</a></td>
+		</tr>
+	    </table>
+	</td>
+    </tr>
+    <% } %>
+	
+	<% if (!isGuest && role == UserRoles.Manager) { %>
+    <tr>
+	<% if (position == SessionPositions.Salon) { %>
+	    <td class="SiteNavigationOptionSelected">
+	<% } else { %>
+	    <td class="SiteNavigationOption">
+	<% } %>
+	    <table border="0" cellspacing="6" cellpadding="0">
+		<tr>
+		    <td><img border="0" src="/HairSalon/images/icons/medium/salon_blue.gif" width="22" height="22"></td>
+		    <td><a title="Maintain salon information." class="MenuFont" href = "/HairSalon/view-salon.jsp">Salon</a></td>
+		</tr>
+	    </table>
+	</td>
+    </tr>
+	
+    <tr>
+	<% if (position == SessionPositions.Employees) { %>
+	    <td class="SiteNavigationOptionSelected">
+	<% } else { %>
+	    <td class="SiteNavigationOption">
+	<% } %>
+	    <table border="0" cellspacing="6" cellpadding="0">
+		<tr>
+		    <td><img border="0" src="/HairSalon/images/icons/medium/employee_blue.gif" width="22" height="22"></td>
+		    <td><a title="Search and manage employees." class="MenuFont" href="/HairSalon/search-employees.jsp">Employees</a></td>
+		</tr>
+	    </table>
+	</td>
+    </tr>
+    
+    <tr>
+	<% if (position == SessionPositions.Products) { %>
+	    <td class="SiteNavigationOptionSelected">
+	<% } else { %>
+	    <td class="SiteNavigationOption">
+	<% } %>
+	    <table border="0" cellspacing="6" cellpadding="0">
+		<tr>
+		    <td><img border="0" src="/HairSalon/images/icons/medium/product_blue.gif" width="22" height="22"></td>
+		    <td><a title="Search and manage products." class="MenuFont" href = "/HairSalon/search-products.jsp">Products</a></td>
+		</tr>
+	    </table>
+	</td>
+    </tr>
+    
+    <tr>
+	<% if (position == SessionPositions.Clients) { %>
+	    <td class="SiteNavigationOptionSelected">
+	<% } else { %>
+	    <td class="SiteNavigationOption">
+	<% } %>
+	    <table border="0" cellspacing="6" cellpadding="0">
+		<tr>
+		    <td><img border="0" src="/HairSalon/images/icons/medium/client_blue.gif" width="22" height="22"></td>
+		    <td><a title="Search and manage clients." class="MenuFont" href = "/HairSalon/search-clients.jsp">Clients</a></td>
+		</tr>
+	    </table>
+	</td>
+    </tr>
+    
+    <tr>
+	<% if (position == SessionPositions.Suppliers) { %>
+	    <td class="SiteNavigationOptionSelected">
+	<% } else { %>
+	    <td class="SiteNavigationOption">
+	<% } %>
+	    <table border="0" cellspacing="6" cellpadding="0">
+		<tr>
+		    <td><img border="0" src="/HairSalon/images/icons/medium/supplier_blue.gif" width="22" height="22"></td>
+		    <td><a title="Search and manage suppliers." class="MenuFont" href = "/HairSalon/search-suppliers.jsp">Suppliers</a></td>
+		</tr>
+	    </table>
+	</td>
+    </tr>
+    
+    <tr>
+	<% if (position == SessionPositions.Services) { %>
+	    <td class="SiteNavigationOptionSelected">
+	<% } else { %>
+	    <td class="SiteNavigationOption">
+	<% } %>
+	    <table border="0" cellspacing="6" cellpadding="0">
+		<tr>
+		    <td><img border="0" src="/HairSalon/images/icons/medium/service_blue.gif" width="22" height="22"></td>
+		    <td><a title="Search and manage services." class="MenuFont" href = "/HairSalon/search-services.jsp">Services</a></td>
+		</tr>
+	    </table>
+	</td>
+    </tr>
+    
+    <tr>
+	<% if (position == SessionPositions.Reports) { %>
+	    <td class="SiteNavigationOptionSelected">
+	<% } else { %>
+	    <td class="SiteNavigationOption">
+	<% } %>
+	    <table border="0" cellspacing="6" cellpadding="0">
+		<tr>
+		    <td><img border="0" src="/HairSalon/images/icons/medium/report_blue.gif" width="22" height="22"></td>
+		    <td><a title="Generate and view reports." class="MenuFont" href = "/HairSalon/generate-reports.jsp">Reports</a></td>
+		</tr>
+	    </table>
+	</td>
+    </tr>
+    <% } %>
+    
+    <tr>
+	<% if (position == SessionPositions.Help) { %>
+	    <td class="SiteNavigationOptionSelected">
+	<% } else { %>
+	    <td class="SiteNavigationOption">
+	<% } %>
+	    <table border="0" cellspacing="6" cellpadding="0">
+		<tr>
+		    <td><img border="0" src="/HairSalon/images/icons/medium/help_blue.gif" width="22" height="22"></td>
+		    <td><a title="View user documentation." class="MenuFont" href = "/HairSalon/view-help.jsp">Help</a></td>
+		</tr>
+	    </table>
+	</td>
+    </tr>
+    
+    <tr>
+	<td class="SiteNavigationShadow"><img src="/HairSalon/images/site_blank.gif"></td>
+    </tr>
+</table>

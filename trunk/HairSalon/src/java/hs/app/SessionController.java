@@ -964,9 +964,12 @@ public class SessionController
 				ScheduleBean entry = new ScheduleBean ();
 				entry.setEmployee (employee);
 				entry.setDate (date);
-				entry.setStartTime (times.remove (0));
 				entry.setEndTime (times.remove (0));
-				unavailable.add (entry);
+				entry.setStartTime (times.remove (0));
+				
+				// Make sure this entry has actual time.
+				if (!entry.getStartTime ().equals (entry.getEndTime()) && entry.getStartTime ().before (entry.getEndTime ()))
+					unavailable.add (entry);
 			}
 			
 			hash.put (employee, unavailable);

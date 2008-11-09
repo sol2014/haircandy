@@ -302,7 +302,7 @@ public class AppointmentServlet extends DispatcherServlet
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime (startTime);
 			calendar.add(Calendar.MINUTE,duration);
-			appointment.setEndTime (calendar.getTime());
+			appointment.setEndTime (calendar.getTime ());
 		}
 		catch (Exception e)
 		{

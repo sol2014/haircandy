@@ -1,0 +1,27 @@
+TODO List
+---------
+
+Updated: Sunday, Nov 9th, 2008
+
+- Make the preferences dialog actually work to set availability and password update.
+
+- Finish any alerts that we need to create for the user throughout the app.
+
+- Finish appointment scheduler.
+
+- Fix all the form pages from taking ENTER keystroke to "SAVE" records.
+
+- Add Start Time/End Time to the Employee scheduler dialog.
+
+- Dialog boxes need to have input fields cleared if used twice or more.
+
+- Check for overlap if we are client booking an appointment (we are not allowed
+  to overlap appointments for them. so the dialog has to give error.
+
+- Do not allow anyone to create an appointment if no services are selected.
+
+- Dialog repositioning and sizing must be fixed for all dialogs, its horrible
+  right now.
+
+- Add the duration Hour+Minute Combo boxes for Services search, maintain and create pages.
+

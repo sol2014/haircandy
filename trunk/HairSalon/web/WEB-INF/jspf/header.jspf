@@ -1,0 +1,112 @@
+
+<%--= Do Not Edit =--%>
+
+<html>
+    <head>
+	<meta http-equiv="Content-Language" content="en-us">
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<title>HairSalon: <%= page_title %></title>
+	<link href="css/Main.css" rel="stylesheet" type="text/css">
+	<link href="css/Scheduler.css" rel="stylesheet" type="text/css">
+	<link href="css/Shadow.css" rel="stylesheet" type="text/css">
+        <link href="css/Calendar.css" rel="stylesheet" type="text/css">
+	<link href="css/epoch_styles.css" rel="stylesheet" type="text/css" />
+	
+	<script type="text/javascript" language="javascript" src="js/preferences-addin.js"></script>
+        <script type="text/javascript" language="javascript" src="js/tools.js"></script>
+        <script type="text/javascript" language="javascript" src="js/ajax.js"></script>
+	<script type="text/javascript" language="javascript" src="js/epoch_classes.js"></script>
+    </head>
+    
+    <!--<body onLoad="document.forms.form.firstfield.focus ()" class="SiteBody"> -->
+    <body class="SiteBody"> 
+    
+    <noscript>
+    <meta http-equiv="refresh" content="2; URL=application">
+    <center><b>You are using a browser that does not support JavaScript, or it is currently disabled!<br />You must turn on JavaScript in order to use this web application.</b><br />
+    If your browser does not support JavaScript, you can upgrade to a newer browser,<br />such as <a href="http://www.microsoft.com/windows/downloads/ie/getitnow.mspx">Microsoft&reg; Internet Explorer 7</a> or <a href="http://www.mozilla.com/en-US/firefox/">Mozilla Firefox 3</a>.
+    </noscript>
+
+    <div id="MainFrame">
+	<table border="0" height="100%" width="100%" cellspacing="0" cellpadding="0">
+	    <tr>
+		<td><img border="0" src="images/site_topleftshadow.gif" width="18" height="18"></td>
+		<td width="100%" background="images/site_topshadow.gif"><img border="0" src="images/site_topshadow.gif" width="14" height="18"></td>
+		<td><img border="0" src="images/site_toprightshadow.gif" width="18" height="18"></td>
+	    </tr>
+	    <tr>
+		<td height="100%" background="images/site_leftshadow.gif"><img border="0" src="images/site_leftshadow.gif" width="18" height="32"></td>
+		<td height="100%">
+		    <table border="0" width="100%" height="100%" cellspacing="0" cellpadding="0">
+			<tr>
+			    <td width="2"><img border="0" src="images/site_topleft.gif" width="2" height="72"></td>
+			    <td width="100%" background="images/site_top.gif">
+				<table border="0" width="100%" cellspacing="0" cellpadding="0">
+				    <tr>
+					<td><img border="0" src="images/site_logo.gif" width="306" height="72"></td>
+					<td class="SiteHeaderImage" width="100%">&nbsp;</td>
+				    </tr>
+				</table>
+			    </td>
+			    <td width="2"><img border="0" src="images/site_topright.gif" width="2" height="72"></td>
+			</tr>
+			<tr>
+			    <td background="images/site_left.gif"><img border="0" src="images/site_left.gif" width="2" height="13"></td>
+			    <td height="100%">
+				<table border="0" width="100%" height="100%" cellspacing="0" cellpadding="0">
+				    <tr>
+					<td background="images/navigation/nav_header.gif" height="36">
+					    <table width="100%" cellspacing="0" cellpadding="0">
+						<tr>
+						    <td width=100%>
+
+<%--= Navigation Bar Section =--%>
+
+<%@ include file="navigation.jspf" %>
+
+<%--= Do Not Edit =--%>
+
+						    </td>
+						    <td align="right" width="100%">
+
+<%--= Session Access Section =--%>
+
+<%@ include file="session.jspf" %>
+
+<%--= Do Not Edit =--%>
+
+						    </td>
+						</tr>
+					    </table>
+					</td>
+				    </tr>
+				    <tr>
+					<td height="100%">
+					    <table height="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+						    <td align="top" valign="top" background="images/navigation/nav_bottombase.gif">
+							<div align="left">
+
+<%--= Side Menu Section =--%>
+
+<%@ include file="menu.jspf" %>
+
+<% SessionPositions primaryPosition = positions.get(0); %>
+
+<%--= Do Not Edit =--%>
+
+							</div>
+						    </td>
+						    <td width="2px" background="images/site_page_separator.gif"><img border="0" src="images/site_page_separator.gif" width="1" height="44"></td>
+						    <td width="100%" height="100%">
+							<div id="overflowscroller">
+							<table border="0" width="100%" height="425" cellspacing="0" cellpadding="0">
+							    <tr>
+								<td><img border="0" src="images/shadow_topleft.gif" width="15" height="15"></td>
+								<td background="images/shadow_top.gif" width="100%"><img border="0" src="images/shadow_top.gif" width="15" height="15"></td>
+								<td><img border="0" src="images/shadow_topright.gif" width="15" height="15"></td>
+							    </tr>
+							    <tr>
+								<td background="images/shadow_left.gif" height="100%"><img border="0" src="images/shadow_left.gif" width="15" height="15"></td>
+								<td valign="top" align="left" width="100%" bgcolor="#FFFFFF">
+<%--= End of Header, Do Not Add Below =--%>

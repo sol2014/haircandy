@@ -1,0 +1,374 @@
+/*
+* HairSalon: Scheduling and Management System
+* Systems II - Southern Alberta Institute of Technology
+* 
+* File Author: Philippe Durand
+* 
+* System Developed by:
+* Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
+*/
+
+.DialogBox
+{
+    display:none;
+    position: absolute;
+    background-color:#ffffff;
+    z-index: 2008;
+}
+
+.draggable
+{
+    position:absolute;
+    display:none;
+    border-color:#FF0000;
+    background-image: transparent;
+    border-width:1px;
+    border-style:dotted;
+    cursor: pointer;
+}
+
+.StandardButton
+{
+    width: 110px;
+    cursor:pointer;
+}
+
+#overflowscroller
+{
+    /*background-color: #FFFFFF;
+    overflow:auto;
+    padding: 0px;
+    margin: 0px;
+    font-family: Arial,Helvetica,Geneva,Swiss,SunSans-Regular;
+    font-size: 11px;*/
+    width: 100%;
+    height: 100%;
+}
+
+#dialogscroller
+{
+    overflow:auto;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+body
+{
+    margin: 0;
+    padding: 0;
+}
+
+#MainFrame
+{
+    /*position: absolute; Needed for Safari */ 
+    background-color: #9dbed3;
+    /*width: 100%;*/
+}
+
+table
+{
+    border:0px;
+    cellspacing:0px;
+    cellpadding:0px;
+}
+
+.ClearBoth
+{
+    clear:both;
+    float:none;
+}
+
+.Site
+{
+    float:left;
+}
+
+.SiteBody
+{
+    background-color:#9dbed3;
+    text-align:right;
+    align:center;
+}
+
+.SiteHeaderImage
+{
+    background-image:url(../images/site_header_image.gif);
+    background-repeat:no-repeat;
+    height:72px;
+    border:0px;
+    cellspacing:0px;
+    cellpadding:0px;
+}
+
+.SiteTop
+{
+    height:72px;
+    background-image:url(../images/site_top.gif);
+    background-repeat: repeat-x;
+}
+
+.SiteBottom
+{
+    height:2px;
+    background-image:url(../images/site_bottom.gif);
+    background-repeat: repeat-x;
+}
+
+.SiteRight
+{
+    width:2px;
+    float:right;
+    background-image:url(../images/site_right.gif);
+    background-repeat: repeat-y;
+}
+
+.SiteLeft
+{
+    width:2px;
+    float:left;
+    background-image:url(../images/site_left.gif);
+    background-repeat: repeat-y;
+}
+
+.SiteTopLeft
+{
+    height:72px;
+    width:2px;
+    float:left;
+    background-image:url(../images/site_topleft.gif);
+    background-position:bottom;
+    background-repeat:repeat-x;
+}
+
+.SiteBottomLeft
+{
+    height:2px;
+    width:2px;
+    float:left;
+    background-image:url(../images/site_bottomleft.gif);
+    background-position:top;
+    background-repeat:repeat-x;
+}
+
+.SiteTopRight
+{
+    height:72px;
+    width:2px;
+    float:right;
+    background-image:url(../images/site_topright.gif);
+    background-position:bottom;
+    background-repeat:repeat-x;
+}
+
+.SiteBottomRight
+{
+    height:2px;
+    width:2px;
+    float:right;
+    background-image:url(../images/site_bottomright.gif);
+    background-position:top;
+    background-repeat:repeat-x;
+}
+
+.SiteSeparator
+{
+    width:1px;
+    background-image:url(../images/site_page_separator.gif);
+    background-repeat:repeat-y;
+}
+
+.SiteContent
+{
+    background-color:#FFFFFF;
+}
+
+.HeaderFont
+{
+    alignment:center;
+    font-weight:bold;
+    font-size:10pt;
+    color:white;
+    font-family: Trebuchet MS, trebuchet, Helvetica, sans-serif;
+}
+
+.NavigationFont
+{
+    font-size:10pt;
+    font-weight: bold;
+    color: #3c3c3c;
+    font-family: 'Trebuchet MS',Helvetica,sans-serif;
+}
+
+a.NavigationFont
+{
+    text-decoration: none;
+    color: #4b5e85;
+}
+
+a.NavigationFont:visited
+{
+    text-decoration: none;
+    color: #4b5e85;
+}
+
+a.NavigationFont:hover
+{
+    text-decoration: none;
+    color: #7e9edf;
+}
+
+.MenuFont
+{
+    font-size:10pt;
+    font-weight: bold;
+    color: #FFFFFF;
+    font-family: 'Trebuchet MS',Helvetica,sans-serif;
+}
+
+a.MenuFont
+{
+    text-decoration: none;
+    color: #d7ddea;
+}
+
+a.MenuFont:visited
+{
+    text-decoration: none;
+    color: #d7ddea;
+}
+
+a.MenuFont:hover
+{
+    text-decoration: none;
+    color: #bf5df7;
+}
+
+.SiteNavigation
+{
+    border:0px;
+    width:150px;
+    cellspacing:0px;
+    cellpadding:0px;
+}
+
+.SiteNavigationHeader
+{
+    height:30px;
+    background-image:url(../images/navigation/nav_header.gif);
+    background-repeat:repeat-x;
+}
+
+.SiteNavigationSeparator
+{
+    height:2px;
+    background-image:url(../images/navigation/nav_separator.gif);
+}
+
+.SiteNavigationHeaderSeparator
+{
+    height:8px;
+    alignment:center;
+    background-image:url(../images/navigation/nav_header_separator.gif);
+}
+
+.SiteNavigationOption
+{
+    height:36px;
+    alignment:left;
+    background-image:url(../images/navigation/nav_barnormal.gif);
+}
+
+.SiteNavigationOptionSelected
+{
+    height:36px;
+    alignment:left;
+    background-image:url(../images/navigation/nav_barselected.gif);
+}
+
+.SiteNavigationShadow
+{
+    height:23px;
+    alignment:center;
+    background-image:url(../images/navigation/nav_bottomshadow.gif);
+}
+
+.SiteNavigationBackground
+{
+    background-image:url(../images/navigation/nav_bottombase.gif);
+    background-repeat:repeat-both;
+}
+
+.SearchLine
+{
+    background-color: #dbdbdb;
+    border: 1px #192832 solid;
+}
+
+.SearchTitle
+{
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+a.SearchTitle
+{
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+a.SearchTitle:visited
+{
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+a.SearchTitle:hover
+{
+    text-decoration: none;
+    color: #FF8723;
+}
+
+.SearchLink
+{
+    font-size: 12px;
+    color: #324B64;
+    font-weight: bold;
+    font-family: Trebuchet MS, trebuchet, Helvetica, sans-serif;
+}
+
+a.SearchLink
+{
+    text-decoration: none;
+    color: #324B64;
+    font-weight: bold;
+    font-family: Trebuchet MS, trebuchet, Helvetica, sans-serif;
+}
+
+a.SearchLink:visited
+{
+    text-decoration: none;
+    color: #324B64;
+    font-family: Trebuchet MS, trebuchet, Helvetica, sans-serif;
+}
+
+a.SearchLink:hover
+{
+    text-decoration: none;
+    color: #DD6900;
+    font-family: Trebuchet MS, trebuchet, Helvetica, sans-serif;
+}
+
+td.Row1 { background-color: #eaeaea; }
+td.Row2 { background-color: #FFFFFF; }
+td.Row3 { background-color: #456E87; }
+td.Row4 { background-image: url(../images/cellpic0.gif); }
+td.Row44 { background-image: url(../images/cellpic1.gif); }
+td.Row5 { background-image: url(../images/toolbar_middle_center.png); }
+td.Row6 { background-color: #FAFAFA; }
+td.Row7 { background-color: #FDFDFD; }
+
+.FontSmall { font-size: 10px; }
+.FontMedium { font-size: 11px; }

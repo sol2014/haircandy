@@ -1,11 +1,166 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee      http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+<!-- Listeners -->
+    <listener>
+        <listener-class>hairsalon.application.ContextListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>hairsalon.application.SessionListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>hairsalon.application.ContextListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>hairsalon.application.SessionListener</listener-class>
+    </listener>
+    
+<!-- filters -->          
+    <filter>
+        <filter-name>RequestFilter</filter-name>
+        <filter-class>hairsalon.presentation.RequestFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>RequestFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+<!-- context parameters -->	
+    <context-param>
+        <param-name>db_url</param-name>
+        <param-value>jdbc:mysql://localhost:3306/cmps350_hairsalon</param-value>
+    </context-param>
+    <context-param>
+        <param-name>db_username</param-name>
+        <param-value>hairsalon</param-value>
+    </context-param>
+    <context-param>
+        <param-name>db_password</param-name>
+        <param-value>hairsalon</param-value>
+    </context-param>
+	
+<!-- Servlets -->        
+    <servlet>
+        <servlet-name>SessionServlet</servlet-name>
+        <servlet-class>hairsalon.presentation.servlets.SessionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ApplicationServlet</servlet-name>
+        <servlet-class>hairsalon.presentation.servlets.ApplicationServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SupplierServlet</servlet-name>
+        <servlet-class>hairsalon.presentation.servlets.SupplierServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClientServlet</servlet-name>
+        <servlet-class>hairsalon.presentation.servlets.ClientServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductServlet</servlet-name>
+        <servlet-class>hairsalon.presentation.servlets.ProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmployeeServlet</servlet-name>
+        <servlet-class>hairsalon.presentation.servlets.EmployeeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServiceServlet</servlet-name>
+        <servlet-class>hairsalon.presentation.servlets.ServiceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SalonServlet</servlet-name>
+        <servlet-class>hairsalon.presentation.servlets.SalonServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AJAXSupplier</servlet-name>
+        <servlet-class>hairsalon.presentation.servlets.AJAXSupplier</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SaleServlet</servlet-name>
+        <servlet-class>hairsalon.presentation.servlets.SaleServlet</servlet-class>
+    </servlet>
+	<servlet>
+        <servlet-name>ScheduleServlet</servlet-name>
+        <servlet-class>hairsalon.presentation.servlets.ScheduleServlet</servlet-class>
+    </servlet>
+	
+<!-- Servlet Mappings -->        
+    
+    <servlet>
+        <servlet-name>AppointmentServlet</servlet-name>
+        <servlet-class>hairsalon.presentation.servlets.AppointmentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SessionServlet</servlet-name>
+        <url-pattern>/session</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ApplicationServlet</servlet-name>
+        <url-pattern>/application</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SupplierServlet</servlet-name>
+        <url-pattern>/supplier</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClientServlet</servlet-name>
+        <url-pattern>/client</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductServlet</servlet-name>
+        <url-pattern>/product</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmployeeServlet</servlet-name>
+        <url-pattern>/employee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceServlet</servlet-name>
+        <url-pattern>/service</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SalonServlet</servlet-name>
+        <url-pattern>/SalonServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AJAXSupplier</servlet-name>
+        <url-pattern>/AJAXSupplier</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmployeeServlet</servlet-name>
+        <url-pattern>/employee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceServlet</servlet-name>
+        <url-pattern>/service</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SaleServlet</servlet-name>
+        <url-pattern>/sale</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SalonServlet</servlet-name>
+        <url-pattern>/salon</url-pattern>
+    </servlet-mapping>
+	<servlet-mapping>
+        <servlet-name>ScheduleServlet</servlet-name>
+        <url-pattern>/schedule</url-pattern>
+    </servlet-mapping>
+	
+<!-- Session Configs -->  
+    <servlet-mapping>
+        <servlet-name>AppointmentServlet</servlet-name>
+        <url-pattern>/appointment</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+                30
         </session-timeout>
     </session-config>
+
+<!-- Welcome File  -->          
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
-        </welcome-file-list>
-    </web-app>
+            <welcome-file>application</welcome-file>
+    </welcome-file-list>
+</web-app>

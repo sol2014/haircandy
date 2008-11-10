@@ -109,7 +109,7 @@ String error_string = (String) userSession.moveAttribute ("alert_error");
 
 		    <% for (AlertBean alert : alerts) { %>
 		    <tr align="right" valign="middle">
-			<td height="30" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/medium/<%=CoreTools.displayAlertIcon (alert.getLevel())%>.gif" width="16" height="16" />&nbsp;</td>
+			<td height="30" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/medium/<%=CoreTools.displayAlertIcon (alert.getLevel())%>.gif" width="22" height="22" />&nbsp;</td>
 			<td align="left" class="Row2"><span class="SearchLink"><a href="<%=CoreTools.display (alert.getLink ())%>" class="SearchLink"><%=CoreTools.display (alert.getMessage ())%></a></span></td>
 			<% if (userSession.getEmployee ().getRole ().equals ("Manager")) { %>
 			    <td nowrap="nowrap" class="Row7"><img style="cursor:pointer" id="<%=alert.getAlertNo ()%>" src="/HairSalon/images/icons/small/remove_white.gif" onclick="deleteAlert(this)" title="Delete this alert from the list." /></td>

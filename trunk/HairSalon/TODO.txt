@@ -73,7 +73,7 @@ Updated: Sunday, Nov 10th, 2008
   services that MOST salons would have. We could also make the starter wizard let the people
   pick what product brands they carrie, and we insert only that data.
 
-- TASK: Complete server and client side checking, especially for numerical values.
+- TASK: Complete server and client side checking, especially for numerical values. (dont allow alpha in number box)
 
 - TASK: Create a wizard application for installation that will also allow the installer to
   set the basic Salon information to be inserted into the database before people start to log in.

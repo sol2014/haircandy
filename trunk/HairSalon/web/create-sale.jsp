@@ -101,92 +101,92 @@ String error_string = (String) userSession.moveAttribute("sale_error");
                 <td align="right" valign="top">
                     <table align="right" border="0" cellpadding="0" width="250">
                         <tr>
-                            <td align="right"><img border="0" src="/HairSalon/images/icons/small/client_white.gif" width="16" height="16"></td>
-                            <td align="left"><u><b>Client Details</b></u></td>
+                            <td nowrap="nowrap" align="right"><img border="0" src="/HairSalon/images/icons/small/client_white.gif" width="16" height="16"></td>
+                            <td nowrap="nowrap" align="left"><u><b>Client Details</b></u></td>
                         </tr>
                         <tr>
                             <% if (userSession.moveAttribute("sale_error_first_name") == null) {%>
-                            <td align="right">First Name:</td>
+                            <td nowrap="nowrap" align="right">First Name:</td>
                             <% } else {%>
-                            <td align="right"><font color="red">First Name:</font></td>
+                            <td nowrap="nowrap" align="right"><font color="red">First Name:</font></td>
                             <% }%>
-                            <td align="left"><input type="text" name="first_name" id="first_name" size="20" value="<%=CoreTools.display(userSession.moveAttribute("sale_new_first_name"))%>"></td>
+                            <td nowrap="nowrap" align="left"><input type="text" name="first_name" id="first_name" size="20" value="<%=CoreTools.display(userSession.moveAttribute("sale_new_first_name"))%>"></td>
                         </tr>
                         <tr>
                             <% if (userSession.moveAttribute("sale_error_last_name") == null) {%>
-                            <td align="right">Last Name:</td>
+                            <td nowrap="nowrap" align="right">Last Name:</td>
                             <% } else {%>
-                            <td align="right"><font color="red">Last Name:</font></td>
+                            <td nowrap="nowrap" align="right"><font color="red">Last Name:</font></td>
                             <% }%>
-                            <td align="left"><input type="text" name="last_name" id="last_name" size="20" value="<%=CoreTools.display(userSession.moveAttribute("sale_new_last_name"))%>"></td>
+                            <td nowrap="nowrap" align="left"><input type="text" name="last_name" id="last_name" size="20" value="<%=CoreTools.display(userSession.moveAttribute("sale_new_last_name"))%>"></td>
                         </tr>
                         <tr>
                             <% if (userSession.moveAttribute("sale_error_phone_number") == null) {%>
-                            <td align="right"><div id="telephone_label">Telephone:</div></td>
+                            <td nowrap="nowrap" align="right"><div id="telephone_label">Telephone:</div></td>
                             <% } else {%>
-                            <td align="right"><font color="red"><div id="telephone_label">Telephone:</div></font></td>
+                            <td nowrap="nowrap" align="right"><font color="red"><div id="telephone_label">Telephone:</div></font></td>
                             <% }%>
-                            <td align="left"><input type="text" name="phone_number" id="phone_number" onKeyUp="return checkTelephone(this)" size="10" value="<%=CoreTools.display(userSession.moveAttribute("sale_new_phone_number"))%>">
+                            <td nowrap="nowrap" align="left"><input type="text" name="phone_number" id="phone_number" onKeyUp="return checkTelephone(this)" size="10" value="<%=CoreTools.display(userSession.moveAttribute("sale_new_phone_number"))%>">
                                 <img style="cursor:pointer" align="absmiddle" src="images/icons/small/find_white.gif" onclick="findClient()" title="Find and load client from this phone number."/>
                                 <img style="cursor:pointer" align="absmiddle" src="images/icons/small/personal_white.gif" onclick="setGuest()" title="Use a guest identity."/>
                             </td>
                         </tr>
                         <tr>
-                            <td align="right">&nbsp;</td>
-                            <td align="left">&nbsp;</td>
+                            <td nowrap="nowrap" align="right">&nbsp;</td>
+                            <td nowrap="nowrap" align="left">&nbsp;</td>
                         </tr>
                         <tr>
-                            <td align="right"><img border="0" src="/HairSalon/images/icons/small/sale_white.gif" width="16" height="16"></td>
-                            <td align="left"><u><b>Sale Details</b></u></td>
+                            <td nowrap="nowrap" align="right"><img border="0" src="/HairSalon/images/icons/small/sale_white.gif" width="16" height="16"></td>
+                            <td nowrap="nowrap" align="left"><u><b>Sale Details</b></u></td>
                         </tr>
                         <tr>
                             <% if (userSession.moveAttribute("sale_error_employee_no") == null) {%>
-                            <td align="right">Employee ID:</td>
+                            <td nowrap="nowrap" align="right">Employee ID:</td>
                             <% } else {%>
-                            <td align="right"><font color="red">Employee ID:</font></td>
+                            <td nowrap="nowrap" align="right"><font color="red">Employee ID:</font></td>
                             <% }%>
-                            <td align="left"><input type="text" name="employee_no" size="6" style="text-align:right" value="<%=CoreTools.display(userSession.moveAttribute("sale_new_employee_no"))%>"></td>
+                            <td nowrap="nowrap" align="left"><input type="text" name="employee_no" size="6" style="text-align:right" value="<%=CoreTools.display(userSession.moveAttribute("sale_new_employee_no"))%>"></td>
                         </tr>
                         <tr>
-                            <td align="right">Sub-Total:</td>
-                            <td align="left"><input type="text" name="total_due" readonly id="total_due" size="6" style="text-align:right" value="<%=CoreTools.display(userSession.moveAttribute("sale_new_total_due"))%>">$</td>
+                            <td nowrap="nowrap" align="right">Sub-Total:</td>
+                            <td nowrap="nowrap" align="left"><input type="text" name="total_due" readonly id="total_due" size="6" style="text-align:right" value="<%=CoreTools.display(userSession.moveAttribute("sale_new_total_due"))%>">$</td>
                         </tr>
                         <tr>
-                            <td align="right">Tax (<%=salon.getTaxRate()%>%):</td>
-                            <td align="left"><input type="text" name="total_tax" readonly id="total_tax" size="6" style="text-align:right" value="<%=CoreTools.display(userSession.moveAttribute("sale_new_total_tax"))%>">$</td>
+                            <td nowrap="nowrap" align="right">Tax (<%=salon.getTaxRate()%>%):</td>
+                            <td nowrap="nowrap" align="left"><input type="text" name="total_tax" readonly id="total_tax" size="6" style="text-align:right" value="<%=CoreTools.display(userSession.moveAttribute("sale_new_total_tax"))%>">$</td>
                         </tr>
                         <tr>
-                            <td align="right">Discount:</td>
-                            <td align="left"><input type="text" name="discount" id="discount" size="3" onKeyUp="return calculateTotal()" style="text-align:right" value="<%=CoreTools.display(userSession.moveAttribute("sale_new_discount"))%>">%</td>
+                            <td nowrap="nowrap" align="right">Discount:</td>
+                            <td nowrap="nowrap" align="left"><input type="text" name="discount" id="discount" size="3" onKeyUp="return calculateTotal()" style="text-align:right" value="<%=CoreTools.display(userSession.moveAttribute("sale_new_discount"))%>">%</td>
                         </tr>
                         <tr>
-                            <td align="right">Discount:</td>
-                            <td width="50" align="right"><b><div id="discount_label">$0.00</div></b></td>
+                            <td nowrap="nowrap" align="right">Discount:</td>
+                            <td nowrap="nowrap" align="right"><b id="discount_label">$0.00</b></td>
                         </tr>
                         <tr>
-                            <td align="right">Total:</td>
-                            <td width="50" align="right"><b><u><div id="total_label">$0.00</div></u></b></td>
+                            <td nowrap="nowrap" align="right">Total:</td>
+                            <td nowrap="nowrap" align="right"><b><u id="total_label">$0.00</u></b></td>
                         </tr>
                         <tr>
-                            <td align="right">Change:</td>
-                            <td width="50" align="right"><b><div id="change_label">$0.00</div></b></td>
+                            <td nowrap="nowrap" align="right">Change:</td>
+                            <td nowrap="nowrap" align="right"><b id="change_label">$0.00</b></td>
                         </tr>
                         <tr>
                             <% if (userSession.moveAttribute("sale_error_payment") == null) {%>
-                            <td align="right">Payment:</td>
+                            <td nowrap="nowrap" align="right">Payment:</td>
                             <% } else {%>
-                            <td align="right"><font color="red">Payment:</font></td>
+                            <td nowrap="nowrap" align="right"><font color="red">Payment:</font></td>
                             <% }%>
-                            <td align="left"><input type="text" name="payment" id="payment" size="6" onKeyUp="return calculateTotal()" style="text-align:right" value="<%=CoreTools.display(userSession.moveAttribute("sale_new_payment"))%>">$
+                            <td nowrap="nowrap" align="left"><input type="text" name="payment" id="payment" size="6" onKeyUp="return calculateTotal()" style="text-align:right" value="<%=CoreTools.display(userSession.moveAttribute("sale_new_payment"))%>">$
                             &nbsp;<img style="cursor:pointer" align="absmiddle" src="images/icons/small/setfield_white.gif" onclick="setTotalPayment()" title="Use total as payment."/></td>
                         </tr>
                         <tr>
-                            <td align="right">Payment Type:</td>
-                            <td align="left"><select name="payment_type" size="1"><%=CoreTools.generatePaymentTypeOptions((String) userSession.moveAttribute("sale_new_payment_type"), false)%></select></td>
+                            <td nowrap="nowrap" align="right">Payment Type:</td>
+                            <td nowrap="nowrap" align="left"><select name="payment_type" size="1"><%=CoreTools.generatePaymentTypeOptions((String) userSession.moveAttribute("sale_new_payment_type"), false)%></select></td>
                         </tr>
                         <tr>
-                            <td align="right">Complete:</td>
-                            <td align="left"><%=CoreTools.generateTrueFalseOptions("is_complete", (String) userSession.moveAttribute("sale_new_is_complete"))%></td>
+                            <td nowrap="nowrap" align="right">Complete:</td>
+                            <td nowrap="nowrap" align="left"><%=CoreTools.generateTrueFalseOptions("is_complete", (String) userSession.moveAttribute("sale_new_is_complete"))%></td>
                         </tr>
                     </table>
                 </td>

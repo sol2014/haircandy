@@ -125,7 +125,7 @@ public class AppointmentServlet extends DispatcherServlet
 		
 		AppointmentBean appointment = new AppointmentBean ();
 				
-		if (appointment_no != null)
+		if (appointment_no != null || !appointment_no.equals ("null"))
 		{
 			try
 			{

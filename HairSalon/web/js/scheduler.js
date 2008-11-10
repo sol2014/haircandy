@@ -68,12 +68,8 @@ function getColumnIDFromEmployeeNo(id)
 
 function saveEntry(appointment)//function used to save the entry
 {
-    alert ("saving entry");
-    
     function setScheduleNo(id)
     {
-        alert ("set schedule no:"+id);
-        
         if(isNaN(id))
         {
             //add error messages here
@@ -89,20 +85,12 @@ function saveEntry(appointment)//function used to save the entry
         }
     }
     
-    alert ("saving entry: creating ajax");
-    
     var messager = new Ajaxer("text",null,setScheduleNo,null);
     var queryString = "schedule_action=Save&";
     if(appointment.scheduleNo)
     {
         queryString+="schedule_no="+appointment.scheduleNo+"&";   
     }
-    
-    if (appointment == null)
-        alert ("BUG! Appointment array is NULL. Is it a array or 1 appointment??");
-    
-    if (appointment[0] == null)
-        alert ("BUG! Appointment[0] is NULL.");
     
     var startTime = parseInt(salonStartTime.split(":")[0])*60+parseInt(salonStartTime.split(":")[1])+parseInt(getRowId(appointment[0]))*15;
     var endTime = parseInt(salonStartTime.split(":")[0])*60+parseInt(salonStartTime.split(":")[1])+(parseInt(getRowId(appointment[appointment.length-1]))+1)*15;
@@ -668,7 +656,6 @@ function mouseUpHandler(e)//function to deal with mouse up event, hide draggable
                 
                 if(ok)//save the current position
                 {
-                    alert ("yes we will move this cell");
                     
                     for(var j = start; j < end; j++)
                     {
@@ -691,27 +678,16 @@ function mouseUpHandler(e)//function to deal with mouse up event, hide draggable
                         }
                         add.state = bookingState;
                         
-                        alert ("adding to cells:"+add.id);
                         appointmentCells.push(add.id);
                     }
                 }
                 else//move back to the original position
                 {
-                    alert ("move cell back to original position");
                     var startRow = getRowId(previousFirstCell.id);
                     var endRow = getRowId(previousLastCell.id);
                     var column = getColumnId(previousFirstCell.id);
-                    alert ("start: "+startRow);
-                    alert ("end: "+endRow);
-                    if (startRow <= endRow)
-                        alert ("we will be looping at least once");
-                    else
-                        alert ("THIS IS THE BUG, for some reason, startRow is not less than endRow");
-                    
                     for(var k = startRow; k <= endRow; k++)
                     {
-                        alert ("NEVER OCCURS: "+k+":"+column);
-                        
                         add  = findCell(k+"^-^"+column);
                         if(k == startRow)//appointment start
                         {
@@ -731,8 +707,6 @@ function mouseUpHandler(e)//function to deal with mouse up event, hide draggable
                         }
                         
                         add.state = bookingState;
-                        
-                        alert ("adding to cells:"+add.id);
                         appointmentCells.push(add.id);
                     }
                 }
@@ -780,13 +754,13 @@ function disableSelection(targetElement)//function that disable selection while 
 function getRowId(id)//function to get the row number from a given cell id
 {
     var rowid = id.split("^-^")[0];
-    return rowid;
+    return parseInt(rowid);
 }
 
 function getColumnId(id)//function to get the column number from a given cell id
 {
     var columnid = id.split("^-^")[1];
-    return columnid;
+    return parseInt(columnid);
 }
 
 function Cell(id, state)//cell prototype

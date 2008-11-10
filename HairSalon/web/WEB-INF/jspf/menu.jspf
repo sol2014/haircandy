@@ -39,6 +39,22 @@ if (!isGuest)
 %>
 
 <table border="0" width="130" cellspacing="0" cellpadding="0" height="100%">
+    <% if (isGuest) { %>
+	<tr>
+	<% if (position == SessionPositions.AppCalendar) { %>
+	    <td class="SiteNavigationOptionSelected">
+	<% } else { %>
+	    <td class="SiteNavigationOption">
+	<% } %>
+	    <table border="0" cellspacing="6" cellpadding="0">
+		<tr>
+		    <td><img border="0" src="/HairSalon/images/icons/medium/appointment_blue.gif" width="22" height="22"></td>
+		    <td><a title="Book or view appointments." class="MenuFont" href = "/HairSalon/view-app-clientcalendar.jsp">Appointments</a></span></td>
+		</tr>
+	    </table>
+	</td>
+    </tr>
+    <% } else { %>
 	<tr>
 	<% if (position == SessionPositions.AppCalendar) { %>
 	    <td class="SiteNavigationOptionSelected">
@@ -53,6 +69,7 @@ if (!isGuest)
 	    </table>
 	</td>
     </tr>
+    <% } %>
     
 	<% if (!isGuest && (role == UserRoles.Stylist || role == UserRoles.Manager || role == UserRoles.Receptionist)) { %>
     <tr>

@@ -3,6 +3,9 @@ TODO List
 
 Updated: Sunday, Nov 10th, 2008
 
+- Enforce Limit of Hair Stations (when creating schedule entries) we cannot
+  allow booking of more stylists than we can fit into the salon.
+
 - Search and Delete Sale need to work.
 
 - Delete button in appointment dialog needs to be hidden when creating new entry.

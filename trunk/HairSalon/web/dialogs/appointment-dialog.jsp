@@ -24,13 +24,13 @@
         }
         var messager = new Ajaxer("text",null,fillDialogShell,null);
         var queryString="appointment_action=Load&";
-        queryString += "employee_no="+employeeIDArray[getColumnId(previousFirstCell.id)]+"&";
         if(draggableDiv.appointmentId)
         {
             queryString+="appointment_no="+draggableDiv.appointmentId+"&";
         }
         else
         {
+            queryString += "employee_no="+employeeIDArray[getColumnId(previousFirstCell.id)]+"&";
             queryString+="date="+date+"&";
             queryString+="start_time="+getAppointmentStartTime()+"&";
             queryString+="end_time="+getAppointmentStartTime()+"&";

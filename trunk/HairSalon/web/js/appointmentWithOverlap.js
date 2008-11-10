@@ -441,6 +441,27 @@ function getAppointmentStartTime()
     return hour+":"+minutes;
 }
 
+function getTimeFromRow(row)
+{
+    var hour = parseInt(salonStartTime) + parseInt((row-row%4)/4);
+    var minutes = row%4;
+    switch (minutes)
+    {
+        case 1:
+            minutes="15";
+            break;
+        case 2:
+            minutes="30";
+            break;
+        case 3:
+            minutes="45"
+            break;
+        default:
+            minutes="00";
+    }
+    return hour+":"+minutes;
+}
+
 function cellRealSingleClickHandler(element)
 {
     if (typeof(element.postponement) != "undefined")
@@ -474,7 +495,7 @@ function cellDoubleClickHandler(element)//function to deal with double click
         element.postponement = undefined;
         element.doRealOneClick = undefined;
         var cell = findCell(element.id);
-        if(cell.state == emptyState)
+        if(cell.state == emptyState||cell.state == bookingState)
         {
             document.getElementById("blackout").style.display="block";
             document.getElementById("appointment_dialog_shell").style.display="block";
@@ -654,6 +675,9 @@ function mouseUpHandler(e)//function to deal with mouse up event, hide draggable
                 var appointmentCells = new Array();
                 var start = parseInt(getRowId(cell.id)) - parseInt(clickedArea);
                 var end = parseInt(getRowId(cell.id)) - parseInt(clickedArea) + parseInt(ratio);
+                appointmentCells.rowStart = start;
+                appointmentCells.rowEnd = end;
+                appointmentCells.column = getColumnId(cell.id);
                 var ok = true;
                 if(start < 0)
                 {
@@ -744,6 +768,9 @@ function mouseUpHandler(e)//function to deal with mouse up event, hide draggable
                     var startRow = getRowId(previousFirstCell.id);
                     var endRow = getRowId(previousLastCell.id);
                     var column = getColumnId(previousFirstCell.id);
+                    appointmentCells.rowStart = startRow;
+                    appointmentCells.rowEnd = endRow;
+                    appointmentCells.column = column;
                     for(var k = startRow; k <= endRow; k++)
                     {
                         add  = findCell(k+"^-^"+column);
@@ -815,6 +842,7 @@ function mouseUpHandler(e)//function to deal with mouse up event, hide draggable
                 }
                 appointmentCells.appointmentId = draggableDiv.appointmentId;
                 appointments.push(appointmentCells);
+                updateAppointmentPosition(appointmentCells.appointmentId,appointmentCells.rowStart,appointmentCells.rowEnd, appointmentCells.column);
                 find = true;
                 break;
             }
@@ -825,6 +853,18 @@ function mouseUpHandler(e)//function to deal with mouse up event, hide draggable
         }
         draggableDiv.style.display = "none";
     }
+}
+
+function updateAppointmentPosition(appointmentId,rowStart,rowEnd,column)
+{
+    var ajax = new Ajaxer("text",null,null,null);
+    var queryString="appointment_action=QuickSave&";
+    queryString+="appointment_no="+appointmentId+"&";
+    queryString+="employee_no="+employeeIDArray[column]+"&";
+    queryString+="start_time="+getTimeFromRow(rowStart)+"&";
+    queryString+="end_time="+getTimeFromRow(rowEnd)+"&";
+    alert(queryString);
+    ajax.request("appointment",queryString);
 }
 
 document.onmousemove = mouseMoveHandler; 

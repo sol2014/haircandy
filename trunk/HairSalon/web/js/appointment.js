@@ -868,7 +868,7 @@ function updateAppointmentPosition(appointmentId,rowStart,rowEnd,column)
     queryString+="employee_no="+employeeIDArray[column]+"&";
     queryString+="start_time="+getTimeFromRow(rowStart)+"&";
     queryString+="end_time="+getTimeFromRow(rowEnd)+"&";
-    alert(queryString);
+    //alert(queryString);
     ajax.request("appointment",queryString);
 }
 

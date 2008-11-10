@@ -99,8 +99,6 @@ function refillServicesList()
         {
             service.quantity = document.getElementById("st_"+service.id).value;
         }
-        if (service.quantity == null)
-            alert("service quantity is null in data");
         queryString+="quantity="+service.quantity+"&";
         queryString+="price="+service.price+"&";
     }

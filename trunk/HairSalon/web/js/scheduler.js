@@ -352,7 +352,6 @@ function deleteEntry(id)
         }
         else
         {
-            alert('wtf');
             getMatrix();
         }
     }

@@ -902,13 +902,13 @@ function disableSelection(targetElement)//function that disable selection while 
 function getRowId(id)//function to get the row number from a given cell id
 {
     var rowid = id.split("^-^")[0];
-    return rowid;
+    return parseInt(rowid);
 }
 
 function getColumnId(id)//function to get the column number from a given cell id
 {
     var columnid = id.split("^-^")[1];
-    return columnid;
+    return parseInt(columnid);
 }
 
 function Cell(id, stateCssClass, state)//cell prototype

@@ -41,6 +41,8 @@ Updated: Sunday, Nov 10th, 2008
 
 - FEATURE: Add a tooltip on cells to show the date/start/end time (if possible).
 
+- FEATURE: User HELP icon that opens seperate page for help in all screens/dialogs.
+
 - BUG: Only show alert for 1 record type, always keep latest. Show date column in alert list too.
 
 - BUG: Make sure that all search result cells are top aligned, and use nowrap and have

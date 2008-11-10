@@ -25,9 +25,9 @@
         var messager = new Ajaxer("text",null,fillDialogShell,null);
         var queryString="appointment_action=Load&";
         queryString += "employee_no="+employeeIDArray[getColumnId(previousFirstCell.id)]+"&";
-        if(draggableDiv.appointmentNo)
+        if(draggableDiv.appointmentId)
         {
-            queryString+="appointment_no="+draggableDiv.appointmentNo+"&";
+            queryString+="appointment_no="+draggableDiv.appointmentId+"&";
         }
         else
         {
@@ -35,7 +35,7 @@
             queryString+="start_time="+getAppointmentStartTime()+"&";
             queryString+="end_time="+getAppointmentStartTime()+"&";
         }
-        
+        alert(queryString);
         messager.request("appointment",queryString);   
     }
 </script>

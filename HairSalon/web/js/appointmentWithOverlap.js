@@ -500,6 +500,11 @@ function cellDoubleClickHandler(element)//function to deal with double click
             document.getElementById("blackout").style.display="block";
             document.getElementById("appointment_dialog_shell").style.display="block";
             previousFirstCell = document.getElementById(element.id);
+            var appointmentId = getCellAppointmentId(element.id);
+            if(appointmentId!=-1)
+            {
+                draggableDiv.appointmentId=appointmentId;
+            }
             getDialogShell();
         } 
     }
@@ -954,6 +959,19 @@ function isCellUsed(id)//function that checks to see if the any cells in the ran
         }
     }
     return -1;
+}
+
+function getCellAppointmentId(id)
+{
+    var index = isCellUsed(id);
+    if(index!=-1)
+    {
+        return appointments[index].appointmentId;
+    }
+    else
+    {
+        return -1;
+    }
 }
 
 function isCellOverlapped(id, firstAppointmentIndex)

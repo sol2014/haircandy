@@ -323,7 +323,9 @@ public class AppointmentServlet extends DispatcherServlet
 					
                     hash1.remove (sb);
                     hash1.put (sb, amount);
+					
 					duration += sb.getDuration () * amount;
+					LogController.write (this, "Adding to duration: "+(sb.getDuration () * amount)+" = "+duration);
                 }
                 catch (Exception e)
                 {
@@ -398,12 +400,15 @@ public class AppointmentServlet extends DispatcherServlet
 			response.setContentType ("text/html");
 			response.setCharacterEncoding ("UTF-8");
 			PrintWriter pw = response.getWriter ();
+			
+			LogController.write (this, "Duration: "+duration);
 			if (duration < 15)
 				duration = 1;
 			else
 				duration = duration / 15;
 			
 			String sentstr = appointment.getAppointmentNo ()+":"+duration;
+			LogController.write (this, "Sending: "+sentstr);
 			pw.print (sentstr);
 			pw.close ();
 			

@@ -242,22 +242,22 @@ function closeAddService(){
 
 function doSubmit()
 {
-    var productQuery = "products=";
+    var productQuery = "";
     
     for(var i = 0; i < products.length; i++)
     {
         var product = products[i];
         product.quantity = document.getElementById("sr_"+product.id).value;   
-        productQuery = productQuery+product.id+":"+product.quantity+"&";
+        productQuery = "products="+product.id+":"+product.quantity+"&";
     }
     
-    var serviceQuery = "&services=";
+    var serviceQuery = "";
     
     for(var i=0;i<services.length;i++)
     {
         var service = services[i];
         service.quantity = document.getElementById("st_"+service.id).value;
-        serviceQuery = serviceQuery+service.id+":"+service.quantity+"&";
+        serviceQuery = "services="+service.id+":"+service.quantity+"&";
     }
     
     var ajax = new Ajaxer("text",null,operResultTable,null);
@@ -270,8 +270,10 @@ function doSubmit()
     queryString+="start_time="+escape(document.getElementById("app_start_time").value)+"&";
     queryString+="end_time="+escape(document.getElementById("app_end_time").value)+"&";
     queryString+="date="+escape(document.getElementById("app_date").value)+"&";
-    queryString+=productQuery;
-    queryString+=serviceQuery;
+    if (products.length > 0)
+      queryString+=productQuery;
+    if (services.length > 0)
+      queryString+=serviceQuery;
     alert(queryString);
     ajax.request("appointment",queryString);
 }

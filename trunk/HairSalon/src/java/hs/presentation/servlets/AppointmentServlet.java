@@ -213,6 +213,7 @@ public class AppointmentServlet extends DispatcherServlet
 	{
 		// Get all the parameters out.
 		String appointmentNo = request.getParameter ("appointment_no");
+		PrintWriter pw = response.getWriter ();
 		
 		LogController.write (this, "[USER REQUEST] Performing save: "+appointmentNo);
 		
@@ -325,7 +326,6 @@ public class AppointmentServlet extends DispatcherServlet
                     hash1.put (sb, amount);
 					
 					duration += sb.getDuration () * amount;
-					LogController.write (this, "Adding to duration: "+(sb.getDuration () * amount)+" = "+duration);
                 }
                 catch (Exception e)
                 {
@@ -394,21 +394,63 @@ public class AppointmentServlet extends DispatcherServlet
 			appointment.setEndTime (endTime);
 		}
         
+		// First check if we are within the limits of the day.
+		
+		if (CoreTools.isTimeBefore(salon.getWeekdayEndTime (CoreTools.getWeekDay(appointment.getDate())), appointment.getEndTime()))
+		{
+			// You cannot schedule the end time past the business hours.
+			LogController.write (this, "You cannot book an appointment that ends after the business hours.");
+			
+			pw.print ("Booking outside business hours.");
+			pw.close ();
+			
+			return;
+		}
+		
+		Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions = SessionController.getAvailabilityExceptions(userSession, date);
+		ArrayList<ScheduleExceptionBean> scheduleExceptions = SessionController.getScheduleExceptions(userSession, date);
+		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> unavailables = SessionController.getUnavailable(userSession, date, availabilityExceptions, scheduleExceptions);
+		Hashtable<EmployeeBean, ArrayList<AppointmentBean>> appointments = SessionController.getAppointments(userSession, date, availabilityExceptions, scheduleExceptions);
+		
+		// If we are, then check to see if we are ending the appointment overtop of
+		// unavailable time.
+		for (EmployeeBean e : unavailables.keySet ())
+		{
+			if (e.getEmployeeNo ().equals (employee.getEmployeeNo ()))
+			{
+				ArrayList<ScheduleBean> unavail = unavailables.get (e);
+				for (ScheduleBean sch : unavailables.get (e))
+				{
+					
+					if (CoreTools.isTimeBefore (sch.getStartTime (), appointment.getEndTime ()) && CoreTools.isTimeBefore (appointment.getEndTime (), sch.getEndTime ()))
+					{
+						LogController.write (this, "You cannot book an appointment that ends within an unavailable block.");
+						
+						pw.print ("Appointment ends within a unavailable block.");
+						pw.close ();
+
+						return;
+					}
+				}
+			}
+		}
+		
+		// Then lastly, check to see if we are ending the appointment overtop of another
+		// appointment (only if we are a client do we care about this one.
+		
 		if (SessionController.saveAppointment (userSession, appointment))
 		{
 			LogController.write ("Save successfull.");
 			response.setContentType ("text/html");
 			response.setCharacterEncoding ("UTF-8");
-			PrintWriter pw = response.getWriter ();
 			
-			LogController.write (this, "Duration: "+duration);
 			if (duration < 15)
 				duration = 1;
 			else
 				duration = duration / 15;
 			
 			String sentstr = appointment.getAppointmentNo ()+":"+duration;
-			LogController.write (this, "Sending: "+sentstr);
+			
 			pw.print (sentstr);
 			pw.close ();
 			

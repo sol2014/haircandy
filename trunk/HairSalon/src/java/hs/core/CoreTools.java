@@ -553,4 +553,59 @@ public class CoreTools
 		SimpleDateFormat sdf = new SimpleDateFormat (TimeFormat);
 		return sdf.parse (timestr);
 	}
+	
+	public static boolean isDateBefore (Date first, Date second)
+	{
+		Calendar c = Calendar.getInstance ();
+		c.setTime (first);
+		int firstDay = c.get (Calendar.DATE);
+		int firstMonth = c.get (Calendar.MONTH);
+		int firstYear = c.get(Calendar.YEAR);
+		c.setTime (second);
+		int secondDay = c.get (Calendar.DATE);
+		int secondMonth = c.get (Calendar.MONTH);
+		int secondYear = c.get (Calendar.YEAR);
+		
+		if (firstYear > secondYear)
+			return false;
+		else if (firstYear == secondYear)
+		{
+			if (firstMonth > secondMonth)
+				return false;
+			else if (firstMonth == secondMonth)
+			{
+				if (firstDay > secondDay)
+					return false;
+				else
+					return true;
+			}
+			else
+				return true;
+		}
+		else
+			return true;
+	}
+	
+	public static boolean isTimeBefore (Date first, Date second)
+	{
+		int firstHour = getHour (first);
+		int secondHour = getHour (second);
+		int firstMinutes = getMinutes (first);
+		int secondMinutes = getMinutes (second);
+		
+		if (firstHour > secondHour)
+		{
+			return false;
+		}
+		else if (firstHour == secondHour)
+		{
+			// its the same hour, check minutes
+			if (firstMinutes > secondMinutes)
+				return false;
+			else
+				return true;
+		}
+		else
+			return true;
+	}
 }

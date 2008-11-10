@@ -7,11 +7,16 @@ Updated: Sunday, Nov 10th, 2008
   by the employees and managers. Technically exceptions should not have
   years, if they do, we should have a flag for "Once" or "Repeat" so that
   when the exception passes, we create a new one.
- 
+  > We concidered this flaw a minor issue. Nov 10th, 2008
+
 - FLAW: Enforce Limit of Hair Stations (when creating schedule entries) we cannot
   allow booking of more stylists than we can fit into the salon. Do we really
   need beauty stations? We have no way to tell the difference between hair
   and beauty stations right now, so we should just have Stations period.
+  > Flaw fixed by removing the concept of hair stations and beauty stations. This limit
+    would only provide some probably non-essential control to running a business. Most
+    managers would be able to make sure they do not schedule too many people for their
+    salon capacity. Nov 10th, 2008
 
 - FLAW: We should be taking the Salon business hours and storing them into a new schedule table
   that stores only the hours of operations for any given day. We should use this table instead
@@ -21,27 +26,39 @@ Updated: Sunday, Nov 10th, 2008
   after entering data does not change the rendering of previously set days. If we do this though
   we will then have to allow a way to change business hours for previous days (this requires
   a new interface somehow to change hours of operation for 1 business day).
+  > This flaw has been concidered as high priority as this is a negative aspect of the schedule
+    information that could cause serious problems in rendering each day. Nov 10th, 2008
 
 - FLAW: We totally forgot to use Employee Availability in the scheduler. It should be displaying
   something like we use in the appointment schedule (unavailable time). But instead this would be
   for the staff scheduler, so that the manager does not book outside of the available time.
+  > This flaw has been concidered as absolutely necessary. Joey will work on this. Nov 10th, 2008
 
 - FEATURE: The manager should have a quick way to book a schedule day quickly based on
   the employee availability records.
+  > This feature would certainly be useful, however is lower priority at this point. Nov 10th, 2008
 
 - FEATURE: Search and Delete Sale need to work.
+  > This must work. Nov 10th, 2008
 
 - FEATURE: Make the preferences dialog actually work to set availability and password update.
+  > This must work for user session control and scheduling limits for employees.
 
 - FEATURE: Finish any alerts that we need to create for the user throughout the app.
+  > Non essential at this point. We have inventory alerts, and more could be created
+    but there are time constraints. Nov 10th, 2008
 
 - FEATURE: Make sure alerts can be deleted one by one, or all at once (or by type?)
+  > Must have this available to managers. Nov 10th, 2008
 
 - FEATURE: Add a legend for cell types in the scheduler and calendar views.
+  > This is necessary for good user friendliness. Single images can be made. Nov 10th, 2008
 
 - FEATURE: Add a tooltip on cells to show the date/start/end time (if possible).
+  > This feature is non-essential and will make it in if we have time. Nov 10th, 2008
 
 - FEATURE: User HELP icon that opens seperate page for help in all screens/dialogs.
+  > This is for user friendliness.
 
 - BUG: Do not let scheduler or appointment drag cells outside of bounds (dissapear on drop).
 

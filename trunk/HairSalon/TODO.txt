@@ -43,6 +43,8 @@ Updated: Sunday, Nov 10th, 2008
 
 - FEATURE: User HELP icon that opens seperate page for help in all screens/dialogs.
 
+- BUG: Do not let scheduler or appointment drag cells outside of bounds (dissapear on drop).
+
 - BUG: Employees can move schedule entries around, only Managers should be able to.
 
 - BUG: Only show alert for 1 record type, always keep latest. Show date column in alert list too.

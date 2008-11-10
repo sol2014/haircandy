@@ -17,6 +17,8 @@
 <script>
     function getDialogShell()
     {
+        products = new Array();
+        services = new Array();
         function fillDialogShell(content)
         {
             document.getElementById("appointment_dialog_shell").innerHTML = "";

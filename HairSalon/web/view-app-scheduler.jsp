@@ -43,6 +43,7 @@ Date date = CoreTools.getDate (request.getParameter("date"));
     <div align="left" id="matrix"></div>
 </font>
 
+
 <%@ include file="dialogs/appointment-dialog.jsp" %>
 
 <%@ include file="WEB-INF/jspf/footer.jspf" %>

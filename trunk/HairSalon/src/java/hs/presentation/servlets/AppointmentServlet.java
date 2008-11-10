@@ -125,7 +125,7 @@ public class AppointmentServlet extends DispatcherServlet
 		
 		AppointmentBean appointment = new AppointmentBean ();
 				
-		if (appointment_no != null || !appointment_no.equals ("null"))
+		if (appointment_no != null)
 		{
 			try
 			{
@@ -162,18 +162,21 @@ public class AppointmentServlet extends DispatcherServlet
 			appointment.setEmployee (employee);
 		}
 		
-		try
+		if (date != null && start_time != null && end_time != null)
 		{
-			appointment.setDate (CoreTools.getDate (date));
-			appointment.setStartTime (CoreTools.getTime (start_time));
-			appointment.setEndTime (CoreTools.getTime (end_time));
-		}
-		catch (Exception e)
-		{
-			// ERROR with data.
-			pw.write ("There was invalid data for date and time information.");
-			pw.close();
-			return;
+			try
+			{
+				appointment.setDate (CoreTools.getDate (date));
+				appointment.setStartTime (CoreTools.getTime (start_time));
+				appointment.setEndTime (CoreTools.getTime (end_time));
+			}
+			catch (Exception e)
+			{
+				// ERROR with data.
+				pw.write ("There was invalid data for date and time information.");
+				pw.close();
+				return;
+			}
 		}
 		
 		request.setAttribute ("appointment_load_result", appointment);

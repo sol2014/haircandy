@@ -41,7 +41,7 @@ int recordNo = 0;
 <script>
 function goToCalendarDay (day)
 {
-    location.replace ("view-app-scheduler.jsp?date="+day);
+    location.replace ("view-appointments.jsp?date="+day);
 }
 
 function highlightDay (day)

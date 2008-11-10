@@ -39,3 +39,11 @@ Updated: Sunday, Nov 9th, 2008
 
 - Delete button in appointment dialog needs to be hidden when creating new entry.
 
+- We should be taking the Salon business hours and storing them into a new schedule table
+  that stores only the hours of operations for any given day. We should use this table instead
+  to load business hours in all places in the code. If business hour data is not available in
+  the DB, we should create a new entry on-the-fly that uses the salon business hours. This
+  makes sure that we store salon hours for all days, and makes sure changing  business hours
+  after entering data does not change the rendering of previously set days. If we do this though
+  we will then have to allow a way to change business hours for previous days (this requires
+  a new interface somehow to change hours of operation for 1 business day).

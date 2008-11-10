@@ -67,6 +67,10 @@ public class ProductServlet extends DispatcherServlet
 		
 		if (names != null && quantitys != null && ids != null)
 		{
+			LogController.write (this, "IDS: "+ids.toString());
+			LogController.write (this, "NAMES: "+names.toString());
+			LogController.write (this, "QUANTITYS: "+quantitys.toString());
+			
 			for (int i = 0; i < names.length; i++)
 			{
 				ProductBean pb = new ProductBean ();

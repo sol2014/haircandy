@@ -80,11 +80,11 @@ for (Cookie cookie : cookies)
 		    <table>
 			<tr>
 			    <td align="right">Employee ID:</td>
-			    <td><input type="text" value="<%=CoreTools.display (username)%>" name="login_id" /></td>
+			    <td><input type="text" value="<%=CoreTools.display (username)%>" size="5" name="login_id" /></td>
 			</tr>
 			<tr>
 			    <td align="right">Password:</td>
-			    <td><input type="password" value="<%=CoreTools.display (password)%>" name="login_password" /></td>
+			    <td><input type="password" value="<%=CoreTools.display (password)%>" size="15" name="login_password" /></td>
 			</tr>
 		    </table>
 		    <br />

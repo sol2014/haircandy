@@ -44,7 +44,7 @@ try
     var duration = parseInt(array[1]);
     if(isNaN(appointmentNo)||isNaN(duration))
     {
-        alert('wtf');
+        document.getElementById("operResult").innerHTML=content;
     }
     else
     {

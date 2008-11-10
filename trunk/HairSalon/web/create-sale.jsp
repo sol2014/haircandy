@@ -73,7 +73,8 @@ String error_string = (String) userSession.moveAttribute("sale_error");
                 <td align="Left" valign="top"><img border="0" src="/HairSalon/images/icons/big/sale_white.gif" width="48" height="48"></td>
                 <td align="left"><b><font size="3">Create new Sale</font></b><br>
                     Sales can be created for clients who just simply need to purchase products 
-                    and services from the salon without an appointment.
+                    and services from the salon without an appointment. Make sure to provide all
+		    fields and verify information before finishing.
                     <br><br>
                     
                     <% if (sale != null) {%>

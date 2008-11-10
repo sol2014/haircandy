@@ -33,6 +33,7 @@
 		for (EmployeeBean employee : unavailables.keySet()) {
 			employees.add(SessionController.loadEmployee(userSession, employee));
 		}
+                Collections.sort(employees, new EmployeeLastNameComparator());
 
 		SalonBean sb = SessionController.loadSalon(userSession, new SalonBean());
 		int weekDay = CoreTools.getWeekDay(date);

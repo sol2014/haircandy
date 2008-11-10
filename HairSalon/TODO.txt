@@ -28,3 +28,9 @@ Updated: Sunday, Nov 9th, 2008
 - Add a legend for cell types in the scheduler and calendar views.
 
 - Remove comparator from all the beans.
+
+- JavaDoc everything and document javascript to some degree.
+
+- Check all file headers.
+
+- Clean up any unwanted code, and WTFs or others...

@@ -35,4 +35,7 @@ Updated: Sunday, Nov 9th, 2008
 
 - Clean up any unwanted code, and WTFs or others...
 
-- Search and Delete Sale
+- Search and Delete Sale need to work.
+
+- Delete button in appointment dialog needs to be hidden when creating new entry.
+

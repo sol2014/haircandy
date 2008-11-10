@@ -280,7 +280,7 @@ if (products.length > 0)
     queryString+=productQuery;
 if (services.length > 0)
     queryString+=serviceQuery;
-alert(queryString);
+//alert(queryString);
 ajax.request("appointment",queryString);
 }
 

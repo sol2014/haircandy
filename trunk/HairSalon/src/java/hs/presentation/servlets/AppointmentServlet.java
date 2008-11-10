@@ -418,7 +418,6 @@ public class AppointmentServlet extends DispatcherServlet
 		{
 			if (e.getEmployeeNo ().equals (employee.getEmployeeNo ()))
 			{
-				ArrayList<ScheduleBean> unavail = unavailables.get (e);
 				for (ScheduleBean sch : unavailables.get (e))
 				{
 					
@@ -437,6 +436,27 @@ public class AppointmentServlet extends DispatcherServlet
 		
 		// Then lastly, check to see if we are ending the appointment overtop of another
 		// appointment (only if we are a client do we care about this one.
+		if (userSession.isGuest ())
+		{
+			for (EmployeeBean e : appointments.keySet ())
+			{
+				if (e.getEmployeeNo ().equals (employee.getEmployeeNo ()))
+				{
+					for (AppointmentBean apb : appointments.get (e))
+					{
+						if (CoreTools.isTimeBefore (apb.getStartTime (), appointment.getEndTime ()) && CoreTools.isTimeBefore (appointment.getEndTime (), apb.getEndTime ()))
+						{
+							LogController.write (this, "Clients cannot book an appointment that ends within another appointment block.");
+
+							pw.print ("Appointment ends within another appointment block.");
+							pw.close ();
+
+							return;
+						}
+					}
+				}
+			}
+		}
 		
 		if (SessionController.saveAppointment (userSession, appointment))
 		{

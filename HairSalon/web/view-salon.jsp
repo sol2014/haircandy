@@ -55,10 +55,10 @@ window.onload = function () {
 	<table border="0" cellspacing="5" cellpadding="0">
 	    <tr>
 		<td align="left" valign="top"><img border="0" src="/HairSalon/images/icons/big/salon_white.gif" width="48" height="48"></td>
-		<td align="left"><b><font size="3">Maintain Salon Information</font></b><br>
-		    Many of these settings will affect the way the application treats the scheduling and the user interaction when certain limits are reached. Also, sales transactions will use the tax percentage
-			set by the manager and cannot be overriden by employees. Business hours will be observed when allowing a manager to maintain the
-		    schedule.
+		<td align="left"><b><font size="3">Maintain Salon Details</font></b><br>
+		    The following settings will be used to identify the salon, but also limit the number of
+		    employees in the schedule at any one time. Also the default hours of operation are also
+		    set here, they will dictate when schedule entries and appointments can be booked.
 		    <br><br>
 
 		    <%-- Here we we need to store the temporary record data --%>

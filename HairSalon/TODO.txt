@@ -1,16 +1,19 @@
-TODO List
+TODO List - Flaws, Bugs, Features and Tasks, oh my!
 ---------
 
 Updated: Sunday, Nov 10th, 2008
 
-- Enforce Limit of Hair Stations (when creating schedule entries) we cannot
-  allow booking of more stylists than we can fit into the salon.
+- FLAW: Exceptions are non-repeatable, and they must be constantly managed
+  by the employees and managers. Technically exceptions should not have
+  years, if they do, we should have a flag for "Once" or "Repeat" so that
+  when the exception passes, we create a new one.
+ 
+- FLAW: Enforce Limit of Hair Stations (when creating schedule entries) we cannot
+  allow booking of more stylists than we can fit into the salon. Do we really
+  need beauty stations? We have no way to tell the difference between hair
+  and beauty stations right now, so we should just have Stations period.
 
-- Search and Delete Sale need to work.
-
-- Delete button in appointment dialog needs to be hidden when creating new entry.
-
-- BIG FLAW: We should be taking the Salon business hours and storing them into a new schedule table
+- FLAW: We should be taking the Salon business hours and storing them into a new schedule table
   that stores only the hours of operations for any given day. We should use this table instead
   to load business hours in all places in the code. If business hour data is not available in
   the DB, we should create a new entry on-the-fly that uses the salon business hours. This
@@ -19,35 +22,66 @@ Updated: Sunday, Nov 10th, 2008
   we will then have to allow a way to change business hours for previous days (this requires
   a new interface somehow to change hours of operation for 1 business day).
 
-- Make the preferences dialog actually work to set availability and password update.
+- FLAW: We totally forgot to use Employee Availability in the scheduler. It should be displaying
+  something like we use in the appointment schedule (unavailable time). But instead this would be
+  for the staff scheduler, so that the manager does not book outside of the available time.
 
-- Finish any alerts that we need to create for the user throughout the app.
+- FEATURE: The manager should have a quick way to book a schedule day quickly based on
+  the employee availability records.
 
-- Make sure alerts can be deleted one by one, or all at once (or by type?)
+- FEATURE: Search and Delete Sale need to work.
 
-- Fix all the form pages from taking ENTER keystroke to "SAVE" records.
+- FEATURE: Make the preferences dialog actually work to set availability and password update.
 
-- Add Start Time/End Time to the Employee scheduler dialog.
+- FEATURE: Finish any alerts that we need to create for the user throughout the app.
 
-- Dialog boxes need to have input fields cleared if used twice or more.
+- FEATURE: Make sure alerts can be deleted one by one, or all at once (or by type?)
 
-- Make errors in appointment creation/edit dialog more obvious.
+- FEATURE: Add a legend for cell types in the scheduler and calendar views.
 
-- Do not allow anyone to create an appointment if no services are selected.
+- FEATURE: Add a tooltip on cells to show the date/start/end time (if possible).
 
-- Dialog repositioning and sizing must be fixed for all dialogs, its horrible
+- BUG: Make sure that all search result cells are top aligned, and use nowrap and have
+  proper result images.
+
+- BUG: Input checking in all Dialogs must highlight fields RED when finishing.
+
+- BUG: Delete button in appointment dialog needs to be hidden when creating new entry.
+
+- BUG: Fix all the form pages from taking ENTER keystroke to "SAVE" records.
+
+- BUG: Start Time/End Time do not render in the Employee scheduler dialog.
+
+- BUG: Dialog boxes need to have input fields cleared if used twice or more.
+
+- BUG: Make errors in appointment creation/edit dialog more obvious.
+
+- BUG: Do not allow anyone to create an appointment if no services are selected.
+
+- BUG: Dialog repositioning and sizing must be fixed for all dialogs, its horrible
   right now.
 
-- Add the duration Hour+Minute Combo boxes for Services search, maintain and create pages.
+- BUG: Add the duration Hour+Minute Combo boxes for Services search, maintain and create pages.
 
-- Add a legend for cell types in the scheduler and calendar views.
+- BUG: Remove comparator from all the beans.
 
-- Add a tooltip on cells to show the date/start/end time (if possible).
+- TASK: Fill product and services database with basic salon data! (we need lots of producs and
+  services that MOST salons would have. We could also make the starter wizard let the people
+  pick what product brands they carrie, and we insert only that data.
 
-- Remove comparator from all the beans.
+- TASK: Complete server and client side checking, especially for numerical values.
 
-- JavaDoc everything and document javascript to some degree.
+- TASK: Create a wizard application for installation that will also allow the installer to
+  set the basic Salon information to be inserted into the database before people start to log in.
 
-- Check all file headers.
+- TASK: Make sure we are using the proper search parameters for all search screens and dialogs.
 
-- Clean up any unwanted code, and WTFs or others...
+- TASK: Make sure all pages have proper TITLE, Navigation Position, Menu entry.
+
+- TASK: Check ALL Links on the page for dead links.
+
+- TASK: JavaDoc everything and document javascript to some degree.
+
+- TASK: Check all file headers.
+
+- TASK: Clean up any unwanted code, and WTFs or others...

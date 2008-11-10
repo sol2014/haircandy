@@ -1,5 +1,5 @@
 HairSalon Web Application
-Systems 2 Project
+Systems 2 Project @ Southern Alberta Institute of Technology
 
 Developed by Nuha Bazara, Joey Ren, Horace Wan, Miyoung Han and Philippe Durand.
 

@@ -438,6 +438,7 @@ function getAppointmentStartTime()
         default:
             minutes="00";
     }
+    //alert(hour+":"+minutes);
     return hour+":"+minutes;
 }
 

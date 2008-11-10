@@ -26,11 +26,90 @@ public class AppointmentServlet extends DispatcherServlet
 	{
 		setActionAttribute ("appointment_action");
 		addExternalAction ("Save", "performSave");
+		addExternalAction ("QuickSave", "performQuickSave");
 		addExternalAction ("Finish", "performSave");
 		addExternalAction ("Delete", "performDelete");
 		addExternalAction ("Load", "performLoad");
 	}
 
+	public void performQuickSave (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException
+	{
+		PrintWriter pw = response.getWriter ();
+		
+		String appointment_no = request.getParameter ("appointment_no");
+		String start_time = request.getParameter ("start_time");
+		String end_time = request.getParameter ("end_time");
+		String employee_no = request.getParameter ("employee_no");
+		
+		LogController.write (this, "[PAGE REQUEST] Performing quick save: "+appointment_no);
+		
+		AppointmentBean appointment = new AppointmentBean ();
+		
+		if (appointment_no != null)
+		{
+			try
+			{
+				appointment.setAppointmentNo (Integer.parseInt (appointment_no));
+			}
+			catch (Exception e)
+			{
+				// BAD DATA
+				pw.write ("There was invalid data for appointment number.");
+				pw.close();
+				return;
+			}
+			
+			appointment = SessionController.loadAppointment (userSession, appointment);
+		}
+		
+		if (appointment == null)
+		{
+			LogController.write (this, "Cannot perform quicksave without a valid appointment number: "+appointment_no);
+			return;
+		}
+		
+		EmployeeBean employee = new EmployeeBean ();
+		employee.setAddress (new AddressBean ());
+		
+		try
+		{
+			employee.setEmployeeNo (Integer.parseInt (employee_no));
+		}
+		catch (Exception e)
+		{
+			// BAD DATA
+			pw.write ("There was invalid data for employee number.");
+			pw.close();
+			return;
+		}
+		
+		employee = SessionController.loadEmployee (userSession, employee);
+		appointment.setEmployee (employee);
+		
+		try
+		{
+			appointment.setStartTime (CoreTools.getTime (start_time));
+			appointment.setEndTime (CoreTools.getTime (end_time));
+		}
+		catch (Exception e)
+		{
+			// ERROR with data.
+			pw.write ("There was invalid data for date and time information.");
+			pw.close();
+			return;
+		}
+		
+		if (SessionController.saveAppointment (userSession, appointment))
+		{
+			LogController.write (this, "Quick save completed succesfully.");
+		}
+		else
+		{
+			LogController.write (this, "Unable to quick save appointment.");
+		}
+	}
+	
 	public void performLoad (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{

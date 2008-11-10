@@ -19,6 +19,7 @@
     {
         products = new Array();
         services = new Array();
+        tax_percent = 0.0;
         function fillDialogShell(content)
         {
             document.getElementById("appointment_dialog_shell").innerHTML = "";

@@ -41,7 +41,7 @@ EmployeeBean employee = appointment.getEmployee();
 SimpleDateFormat tf = new SimpleDateFormat (CoreTools.AMPMFormat);
 SimpleDateFormat df = new SimpleDateFormat (CoreTools.DateFormat);
 
-SimpleDateFormat tf2 = new SimpleDateFormat (CoreTools.FullTimeFormat);
+SimpleDateFormat tf2 = new SimpleDateFormat (CoreTools.TimeFormat);
 SimpleDateFormat df2 = new SimpleDateFormat (CoreTools.DateFormat);
 
 String employeeNo = "";
@@ -171,7 +171,8 @@ if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo
 					<td>
 					    <input type="button" onclick="doFinish()" value="Finish" class="StandardButton" /><br/>
 					    <input type="button" onclick="doDelete()" id="deleteButton" value="Delete" class="StandardButton" /><br/>
-					    <input type="button" onclick="doClose()" value="Close" class="StandardButton" />
+					    <input type="button" onclick="doClose()" value="Close" class="StandardButton" /><br/>
+					    <div id="operResult"></div>
 					</td>
 				    </tr>
 				</table>

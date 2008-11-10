@@ -34,3 +34,5 @@ Updated: Sunday, Nov 9th, 2008
 - Check all file headers.
 
 - Clean up any unwanted code, and WTFs or others...
+
+- Search and Delete Sale

@@ -19,7 +19,17 @@
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
-   
+
+<%-- Retrieve the UserSession object from the http session. --%>
+<%
+UserSession userSession = (UserSession) session.getAttribute ("user_session");
+int recordNo = 0;
+
+userSession.setCurrentPosition (SessionPositions.AppScheduler);
+
+String page_title = "Appointments";
+%>
+
 <%-- Use the pre-set header file. --%>
 <%@ include file="WEB-INF/jspf/header.jspf" %>
 

@@ -27,6 +27,7 @@
         if(draggableDiv.appointmentId)
         {
             queryString+="appointment_no="+draggableDiv.appointmentId+"&";
+            draggableDiv.appointmentId = undefined;
         }
         else
         {

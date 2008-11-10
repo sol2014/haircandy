@@ -26,3 +26,5 @@ Updated: Sunday, Nov 9th, 2008
 - Add the duration Hour+Minute Combo boxes for Services search, maintain and create pages.
 
 - Add a legend for cell types in the scheduler and calendar views.
+
+- Remove comparator from all the beans.

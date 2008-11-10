@@ -20,7 +20,8 @@ BEGIN
         WHERE ((p_employee_no IS NULL) OR (employee_no = p_employee_no))
         AND ((p_date IS NULL) OR (date = p_date))
         AND ((p_start_time IS NULL) OR (start_time = p_start_time))
-        AND ((p_end_time IS NULL) OR (end_time = p_end_time));
+        AND ((p_end_time IS NULL) OR (end_time = p_end_time))
+	ORDER BY p_employee_no DESC;
 END
 //
 

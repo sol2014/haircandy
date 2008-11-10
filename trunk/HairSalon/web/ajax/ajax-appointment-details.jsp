@@ -96,7 +96,7 @@ if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo
     <table id="dialog_table" bgcolor="#FFFFFF" height="100%" width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
             <td><img src="images/scheduler/scheduler_topleft.gif" width="2" height="33" /></td>
-            <td align="center" width="100%" background="images/scheduler/scheduler_topheader.gif"><b><font color="#FFFFFF">Add Service</font></b></td>
+            <td align="center" width="100%" background="images/scheduler/scheduler_topheader.gif"><b><font color="#FFFFFF">Edit Appointment Entry</font></b></td>
             <td><img src="images/scheduler/scheduler_topright.gif" width="2" height="33" /></td>
         </tr>
         <tr>

@@ -213,21 +213,6 @@ if (!isGuest)
     <% } %>
     
     <tr>
-	<% if (position == SessionPositions.Help) { %>
-	    <td class="SiteNavigationOptionSelected">
-	<% } else { %>
-	    <td class="SiteNavigationOption">
-	<% } %>
-	    <table border="0" cellspacing="6" cellpadding="0">
-		<tr>
-		    <td><img border="0" src="/HairSalon/images/icons/medium/help_blue.gif" width="22" height="22"></td>
-		    <td><a title="View user documentation." class="MenuFont" href = "/HairSalon/view-help.jsp">Help</a></td>
-		</tr>
-	    </table>
-	</td>
-    </tr>
-    
-    <tr>
 	<td class="SiteNavigationShadow"><img src="/HairSalon/images/site_blank.gif"></td>
     </tr>
 </table>

@@ -43,6 +43,8 @@ Updated: Sunday, Nov 10th, 2008
 
 - FEATURE: User HELP icon that opens seperate page for help in all screens/dialogs.
 
+- BUG: Employees can move schedule entries around, only Managers should be able to.
+
 - BUG: Only show alert for 1 record type, always keep latest. Show date column in alert list too.
 
 - BUG: Make sure that all search result cells are top aligned, and use nowrap and have

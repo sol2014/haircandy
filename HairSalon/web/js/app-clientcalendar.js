@@ -23,7 +23,7 @@ function refreshCalender(year, month)
     var queryString="";
     queryString+="year="+year+"&";
     queryString+="month="+month+"&";
-    messager.request("ajax/ajax-app-calendar.jsp",queryString);
+    messager.request("ajax/ajax-app-clientcalendar.jsp",queryString);
 }
 
 function showPreviousYear(year, month)

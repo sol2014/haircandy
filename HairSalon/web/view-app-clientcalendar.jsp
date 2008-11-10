@@ -61,7 +61,7 @@ function unlightDay (day)
 
 <%@ include file="WEB-INF/jspf/footer.jspf" %>
 
-<script language="javascript" src="js/calendar.js"></script>
+<script language="javascript" src="js/app-clientcalendar.js"></script>
 <script>
     var today = new Date();
     refreshCalender(today.getFullYear(),today.getMonth());

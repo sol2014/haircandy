@@ -69,6 +69,9 @@ Updated: Sunday, Nov 10th, 2008
 
 - BUG: Remove comparator from all the beans.
 
+- BUG: Fix blackout so that it uses the document height/width, not the browser viewing area, also, make
+  blackout everytime we show a popup, do not use the same blackout each time.
+
 - TASK: Fill product and services database with basic salon data! (we need lots of producs and
   services that MOST salons would have. We could also make the starter wizard let the people
   pick what product brands they carrie, and we insert only that data.

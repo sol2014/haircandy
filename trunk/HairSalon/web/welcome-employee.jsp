@@ -58,9 +58,10 @@ String error_string = (String) userSession.moveAttribute ("alert_error");
         request.send(queryString);
     }
 </script>
+
 <font face="Trebuchet MS" size="2">
     <form onsubmit="deleteAlert()" method="POST" action="product">
-    <table height="100%" border="0" cellspacing="5" cellpadding="0">
+    <table height="100%" width="100%" border="0" cellspacing="5" cellpadding="0">
 	<tr>
 	    <td align="left" valign="top">
 	    <img border="0" src="/HairSalon/images/icons/big/welcome_white.gif" width="48" height="48"></td>
@@ -85,9 +86,9 @@ String error_string = (String) userSession.moveAttribute ("alert_error");
     <table align="left" width="100%" cellspacing="0" cellpadding="0" class="SearchLine">
 	<tr align="left">
 	    <% if (alerts != null && alerts.length > 0) { %>
-	    <td height="25" nowrap="nowrap" class="Row44"><b><font color="#FFFFFF">&nbsp;Alerts Generated (<%=alerts.length%>)</b></td>
+	    <td height="25" nowrap="nowrap" class="Row4"><b><font color="#FFFFFF">&nbsp;Alerts Generated (<%=alerts.length%>)</b></td>
 	    <% } else { %>
-	    <td height="25" nowrap="nowrap" class="Row44"><b><font color="#FFFFFF">&nbsp;Alerts Generated (None)</b></td>
+	    <td height="25" nowrap="nowrap" class="Row4"><b><font color="#FFFFFF">&nbsp;Alerts Generated (None)</b></td>
 	    <% }%>
 	</tr>
 	<tr>

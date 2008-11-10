@@ -43,7 +43,7 @@
                 
                 <% for (ServiceBean service : searchResults.keySet ()) {%>
                 <tr align="right" valign="middle">
-                    <td height="30" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/service.gif" width="16" height="16" />&nbsp;</td>
+                    <td height="30" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/service_white.gif" width="16" height="16" />&nbsp;</td>
                     <td align="left" class="Row2"><span class="SearchLink"><%=CoreTools.display(service.getName())%></span></td>
 		    <td nowrap="nowrap" class="Row7"><%=CoreTools.display (service.getDuration ())%>m</td>
 		    <td nowrap="nowrap" class="Row7"><input type="text" onKeyUp="return calculateServiceSubTotal()" id="st_<%=CoreTools.display(service.getServiceNo())%>" value="<%=CoreTools.display(searchResults.get(service))%>" size="4" style="text-align:right"/></td>

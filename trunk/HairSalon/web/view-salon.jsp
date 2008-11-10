@@ -56,8 +56,7 @@ window.onload = function () {
 	    <tr>
 		<td align="left" valign="top"><img border="0" src="/HairSalon/images/icons/big/salon_white.gif" width="48" height="48"></td>
 		<td align="left"><b><font size="3">Maintain Salon Information</font></b><br>
-		    Make sure to provide accurate details about the salon. Many of these settings will affect the way the application
-			treats the scheduling and the user interaction when certain limits are reached. Also, sales transactions will use the tax percentage
+		    Many of these settings will affect the way the application treats the scheduling and the user interaction when certain limits are reached. Also, sales transactions will use the tax percentage
 			set by the manager and cannot be overriden by employees. Business hours will be observed when allowing a manager to maintain the
 		    schedule.
 		    <br><br>

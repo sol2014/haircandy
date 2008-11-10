@@ -627,6 +627,7 @@ public class SessionController
 				AlertBean alert = new AlertBean ();
 				alert.setDate (new Date());
 				alert.setRecordNo (lowProd.getProductNo ());
+				
 				alert.setType (AlertTypes.Inventory.toString ());
 				alert.setLink ("product?product_action=Load&product_no="+alert.getRecordNo ());
 				
@@ -634,20 +635,20 @@ public class SessionController
 				double current = lowProd.getStockQty ();
 				double percent = current / min;
 				
-				if (percent <= 0.25)
+				if (percent <= 0.0)
+				{
 					alert.setLevel ("High");
-				else if (percent <= 0.50)
-					alert.setLevel ("Medium");
-				else if (percent > 0.50)
-					alert.setLevel ("Low");
-				
-				if (current < 1)
-				{
-					alert.setMessage ("The product named ["+lowProd.getName ()+"] is out of stock.");
+					alert.setMessage ("Product ["+lowProd.getName ()+"] is out of stock!");
 				}
-				else
+				else if (percent <= 0.50)
 				{
-					alert.setMessage ("The product named ["+lowProd.getName ()+"] is currently under the minimum quantity levels.");
+					alert.setLevel ("Medium");
+					alert.setMessage ("Product ["+lowProd.getName ()+"] is almost out of stock ["+current+"/"+min+"].");
+				}
+				else if (percent > 0.50)
+				{
+					alert.setLevel ("Low");
+					alert.setMessage ("Product ["+lowProd.getName ()+"] is under the minimum quantity ["+current+"/"+min+"].");
 				}
 				
 				EmployeeBean manager = new EmployeeBean ();

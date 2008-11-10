@@ -248,16 +248,16 @@ function doSubmit()
     {
         var product = products[i];
         product.quantity = document.getElementById("sr_"+product.id).value;   
-        productQuery = "products="+product.id+":"+product.quantity+"&";
+        productQuery += "products="+product.id+":"+product.quantity+"&";
     }
     
     var serviceQuery = "";
     
-    for(var i=0;i<services.length;i++)
+    for(var j = 0; j < services.length; j++)
     {
-        var service = services[i];
+        var service = services[j];
         service.quantity = document.getElementById("st_"+service.id).value;
-        serviceQuery = "services="+service.id+":"+service.quantity+"&";
+        serviceQuery += "services="+service.id+":"+service.quantity+"&";
     }
     
     var ajax = new Ajaxer("text",null,operResultTable,null);

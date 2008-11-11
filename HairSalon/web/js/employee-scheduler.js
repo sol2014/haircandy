@@ -151,12 +151,8 @@ function addIntialEntry(duration, row, column, id)//function used to add entry o
 
 function addExceptionEntry(duration, row, column)//function used to add entry on page load
 {
-    ratio = duration;
-    if(ratio != 0)
-    {
-        draggableDiv.style.height = heightUnit * ratio;
-    }
-    var start = row;
+    ratio = parseInt(duration);
+    var start = parseInt(row);
     var end = parseInt(start) + parseInt(ratio);
     for(var j = start; j < end; j++)
     {

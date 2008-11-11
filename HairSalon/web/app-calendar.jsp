@@ -39,30 +39,30 @@ int recordNo = 0;
 <% String error_string = (String) userSession.moveAttribute ("schedule_error"); %>
 
 <script>
-function goToCalendarDay (day)
-{
-    <% if (userSession.isGuest ()) { %>
-    location.replace ("app-scheduler-clients.jsp?date="+day);
-    <% } else { %>
-    location.replace ("app-scheduler-employees.jsp?date="+day);
-    <% } %>
-}
+    function goToCalendarDay (day)
+    {
+	<% if (userSession.isGuest ()) { %>
+	location.replace ("app-scheduler-clients.jsp?date="+day);
+	<% } else { %>
+	location.replace ("app-scheduler-employees.jsp?date="+day);
+	<% } %>
+    }
 
-var cellData = new Hashtable();
+    var cellData = new Hashtable();
 
-function highlightDay (day)
-{
-    cellData.remove (day);
-    cellData.put (day, document.getElementById(day).className);
-    document.getElementById(day).className = "CalendarCellSelected";
-}
+    function highlightDay (day)
+    {
+	cellData.remove (day);
+	cellData.put (day, document.getElementById(day).className);
+	document.getElementById(day).className = "CalendarCellSelected";
+    }
 
-function unlightDay (day)
-{
-    var className = cellData.get (day);
-    document.getElementById(day).className = className;
-    cellData.remove (day);
-}
+    function unlightDay (day)
+    {
+	var className = cellData.get (day);
+	document.getElementById(day).className = className;
+	cellData.remove (day);
+    }
 </script>
 
 <font face="Trebuchet MS" size="2">
@@ -71,13 +71,15 @@ function unlightDay (day)
 
 <%@ include file="WEB-INF/jspf/footer.jspf" %>
 
-<% if (userSession.isGuest()) { %>
-<script language="javascript" src="js/app-clientcalendar.js"></script>
-<% } else { %>
-<script language="javascript" src="js/app-calendar.js"></script>
-<% } %>
+<script language="javascript" src="js/calendar-addin.js"></script>
 
 <script>
+    <% if (userSession.isGuest()) { %>
+    setCalendarAjax("ajax/ajax-app-clientcalendar.jsp");
+    <% } else { %>
+    setCalendarAjax("ajax/ajax-app-calendar.jsp");
+    <% } %>
+    
     var today = new Date();
     refreshCalender(today.getFullYear(),today.getMonth());
 </script>

@@ -7,7 +7,14 @@
  * System Developed by:
  * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
  */
-  
+
+var ajaxUrl = "";
+
+function setCalendarAjax (url)
+{
+    ajaxUrl = url;
+}
+
 function refreshCalender(year, month)
 {
     function reFill(content)
@@ -23,7 +30,7 @@ function refreshCalender(year, month)
     var queryString="";
     queryString+="year="+year+"&";
     queryString+="month="+month+"&";
-    messager.request("ajax/ajax-app-calendar.jsp",queryString);
+    messager.request(ajaxUrl,queryString);
 }
 
 function showPreviousYear(year, month)

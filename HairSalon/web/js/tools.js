@@ -39,7 +39,6 @@ function   NoEnterKey(e)
     { 
         e.returnValue = false; 
     }
-    return false;
 }   
 document.onkeypress = NoEnterKey;
 

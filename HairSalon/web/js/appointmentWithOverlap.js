@@ -184,7 +184,7 @@ function findAppointmentIndex(appointmentId)
 function saveAppointment(appointmentId, duration)
 {
     var index = findAppointmentIndex(appointmentId);
-    if(index)
+    if(!isNaN(index))
     {
         removeAppointment(index);
     }

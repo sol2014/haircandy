@@ -65,7 +65,6 @@ public class PersistenceController
 			brokers.put (Class.forName ("hs.objects.AddressBean"), AddressBroker.getInstance ());
 			brokers.put (Class.forName ("hs.objects.AppointmentBean"), AppointmentBroker.getInstance ());
 			brokers.put (Class.forName ("hs.objects.AvailabilityExceptionBean"), AvailabilityExceptionBroker.getInstance ());
-			brokers.put (Class.forName ("hs.objects.AvailabilityBean"), AvailabilityBroker.getInstance ());
 			brokers.put (Class.forName ("hs.objects.ClientBean"), ClientBroker.getInstance ());
 			brokers.put (Class.forName ("hs.objects.EmployeeBean"), EmployeeBroker.getInstance ());
 			brokers.put (Class.forName ("hs.objects.ProductBean"), ProductBroker.getInstance ());

@@ -7,39 +7,50 @@
  * System Developed by:
  * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
  */
-
 package hs.objects;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 
 /**
- * This class contains information or attutibe of a Supplier object.
- * Upon creation of an instance of the following must be provided:
+ * This bean holds information about a supplier that brings products to the
+ * salon for selling and using during appointments.
  * 
- * Customer's first name, last name, address includes city and country, 
- * postal code, phone number and active status.
- *
- *  The above attutibe can be obtain by the getter method.
  * @author Horace Wan
  */
-public class SupplierBean extends DataBean implements Comparator
+public class SupplierBean extends DataBean implements Comparable
 {
 	/**
-	 *  The preset String length for each variables.
+	 * The identification number of the supplier.
 	 */
-	public static final int ADDRESS_LENGTH = 25;
-	public static final int NAME_LENGTH = 50;
-	public static final int POSTALCODE_LENGTH = 6;
-	public static final int PHONE_NUMBER_LENGTH = 10;
-	public static final int EMAIL_LENGTH = 50;
 	private Integer supplierNo;
+	/**
+	 * The address bean connected to this supplier.
+	 */
 	private AddressBean address;
+	/**
+	 * The list of products that this supplier brings to the salon.
+	 */
 	private ArrayList<ProductBean> products = new ArrayList<ProductBean> ();
+	/**
+	 * The name of the supplier.
+	 */
 	private String name;
+	/**
+	 * The description of the supplier.
+	 */
 	private String description;
+	/**
+	 * The phone number of the supplier.
+	 */
 	private String phoneNumber;
+	/**
+	 * A flag used to enable or disable the supplier in the system.
+	 */
 	private boolean enabled;
+
+	public SupplierBean ()
+	{
+	}
 
 	public boolean getEnabled ()
 	{
@@ -51,11 +62,6 @@ public class SupplierBean extends DataBean implements Comparator
 		this.enabled = enabled;
 	}
 
-	public SupplierBean ()
-	{
-		
-	}
-	
 	public ArrayList<ProductBean> getProducts ()
 	{
 		return products;
@@ -115,13 +121,12 @@ public class SupplierBean extends DataBean implements Comparator
 	{
 		this.supplierNo = supplierNo;
 	}
-	
-	public int compare (Object o1, Object o2)
-	{
-		SupplierBean a1 = (SupplierBean) o1;
-		SupplierBean a2 = (SupplierBean) o2;
 
-		return a1.getSupplierNo ().compareTo (a2.getSupplierNo ());
+	public int compareTo (Object o)
+	{
+		SupplierBean a = (SupplierBean) o;
+
+		return getSupplierNo ().compareTo (a.getSupplierNo ());
 	}
 
 	@Override

@@ -7,28 +7,60 @@
  * System Developed by:
  * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
  */
-
 package hs.objects;
 
 import java.util.Hashtable;
 
 /**
- * This class contains information or attutibe of an appointment object.
- * This object represents an entry within the schedule.  Upon creation 
- * of an instance of the following must be provided:
+ * This bean holds client appointment information and links the employee
+ * with the client for a specific date. It also provides the services that
+ * are scheduled to be performed during that time and how long this will take.
  * 
- * The Client for this appointment, the Service(s) to be perform for this 
- * client and the product to be purchase after the appointment is complete.
- *
- * The above attutibe can be obtain by the getter method.
  * @author Horace Wan
  */
-public class AppointmentBean extends TimeSlotBean
+public class AppointmentBean extends TimeSlotBean implements Comparable
 {
-    /**
-     * A key pair for the product(s) sold in this sale.
-     */
-    private Hashtable<ProductBean, Integer> products = new Hashtable<ProductBean, Integer> ();
+	/**
+	 * A hashtable of the products to be sold after this appointment, and the quantity for each.
+	 */
+	private Hashtable<ProductBean, Integer> products = new Hashtable<ProductBean, Integer> ();
+	/**
+	 * A hashtable of the services to be performed during this appointment, and the quantity for each.
+	 */
+	private Hashtable<ServiceBean, Integer> services = new Hashtable<ServiceBean, Integer> ();
+	/**
+	 * The client that is coming in for this appointment.
+	 */
+	private ClientBean client = null;
+	/**
+	 * The employee that is to perform the services included in this appointment.
+	 */
+	private EmployeeBean employee = null;
+	/**
+	 * The flag of whether this appointment has been completed with a sale.
+	 */
+	private Boolean isComplete = false;
+	/**
+	 * The identification number of this appointment.
+	 */
+	private Integer appointmentNo = null;
+
+	/**
+	 *  Default constructor for appointment bean.
+	 */
+	public AppointmentBean ()
+	{
+	}
+
+	public EmployeeBean getEmployee ()
+	{
+		return employee;
+	}
+
+	public void setEmployee (EmployeeBean employee)
+	{
+		this.employee = employee;
+	}
 
 	public Hashtable<ProductBean, Integer> getProducts ()
 	{
@@ -49,112 +81,49 @@ public class AppointmentBean extends TimeSlotBean
 	{
 		this.services = services;
 	}
-;
-    /**
-     * A key pair for the service(s) performed in this sale.
-     */
-    private Hashtable<ServiceBean, Integer> services = new Hashtable<ServiceBean, Integer> ();;
-	
-    /**
-     * The client associated with the appointment.
-     */
-    private ClientBean client;
 
-	public EmployeeBean getEmployee ()
+	public Integer getAppointmentNo ()
 	{
-		return employee;
+		return appointmentNo;
 	}
 
-	public void setEmployee (EmployeeBean employee)
+	public ClientBean getClient ()
 	{
-		this.employee = employee;
+		return client;
 	}
-	private EmployeeBean employee;
-    /**
-     * The tag to show if the appointment is cancelled.
-     */
-    private Boolean isComplete = false;
-    /**
-     * The appointment identification number.
-     */
-    private Integer appointmentNo;
 
-    /**
-     *  Default constructor for person object.
-     */
-    public AppointmentBean ()
-    {
-    }
-
-    /**
-     * Returns the appointment identification number.
-     * @return an integer for the appointment identification number.
-     */
-    public Integer getAppointmentNo ()
-    {
-        return appointmentNo;
-    }
-
-    /**
-     * Returns the client associated with the appointment.
-     * @return an Object for the client associated with the appointment.
-     */
-    public ClientBean getClient ()
-    {
-        return client;
-    }
-
-    /**
-     * Returns a tag to show if the appointment is cancelled.
-     * @return a tag to show if the appointment is cancelled.
-     */
-    public Boolean getIsComplete ()
-    {
-        return isComplete;
-    }
-
-    /**
-     * Sets the the appointment identification number. 
-     * @param appointmentNo an integer for the appointment identification 
-     *                          number.
-     */
-    public void setAppointmentNo (Integer appointmentNo)
-    {
-        this.appointmentNo = appointmentNo;
-    }
-
-    /**
-     * Sets the client associated with the appointment.
-     * @param client an Object for the client associated with the appointment.
-     */
-    public void setClient (ClientBean client)
-    {
-        this.client = client;
-    }
-
-    /**
-     * Sets the tag to show if the appointment is cancelled.
-     * @param isCancelled a boolean tag to show if the appointment is 
-     *              cancelled.
-     */
-    public void setIsComplete (Boolean isComplete)
-    {
-        this.isComplete = isComplete;
-    }
-	
-	public int compare (Object o1, Object o2)
+	public Boolean getIsComplete ()
 	{
-		AppointmentBean a1 = (AppointmentBean)o1;
-		AppointmentBean a2 = (AppointmentBean)o2;
-		
-		return a1.getAppointmentNo ().compareTo (a2.getAppointmentNo ());
+		return isComplete;
 	}
-	
+
+	public void setAppointmentNo (Integer appointmentNo)
+	{
+		this.appointmentNo = appointmentNo;
+	}
+
+	public void setClient (ClientBean client)
+	{
+		this.client = client;
+	}
+
+	public void setIsComplete (Boolean isComplete)
+	{
+		this.isComplete = isComplete;
+	}
+
+	public int compareTo (Object o)
+	{
+		AppointmentBean a = (AppointmentBean) o;
+
+		return getAppointmentNo ().compareTo (a.getAppointmentNo ());
+	}
+
 	@Override
 	public boolean equals (Object o)
 	{
-		AppointmentBean a = (AppointmentBean)o;
-		
+		AppointmentBean a = (AppointmentBean) o;
+
 		return (a.getAppointmentNo ().equals (this.getAppointmentNo ()));
 	}
 

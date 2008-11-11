@@ -7,89 +7,98 @@
  * System Developed by:
  * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
  */
-
 package hs.objects;
 
 import java.util.*;
-import java.text.*;
 
 /**
- * This class contains an abstract time slot in the schedule.
+ * This class contains an abstract time slot used for schedule entries and
+ * other similar data.
+ * 
  * @author Horace Wan
  */
-public abstract class TimeSlotBean extends DataBean
+public abstract class TimeSlotBean extends DataBean implements Comparable
 {
-    /*
-     * This is the date of the time slot. 
-     */
-    private Date date;
-    /*
-     * This is the start time of the time slot. 
-     */
-    private Date startTime;
-    /*
-     * This is the end time of the time slot. 
-     */
-    private Date endTime;
+	/*
+	 * This is the date of the time slot. 
+	 */
+	private Date date;
+	/*
+	 * This is the start of the time slot. 
+	 */
+	private Date startTime;
+	/*
+	 * This is the end of the time slot. 
+	 */
+	private Date endTime;
 
-    /*
-     * Default constructor for TimeSlot object. 
-     */
-    public TimeSlotBean ()
-    {
-    }
-	
-    /**
-     * Return the date of the time slot.
-     * @return the date of the time slot.
-     */
-    public Date getDate ()
-    {
-        return date;
-    }
+	/*
+	 * Default constructor for the timeslot bean.
+	 */
+	public TimeSlotBean ()
+	{
+	}
 
-    /**
-     * Return the end time of the time slot.
-     * @return the end time of the time slot.
-     */
-    public Date getEndTime ()
-    {
-        return endTime;
-    }
+	public Date getDate ()
+	{
+		return date;
+	}
 
-    /**
-     * Return the start time of the time slot.
-     * @return the start time of the time slot.
-     */
-    public Date getStartTime ()
-    {
-        return startTime;
-    }
+	public Date getEndTime ()
+	{
+		return endTime;
+	}
 
-    /**
-     * Set the date of the time slot.
-     * @parm the date of the time slot.
-     */
-    public void setDate (Date date)
-    {
-        this.date = date;
-    }
+	public Date getStartTime ()
+	{
+		return startTime;
+	}
 
-    /**
-     * Set the end time of the time slot.
-     * @parm the end time of the time slot.
-     */
-    public void setEndTime (Date endTime)
-    {
-        this.endTime = endTime;
-    }
+	public void setDate (Date date)
+	{
+		this.date = date;
+	}
 
-    /**
-     * Set the start time of the time slot.
-     * @parm the start time of the time slot.
-     */
-    public void setStartTime (Date startTime)
-    {
-        this.startTime = startTime;
-    }
+	public void setEndTime (Date endTime)
+	{
+		this.endTime = endTime;
+	}
+
+	public void setStartTime (Date startTime)
+	{
+		this.startTime = startTime;
+	}
+
+	public int compareTo (Object o)
+	{
+		TimeSlotBean a = (TimeSlotBean) o;
+		int result = 0;
+
+		result += getDate ().compareTo (a.getDate ());
+		result += getStartTime ().compareTo (a.getStartTime ());
+		result += getEndTime ().compareTo (a.getEndTime ());
+
+		return result;
+	}
+
+	@Override
+	public boolean equals (Object o)
+	{
+		TimeSlotBean a = (TimeSlotBean) o;
+		boolean result = false;
+		result = a.getDate ().equals (this.getDate ());
+		result = a.getStartTime ().equals (this.getStartTime ());
+		result = a.getEndTime ().equals (this.getEndTime ());
+		return (result);
+	}
+
+	@Override
+	public int hashCode ()
+	{
+		int hash = 5;
+		hash = 79 * hash + (this.date != null ? this.date.hashCode () : 0);
+		hash = 79 * hash + (this.startTime != null ? this.startTime.hashCode () : 0);
+		hash = 79 * hash + (this.endTime != null ? this.endTime.hashCode () : 0);
+		return hash;
+	}
 }

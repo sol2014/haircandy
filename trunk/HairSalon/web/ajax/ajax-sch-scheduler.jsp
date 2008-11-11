@@ -19,39 +19,39 @@
 
 <%
 // Retrieve the UserSession object from the http session.
-		UserSession userSession = (UserSession) session.getAttribute("user_session");
-		userSession.setCurrentPosition(SessionPositions.SchScheduler);
+UserSession userSession = (UserSession) session.getAttribute("user_session");
+userSession.setCurrentPosition(SessionPositions.SchScheduler);
 
 
-		Date date = CoreTools.getDate(request.getParameter("date"));
-		SimpleDateFormat sdf = new SimpleDateFormat(CoreTools.DayMonthYearFormat);
+Date date = CoreTools.getDate(request.getParameter("date"));
+SimpleDateFormat sdf = new SimpleDateFormat(CoreTools.DayMonthYearFormat);
 
-		EmployeeBean ebb = new EmployeeBean();
-		AddressBean ab = new AddressBean();
-		ebb.setAddress(ab);
+EmployeeBean ebb = new EmployeeBean();
+AddressBean ab = new AddressBean();
+ebb.setAddress(ab);
 
-		EmployeeBean[] arrayEmployees = SessionController.searchEmployees(userSession, ebb);
-		ArrayList<EmployeeBean> employees = new ArrayList<EmployeeBean>();
+EmployeeBean[] arrayEmployees = SessionController.searchEmployees(userSession, ebb);
+ArrayList<EmployeeBean> employees = new ArrayList<EmployeeBean>();
 
-		for (int i = 0; i < arrayEmployees.length; i++) {
-			employees.add(arrayEmployees[i]);
-		}
-		Collections.sort(employees, new EmployeeLastNameComparator());
+for (int i = 0; i < arrayEmployees.length; i++) {
+	employees.add(arrayEmployees[i]);
+}
+Collections.sort(employees, new EmployeeLastNameComparator());
 
-		Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions = SessionController.getAvailabilityExceptions(userSession, date);
-		ArrayList<ScheduleExceptionBean> scheduleExceptions = SessionController.getScheduleExceptions(userSession, date);
-		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedules = SessionController.getSchedule(userSession, date, availabilityExceptions, scheduleExceptions);
+Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions = SessionController.getAvailabilityExceptions(userSession, date);
+ArrayList<ScheduleExceptionBean> scheduleExceptions = SessionController.getScheduleExceptions(userSession, date);
+Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedules = SessionController.getSchedule(userSession, date, availabilityExceptions, scheduleExceptions);
 
-		// Now we need to find the salon hours for today, if none exist, create them.
-		ScheduleHoursBean shb = new ScheduleHoursBean ();
-		shb.setDate (date);
-		shb = SessionController.loadScheduleHours (userSession, shb);
-		
-		Date startTime = shb.getStartTime ();
-		Date endTime = shb.getEndTime ();
-		int startHour = CoreTools.getStartHour(startTime);
-		int endHour = CoreTools.getEndHour(endTime);
-		int rowCount = 0;
+// Now we need to find the salon hours for today, if none exist, create them.
+ScheduleHoursBean shb = new ScheduleHoursBean ();
+shb.setDate (date);
+shb = SessionController.loadScheduleHours (userSession, shb);
+
+Date startTime = shb.getStartTime ();
+Date endTime = shb.getEndTime ();
+int startHour = CoreTools.getStartHour(startTime);
+int endHour = CoreTools.getEndHour(endTime);
+int rowCount = 0;
 %>
 
 <%!

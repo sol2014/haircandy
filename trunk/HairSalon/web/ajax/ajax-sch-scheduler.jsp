@@ -19,43 +19,43 @@
 
 <%
 // Retrieve the UserSession object from the http session.
-UserSession userSession = (UserSession) session.getAttribute("user_session");
-userSession.setCurrentPosition(SessionPositions.SchScheduler);
+		UserSession userSession = (UserSession) session.getAttribute("user_session");
+		userSession.setCurrentPosition(SessionPositions.SchScheduler);
 
 
-Date date = CoreTools.getDate(request.getParameter("date"));
-SimpleDateFormat sdf = new SimpleDateFormat(CoreTools.DayMonthYearFormat);
+		Date date = CoreTools.getDate(request.getParameter("date"));
+		SimpleDateFormat sdf = new SimpleDateFormat(CoreTools.DayMonthYearFormat);
 
-EmployeeBean ebb = new EmployeeBean();
-AddressBean ab = new AddressBean();
-ebb.setAddress(ab);
+		EmployeeBean ebb = new EmployeeBean();
+		AddressBean ab = new AddressBean();
+		ebb.setAddress(ab);
 
-EmployeeBean[] arrayEmployees = SessionController.searchEmployees(userSession, ebb);
-ArrayList<EmployeeBean> employees = new ArrayList<EmployeeBean>();
+		EmployeeBean[] arrayEmployees = SessionController.searchEmployees(userSession, ebb);
+		ArrayList<EmployeeBean> employees = new ArrayList<EmployeeBean>();
 
-for (int i = 0; i < arrayEmployees.length; i++) {
-	employees.add(arrayEmployees[i]);
-}
-Collections.sort(employees, new EmployeeLastNameComparator());
+		for (int i = 0; i < arrayEmployees.length; i++) {
+			employees.add(arrayEmployees[i]);
+		}
+		Collections.sort(employees, new EmployeeLastNameComparator());
 
-ScheduleHoursBean shb = new ScheduleHoursBean ();
-shb.setDate (date);
-shb = SessionController.loadScheduleHours (userSession, shb);
+		ScheduleHoursBean shb = new ScheduleHoursBean();
+		shb.setDate(date);
+		shb = SessionController.loadScheduleHours(userSession, shb);
 
-Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions = SessionController.getAvailabilityExceptions(userSession, date);
-ArrayList<ScheduleExceptionBean> scheduleExceptions = SessionController.getScheduleExceptions(userSession, date);
-Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedules = SessionController.getSchedule(userSession, date, availabilityExceptions, scheduleExceptions);
-Hashtable<EmployeeBean, ArrayList<ScheduleBean>> unschedulables = SessionController.getUnschedulable (userSession, date, shb);
+		Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions = SessionController.getAvailabilityExceptions(userSession, date);
+		ArrayList<ScheduleExceptionBean> scheduleExceptions = SessionController.getScheduleExceptions(userSession, date);
+		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedules = SessionController.getSchedule(userSession, date, availabilityExceptions, scheduleExceptions);
+		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> unschedulables = SessionController.getUnschedulable(userSession, date, shb);
 
-Date startTime = shb.getStartTime ();
-Date endTime = shb.getEndTime ();
-int startHour = CoreTools.getStartHour(startTime);
-int endHour = CoreTools.getEndHour(endTime);
-int rowCount = 0;
+		Date startTime = shb.getStartTime();
+		Date endTime = shb.getEndTime();
+		int startHour = CoreTools.getStartHour(startTime);
+		int endHour = CoreTools.getEndHour(endTime);
+		int rowCount = 0;
 %>
 
 <%!
-	private String getCSSClass(int startHour, int row, EmployeeBean eb, Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedules, Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions, ArrayList<ScheduleExceptionBean> scheduleExceptions) {
+	private String getCSSClass(int startHour, int row, EmployeeBean eb, Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedules, Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions, ArrayList<ScheduleExceptionBean> scheduleExceptions, Hashtable<EmployeeBean, ArrayList<ScheduleBean>> unschedulables) {
 		if (scheduleExceptions != null) {
 			return "SchedulerCellSectionMiddle_Stone";
 		}
@@ -96,6 +96,29 @@ int rowCount = 0;
 				}
 			}
 		}
+		if (unschedulables != null) {
+			ArrayList<ScheduleBean> sbs = null;
+			for (EmployeeBean cycle : unschedulables.keySet()) {
+				if (cycle.getEmployeeNo().equals(eb.getEmployeeNo())) {
+					sbs = unschedulables.get(cycle);
+				}
+			}
+
+			if (sbs != null) {
+				for (ScheduleBean sbb : sbs) {
+					int scheduleStartHour = CoreTools.getHour(sbb.getStartTime());
+					int scheduleStartMinutes = CoreTools.getMinutes(sbb.getStartTime());
+					int scheduleEndHour = CoreTools.getHour(sbb.getEndTime());
+					int scheduleEndMinutes = CoreTools.getMinutes(sbb.getEndTime());
+					int startOffset = (scheduleStartHour - startHour) * 4 + scheduleStartMinutes / 15;
+					int endOffset = (scheduleEndHour - startHour) * 4 + scheduleEndMinutes / 15;
+					int duration = endOffset - startOffset;
+					if (row >= startOffset && row < endOffset) {
+						return "SchedulerCellSectionMiddle_Stone";
+					}
+				}
+			}
+		}
 		return "SchedulerCellSection";
 	}
 %>
@@ -127,7 +150,7 @@ int rowCount = 0;
                             <tr>
                                 <td class="SchedulerTimeHeader">&nbsp;</td>
                                 <% for (int i = 0; i < employees.size(); i++) {
-				    EmployeeBean eb = employees.get(i);%>
+		 EmployeeBean eb = employees.get(i);%>
                                 <td class="SchedulerColumn"><span class="HeaderFont"><%=eb.getFirstName()%></span></td>
                                 <% if (i != employees.size() - 1) {%>
                                 <td class="SchedulerHeaderSeparator"></td>
@@ -151,15 +174,17 @@ int rowCount = 0;
                                     <table border="0" width="100%" cellspacing="0" cellpadding="0" height="100%">
                                         <% for (int k = 0; k < 4; k++) {%>
                                         <tr>
-                                            <td id="<%=rowCount + k%>^-^<%=j%>" onclick="cellSingleClickHandler(this)" ondblclick="cellDoubleClickHandler(this)"  onmousedown="cellMouseDownHandler(event, this)" class="<%=getCSSClass(startHour, rowCount + k, employees.get(j), schedules, availabilityExceptions, scheduleExceptions)%>"><img src="images/site_blank.gif"></td>
+                                            <td id="<%=rowCount + k%>^-^<%=j%>" onclick="cellSingleClickHandler(this)" ondblclick="cellDoubleClickHandler(this)"  onmousedown="cellMouseDownHandler(event, this)" class="<%=getCSSClass(startHour, rowCount + k, employees.get(j), schedules, availabilityExceptions, scheduleExceptions, unschedulables)%>"><img src="images/site_blank.gif"></td>
                                         </tr>
                                         <% }%>
                                     </table>
                                 </td>
                                 <% if (j != employees.size() - 1) {%>
                                 <td class="SchedulerCellSeparator"><img src="images/site_blank.gif"></td>
-                                <% } }%></tr>
-                            <% rowCount = rowCount + 4; }%>
+                                <% }
+	 }%></tr>
+                            <% rowCount = rowCount + 4;
+	 }%>
                         </table>
                     </td>
                     <td class="SchedulerRight"></td>
@@ -174,11 +199,11 @@ int rowCount = 0;
         </td>
     </tr>
     <tr>
-	<td width="100%" align="left" nowrap="nowrap">
-	    <% if (userSession.getEmployee ().getRole ().equals ("Manager")) { %>
-	    Open: <%=ServletHelper.generateHourPicker ("start_time", startTime)%> Close: <%=ServletHelper.generateHourPicker ("end_time", endTime)%> <input id="update_button" type="button" value="Update" onclick="updateHours()">
-	    <% } %>
-	</td>
+        <td width="100%" align="left" nowrap="nowrap">
+            <% if (userSession.getEmployee().getRole().equals("Manager")) {%>
+            Open: <%=ServletHelper.generateHourPicker("start_time", startTime)%> Close: <%=ServletHelper.generateHourPicker("end_time", endTime)%> <input id="update_button" type="button" value="Update" onclick="updateHours()">
+            <% }%>
+        </td>
     </tr>
     <tr>
         <td>
@@ -208,55 +233,55 @@ int rowCount = 0;
 <script>
     function updatePage ()
     {
-	getMatrix();
+        getMatrix();
     }
     
     function updateHours ()
     {
-	var start_hour = parseInt(document.getElementById ("start_time_hour").value);
-	var start_min = parseInt(document.getElementById ("start_time_min").value);
-	var start_ampm = document.getElementById ("start_time_ampm").value;
-	
-	if (start_ampm != null && start_ampm == "PM")
-	{
-	    if (start_hour != 12)
-		start_hour += 12;
-	}
-	else
-	{
-	    if (start_hour == 12)
-		start_hour = 0;
-	}
-	
-	var start = start_hour+":"+start_min;
-	
-	var end_hour = parseInt(document.getElementById ("end_time_hour").value);
-	var end_min = parseInt(document.getElementById ("end_time_min").value);
-	var end_ampm = document.getElementById ("end_time_ampm").value;
-	
-	if (end_ampm != null && end_ampm == "PM")
-	{
-	    if (end_hour != 12)
-		end_hour += 12;
-	}
-	else
-	{
-	    if (end_hour == 12)
-		end_hour = 0;
-	}
-	
-	var end = end_hour+":"+end_min;
-	
-	var ajax = new Ajaxer("text",null,updatePage,null);
-	var queryString="schedule_action=UpdateHours&";
-	
-	queryString+="date="+'<%=request.getParameter("date")%>'+"&";
-	queryString+="start_time="+start+"&";
-	queryString+="end_time="+end+"&";
-	
-	alert (queryString);
-	
-	ajax.request("schedule", queryString);
+        var start_hour = parseInt(document.getElementById ("start_time_hour").value);
+        var start_min = parseInt(document.getElementById ("start_time_min").value);
+        var start_ampm = document.getElementById ("start_time_ampm").value;
+        
+        if (start_ampm != null && start_ampm == "PM")
+        {
+            if (start_hour != 12)
+                start_hour += 12;
+        }
+        else
+        {
+            if (start_hour == 12)
+                start_hour = 0;
+        }
+        
+        var start = start_hour+":"+start_min;
+        
+        var end_hour = parseInt(document.getElementById ("end_time_hour").value);
+        var end_min = parseInt(document.getElementById ("end_time_min").value);
+        var end_ampm = document.getElementById ("end_time_ampm").value;
+        
+        if (end_ampm != null && end_ampm == "PM")
+        {
+            if (end_hour != 12)
+                end_hour += 12;
+        }
+        else
+        {
+            if (end_hour == 12)
+                end_hour = 0;
+        }
+        
+        var end = end_hour+":"+end_min;
+        
+        var ajax = new Ajaxer("text",null,updatePage,null);
+        var queryString="schedule_action=UpdateHours&";
+        
+        queryString+="date="+'<%=request.getParameter("date")%>'+"&";
+        queryString+="start_time="+start+"&";
+        queryString+="end_time="+end+"&";
+        
+        alert (queryString);
+        
+        ajax.request("schedule", queryString);
     }
 </script>
 
@@ -291,7 +316,6 @@ int rowCount = 0;
     %>
 </script>
 <script>
-    //schedules
     <%
 		if (schedules != null) {
 			for (EmployeeBean eb : employees) {
@@ -321,7 +345,6 @@ int rowCount = 0;
     %>
 </script>    
 <script>
-    //availabilityExceptions
     <%
 		if (availabilityExceptions != null) {
 			for (EmployeeBean eb : employees) {
@@ -343,7 +366,6 @@ int rowCount = 0;
     %>
 </script>    
 <script>
-    //scheduleExceptions
     <%
 		if (scheduleExceptions != null) {
 			for (EmployeeBean eb : employees) {
@@ -356,7 +378,6 @@ int rowCount = 0;
     %>
 </script>
 <script>
-    //unschedulables
     <%
 		if (unschedulables != null) {
 			for (EmployeeBean eb : employees) {

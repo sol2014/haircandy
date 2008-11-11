@@ -39,7 +39,7 @@
             queryString+="start_time="+getAppointmentStartTime()+"&";
             queryString+="end_time="+getAppointmentStartTime()+"&";
         }
-        alert(queryString);
+        //alert(queryString);
         messager.request("appointment",queryString);   
     }
 </script>

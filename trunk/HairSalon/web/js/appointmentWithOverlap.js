@@ -175,7 +175,7 @@ function findAppointmentIndex(appointmentId)
         var appointment = appointments[i];
         if(appointment.appointmentId+""==appointmentId+"")
         {
-            return i;
+            return parseInt(i);
         }
     }
     return false;
@@ -202,6 +202,7 @@ function deleteAppointment(appointmentId)
 
 function removeAppointment(index)
 {
+    var appointment = appointments[index];
     appointments.splice(index, 1);//remove the selected appointment
     for(var k = 0; k < appointment.length; k++)
     {
@@ -955,7 +956,7 @@ function isCellUsed(id)//function that checks to see if the any cells in the ran
         {
             if(appointment[j]==id)
             {
-                return i;
+                return parseInt(i);
             }
         }
     }

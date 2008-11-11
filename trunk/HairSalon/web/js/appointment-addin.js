@@ -37,23 +37,16 @@ function finishDeleting(content)
 }
 
 function operResultTable(content){
-    try
+    var array = content.split(":");
+    var appointmentNo = parseInt(array[0]);
+    var duration = parseInt(array[1]);
+    if(isNaN(appointmentNo)|| isNaN(duration))
     {
-        var array = content.split(":");
-        var appointmentNo = parseInt(array[0]);
-        var duration = parseInt(array[1]);
-        if(isNaN(appointmentNo)||isNaN(duration))
-        {
-            document.getElementById("operResult").innerHTML=content;
-        }
-        else
-        {
-            saveAppointment(appointmentNo, duration);
-        }
+        document.getElementById("operResult").innerHTML=content;
     }
-    catch(e)
+    else
     {
-        document.getElementById("operResult").innerHTML=content; 
+        saveAppointment(appointmentNo, duration);
     }
 }
 

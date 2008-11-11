@@ -130,11 +130,11 @@ function addIntialEntry(duration, row, column, id)//function used to add entry o
             }
             else//appointment body
             {
-                document.getElementById(add.id).className = bookingBodyClass;
+                document.getElementById(add.id).className = bookedBodyClass;
             }
             if(start == end -1)//only one cell
             {
-                document.getElementById(add.id).className = bookingComboClass;
+                document.getElementById(add.id).className = bookedComboClass;
             }
             add.state = bookingState;
             appointmentCells.push(add.id);

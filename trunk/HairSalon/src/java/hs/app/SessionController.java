@@ -891,6 +891,56 @@ public class SessionController
 		return hash;
 	}
 	
+	public static Hashtable<EmployeeBean, ArrayList<ScheduleBean>> getUnschedulable (UserSession session, java.util.Date date, ScheduleHoursBean hours)
+	{
+		LogController.write ("SessionController->Getting filtered unschedulable time...");
+		
+		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> hash = new Hashtable<EmployeeBean, ArrayList<ScheduleBean>> ();
+		
+		Date startTime = hours.getStartTime ();
+		Date endTime = hours.getEndTime ();
+		
+		EmployeeBean employee = new EmployeeBean ();
+		employee.setAddress (new AddressBean ());
+		
+		EmployeeBean[] employees = searchEmployees (session, employee);
+		
+		for (EmployeeBean cycle : employees)
+		{
+			Date workStart = cycle.getWeekdayStartTime (CoreTools.getWeekDay (date));
+			Date workEnd = cycle.getWeekdayEndTime (CoreTools.getWeekDay (date));
+			ArrayList<ScheduleBean> unschedulable = new ArrayList<ScheduleBean> ();
+			
+			if (!CoreTools.isTimeBefore (workStart, startTime))
+			{
+				// The employee's start time is after the day start time.
+				ScheduleBean entry = new ScheduleBean ();
+				entry.setEmployee (cycle);
+				entry.setDate (date);
+				entry.setStartTime (startTime);
+				entry.setEndTime (workStart);
+				
+				unschedulable.add (entry);
+			}
+			
+			if (!CoreTools.isTimeBefore (endTime, workEnd))
+			{
+				// The end time is not before the available end time.
+				ScheduleBean entry = new ScheduleBean ();
+				entry.setEmployee (cycle);
+				entry.setDate (date);
+				entry.setStartTime (workEnd);
+				entry.setEndTime (endTime);
+				
+				unschedulable.add (entry);
+			}
+			
+			hash.put (cycle, unschedulable);
+		}
+		
+		return hash;
+	}
+	
 	public static Hashtable<EmployeeBean, ArrayList<ScheduleBean>> getUnavailable (UserSession session, java.util.Date date, Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions, ArrayList<ScheduleExceptionBean> scheduleExceptions, ScheduleHoursBean hours)
 	{
 		LogController.write ("SessionController->Getting filtered unavailable time...");

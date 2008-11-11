@@ -38,14 +38,14 @@ for (int i = 0; i < arrayEmployees.length; i++) {
 }
 Collections.sort(employees, new EmployeeLastNameComparator());
 
-Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions = SessionController.getAvailabilityExceptions(userSession, date);
-ArrayList<ScheduleExceptionBean> scheduleExceptions = SessionController.getScheduleExceptions(userSession, date);
-Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedules = SessionController.getSchedule(userSession, date, availabilityExceptions, scheduleExceptions);
-
-// Now we need to find the salon hours for today, if none exist, create them.
 ScheduleHoursBean shb = new ScheduleHoursBean ();
 shb.setDate (date);
 shb = SessionController.loadScheduleHours (userSession, shb);
+
+Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions = SessionController.getAvailabilityExceptions(userSession, date);
+ArrayList<ScheduleExceptionBean> scheduleExceptions = SessionController.getScheduleExceptions(userSession, date);
+Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedules = SessionController.getSchedule(userSession, date, availabilityExceptions, scheduleExceptions);
+Hashtable<EmployeeBean, ArrayList<ScheduleBean>> unschedulables = SessionController.getUnschedulable (userSession, date, shb);
 
 Date startTime = shb.getStartTime ();
 Date endTime = shb.getEndTime ();
@@ -127,7 +127,7 @@ int rowCount = 0;
                             <tr>
                                 <td class="SchedulerTimeHeader">&nbsp;</td>
                                 <% for (int i = 0; i < employees.size(); i++) {
-		 EmployeeBean eb = employees.get(i);%>
+				    EmployeeBean eb = employees.get(i);%>
                                 <td class="SchedulerColumn"><span class="HeaderFont"><%=eb.getFirstName()%></span></td>
                                 <% if (i != employees.size() - 1) {%>
                                 <td class="SchedulerHeaderSeparator"></td>
@@ -158,10 +158,8 @@ int rowCount = 0;
                                 </td>
                                 <% if (j != employees.size() - 1) {%>
                                 <td class="SchedulerCellSeparator"><img src="images/site_blank.gif"></td>
-                                <% }
-	 }%></tr>
-                            <% rowCount = rowCount + 4;
-	 }%>
+                                <% } }%></tr>
+                            <% rowCount = rowCount + 4; }%>
                         </table>
                     </td>
                     <td class="SchedulerRight"></td>
@@ -178,7 +176,7 @@ int rowCount = 0;
     <tr>
 	<td width="100%" align="left" nowrap="nowrap">
 	    <% if (userSession.getEmployee ().getRole ().equals ("Manager")) { %>
-	    Open: <%=ServletHelper.generateHourPicker ("start_time", startTime)%> Close: <%=ServletHelper.generateHourPicker ("end_time", endTime)%> <input id="update_button" type="button" value="Update" onclick="alert('update!')">
+	    Open: <%=ServletHelper.generateHourPicker ("start_time", startTime)%> Close: <%=ServletHelper.generateHourPicker ("end_time", endTime)%> <input id="update_button" type="button" value="Update" onclick="updateHours()">
 	    <% } %>
 	</td>
     </tr>
@@ -206,6 +204,62 @@ int rowCount = 0;
         </td>
     </tr>
 </table>
+
+<script>
+    function updatePage ()
+    {
+	getMatrix();
+    }
+    
+    function updateHours ()
+    {
+	var start_hour = parseInt(document.getElementById ("start_time_hour").value);
+	var start_min = parseInt(document.getElementById ("start_time_min").value);
+	var start_ampm = document.getElementById ("start_time_ampm").value;
+	
+	if (start_ampm != null && start_ampm == "PM")
+	{
+	    if (start_hour != 12)
+		start_hour += 12;
+	}
+	else
+	{
+	    if (start_hour == 12)
+		start_hour = 0;
+	}
+	
+	var start = start_hour+":"+start_min;
+	
+	var end_hour = parseInt(document.getElementById ("end_time_hour").value);
+	var end_min = parseInt(document.getElementById ("end_time_min").value);
+	var end_ampm = document.getElementById ("end_time_ampm").value;
+	
+	if (end_ampm != null && end_ampm == "PM")
+	{
+	    if (end_hour != 12)
+		end_hour += 12;
+	}
+	else
+	{
+	    if (end_hour == 12)
+		end_hour = 0;
+	}
+	
+	var end = end_hour+":"+end_min;
+	
+	var ajax = new Ajaxer("text",null,updatePage,null);
+	var queryString="schedule_action=UpdateHours&";
+	
+	queryString+="date="+'<%=request.getParameter("date")%>'+"&";
+	queryString+="start_time="+start+"&";
+	queryString+="end_time="+end+"&";
+	
+	alert (queryString);
+	
+	ajax.request("schedule", queryString);
+    }
+</script>
+
 <script>
     rowCount = <%=rowCount%>;
     salonStartTime = '<%=startHour%>:00';

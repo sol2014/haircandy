@@ -27,8 +27,41 @@ public class ScheduleServlet extends DispatcherServlet
 		setActionAttribute ("schedule_action");
 		addExternalAction ("Save", "performSave");
 		addExternalAction ("Delete", "performDelete");
+		addExternalAction ("UpdateHours", "performUpdateHours");
 	}
 
+	public void performUpdateHours (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException
+	{
+		String date = request.getParameter ("date");
+		String startTime = request.getParameter ("start_time");
+		String endTime = request.getParameter ("end_time");
+		
+		ScheduleHoursBean shb = new ScheduleHoursBean ();
+		
+		try
+		{
+			shb.setDate (CoreTools.getDate (date));
+			shb.setStartTime (CoreTools.getTime (startTime));
+			shb.setEndTime (CoreTools.getTime (endTime));
+		}
+		catch (Exception e)
+		{
+			LogController.write (this, "Attemped to update schedule hours with invalid data!");
+			return;
+		}
+		
+		LogController.write (this, "[USER REQUEST] Performing schedule hours update: "+CoreTools.showDate (shb.getDate()));
+		
+		if (!SessionController.saveScheduleHours (userSession, shb))
+		{
+			LogController.write (this, "Unable to save schedule hours.");
+			return;
+		}
+		
+		LogController.write (this, "Saved schedule hours successfully.");
+	}
+	
 	public void performDelete (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{

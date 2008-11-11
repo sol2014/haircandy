@@ -291,6 +291,7 @@ int rowCount = 0;
     %>
 </script>
 <script>
+    //schedules
     <%
 		if (schedules != null) {
 			for (EmployeeBean eb : employees) {
@@ -320,6 +321,7 @@ int rowCount = 0;
     %>
 </script>    
 <script>
+    //availabilityExceptions
     <%
 		if (availabilityExceptions != null) {
 			for (EmployeeBean eb : employees) {
@@ -341,6 +343,7 @@ int rowCount = 0;
     %>
 </script>    
 <script>
+    //scheduleExceptions
     <%
 		if (scheduleExceptions != null) {
 			for (EmployeeBean eb : employees) {
@@ -353,6 +356,7 @@ int rowCount = 0;
     %>
 </script>
 <script>
+    //unschedulables
     <%
 		if (unschedulables != null) {
 			for (EmployeeBean eb : employees) {

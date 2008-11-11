@@ -122,11 +122,11 @@ function addIntialEntry(duration, row, column, id)//function used to add entry o
             add  = findCell(j+"^-^"+column);
             if(j == start)//appointment start
             {
-                document.getElementById(add.id).className = bookingHeadClass;
+                document.getElementById(add.id).className = bookedHeadClass;
             }
             else if(j == end - 1)//appointment tail
             {
-                document.getElementById(add.id).className = bookingTailClass;
+                document.getElementById(add.id).className = bookedTailClass;
             }
             else//appointment body
             {

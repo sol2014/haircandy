@@ -7,26 +7,18 @@
  * System Developed by:
  * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
  */
-
 package hs.objects;
 
-import java.util.*;
-
-import hs.core.*;
+import java.util.Hashtable;
 
 /**
- * This class contains the information or attribute for a service object.
- * This object represents a service an employee can provide for a client.
- * Upon creation of an instance of this object, the following must be 
- * provide:
- *  
- * The name, description, duration, idenification number and the product 
- * consumption of the service.
- *   
- * The above attutibe can be obtain by the getter method.
+ * This bean holds the information about a service that can be performed by
+ * stylists during appointments. Services also consume products when they
+ * are pushed through as a sale.
+ * 
  * @author Horace Wan
  */
-public class ServiceBean extends DataBean implements Comparator
+public class ServiceBean extends DataBean implements Comparable
 {
 	/**
 	 * The name of the service.
@@ -37,17 +29,46 @@ public class ServiceBean extends DataBean implements Comparator
 	 */
 	private String description;
 	/**
-	 * The lenght of time needed for this service.
+	 * The lenght of time needed for this service in minutes.
 	 */
 	private Integer duration;
 	/**
-	 * The amount of product consumed by this service.
+	 * The hashtable of products consumed by this service, and the quantity of units consued.
 	 */
 	private Hashtable<ProductBean, Integer> productUse = new Hashtable<ProductBean, Integer> ();
 	/**
-	 * The service idenification number.
+	 * The price of the service when processed by a sale.
 	 */
 	private Double price;
+	/**
+	 * The identification number of the services.
+	 */
+	private Integer serviceNo;
+	/**
+	 * The flag used to enable and disable this service in the system.
+	 */
+	private Boolean enabled = true;
+
+	/**
+	 *  Default constructor for the service bean.
+	 */
+	public ServiceBean ()
+	{
+	}
+
+	/**
+	 * Clones the information of the passed bean into this one.
+	 * 
+	 * @param bean the bean information to clone.
+	 */
+	public void clone (ServiceBean bean)
+	{
+		this.setServiceNo (bean.getServiceNo ());
+		this.setName (bean.getName ());
+		this.setDescription (bean.getDescription ());
+		this.setDuration (bean.getDuration ());
+		this.setProductUse (bean.getProductUse ());
+	}
 
 	public Double getPrice ()
 	{
@@ -58,41 +79,12 @@ public class ServiceBean extends DataBean implements Comparator
 	{
 		this.price = price;
 	}
-	private Integer serviceNo;
-	/**
-	 * Whether this service is currently being used.
-	 */
-	private Boolean enabled = true;
-	
-	/**
-	 *  Default constructor for person object.
-	 */
-	public ServiceBean ()
-	{
-	}
 
-	public void clone (ServiceBean bean)
-	{
-		this.setServiceNo (bean.getServiceNo ());
-		this.setName (bean.getName ());
-		this.setDescription (bean.getDescription ());
-		this.setDuration (bean.getDuration ());
-		this.setProductUse (bean.getProductUse ());
-	}
-
-	/**
-	 * Sets the description of the service.
-	 * @param description a string for the description of the service.
-	 */
 	public void setDescription (String description)
 	{
 		this.description = description;
 	}
 
-	/**
-	 * Sets the duration of the service.
-	 * @param duration an integer for the duration of the service.
-	 */
 	public void setDuration (Integer duration)
 	{
 		this.duration = duration;
@@ -102,92 +94,57 @@ public class ServiceBean extends DataBean implements Comparator
 	{
 		this.enabled = used;
 	}
-	
+
 	public Boolean getEnabled ()
 	{
 		return this.enabled;
 	}
-	
-	/**
-	 * Sets the name of the service.
-	 * @param name a string for the name of the service.
-	 */
+
 	public void setName (String name)
 	{
 		this.name = name;
 	}
 
-	/**
-	 * Sets the amount of product consumed by this service.
-	 * @param productUse a hash key pair for the amount of product consumed 
-	 *                      by this service.
-	 */
 	public void setProductUse (Hashtable<ProductBean, Integer> productUse)
 	{
 		this.productUse = productUse;
 	}
 
-	/**
-	 * Sets the service idenification number.
-	 * @param serviceNo a string for the service idenification number.
-	 */
 	public void setServiceNo (Integer serviceNo)
 	{
 		this.serviceNo = serviceNo;
 	}
 
-	/**
-	 * Returns the description of the service.
-	 * @return a string for the description of the service.
-	 */
 	public String getDescription ()
 	{
 		return description;
 	}
 
-	/**
-	 * Returns the duration of the service.
-	 * @return an integer for the duration of the service.
-	 */
 	public Integer getDuration ()
 	{
 		return duration;
 	}
 
-	/**
-	 * Returns the name of the service.
-	 * @return a string for the name of the service.
-	 */
 	public String getName ()
 	{
 		return name;
 	}
 
-	/**
-	 * Returnsthe amount of product consumed by this service.  
-	 * @return a hash key pair for the amount of product consumed by this 
-	 *                  service.
-	 */
 	public Hashtable<ProductBean, Integer> getProductUse ()
 	{
 		return productUse;
 	}
 
-	/**
-	 * Returns the service idenification number.
-	 * @return a string for the service idenification number.
-	 */
 	public Integer getServiceNo ()
 	{
 		return serviceNo;
 	}
 
-	public int compare (Object o1, Object o2)
+	public int compareTo (Object o)
 	{
-		ServiceBean a1 = (ServiceBean) o1;
-		ServiceBean a2 = (ServiceBean) o2;
+		ServiceBean a = (ServiceBean) o;
 
-		return a1.getServiceNo ().compareTo (a2.getServiceNo ());
+		return getServiceNo ().compareTo (a.getServiceNo ());
 	}
 
 	@Override

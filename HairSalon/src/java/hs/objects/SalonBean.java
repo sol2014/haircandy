@@ -12,91 +12,52 @@ package hs.objects;
 import java.util.*;
 
 /**
- * This class contains information or attutibe of a salon object.
- * Upon creation of an instance of the following must be provided:
- *  
- * The name, first and second line of address, city, country, postal code,
- * phone number, e-mail address of the salon, the salon idenification number,
- * the business hours, the provincial and federal tax rates, the schedule of 
- * the salon.  
- *   
- * The above attutibe can be obtain by the getter method.
+ * This bean holds information about the salon itself. It can be used
+ * across the system to obtain information setup by management of the salon.
+ * 
  * @author Horace Wan
  */
-public class SalonBean extends DataBean implements Comparator
+public class SalonBean extends DataBean implements Comparable
 {
 	/**
-	 *  The preset String length for each variables.
-	 */
-	public static final int ADDRESS_LENGTH = 25;
-	public static final int NAME_LENGTH = 15;
-	public static final int POSTALCODE_LENGTH = 6;
-	public static final int PHONE_NUMBER_LENGTH = 10;
-	public static final int EMAIL_LENGTH = 50;
-	/**
-	 *  The default tax rate the salon charges based on provincial and federal 
-	 *  tax rates.
+	 *  The tax rate that all sales use when taking payment.
 	 */
 	private Double taxRate;
+	/**
+	 * The list of schedule exceptions that should be used when excluding
+	 * days from the scheduler.
+	 */
 	private ArrayList<ScheduleExceptionBean> exceptions = null;
-
-	public ArrayList<ScheduleExceptionBean> getExceptions ()
-	{
-		return exceptions;
-	}
-
-	public void setExceptions (ArrayList<ScheduleExceptionBean> exceptions)
-	{
-		this.exceptions = exceptions;
-	}
-
-	public ArrayList<ScheduleBean> getSchedules ()
-	{
-		return schedules;
-	}
-
-	public void setSchedules (ArrayList<ScheduleBean> schedules)
-	{
-		this.schedules = schedules;
-	}
-
 	/**
 	 *  An array of schedule entries for the salon.
 	 */
 	private ArrayList<ScheduleBean> schedules = null;
 	/**
-	 *  The name of the salon.
+	 * The salon's name.
 	 */
 	private String name;
 	/**
-	 *  The first line of a salon address.
+	 * The salon's first address line.
 	 */
 	private String address1;
 	/**
-	 *  The second line of a salon address.
+	 * The salon's second address line.
 	 */
 	private String address2;
 	/**
-	 *  The city which this salon locates.
+	 * The salon's city.
 	 */
 	private String city;
 	/**
-	 *  The country which this salon locates.
+	 * The salon's province.
 	 */
 	private String province;
-
-	public String getProvince ()
-	{
-		return province;
-	}
-
-	public void setProvince (String province)
-	{
-		this.province = province;
-	}
+	/**
+	 * The salon's country.
+	 */
 	private String country;
 	/**
-	 *  The postal code of the address.
+	 *  The salon's postal code
 	 */
 	private String postalCode;
 	/**
@@ -121,6 +82,13 @@ public class SalonBean extends DataBean implements Comparator
 	private Date saturdayEnd = null;
 	private Date sundayStart = null;
 	private Date sundayEnd = null;
+
+	/**
+	 *  Default constructor for the salon bean.
+	 */
+	public SalonBean ()
+	{
+	}
 
 	public Date getFridayEnd ()
 	{
@@ -262,178 +230,131 @@ public class SalonBean extends DataBean implements Comparator
 		this.wednesdayStart = wednesdayStart;
 	}
 
-	/**
-	 *  Default constructor for salon object.
-	 */
-	public SalonBean ()
+	public ArrayList<ScheduleExceptionBean> getExceptions ()
 	{
+		return exceptions;
 	}
 
-	/**
-	 * Sets the 1st line of customer address.
-	 * @param  address1 a string for the salon's 1st line of address.
-	 */
+	public void setExceptions (ArrayList<ScheduleExceptionBean> exceptions)
+	{
+		this.exceptions = exceptions;
+	}
+
+	public ArrayList<ScheduleBean> getSchedules ()
+	{
+		return schedules;
+	}
+
+	public void setSchedules (ArrayList<ScheduleBean> schedules)
+	{
+		this.schedules = schedules;
+	}
+
 	public void setAddress1 (String address1)
 	{
 		this.address1 = address1;
 	}
 
-	/**
-	 * Sets the 2nd line of customer address.
-	 * @param  address2 a string for the salon's 2nd line of address.
-	 */
 	public void setAddress2 (String address2)
 	{
 		this.address2 = address2;
 	}
 
-	/**
-	 * Sets the city which this salon locates.
-	 * @param  city a string for the city which this salon locates.
-	 */
 	public void setCity (String city)
 	{
 		this.city = city;
 	}
 
-	/**
-	 * Sets the country which this salon locates.
-	 * @param  country a string for the country which this salon locates.
-	 */
 	public void setCountry (String country)
 	{
 		this.country = country;
 	}
 
-	/**
-	 * Sets the salon's e-mail address.
-	 * @param  email a string for the salon's e-mail address.
-	 */
+	public void setProvince (String province)
+	{
+		this.province = province;
+	}
+	
 	public void setEmail (String email)
 	{
 		this.email = email;
 	}
 
-
-	/**
-	 * Sets the name of the salon.
-	 * @param  name a string for the name of the salon.
-	 */
 	public void setName (String name)
 	{
 		this.name = name;
 	}
 
-	/**
-	 * Sets the salon's phone number.
-	 * @param  phoneNumber a string for the salon's phone number.
-	 */
 	public void setPhoneNumber (String phoneNumber)
 	{
 		this.phoneNumber = phoneNumber;
 	}
 
-	/**
-	 * Sets the salon's postal code.
-	 * @param  postalCode a string for the salon's postal code.
-	 */
 	public void setPostalCode (String postalCode)
 	{
 		this.postalCode = postalCode;
 	}
 
-	/**
-	 * Sets the default tax rate the salon charges based 
-	 *              on provincial and federal tax rates.
-	 * @param  taxRate a Double for default tax rate the salon charges based 
-	 *              on provincial and federal tax rates.
-	 */
 	public void setTaxRate (Double taxRate)
 	{
 		this.taxRate = taxRate;
 	}
 
-	/**
-	 * Returns the salon's 1st line of address.
-	 * @return a string for the salon's 1st line of address.
-	 */
 	public String getAddress1 ()
 	{
 		return address1;
 	}
 
-	/**
-	 * Returns the salon's 1st line of address.
-	 * @return a string for the salon's 1st line of address.
-	 */
 	public String getAddress2 ()
 	{
 		return address2;
 	}
 
-	/**
-	 * Returns the salon's 1st line of address.
-	 * @return a string for the salon's 1st line of address.
-	 */
 	public String getCity ()
 	{
 		return city;
 	}
 
-	/**
-	 * Returns the salon's 1st line of address.
-	 * @return a string for the salon's 1st line of address.
-	 */
 	public String getCountry ()
 	{
 		return country;
 	}
 
-	/**
-	 * Returns the salon's 1st line of address.
-	 * @return a string for the salon's 1st line of address.
-	 */
+	public String getProvince ()
+	{
+		return province;
+	}
+	
 	public String getEmail ()
 	{
 		return email;
 	}
 
-	/**
-	 * Returns the salon's 1st line of address.
-	 * @return a string for the salon's 1st line of address.
-	 */
 	public String getName ()
 	{
 		return name;
 	}
 
-	/**
-	 * Returns the salon's 1st line of address.
-	 * @return a string for the salon's 1st line of address.
-	 */
 	public String getPhoneNumber ()
 	{
 		return phoneNumber;
 	}
 
-	/**
-	 * Returns the salon's 1st line of address.
-	 * @return a string for the salon's 1st line of address.
-	 */
 	public String getPostalCode ()
 	{
 		return postalCode;
 	}
 
-	/**
-	 * Returns the salon's 1st line of address.
-	 * @return a string for the salon's 1st line of address.
-	 */
 	public Double getTaxRate ()
 	{
 		return taxRate;
 	}
 
+	/**
+	 * Used to obtain the start time for a specified weekday.
+	 * @param weekDay the weekday integer from 0 - 6
+	 * @return the date of the weekday's start time.
+	 */
 	public Date getWeekdayStartTime (int weekDay)
 	{
 		Date startTime;
@@ -467,6 +388,11 @@ public class SalonBean extends DataBean implements Comparator
 		return startTime;
 	}
 
+	/**
+	 * Used to obtain the end time for a specified weekday.
+	 * @param weekDay the weekday integer from 0 - 6
+	 * @return the date of the weekday's end time.
+	 */
 	public Date getWeekdayEndTime (int weekDay)
 	{
 		Date endTime;
@@ -499,20 +425,8 @@ public class SalonBean extends DataBean implements Comparator
 		}
 		return endTime;
 	}
-	
-	/**
-	 *  A toString method to print out the salon's information
-	 *  @return a string of salon's information
-	 */
-	@Override
-	public String toString ()  //NOT DONE
-	{
-		return taxRate + " " + name + " " + address1 + " " + address2 +
-				" " + city + " " + country + " " + postalCode + " " +
-				phoneNumber + " " + email + "\n";
-	}
 
-	public int compare (Object o1, Object o2)
+	public int compareTo (Object o)
 	{
 		return 0;
 	}
@@ -522,5 +436,13 @@ public class SalonBean extends DataBean implements Comparator
 	{
 		return true;
 	}
-}
 
+	@Override
+	public int hashCode ()
+	{
+		int hash = 7;
+		hash = 19 * hash + (this.name != null ? this.name.hashCode () : 0);
+		hash = 19 * hash + (this.phoneNumber != null ? this.phoneNumber.hashCode () : 0);
+		return hash;
+	}
+}

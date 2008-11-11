@@ -7,22 +7,17 @@
  * System Developed by:
  * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
  */
-
 package hs.objects;
 
 import java.util.*;
 
 /**
- * This class contains information or attutibe of a schedule exception object.
- * This is an exception class for schedule.  Upon creation of an instance 
- * of the following must be provided:
- *  
- * The date and reason of the exception.
- *   
- * The above attutibe can be obtain by the getter method.
+ * This bean holds schedule exceptions for the whole salon. These are usually
+ * holidays, or special event days the business holds yearly.
+ * 
  * @author Horace Wan
  */
-public class ScheduleExceptionBean extends DataBean implements Comparator
+public class ScheduleExceptionBean extends DataBean implements Comparable
 {
 	/**
 	 * The date of the schedule exception occurs.
@@ -34,61 +29,44 @@ public class ScheduleExceptionBean extends DataBean implements Comparator
 	private String reason;
 
 	/**
-	 *  Default constructor for person object.
+	 *  Default constructor for the schedule exception bean.
 	 */
 	public ScheduleExceptionBean ()
 	{
 	}
 
-	/** 
-	 * Sets the date of the schedule exception occurs.
-	 * @param date the date of the schedule exception occurs.
-	 */
 	public void setDate (Date date)
 	{
 		this.date = date;
 	}
 
-	/**
-	 * Sets the reason of the schedule exception occurs.
-	 * @param reason a string for the reason of the schedule exception occurs.
-	 */
 	public void setReason (String reason)
 	{
 		this.reason = reason;
 	}
 
-	/**
-	 * Returns the date of the schedule exception occurs.
-	 * @return the date of the schedule exception occurs.
-	 */
 	public Date getDate ()
 	{
 		return date;
 	}
 
-	/**
-	 * Returns the reason of the schedule exception occurs.
-	 * @return a string for the reason of the schedule exception occurs.
-	 */
 	public String getReason ()
 	{
 		return reason;
 	}
-	
-	public int compare (Object o1, Object o2)
+
+	public int compareTo (Object o)
 	{
-		ScheduleExceptionBean a1 = (ScheduleExceptionBean)o1;
-		ScheduleExceptionBean a2 = (ScheduleExceptionBean)o2;
-		
-		return a1.getDate ().compareTo (a2.getDate ());
+		ScheduleExceptionBean a = (ScheduleExceptionBean) o;
+
+		return getDate ().compareTo (a.getDate ());
 	}
-	
+
 	@Override
 	public boolean equals (Object o)
 	{
-		ScheduleExceptionBean a = (ScheduleExceptionBean)o;
-		
+		ScheduleExceptionBean a = (ScheduleExceptionBean) o;
+
 		return (a.getDate ().equals (this.getDate ()));
 	}
 

@@ -13,18 +13,13 @@ package hs.objects;
 import java.util.*;
 
 /**
- * This class contains information or attutibe of an Availability
- * Exception object.  This object represents an exception class for 
- * employee’s availability.  Upon creation of an instance of the following 
- * must be provided:
- *  
- * The date, reason, start time and end time of the availability exception,
- * plus the employee information.
- *
- * The above attutibe can be obtain by the getter method.
+ * This bean holds the availability exceptions that an employee can create
+ * for him/herself. They allow the employee to enforce restrictions for 
+ * scheduling when the manager is creating the schedule.
+ * 
  * @author Horace Wan
  */
-public class AvailabilityExceptionBean extends DataBean
+public class AvailabilityExceptionBean extends DataBean implements Comparable
 {
     /**
      * The date of the availability exception occurs.
@@ -46,6 +41,11 @@ public class AvailabilityExceptionBean extends DataBean
     {
     }
 	
+	/**
+	 * Clones the information of the passed bean into this one.
+	 * 
+	 * @param exception the exception information to clone.
+	 */
 	public void clone (AvailabilityExceptionBean exception)
 	{
 		this.setDate (exception.getDate());
@@ -53,69 +53,42 @@ public class AvailabilityExceptionBean extends DataBean
 		this.setReason (exception.getReason ());
 	}
 	
-    /**
-     * Sets the date of the availability exception occurs.
-     * @param date the date of the availability exception occurs.
-     */
     public void setDate (Date date)
     {
         this.date = date;
     }
 
-    /**
-     * Sets the employee this availability exception is entered for.
-     * @param employee an Object for the employee this availability exception 
-     *                  is entered for.
-     */
     public void setEmployeeNo (Integer employeeNo)
     {
         this.employeeNo = employeeNo;
     }
-
-    /**
-     * Sets the reason the availability exception occurs.
-     * @param reason a string for the reason the availability exception occurs.
-     */
+	
     public void setReason (String reason)
     {
         this.reason = reason;
     }
 	
-    /**
-     * Returns the date of the availability exception occurs.
-     * @return the date of the availability exception occurs.
-     */
     public Date getDate ()
     {
         return date;
     }
-
-    /**
-     * Returns the employee this availability exception is entered for.
-     * @return an Object for the employee this availability exception is 
-     *              entered for.
-     */
+	
     public Integer getEmployeeNo ()
     {
         return employeeNo;
     }
-
-    /**
-     * Returns the reason the availability exception occurs.
-     * @return a string for the reason the availability exception occurs.
-     */
+	
     public String getReason ()
     {
         return reason;
     }
 	
-	public int compare (Object o1, Object o2)
+	public int compareTo (Object o)
 	{
-		AvailabilityExceptionBean a1 = (AvailabilityExceptionBean)o1;
-		AvailabilityExceptionBean a2 = (AvailabilityExceptionBean)o2;
+		AvailabilityExceptionBean a = (AvailabilityExceptionBean)o;
 		
-		int result1 = a1.getEmployeeNo ().compareTo (a2.getEmployeeNo ());
-		int result2 = a1.getDate ().compareTo (a2.getDate ());
+		int result1 = getEmployeeNo ().compareTo (a.getEmployeeNo ());
+		int result2 = getDate ().compareTo (a.getDate ());
 		
 		return (result1 - result2);
 	}

@@ -7,33 +7,36 @@
  * System Developed by:
  * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
  */
-
 package hs.objects;
 
 /**
- * This class contains information or attutibe of an Client object.  This 
- * object represents the client who books appointments with the salon.  Upon 
- * creation of an instance of the following must be provided:
+ * This bean holds information about clients who book appointments into the
+ * system. These clients are created automatically when appointments are
+ * booked for them.
  * 
- * The salon(s) this client belongs to. and a client idenification number.
- *
- * The above attutibe can be obtain by the getter method.
  * @author Horace Wan
  */
-public class ClientBean extends PersonBean
+public class ClientBean extends PersonBean implements Comparable
 {
 	/**
-     * The client identification number.
-     */
-    private Integer clientNo;
-    
-   
-    /**
-     * The address record attached to this employee.
-     */
-    private AddressBean address = null;
-	
+	 * The identification number of the client.
+	 */
+	private Integer clientNo;
+	/**
+	 * The address bean attached to this employee.
+	 */
+	private AddressBean address = null;
+	/**
+	 * The flag used to enable or disable the record in the system.
+	 */
 	private boolean enabled = true;
+
+	/**
+	 *  Default constructor for the client bean.
+	 */
+	public ClientBean ()
+	{
+	}
 
 	public boolean getEnabled ()
 	{
@@ -44,68 +47,40 @@ public class ClientBean extends PersonBean
 	{
 		this.enabled = enabled;
 	}
-	
-    /**
-     *  Default constructor for person object.
-     */
-    public ClientBean ()
-    {
-		
-    }
-	
-    /**
-     * Sets the client idenification number.
-     * @param clientNo a string for the client idenification number.
-     */
-    public void setClientNo (Integer clientNo)
-    {
-        this.clientNo = clientNo;
-    }
 
-  
-    /**
-     * Returns the client idenification number.
-     * @return a string for the client idenification number.
-     */
-    public Integer getClientNo ()
-    {
-        return clientNo;
-    }
+	public void setClientNo (Integer clientNo)
+	{
+		this.clientNo = clientNo;
+	}
 
-   
-	
-	/**
-	 * Returns the address information of this client.
-	 * @return the address bean containing the information.
-	 */
+	public Integer getClientNo ()
+	{
+		return clientNo;
+	}
+
 	public AddressBean getAddress ()
 	{
 		return address;
 	}
-	
-	/**
-	 * Set the address information for this client.
-	 * @param address the address bean to set into the client.
-	 */
+
 	public void setAddress (AddressBean address)
 	{
 		this.address = address;
 	}
-	
+
 	@Override
-	public int compare (Object o1, Object o2)
+	public int compareTo (Object o)
 	{
-		ClientBean a1 = (ClientBean)o1;
-		ClientBean a2 = (ClientBean)o2;
-		
-		return a1.getClientNo ().compareTo (a2.getClientNo ());
+		ClientBean a = (ClientBean) o;
+
+		return getClientNo ().compareTo (a.getClientNo ());
 	}
-	
+
 	@Override
 	public boolean equals (Object o)
 	{
-		ClientBean a = (ClientBean)o;
-		
+		ClientBean a = (ClientBean) o;
+
 		return (a.getClientNo ().equals (this.getClientNo ()));
 	}
 

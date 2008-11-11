@@ -58,11 +58,12 @@ Updated: Sunday, Nov 10th, 2008
   > This feature is non-essential and will make it in if we have time. Nov 10th, 2008
 
 - FEATURE: User HELP icon that opens seperate page for help in all screens/dialogs.
-  > This is for user friendliness.
+  > This is for user friendliness. Nov 10th, 2008
 
 - BUG: Do not let scheduler or appointment drag cells outside of bounds (dissapear on drop).
 
 - BUG: Employees can move schedule entries around, only Managers should be able to.
+  > Joey fixed this bug Nov 10th, 2008
 
 - BUG: Only show alert for 1 record type, always keep latest. Show date column in alert list too.
 
@@ -74,6 +75,7 @@ Updated: Sunday, Nov 10th, 2008
 - BUG: Delete button in appointment dialog needs to be hidden when creating new entry.
 
 - BUG: Fix all the form pages from taking ENTER keystroke to "SAVE" records.
+  > Joey fixed this bug on Nov 10th, 2008
 
 - BUG: Start Time/End Time do not render in the Employee scheduler dialog.
 

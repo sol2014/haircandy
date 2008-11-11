@@ -7,46 +7,37 @@
  * System Developed by:
  * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
  */
-
-package hs.objects;  //Group this class in folder %/hairsalon/objects/
-
-import java.util.*;
+package hs.objects;
 
 /**
- * This class contains information or attutibe of a schedule object.
- * This class represents the employee schedule.  Upon creation of an 
- * instance of the following must be provided:
- *  
- * An array of employee, appointment and salon, and the schedule idenification
- * number.
- *   
- * The above attutibe can be obtain by the getter method.
+ * This bean holds information about a schedule day's hours of operation. These
+ * are created from the times specified in the salon bean, but can be modified
+ * after they are originally created by the manager.
  * 
- * A method to add an appointmnet to the Schedule is provided.
  * @author Horace Wan
  */
-public class ScheduleHoursBean extends TimeSlotBean implements Comparator
+public class ScheduleHoursBean extends TimeSlotBean implements Comparable
 {
-    /**
-     *  Default constructor for person object.
-     */
-    public ScheduleHoursBean ()
-    {
-    }
-	
-	public int compare (Object o1, Object o2)
+	/**
+	 *  Default constructor for schedule hours bean.
+	 */
+	public ScheduleHoursBean ()
 	{
-		ScheduleBean a1 = (ScheduleBean)o1;
-		ScheduleBean a2 = (ScheduleBean)o2;
-		
-		return a1.getDate ().compareTo (a2.getDate ());
 	}
-	
+
+	@Override
+	public int compareTo (Object o)
+	{
+		ScheduleBean a = (ScheduleBean) o;
+
+		return getDate ().compareTo (a.getDate ());
+	}
+
 	@Override
 	public boolean equals (Object o)
 	{
-		ScheduleBean a = (ScheduleBean)o;
-		
+		ScheduleBean a = (ScheduleBean) o;
+
 		return (a.getDate ().equals (this.getDate ()));
 	}
 

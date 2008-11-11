@@ -352,4 +352,33 @@ int rowCount = 0;
 		}
     %>
 </script>
+<script>
+    <%
+		if (unschedulables != null) {
+			for (EmployeeBean eb : employees) {
+				ArrayList<ScheduleBean> sbs = null;
+				for (EmployeeBean cycle : unschedulables.keySet()) {
+					if (cycle.getEmployeeNo().equals(eb.getEmployeeNo())) {
+						sbs = unschedulables.get(cycle);
+					}
+				}
+
+				if (sbs != null) {
+					for (ScheduleBean sbb : sbs) {
+						int scheduleStartHour = CoreTools.getHour(sbb.getStartTime());
+						int scheduleStartMinutes = CoreTools.getMinutes(sbb.getStartTime());
+						int scheduleEndHour = CoreTools.getHour(sbb.getEndTime());
+						int scheduleEndMinutes = CoreTools.getMinutes(sbb.getEndTime());
+						int startOffset = (scheduleStartHour - startHour) * 4 + scheduleStartMinutes / 15;
+						int endOffset = (scheduleEndHour - startHour) * 4 + scheduleEndMinutes / 15;
+						int duration = endOffset - startOffset;
+                    %>
+                        addExceptionEntry(<%=duration%>,<%=startOffset%>,getColumnIDFromEmployeeNo(<%=eb.getEmployeeNo()%>));
+                    <%
+					}
+				}
+			}
+		}
+    %>
+</script>    
 <script>//disableSelection(document.body)</script>

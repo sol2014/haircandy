@@ -71,8 +71,11 @@ function unlightDay (day)
 
 <%@ include file="WEB-INF/jspf/footer.jspf" %>
 
-<script language="javascript" src="js/sch-calendar.js"></script>
+<script language="javascript" src="js/calendar-addin.js"></script>
+
 <script>
+    setCalendarAjax("ajax/ajax-sch-calendar.jsp");
+    
     var today = new Date();
     refreshCalender(today.getFullYear(),today.getMonth());
 </script>

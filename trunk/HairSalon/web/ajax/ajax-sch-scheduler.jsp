@@ -57,12 +57,12 @@
 <%!
 	private String getCSSClass(int startHour, int row, EmployeeBean eb, Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedules, Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions, ArrayList<ScheduleExceptionBean> scheduleExceptions, Hashtable<EmployeeBean, ArrayList<ScheduleBean>> unschedulables) {
 		if (scheduleExceptions != null) {
-			return "SchedulerCellSectionMiddle_Stone";
+			return "SchedulerCellSection_Unavailable";
 		}
 		if (availabilityExceptions != null) {
 			for (EmployeeBean cycle : availabilityExceptions.keySet()) {
 				if (cycle.getEmployeeNo().equals(eb.getEmployeeNo())) {
-					return "SchedulerCellSectionMiddle_Stone";
+					return "SchedulerCellSection_Unavailable";
 				}
 			}
 		}
@@ -114,7 +114,7 @@
 					int endOffset = (scheduleEndHour - startHour) * 4 + scheduleEndMinutes / 15;
 					int duration = endOffset - startOffset;
 					if (row >= startOffset && row < endOffset) {
-						return "SchedulerCellSectionMiddle_Stone";
+						return "SchedulerCellSectionMiddle_Unavailable";
 					}
 				}
 			}

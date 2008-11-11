@@ -197,4 +197,12 @@ public class ServiceBean extends DataBean implements Comparator
 
 		return (a.getServiceNo ().equals (this.getServiceNo ()));
 	}
+
+	@Override
+	public int hashCode ()
+	{
+		int hash = 5;
+		hash = 71 * hash + (this.serviceNo != null ? this.serviceNo.hashCode () : 0);
+		return hash;
+	}
 }

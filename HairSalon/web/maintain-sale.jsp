@@ -105,11 +105,11 @@ String error_string = (String) userSession.moveAttribute ("sale_save_error");
                     <input type="submit" value="Revert" name="sale_action" class="StandardButton"/>
 		    
                     <% if (error_string != null) {%>
-		    <font color="red"><%=CoreTools.display (error_string)%></font>
+		    <font color="red"><%=ServletHelper.display (error_string)%></font>
 		    <% }%>
 		    <% if (feedback_string != null)
 			    {%>
-		    <font color="green"><%=CoreTools.display (feedback_string)%></font>
+		    <font color="green"><%=ServletHelper.display (feedback_string)%></font>
 		    <% }%>
                 </td>
             </tr>
@@ -129,7 +129,7 @@ String error_string = (String) userSession.moveAttribute ("sale_save_error");
                             <% } else {%>
                             <td align="right"><font color="red">First Name:</font></td>
                             <% }%>
-                            <td align="left"><input type="text" name="first_name" id="first_name" size="20" value="<%=CoreTools.display (client.getFirstName ())%>"></td>
+                            <td align="left"><input type="text" name="first_name" id="first_name" size="20" value="<%=ServletHelper.display (client.getFirstName ())%>"></td>
                         </tr>
                         <tr>
                             <% if (userSession.moveAttribute("sale_error_last_name") == null) {%>
@@ -137,7 +137,7 @@ String error_string = (String) userSession.moveAttribute ("sale_save_error");
                             <% } else {%>
                             <td align="right"><font color="red">Last Name:</font></td>
                             <% }%>
-                            <td align="left"><input type="text" name="last_name" id="last_name" size="20" value="<%=CoreTools.display (client.getLastName ())%>"></td>
+                            <td align="left"><input type="text" name="last_name" id="last_name" size="20" value="<%=ServletHelper.display (client.getLastName ())%>"></td>
                         </tr>
                         <tr>
                             <% if (userSession.moveAttribute("sale_error_phone_number") == null) {%>
@@ -145,7 +145,7 @@ String error_string = (String) userSession.moveAttribute ("sale_save_error");
                             <% } else {%>
                             <td align="right"><font color="red"><div id="telephone_label">Telephone:</div></font></td>
                             <% }%>
-                            <td align="left"><input type="text" name="phone_number" id="phone_number" onKeyUp="return checkTelephone(this)" size="10" value="<%=CoreTools.display (client.getPhoneNumber ())%>">
+                            <td align="left"><input type="text" name="phone_number" id="phone_number" onKeyUp="return checkTelephone(this)" size="10" value="<%=ServletHelper.display (client.getPhoneNumber ())%>">
                                 <img style="cursor:pointer" align="absmiddle" src="images/icons/small/find_white.gif" onclick="findClient()" title="Find and load client from this phone number."/>
                                 <img style="cursor:pointer" align="absmiddle" src="images/icons/small/personal_white.gif" onclick="setGuest()" title="Use a guest identity."/>
                             </td>
@@ -164,19 +164,19 @@ String error_string = (String) userSession.moveAttribute ("sale_save_error");
                             <% } else {%>
                             <td align="right"><font color="red">Employee ID:</font></td>
                             <% }%>
-                            <td align="left"><input type="text" name="employee_no" size="6" style="text-align:right" value="<%=CoreTools.display (sale.getEmployee ().getEmployeeNo ())%>"></td>
+                            <td align="left"><input type="text" name="employee_no" size="6" style="text-align:right" value="<%=ServletHelper.display (sale.getEmployee ().getEmployeeNo ())%>"></td>
                         </tr>
                         <tr>
                             <td align="right">Sub-Total:</td>
-                            <td align="left"><input type="text" name="total_due" readonly id="total_due" size="6" style="text-align:right" value="<%=CoreTools.display (sale.getTotalDue ())%>">$</td>
+                            <td align="left"><input type="text" name="total_due" readonly id="total_due" size="6" style="text-align:right" value="<%=ServletHelper.display (sale.getTotalDue ())%>">$</td>
                         </tr>
                         <tr>
                             <td align="right">Tax (<%=salon.getTaxRate()%>%):</td>
-                            <td align="left"><input type="text" name="total_tax" readonly id="total_tax" size="6" style="text-align:right" value="<%=CoreTools.display (sale.getTotalTax ())%>">$</td>
+                            <td align="left"><input type="text" name="total_tax" readonly id="total_tax" size="6" style="text-align:right" value="<%=ServletHelper.display (sale.getTotalTax ())%>">$</td>
                         </tr>
                         <tr>
                             <td align="right">Discount:</td>
-                            <td align="left"><input type="text" name="discount" id="discount" size="3" onKeyUp="return calculateTotal()" style="text-align:right" value="<%=CoreTools.display (sale.getDiscount ())%>">%</td>
+                            <td align="left"><input type="text" name="discount" id="discount" size="3" onKeyUp="return calculateTotal()" style="text-align:right" value="<%=ServletHelper.display (sale.getDiscount ())%>">%</td>
                         </tr>
                         <tr>
                             <td align="right">Discount:</td>
@@ -196,16 +196,16 @@ String error_string = (String) userSession.moveAttribute ("sale_save_error");
                             <% } else {%>
                             <td align="right"><font color="red">Payment:</font></td>
                             <% }%>
-                            <td align="left"><input type="text" name="payment" id="payment" size="6" onKeyUp="return calculateTotal()" style="text-align:right" value="<%=CoreTools.display (sale.getPayment())%>">$
+                            <td align="left"><input type="text" name="payment" id="payment" size="6" onKeyUp="return calculateTotal()" style="text-align:right" value="<%=ServletHelper.display (sale.getPayment())%>">$
                             &nbsp;<img style="cursor:pointer" align="absmiddle" src="images/icons/small/setfield_white.gif" onclick="setTotalPayment()" title="Use total as payment."/></td>
                         </tr>
                         <tr>
                             <td align="right">Payment Type:</td>
-                            <td align="left"><select name="payment_type" size="1"><%=CoreTools.generatePaymentTypeOptions(CoreTools.display (sale.getPaymentType ()), false)%></select></td>
+                            <td align="left"><select name="payment_type" size="1"><%=ServletHelper.generatePaymentTypeOptions(ServletHelper.display (sale.getPaymentType ()), false)%></select></td>
                         </tr>
                         <tr>
                             <td align="right">Complete:</td>
-			    <td align="left"><%=CoreTools.generateTrueFalseOptions("is_complete", Boolean.toString (sale.getIsComplete ()))%></td>
+			    <td align="left"><%=ServletHelper.generateTrueFalseOptions("is_complete", Boolean.toString (sale.getIsComplete ()))%></td>
                         </tr>
                     </table>
                 </td>

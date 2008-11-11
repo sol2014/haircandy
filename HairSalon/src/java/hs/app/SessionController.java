@@ -364,6 +364,30 @@ public class SessionController
 		return address;
 	}
 
+	public static ScheduleHoursBean loadScheduleHours (UserSession session, ScheduleHoursBean scheduleHours)
+	{
+		LogController.write ("SessionController->Loading schedule hours entry...");
+		Date date = scheduleHours.getDate ();
+		
+		scheduleHours = (ScheduleHoursBean) PersistenceController.load (scheduleHours);
+		
+		if (scheduleHours == null && date != null)
+		{
+			// We must always have schedule hours available no matter what, in
+			// this case, we create a new using default business hours from salon.
+			SalonBean salon = SessionController.loadSalon(session, new SalonBean());
+			int weekDay = CoreTools.getWeekDay(date);
+			
+		    scheduleHours = new ScheduleHoursBean ();
+		    scheduleHours.setDate (date);
+		    scheduleHours.setStartTime (salon.getWeekdayStartTime(weekDay));
+		    scheduleHours.setEndTime (salon.getWeekdayEndTime(weekDay));
+		    saveScheduleHours (session, scheduleHours);
+		}
+		
+		return scheduleHours;
+	}
+	
 	public static ScheduleBean loadSchedule (UserSession session, ScheduleBean schedule)
 	{
 		LogController.write ("SessionController->Loading schedule entry...");
@@ -477,6 +501,16 @@ public class SessionController
 		
 		boolean result = false;
 		result = PersistenceController.commit (appointment);
+		return result;
+	}
+	
+	public static boolean saveScheduleHours (UserSession session, ScheduleHoursBean scheduleHours)
+	{
+		LogController.write ("SessionController->Saving schedule hours entry...");
+		
+		boolean result = false;
+		result = PersistenceController.commit (scheduleHours);
+		
 		return result;
 	}
 	
@@ -782,7 +816,7 @@ public class SessionController
 				result = PersistenceController.commit (cycle);
 			}
 		}
-
+		
 		return result;
 	}
 
@@ -857,17 +891,15 @@ public class SessionController
 		return hash;
 	}
 	
-	public static Hashtable<EmployeeBean, ArrayList<ScheduleBean>> getUnavailable (UserSession session, java.util.Date date, Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions, ArrayList<ScheduleExceptionBean> scheduleExceptions)
+	public static Hashtable<EmployeeBean, ArrayList<ScheduleBean>> getUnavailable (UserSession session, java.util.Date date, Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions, ArrayList<ScheduleExceptionBean> scheduleExceptions, ScheduleHoursBean hours)
 	{
 		LogController.write ("SessionController->Getting filtered unavailable time...");
 		
 		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> hash = new Hashtable<EmployeeBean, ArrayList<ScheduleBean>> ();
 		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedule = getSchedule (session, date, availabilityExceptions, scheduleExceptions);
 		
-		SalonBean salon = new SalonBean();
-		salon = loadSalon (session, salon);
-		Date startTime = salon.getWeekdayStartTime (CoreTools.getWeekDay (date));
-		Date endTime = salon.getWeekdayEndTime (CoreTools.getWeekDay (date));
+		Date startTime = hours.getStartTime ();
+		Date endTime = hours.getEndTime ();
 		
 		if (schedule == null)
 		{

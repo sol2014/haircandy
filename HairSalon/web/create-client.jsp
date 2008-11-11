@@ -65,7 +65,7 @@ String error_string = (String) userSession.moveAttribute ("client_error");
 			    <% } else { %>
 			    <td align="right"><font color="red">First Name:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="first_name" size="20" value="<%=CoreTools.display (userSession.moveAttribute ("client_new_first_name"))%>">
+			    <td align="left"><input type="text" name="first_name" size="20" value="<%=ServletHelper.display (userSession.moveAttribute ("client_new_first_name"))%>">
 			    </font></td>
 			</tr>
 			<tr>
@@ -74,7 +74,7 @@ String error_string = (String) userSession.moveAttribute ("client_error");
 			    <% } else { %>
 			    <td align="right"><font color="red">Last Name:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="last_name" size="20" value="<%=CoreTools.display (userSession.moveAttribute ("client_new_last_name"))%>"></td>
+			    <td align="left"><input type="text" name="last_name" size="20" value="<%=ServletHelper.display (userSession.moveAttribute ("client_new_last_name"))%>"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("client_error_phone_number") == null) { %>
@@ -82,11 +82,11 @@ String error_string = (String) userSession.moveAttribute ("client_error");
 			    <% } else { %>
 			    <td align="right"><font color="red"><div id="telephone_label">Telephone:</div></font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="phone_number" id="phone_number" onKeyUp="return checkTelephone(this)" size="10" value="<%=CoreTools.display (userSession.moveAttribute ("client_new_phone_number"))%>"></td>
+			    <td align="left"><input type="text" name="phone_number" id="phone_number" onKeyUp="return checkTelephone(this)" size="10" value="<%=ServletHelper.display (userSession.moveAttribute ("client_new_phone_number"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Enabled:</td>
-			    <td align="left"><%=CoreTools.generateTrueFalseOptions ("enabled", (String) userSession.moveAttribute ("client_new_enabled"))%></td>
+			    <td align="left"><%=ServletHelper.generateTrueFalseOptions ("enabled", (String) userSession.moveAttribute ("client_new_enabled"))%></td>
 			</tr>
 			
 			<tr>
@@ -100,31 +100,31 @@ String error_string = (String) userSession.moveAttribute ("client_error");
 			</tr>
 			<tr>
 			    <td align="right">Address 1:</td>
-			    <td align="left"><input type="text" name="address1" size="20" value="<%=CoreTools.display (userSession.moveAttribute ("client_new_address1"))%>"></td>
+			    <td align="left"><input type="text" name="address1" size="20" value="<%=ServletHelper.display (userSession.moveAttribute ("client_new_address1"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Address 2:</td>
-			    <td align="left"><input type="text" name="address2" size="20" value="<%=CoreTools.display (userSession.moveAttribute ("client_new_address2"))%>"></td>
+			    <td align="left"><input type="text" name="address2" size="20" value="<%=ServletHelper.display (userSession.moveAttribute ("client_new_address2"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Email:</td>
-			    <td align="left"><input type="text" name="email" size="20" value="<%=CoreTools.display (userSession.moveAttribute ("client_new_email"))%>"></td>
+			    <td align="left"><input type="text" name="email" size="20" value="<%=ServletHelper.display (userSession.moveAttribute ("client_new_email"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">City:</td>
-			    <td align="left"><input type="text" name="city" size="15" value="<%=CoreTools.display (userSession.moveAttribute ("client_new_city"))%>"></td>
+			    <td align="left"><input type="text" name="city" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("client_new_city"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Province:</td>
-			    <td align="left"><input type="text" name="province" size="15" value="<%=CoreTools.display (userSession.moveAttribute ("client_new_province"))%>"></td>
+			    <td align="left"><input type="text" name="province" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("client_new_province"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Country:</td>
-			    <td align="left"><input type="text" name="country" size="15" value="<%=CoreTools.display (userSession.moveAttribute ("client_new_country"))%>"></td>
+			    <td align="left"><input type="text" name="country" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("client_new_country"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right"><div id="postal_code_label">Postal Code:</div></td>
-			    <td align="left"><input type="text" name="postal_code" id="postal_code" onKeyUp="return checkPostalCode(this)" size="6" value="<%=CoreTools.display (userSession.moveAttribute ("client_new_postal_code"))%>"><i>(ie. N4N4N4)</i></td>
+			    <td align="left"><input type="text" name="postal_code" id="postal_code" onKeyUp="return checkPostalCode(this)" size="6" value="<%=ServletHelper.display (userSession.moveAttribute ("client_new_postal_code"))%>"><i>(ie. N4N4N4)</i></td>
 			</tr>
 		    </table>
 		</td>

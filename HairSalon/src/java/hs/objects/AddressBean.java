@@ -214,4 +214,12 @@ public class AddressBean extends DataBean
 		
 		return (a.getAddressNo ().equals (this.getAddressNo ()));
 	}
+
+	@Override
+	public int hashCode ()
+	{
+		int hash = 3;
+		hash = 11 * hash + (this.addressNo != null ? this.addressNo.hashCode () : 0);
+		return hash;
+	}
 }

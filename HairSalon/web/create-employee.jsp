@@ -65,7 +65,7 @@ String error_string = (String) userSession.moveAttribute ("employee_error");
 			    <% } else { %>
 			    <td align="right"><font color="red">First Name:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="first_name" size="20" value="<%=CoreTools.display (userSession.moveAttribute ("employee_new_first_name"))%>"></td>
+			    <td align="left"><input type="text" name="first_name" size="20" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_first_name"))%>"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("employee_error_last_name") == null) { %>
@@ -73,7 +73,7 @@ String error_string = (String) userSession.moveAttribute ("employee_error");
 			    <% } else { %>
 			    <td align="right"><font color="red">Last Name:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="last_name" size="20" value="<%=CoreTools.display (userSession.moveAttribute ("employee_new_last_name"))%>"></td>
+			    <td align="left"><input type="text" name="last_name" size="20" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_last_name"))%>"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("employee_error_phone_number") == null) { %>
@@ -81,11 +81,11 @@ String error_string = (String) userSession.moveAttribute ("employee_error");
 			    <% } else { %>
 			    <td align="right"><font color="red"><div id="telephone_label">Telephone:</div></font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="phone_number" id="phone_number" onKeyUp="return checkTelephone(this)" size="10" value="<%=CoreTools.display (userSession.moveAttribute ("employee_new_phone_number"))%>"></td>
+			    <td align="left"><input type="text" name="phone_number" id="phone_number" onKeyUp="return checkTelephone(this)" size="10" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_phone_number"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Role:</td>
-			    <td align="left"><select size="1" name="role"><%=CoreTools.generateUserRoleOptions ((String) userSession.moveAttribute ("employee_new_role"), false)%></select></td>
+			    <td align="left"><select size="1" name="role"><%=ServletHelper.generateUserRoleOptions ((String) userSession.moveAttribute ("employee_new_role"), false)%></select></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("employee_error_password") == null) { %>
@@ -97,7 +97,7 @@ String error_string = (String) userSession.moveAttribute ("employee_error");
 			</tr>
 			<tr>
 			    <td align="right">Enabled:</td>
-			    <td align="left"><%=CoreTools.generateTrueFalseOptions ("enabled", (String) userSession.moveAttribute ("employee_new_enabled"))%></td>
+			    <td align="left"><%=ServletHelper.generateTrueFalseOptions ("enabled", (String) userSession.moveAttribute ("employee_new_enabled"))%></td>
 			</tr>
 			<tr>
 			    <td align="right">&nbsp;</td>
@@ -114,11 +114,11 @@ String error_string = (String) userSession.moveAttribute ("employee_error");
 			    <% } else { %>
 			    <td align="right"><font color="red">Address 1:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="address1" size="20" value="<%=CoreTools.display (userSession.moveAttribute ("employee_new_address1"))%>"></td>
+			    <td align="left"><input type="text" name="address1" size="20" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_address1"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Address 2:</td>
-			    <td align="left"><input type="text" name="address2" size="20" value="<%=CoreTools.display (userSession.moveAttribute ("employee_new_address2"))%>"></td>
+			    <td align="left"><input type="text" name="address2" size="20" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_address2"))%>"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("employee_error_email") == null) { %>
@@ -126,7 +126,7 @@ String error_string = (String) userSession.moveAttribute ("employee_error");
 			    <% } else { %>
 			    <td align="right"><font color="red">Email:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="email" size="20" value="<%=CoreTools.display (userSession.moveAttribute ("employee_new_email"))%>"></td>
+			    <td align="left"><input type="text" name="email" size="20" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_email"))%>"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("employee_error_city") == null) { %>
@@ -134,7 +134,7 @@ String error_string = (String) userSession.moveAttribute ("employee_error");
 			    <% } else { %>
 			    <td align="right"><font color="red">City:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="city" size="15" value="<%=CoreTools.display (userSession.moveAttribute ("employee_new_city"))%>"></td>
+			    <td align="left"><input type="text" name="city" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_city"))%>"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("employee_error_province") == null) { %>
@@ -142,7 +142,7 @@ String error_string = (String) userSession.moveAttribute ("employee_error");
 			    <% } else { %>
 			    <td align="right"><font color="red">Province:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="province" size="15" value="<%=CoreTools.display (userSession.moveAttribute ("employee_new_province"))%>"></td>
+			    <td align="left"><input type="text" name="province" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_province"))%>"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("employee_error_country") == null) { %>
@@ -150,7 +150,7 @@ String error_string = (String) userSession.moveAttribute ("employee_error");
 			    <% } else { %>
 			    <td align="right"><font color="red">Country:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="country" size="15" value="<%=CoreTools.display (userSession.moveAttribute ("employee_new_country"))%>"></td>
+			    <td align="left"><input type="text" name="country" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_country"))%>"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("employee_error_postal_code") == null) { %>
@@ -158,7 +158,7 @@ String error_string = (String) userSession.moveAttribute ("employee_error");
 			    <% } else { %>
 			    <td align="right"><font color="red"><div id="postal_code_label">Postal Code:</div></font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="postal_code" id="postal_code" onKeyUp="return checkPostalCode(this)" size="6" value="<%=CoreTools.display (userSession.moveAttribute ("employee_new_postal_code"))%>"><i>(ie. N4N4N4)</i></td>
+			    <td align="left"><input type="text" name="postal_code" id="postal_code" onKeyUp="return checkPostalCode(this)" size="6" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_postal_code"))%>"><i>(ie. N4N4N4)</i></td>
 			</tr>
 			<tr>
 			    <td align="right">&nbsp;</td>
@@ -171,38 +171,38 @@ String error_string = (String) userSession.moveAttribute ("employee_error");
 			</tr>
 			<tr>
 			    <td align="right">Monday:</td>
-			    <td align="left"><input type="text" name="monday_start" size="5" value="<%=CoreTools.display (userSession.moveAttribute ("employee_new_monday_start"))%>"> to
-			    <input type="text" name="monday_end" size="5" value="<%=CoreTools.display (userSession.moveAttribute ("employee_new_monday_end"))%>"></td>
+			    <td align="left"><input type="text" name="monday_start" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_monday_start"))%>"> to
+			    <input type="text" name="monday_end" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_monday_end"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Tuesday:</td>
-			    <td align="left"><input type="text" name="tuesday_start" size="5" value="<%=CoreTools.display (userSession.moveAttribute ("employee_new_tuesday_start"))%>"> to
-			    <input type="text" name="tuesday_end" size="5" value="<%=CoreTools.display (userSession.moveAttribute ("employee_new_tuesday_end"))%>"></td>
+			    <td align="left"><input type="text" name="tuesday_start" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_tuesday_start"))%>"> to
+			    <input type="text" name="tuesday_end" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_tuesday_end"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Wednesday:</td>
-			    <td align="left"><input type="text" name="wednesday_start" size="5" value="<%=CoreTools.display (userSession.moveAttribute ("employee_new_wednesday_start"))%>"> to
-			    <input type="text" name="wednesday_end" size="5" value="<%=CoreTools.display (userSession.moveAttribute ("employee_new_wednesday_end"))%>"></td>
+			    <td align="left"><input type="text" name="wednesday_start" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_wednesday_start"))%>"> to
+			    <input type="text" name="wednesday_end" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_wednesday_end"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Thursday:</td>
-			    <td align="left"><input type="text" name="thursday_start" size="5" value="<%=CoreTools.display (userSession.moveAttribute ("employee_new_thursday_start"))%>"> to
-			    <input type="text" name="thursday_end" size="5" value="<%=CoreTools.display (userSession.moveAttribute ("employee_new_thursday_end"))%>"></td>
+			    <td align="left"><input type="text" name="thursday_start" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_thursday_start"))%>"> to
+			    <input type="text" name="thursday_end" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_thursday_end"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Friday:</td>
-			    <td align="left"><input type="text" name="friday_start" size="5" value="<%=CoreTools.display (userSession.moveAttribute ("employee_new_friday_start"))%>"> to
-			    <input type="text" name="friday_end" size="5" value="<%=CoreTools.display (userSession.moveAttribute ("employee_new_friday_end"))%>"></td>
+			    <td align="left"><input type="text" name="friday_start" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_friday_start"))%>"> to
+			    <input type="text" name="friday_end" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_friday_end"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Saturday:</td>
-			    <td align="left"><input type="text" name="saturday_start" size="5" value="<%=CoreTools.display (userSession.moveAttribute ("employee_new_saturday_start"))%>"> to
-			    <input type="text" name="saturday_end" size="5" value="<%=CoreTools.display (userSession.moveAttribute ("employee_new_saturday_end"))%>"></td>
+			    <td align="left"><input type="text" name="saturday_start" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_saturday_start"))%>"> to
+			    <input type="text" name="saturday_end" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_saturday_end"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Sunday:</td>
-			    <td align="left"><input type="text" name="sunday_start" size="5" value="<%=CoreTools.display (userSession.moveAttribute ("employee_new_sunday_start"))%>"> to
-			    <input type="text" name="sunday_end" size="5" value="<%=CoreTools.display (userSession.moveAttribute ("employee_new_sunday_end"))%>"></td>
+			    <td align="left"><input type="text" name="sunday_start" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_sunday_start"))%>"> to
+			    <input type="text" name="sunday_end" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_sunday_end"))%>"></td>
 			</tr>
 		    </table>
 		</td>

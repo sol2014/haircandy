@@ -96,4 +96,12 @@ public class ScheduleBean extends TimeSlotBean implements Comparator
 		
 		return (a.getScheduleNo ().equals (this.getScheduleNo ()));
 	}
+
+	@Override
+	public int hashCode ()
+	{
+		int hash = 7;
+		hash = 97 * hash + (this.ScheduleNo != null ? this.ScheduleNo.hashCode () : 0);
+		return hash;
+	}
 }

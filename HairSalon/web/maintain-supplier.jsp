@@ -59,8 +59,8 @@ String error_string = (String) userSession.moveAttribute ("supplier_error");
 		    <input type="submit" value="Revert" name="supplier_action" class="StandardButton"/>
 		    
 		    <%-- This is the feedback section, any errors or messages should be displayed here --%>
-		    <% if (error_string != null) { %><font color="red"><%=CoreTools.display (error_string)%></font><% } %>
-		    <% if (feedback_string != null) { %><font color="green"><%=CoreTools.display (feedback_string)%></font><% } %>
+		    <% if (error_string != null) { %><font color="red"><%=ServletHelper.display (error_string)%></font><% } %>
+		    <% if (feedback_string != null) { %><font color="green"><%=ServletHelper.display (feedback_string)%></font><% } %>
 		</td>
 	    </tr>
 	</table>
@@ -79,7 +79,7 @@ String error_string = (String) userSession.moveAttribute ("supplier_error");
 			    <% } else { %>
 			    <td align="right"><font color="red">Name:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="name" value="<%=CoreTools.display(sb.getName())%>" size="20"></td>
+			    <td align="left"><input type="text" name="name" value="<%=ServletHelper.display(sb.getName())%>" size="20"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("supplier_error_description") == null) { %>
@@ -87,7 +87,7 @@ String error_string = (String) userSession.moveAttribute ("supplier_error");
 			    <% } else { %>
 			    <td align="right"><font color="red">Description:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="description" value="<%=CoreTools.display(sb.getDescription())%>" size="20"></td>
+			    <td align="left"><input type="text" name="description" value="<%=ServletHelper.display(sb.getDescription())%>" size="20"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("supplier_error_phone_number") == null) { %>
@@ -95,11 +95,11 @@ String error_string = (String) userSession.moveAttribute ("supplier_error");
 			    <% } else { %>
 			    <td align="right"><font color="red"><div id="telephone_label">Telephone:</div></font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="phone_number" id="phone_number" onKeyUp="return checkTelephone(this)" value="<%=CoreTools.display(sb.getPhoneNumber())%>" size="10"></td>
+			    <td align="left"><input type="text" name="phone_number" id="phone_number" onKeyUp="return checkTelephone(this)" value="<%=ServletHelper.display(sb.getPhoneNumber())%>" size="10"></td>
 			</tr>
 			<tr>
 			    <td align="right">Enabled:</td>
-			    <td align="left"><%=CoreTools.generateTrueFalseOptions ("enabled", Boolean.toString (sb.getEnabled ()))%></td>
+			    <td align="left"><%=ServletHelper.generateTrueFalseOptions ("enabled", Boolean.toString (sb.getEnabled ()))%></td>
 			</tr>
 			<tr>
 			    <td align="right">&nbsp;</td>
@@ -115,15 +115,15 @@ String error_string = (String) userSession.moveAttribute ("supplier_error");
 			    <% } else { %>
 			    <td align="right"><font color="red">Address 1:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="address1" value="<%=CoreTools.display (sb.getAddress().getAddress1 ())%>" size="20"></td>
+			    <td align="left"><input type="text" name="address1" value="<%=ServletHelper.display (sb.getAddress().getAddress1 ())%>" size="20"></td>
 			</tr>
 			<tr>
 			    <td align="right">Address 2:</td>
-			    <td align="left"><input type="text" name="address2" value="<%=CoreTools.display (sb.getAddress().getAddress2 ())%>" size="20"></td>
+			    <td align="left"><input type="text" name="address2" value="<%=ServletHelper.display (sb.getAddress().getAddress2 ())%>" size="20"></td>
 			</tr>
 			<tr>
 			    <td align="right">Email:</td>
-			    <td align="left"><input type="text" name="email" value="<%=CoreTools.display (sb.getAddress().getEmail ())%>" size="20"></td>
+			    <td align="left"><input type="text" name="email" value="<%=ServletHelper.display (sb.getAddress().getEmail ())%>" size="20"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("supplier_error_city") == null) { %>
@@ -131,7 +131,7 @@ String error_string = (String) userSession.moveAttribute ("supplier_error");
 			    <% } else { %>
 			    <td align="right"><font color="red">City:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="city" value="<%=CoreTools.display (sb.getAddress().getCity ())%>" size="15"></td>
+			    <td align="left"><input type="text" name="city" value="<%=ServletHelper.display (sb.getAddress().getCity ())%>" size="15"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("supplier_error_province") == null) { %>
@@ -139,7 +139,7 @@ String error_string = (String) userSession.moveAttribute ("supplier_error");
 			    <% } else { %>
 			    <td align="right"><font color="red">Province:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="province" value="<%=CoreTools.display (sb.getAddress().getProvince ())%>" size="15"></td>
+			    <td align="left"><input type="text" name="province" value="<%=ServletHelper.display (sb.getAddress().getProvince ())%>" size="15"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("supplier_error_country") == null) { %>
@@ -147,7 +147,7 @@ String error_string = (String) userSession.moveAttribute ("supplier_error");
 			    <% } else { %>
 			    <td align="right"><font color="red">Country:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="country" value="<%=CoreTools.display (sb.getAddress().getCountry ())%>" size="15"></td>
+			    <td align="left"><input type="text" name="country" value="<%=ServletHelper.display (sb.getAddress().getCountry ())%>" size="15"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("supplier_error_postal_code") == null) { %>
@@ -155,7 +155,7 @@ String error_string = (String) userSession.moveAttribute ("supplier_error");
 			    <% } else { %>
 			    <td align="right"><font color="red"><div id="postal_code_label">Postal Code:</div></font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="postal_code" id="postal_code" onKeyUp="return checkPostalCode(this)" value="<%=CoreTools.display (sb.getAddress().getPostalCode ())%>" size="6"><i>(ie. N4N4N4)</i></td>
+			    <td align="left"><input type="text" name="postal_code" id="postal_code" onKeyUp="return checkPostalCode(this)" value="<%=ServletHelper.display (sb.getAddress().getPostalCode ())%>" size="6"><i>(ie. N4N4N4)</i></td>
 			</tr>
 		    </table>
 		</td>
@@ -181,7 +181,7 @@ String error_string = (String) userSession.moveAttribute ("supplier_error");
             if (sb.getProducts() != null) {
                 for (ProductBean pb : sb.getProducts()) {
             %>
-                products.push(new product(<%=CoreTools.display(pb.getProductNo())%>,"<%=CoreTools.display(pb.getName())%>"));
+                products.push(new product(<%=ServletHelper.display(pb.getProductNo())%>,"<%=ServletHelper.display(pb.getName())%>"));
             <%            }
             }
     %>        

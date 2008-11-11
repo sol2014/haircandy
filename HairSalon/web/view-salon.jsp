@@ -70,8 +70,8 @@ window.onload = function () {
 		    <input type="submit" value="Revert" name="salon_action" class="StandardButton"/>
 
 		    <%-- This is the feedback section, any errors or messages should be displayed here --%>
-		    <% if (error_string != null) {%><font color="red"><%=CoreTools.display(error_string)%></font><% }%>
-		    <% if (feedback_string != null) {%><font color="green"><%=CoreTools.display(feedback_string)%></font><% }%>
+		    <% if (error_string != null) {%><font color="red"><%=ServletHelper.display(error_string)%></font><% }%>
+		    <% if (feedback_string != null) {%><font color="green"><%=ServletHelper.display(feedback_string)%></font><% }%>
 		</td>
 	    </tr>
 	</table>
@@ -90,7 +90,7 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red">Salon Name:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="salon_name" value="<%=CoreTools.display(salon.getName())%>" size="20"></td>
+			    <td align="left"><input type="text" name="salon_name" value="<%=ServletHelper.display(salon.getName())%>" size="20"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("salon_error_phone_number") == null) { %>
@@ -98,7 +98,7 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red"><div id="telephone_label">Telephone:</div></font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="phone_number" id="phone_number" onKeyUp="return checkTelephone(this)" size="10" value="<%=CoreTools.display (salon.getPhoneNumber())%>"></td>
+			    <td align="left"><input type="text" name="phone_number" id="phone_number" onKeyUp="return checkTelephone(this)" size="10" value="<%=ServletHelper.display (salon.getPhoneNumber())%>"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("salon_error_tax") == null) { %>
@@ -106,23 +106,7 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red">Tax Rate:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="tax" style="text-align:right" value="<%=CoreTools.display(salon.getTaxRate())%>" size="5">%</td>
-			</tr>
-			<tr>
-			    <% if (userSession.moveAttribute ("salon_error_hair_stations") == null) { %>
-			    <td align="right">Hair Stations:</td>
-			    <% } else { %>
-			    <td align="right"><font color="red">Hair Stations:</font></td>
-			    <% } %>
-			    <td align="left"><input type="text" name="hair_stations" style="text-align:right" value="<%=CoreTools.display(salon.getHairStations())%>" size="5"></td>
-			</tr>
-			<tr>
-			    <% if (userSession.moveAttribute ("salon_error_beauty_stations") == null) { %>
-			    <td align="right">Beauty Stations:</td>
-			    <% } else { %>
-			    <td align="right"><font color="red">Beauty Stations:</font></td>
-			    <% } %>
-			    <td align="left"><input type="text" name="beauty_stations" style="text-align:right" value="<%=CoreTools.display(salon.getBeautyStations())%>" size="5"></td>
+			    <td align="left"><input type="text" name="tax" style="text-align:right" value="<%=ServletHelper.display(salon.getTaxRate())%>" size="5">%</td>
 			</tr>
 			<tr>
 			    <td align="right">&nbsp;</td>
@@ -139,11 +123,11 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red">Address 1:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="address1" value="<%=CoreTools.display(salon.getAddress1())%>" size="20"></td>
+			    <td align="left"><input type="text" name="address1" value="<%=ServletHelper.display(salon.getAddress1())%>" size="20"></td>
 			</tr>
 			<tr>
 			    <td align="right">Address 2:</td>
-			    <td align="left"><input type="text" name="address2" value="<%=CoreTools.display(salon.getAddress2())%>" size="20"></td>
+			    <td align="left"><input type="text" name="address2" value="<%=ServletHelper.display(salon.getAddress2())%>" size="20"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("salon_error_email") == null) { %>
@@ -151,7 +135,7 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red">Email:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="email" value="<%=CoreTools.display(salon.getEmail())%>" size="20"></td>
+			    <td align="left"><input type="text" name="email" value="<%=ServletHelper.display(salon.getEmail())%>" size="20"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("salon_error_city") == null) { %>
@@ -159,7 +143,7 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red">City:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="city" value="<%=CoreTools.display(salon.getCity())%>" size="15"></td>
+			    <td align="left"><input type="text" name="city" value="<%=ServletHelper.display(salon.getCity())%>" size="15"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("salon_error_province") == null) { %>
@@ -167,7 +151,7 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red">Province:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="province" value="<%=CoreTools.display(salon.getProvince())%>" size="15"></td>
+			    <td align="left"><input type="text" name="province" value="<%=ServletHelper.display(salon.getProvince())%>" size="15"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("salon_error_country") == null) { %>
@@ -175,7 +159,7 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red">Country:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="country" value="<%=CoreTools.display(salon.getCountry())%>" size="15"></td>
+			    <td align="left"><input type="text" name="country" value="<%=ServletHelper.display(salon.getCountry())%>" size="15"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("salon_error_postal_code") == null) { %>
@@ -183,7 +167,7 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red"><div id="postal_code_label">Postal Code:</div></font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="postal_code" id="postal_code" onKeyUp="return checkPostalCode(this)" value="<%=CoreTools.display(salon.getPostalCode())%>" size="6"><i>(ie. N4N4N4)</i></td>
+			    <td align="left"><input type="text" name="postal_code" id="postal_code" onKeyUp="return checkPostalCode(this)" value="<%=ServletHelper.display(salon.getPostalCode())%>" size="6"><i>(ie. N4N4N4)</i></td>
 			</tr>
 
 			<tr>
@@ -192,44 +176,188 @@ window.onload = function () {
 			</tr>
 
 			<tr>
-			    <td align="right">
+			    <td nowrap="nowrap" align="right">
 			    <img border="0" src="/HairSalon/images/icons/small/availability_white.gif" width="16" height="16"></td>
-			    <td align="left"><b><u>Business Hours</u></b></td>
+			    <td nowrap="nowrap" align="left"><b><u>Default Business Hours</u></b></td>
 			</tr>
+			
 			<tr>
+			    <% if (userSession.moveAttribute ("salon_error_monday") == null) { %>
 			    <td align="right">Monday:</td>
-			    <td align="left"><input type="text" name="monday_start" size="5" value="<%=CoreTools.showMilitaryTime(salon.getMondayStart())%>"> to
-			    <input type="text" name="monday_end" size="5" value="<%=CoreTools.showMilitaryTime(salon.getMondayEnd())%>"></td>
+			    <% } else { %>
+			    <td align="right"><font color="red">Monday:</font></td>
+			    <% } %>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this)" id="monday_check" value="monday"></td>
+			</tr>
+			
+			<tr>
+			    <td nowrap="nowrap" align="right">Open:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("monday_start", salon.getMondayStart())%>
+				
+			    </td>
 			</tr>
 			<tr>
+			    <td nowrap="nowrap" align="right">Close:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("monday_end", salon.getMondayEnd())%>
+			    </td>
+			</tr>
+			
+			<tr>
+			    <td nowrap="nowrap" align="right">&nbsp;</td>
+			    <td nowrap="nowrap" align="left">&nbsp;</td>
+			</tr>
+			
+			<tr>
+			    <% if (userSession.moveAttribute ("salon_error_tuesday") == null) { %>
 			    <td align="right">Tuesday:</td>
-			    <td align="left"><input type="text" name="tuesday_start" size="5" value="<%=CoreTools.showMilitaryTime(salon.getTuesdayStart())%>"> to
-			    <input type="text" name="tuesday_end" size="5" value="<%=CoreTools.showMilitaryTime(salon.getTuesdayEnd())%>"></td>
+			    <% } else { %>
+			    <td align="right"><font color="red">Tuesday:</font></td>
+			    <% } %>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onChange="switchDayStatus(this)" id="tuesday_check" value="tuesday"></td>
 			</tr>
 			<tr>
+			    <td nowrap="nowrap" align="right">Open:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("tuesday_start", salon.getTuesdayStart())%>
+			    </td>
+			</tr>
+			<tr>
+			    <td nowrap="nowrap" align="right">Close:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("tuesday_end", salon.getTuesdayEnd())%>
+			    </td>
+			</tr>
+			
+			<tr>
+			    <td nowrap="nowrap" align="right">&nbsp;</td>
+			    <td nowrap="nowrap" align="left">&nbsp;</td>
+			</tr>
+			
+			<tr>
+			    <% if (userSession.moveAttribute ("salon_error_wednesday") == null) { %>
 			    <td align="right">Wednesday:</td>
-			    <td align="left"><input type="text" name="wednesday_start" size="5" value="<%=CoreTools.showMilitaryTime(salon.getWednesdayStart())%>"> to
-			    <input type="text" name="wednesday_end" size="5" value="<%=CoreTools.showMilitaryTime(salon.getWednesdayEnd())%>"></td>
+			    <% } else { %>
+			    <td align="right"><font color="red">Wednesday:</font></td>
+			    <% } %>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onChange="switchDayStatus(this)" id="wednesday_check" value="wednesday"></td>
 			</tr>
 			<tr>
+			    <td nowrap="nowrap" align="right">Open:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("wednesday_start", salon.getWednesdayStart())%>
+			    </td>
+			</tr>
+			<tr>
+			    <td nowrap="nowrap" align="right">Close:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("wednesday_end", salon.getWednesdayEnd())%>
+			    </td>
+			</tr>
+			
+			<tr>
+			    <td nowrap="nowrap" align="right">&nbsp;</td>
+			    <td nowrap="nowrap" align="left">&nbsp;</td>
+			</tr>
+			
+			<tr>
+			    <% if (userSession.moveAttribute ("salon_error_thursday") == null) { %>
 			    <td align="right">Thursday:</td>
-			    <td align="left"><input type="text" name="thursday_start" size="5" value="<%=CoreTools.showMilitaryTime(salon.getThursdayStart())%>"> to
-			    <input type="text" name="thursday_end" size="5" value="<%=CoreTools.showMilitaryTime(salon.getThursdayEnd())%>"></td>
+			    <% } else { %>
+			    <td align="right"><font color="red">Thursday:</font></td>
+			    <% } %>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onChange="switchDayStatus(this)" id="thursday_check" value="thursday"></td>
 			</tr>
 			<tr>
+			    <td nowrap="nowrap" align="right">Open:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("thursday_start", salon.getThursdayStart())%>
+			    </td>
+			</tr>
+			<tr>
+			    <td nowrap="nowrap" align="right">Close:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("thursday_end", salon.getThursdayEnd())%>
+			    </td>
+			</tr>
+			
+			<tr>
+			    <td nowrap="nowrap" align="right">&nbsp;</td>
+			    <td nowrap="nowrap" align="left">&nbsp;</td>
+			</tr>
+			
+			<tr>
+			    <% if (userSession.moveAttribute ("salon_error_friday") == null) { %>
 			    <td align="right">Friday:</td>
-			    <td align="left"><input type="text" name="friday_start" size="5" value="<%=CoreTools.showMilitaryTime(salon.getFridayStart())%>"> to
-			    <input type="text" name="friday_end" size="5" value="<%=CoreTools.showMilitaryTime(salon.getFridayEnd())%>"></td>
+			    <% } else { %>
+			    <td align="right"><font color="red">Friday:</font></td>
+			    <% } %>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onChange="switchDayStatus(this)" id="friday_check" value="friday"></td>
 			</tr>
 			<tr>
-			    <td align="right">Saturday:</td>
-			    <td align="left"><input type="text" name="saturday_start" size="5" value="<%=CoreTools.showMilitaryTime(salon.getSaturdayStart())%>"> to
-			    <input type="text" name="saturday_end" size="5" value="<%=CoreTools.showMilitaryTime(salon.getSaturdayEnd())%>"></td>
+			    <td nowrap="nowrap" align="right">Open:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("friday_start", salon.getFridayStart())%>
+			    </td>
 			</tr>
 			<tr>
+			    <td nowrap="nowrap" align="right">Close:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("friday_end", salon.getFridayEnd())%>
+			    </td>
+			</tr>
+			
+			<tr>
+			    <td nowrap="nowrap" align="right">&nbsp;</td>
+			    <td nowrap="nowrap" align="left">&nbsp;</td>
+			</tr>
+			
+			<tr>
+			    <% if (userSession.moveAttribute ("salon_error_saturday") == null) { %>
+			    <td align="right">Satuday:</td>
+			    <% } else { %>
+			    <td align="right"><font color="red">Saturday:</font></td>
+			    <% } %>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onChange="switchDayStatus(this)" id="saturday_check" value="saturday"></td>
+			</tr>
+			<tr>
+			    <td nowrap="nowrap" align="right">Open:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("saturday_start", salon.getSaturdayStart())%>
+			    </td>
+			</tr>
+			<tr>
+			    <td nowrap="nowrap" align="right">Close:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("saturday_end", salon.getSaturdayEnd())%>
+			    </td>
+			</tr>
+			
+			<tr>
+			    <td nowrap="nowrap" align="right">&nbsp;</td>
+			    <td nowrap="nowrap" align="left">&nbsp;</td>
+			</tr>
+			
+			<tr>
+			    <% if (userSession.moveAttribute ("salon_error_sunday") == null) { %>
 			    <td align="right">Sunday:</td>
-			    <td align="left"><input type="text" name="sunday_start" size="5" value="<%=CoreTools.showMilitaryTime(salon.getSundayStart())%>"> to
-			    <input type="text" name="sunday_end" size="5" value="<%=CoreTools.showMilitaryTime(salon.getSundayEnd())%>"></td>
+			    <% } else { %>
+			    <td align="right"><font color="red">Sunday:</font></td>
+			    <% } %>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onChange="switchDayStatus(this)" id="sunday_check" value="sunday"></td>
+			</tr>
+			<tr>
+			    <td nowrap="nowrap" align="right">Open:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("sunday_start", salon.getSundayStart())%>
+			    </td>
+			</tr>
+			<tr>
+			    <td nowrap="nowrap" align="right">Close:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("sunday_end", salon.getSundayEnd())%>
+			    </td>
 			</tr>
 		    </table>
 		</td>
@@ -249,11 +377,18 @@ window.onload = function () {
 <%@ include file="WEB-INF/jspf/footer.jspf" %>
 
 <script language="javascript" src="js/salon-addin.js"></script>
+<script language="javascript" src="js/time-addin.js"></script>
+
 <script>
 <% if (salon.getExceptions() != null && salon.getExceptions().size() > 0) {
                 for (ScheduleExceptionBean e : salon.getExceptions()) {%>
-    addIntialException('<%=CoreTools.display(e.getDate())%>','<%=CoreTools.display(e.getReason())%>');
+    addIntialException('<%=ServletHelper.display(e.getDate())%>','<%=ServletHelper.display(e.getReason())%>');
 <%}
             }%>
  </script>
+ 
+ <script>
+     updateDays ();
+ </script>
+ 
  <script>refillExceptionsList();</script>

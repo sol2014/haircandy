@@ -105,7 +105,7 @@ public class SalonBroker extends DatabaseBroker implements BrokerInterface
 		{
 			Connection connection = super.getConnection ();
 			
-			CallableStatement statement = connection.prepareCall ("{call UpdateSalon(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+			CallableStatement statement = connection.prepareCall ("{call UpdateSalon(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 			int index = 1;
 			
 			statement.setString (index++, salon.getName ());
@@ -118,8 +118,6 @@ public class SalonBroker extends DatabaseBroker implements BrokerInterface
 			statement.setString (index++, salon.getPhoneNumber ());
 			statement.setString (index++, salon.getEmail ());
 			statement.setDouble (index++, salon.getTaxRate ());
-			statement.setInt (index++, salon.getHairStations ());
-			statement.setInt (index++, salon.getBeautyStations ());
 			statement.setTime (index++, new java.sql.Time(salon.getMondayStart ().getTime()));
 			statement.setTime (index++, new java.sql.Time(salon.getMondayEnd ().getTime()));
 			statement.setTime (index++, new java.sql.Time(salon.getTuesdayStart ().getTime()));
@@ -174,12 +172,10 @@ public class SalonBroker extends DatabaseBroker implements BrokerInterface
 		
 		salon.setAddress1 (result.getString ("address1"));
 		salon.setAddress2 (result.getString ("address2"));
-		salon.setBeautyStations (result.getInt ("beauty_stations"));
 		salon.setCity (result.getString ("city"));
 		salon.setProvince (result.getString ("province"));
 		salon.setCountry (result.getString ("country"));
 		salon.setEmail (result.getString ("email"));
-		salon.setHairStations (result.getInt ("hair_stations"));
 		salon.setName (result.getString ("name"));
 		salon.setPhoneNumber (result.getString ("phone_number"));
 		salon.setPostalCode (result.getString ("postal_code"));

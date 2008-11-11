@@ -122,17 +122,17 @@ if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo
 				    </tr>
 				    <tr>
 					<td nowrap="nowrap" align="right">First Name:</td>
-					<td nowrap="nowrap" align="left"><input type="text" name="first_name" id="first_name" size="20" value="<%=CoreTools.display (firstName)%>"></td>
+					<td nowrap="nowrap" align="left"><input type="text" name="first_name" id="first_name" size="20" value="<%=ServletHelper.display (firstName)%>"></td>
 				    </tr>
 				    <tr>
 					
 					<td nowrap="nowrap" align="right">Last Name:</td>
-					<td nowrap="nowrap" align="left"><input type="text" name="last_name" id="last_name" size="20" value="<%=CoreTools.display (lastName)%>"></td>
+					<td nowrap="nowrap" align="left"><input type="text" name="last_name" id="last_name" size="20" value="<%=ServletHelper.display (lastName)%>"></td>
 				    </tr>
 				    <tr>
 					
 					<td nowrap="nowrap" align="right"><div id="telephone_label">Telephone:</div></td>
-					<td nowrap="nowrap" align="left"><input type="text" name="phone_number" id="phone_number" onKeyUp="return checkTelephone(this)" size="10" value="<%=CoreTools.display (phoneNumber)%>">
+					<td nowrap="nowrap" align="left"><input type="text" name="phone_number" id="phone_number" onKeyUp="return checkTelephone(this)" size="10" value="<%=ServletHelper.display (phoneNumber)%>">
 					    <img style="cursor:pointer" align="absmiddle" src="images/icons/small/find_white.gif" onclick="findClient()" title="Find and load client from this phone number."/>
 					    <img style="cursor:pointer" align="absmiddle" src="images/icons/small/personal_white.gif" onclick="setGuest()" title="Use a guest identity."/>
 					</td>

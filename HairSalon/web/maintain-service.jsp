@@ -63,8 +63,8 @@ String error_string = (String) userSession.moveAttribute ("service_error");
 		    <input type="submit" value="Revert" name="service_action" class="StandardButton"/>
 		    
 		    <%-- This is the feedback section, any errors or messages should be displayed here --%>
-		    <% if (error_string != null) { %><font color="red"><%=CoreTools.display (error_string)%></font><% } %>
-		    <% if (feedback_string != null) { %><font color="green"><%=CoreTools.display (feedback_string)%></font><% } %>
+		    <% if (error_string != null) { %><font color="red"><%=ServletHelper.display (error_string)%></font><% } %>
+		    <% if (feedback_string != null) { %><font color="green"><%=ServletHelper.display (feedback_string)%></font><% } %>
 		</td>
 	    </tr>
 	</table>
@@ -107,11 +107,11 @@ String error_string = (String) userSession.moveAttribute ("service_error");
 			    <% } else { %>
 			    <td align="right"><font color="red">Price:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="price" style="text-align:right" value="<%=CoreTools.display(service.getPrice ())%>" size="5">$</td>
+			    <td align="left"><input type="text" name="price" style="text-align:right" value="<%=ServletHelper.display(service.getPrice ())%>" size="5">$</td>
 			</tr>
 			<tr>
 			    <td align="right">Enabled:</td>
-			    <td align="left"><%=CoreTools.generateTrueFalseOptions ("enabled", Boolean.toString(service.getEnabled ()))%></td>
+			    <td align="left"><%=ServletHelper.generateTrueFalseOptions ("enabled", Boolean.toString(service.getEnabled ()))%></td>
 			</tr>
 		    </table>
 		</td>

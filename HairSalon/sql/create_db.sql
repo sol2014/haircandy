@@ -22,6 +22,7 @@ SOURCE ./db/service_product_db.sql
 SOURCE ./db/supplier_db.sql
 SOURCE ./db/supplier_product_db.sql
 SOURCE ./db/schedule_exception_db.sql
+SOURCE ./db/schedule_hours_db.sql
 SOURCE ./db/availability_exception_db.sql
 SOURCE ./db/sale_db.sql
 SOURCE ./db/sale_product_db.sql
@@ -41,6 +42,7 @@ SOURCE ./sp/sale.sql
 SOURCE ./sp/salon.sql
 SOURCE ./sp/schedule.sql
 SOURCE ./sp/schedule_exception.sql
+SOURCE ./sp/schedule_hours.sql
 SOURCE ./sp/service.sql
 SOURCE ./sp/supplier.sql
 SOURCE ./sp/alert.sql

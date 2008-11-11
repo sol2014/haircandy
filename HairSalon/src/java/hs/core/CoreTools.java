@@ -13,7 +13,6 @@ import java.util.*;
 import java.io.*;
 import java.text.*;
 
-import hs.core.*;
 import hs.objects.*;
 
 public class CoreTools
@@ -24,45 +23,6 @@ public class CoreTools
 	public static final String FullTimeFormat = "KK:mm:ss";
 	public static final String MonthYearFormat = "MMMMMMMM, yyyy";
 	public static final String DayMonthYearFormat = "EEEEEEEEE, MMMMMMMMM d, yyyy";
-	
-	public static String display (Object o)
-	{
-		if (o == null)
-		{
-			return "";
-		}
-		else
-		{
-			if (o instanceof Date)
-			{
-				DateFormat df = new SimpleDateFormat (DateFormat);
-				return df.format ((Date) o);
-			}
-			else
-			{
-				return o.toString ().trim ();
-			}
-		}
-	}
-
-	public static String displayMax (String str, int max)
-	{
-		String value = "";
-
-		if (str != null)
-		{
-			if (str.trim ().length () <= max)
-			{
-				value = str.trim ();
-			}
-			else
-			{
-				value = str.trim ().substring (0, max - 3) + "...";
-			}
-		}
-
-		return value;
-	}
 
 	public static boolean containsOnlyNumbers (String str)
 	{
@@ -171,302 +131,6 @@ public class CoreTools
 		return true;
 	}
 
-	public static String displayAlertIcon (String levelstr)
-	{
-		AlertLevels level = AlertLevels.valueOf (levelstr);
-
-		switch (level)
-		{
-			case Low:
-				return "alert-low";
-			case Medium:
-				return "alert-medium";
-			case High:
-				return "alert-high";
-		}
-
-		return "";
-	}
-
-	public static String displayPhoneNumber (String rawNumber)
-	{
-		if (rawNumber == null || rawNumber.equals (""))
-		{
-			return "No Data";		// First make sure that we have only numbers.
-
-		}
-		if (isNumbers (rawNumber))
-		{
-			if (rawNumber.length () == 10)
-			{
-				String area = rawNumber.substring (0, 3);
-				String first = rawNumber.substring (3, 6);
-				String second = rawNumber.substring (6, 10);
-
-				return "(" + area + ") " + first + "-" + second;
-			}
-			else
-			{
-				return "Bad Length";
-			}
-		}
-		else
-		{
-			return "Not Numeric";
-		}
-	}
-
-	public static String displayPrice (Double price)
-	{
-		return "$ " + price;
-	}
-
-	public static String generateTrueFalseOptions (String name, String selected)
-	{
-		String html = "";
-
-		if (selected == null || selected.length () < 1)
-		{
-			selected = "True";
-		}
-
-		html += "<input type=\"radio\" name=\"" + name + "\" value=\"True\" ";
-
-		if (selected != null && selected.toLowerCase ().equals ("true"))
-		{
-			html += "checked=\"checked\"";
-		}
-
-		html += "/>True";
-
-		html += "<input type=\"radio\" name=\"" + name + "\" value=\"False\" ";
-
-		if (selected != null && selected.toLowerCase ().equals ("false"))
-		{
-			html += "checked=\"checked\"";
-		}
-
-		html += "/>False";
-
-		return html;
-	}
-
-	public static String generateOptions (String selected, String[] options)
-	{
-		String html = "";
-
-		if (options.length < 1)
-		{
-			return "";
-		}
-		else
-		{
-			for (String option : options)
-			{
-				html += "<option value=\"" + option + "\"";
-
-				if (selected != null && selected.toLowerCase ().equals (option.toLowerCase ()))
-				{
-					html += "selected=\"selected\"";
-				}
-
-				html += ">" + option + "</option>";
-			}
-		}
-
-		return html;
-	}
-
-	public static String generateUserRoleOptions (String selected, boolean withNone)
-	{
-		String html = "";
-
-		if (withNone)
-		{
-			html += "<option value=\"None\"";
-
-			if (selected != null && selected.equals ("None"))
-			{
-				html += "selected=\"selected\"";
-			}
-
-			html += ">None</option>";
-		}
-
-		for (UserRoles role : UserRoles.values ())
-		{
-			html += "<option value=\"" + role + "\"";
-
-			if (selected != null && selected.toLowerCase ().equals (role.toString ().toLowerCase ()))
-			{
-				html += "selected=\"selected\"";
-			}
-
-			html += ">" + role + "</option>";
-		}
-		return html;
-	}
-
-	public static String generatePaymentTypeOptions (String selected, boolean withNone)
-	{
-		String html = "";
-
-		if (withNone)
-		{
-			html += "<option value=\"None\"";
-
-			if (selected != null && selected.equals ("None"))
-			{
-				html += "selected=\"selected\"";
-			}
-
-			html += ">None</option>";
-		}
-
-		for (PaymentTypes type : PaymentTypes.values ())
-		{
-			html += "<option value=\"" + type + "\"";
-
-			if (selected != null && selected.toLowerCase ().equals (type.toString ().toLowerCase ()))
-			{
-				html += "selected=\"selected\"";
-			}
-
-			html += ">" + type + "</option>";
-		}
-
-		return html;
-	}
-
-	public static String generateProductTypeOptions (String selected, boolean withNone)
-	{
-		String html = "";
-
-		if (withNone)
-		{
-			html += "<option value=\"None\"";
-
-			if (selected != null && selected.equals ("None"))
-			{
-				html += "selected=\"selected\"";
-			}
-
-			html += ">None</option>";
-		}
-
-		for (ProductTypes type : ProductTypes.values ())
-		{
-			html += "<option value=\"" + type + "\"";
-
-			if (selected != null && selected.toLowerCase ().equals (type.toString ().toLowerCase ()))
-			{
-				html += "selected=\"selected\"";
-			}
-
-			html += ">" + type + "</option>";
-		}
-
-		return html;
-	}
-
-	public static String generateProductUnitOptions (String selected, boolean withNone)
-	{
-		String html = "";
-
-		if (withNone)
-		{
-			html += "<option value=\"None\"";
-
-			if (selected != null && selected.equals ("None"))
-			{
-				html += "selected=\"selected\"";
-			}
-
-			html += ">None</option>";
-		}
-
-		for (ProductUnits type : ProductUnits.values ())
-		{
-			html += "<option value=\"" + type + "\"";
-
-			if (selected != null && selected.toLowerCase ().equals (type.toString ().toLowerCase ()))
-			{
-				html += "selected=\"selected\"";
-			}
-
-			html += ">" + type + "</option>";
-		}
-
-		return html;
-	}
-
-	public static String generateEmployeeExceptions (EmployeeBean employee)
-	{
-		String html = "";
-
-		if (employee != null)
-		{
-			ArrayList<AvailabilityExceptionBean> exceptions = employee.getAvailabilityExceptions ();
-
-			if (exceptions != null)
-			{
-				// We have a list of services to display.
-				for (AvailabilityExceptionBean exception : exceptions)
-				{
-					html += "<option value=\"" + exception.getDate ().toString () + "\">" + exception.getDate ().toString () + "</option>";
-				}
-			}
-		}
-
-		return html;
-	}
-
-	public static String generateEmployeeServices (EmployeeBean employee)
-	{
-		String html = "";
-
-		if (employee != null)
-		{
-			ArrayList<ServiceBean> services = employee.getServices ();
-
-			if (services != null)
-			{
-				// We have a list of services to display.
-				for (ServiceBean service : services)
-				{
-					html += "<option value=\"" + service.getServiceNo ().toString () + "\">" + service.getName () + "</option>";
-				}
-			}
-		}
-
-		return html;
-	}
-
-	public static String generateServicesLeft (EmployeeBean employee, ServiceBean[] services)
-	{
-		String html = "";
-
-		if (employee != null && services != null)
-		{
-			// We have a list of services to display.
-			for (ServiceBean service : services)
-			{
-				if (!employee.hasService (service))
-				{
-					html += "<option value=\"" + service.getServiceNo ().toString () + "\">" + service.getName () + "</option>";
-				}
-			}
-		}
-
-		return html;
-	}
-
-	public static String showMilitaryTime (Date date)
-	{
-		SimpleDateFormat format = new SimpleDateFormat ("HH:mm");
-		return format.format (date);
-	}
-
 	public static int getEndHour (Date date)
 	{
 		Calendar calendar = Calendar.getInstance ();
@@ -539,7 +203,7 @@ public class CoreTools
 			return "AM";
 		}
 	}
-
+	
 	public static Date getDate (String datestr)
 			throws ParseException
 	{
@@ -552,6 +216,12 @@ public class CoreTools
 	{
 		SimpleDateFormat sdf = new SimpleDateFormat (TimeFormat);
 		return sdf.parse (timestr);
+	}
+	
+	public static String showTime (Date date)
+	{
+		SimpleDateFormat format = new SimpleDateFormat ("HH:mm");
+		return format.format (date);
 	}
 	
 	public static boolean isDateBefore (Date first, Date second)

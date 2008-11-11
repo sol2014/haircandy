@@ -292,5 +292,13 @@ public class ProductBean extends DataBean implements Comparator
 		
 		return (a.getProductNo ().equals (this.getProductNo ()));
 	}
+
+	@Override
+	public int hashCode ()
+	{
+		int hash = 7;
+		hash = 89 * hash + (this.productNo != null ? this.productNo.hashCode () : 0);
+		return hash;
+	}
 }
 

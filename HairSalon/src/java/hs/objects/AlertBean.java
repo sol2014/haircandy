@@ -145,5 +145,13 @@ public class AlertBean extends DataBean
 		
 		return (result1);
 	}
+
+	@Override
+	public int hashCode ()
+	{
+		int hash = 7;
+		hash = 29 * hash + (this.alertNo != null ? this.alertNo.hashCode () : 0);
+		return hash;
+	}
 }
 

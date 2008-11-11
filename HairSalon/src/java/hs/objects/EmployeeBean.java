@@ -398,6 +398,7 @@ public class EmployeeBean extends PersonBean implements Comparator
 		return address;
 	}
 	
+	@Override
 	public int compare (Object o1, Object o2)
 	{
 		EmployeeBean a1 = (EmployeeBean)o1;
@@ -412,5 +413,13 @@ public class EmployeeBean extends PersonBean implements Comparator
 		EmployeeBean a = (EmployeeBean)o;
 		
 		return (a.getEmployeeNo ().equals (this.getEmployeeNo ()));
+	}
+
+	@Override
+	public int hashCode ()
+	{
+		int hash = 3;
+		hash = 67 * hash + (this.employeeNo != null ? this.employeeNo.hashCode () : 0);
+		return hash;
 	}
 }

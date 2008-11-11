@@ -126,28 +126,6 @@ public class SalonServlet extends DispatcherServlet
 			inputFailed = true;
 		}
 		
-		String hairStations = request.getParameter ("hair_stations").trim ();
-		try
-		{
-			salon.setHairStations (Integer.parseInt (hairStations));
-		}
-		catch (Exception e)
-		{
-			userSession.setAttribute ("salon_error_hair_stations", "");
-			inputFailed = true;
-		}
-		
-		String beautyStations = request.getParameter ("beauty_stations").trim ();
-		try
-		{
-			salon.setBeautyStations (Integer.parseInt (beautyStations));
-		}
-		catch (Exception e)
-		{
-			userSession.setAttribute ("salon_error_beauty_stations", "");
-			inputFailed = true;
-		}
-		
 		String phoneNumber = request.getParameter ("phone_number").trim ();
         if (phoneNumber == null || phoneNumber.length () != 10)
         {
@@ -217,21 +195,21 @@ public class SalonServlet extends DispatcherServlet
 			inputFailed = true;
 		}
 		else salon.setEmail (email);
-
-		String monday_start = request.getParameter ("monday_start");
-		String monday_end = request.getParameter ("monday_end");
-		String tuesday_start = request.getParameter ("tuesday_start");
-		String tuesday_end = request.getParameter ("tuesday_end");
-		String wednesday_start = request.getParameter ("wednesday_start");
-		String wednesday_end = request.getParameter ("wednesday_end");
-		String thursday_start = request.getParameter ("thursday_start");
-		String thursday_end = request.getParameter ("thursday_end");
-		String friday_start = request.getParameter ("friday_start");
-		String friday_end = request.getParameter ("friday_end");
-		String saturday_start = request.getParameter ("saturday_start");
-		String saturday_end = request.getParameter ("saturday_end");
-		String sunday_start = request.getParameter ("sunday_start");
-		String sunday_end = request.getParameter ("sunday_end");
+		
+		String monday_start = ServletHelper.readTimeRequest (request, "monday_start");
+		String monday_end = ServletHelper.readTimeRequest (request, "monday_end");
+		String tuesday_start = ServletHelper.readTimeRequest (request, "tuesday_start");
+		String tuesday_end = ServletHelper.readTimeRequest (request, "tuesday_end");
+		String wednesday_start = ServletHelper.readTimeRequest (request, "wednesday_start");
+		String wednesday_end = ServletHelper.readTimeRequest (request, "wednesday_end");
+		String thursday_start = ServletHelper.readTimeRequest (request, "thursday_start");
+		String thursday_end = ServletHelper.readTimeRequest (request, "thursday_end");
+		String friday_start = ServletHelper.readTimeRequest (request, "friday_start");
+		String friday_end = ServletHelper.readTimeRequest (request, "friday_end");
+		String saturday_start = ServletHelper.readTimeRequest (request, "saturday_start");
+		String saturday_end = ServletHelper.readTimeRequest (request, "saturday_end");
+		String sunday_start = ServletHelper.readTimeRequest (request, "sunday_start");
+		String sunday_end = ServletHelper.readTimeRequest (request, "sunday_end");
 
 		try
 		{
@@ -253,6 +231,48 @@ public class SalonServlet extends DispatcherServlet
 		catch (Exception e)
 		{
 			LogController.write (this, "Unable to convert date information.");
+			inputFailed = true;
+		}
+		
+		if (!salon.getMondayStart ().equals (salon.getMondayEnd ()) && !salon.getMondayStart ().before (salon.getMondayEnd ()))
+		{
+			userSession.setAttribute ("salon_error_monday", "");
+			inputFailed = true;
+		}
+		
+		if (!salon.getTuesdayStart ().equals (salon.getTuesdayEnd ()) && !salon.getTuesdayStart ().before (salon.getTuesdayEnd ()))
+		{
+			userSession.setAttribute ("salon_error_tuesday", "");
+			inputFailed = true;
+		}
+		
+		if (!salon.getWednesdayStart ().equals (salon.getWednesdayEnd ()) && !salon.getWednesdayStart ().before (salon.getWednesdayEnd ()))
+		{
+			userSession.setAttribute ("salon_error_wednesday", "");
+			inputFailed = true;
+		}
+		
+		if (!salon.getThursdayStart ().equals (salon.getThursdayEnd ()) && !salon.getThursdayStart ().before (salon.getThursdayEnd ()))
+		{
+			userSession.setAttribute ("salon_error_thursday", "");
+			inputFailed = true;
+		}
+		
+		if (!salon.getFridayStart ().equals (salon.getFridayEnd ()) && !salon.getFridayStart ().before (salon.getFridayEnd ()))
+		{
+			userSession.setAttribute ("salon_error_friday", "");
+			inputFailed = true;
+		}
+		
+		if (!salon.getSaturdayStart ().equals (salon.getSaturdayEnd ()) && !salon.getSaturdayStart ().before (salon.getSaturdayEnd ()))
+		{
+			userSession.setAttribute ("salon_error_saturday", "");
+			inputFailed = true;
+		}
+		
+		if (!salon.getSundayStart ().equals (salon.getSundayEnd ()) && !salon.getSundayStart ().before (salon.getSundayEnd ()))
+		{
+			userSession.setAttribute ("salon_error_sunday", "");
 			inputFailed = true;
 		}
 		

@@ -45,12 +45,12 @@
                 <% for (ServiceBean service : searchResults.keySet ()) {%>
                 <tr align="right" valign="middle">
                     <td height="30" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/result.gif" width="16" height="16" />&nbsp;</td>
-                    <td align="left" class="Row2"><span class="SearchLink"><a href="service?service_action=Load&service_no=<%= service.getServiceNo()%>" class="SearchLink"><%=CoreTools.display(service.getName())%></a></span></td>
-		    <td nowrap="nowrap" class="Row7"><%=CoreTools.display (service.getDuration ())%>m</td>
-		    <td nowrap="nowrap" class="Row7"><input type="text" onKeyUp="return calculateServiceSubTotal()" id="st_<%=CoreTools.display(service.getServiceNo())%>" value="<%=CoreTools.display(searchResults.get(service))%>" size="4" style="text-align:right"/></td>
-                    <td nowrap="nowrap" class="Row7"><%=CoreTools.displayPrice (service.getPrice ())%></td>
-		    <td nowrap="nowrap" class="Row7"><b><div id="sub_total_service_<%=CoreTools.display(service.getServiceNo())%>"><%=CoreTools.displayPrice (service.getPrice ())%></div></b></td>
-                    <td nowrap="nowrap" class="Row7"><img style="cursor:pointer" src="images/icons/small/remove_white.gif" onclick="deleteService('<%=CoreTools.display(service.getServiceNo())%>')" title="Delete this service from the list." /></td>
+                    <td align="left" class="Row2"><span class="SearchLink"><a href="service?service_action=Load&service_no=<%= service.getServiceNo()%>" class="SearchLink"><%=ServletHelper.display(service.getName())%></a></span></td>
+		    <td nowrap="nowrap" class="Row7"><%=ServletHelper.display (service.getDuration ())%>m</td>
+		    <td nowrap="nowrap" class="Row7"><input type="text" onKeyUp="return calculateServiceSubTotal()" id="st_<%=ServletHelper.display(service.getServiceNo())%>" value="<%=ServletHelper.display(searchResults.get(service))%>" size="4" style="text-align:right"/></td>
+                    <td nowrap="nowrap" class="Row7"><%=ServletHelper.displayPrice (service.getPrice ())%></td>
+		    <td nowrap="nowrap" class="Row7"><b><div id="sub_total_service_<%=ServletHelper.display(service.getServiceNo())%>"><%=ServletHelper.displayPrice (service.getPrice ())%></div></b></td>
+                    <td nowrap="nowrap" class="Row7"><img style="cursor:pointer" src="images/icons/small/remove_white.gif" onclick="deleteService('<%=ServletHelper.display(service.getServiceNo())%>')" title="Delete this service from the list." /></td>
                 </tr>
                 <% }%>
                 <% }%>

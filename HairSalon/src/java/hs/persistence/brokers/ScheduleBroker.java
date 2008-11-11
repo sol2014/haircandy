@@ -2,6 +2,8 @@
  * HairSalon: Scheduling and Management System
  * Systems II - Southern Alberta Institute of Technology
  * 
+ * File Author: Philippe Durand
+ * 
  * System Developed by:
  * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
  */
@@ -18,7 +20,7 @@ import hs.persistence.*;
 /**
  * The broker that provides the schedule beans to/from the database.
  * 
- * @author Miyoung Han
+ * @author Philippe Durand
  */
 public class ScheduleBroker extends DatabaseBroker implements BrokerInterface
 {

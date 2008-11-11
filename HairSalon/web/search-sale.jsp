@@ -65,20 +65,20 @@ String error_string = (String) userSession.moveAttribute ("sale_search_error");
 			    </tr>
 			    <tr>
 				<td align="right">Payment Type:</td>
-				<td align="left"><input type="text" name="payment_type" size="15" value="<%=CoreTools.display (userSession.moveAttribute ("sale_search_payment_type"))%>"></td>
+				<td align="left"><input type="text" name="payment_type" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("sale_search_payment_type"))%>"></td>
 			    </tr>
 			    <tr>
 				<td align="right">Total Due:</td>
-				<td align="left"><input type="text" name="total_due" size="15" value="<%=CoreTools.display (userSession.moveAttribute ("sale_search_total_due"))%>"></td>
+				<td align="left"><input type="text" name="total_due" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("sale_search_total_due"))%>"></td>
 			    </tr>
 
 			    <tr>
 				<td align="right">Payment:</td>
-				<td align="left"><input type="text" name="payment" size="15" value="<%=CoreTools.display (userSession.moveAttribute ("sale_search_payment"))%>"></td>
+				<td align="left"><input type="text" name="payment" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("sale_search_payment"))%>"></td>
 			    </tr>
 			    <tr>
 				<td align="right">Is Complete:</td>
-				<td align="left"><input type="text" name="is_complete" size="15" value="<%=CoreTools.display (userSession.moveAttribute ("sale_search_is_complete"))%>"></td>
+				<td align="left"><input type="text" name="is_complete" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("sale_search_is_complete"))%>"></td>
 			    </tr>
 			</table>
 		    </div>

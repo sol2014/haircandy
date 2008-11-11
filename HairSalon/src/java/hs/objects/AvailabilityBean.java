@@ -160,4 +160,13 @@ public class AvailabilityBean extends DataBean
 		
 		return (result1 && result2);
 	}
+
+	@Override
+	public int hashCode ()
+	{
+		int hash = 7;
+		hash = 61 * hash + (this.day != null ? this.day.hashCode () : 0);
+		hash = 61 * hash + (this.employeeNo != null ? this.employeeNo.hashCode () : 0);
+		return hash;
+	}
 }

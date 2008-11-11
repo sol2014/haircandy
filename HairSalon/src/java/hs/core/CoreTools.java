@@ -218,9 +218,15 @@ public class CoreTools
 		return sdf.parse (timestr);
 	}
 	
+	public static String showDate (Date date)
+	{
+		SimpleDateFormat format = new SimpleDateFormat (CoreTools.DateFormat);
+		return format.format (date);
+	}
+	
 	public static String showTime (Date date)
 	{
-		SimpleDateFormat format = new SimpleDateFormat ("HH:mm");
+		SimpleDateFormat format = new SimpleDateFormat (CoreTools.TimeFormat);
 		return format.format (date);
 	}
 	

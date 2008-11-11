@@ -350,7 +350,83 @@ public class EmployeeBean extends PersonBean implements Comparable
 	{
 		return address;
 	}
+	
+	/**
+	 * Used to obtain the start time for a specified weekday.
+	 * @param weekDay the weekday integer from 0 - 6
+	 * @return the date of the weekday's start time.
+	 */
+	public Date getWeekdayStartTime (int weekDay)
+	{
+		Date startTime;
+		switch (weekDay)
+		{
+			case 2:
+				startTime = getMondayStart ();
+				break;
+			case 3:
+				startTime = getTuesdayStart ();
+				break;
+			case 4:
+				startTime = getWednesdayStart ();
+				break;
+			case 5:
+				startTime = getThursdayStart ();
+				break;
+			case 6:
+				startTime = getFridayStart ();
+				break;
+			case 7:
+				startTime = getSaturdayStart ();
+				break;
+			case 1:
+				startTime = getSundayStart ();
+				break;
+			default:
+				startTime = null;
+				break;
+		}
+		return startTime;
+	}
 
+	/**
+	 * Used to obtain the end time for a specified weekday.
+	 * @param weekDay the weekday integer from 0 - 6
+	 * @return the date of the weekday's end time.
+	 */
+	public Date getWeekdayEndTime (int weekDay)
+	{
+		Date endTime;
+		switch (weekDay)
+		{
+			case 2:
+				endTime = getMondayEnd ();
+				break;
+			case 3:
+				endTime = getTuesdayEnd ();
+				break;
+			case 4:
+				endTime = getWednesdayEnd ();
+				break;
+			case 5:
+				endTime = getThursdayEnd ();
+				break;
+			case 6:
+				endTime = getFridayEnd ();
+				break;
+			case 7:
+				endTime = getSaturdayEnd ();
+				break;
+			case 1:
+				endTime = getSundayEnd ();
+				break;
+			default:
+				endTime = null;
+				break;
+		}
+		return endTime;
+	}
+	
 	@Override
 	public int compareTo (Object o)
 	{

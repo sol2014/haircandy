@@ -1,19 +1,19 @@
 /**//*
-* 描述：跨浏览器的设置 innerHTML 方法
-*       允许插入的 HTML 代码中包含 script 和 style
-* 作者：kenxu <ken@ajaxwing.com>
-* 日期：2006-03-23
-* 参数：
-*    el: 合法的 DOM 树中的节点
-*    htmlCode: 合法的 HTML 代码
-* 经测试的浏览器：ie5+, firefox1.5+, opera8.5+
-*/
+ * 描述：跨浏览器的设置 innerHTML 方法
+ *       允许插入的 HTML 代码中包含 script 和 style
+ * 作者：kenxu <ken@ajaxwing.com>
+ * 日期：2006-03-23
+ * 参数：
+ *    el: 合法的 DOM 树中的节点
+ *    htmlCode: 合法的 HTML 代码
+ * 经测试的浏览器：ie5+, firefox1.5+, opera8.5+
+ */
 var setInnerHTML = function (el, htmlCode) {
     var ua = navigator.userAgent.toLowerCase();
     if (ua.indexOf('msie') >= 0 && ua.indexOf('opera') < 0) {
         htmlCode = '<div style="display:none">for IE</div>' + htmlCode;
         htmlCode = htmlCode.replace(/<script([^>]*)>/gi,
-                                    '<script$1 defer>');
+        '<script$1 defer>');
         el.innerHTML = htmlCode;
         el.removeChild(el.firstChild);
     } else {
@@ -29,7 +29,19 @@ var setInnerHTML = function (el, htmlCode) {
     }
 }
 
-
+function   NoEnterKey(e)
+{   
+    if(!e)
+    {
+        e = window.event;
+    }
+    if(e.keyCode == 13) 
+    { 
+        e.returnValue = false; 
+    }
+    return false;
+}   
+document.onkeypress = NoEnterKey;
 
 
 function getScreenWidth()//function to get screen width

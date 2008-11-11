@@ -41,7 +41,7 @@ UserSession userSession = (UserSession) session.getAttribute ("user_session");
 <script>
 function goToCalendarDay (day)
 {
-    location.replace ("view-sch-scheduler.jsp?date="+day);
+    location.replace ("view-sch-clientscheduler.jsp?date="+day);
 }
 
 var cellData = new Hashtable();

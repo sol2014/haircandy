@@ -21,11 +21,11 @@
 				</tr>
 				<tr>
 				    <td nowrap="nowrap" align="right">Full Name:</td>
-				    <td nowrap="nowrap" align="left"><b><%=CoreTools.display (userSession.getEmployee ().getName ())%></b> ID: <b><%=CoreTools.display(userSession.getEmployee().getEmployeeNo ())%></b></td>
+				    <td nowrap="nowrap" align="left"><b><%=ServletHelper.display (userSession.getEmployee ().getName ())%></b> ID: <b><%=ServletHelper.display(userSession.getEmployee().getEmployeeNo ())%></b></td>
 				</tr>
 				<tr>
 				    <td nowrap="nowrap" align="right">Telephone:</td>
-				    <td nowrap="nowrap" align="left"><b><%=CoreTools.displayPhoneNumber (userSession.getEmployee().getPhoneNumber())%></b></td>
+				    <td nowrap="nowrap" align="left"><b><%=ServletHelper.displayPhoneNumber (userSession.getEmployee().getPhoneNumber())%></b></td>
 				</tr>
 				<tr>
 				    <td align="right"></td>
@@ -57,38 +57,38 @@
 				</tr>
 				<tr>
 				    <td nowrap="nowrap" align="right">Monday:</td>
-				    <td nowrap="nowrap" align="left"><input type="text" name="monday_start" size="5" value="<%=CoreTools.showMilitaryTime(userSession.getEmployee().getMondayStart())%>"> to
-				    <input type="text" name="monday_end" size="5" value="<%=CoreTools.showMilitaryTime(userSession.getEmployee().getMondayEnd())%>"></td>
+				    <td nowrap="nowrap" align="left"><input type="text" name="monday_start" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getMondayStart())%>"> to
+				    <input type="text" name="monday_end" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getMondayEnd())%>"></td>
 				</tr>
 				<tr>
 				    <td nowrap="nowrap" align="right">Tuesday:</td>
-				    <td nowrap="nowrap" align="left"><input type="text" name="tuesday_start" size="5" value="<%=CoreTools.showMilitaryTime(userSession.getEmployee().getTuesdayStart())%>"> to
-				    <input type="text" name="tuesday_end" size="5" value="<%=CoreTools.showMilitaryTime(userSession.getEmployee().getTuesdayEnd())%>"></td>
+				    <td nowrap="nowrap" align="left"><input type="text" name="tuesday_start" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getTuesdayStart())%>"> to
+				    <input type="text" name="tuesday_end" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getTuesdayEnd())%>"></td>
 				</tr>
 				<tr>
 				    <td nowrap="nowrap" align="right">Wednesday:</td>
-				    <td nowrap="nowrap" align="left"><input type="text" name="wednesday_start" size="5" value="<%=CoreTools.showMilitaryTime(userSession.getEmployee().getWednesdayStart())%>"> to
-				    <input type="text" name="wednesday_end" size="5" value="<%=CoreTools.showMilitaryTime(userSession.getEmployee().getWednesdayEnd())%>"></td>
+				    <td nowrap="nowrap" align="left"><input type="text" name="wednesday_start" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getWednesdayStart())%>"> to
+				    <input type="text" name="wednesday_end" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getWednesdayEnd())%>"></td>
 				</tr>
 				<tr>
 				    <td nowrap="nowrap" align="right">Thursday:</td>
-				    <td nowrap="nowrap" align="left"><input type="text" name="thursday_start" size="5" value="<%=CoreTools.showMilitaryTime(userSession.getEmployee().getThursdayStart())%>"> to
-				    <input type="text" name="thursday_end" size="5" value="<%=CoreTools.showMilitaryTime(userSession.getEmployee().getThursdayEnd())%>"></td>
+				    <td nowrap="nowrap" align="left"><input type="text" name="thursday_start" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getThursdayStart())%>"> to
+				    <input type="text" name="thursday_end" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getThursdayEnd())%>"></td>
 				</tr>
 				<tr>
 				    <td nowrap="nowrap" align="right">Friday:</td>
-				    <td nowrap="nowrap" align="left"><input type="text" name="friday_start" size="5" value="<%=CoreTools.showMilitaryTime(userSession.getEmployee().getFridayStart())%>"> to
-				    <input type="text" name="friday_end" size="5" value="<%=CoreTools.showMilitaryTime(userSession.getEmployee().getFridayEnd())%>"></td>
+				    <td nowrap="nowrap" align="left"><input type="text" name="friday_start" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getFridayStart())%>"> to
+				    <input type="text" name="friday_end" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getFridayEnd())%>"></td>
 				</tr>
 				<tr>
 				    <td nowrap="nowrap" align="right">Saturday:</td>
-				    <td nowrap="nowrap" align="left"><input type="text" name="saturday_start" size="5" value="<%=CoreTools.showMilitaryTime(userSession.getEmployee().getSaturdayStart())%>"> to
-				    <input type="text" name="saturday_end" size="5" value="<%=CoreTools.showMilitaryTime(userSession.getEmployee().getSaturdayEnd())%>"></td>
+				    <td nowrap="nowrap" align="left"><input type="text" name="saturday_start" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getSaturdayStart())%>"> to
+				    <input type="text" name="saturday_end" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getSaturdayEnd())%>"></td>
 				</tr>
 				<tr>
 				    <td nowrap="nowrap" align="right">Sunday:</td>
-				    <td nowrap="nowrap" align="left"><input type="text" name="sunday_start" size="5" value="<%=CoreTools.showMilitaryTime(userSession.getEmployee().getSundayStart())%>"> to
-				    <input type="text" name="sunday_end" size="5" value="<%=CoreTools.showMilitaryTime(userSession.getEmployee().getSundayEnd())%>"></td>
+				    <td nowrap="nowrap" align="left"><input type="text" name="sunday_start" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getSundayStart())%>"> to
+				    <input type="text" name="sunday_end" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getSundayEnd())%>"></td>
 				</tr>
 			    </table>
 			</td>

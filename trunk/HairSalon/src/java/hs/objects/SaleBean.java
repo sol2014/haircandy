@@ -274,4 +274,12 @@ public class SaleBean extends DataBean implements Comparator
 		
 		return (a.getTransactionNo ().equals (this.getTransactionNo ()));
 	}
+
+	@Override
+	public int hashCode ()
+	{
+		int hash = 7;
+		hash = 61 * hash + (this.transactionNo != null ? this.transactionNo.hashCode () : 0);
+		return hash;
+	}
 }

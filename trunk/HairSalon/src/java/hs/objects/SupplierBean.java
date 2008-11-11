@@ -131,5 +131,13 @@ public class SupplierBean extends DataBean implements Comparator
 
 		return (a.getSupplierNo ().equals (this.getSupplierNo ()));
 	}
+
+	@Override
+	public int hashCode ()
+	{
+		int hash = 7;
+		hash = 83 * hash + (this.supplierNo != null ? this.supplierNo.hashCode () : 0);
+		return hash;
+	}
 }
 

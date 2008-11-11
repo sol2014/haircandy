@@ -11,8 +11,6 @@ CREATE TABLE `salon`
 	`phone_number` VARCHAR(10),
 	`email` VARCHAR(50),
 	`tax_rate` DECIMAL(2,2) NOT NULL,
-	`hair_stations` TINYINT NOT NULL,
-	`beauty_stations` TINYINT NOT NULL,
 	`monday_start` TIME NOT NULL,
 	`monday_end` TIME NOT NULL,
 	`tuesday_start` TIME NOT NULL,

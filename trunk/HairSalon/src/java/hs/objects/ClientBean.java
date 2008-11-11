@@ -92,6 +92,7 @@ public class ClientBean extends PersonBean
 		this.address = address;
 	}
 	
+	@Override
 	public int compare (Object o1, Object o2)
 	{
 		ClientBean a1 = (ClientBean)o1;
@@ -106,5 +107,13 @@ public class ClientBean extends PersonBean
 		ClientBean a = (ClientBean)o;
 		
 		return (a.getClientNo ().equals (this.getClientNo ()));
+	}
+
+	@Override
+	public int hashCode ()
+	{
+		int hash = 7;
+		hash = 37 * hash + (this.clientNo != null ? this.clientNo.hashCode () : 0);
+		return hash;
 	}
 }

@@ -110,7 +110,7 @@ String error_string = (String) userSession.moveAttribute("sale_error");
                             <% } else {%>
                             <td nowrap="nowrap" align="right"><font color="red">First Name:</font></td>
                             <% }%>
-                            <td nowrap="nowrap" align="left"><input type="text" name="first_name" id="first_name" size="20" value="<%=CoreTools.display(userSession.moveAttribute("sale_new_first_name"))%>"></td>
+                            <td nowrap="nowrap" align="left"><input type="text" name="first_name" id="first_name" size="20" value="<%=ServletHelper.display(userSession.moveAttribute("sale_new_first_name"))%>"></td>
                         </tr>
                         <tr>
                             <% if (userSession.moveAttribute("sale_error_last_name") == null) {%>
@@ -118,7 +118,7 @@ String error_string = (String) userSession.moveAttribute("sale_error");
                             <% } else {%>
                             <td nowrap="nowrap" align="right"><font color="red">Last Name:</font></td>
                             <% }%>
-                            <td nowrap="nowrap" align="left"><input type="text" name="last_name" id="last_name" size="20" value="<%=CoreTools.display(userSession.moveAttribute("sale_new_last_name"))%>"></td>
+                            <td nowrap="nowrap" align="left"><input type="text" name="last_name" id="last_name" size="20" value="<%=ServletHelper.display(userSession.moveAttribute("sale_new_last_name"))%>"></td>
                         </tr>
                         <tr>
                             <% if (userSession.moveAttribute("sale_error_phone_number") == null) {%>
@@ -126,7 +126,7 @@ String error_string = (String) userSession.moveAttribute("sale_error");
                             <% } else {%>
                             <td nowrap="nowrap" align="right"><font color="red"><div id="telephone_label">Telephone:</div></font></td>
                             <% }%>
-                            <td nowrap="nowrap" align="left"><input type="text" name="phone_number" id="phone_number" onKeyUp="return checkTelephone(this)" size="10" value="<%=CoreTools.display(userSession.moveAttribute("sale_new_phone_number"))%>">
+                            <td nowrap="nowrap" align="left"><input type="text" name="phone_number" id="phone_number" onKeyUp="return checkTelephone(this)" size="10" value="<%=ServletHelper.display(userSession.moveAttribute("sale_new_phone_number"))%>">
                                 <img style="cursor:pointer" align="absmiddle" src="images/icons/small/find_white.gif" onclick="findClient()" title="Find and load client from this phone number."/>
                                 <img style="cursor:pointer" align="absmiddle" src="images/icons/small/personal_white.gif" onclick="setGuest()" title="Use a guest identity."/>
                             </td>
@@ -145,19 +145,19 @@ String error_string = (String) userSession.moveAttribute("sale_error");
                             <% } else {%>
                             <td nowrap="nowrap" align="right"><font color="red">Employee ID:</font></td>
                             <% }%>
-                            <td nowrap="nowrap" align="left"><input type="text" name="employee_no" size="6" style="text-align:right" value="<%=CoreTools.display(userSession.moveAttribute("sale_new_employee_no"))%>"></td>
+                            <td nowrap="nowrap" align="left"><input type="text" name="employee_no" size="6" style="text-align:right" value="<%=ServletHelper.display(userSession.moveAttribute("sale_new_employee_no"))%>"></td>
                         </tr>
                         <tr>
                             <td nowrap="nowrap" align="right">Sub-Total:</td>
-                            <td nowrap="nowrap" align="left"><input type="text" name="total_due" readonly id="total_due" size="6" style="text-align:right" value="<%=CoreTools.display(userSession.moveAttribute("sale_new_total_due"))%>">$</td>
+                            <td nowrap="nowrap" align="left"><input type="text" name="total_due" readonly id="total_due" size="6" style="text-align:right" value="<%=ServletHelper.display(userSession.moveAttribute("sale_new_total_due"))%>">$</td>
                         </tr>
                         <tr>
                             <td nowrap="nowrap" align="right">Tax (<%=salon.getTaxRate()%>%):</td>
-                            <td nowrap="nowrap" align="left"><input type="text" name="total_tax" readonly id="total_tax" size="6" style="text-align:right" value="<%=CoreTools.display(userSession.moveAttribute("sale_new_total_tax"))%>">$</td>
+                            <td nowrap="nowrap" align="left"><input type="text" name="total_tax" readonly id="total_tax" size="6" style="text-align:right" value="<%=ServletHelper.display(userSession.moveAttribute("sale_new_total_tax"))%>">$</td>
                         </tr>
                         <tr>
                             <td nowrap="nowrap" align="right">Discount:</td>
-                            <td nowrap="nowrap" align="left"><input type="text" name="discount" id="discount" size="3" onKeyUp="return calculateTotal()" style="text-align:right" value="<%=CoreTools.display(userSession.moveAttribute("sale_new_discount"))%>">%</td>
+                            <td nowrap="nowrap" align="left"><input type="text" name="discount" id="discount" size="3" onKeyUp="return calculateTotal()" style="text-align:right" value="<%=ServletHelper.display(userSession.moveAttribute("sale_new_discount"))%>">%</td>
                         </tr>
                         <tr>
                             <td nowrap="nowrap" align="right">Discount:</td>
@@ -177,16 +177,16 @@ String error_string = (String) userSession.moveAttribute("sale_error");
                             <% } else {%>
                             <td nowrap="nowrap" align="right"><font color="red">Payment:</font></td>
                             <% }%>
-                            <td nowrap="nowrap" align="left"><input type="text" name="payment" id="payment" size="6" onKeyUp="return calculateTotal()" style="text-align:right" value="<%=CoreTools.display(userSession.moveAttribute("sale_new_payment"))%>">$
+                            <td nowrap="nowrap" align="left"><input type="text" name="payment" id="payment" size="6" onKeyUp="return calculateTotal()" style="text-align:right" value="<%=ServletHelper.display(userSession.moveAttribute("sale_new_payment"))%>">$
                             &nbsp;<img style="cursor:pointer" align="absmiddle" src="images/icons/small/setfield_white.gif" onclick="setTotalPayment()" title="Use total as payment."/></td>
                         </tr>
                         <tr>
                             <td nowrap="nowrap" align="right">Payment Type:</td>
-                            <td nowrap="nowrap" align="left"><select name="payment_type" size="1"><%=CoreTools.generatePaymentTypeOptions((String) userSession.moveAttribute("sale_new_payment_type"), false)%></select></td>
+                            <td nowrap="nowrap" align="left"><select name="payment_type" size="1"><%=ServletHelper.generatePaymentTypeOptions((String) userSession.moveAttribute("sale_new_payment_type"), false)%></select></td>
                         </tr>
                         <tr>
                             <td nowrap="nowrap" align="right">Complete:</td>
-                            <td nowrap="nowrap" align="left"><%=CoreTools.generateTrueFalseOptions("is_complete", (String) userSession.moveAttribute("sale_new_is_complete"))%></td>
+                            <td nowrap="nowrap" align="left"><%=ServletHelper.generateTrueFalseOptions("is_complete", (String) userSession.moveAttribute("sale_new_is_complete"))%></td>
                         </tr>
                     </table>
                 </td>

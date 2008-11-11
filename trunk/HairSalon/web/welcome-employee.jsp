@@ -66,9 +66,9 @@ String error_string = (String) userSession.moveAttribute ("alert_error");
 	    <td align="left" valign="top">
 	    <img border="0" src="/HairSalon/images/icons/big/welcome_white.gif" width="48" height="48"></td>
 	    <td align="left" valign="top"><b><font size="3">Welcome to: <%=salon.getName()%></font></b><br />
-		<b>Telephone: </b><%=CoreTools.displayPhoneNumber(salon.getPhoneNumber())%><br />
-		<b>Address: </b><%=CoreTools.display (salon.getAddress1())%>, <%=CoreTools.display (salon.getAddress2())%><br />
-		<b>City: </b><%=CoreTools.display (salon.getCity ())%><br/><br/>
+		<b>Telephone: </b><%=ServletHelper.displayPhoneNumber(salon.getPhoneNumber())%><br />
+		<b>Address: </b><%=ServletHelper.display (salon.getAddress1())%>, <%=ServletHelper.display (salon.getAddress2())%><br />
+		<b>City: </b><%=ServletHelper.display (salon.getCity ())%><br/><br/>
 	    </td>
 	</tr>
 	<tr>
@@ -80,7 +80,7 @@ String error_string = (String) userSession.moveAttribute ("alert_error");
     <% AlertBean[] alerts = SessionController.loadAlerts (userSession); %>
     
 <% if (error_string != null) {%>
-		    <font color="red"><%=CoreTools.display (error_string)%></font>
+		    <font color="red"><%=ServletHelper.display (error_string)%></font>
 		    <% }%>
 		    
     <table align="left" width="100%" cellspacing="0" cellpadding="0" class="SearchLine">
@@ -109,8 +109,8 @@ String error_string = (String) userSession.moveAttribute ("alert_error");
 
 		    <% for (AlertBean alert : alerts) { %>
 		    <tr align="right" valign="middle">
-			<td height="30" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/medium/<%=CoreTools.displayAlertIcon (alert.getLevel())%>.gif" width="22" height="22" />&nbsp;</td>
-			<td align="left" class="Row2"><span class="SearchLink"><a href="<%=CoreTools.display (alert.getLink ())%>" class="SearchLink"><%=CoreTools.display (alert.getMessage ())%></a></span></td>
+			<td height="30" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/medium/<%=ServletHelper.displayAlertIcon (alert.getLevel())%>.gif" width="22" height="22" />&nbsp;</td>
+			<td align="left" class="Row2"><span class="SearchLink"><a href="<%=ServletHelper.display (alert.getLink ())%>" class="SearchLink"><%=ServletHelper.display (alert.getMessage ())%></a></span></td>
 			<% if (userSession.getEmployee ().getRole ().equals ("Manager")) { %>
 			    <td nowrap="nowrap" class="Row7"><img style="cursor:pointer" id="<%=alert.getAlertNo ()%>" src="/HairSalon/images/icons/small/remove_white.gif" onclick="deleteAlert(this)" title="Delete this alert from the list." /></td>
 			<% } %>

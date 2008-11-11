@@ -103,8 +103,8 @@ function calculateItems()
 		    <input type="submit" value="Revert" name="product_action" class="StandardButton"/>
 		    
 		    <%-- This is the feedback section, any errors or messages should be displayed here --%>
-		    <% if (error_string != null) { %><font color="red"><%=CoreTools.display (error_string)%></font><% } %>
-		    <% if (feedback_string != null) { %><font color="green"><%=CoreTools.display (feedback_string)%></font><% } %>
+		    <% if (error_string != null) { %><font color="red"><%=ServletHelper.display (error_string)%></font><% } %>
+		    <% if (feedback_string != null) { %><font color="green"><%=ServletHelper.display (feedback_string)%></font><% } %>
 		</td>
 	    </tr>
 	</table>
@@ -123,7 +123,7 @@ function calculateItems()
 			    <% } else { %>
 			    <td align="right"><font color="red">Name:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="product_name" value="<%=CoreTools.display (product.getName ())%>" size="20"></td>
+			    <td align="left"><input type="text" name="product_name" value="<%=ServletHelper.display (product.getName ())%>" size="20"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("product_error_brand") == null) { %>
@@ -131,11 +131,11 @@ function calculateItems()
 			    <% } else { %>
 			    <td align="right"><font color="red">Brand Name:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="brand" value="<%=CoreTools.display (product.getBrand ())%>" size="20"></td>
+			    <td align="left"><input type="text" name="brand" value="<%=ServletHelper.display (product.getBrand ())%>" size="20"></td>
 			</tr>
 			<tr>
 			    <td align="right">Type:</td>
-			    <td align="left"><select size="1" name="type"><%= CoreTools.generateProductTypeOptions (product.getType().toString (), false)%></select></td>
+			    <td align="left"><select size="1" name="type"><%= ServletHelper.generateProductTypeOptions (product.getType().toString (), false)%></select></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("product_error_product_quantity") == null) { %>
@@ -143,14 +143,14 @@ function calculateItems()
 			    <% } else { %>
 			    <td nowrap="nowrap" align="right"><font color="red">Units Per Item:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="product_quantity" id="product_quantity" onKeyUp="return calculateUnits()" style="text-align:right" value="<%=CoreTools.display (product.getQtyPer ())%>" size="5">
-			    <select size="1" name="unit"><%=CoreTools.generateProductUnitOptions (product.getUnit().toString (), false)%></select></td>
+			    <td align="left"><input type="text" name="product_quantity" id="product_quantity" onKeyUp="return calculateUnits()" style="text-align:right" value="<%=ServletHelper.display (product.getQtyPer ())%>" size="5">
+			    <select size="1" name="unit"><%=ServletHelper.generateProductUnitOptions (product.getUnit().toString (), false)%></select></td>
 			</tr>
 			<tr>
 			    <td align="right">Stocked Items:</td>
 			    <td align="left">
 				<input type="text" id="total_items" onKeyUp="return calculateUnits()" style="text-align:right" value="0.0" size="5">
-				<input type="hidden" name="stock" id="stock" style="text-align:right" value="<%=CoreTools.display (product.getStockQty ())%>" size="5">
+				<input type="hidden" name="stock" id="stock" style="text-align:right" value="<%=ServletHelper.display (product.getStockQty ())%>" size="5">
 			    </td>
 			</tr>
 			<tr>
@@ -160,7 +160,7 @@ function calculateItems()
 			    <td nowrap="nowrap" align="right"><font color="red">Minimum:</font></td>
 			    <% } %>
 			    <td align="left"><input type="text" name="minimum_items" id="minimum_items" onKeyUp="return calculateUnits()" style="text-align:right" value="0.0" size="5">
-			    <input type="hidden" name="minimum_level" id="minimum_level" style="text-align:right" value="<%=CoreTools.display (product.getMinLevel ())%>" size="5"></td>
+			    <input type="hidden" name="minimum_level" id="minimum_level" style="text-align:right" value="<%=ServletHelper.display (product.getMinLevel ())%>" size="5"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("product_error_price") == null) { %>
@@ -168,11 +168,11 @@ function calculateItems()
 			    <% } else { %>
 			    <td align="right"><font color="red">Unit Price:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="price" style="text-align:right" value="<%=CoreTools.display(product.getPrice ())%>" size="5">$</td>
+			    <td align="left"><input type="text" name="price" style="text-align:right" value="<%=ServletHelper.display(product.getPrice ())%>" size="5">$</td>
 			</tr>
 			<tr>
 			    <td align="right">Enabled:</td>
-			    <td align="left"><%=CoreTools.generateTrueFalseOptions ("enabled", product.getEnabled().toString())%></td>
+			    <td align="left"><%=ServletHelper.generateTrueFalseOptions ("enabled", product.getEnabled().toString())%></td>
 			</tr>
 		    </table>
 		</td>

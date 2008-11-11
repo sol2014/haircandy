@@ -42,10 +42,13 @@
 		ArrayList<ScheduleExceptionBean> scheduleExceptions = SessionController.getScheduleExceptions(userSession, date);
 		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedules = SessionController.getSchedule(userSession, date, availabilityExceptions, scheduleExceptions);
 
-		SalonBean sb = SessionController.loadSalon(userSession, new SalonBean());
-		int weekDay = CoreTools.getWeekDay(date);
-		Date startTime = sb.getWeekdayStartTime(weekDay);
-		Date endTime = sb.getWeekdayEndTime(weekDay);
+		// Now we need to find the salon hours for today, if none exist, create them.
+		ScheduleHoursBean shb = new ScheduleHoursBean ();
+		shb.setDate (date);
+		shb = SessionController.loadScheduleHours (userSession, shb);
+		
+		Date startTime = shb.getStartTime ();
+		Date endTime = shb.getEndTime ();
 		int startHour = CoreTools.getStartHour(startTime);
 		int endHour = CoreTools.getEndHour(endTime);
 		int rowCount = 0;

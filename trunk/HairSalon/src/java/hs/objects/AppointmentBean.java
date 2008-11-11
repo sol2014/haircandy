@@ -157,4 +157,12 @@ public class AppointmentBean extends TimeSlotBean
 		
 		return (a.getAppointmentNo ().equals (this.getAppointmentNo ()));
 	}
+
+	@Override
+	public int hashCode ()
+	{
+		int hash = 7;
+		hash = 41 * hash + (this.appointmentNo != null ? this.appointmentNo.hashCode () : 0);
+		return hash;
+	}
 }

@@ -71,19 +71,19 @@ String error_string = (String) userSession.moveAttribute("supplier_error_feedbac
 			</tr>
 			<tr>
 			    <td align="right">Name:</td>
-			    <td align="left"><input type="text" name="name" size="20" value="<%=CoreTools.display(userSession.moveAttribute("supplier_search_name"))%>"></td>
+			    <td align="left"><input type="text" name="name" size="20" value="<%=ServletHelper.display(userSession.moveAttribute("supplier_search_name"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Description:</td>
-			    <td align="left"><input type="text" name="description" size="20" value="<%=CoreTools.display(userSession.moveAttribute("supplier_search_description"))%>"></td>
+			    <td align="left"><input type="text" name="description" size="20" value="<%=ServletHelper.display(userSession.moveAttribute("supplier_search_description"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Telephone:</td>
-			    <td align="left"><input type="text" name="phone_number" size="10" value="<%=CoreTools.display(userSession.moveAttribute("supplier_search_phone_number"))%>"></td>
+			    <td align="left"><input type="text" name="phone_number" size="10" value="<%=ServletHelper.display(userSession.moveAttribute("supplier_search_phone_number"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Enabled:</td>
-			    <td align="left"><%=CoreTools.generateTrueFalseOptions ("enabled", (String) userSession.moveAttribute ("supplier_search_enabled"))%></td>
+			    <td align="left"><%=ServletHelper.generateTrueFalseOptions ("enabled", (String) userSession.moveAttribute ("supplier_search_enabled"))%></td>
 			</tr>
 
 			<tr>
@@ -98,31 +98,31 @@ String error_string = (String) userSession.moveAttribute("supplier_error_feedbac
 			</tr>
 			<tr>
 			    <td align="right">Address 1:</td>
-			    <td align="left"><input type="text" name="address1" size="20" value="<%=CoreTools.display(userSession.moveAttribute("supplier_search_address1"))%>"></td>
+			    <td align="left"><input type="text" name="address1" size="20" value="<%=ServletHelper.display(userSession.moveAttribute("supplier_search_address1"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Address 2:</td>
-			    <td align="left"><input type="text" name="address2" size="20" value="<%=CoreTools.display(userSession.moveAttribute("supplier_search_address2"))%>"></td>
+			    <td align="left"><input type="text" name="address2" size="20" value="<%=ServletHelper.display(userSession.moveAttribute("supplier_search_address2"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Email:</td>
-			    <td align="left"><input type="text" name="email" size="20" value="<%=CoreTools.display(userSession.moveAttribute("supplier_search_email"))%>"></td>
+			    <td align="left"><input type="text" name="email" size="20" value="<%=ServletHelper.display(userSession.moveAttribute("supplier_search_email"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">City:</td>
-			    <td align="left"><input type="text" name="city" size="15" value="<%=CoreTools.display(userSession.moveAttribute("supplier_search_city"))%>"></td>
+			    <td align="left"><input type="text" name="city" size="15" value="<%=ServletHelper.display(userSession.moveAttribute("supplier_search_city"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Province:</td>
-			    <td align="left"><input type="text" name="province" size="15" value="<%=CoreTools.display(userSession.moveAttribute("supplier_search_province"))%>"></td>
+			    <td align="left"><input type="text" name="province" size="15" value="<%=ServletHelper.display(userSession.moveAttribute("supplier_search_province"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Country:</td>
-			    <td align="left"><input type="text" name="country" size="15" value="<%=CoreTools.display(userSession.moveAttribute("supplier_search_country"))%>"></td>
+			    <td align="left"><input type="text" name="country" size="15" value="<%=ServletHelper.display(userSession.moveAttribute("supplier_search_country"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Postal Code:</td>
-			    <td align="left"><input type="text" name="postal_code" size="6" value="<%=CoreTools.display(userSession.moveAttribute("supplier_search_postal_code"))%>"><i>(ie. N4N4N4)</i></td>
+			    <td align="left"><input type="text" name="postal_code" size="6" value="<%=ServletHelper.display(userSession.moveAttribute("supplier_search_postal_code"))%>"><i>(ie. N4N4N4)</i></td>
 			</tr>
 		    </table>
 		</td>
@@ -161,8 +161,8 @@ String error_string = (String) userSession.moveAttribute("supplier_error_feedbac
 					<tr align="right">
 					    <td height="30" valign="top" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/result.gif" width="16" height="16" />&nbsp;</td>
 					    <td align="left" valign="top" nowrap="nowrap" class="Row2"><span class="SearchLink"><a href="supplier?supplier_action=Load&supplier_no=<%= supplier.getSupplierNo()%>" class="SearchLink"><%= supplier.getName()%></a></span></td>
-					    <td align="left" valign="top" class="Row7"><%=CoreTools.display (supplier.getDescription ())%></td>
-					    <td nowrap="nowrap" valign="top" class="Row7"><%=CoreTools.displayPhoneNumber(supplier.getPhoneNumber())%></td>
+					    <td align="left" valign="top" class="Row7"><%=ServletHelper.display (supplier.getDescription ())%></td>
+					    <td nowrap="nowrap" valign="top" class="Row7"><%=ServletHelper.displayPhoneNumber(supplier.getPhoneNumber())%></td>
 					</tr>
 					<% }%>
 					<% }%>

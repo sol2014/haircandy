@@ -173,22 +173,22 @@ public class EmployeeServlet extends DispatcherServlet
 			userSession.setAttribute ("employee_new_province", salon.getProvince ());
 			userSession.setAttribute ("employee_new_country", salon.getCountry ());
 			
-			SimpleDateFormat format = new SimpleDateFormat (CoreTools.TimeFormat);
+			SimpleDateFormat sdf = new SimpleDateFormat (CoreTools.TimeFormat);
 			
-			userSession.setAttribute ("employee_new_monday_start", format.format (salon.getMondayStart ()));
-			userSession.setAttribute ("employee_new_monday_end", format.format (salon.getMondayEnd ()));
-			userSession.setAttribute ("employee_new_tuesday_start", format.format (salon.getTuesdayStart ()));
-			userSession.setAttribute ("employee_new_tuesday_end", format.format (salon.getTuesdayEnd ()));
-			userSession.setAttribute ("employee_new_wednesday_start", format.format (salon.getWednesdayStart ()));
-			userSession.setAttribute ("employee_new_wednesday_end", format.format (salon.getWednesdayEnd ()));
-			userSession.setAttribute ("employee_new_thursday_start", format.format (salon.getThursdayStart ()));
-			userSession.setAttribute ("employee_new_thursday_end", format.format (salon.getThursdayEnd ()));
-			userSession.setAttribute ("employee_new_friday_start", format.format (salon.getFridayStart ()));
-			userSession.setAttribute ("employee_new_friday_end", format.format (salon.getFridayEnd ()));
-			userSession.setAttribute ("employee_new_saturday_start", format.format (salon.getSaturdayStart ()));
-			userSession.setAttribute ("employee_new_saturday_end", format.format (salon.getSaturdayEnd ()));
-			userSession.setAttribute ("employee_new_sunday_start", format.format (salon.getSundayStart ()));
-			userSession.setAttribute ("employee_new_sunday_end", format.format (salon.getSundayEnd ()));
+			userSession.setAttribute ("employee_new_monday_start", sdf.format (salon.getMondayStart ()));
+			userSession.setAttribute ("employee_new_monday_end", sdf.format (salon.getMondayEnd ()));
+			userSession.setAttribute ("employee_new_tuesday_start", sdf.format (salon.getTuesdayStart ()));
+			userSession.setAttribute ("employee_new_tuesday_end", sdf.format (salon.getTuesdayEnd ()));
+			userSession.setAttribute ("employee_new_wednesday_start", sdf.format (salon.getWednesdayStart ()));
+			userSession.setAttribute ("employee_new_wednesday_end", sdf.format (salon.getWednesdayEnd ()));
+			userSession.setAttribute ("employee_new_thursday_start", sdf.format (salon.getThursdayStart ()));
+			userSession.setAttribute ("employee_new_thursday_end", sdf.format (salon.getThursdayEnd ()));
+			userSession.setAttribute ("employee_new_friday_start", sdf.format (salon.getFridayStart ()));
+			userSession.setAttribute ("employee_new_friday_end", sdf.format (salon.getFridayEnd ()));
+			userSession.setAttribute ("employee_new_saturday_start", sdf.format (salon.getSaturdayStart ()));
+			userSession.setAttribute ("employee_new_saturday_end", sdf.format (salon.getSaturdayEnd ()));
+			userSession.setAttribute ("employee_new_sunday_start", sdf.format (salon.getSundayStart ()));
+			userSession.setAttribute ("employee_new_sunday_end", sdf.format (salon.getSundayEnd ()));
 		}
 		
 		userSession.setAttribute ("employee_new_phone_number", "");
@@ -461,20 +461,20 @@ public class EmployeeServlet extends DispatcherServlet
 		String used = request.getParameter ("enabled");
 		employee.setEnabled (Boolean.parseBoolean (used));
 		
-		String monday_start = request.getParameter ("monday_start");
-		String monday_end = request.getParameter ("monday_end");
-		String tuesday_start = request.getParameter ("tuesday_start");
-		String tuesday_end = request.getParameter ("tuesday_end");
-		String wednesday_start = request.getParameter ("wednesday_start");
-		String wednesday_end = request.getParameter ("wednesday_end");
-		String thursday_start = request.getParameter ("thursday_start");
-		String thursday_end = request.getParameter ("thursday_end");
-		String friday_start = request.getParameter ("friday_start");
-		String friday_end = request.getParameter ("friday_end");
-		String saturday_start = request.getParameter ("saturday_start");
-		String saturday_end = request.getParameter ("saturday_end");
-		String sunday_start = request.getParameter ("sunday_start");
-		String sunday_end = request.getParameter ("sunday_end");
+		String monday_start = ServletHelper.readTimeRequest (request, "monday_start");
+		String monday_end = ServletHelper.readTimeRequest (request, "monday_end");
+		String tuesday_start = ServletHelper.readTimeRequest (request, "tuesday_start");
+		String tuesday_end = ServletHelper.readTimeRequest (request, "tuesday_end");
+		String wednesday_start = ServletHelper.readTimeRequest (request, "wednesday_start");
+		String wednesday_end = ServletHelper.readTimeRequest (request, "wednesday_end");
+		String thursday_start = ServletHelper.readTimeRequest (request, "thursday_start");
+		String thursday_end = ServletHelper.readTimeRequest (request, "thursday_end");
+		String friday_start = ServletHelper.readTimeRequest (request, "friday_start");
+		String friday_end = ServletHelper.readTimeRequest (request, "friday_end");
+		String saturday_start = ServletHelper.readTimeRequest (request, "saturday_start");
+		String saturday_end = ServletHelper.readTimeRequest (request, "saturday_end");
+		String sunday_start = ServletHelper.readTimeRequest (request, "sunday_start");
+		String sunday_end = ServletHelper.readTimeRequest (request, "sunday_end");
 		
 		try
 		{
@@ -497,6 +497,48 @@ public class EmployeeServlet extends DispatcherServlet
 		{
 			LogController.write (this, "Invalid availability data found from form.");
 			return;
+		}
+		
+		if (!employee.getMondayStart ().equals (employee.getMondayEnd ()) && !employee.getMondayStart ().before (employee.getMondayEnd ()))
+		{
+			userSession.setAttribute ("employee_error_monday", "");
+			inputFailed = true;
+		}
+		
+		if (!employee.getTuesdayStart ().equals (employee.getTuesdayEnd ()) && !employee.getTuesdayStart ().before (employee.getTuesdayEnd ()))
+		{
+			userSession.setAttribute ("employee_error_tuesday", "");
+			inputFailed = true;
+		}
+		
+		if (!employee.getWednesdayStart ().equals (employee.getWednesdayEnd ()) && !employee.getWednesdayStart ().before (employee.getWednesdayEnd ()))
+		{
+			userSession.setAttribute ("employee_error_wednesday", "");
+			inputFailed = true;
+		}
+		
+		if (!employee.getThursdayStart ().equals (employee.getThursdayEnd ()) && !employee.getThursdayStart ().before (employee.getThursdayEnd ()))
+		{
+			userSession.setAttribute ("employee_error_thursday", "");
+			inputFailed = true;
+		}
+		
+		if (!employee.getFridayStart ().equals (employee.getFridayEnd ()) && !employee.getFridayStart ().before (employee.getFridayEnd ()))
+		{
+			userSession.setAttribute ("employee_error_friday", "");
+			inputFailed = true;
+		}
+		
+		if (!employee.getSaturdayStart ().equals (employee.getSaturdayEnd ()) && !employee.getSaturdayStart ().before (employee.getSaturdayEnd ()))
+		{
+			userSession.setAttribute ("employee_error_saturday", "");
+			inputFailed = true;
+		}
+		
+		if (!employee.getSundayStart ().equals (employee.getSundayEnd ()) && !employee.getSundayStart ().before (employee.getSundayEnd ()))
+		{
+			userSession.setAttribute ("employee_error_sunday", "");
+			inputFailed = true;
 		}
 		
 		if (inputFailed)

@@ -59,8 +59,8 @@ String error_string = (String) userSession.moveAttribute ("client_error");
 		    <input type="submit" value="Revert" name="client_action" class="StandardButton"/>
 		    
 		    <%-- This is the feedback section, any errors or messages should be displayed here --%>
-		    <% if (error_string != null) { %><font color="red"><%=CoreTools.display (error_string)%></font><% } %>
-		    <% if (feedback_string != null) { %><font color="green"><%=CoreTools.display (feedback_string)%></font><% } %>
+		    <% if (error_string != null) { %><font color="red"><%=ServletHelper.display (error_string)%></font><% } %>
+		    <% if (feedback_string != null) { %><font color="green"><%=ServletHelper.display (feedback_string)%></font><% } %>
 		</td>
 	    </tr>
 	</table>
@@ -79,7 +79,7 @@ String error_string = (String) userSession.moveAttribute ("client_error");
 			    <% } else { %>
 			    <td align="right"><font color="red">First Name:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="first_name" value="<%=CoreTools.display (client.getFirstName ())%>" size="20"></td>
+			    <td align="left"><input type="text" name="first_name" value="<%=ServletHelper.display (client.getFirstName ())%>" size="20"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("client_error_last_name") == null) { %>
@@ -87,7 +87,7 @@ String error_string = (String) userSession.moveAttribute ("client_error");
 			    <% } else { %>
 			    <td align="right"><font color="red">Last Name:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="last_name" value="<%=CoreTools.display (client.getLastName ())%>" size="20"></td>
+			    <td align="left"><input type="text" name="last_name" value="<%=ServletHelper.display (client.getLastName ())%>" size="20"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("client_error_phone_number") == null) { %>
@@ -95,11 +95,11 @@ String error_string = (String) userSession.moveAttribute ("client_error");
 			    <% } else { %>
 			    <td align="right"><font color="red"><div id="telephone_label">Telephone:</div></font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="phone_number" id="phone_number" onKeyUp="return checkTelephone(this)" value="<%=CoreTools.display (client.getPhoneNumber ())%>" size="10"></td>
+			    <td align="left"><input type="text" name="phone_number" id="phone_number" onKeyUp="return checkTelephone(this)" value="<%=ServletHelper.display (client.getPhoneNumber ())%>" size="10"></td>
 			</tr>
 			<tr>
 			    <td align="right">Enabled:</td>
-			    <td align="left"><%=CoreTools.generateTrueFalseOptions ("enabled", Boolean.toString (client.getEnabled ()))%></td>
+			    <td align="left"><%=ServletHelper.generateTrueFalseOptions ("enabled", Boolean.toString (client.getEnabled ()))%></td>
 			</tr>
 			<tr>
 			    <td align="right">&nbsp;</td>
@@ -112,31 +112,31 @@ String error_string = (String) userSession.moveAttribute ("client_error");
 			</tr>
 			<tr>
 			    <td align="right">Address 1:</td>
-			    <td align="left"><input type="text" name="address1" value="<%=CoreTools.display (address.getAddress1 ())%>" size="20"></td>
+			    <td align="left"><input type="text" name="address1" value="<%=ServletHelper.display (address.getAddress1 ())%>" size="20"></td>
 			</tr>
 			<tr>
 			    <td align="right">Address 2:</td>
-			    <td align="left"><input type="text" name="address2" value="<%=CoreTools.display (address.getAddress2 ())%>" size="20"></td>
+			    <td align="left"><input type="text" name="address2" value="<%=ServletHelper.display (address.getAddress2 ())%>" size="20"></td>
 			</tr>
 			<tr>
 			    <td align="right">Email:</td>
-			    <td align="left"><input type="text" name="email" value="<%=CoreTools.display (address.getEmail ())%>" size="20"></td>
+			    <td align="left"><input type="text" name="email" value="<%=ServletHelper.display (address.getEmail ())%>" size="20"></td>
 			</tr>
 			<tr>
 			    <td align="right">City:</td>
-			    <td align="left"><input type="text" name="city" value="<%=CoreTools.display (address.getCity ())%>" size="15"></td>
+			    <td align="left"><input type="text" name="city" value="<%=ServletHelper.display (address.getCity ())%>" size="15"></td>
 			</tr>
 			<tr>
 			    <td align="right">Province:</td>
-			    <td align="left"><input type="text" name="province" value="<%=CoreTools.display (address.getProvince ())%>" size="15"></td>
+			    <td align="left"><input type="text" name="province" value="<%=ServletHelper.display (address.getProvince ())%>" size="15"></td>
 			</tr>
 			<tr>
 			    <td align="right">Country:</td>
-			    <td align="left"><input type="text" name="country" value="<%=CoreTools.display (address.getCountry ())%>" size="15"></td>
+			    <td align="left"><input type="text" name="country" value="<%=ServletHelper.display (address.getCountry ())%>" size="15"></td>
 			</tr>
 			<tr>
 			    <td align="right"><div id="postal_code_label">Postal Code:</div></td>
-			    <td align="left"><input type="text" name="postal_code" id="postal_code" onKeyUp="return checkPostalCode(this)" value="<%=CoreTools.display (address.getPostalCode ())%>" size="6"><i>(ie. N4N4N4)</i></td>
+			    <td align="left"><input type="text" name="postal_code" id="postal_code" onKeyUp="return checkPostalCode(this)" value="<%=ServletHelper.display (address.getPostalCode ())%>" size="6"><i>(ie. N4N4N4)</i></td>
 			</tr>
 		    </table>
 		</td>

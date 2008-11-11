@@ -71,23 +71,23 @@ String error_string = (String) userSession.moveAttribute ("service_error");
 			</tr>
 			<tr>
 			    <td align="right">Name:</td>
-			    <td align="left"><input type="text" name="firstfield" size="20" value="<%=CoreTools.display (userSession.moveAttribute ("service_search_name"))%>"></td>
+			    <td align="left"><input type="text" name="firstfield" size="20" value="<%=ServletHelper.display (userSession.moveAttribute ("service_search_name"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Description:</td>
-			    <td align="left"><input type="text" name="description" size="20" value="<%=CoreTools.display (userSession.moveAttribute ("service_search_description"))%>"></td>
+			    <td align="left"><input type="text" name="description" size="20" value="<%=ServletHelper.display (userSession.moveAttribute ("service_search_description"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Duration:</td>
-			    <td align="left"><input type="text" name="duration" size="5" style="text-align:right" value="<%=CoreTools.display (userSession.moveAttribute ("service_search_duration"))%>">min</td>
+			    <td align="left"><input type="text" name="duration" size="5" style="text-align:right" value="<%=ServletHelper.display (userSession.moveAttribute ("service_search_duration"))%>">min</td>
 			</tr>
 			<tr>
 			    <td align="right">Price:</td>
-			    <td align="left"><input type="text" name="price" size="5" style="text-align:right" value="<%=CoreTools.display (userSession.moveAttribute ("service_search_price"))%>">$</td>
+			    <td align="left"><input type="text" name="price" size="5" style="text-align:right" value="<%=ServletHelper.display (userSession.moveAttribute ("service_search_price"))%>">$</td>
 			</tr>
 			<tr>
 			    <td align="right">Enabled:</td>
-			    <td align="left"><%=CoreTools.generateTrueFalseOptions ("enabled", (String) userSession.moveAttribute ("service_search_enabled"))%></td>
+			    <td align="left"><%=ServletHelper.generateTrueFalseOptions ("enabled", (String) userSession.moveAttribute ("service_search_enabled"))%></td>
 			</tr>
 		    </table>
 		</td>
@@ -127,9 +127,9 @@ String error_string = (String) userSession.moveAttribute ("service_error");
 					<tr align="right" valign="middle">
 					    <td height="30" valign="top" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/result.gif" width="16" height="16" />&nbsp;</td>
 					    <td align="left" nowrap="nowrap" class="Row2"><span class="SearchLink"><a href="service?service_action=Load&service_no=<%= service.getServiceNo ()%>" class="SearchLink"><%= service.getName ()%></a></span></td>
-					    <td align="left" valign="top" class="Row7"><%=CoreTools.display (service.getDescription ())%></td>
-					    <td nowrap="nowrap" class="Row7"><%=CoreTools.display (service.getDuration ())%>m</td>
-					    <td nowrap="nowrap" valign="top" class="Row7"><%=CoreTools.displayPrice (service.getPrice ())%></td>
+					    <td align="left" valign="top" class="Row7"><%=ServletHelper.display (service.getDescription ())%></td>
+					    <td nowrap="nowrap" class="Row7"><%=ServletHelper.display (service.getDuration ())%>m</td>
+					    <td nowrap="nowrap" valign="top" class="Row7"><%=ServletHelper.displayPrice (service.getPrice ())%></td>
 					</tr>
 					<% }%>
 					<% }%>

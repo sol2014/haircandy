@@ -36,7 +36,7 @@
 				</tr>
 				<tr>
 				    <td align="right">Type:</td>
-				    <td align="left"><select size="1" name="product_type" id="product_type"><%= CoreTools.generateProductTypeOptions (null, true)%></select></td>
+				    <td align="left"><select size="1" name="product_type" id="product_type"><%= ServletHelper.generateProductTypeOptions (null, true)%></select></td>
 				</tr>
 			    </table>
 			    <table width="100%" cellpadding="10">

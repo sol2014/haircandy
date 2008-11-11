@@ -72,23 +72,23 @@ String error_string = (String) userSession.moveAttribute ("employee_search_error
 			</tr>
 			<tr>
 			    <td align="right">First Name:</td>
-			    <td align="left"><input type="text" name="first_name" size="20" value="<%=CoreTools.display (userSession.moveAttribute ("employee_search_first_name"))%>"></td>
+			    <td align="left"><input type="text" name="first_name" size="20" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_search_first_name"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Last Name:</td>
-			    <td align="left"><input type="text" name="last_name" size="20" value="<%=CoreTools.display (userSession.moveAttribute ("employee_search_last_name"))%>"></td>
+			    <td align="left"><input type="text" name="last_name" size="20" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_search_last_name"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Telephone:</td>
-			    <td align="left"><input type="text" name="phone_number" size="10" value="<%=CoreTools.display (userSession.moveAttribute ("employee_search_phone_number"))%>"></td>
+			    <td align="left"><input type="text" name="phone_number" size="10" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_search_phone_number"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Role:</td>
-			    <td align="left"><select size="1" name="role"><%=CoreTools.generateUserRoleOptions ((String) userSession.moveAttribute ("employee_search_role"), true)%></select></td>
+			    <td align="left"><select size="1" name="role"><%=ServletHelper.generateUserRoleOptions ((String) userSession.moveAttribute ("employee_search_role"), true)%></select></td>
 			</tr>
 			<tr>
 			    <td align="right">Enabled:</td>
-			    <td align="left"><%=CoreTools.generateTrueFalseOptions ("enabled", (String) userSession.moveAttribute ("employee_search_enabled"))%></td>
+			    <td align="left"><%=ServletHelper.generateTrueFalseOptions ("enabled", (String) userSession.moveAttribute ("employee_search_enabled"))%></td>
 			</tr>
 			<tr>
 			    <td align="right">&nbsp;</td>
@@ -100,31 +100,31 @@ String error_string = (String) userSession.moveAttribute ("employee_search_error
 			</tr>
 			<tr>
 			    <td align="right">Address 1:</td>
-			    <td align="left"><input type="text" name="address1" size="20" value="<%=CoreTools.display (userSession.moveAttribute ("employee_search_address1"))%>"></td>
+			    <td align="left"><input type="text" name="address1" size="20" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_search_address1"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Address 2:</td>
-			    <td align="left"><input type="text" name="address2" size="20" value="<%=CoreTools.display (userSession.moveAttribute ("employee_search_address2"))%>"></td>
+			    <td align="left"><input type="text" name="address2" size="20" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_search_address2"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Email:</td>
-			    <td align="left"><input type="text" name="email" size="20" value="<%=CoreTools.display (userSession.moveAttribute ("employee_search_email"))%>"></td>
+			    <td align="left"><input type="text" name="email" size="20" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_search_email"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">City:</td>
-			    <td align="left"><input type="text" name="city" size="15" value="<%=CoreTools.display (userSession.moveAttribute ("employee_search_city"))%>"></td>
+			    <td align="left"><input type="text" name="city" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_search_city"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Province:</td>
-			    <td align="left"><input type="text" name="province" size="15" value="<%=CoreTools.display (userSession.moveAttribute ("employee_search_province"))%>"></td>
+			    <td align="left"><input type="text" name="province" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_search_province"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Country:</td>
-			    <td align="left"><input type="text" name="country" size="15" value="<%=CoreTools.display (userSession.moveAttribute ("employee_search_country"))%>"></td>
+			    <td align="left"><input type="text" name="country" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_search_country"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Postal Code:</td>
-			    <td align="left"><input type="text" name="postal_code" size="6" value="<%=CoreTools.display (userSession.moveAttribute ("employee_search_postal_code"))%>"><i>(ie. N4N4N4)</i></td>
+			    <td align="left"><input type="text" name="postal_code" size="6" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_search_postal_code"))%>"><i>(ie. N4N4N4)</i></td>
 			</tr>
 		    </table>
 		</td>
@@ -165,7 +165,7 @@ String error_string = (String) userSession.moveAttribute ("employee_search_error
 					    <td height="30" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/result.gif" width="16" height="16" />&nbsp;</td>
 					    <td align="left" nowrap="nowrap" class="Row2"><span class="SearchLink"><a href="employee?employee_action=Load&employee_no=<%= employee.getEmployeeNo ()%>" class="SearchLink"><%= employee.getName ()%></a></span></td>
 					    <td align="left" nowrap="nowrap" class="Row7"><%= employee.getRole ()%></td>
-					    <td nowrap="nowrap" class="Row7"><%=CoreTools.displayPhoneNumber(employee.getPhoneNumber ())%></td>
+					    <td nowrap="nowrap" class="Row7"><%=ServletHelper.displayPhoneNumber(employee.getPhoneNumber ())%></td>
 					</tr>
 					<% }%>
 					<% }%>

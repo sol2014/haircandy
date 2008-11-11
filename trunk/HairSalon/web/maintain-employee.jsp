@@ -70,8 +70,8 @@ window.onload = function () {
 		    <input type="submit" value="Revert" name="employee_action" class="StandardButton"/>
 		    
 		    <%-- This is the feedback section, any errors or messages should be displayed here --%>
-		    <% if (error_string != null) {%><font color="red"><%=CoreTools.display(error_string)%></font><% }%>
-		    <% if (feedback_string != null) {%><font color="green"><%=CoreTools.display(feedback_string)%></font><% }%>
+		    <% if (error_string != null) {%><font color="red"><%=ServletHelper.display(error_string)%></font><% }%>
+		    <% if (feedback_string != null) {%><font color="green"><%=ServletHelper.display(feedback_string)%></font><% }%>
 		</td>
 	    </tr>
 	</table>
@@ -90,7 +90,7 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red">First Name:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="first_name" value="<%=CoreTools.display(employee.getFirstName())%>" size="20"></td>
+			    <td align="left"><input type="text" name="first_name" value="<%=ServletHelper.display(employee.getFirstName())%>" size="20"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("employee_error_last_name") == null) { %>
@@ -98,7 +98,7 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red">Last Name:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="last_name" value="<%=CoreTools.display(employee.getLastName())%>" size="20"></td>
+			    <td align="left"><input type="text" name="last_name" value="<%=ServletHelper.display(employee.getLastName())%>" size="20"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("employee_error_phone_number") == null) { %>
@@ -106,11 +106,11 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red"><div id="telephone_label">Telephone:</div></font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="phone_number" id="phone_number" onKeyUp="return checkTelephone(this)" value="<%=CoreTools.display(employee.getPhoneNumber())%>" size="10"></td>
+			    <td align="left"><input type="text" name="phone_number" id="phone_number" onKeyUp="return checkTelephone(this)" value="<%=ServletHelper.display(employee.getPhoneNumber())%>" size="10"></td>
 			</tr>
 			<tr>
 			    <td align="right">Role:</td>
-			    <td align="left"><select size="1" name="role"><%=CoreTools.generateUserRoleOptions (employee.getRole (), false)%></select></td>
+			    <td align="left"><select size="1" name="role"><%=ServletHelper.generateUserRoleOptions (employee.getRole (), false)%></select></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("employee_error_password") == null) { %>
@@ -118,11 +118,11 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red">Password:</font></td>
 			    <% } %>
-			    <td align="left"><input type="password" name="password" value="<%=CoreTools.display(employee.getPassword())%>" size="15"></td>
+			    <td align="left"><input type="password" name="password" value="<%=ServletHelper.display(employee.getPassword())%>" size="15"></td>
 			</tr>
 			<tr>
 			    <td align="right">Enabled:</td>
-			    <td align="left"><%=CoreTools.generateTrueFalseOptions ("enabled", Boolean.toString (employee.getEnabled ()))%></td>
+			    <td align="left"><%=ServletHelper.generateTrueFalseOptions ("enabled", Boolean.toString (employee.getEnabled ()))%></td>
 			</tr>
 			<tr>
 			    <td align="right">&nbsp;</td>
@@ -138,7 +138,7 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red">Address 1:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="address1" value="<%=CoreTools.display(address.getAddress1())%>" size="20"></td>
+			    <td align="left"><input type="text" name="address1" value="<%=ServletHelper.display(address.getAddress1())%>" size="20"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("employee_error_address2") == null) { %>
@@ -146,7 +146,7 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red">Address 2:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="address2" value="<%=CoreTools.display(address.getAddress2())%>" size="20"></td>
+			    <td align="left"><input type="text" name="address2" value="<%=ServletHelper.display(address.getAddress2())%>" size="20"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("employee_error_email") == null) { %>
@@ -154,7 +154,7 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red">Email:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="email" value="<%=CoreTools.display(address.getEmail())%>" size="20"></td>
+			    <td align="left"><input type="text" name="email" value="<%=ServletHelper.display(address.getEmail())%>" size="20"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("employee_error_city") == null) { %>
@@ -162,7 +162,7 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red">City:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="city" value="<%=CoreTools.display(address.getCity())%>" size="15"></td>
+			    <td align="left"><input type="text" name="city" value="<%=ServletHelper.display(address.getCity())%>" size="15"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("employee_error_province") == null) { %>
@@ -170,7 +170,7 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red">Province:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="province" value="<%=CoreTools.display(address.getProvince())%>" size="15"></td>
+			    <td align="left"><input type="text" name="province" value="<%=ServletHelper.display(address.getProvince())%>" size="15"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("employee_error_country") == null) { %>
@@ -178,7 +178,7 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red">Country:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="country" value="<%=CoreTools.display(address.getCountry())%>" size="15"></td>
+			    <td align="left"><input type="text" name="country" value="<%=ServletHelper.display(address.getCountry())%>" size="15"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("employee_error_postal_code") == null) { %>
@@ -186,7 +186,7 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red"><div id="postal_code_label">Postal Code:</div></font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="postal_code" id="postal_code" onKeyUp="return checkPostalCode(this)" value="<%=CoreTools.display(address.getPostalCode())%>" size="6"><i>(ex. N4N4N4)</i></td>
+			    <td align="left"><input type="text" name="postal_code" id="postal_code" onKeyUp="return checkPostalCode(this)" value="<%=ServletHelper.display(address.getPostalCode())%>" size="6"><i>(ex. N4N4N4)</i></td>
 			</tr>
 			<tr>
 			    <td align="right">&nbsp;</td>
@@ -197,39 +197,182 @@ window.onload = function () {
 			    <td align="left"><b><u>Availability</u></b></td>
 			</tr>
 			<tr>
+			    <% if (userSession.moveAttribute ("employee_error_monday") == null) { %>
 			    <td align="right">Monday:</td>
-			    <td align="left"><input type="text" name="monday_start" size="5" value="<%=CoreTools.showMilitaryTime(employee.getMondayStart())%>"> to
-			    <input type="text" name="monday_end" size="5" value="<%=CoreTools.showMilitaryTime(employee.getMondayEnd())%>"></td>
+			    <% } else { %>
+			    <td align="right"><font color="red">Monday:</font></td>
+			    <% } %>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this)" id="monday_check" value="monday"></td>
+			</tr>
+			
+			<tr>
+			    <td nowrap="nowrap" align="right">Open:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("monday_start", employee.getMondayStart())%>
+				
+			    </td>
 			</tr>
 			<tr>
+			    <td nowrap="nowrap" align="right">Close:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("monday_end", employee.getMondayEnd())%>
+			    </td>
+			</tr>
+			
+			<tr>
+			    <td nowrap="nowrap" align="right">&nbsp;</td>
+			    <td nowrap="nowrap" align="left">&nbsp;</td>
+			</tr>
+			
+			<tr>
+			    <% if (userSession.moveAttribute ("employee_error_tuesday") == null) { %>
 			    <td align="right">Tuesday:</td>
-			    <td align="left"><input type="text" name="tuesday_start" size="5" value="<%=CoreTools.showMilitaryTime(employee.getTuesdayStart())%>"> to
-			    <input type="text" name="tuesday_end" size="5" value="<%=CoreTools.showMilitaryTime(employee.getTuesdayEnd())%>"></td>
+			    <% } else { %>
+			    <td align="right"><font color="red">Tuesday:</font></td>
+			    <% } %>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onChange="switchDayStatus(this)" id="tuesday_check" value="tuesday"></td>
 			</tr>
 			<tr>
+			    <td nowrap="nowrap" align="right">Open:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("tuesday_start", employee.getTuesdayStart())%>
+			    </td>
+			</tr>
+			<tr>
+			    <td nowrap="nowrap" align="right">Close:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("tuesday_end", employee.getTuesdayEnd())%>
+			    </td>
+			</tr>
+			
+			<tr>
+			    <td nowrap="nowrap" align="right">&nbsp;</td>
+			    <td nowrap="nowrap" align="left">&nbsp;</td>
+			</tr>
+			
+			<tr>
+			    <% if (userSession.moveAttribute ("employee_error_wednesday") == null) { %>
 			    <td align="right">Wednesday:</td>
-			    <td align="left"><input type="text" name="wednesday_start" size="5" value="<%=CoreTools.showMilitaryTime(employee.getWednesdayStart())%>"> to
-			    <input type="text" name="wednesday_end" size="5" value="<%=CoreTools.showMilitaryTime(employee.getWednesdayEnd())%>"></td>
+			    <% } else { %>
+			    <td align="right"><font color="red">Wednesday:</font></td>
+			    <% } %>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onChange="switchDayStatus(this)" id="wednesday_check" value="wednesday"></td>
 			</tr>
 			<tr>
+			    <td nowrap="nowrap" align="right">Open:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("wednesday_start", employee.getWednesdayStart())%>
+			    </td>
+			</tr>
+			<tr>
+			    <td nowrap="nowrap" align="right">Close:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("wednesday_end", employee.getWednesdayEnd())%>
+			    </td>
+			</tr>
+			
+			<tr>
+			    <td nowrap="nowrap" align="right">&nbsp;</td>
+			    <td nowrap="nowrap" align="left">&nbsp;</td>
+			</tr>
+			
+			<tr>
+			    <% if (userSession.moveAttribute ("employee_error_thursday") == null) { %>
 			    <td align="right">Thursday:</td>
-			    <td align="left"><input type="text" name="thursday_start" size="5" value="<%=CoreTools.showMilitaryTime(employee.getThursdayStart())%>"> to
-			    <input type="text" name="thursday_end" size="5" value="<%=CoreTools.showMilitaryTime(employee.getThursdayEnd())%>"></td>
+			    <% } else { %>
+			    <td align="right"><font color="red">Thursday:</font></td>
+			    <% } %>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onChange="switchDayStatus(this)" id="thursday_check" value="thursday"></td>
 			</tr>
 			<tr>
+			    <td nowrap="nowrap" align="right">Open:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("thursday_start", employee.getThursdayStart())%>
+			    </td>
+			</tr>
+			<tr>
+			    <td nowrap="nowrap" align="right">Close:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("thursday_end", employee.getThursdayEnd())%>
+			    </td>
+			</tr>
+			
+			<tr>
+			    <td nowrap="nowrap" align="right">&nbsp;</td>
+			    <td nowrap="nowrap" align="left">&nbsp;</td>
+			</tr>
+			
+			<tr>
+			    <% if (userSession.moveAttribute ("employee_error_friday") == null) { %>
 			    <td align="right">Friday:</td>
-			    <td align="left"><input type="text" name="friday_start" size="5" value="<%=CoreTools.showMilitaryTime(employee.getFridayStart())%>"> to
-			    <input type="text" name="friday_end" size="5" value="<%=CoreTools.showMilitaryTime(employee.getFridayEnd())%>"></td>
+			    <% } else { %>
+			    <td align="right"><font color="red">Friday:</font></td>
+			    <% } %>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onChange="switchDayStatus(this)" id="friday_check" value="friday"></td>
 			</tr>
 			<tr>
-			    <td align="right">Saturday:</td>
-			    <td align="left"><input type="text" name="saturday_start" size="5" value="<%=CoreTools.showMilitaryTime(employee.getSaturdayStart())%>"> to
-			    <input type="text" name="saturday_end" size="5" value="<%=CoreTools.showMilitaryTime(employee.getSaturdayEnd())%>"></td>
+			    <td nowrap="nowrap" align="right">Open:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("friday_start", employee.getFridayStart())%>
+			    </td>
 			</tr>
 			<tr>
+			    <td nowrap="nowrap" align="right">Close:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("friday_end", employee.getFridayEnd())%>
+			    </td>
+			</tr>
+			
+			<tr>
+			    <td nowrap="nowrap" align="right">&nbsp;</td>
+			    <td nowrap="nowrap" align="left">&nbsp;</td>
+			</tr>
+			
+			<tr>
+			    <% if (userSession.moveAttribute ("employee_error_saturday") == null) { %>
+			    <td align="right">Satuday:</td>
+			    <% } else { %>
+			    <td align="right"><font color="red">Saturday:</font></td>
+			    <% } %>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onChange="switchDayStatus(this)" id="saturday_check" value="saturday"></td>
+			</tr>
+			<tr>
+			    <td nowrap="nowrap" align="right">Open:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("saturday_start", employee.getSaturdayStart())%>
+			    </td>
+			</tr>
+			<tr>
+			    <td nowrap="nowrap" align="right">Close:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("saturday_end", employee.getSaturdayEnd())%>
+			    </td>
+			</tr>
+			
+			<tr>
+			    <td nowrap="nowrap" align="right">&nbsp;</td>
+			    <td nowrap="nowrap" align="left">&nbsp;</td>
+			</tr>
+			
+			<tr>
+			    <% if (userSession.moveAttribute ("employee_error_sunday") == null) { %>
 			    <td align="right">Sunday:</td>
-			    <td align="left"><input type="text" name="sunday_start" size="5" value="<%=CoreTools.showMilitaryTime(employee.getSundayStart())%>"> to
-			    <input type="text" name="sunday_end" size="5" value="<%=CoreTools.showMilitaryTime(employee.getSundayEnd())%>"></td>
+			    <% } else { %>
+			    <td align="right"><font color="red">Sunday:</font></td>
+			    <% } %>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onChange="switchDayStatus(this)" id="sunday_check" value="sunday"></td>
+			</tr>
+			<tr>
+			    <td nowrap="nowrap" align="right">Open:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("sunday_start", employee.getSundayStart())%>
+			    </td>
+			</tr>
+			<tr>
+			    <td nowrap="nowrap" align="right">Close:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("sunday_end", employee.getSundayEnd())%>
+			    </td>
 			</tr>
 		    </table>
 		</td>
@@ -266,17 +409,24 @@ window.onload = function () {
 <%@ include file="WEB-INF/jspf/footer.jspf" %>
 
 <script language="javascript" src="js/employee-addin.js"></script>
+<script language="javascript" src="js/time-addin.js"></script>
+
 <script>
 <% if (employee.getAvailabilityExceptions() != null && employee.getAvailabilityExceptions().size() > 0) {
                 for (AvailabilityExceptionBean e : employee.getAvailabilityExceptions()) {%>
-    addIntialException('<%=CoreTools.display(e.getDate())%>','<%=CoreTools.display(e.getReason())%>');
+    addIntialException('<%=ServletHelper.display(e.getDate())%>','<%=ServletHelper.display(e.getReason())%>');
 <%}
             }%>
             
 <% if (employee.getServices() != null && employee.getServices().size() > 0) {
  for (ServiceBean service : employee.getServices()) {%>
- addIntialService('<%=CoreTools.display(service.getServiceNo())%>','<%=CoreTools.display(service.getName())%>');
+ addIntialService('<%=ServletHelper.display(service.getServiceNo())%>','<%=ServletHelper.display(service.getName())%>');
 <%}}%>
  </script>
+ 
+  <script>
+     updateDays ();
+ </script>
+ 
  <script>refillServicesList();</script>
  <script>refillExceptionsList();</script>

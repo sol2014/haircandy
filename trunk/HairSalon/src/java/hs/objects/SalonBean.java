@@ -18,8 +18,7 @@ import java.util.*;
  * The name, first and second line of address, city, country, postal code,
  * phone number, e-mail address of the salon, the salon idenification number,
  * the business hours, the provincial and federal tax rates, the schedule of 
- * the salon, the waiting list, the number of hair sation and the number of 
- * beauty station in the salon.  
+ * the salon.  
  *   
  * The above attutibe can be obtain by the getter method.
  * @author Horace Wan
@@ -65,14 +64,6 @@ public class SalonBean extends DataBean implements Comparator
 	 *  An array of schedule entries for the salon.
 	 */
 	private ArrayList<ScheduleBean> schedules = null;
-	/**
-	 *  The number of hair station in the salon.
-	 */
-	private Integer hairStations;
-	/**
-	 *  The number of beauty station in the salon.
-	 */
-	private Integer beautyStations;
 	/**
 	 *  The name of the salon.
 	 */
@@ -297,15 +288,6 @@ public class SalonBean extends DataBean implements Comparator
 	}
 
 	/**
-	 * Sets the number of beauty station in the salon.
-	 * @param  beautyStation an integer of beauty station in the salon.
-	 */
-	public void setBeautyStations (Integer beautyStation)
-	{
-		this.beautyStations = beautyStation;
-	}
-
-	/**
 	 * Sets the city which this salon locates.
 	 * @param  city a string for the city which this salon locates.
 	 */
@@ -332,14 +314,6 @@ public class SalonBean extends DataBean implements Comparator
 		this.email = email;
 	}
 
-	/**
-	 * Sets the number of hair station in the salon.
-	 * @param  hairStation an integer of hair station in the salon.
-	 */
-	public void setHairStations (Integer hairStation)
-	{
-		this.hairStations = hairStation;
-	}
 
 	/**
 	 * Sets the name of the salon.
@@ -401,15 +375,6 @@ public class SalonBean extends DataBean implements Comparator
 	 * Returns the salon's 1st line of address.
 	 * @return a string for the salon's 1st line of address.
 	 */
-	public Integer getBeautyStations ()
-	{
-		return beautyStations;
-	}
-
-	/**
-	 * Returns the salon's 1st line of address.
-	 * @return a string for the salon's 1st line of address.
-	 */
 	public String getCity ()
 	{
 		return city;
@@ -431,15 +396,6 @@ public class SalonBean extends DataBean implements Comparator
 	public String getEmail ()
 	{
 		return email;
-	}
-
-	/**
-	 * Returns the salon's 1st line of address.
-	 * @return a string for the salon's 1st line of address.
-	 */
-	public Integer getHairStations ()
-	{
-		return hairStations;
 	}
 
 	/**

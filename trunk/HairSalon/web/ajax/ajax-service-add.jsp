@@ -45,10 +45,10 @@ ArrayList<ServiceBean> searchResults = (ArrayList<ServiceBean>) request.getAttri
 		    <% for (ServiceBean service : searchResults) {%>
 		    <tr align="right" valign="middle">
 			<td height="30" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/result.gif" width="16" height="16" />&nbsp;</td>
-			<td align="left" class="Row2"><%=CoreTools.display(service.getName())%></td>
-			<td nowrap="nowrap" class="Row7"><%=CoreTools.display (service.getDuration())%>m</td>
-			<td nowrap="nowrap" class="Row7"><%=CoreTools.displayPrice (service.getPrice ())%></td>
-			<td nowrap="nowrap" class="Row7"><img style="cursor:pointer" src="images/icons/small/add_white.gif" onclick="addService('<%=CoreTools.display(service.getServiceNo())%>','<%=CoreTools.display(service.getName())%>','<%=CoreTools.display(service.getPrice())%>')" title="Add the service to the list." /></td>
+			<td align="left" class="Row2"><%=ServletHelper.display(service.getName())%></td>
+			<td nowrap="nowrap" class="Row7"><%=ServletHelper.display (service.getDuration())%>m</td>
+			<td nowrap="nowrap" class="Row7"><%=ServletHelper.displayPrice (service.getPrice ())%></td>
+			<td nowrap="nowrap" class="Row7"><img style="cursor:pointer" src="images/icons/small/add_white.gif" onclick="addService('<%=ServletHelper.display(service.getServiceNo())%>','<%=ServletHelper.display(service.getName())%>','<%=ServletHelper.display(service.getPrice())%>')" title="Add the service to the list." /></td>
 		    </tr>
 		    <% }%>
                 <% }%>

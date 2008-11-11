@@ -130,5 +130,14 @@ public class AvailabilityExceptionBean extends DataBean
 		
 		return (result1 && result2);
 	}
+
+	@Override
+	public int hashCode ()
+	{
+		int hash = 5;
+		hash = 19 * hash + (this.date != null ? this.date.hashCode () : 0);
+		hash = 19 * hash + (this.employeeNo != null ? this.employeeNo.hashCode () : 0);
+		return hash;
+	}
 }
 

@@ -395,8 +395,11 @@ public class AppointmentServlet extends DispatcherServlet
 		}
         
 		// First check if we are within the limits of the day.
+		ScheduleHoursBean hours = new ScheduleHoursBean ();
+		hours.setDate (date);
+		hours = SessionController.loadScheduleHours (userSession, hours);
 		
-		if (CoreTools.isTimeBefore(salon.getWeekdayEndTime (CoreTools.getWeekDay(appointment.getDate())), appointment.getEndTime()))
+		if (CoreTools.isTimeBefore(hours.getEndTime(), appointment.getEndTime()))
 		{
 			// You cannot schedule the end time past the business hours.
 			LogController.write (this, "You cannot book an appointment that ends after the business hours.");
@@ -409,7 +412,7 @@ public class AppointmentServlet extends DispatcherServlet
 		
 		Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions = SessionController.getAvailabilityExceptions(userSession, date);
 		ArrayList<ScheduleExceptionBean> scheduleExceptions = SessionController.getScheduleExceptions(userSession, date);
-		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> unavailables = SessionController.getUnavailable(userSession, date, availabilityExceptions, scheduleExceptions);
+		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> unavailables = SessionController.getUnavailable(userSession, date, availabilityExceptions, scheduleExceptions, hours);
 		Hashtable<EmployeeBean, ArrayList<AppointmentBean>> appointments = SessionController.getAppointments(userSession, date, availabilityExceptions, scheduleExceptions);
 		
 		// If we are, then check to see if we are ending the appointment overtop of

@@ -91,4 +91,12 @@ public class ScheduleExceptionBean extends DataBean implements Comparator
 		
 		return (a.getDate ().equals (this.getDate ()));
 	}
+
+	@Override
+	public int hashCode ()
+	{
+		int hash = 5;
+		hash = 37 * hash + (this.date != null ? this.date.hashCode () : 0);
+		return hash;
+	}
 }

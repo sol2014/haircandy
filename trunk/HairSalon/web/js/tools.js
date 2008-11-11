@@ -50,7 +50,8 @@ function getScreenWidth()//function to get screen width
     {
         width = window.innerWidth;
     }
-    else if( document.documentElement && document.documentElement.clientWidth )//ie 6 and newer 
+    else 
+    if( document.documentElement && document.documentElement.clientWidth )//ie 6 and newer 
     {
         width = document.documentElement.clientWidth;
     }
@@ -79,7 +80,8 @@ function getScreenHeight()//function to get screen height
     {
         height = window.innerHeight;
     }
-    else if( document.documentElement && document.documentElement.clientHeight )//ie 6 and newer 
+    else 
+    if( document.documentElement && document.documentElement.clientHeight )//ie 6 and newer 
     {
         height = document.documentElement.clientHeight;
     }

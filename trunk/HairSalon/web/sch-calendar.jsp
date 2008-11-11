@@ -2,7 +2,7 @@
  * HairSalon: Scheduling and Management System
  * Systems II - Southern Alberta Institute of Technology
  * 
- * File Author: Joey Ren
+ * File Author: Philippe Durand
  * 
  * System Developed by:
  * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
@@ -41,7 +41,11 @@ UserSession userSession = (UserSession) session.getAttribute ("user_session");
 <script>
 function goToCalendarDay (day)
 {
-    location.replace ("view-sch-employeescheduler.jsp?date="+day);
+    <% if (userSession.getEmployee().getRole ().equals ("Manager")) { %>
+    location.replace ("sch-scheduler-managers.jsp?date="+day);
+    <% } else { %>
+    location.replace ("sch-scheduler-employees.jsp?date="+day);
+    <% } %>
 }
 
 var cellData = new Hashtable();

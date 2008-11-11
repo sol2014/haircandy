@@ -7,17 +7,6 @@
  * System Developed by:
  * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
  */
- 
- 
-/*
- * HairSalon: Scheduling and Management System
- * Systems II - Southern Alberta Institute of Technology
- * 
- * File Author: Joey Ren
- * 
- * System Developed by:
- * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
- */
 
 var employeeIDArray;//used to get employee no based on column index
 var employeeNameArray;//used to get employee name based on column index

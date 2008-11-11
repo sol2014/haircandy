@@ -136,7 +136,7 @@ function addIntialEntry(duration, row, column, id)//function used to add entry o
             {
                 document.getElementById(add.id).className = bookedComboClass;
             }
-            add.state = bookingState;
+            add.state = bookedState;
             appointmentCells.push(add.id);
         }
         appointmentCells.scheduleNo = id;
@@ -248,21 +248,21 @@ function editEntry(duration)//function used to edit the entry
             add  = findCell(j+"^-^"+getColumnId(previousFirstCell.id));
             if(j == start)//appointment start
             {
-                document.getElementById(add.id).className = bookingHeadClass;
+                document.getElementById(add.id).className = bookedHeadClass;
             }
             else if(j == end - 1)//appointment tail
             {
-                document.getElementById(add.id).className = bookingTailClass;
+                document.getElementById(add.id).className = bookedTailClass;
             }
             else//appointment body
             {
-                document.getElementById(add.id).className = bookingBodyClass;
+                document.getElementById(add.id).className = bookedBodyClass;
             }
             if(start == end -1)//only one cell
             {
-                document.getElementById(add.id).className = bookingComboClass;
+                document.getElementById(add.id).className = bookedComboClass;
             }
-            add.state = bookingState;
+            add.state = bookedState;
             appointmentCells.push(add.id);
         }
         appointmentCells.scheduleNo = appointment.scheduleNo;
@@ -307,21 +307,21 @@ function addEntry(duration)//function used to change the draggable div's size ba
             add  = findCell(j+"^-^"+getColumnId(previousFirstCell.id));
             if(j == start)//appointment start
             {
-                document.getElementById(add.id).className = bookingHeadClass;
+                document.getElementById(add.id).className = bookedHeadClass;
             }
             else if(j == end - 1)//appointment tail
             {
-                document.getElementById(add.id).className = bookingTailClass;
+                document.getElementById(add.id).className = bookedTailClass;
             }
             else//appointment body
             {
-                document.getElementById(add.id).className = bookingBodyClass;
+                document.getElementById(add.id).className = bookedBodyClass;
             }
             if(start == end -1)//only one cell
             {
-                document.getElementById(add.id).className = bookingComboClass;
+                document.getElementById(add.id).className = bookedComboClass;
             }
-            add.state = bookingState;
+            add.state = bookedState;
             appointmentCells.push(add.id);
         }
         appointments.push(appointmentCells);

@@ -39,55 +39,38 @@ if (!isGuest)
 %>
 
 <table border="0" width="130" cellspacing="0" cellpadding="0" height="100%">
-    <% if (isGuest) { %>
-	<tr>
+    <tr>
 	<% if (position == SessionPositions.AppCalendar) { %>
-	    <td class="SiteNavigationOptionSelected">
+	<td class="SiteNavigationOptionSelected">
 	<% } else { %>
-	    <td class="SiteNavigationOption">
+	<td class="SiteNavigationOption">
 	<% } %>
 	    <table border="0" cellspacing="6" cellpadding="0">
 		<tr>
 		    <td><img border="0" src="/HairSalon/images/icons/medium/appointment_blue.gif" width="22" height="22"></td>
-		    <td><a title="Book or view appointments." class="MenuFont" href = "/HairSalon/view-app-clientcalendar.jsp">Appointments</a></span></td>
+		    <td><a title="Book or view appointments." class="MenuFont" href = "/HairSalon/app-calendar.jsp">Appointments</a></span></td>
 		</tr>
 	    </table>
 	</td>
     </tr>
-    <% } else { %>
-	<tr>
-	<% if (position == SessionPositions.AppCalendar) { %>
-	    <td class="SiteNavigationOptionSelected">
+    
+    <% if (!isGuest && (role == UserRoles.Stylist || role == UserRoles.Manager || role == UserRoles.Receptionist)) { %>
+    <tr>
+	<% if (position == SessionPositions.SchCalendar) { %>
+	<td class="SiteNavigationOptionSelected">
 	<% } else { %>
-	    <td class="SiteNavigationOption">
+	<td class="SiteNavigationOption">
 	<% } %>
 	    <table border="0" cellspacing="6" cellpadding="0">
 		<tr>
-		    <td><img border="0" src="/HairSalon/images/icons/medium/appointment_blue.gif" width="22" height="22"></td>
-		    <td><a title="Book or view appointments." class="MenuFont" href = "/HairSalon/view-app-calendar.jsp">Appointments</a></span></td>
+		    <td><img border="0" src="/HairSalon/images/icons/medium/schedule_blue.gif" width="22" height="22"></td>
+		    <td><a title="View or maintain the schedule." class="MenuFont" href = "/HairSalon/sch-calendar.jsp">Schedule</a></td>
 		</tr>
 	    </table>
 	</td>
     </tr>
     <% } %>
     
-	<% if (!isGuest && (role == UserRoles.Stylist || role == UserRoles.Manager || role == UserRoles.Receptionist)) { %>
-    <tr>
-	<% if (position == SessionPositions.SchCalendar) { %>
-	    <td class="SiteNavigationOptionSelected">
-	<% } else { %>
-	    <td class="SiteNavigationOption">
-	<% } %>
-	    <table border="0" cellspacing="6" cellpadding="0">
-		<tr>
-		    <td><img border="0" src="/HairSalon/images/icons/medium/schedule_blue.gif" width="22" height="22"></td>
-		    <td><a title="View or maintain the schedule." class="MenuFont" href = "/HairSalon/view-sch-calendar.jsp">Schedule</a></td>
-		</tr>
-	    </table>
-	</td>
-    </tr>
-    <% } %>
-	
     <% if (!isGuest && (role == UserRoles.Stylist || role == UserRoles.Manager || role == UserRoles.Receptionist)) { %>
     <tr>
 	<% if (position == SessionPositions.Sales) { %>

@@ -1,4 +1,4 @@
-<div class="DialogBox" id="preferences_dialog" style="width: 475px;height: 250px;">
+<div class="DialogBox" id="preferences_dialog" style="width:680px;height:240px">
     <table bgcolor="#FFFFFF" height="100%" width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 	    <td><img src="images/scheduler/scheduler_topleft.gif" width="2" height="33" /></td>
@@ -28,8 +28,8 @@
 				    <td nowrap="nowrap" align="left"><b><%=ServletHelper.displayPhoneNumber (userSession.getEmployee().getPhoneNumber())%></b></td>
 				</tr>
 				<tr>
-				    <td align="right"></td>
-				    <td align="left">&nbsp;</td>
+				    <td nowrap="nowrap" align="right">&nbsp;</td>
+				    <td nowrap="nowrap" align="left">&nbsp;</td>
 				</tr>
 				<tr>
 				    <td align="right"><img border="0" src="/HairSalon/images/icons/small/login_white.gif" width="16" height="16"></td>
@@ -47,55 +47,117 @@
 				    <td nowrap="nowrap" align="right">Repeat:</td>
 				    <td align="left"><input type="password" name="repeat_password" size="15"></td>
 				</tr>
+				<tr>
+				    <td colspan="2" width="100%" align="center"><br/><input type="button" onclick="closePreferences()" value="Finish" class="StandardButton"/></td>
+				</tr>
 			    </table>
 			</td>
 			<td valign="top" align="left">
 			    <table border="0" cellpadding="0">
 				<tr>
-				    <td nowrap="nowrap" align="right"><img border="0" src="/HairSalon/images/icons/small/availability_white.gif" width="16" height="16"></td>
-				    <td nowrap="nowrap" align="left"><b><u>Availability</u></b></td>
+				    <td align="right"><img border="0" src="/HairSalon/images/icons/small/availability_white.gif" width="16" height="16"></td>
+				    <td align="left"><b><u>Availability Hours</u></b></td>
 				</tr>
 				<tr>
-				    <td nowrap="nowrap" align="right">Monday:</td>
-				    <td nowrap="nowrap" align="left"><input type="text" name="monday_start" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getMondayStart())%>"> to
-				    <input type="text" name="monday_end" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getMondayEnd())%>"></td>
+				    <% if (userSession.moveAttribute ("employee_error_monday") == null) { %>
+				    <td align="right"><u>Monday:</u></td>
+				    <% } else { %>
+				    <td align="right"><font color="red"><u>Monday:</u></font></td>
+				    <% } %>
+				    <td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this)" id="monday_check" value="monday"></td>
+				</tr>
+
+				<tr>
+				    <td nowrap="nowrap" align="right">Start:</td>
+				    <td nowrap="nowrap" align="left">
+					<%=ServletHelper.generateHourPicker ("monday_start", userSession.getEmployee ().getMondayStart())%> Finish: <%=ServletHelper.generateHourPicker ("monday_end", userSession.getEmployee ().getMondayEnd())%>
+				    </td>
 				</tr>
 				<tr>
-				    <td nowrap="nowrap" align="right">Tuesday:</td>
-				    <td nowrap="nowrap" align="left"><input type="text" name="tuesday_start" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getTuesdayStart())%>"> to
-				    <input type="text" name="tuesday_end" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getTuesdayEnd())%>"></td>
+				    <% if (userSession.moveAttribute ("employee_error_tuesday") == null) { %>
+				    <td align="right"><u>Tuesday:</u></td>
+				    <% } else { %>
+				    <td align="right"><font color="red"><u>Tuesday:</u></font></td>
+				    <% } %>
+				    <td nowrap="nowrap" align="left"><input type="checkbox" onChange="switchDayStatus(this)" id="tuesday_check" value="tuesday"></td>
 				</tr>
 				<tr>
-				    <td nowrap="nowrap" align="right">Wednesday:</td>
-				    <td nowrap="nowrap" align="left"><input type="text" name="wednesday_start" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getWednesdayStart())%>"> to
-				    <input type="text" name="wednesday_end" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getWednesdayEnd())%>"></td>
+				    <td nowrap="nowrap" align="right">Start:</td>
+				    <td nowrap="nowrap" align="left">
+					 <%=ServletHelper.generateHourPicker ("tuesday_start", userSession.getEmployee ().getTuesdayStart())%> Finish: <%=ServletHelper.generateHourPicker ("tuesday_end", userSession.getEmployee ().getTuesdayEnd())%>
+				    </td>
 				</tr>
 				<tr>
-				    <td nowrap="nowrap" align="right">Thursday:</td>
-				    <td nowrap="nowrap" align="left"><input type="text" name="thursday_start" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getThursdayStart())%>"> to
-				    <input type="text" name="thursday_end" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getThursdayEnd())%>"></td>
+				    <% if (userSession.moveAttribute ("employee_error_wednesday") == null) { %>
+				    <td align="right"><u>Wednesday:</u></td>
+				    <% } else { %>
+				    <td align="right"><font color="red"><u>Wednesday:</u></font></td>
+				    <% } %>
+				    <td nowrap="nowrap" align="left"><input type="checkbox" onChange="switchDayStatus(this)" id="wednesday_check" value="wednesday"></td>
 				</tr>
 				<tr>
-				    <td nowrap="nowrap" align="right">Friday:</td>
-				    <td nowrap="nowrap" align="left"><input type="text" name="friday_start" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getFridayStart())%>"> to
-				    <input type="text" name="friday_end" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getFridayEnd())%>"></td>
+				    <td nowrap="nowrap" align="right">Start:</td>
+				    <td nowrap="nowrap" align="left">
+					<%=ServletHelper.generateHourPicker ("wednesday_start", userSession.getEmployee ().getWednesdayStart())%> Finish: <%=ServletHelper.generateHourPicker ("wednesday_end", userSession.getEmployee ().getWednesdayEnd())%>
+				    </td>
 				</tr>
 				<tr>
-				    <td nowrap="nowrap" align="right">Saturday:</td>
-				    <td nowrap="nowrap" align="left"><input type="text" name="saturday_start" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getSaturdayStart())%>"> to
-				    <input type="text" name="saturday_end" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getSaturdayEnd())%>"></td>
+				    <% if (userSession.moveAttribute ("employee_error_thursday") == null) { %>
+				    <td align="right"><u>Thursday:</u></td>
+				    <% } else { %>
+				    <td align="right"><font color="red"><u>Thursday:</u></font></td>
+				    <% } %>
+				    <td nowrap="nowrap" align="left"><input type="checkbox" onChange="switchDayStatus(this)" id="thursday_check" value="thursday"></td>
 				</tr>
 				<tr>
-				    <td nowrap="nowrap" align="right">Sunday:</td>
-				    <td nowrap="nowrap" align="left"><input type="text" name="sunday_start" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getSundayStart())%>"> to
-				    <input type="text" name="sunday_end" size="5" value="<%=CoreTools.showTime(userSession.getEmployee().getSundayEnd())%>"></td>
+				    <td nowrap="nowrap" align="right">Start:</td>
+				    <td nowrap="nowrap" align="left">
+					<%=ServletHelper.generateHourPicker ("thursday_start", userSession.getEmployee ().getThursdayStart())%> Finish: <%=ServletHelper.generateHourPicker ("thursday_end", userSession.getEmployee ().getThursdayEnd())%>
+				    </td>
+				</tr>
+				<tr>
+				    <% if (userSession.moveAttribute ("employee_error_friday") == null) { %>
+				    <td align="right"><u>Friday:</u></td>
+				    <% } else { %>
+				    <td align="right"><font color="red"><u>Friday:</u></font></td>
+				    <% } %>
+				    <td nowrap="nowrap" align="left"><input type="checkbox" onChange="switchDayStatus(this)" id="friday_check" value="friday"></td>
+				</tr>
+				<tr>
+				    <td nowrap="nowrap" align="right">Start:</td>
+				    <td nowrap="nowrap" align="left">
+					<%=ServletHelper.generateHourPicker ("friday_start", userSession.getEmployee ().getFridayStart())%> Finish: <%=ServletHelper.generateHourPicker ("friday_end", userSession.getEmployee ().getFridayEnd())%>
+				    </td>
+				</tr>
+				<tr>
+				    <% if (userSession.moveAttribute ("employee_error_saturday") == null) { %>
+				    <td align="right"><u>Satuday:</u></td>
+				    <% } else { %>
+				    <td align="right"><font color="red"><u>Saturday:</u></font></td>
+				    <% } %>
+				    <td nowrap="nowrap" align="left"><input type="checkbox" onChange="switchDayStatus(this)" id="saturday_check" value="saturday"></td>
+				</tr>
+				<tr>
+				    <td nowrap="nowrap" align="right">Start:</td>
+				    <td nowrap="nowrap" align="left">
+					<%=ServletHelper.generateHourPicker ("saturday_start", userSession.getEmployee ().getSaturdayStart())%> Finish: <%=ServletHelper.generateHourPicker ("saturday_end", userSession.getEmployee ().getSaturdayEnd())%>
+				    </td>
+				</tr>
+				<tr>
+				    <% if (userSession.moveAttribute ("employee_error_sunday") == null) { %>
+				    <td align="right"><u>Sunday:</u></td>
+				    <% } else { %>
+				    <td align="right"><font color="red"><u>Sunday:</u></font></td>
+				    <% } %>
+				    <td nowrap="nowrap" align="left"><input type="checkbox" onChange="switchDayStatus(this)" id="sunday_check" value="sunday"></td>
+				</tr>
+				<tr>
+				    <td nowrap="nowrap" align="right">Start:</td>
+				    <td nowrap="nowrap" align="left">
+					<%=ServletHelper.generateHourPicker ("sunday_start", userSession.getEmployee ().getSundayStart())%> Finish: <%=ServletHelper.generateHourPicker ("sunday_end", userSession.getEmployee ().getSundayEnd())%>
+				    </td>
 				</tr>
 			    </table>
-			</td>
-		    </tr>
-		    <tr>
-			<td colspan="2" align="center">
-			    <input type="button" onclick="closePreferences()" value="Finish" class="StandardButton"/>
 			</td>
 		    </tr>
 		</table>
@@ -113,7 +175,12 @@
     </table>
 </div>
 
+<script language="javascript" src="js/time-addin.js"></script>
+
+ <script>
+     updateDays ();
+ </script>
+ 
 <script>
-    document.getElementById("preferences_dialog").style.left = (getScreenWidth() / 2) - 225 + "px";
-    document.getElementById("preferences_dialog").style.top = (getScreenHeight() / 2) - 125 + "px";
+    
 </script>

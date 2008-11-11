@@ -194,7 +194,7 @@ window.onload = function () {
 			</tr>
 			<tr>
 			    <td align="right"><img border="0" src="/HairSalon/images/icons/small/availability_white.gif" width="16" height="16"></td>
-			    <td align="left"><b><u>Availability</u></b></td>
+			    <td align="left"><b><u>Availability Hours</u></b></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("employee_error_monday") == null) { %>

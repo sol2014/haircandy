@@ -34,22 +34,22 @@ int left = positions.size(); %>
 		    break;
 		case AppScheduler:
 		    icon = "appointment_gray.gif";
-		    resource = "view-app-scheduler.jsp";
+		    resource = "";
 		    title = "Appointments";
 		    break;
 		case AppCalendar:
 		    icon = "appointment_gray.gif";
-		    resource = "view-app-calendar.jsp";
+		    resource = "";
 		    title = "Calendar";
 		    break;
 		case SchScheduler:
 		    icon = "schedule_gray.gif";
-		    resource = "view-sch-scheduler.jsp";
+		    resource = "";
 		    title = "Schedule";
 		    break;
 		case SchCalendar:
 		    icon = "schedule_gray.gif";
-		    resource = "view-sch-calendar.jsp";
+		    resource = "";
 		    title = "Calendar";
 		    break;
 		case Sales:

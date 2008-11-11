@@ -21,15 +21,15 @@
   
 <%-- Retrieve the UserSession object from the http session. --%>
 <%
-int recordNo = 0;
 UserSession userSession = (UserSession) session.getAttribute ("user_session");
+int recordNo = 0;
 %>
 
 <%-- Set the next page position for navigator. --%>
-<% userSession.setCurrentPosition (SessionPositions.SchCalendar);%>
+<% userSession.setCurrentPosition (SessionPositions.AppCalendar);%>
 
 <%-- Set the title of the page. --%>
-<% String page_title = "Schedule"; %>
+<% String page_title = "Appointments"; %>
 
 <%-- Use the pre-set header file. --%>
 <%@ include file="WEB-INF/jspf/header.jspf" %>
@@ -41,7 +41,11 @@ UserSession userSession = (UserSession) session.getAttribute ("user_session");
 <script>
 function goToCalendarDay (day)
 {
-    location.replace ("view-sch-scheduler.jsp?date="+day);
+    <% if (userSession.isGuest ()) { %>
+    location.replace ("app-scheduler-clients.jsp?date="+day);
+    <% } else { %>
+    location.replace ("app-scheduler-employees.jsp?date="+day);
+    <% } %>
 }
 
 var cellData = new Hashtable();
@@ -67,7 +71,12 @@ function unlightDay (day)
 
 <%@ include file="WEB-INF/jspf/footer.jspf" %>
 
-<script language="javascript" src="js/sch-calendar.js"></script>
+<% if (userSession.isGuest()) { %>
+<script language="javascript" src="js/app-clientcalendar.js"></script>
+<% } else { %>
+<script language="javascript" src="js/app-calendar.js"></script>
+<% } %>
+
 <script>
     var today = new Date();
     refreshCalender(today.getFullYear(),today.getMonth());

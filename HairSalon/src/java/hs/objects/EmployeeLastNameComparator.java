@@ -11,9 +11,15 @@ package hs.objects;
 
 import java.util.*;
 
-public class EmployeeLastNameComparator implements Comparator<EmployeeBean> {
-
-	public int compare(EmployeeBean eb1, EmployeeBean eb2) {
-		return eb1.getLastName().compareTo(eb2.getLastName());
+/**
+ * The comparator used to sort employee beans by last name.
+ * 
+ * @author Joey Ren
+ */
+public class EmployeeLastNameComparator implements Comparator<EmployeeBean>
+{
+	public int compare (EmployeeBean eb1, EmployeeBean eb2)
+	{
+		return eb1.getLastName ().compareTo (eb2.getLastName ());
 	}
 }

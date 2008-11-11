@@ -176,6 +176,13 @@ int rowCount = 0;
         </td>
     </tr>
     <tr>
+	<td width="100%" align="left" nowrap="nowrap">
+	    <% if (userSession.getEmployee ().getRole ().equals ("Manager")) { %>
+	    Open: <%=ServletHelper.generateHourPicker ("start_time", startTime)%> Close: <%=ServletHelper.generateHourPicker ("end_time", endTime)%> <input id="update_button" type="button" value="Update" onclick="alert('update!')">
+	    <% } %>
+	</td>
+    </tr>
+    <tr>
         <td>
             <table align="left" valign="top" border="0" cellspacing="5" cellpadding="0">
                 <tr>

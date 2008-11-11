@@ -3,31 +3,14 @@ TODO List - Flaws, Bugs, Features and Tasks, oh my!
 
 Updated: Sunday, Nov 10th, 2008
 
+Unresolved
+----------
+
 - FLAW: Exceptions are non-repeatable, and they must be constantly managed
   by the employees and managers. Technically exceptions should not have
   years, if they do, we should have a flag for "Once" or "Repeat" so that
   when the exception passes, we create a new one.
   > We concidered this flaw a minor issue. Nov 10th, 2008
-
-- FLAW: Enforce Limit of Hair Stations (when creating schedule entries) we cannot
-  allow booking of more stylists than we can fit into the salon. Do we really
-  need beauty stations? We have no way to tell the difference between hair
-  and beauty stations right now, so we should just have Stations period.
-  > Flaw fixed by removing the concept of hair stations and beauty stations. This limit
-    would only provide some probably non-essential control to running a business. Most
-    managers would be able to make sure they do not schedule too many people for their
-    salon capacity. Nov 10th, 2008
-
-- FLAW: We should be taking the Salon business hours and storing them into a new schedule table
-  that stores only the hours of operations for any given day. We should use this table instead
-  to load business hours in all places in the code. If business hour data is not available in
-  the DB, we should create a new entry on-the-fly that uses the salon business hours. This
-  makes sure that we store salon hours for all days, and makes sure changing  business hours
-  after entering data does not change the rendering of previously set days. If we do this though
-  we will then have to allow a way to change business hours for previous days (this requires
-  a new interface somehow to change hours of operation for 1 business day).
-  > This flaw has been concidered as high priority as this is a negative aspect of the schedule
-    information that could cause serious problems in rendering each day. Nov 10th, 2008
 
 - FLAW: We totally forgot to use Employee Availability in the scheduler. It should be displaying
   something like we use in the appointment schedule (unavailable time). But instead this would be
@@ -62,9 +45,6 @@ Updated: Sunday, Nov 10th, 2008
 
 - BUG: Do not let scheduler or appointment drag cells outside of bounds (dissapear on drop).
 
-- BUG: Employees can move schedule entries around, only Managers should be able to.
-  > Joey fixed this bug Nov 10th, 2008
-
 - BUG: Only show alert for 1 record type, always keep latest. Show date column in alert list too.
 
 - BUG: Make sure that all search result cells are top aligned, and use nowrap and have
@@ -73,9 +53,6 @@ Updated: Sunday, Nov 10th, 2008
 - BUG: Input checking in all Dialogs must highlight fields RED when finishing.
 
 - BUG: Delete button in appointment dialog needs to be hidden when creating new entry.
-
-- BUG: Fix all the form pages from taking ENTER keystroke to "SAVE" records.
-  > Joey fixed this bug on Nov 10th, 2008
 
 - BUG: Start Time/End Time do not render in the Employee scheduler dialog.
 
@@ -89,8 +66,6 @@ Updated: Sunday, Nov 10th, 2008
   right now.
 
 - BUG: Add the duration Hour+Minute Combo boxes for Services search, maintain and create pages.
-
-- BUG: Remove comparator from all the beans.
 
 - BUG: Fix blackout so that it uses the document height/width, not the browser viewing area, also, make
   blackout everytime we show a popup, do not use the same blackout each time.
@@ -111,7 +86,45 @@ Updated: Sunday, Nov 10th, 2008
 - TASK: Check ALL Links on the page for dead links.
 
 - TASK: JavaDoc everything and document javascript to some degree.
+  > Philippe has gone over all hs.objects.* classes, cleaned up javadoc and formatting.
 
 - TASK: Check all file headers.
+  > Philippe checked all file headers in hs.objects.* classes.
 
 - TASK: Clean up any unwanted code, and WTFs or others...
+  > Philippe cleaned up all unwanted code from hs.objects.* classes.
+
+
+Resolved
+--------
+
+- FLAW (RESOLVED): Enforce Limit of Hair Stations (when creating schedule entries) we cannot
+  allow booking of more stylists than we can fit into the salon. Do we really
+  need beauty stations? We have no way to tell the difference between hair
+  and beauty stations right now, so we should just have Stations period.
+  > Philippe fixed by removing the concept of hair stations and beauty stations. This limit
+    would only provide some probably non-essential control to running a business. Most
+    managers would be able to make sure they do not schedule too many people for their
+    salon capacity. Nov 10th, 2008
+
+- FLAW (RESOLVED): We should be taking the Salon business hours and storing them into a new schedule table
+  that stores only the hours of operations for any given day. We should use this table instead
+  to load business hours in all places in the code. If business hour data is not available in
+  the DB, we should create a new entry on-the-fly that uses the salon business hours. This
+  makes sure that we store salon hours for all days, and makes sure changing  business hours
+  after entering data does not change the rendering of previously set days. If we do this though
+  we will then have to allow a way to change business hours for previous days (this requires
+  a new interface somehow to change hours of operation for 1 business day).
+  > This flaw has been concidered as high priority as this is a negative aspect of the schedule
+    information that could cause serious problems in rendering each day. Nov 10th, 2008
+  > Philippe resolved this issue by providing a new bean ScheduleHoursBean and mechanisms
+    to store the business hours based on salon defaults when schedule entries are created. Nov 10th, 2008
+
+- BUG (RESOLVED): Employees can move schedule entries around, only Managers should be able to.
+  > Joey fixed this bug Nov 10th, 2008
+
+- BUG (RESOLVED): Fix all the form pages from taking ENTER keystroke to "SAVE" records.
+  > Joey fixed this bug on Nov 10th, 2008
+
+- BUG (RESOLVED): Remove comparator from all the beans.
+  > Philippe cleaned all that up and used Comparable instead. Nov 10th, 2008

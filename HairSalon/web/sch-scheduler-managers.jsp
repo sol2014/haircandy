@@ -40,6 +40,7 @@ Date date = CoreTools.getDate (request.getParameter("date"));
 
 <font face="Trebuchet MS" size="2">
     <div align="left" id="matrix"></div>
+    
 </font>
 
 <%@ include file="dialogs/schedule-dialog.jsp" %>
@@ -47,6 +48,61 @@ Date date = CoreTools.getDate (request.getParameter("date"));
 <%@ include file="WEB-INF/jspf/footer.jspf" %>
 
 <script language="javascript" src="js/scheduler-managers-addin.js"></script>
+
+<script>
+    function updatePage ()
+    {
+        getMatrix();
+    }
+    
+    function updateHours ()
+    {
+        var start_hour = parseInt(document.getElementById ("start_time_hour").value);
+        var start_min = parseInt(document.getElementById ("start_time_min").value);
+        var start_ampm = document.getElementById ("start_time_ampm").value;
+        
+        if (start_ampm != null && start_ampm == "PM")
+        {
+            if (start_hour != 12)
+                start_hour += 12;
+        }
+        else
+        {
+            if (start_hour == 12)
+                start_hour = 0;
+        }
+        
+        var start = start_hour+":"+start_min;
+        
+        var end_hour = parseInt(document.getElementById ("end_time_hour").value);
+        var end_min = parseInt(document.getElementById ("end_time_min").value);
+        var end_ampm = document.getElementById ("end_time_ampm").value;
+        
+        if (end_ampm != null && end_ampm == "PM")
+        {
+            if (end_hour != 12)
+                end_hour += 12;
+        }
+        else
+        {
+            if (end_hour == 12)
+                end_hour = 0;
+        }
+        
+        var end = end_hour+":"+end_min;
+        
+        var ajax = new Ajaxer("text",null,updatePage,null);
+        var queryString="schedule_action=UpdateHours&";
+        
+        queryString+="date="+'<%=request.getParameter("date")%>'+"&";
+        queryString+="start_time="+start+"&";
+        queryString+="end_time="+end+"&";
+        
+        alert (queryString);
+        
+        ajax.request("schedule", queryString);
+    }
+</script>
 
 <script>
     function getMatrix()

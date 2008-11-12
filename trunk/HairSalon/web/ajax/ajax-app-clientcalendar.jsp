@@ -9,42 +9,28 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="hs.core.*" %>
-<%@ page import="java.util.*" %>
-<%@ page import="java.text.*" %>
-<%@ page import="java.io.*" %>
-
-<%!
-    private int getTotalDaysOfGivenMonth(int year, int month) {
-        int[] daysInMonths = new int[]{31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-        if (month == 1) {
-            if ((year % 400 == 0) || ((year % 4 == 0) && (year % 100 != 0))) {
-                return 28;
-            } else {
-                return 29;
-            }
-        } else {
-            return daysInMonths[month];
-        }
-    }
-%>
+<%@page import="hs.core.*" %>
+<%@page import="hs.objects.*" %>
+<%@page import="hs.app.*" %>
+<%@page import="hs.presentation.*" %>
+<%@page import="java.util.*" %>
+<%@page import="java.text.*" %>
+<%@page import="java.io.*" %>
 
 <%
+UserSession userSession = (UserSession) session.getAttribute("user_session");
 
-// Now here I want to grab all the data about the schedule right now.
+int year = Integer.parseInt(request.getParameter("year"));
+int month = Integer.parseInt(request.getParameter("month"));
 
-String yearS = request.getParameter("year");
-String monthS = request.getParameter("month");
-int year = Integer.parseInt(yearS);
-int month = Integer.parseInt(monthS);
-
-Date date2 = CoreTools.getDate ("01/"+(month+1)+"/"+year);
+Date date = CoreTools.getDate ("01/"+(month+1)+"/"+year);
 
 Calendar calendar = Calendar.getInstance();
 calendar.set(year, month, 1);
-int weekDayOfFirstDayOfTheGivenMonth = calendar.get(Calendar.DAY_OF_WEEK) - 1;
-int dayIndexOfTheGivenMonth = 0;
-int totalDaysOfGivenMonth = getTotalDaysOfGivenMonth(year, month);
+
+int firstWeekday = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+int dayIndex = 0;
+int totalDays = CoreTools.getDaysInMonth(year, month);
 %>
 
 <font face="Trebuchet MS">
@@ -54,9 +40,9 @@ int totalDaysOfGivenMonth = getTotalDaysOfGivenMonth(year, month);
 		<table border="0" cellspacing="5" cellpadding="0">
 		    <tr>
 			<td align="right" valign="top"><img border="0" src="/HairSalon/images/icons/big/schedule_white.gif" width="48" height="48"></td>
-			<td align="left"><font size="3"><b>Appointment Calendar: <%=CoreTools.showDate (date2, CoreTools.MonthYearFormat)%></b></font><br>
+			<td align="left"><font size="3"><b>Appointment Calendar: <%=CoreTools.showDate (date, CoreTools.MonthYearFormat)%></b></font><br>
 			    You may browse through the calendar and select a day that you would like to view 
-			    the employee schedule for.
+			    the appointments for.
 			</td>
 		    </tr>
 		</table>
@@ -92,33 +78,67 @@ int totalDaysOfGivenMonth = getTotalDaysOfGivenMonth(year, month);
 			<td class="CalendarLeft"></td>
 			<td>
 			    <table border="0" width="100%" cellspacing="0" cellpadding="0">
-				<% int maxRow = (weekDayOfFirstDayOfTheGivenMonth + totalDaysOfGivenMonth) / 7; %>
-				<% if ((weekDayOfFirstDayOfTheGivenMonth + totalDaysOfGivenMonth) % 7 == 0) maxRow--; %>
-				
-				<% for (int row = 0; row < 6; row++) { %>
-				    <% if (row > maxRow) break; %>
+<%
+int maxRow = (firstWeekday + totalDays) / 7;
+
+if ((firstWeekday + totalDays) % 7 == 0)
+    maxRow--;
+
+for (int row = 0; row < 6; row++)
+{
+    if (row > maxRow)
+	break;
+%>
 				<tr>
-				    <% for (int column = 0; column < 7; column++) { %>
-					<% if ((weekDayOfFirstDayOfTheGivenMonth <= dayIndexOfTheGivenMonth) && (dayIndexOfTheGivenMonth < totalDaysOfGivenMonth + weekDayOfFirstDayOfTheGivenMonth)) { %>
-					    <% String datestr = (dayIndexOfTheGivenMonth - weekDayOfFirstDayOfTheGivenMonth + 1)+"/"+(month+1)+"/"+year; %>
-					    <% Date date = CoreTools.getDate (datestr); %>
-					    
-					    <td id="<%=datestr%>" onmouseover="highlightDay('<%=datestr%>')" onmouseout="unlightDay('<%=datestr%>')" onclick="goToCalendarDay('<%=datestr%>')" class="CalendarCell">
-					    
-					<span class="CellFont"><%=dayIndexOfTheGivenMonth - weekDayOfFirstDayOfTheGivenMonth + 1%>&nbsp;</span>
-					    
-					<% } else { %>
+<%
+    for (int column = 0; column < 7; column++)
+    {
+	if ((firstWeekday <= dayIndex) && (dayIndex < totalDays + firstWeekday))
+	{
+	    String datestr = (dayIndex - firstWeekday + 1)+"/"+(month+1)+"/"+year;
+	    AppointmentBean appointment = new AppointmentBean ();
+	    appointment.setDate (CoreTools.getDate (datestr));
+	    AppointmentBean[] appointments = SessionController.searchAppointments (userSession, appointment);
+
+	    if (appointments != null && appointments.length > 0)
+	    {
+%>
+				    <td id="<%=datestr%>" onmouseover="highlightDay('<%=datestr%>')" onmouseout="unlightDay('<%=datestr%>')" onclick="goToCalendarDay('<%=datestr%>')" class="CalendarCellValid">
+<%
+	    }
+	    else
+	    {
+%>
+				    <td id="<%=datestr%>" onmouseover="highlightDay('<%=datestr%>')" onmouseout="unlightDay('<%=datestr%>')" onclick="goToCalendarDay('<%=datestr%>')" class="CalendarCell">
+<%
+	    }
+%>
+					<span class="CellFont"><%=dayIndex - firstWeekday + 1%>&nbsp;</span>
+<%
+	}
+	else
+	{
+%>
 				    <td class="CalendarCellUnused">
-					<% } %> 
+<%
+	}
+%> 
 				    </td>
-				    <% if (column != 6) { %>
+<%
+	if (column != 6)
+	{
+%>
 				    <td class="CalendarCellSeparator"><img src="/HairSalon/images/site_blank.gif"></td>
-				    <% } %>
-				    
-				    <% dayIndexOfTheGivenMonth++; %>
-				<% } %>
+<%
+	}
+
+	dayIndex++;
+    }
+%>
 				</tr>
-				<% }%>
+<%
+}
+%>
 			    </table>
 			</td>
 			<td class="CalendarRight"></td>

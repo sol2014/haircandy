@@ -611,12 +611,13 @@ function mouseUpHandler(e)//function to deal with mouse up event, hide draggable
         doDrag = false;
         var mousePositions = getAbsoluteMousePositions(e);
         var find = false;
+        var add;
+        var appointmentCells = new Array();
         for(var i = 0; i < cells.length; i++)
         {
             var cell = cells[i];
             if((parseInt(mousePositions.absoluteLeft) >= parseInt(cell.absoluteLeft-1))&&(parseInt(mousePositions.absoluteTop) >= parseInt(cell.absoluteTop))&&(parseInt(mousePositions.absoluteLeft) < parseInt(cell.absoluteLeft+1) + parseInt(cell.offsetWidth))&&(parseInt(mousePositions.absoluteTop) < parseInt(cell.absoluteTop) + parseInt(cell.offsetHeight)))
             {
-                var appointmentCells = new Array();
                 appointmentCells.scheduleNo = draggableDiv.scheduleNo;
                 var start = parseInt(getRowId(cell.id)) - parseInt(clickedArea);
                 var end = parseInt(getRowId(cell.id)) - parseInt(clickedArea) + parseInt(ratio);
@@ -637,11 +638,8 @@ function mouseUpHandler(e)//function to deal with mouse up event, hide draggable
                 {
                     ok = false;
                 }
-                var add;
-                
                 if(ok)//save the current position
                 {
-                    
                     for(var j = start; j < end; j++)
                     {
                         add  = findCell(j+"^-^"+getColumnId(cell.id));
@@ -662,7 +660,6 @@ function mouseUpHandler(e)//function to deal with mouse up event, hide draggable
                             document.getElementById(add.id).className = bookingComboClass;
                         }
                         add.state = bookingState;
-                        
                         appointmentCells.push(add.id);
                     }
                 }
@@ -703,7 +700,32 @@ function mouseUpHandler(e)//function to deal with mouse up event, hide draggable
         }
         if(!find)
         {
-
+            var startRow = getRowId(previousFirstCell.id);
+            var endRow = getRowId(previousLastCell.id);
+            var column = getColumnId(previousFirstCell.id);
+            for(var k = startRow; k <= endRow; k++)
+            {
+                add  = findCell(k+"^-^"+column);
+                if(k == startRow)//appointment start
+                {
+                    document.getElementById(add.id).className = bookingHeadClass;
+                }
+                else if(k == endRow)//appointment tail
+                {
+                    document.getElementById(add.id).className = bookingTailClass;
+                }
+                else//appointment body
+                {
+                    document.getElementById(add.id).className = bookingBodyClass;
+                }
+                if(startRow == endRow)//only one cell
+                {
+                    document.getElementById(add.id).className = bookingComboClass;
+                }
+                add.state = bookingState;
+                appointmentCells.push(add.id);
+            }
+            appointments.push(appointmentCells);
         }
         draggableDiv.style.display = "none";
     }

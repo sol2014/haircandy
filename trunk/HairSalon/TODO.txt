@@ -12,11 +12,6 @@ Unresolved
   when the exception passes, we create a new one.
   > We concidered this flaw a minor issue. Nov 10th, 2008
 
-- FLAW: We totally forgot to use Employee Availability in the scheduler. It should be displaying
-  something like we use in the appointment schedule (unavailable time). But instead this would be
-  for the staff scheduler, so that the manager does not book outside of the available time.
-  > This flaw has been concidered as absolutely necessary. Joey will work on this. Nov 10th, 2008
-
 - FEATURE: The manager should have a quick way to book a schedule day quickly based on
   the employee availability records.
   > This feature would certainly be useful, however is lower priority at this point. Nov 10th, 2008
@@ -121,6 +116,12 @@ Resolved
     information that could cause serious problems in rendering each day. Nov 10th, 2008
   > Philippe resolved this issue by providing a new bean ScheduleHoursBean and mechanisms
     to store the business hours based on salon defaults when schedule entries are created. Nov 10th, 2008
+
+- FLAW (RESOLVED): We totally forgot to use Employee Availability in the scheduler. It should be displaying
+  something like we use in the appointment schedule (unavailable time). But instead this would be
+  for the staff scheduler, so that the manager does not book outside of the available time.
+  > This flaw has been concidered as absolutely necessary. Joey will work on this. Nov 10th, 2008
+  > Joey and Philippe fixed this flaw, Nov 11th 2008
 
 - BUG (RESOLVED): Employees can move schedule entries around, only Managers should be able to.
   > Joey fixed this bug Nov 10th, 2008

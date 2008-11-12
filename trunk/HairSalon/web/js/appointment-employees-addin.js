@@ -676,12 +676,13 @@ function mouseUpHandler(e)//function to deal with mouse up event, hide draggable
         doDrag = false;
         var mousePositions = getAbsoluteMousePositions(e);
         var find = false;
+        var appointmentCells = new Array();
+        var add;
         for(var i = 0; i < cells.length; i++)
         {
             var cell = cells[i];
             if((parseInt(mousePositions.absoluteLeft) >= parseInt(cell.absoluteLeft-1))&&(parseInt(mousePositions.absoluteTop) >= parseInt(cell.absoluteTop))&&(parseInt(mousePositions.absoluteLeft) < parseInt(cell.absoluteLeft+1) + parseInt(cell.offsetWidth))&&(parseInt(mousePositions.absoluteTop) < parseInt(cell.absoluteTop) + parseInt(cell.offsetHeight)))
             {
-                var appointmentCells = new Array();
                 var start = parseInt(getRowId(cell.id)) - parseInt(clickedArea);
                 var end = parseInt(getRowId(cell.id)) - parseInt(clickedArea) + parseInt(ratio);
                 appointmentCells.rowStart = start;
@@ -700,7 +701,6 @@ function mouseUpHandler(e)//function to deal with mouse up event, hide draggable
                 {
                     ok = false;
                 }
-                var add;
                 if(ok)//save the current position
                 {
                     for(var j = start; j < end; j++)
@@ -858,7 +858,82 @@ function mouseUpHandler(e)//function to deal with mouse up event, hide draggable
         }
         if(!find)
         {
-
+            var startRow = getRowId(previousFirstCell.id);
+            var endRow = getRowId(previousLastCell.id);
+            var column = getColumnId(previousFirstCell.id);
+            appointmentCells.rowStart = startRow;
+            appointmentCells.rowEnd = endRow;
+            appointmentCells.column = column;
+            for(var k = startRow; k <= endRow; k++)
+            {
+                add  = findCell(k+"^-^"+column);
+                var previousAppointmentIndex = isCellUsed(add.id);
+                if(previousAppointmentIndex!=-1)//cell used by other appointment
+                {
+                    var secondPreviousAppointmentIndex = isCellOverlapped(add.id, previousAppointmentIndex);
+                    if(secondPreviousAppointmentIndex!=-1)//the cell was previously overlap
+                    {
+                        if(k == startRow)//appointment start
+                        {
+                            document.getElementById(add.id).className = overlapTwiceHeadClass;
+                        }
+                        else if(k == endRow)//appointment tail
+                        {
+                            document.getElementById(add.id).className = overlapTwiceTailClass;
+                        }
+                        else//appointment body
+                        {
+                            document.getElementById(add.id).className = overlapTwiceBodyClass;
+                        }
+                        if(startRow == endRow)//only one cell
+                        {
+                            document.getElementById(add.id).className = overlapTwiceComboClass;
+                        }
+                    }
+                    else
+                    {
+                        if(k == startRow)//appointment start
+                        {
+                            document.getElementById(add.id).className = overlapHeadClass;
+                        }
+                        else if(k == endRow)//appointment tail
+                        {
+                            document.getElementById(add.id).className = overlapTailClass;
+                        }
+                        else//appointment body
+                        {
+                            document.getElementById(add.id).className = overlapBodyClass;
+                        }
+                        if(startRow == endRow)//only one cell
+                        {
+                            document.getElementById(add.id).className = overlapComboClass;
+                        }
+                    }
+                }
+                else//not used by other appointments
+                {
+                    if(k == startRow)//appointment start
+                    {
+                        document.getElementById(add.id).className = bookingHeadClass;
+                    }
+                    else if(k == endRow)//appointment tail
+                    {
+                        document.getElementById(add.id).className = bookingTailClass;
+                    }
+                    else//appointment body
+                    {
+                        document.getElementById(add.id).className = bookingBodyClass;
+                    }
+                    if(startRow == endRow)//only one cell
+                    {
+                        document.getElementById(add.id).className = bookingComboClass;
+                    }
+                }
+                add.state = bookingState;
+                appointmentCells.push(add.id);
+            }
+            appointmentCells.appointmentId = draggableDiv.appointmentId;
+            appointments.push(appointmentCells);
         }
         draggableDiv.style.display = "none";
     }

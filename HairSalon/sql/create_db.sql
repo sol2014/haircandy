@@ -18,6 +18,7 @@ SOURCE ./db/service_db.sql
 SOURCE ./db/address_db.sql
 SOURCE ./db/employee_db.sql
 SOURCE ./db/employee_service_db.sql
+SOURCE ./db/employee_hours_db.sql
 SOURCE ./db/service_product_db.sql
 SOURCE ./db/supplier_db.sql
 SOURCE ./db/supplier_product_db.sql
@@ -37,6 +38,7 @@ SOURCE ./sp/appointment.sql
 SOURCE ./sp/availability_exception.sql
 SOURCE ./sp/client.sql
 SOURCE ./sp/employee.sql
+SOURCE ./sp/employee_hours.sql
 SOURCE ./sp/product.sql
 SOURCE ./sp/sale.sql
 SOURCE ./sp/salon.sql

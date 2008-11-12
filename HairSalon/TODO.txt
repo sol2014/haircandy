@@ -52,8 +52,6 @@ Unresolved
 - FEATURE: User HELP icon that opens seperate page for help in all screens/dialogs.
   > This is for user friendliness. Nov 10th, 2008
 
-- BUG: Do not let scheduler or appointment drag cells outside of bounds (dissapear on drop).
-
 - BUG: Only show alert for 1 record type, always keep latest. Show date column in alert list too.
 
 - BUG: Make sure that all search result cells are top aligned, and use nowrap and have
@@ -132,3 +130,7 @@ Resolved
 
 - BUG (RESOLVED): Remove comparator from all the beans.
   > Philippe cleaned all that up and used Comparable instead. Nov 10th, 2008
+
+- BUG (RESOLVED): Do not let scheduler or appointment drag cells outside of bounds (dissapear on drop).
+  > Joey fixed this bug. Nov 11th, 2008
+

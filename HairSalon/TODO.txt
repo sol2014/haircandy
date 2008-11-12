@@ -40,12 +40,9 @@ Unresolved
 - BUG: When someone is changing Salon Hours or Employee Hours, we should never allow them
   to edit them outside the limits based on existing scheduled data.
 
-- BUG: Managers and employees should not be able to change Salon Hours or Employee Hours within
-  the already existing schedule entries that exist in the system.
-
 - BUG: Only show alert for 1 record type, always keep latest. Show date column in alert list too.
 
-- BUG: Make sure that all search result cells are top aligned, and use nowrap and have
+- BUG: Make sure that all search result table cells are top aligned, and use nowrap and have
   proper result images.
 
 - BUG: When deleting schedule entries, or moving them, we are not even checking if there
@@ -81,6 +78,8 @@ Unresolved
 
 - TASK: Create a wizard application for installation that will also allow the installer to
   set the basic Salon information to be inserted into the database before people start to log in.
+  > I think it would be a LOT easier to detect the salon record on the first user login, and this will
+    allow the first user to setup their account, and salon details to start the app off. Nov 12th, 2008
 
 - TASK: Make sure we are using the proper search parameters for all search screens and dialogs.
 

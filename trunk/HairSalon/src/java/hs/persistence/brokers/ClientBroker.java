@@ -44,10 +44,11 @@ public class ClientBroker extends DatabaseBroker implements BrokerInterface
 	public DataBean load (DataBean data)
 	{
 		ClientBean client = (ClientBean) data;
-
+		Connection connection = null;
+		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement statement = connection.prepareCall ("{call LoadClient(?)}");
 
 			// Check which search parameters this object provides
@@ -59,6 +60,7 @@ public class ClientBroker extends DatabaseBroker implements BrokerInterface
 			else
 			{
 				LogController.write (this, "Client bean has no identification number!");
+				super.returnConnection (connection);
 				return null;
 			}
 
@@ -72,15 +74,17 @@ public class ClientBroker extends DatabaseBroker implements BrokerInterface
 			else
 			{
 				LogController.write (this, "There were no results for this load! Client not loaded.");
+				super.returnConnection (connection);
 				return null;
 			}
-
-			super.returnConnection (connection);
 		}
 		catch (SQLException sqlEx)
 		{
 			LogController.write (this, "SQL Exception during search: " + sqlEx.getMessage ());
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		LogController.write (this, "Loaded client bean: "+client.getClientNo ());
 		
@@ -93,10 +97,11 @@ public class ClientBroker extends DatabaseBroker implements BrokerInterface
 		ClientBean client = (ClientBean) data;
 		AddressBean address = client.getAddress();
 		ArrayList<ClientBean> results = new ArrayList<ClientBean> ();
-
+		Connection connection = null;
+		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement statement = connection.prepareCall ("{call SearchClient(?,?,?,?,?,?,?,?,?,?,?)}");
 			int index = 1;
 			
@@ -119,13 +124,14 @@ public class ClientBroker extends DatabaseBroker implements BrokerInterface
 			{
 				results.add ((ClientBean) getBean (set));
 			}
-
-			super.returnConnection (connection);
 		}
 		catch (SQLException sqlEx)
 		{
 			LogController.write (this, "SQL Exception during search: " + sqlEx.getMessage ());
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		LogController.write (this, "Found client beans: "+results.size());
 		
@@ -138,10 +144,11 @@ public class ClientBroker extends DatabaseBroker implements BrokerInterface
 	{
 		ClientBean client = (ClientBean) data;
 		boolean result = false;
+		Connection connection = null;
 		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 
 			if (client.getClientNo () == null)
 			{
@@ -166,8 +173,6 @@ public class ClientBroker extends DatabaseBroker implements BrokerInterface
 				{
 					result = false;
 				}
-				
-				super.returnConnection (connection);
 			}
 			else
 			{
@@ -187,8 +192,6 @@ public class ClientBroker extends DatabaseBroker implements BrokerInterface
 					result = false;
 				else
 					result = true;
-				
-				super.returnConnection (connection);
 			}
 		}
 		catch (SQLException e)
@@ -196,6 +199,9 @@ public class ClientBroker extends DatabaseBroker implements BrokerInterface
 			LogController.write (this, "SQL exception during commit: "+e.toString());
 			result = false;
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		if (result)
 			LogController.write (this, "Commit client bean: "+client.getClientNo());
@@ -208,12 +214,13 @@ public class ClientBroker extends DatabaseBroker implements BrokerInterface
 	{
 		ClientBean client = (ClientBean) data;
 		boolean result = false;
+		Connection connection = null;
 		
 		try
 		{
 			if (client.getClientNo () != null)
 			{
-				Connection connection = super.getConnection ();
+				connection = super.getConnection ();
 				CallableStatement statement = connection.prepareCall ("{call DeleteClient(?)}");
 
 				statement.setInt (1, client.getClientNo ());
@@ -224,8 +231,6 @@ public class ClientBroker extends DatabaseBroker implements BrokerInterface
 					result = true;
 				else
 					result = false;
-				
-				super.returnConnection (connection);
 			}
 			else
 			{
@@ -236,6 +241,9 @@ public class ClientBroker extends DatabaseBroker implements BrokerInterface
 		{
 			result = false;
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		if (result)
 			LogController.write (this, "Deleted client bean: "+client.getClientNo());

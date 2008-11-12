@@ -39,10 +39,11 @@ public class AvailabilityExceptionBroker extends DatabaseBroker implements Broke
 	public DataBean load (DataBean data)
 	{
 		AvailabilityExceptionBean availabilityException = (AvailabilityExceptionBean) data;
+		Connection connection = null;
 		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement statement = connection.prepareCall ("{call LoadAvailabilityException(?,?)}");
 
 			// Check which search parameters this object provides
@@ -54,6 +55,7 @@ public class AvailabilityExceptionBroker extends DatabaseBroker implements Broke
 			else
 			{
 				LogController.write (this, "AvailabilityException bean has no employee number!");
+				super.returnConnection (connection);
 				return null;
 			}
 			
@@ -64,6 +66,7 @@ public class AvailabilityExceptionBroker extends DatabaseBroker implements Broke
 			else
 			{
 				LogController.write (this, "AvailabilityException bean has no date!");
+				super.returnConnection (connection);
 				return null;
 			}
 			
@@ -77,16 +80,18 @@ public class AvailabilityExceptionBroker extends DatabaseBroker implements Broke
 			else
 			{
 				LogController.write (this, "There were no results for this load! AvailabilityException not loaded.");
+				super.returnConnection (connection);
 				return null;
 			}
-
-			super.returnConnection (connection);
 		}
 		catch (SQLException sqlEx)
 		{
 			LogController.write (this, "SQL Exception during search: " + sqlEx.getMessage ());
 		}
-
+		
+		if (connection != null)
+			super.returnConnection (connection);
+		
 		LogController.write (this, "Loaded availability exception bean: "+availabilityException.getEmployeeNo ()+":"+availabilityException.getDate ());
 		
 		return availabilityException;
@@ -97,10 +102,11 @@ public class AvailabilityExceptionBroker extends DatabaseBroker implements Broke
 	{
 		AvailabilityExceptionBean availabilityException = (AvailabilityExceptionBean) data;
 		ArrayList<AvailabilityExceptionBean> results = new ArrayList<AvailabilityExceptionBean> ();
-
+		Connection connection = null;
+		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement statement = connection.prepareCall ("{call SearchAvailabilityException(?,?,?)}");
 			int index = 1;
 			
@@ -142,13 +148,14 @@ public class AvailabilityExceptionBroker extends DatabaseBroker implements Broke
 			{
 				results.add ((AvailabilityExceptionBean) getBean (set));
 			}
-
-			super.returnConnection (connection);
 		}
 		catch (SQLException sqlEx)
 		{
 			LogController.write (this, "SQL Exception during search: " + sqlEx.getMessage ());
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		LogController.write ("Found availability exception beans: "+results.size());
 		
@@ -161,6 +168,7 @@ public class AvailabilityExceptionBroker extends DatabaseBroker implements Broke
 	{
 		AvailabilityExceptionBean availabilityException = (AvailabilityExceptionBean) data;
 		boolean result = true;
+		Connection connection = null;
 		
 		if (availabilityException == null)
 		{
@@ -170,7 +178,7 @@ public class AvailabilityExceptionBroker extends DatabaseBroker implements Broke
 		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 
 			CallableStatement statement = connection.prepareCall ("{call CreateAvailabilityException(?,?,?)}");
 			
@@ -184,13 +192,14 @@ public class AvailabilityExceptionBroker extends DatabaseBroker implements Broke
 				result = true;
 			else
 				result = false;
-			
-			super.returnConnection (connection);
 		}
 		catch (SQLException e)
 		{
 			result = false;
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		if (result)
 			LogController.write (this, "Commit availability exception bean: "+availabilityException.getEmployeeNo ()+":"+availabilityException.getDate ());
@@ -203,10 +212,11 @@ public class AvailabilityExceptionBroker extends DatabaseBroker implements Broke
 	{
 		AvailabilityExceptionBean availabilityException = (AvailabilityExceptionBean) data;
 		boolean result = false;
+		Connection connection = null;
 		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			
 			if (availabilityException.getDate () == null)
 			{
@@ -258,13 +268,14 @@ public class AvailabilityExceptionBroker extends DatabaseBroker implements Broke
 					result = false;
 				}
 			}
-			
-			super.returnConnection (connection);
 		}
 		catch (SQLException e)
 		{
 			result = false;
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		if (result)
 			LogController.write (this, "Deleted availability exception bean: "+availabilityException.getEmployeeNo ()+":"+availabilityException.getDate ());

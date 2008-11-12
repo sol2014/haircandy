@@ -42,10 +42,11 @@ public class ScheduleHoursBroker extends DatabaseBroker implements BrokerInterfa
 	public DataBean load (DataBean data)
 	{
 		ScheduleHoursBean schedulehours = (ScheduleHoursBean) data;
-
+		Connection connection = null;
+		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement statement = connection.prepareCall ("{call LoadScheduleHours(?)}");
 
 			if (schedulehours.getDate () != null)
@@ -55,6 +56,7 @@ public class ScheduleHoursBroker extends DatabaseBroker implements BrokerInterfa
 			else
 			{
 				LogController.write (this, "Schedule hours bean has no identification number!");
+				super.returnConnection (connection);
 				return null;
 			}
 
@@ -67,18 +69,20 @@ public class ScheduleHoursBroker extends DatabaseBroker implements BrokerInterfa
 			else
 			{
 				LogController.write (this, "There were no results for this load! Schedule hours not loaded.");
+				super.returnConnection (connection);
 				return null;
 			}
-
-			super.returnConnection (connection);
 		}
 		catch (SQLException sqlEx)
 		{
 			LogController.write (this, "SQL Exception during load: " + sqlEx.getMessage ());
-
+			super.returnConnection (connection);
 			return null;
 		}
-
+		
+		if (connection != null)
+			super.returnConnection (connection);
+		
 		LogController.write (this, "Loaded schedule hours bean: " + schedulehours.getDate ());
 
 		return schedulehours;
@@ -95,10 +99,11 @@ public class ScheduleHoursBroker extends DatabaseBroker implements BrokerInterfa
 	{
 		ScheduleHoursBean schedulehours = (ScheduleHoursBean) data;
 		boolean result = false;
-
+		Connection connection = null;
+		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement statement = null;
 			int index = 1;
 
@@ -118,7 +123,6 @@ public class ScheduleHoursBroker extends DatabaseBroker implements BrokerInterfa
 			{
 				result = false;
 			}
-			super.returnConnection (connection);
 		}
 		catch (SQLException e)
 		{
@@ -126,7 +130,10 @@ public class ScheduleHoursBroker extends DatabaseBroker implements BrokerInterfa
 			e.printStackTrace ();
 			result = false;
 		}
-
+		
+		if (connection != null)
+			super.returnConnection (connection);
+		
 		return result;
 	}
 
@@ -135,12 +142,13 @@ public class ScheduleHoursBroker extends DatabaseBroker implements BrokerInterfa
 	{
 		ScheduleHoursBean schedulehours = (ScheduleHoursBean) data;
 		boolean result = false;
-
+		Connection connection = null;
+		
 		try
 		{
 			if (schedulehours.getDate () != null)
 			{
-				Connection connection = super.getConnection ();
+				connection = super.getConnection ();
 				CallableStatement statement = connection.prepareCall ("{call DeleteScheduleHours(?)}");
 
 				statement.setDate (1, new java.sql.Date (schedulehours.getDate ().getTime ()));
@@ -155,7 +163,6 @@ public class ScheduleHoursBroker extends DatabaseBroker implements BrokerInterfa
 				{
 					result = true;
 				}
-				super.returnConnection (connection);
 			}
 			else
 			{
@@ -170,10 +177,12 @@ public class ScheduleHoursBroker extends DatabaseBroker implements BrokerInterfa
 			result = false;
 		}
 
+		if (connection != null)
+			super.returnConnection (connection);
+		
 		if (result)
-		{
 			LogController.write (this, "Deleted schedule hours bean: " + schedulehours.getDate ());
-		}
+		
 		return result;
 	}
 

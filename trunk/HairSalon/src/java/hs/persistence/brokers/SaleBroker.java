@@ -43,10 +43,11 @@ public class SaleBroker extends DatabaseBroker implements BrokerInterface
 	public DataBean load (DataBean data)
 	{
 		SaleBean sale = (SaleBean) data;
-
+		Connection connection = null;
+		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement proc = connection.prepareCall ("{call LoadSale(?)}");
 
 			if (sale.getTransactionNo () != null)
@@ -56,6 +57,7 @@ public class SaleBroker extends DatabaseBroker implements BrokerInterface
 			else
 			{
 				LogController.write (this, "Sale bean has no identification number!");
+				super.returnConnection (connection);
 				return null;
 			}
 			ResultSet result = proc.executeQuery ();
@@ -66,6 +68,7 @@ public class SaleBroker extends DatabaseBroker implements BrokerInterface
 			else
 			{
 				LogController.write (this, "There were no results for this load! sale not loaded.");
+				super.returnConnection (connection);
 				return null;
 			}
 
@@ -102,17 +105,17 @@ public class SaleBroker extends DatabaseBroker implements BrokerInterface
 					LogController.write (this, "loaded a product into sale:" + product.getProductNo ());
 				}
 			}
-
-			super.returnConnection (connection);
-
 		}
 		catch (SQLException e)
 		{
 			LogController.write (this, "SQL Exception: "+e.toString());
 			e.printStackTrace ();
-			
+			super.returnConnection (connection);
 			return null;
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		LogController.write (this, "Loaded sale bean: "+sale.getTransactionNo ());
 		
@@ -124,9 +127,11 @@ public class SaleBroker extends DatabaseBroker implements BrokerInterface
 	{
 		SaleBean sale = (SaleBean) data;
 		ArrayList<SaleBean> saleAL = new ArrayList<SaleBean> ();
+		Connection connection = null;
+		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement proc = connection.prepareCall ("{call SearchSale(?,?,?,?,?,?,?,?)}");
 
 			int index = 1;
@@ -140,20 +145,20 @@ public class SaleBroker extends DatabaseBroker implements BrokerInterface
 			addToStatement (proc, sale.getPayment (), index++, Double.class);
 			addToStatement (proc, sale.getIsComplete (), index++, Boolean.class);
 
-
 			ResultSet result = proc.executeQuery ();
 
 			while (result.next ())
 			{
 				saleAL.add ((SaleBean) getBean (result));
 			}
-
-			super.returnConnection (connection);
 		}
 		catch (SQLException r)
 		{
 			LogController.write (this, "SQL Exception during search: " + r.getMessage ());
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		LogController.write (this, "Found sale beans: "+saleAL.size());
 		
@@ -166,10 +171,11 @@ public class SaleBroker extends DatabaseBroker implements BrokerInterface
 	{
 		SaleBean sale = (SaleBean) data;
 		boolean result = true;
+		Connection connection = null;
 		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 
 			CallableStatement proc = null;
 			int index = 1;
@@ -211,8 +217,6 @@ public class SaleBroker extends DatabaseBroker implements BrokerInterface
 			{
 				result = false;
 			}
-
-			super.returnConnection (connection);
 		}
 		catch (SQLException e)
 		{
@@ -222,13 +226,10 @@ public class SaleBroker extends DatabaseBroker implements BrokerInterface
 			result = false;
 		}
 
-
 		if (result)
 		{
 			try
 			{
-				Connection connection = super.getConnection ();
-
 				// Erase any existing products for this service.
 				CallableStatement proc = connection.prepareCall ("{call DeleteSaleProducts(?)}");
 
@@ -322,8 +323,6 @@ public class SaleBroker extends DatabaseBroker implements BrokerInterface
 				{
 					LogController.write (this, "There are no services to store for this sale.");
 				}
-
-				super.returnConnection (connection);
 			}
 			catch (SQLException e2)
 			{
@@ -331,6 +330,9 @@ public class SaleBroker extends DatabaseBroker implements BrokerInterface
 				result = false;
 			}
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		if (result)
 			LogController.write (this, "Commit sale bean: "+sale.getTransactionNo ());
@@ -343,12 +345,13 @@ public class SaleBroker extends DatabaseBroker implements BrokerInterface
 	{
 		SaleBean sale = (SaleBean) data;
 		boolean result = false;
+		Connection connection = null;
 		
 		if (sale.getTransactionNo () != null)
 		{
 			try
 			{
-				Connection connection = super.getConnection ();
+				connection = super.getConnection ();
 				CallableStatement proc = connection.prepareCall ("{call DeleteSale(?)}");
 				
 				proc.setInt (1, sale.getTransactionNo ());
@@ -359,8 +362,6 @@ public class SaleBroker extends DatabaseBroker implements BrokerInterface
 					result = true;
 				else
 					result = false;
-				
-				super.returnConnection (connection);
 			}
 			catch (SQLException e)
 			{
@@ -374,6 +375,9 @@ public class SaleBroker extends DatabaseBroker implements BrokerInterface
 		{
 			result = false;
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		if (result)
 			LogController.write (this, "Deleted sale bean: "+sale.getTransactionNo ());

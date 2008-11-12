@@ -44,10 +44,11 @@ public class ProductBroker extends DatabaseBroker implements BrokerInterface
 	public DataBean load (DataBean data)
 	{
 		ProductBean product = (ProductBean) data;
-
+		Connection connection = null;
+		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement statement = connection.prepareCall ("{call LoadProduct(?)}");
 
 			// Check which search parameters this object provides
@@ -59,6 +60,7 @@ public class ProductBroker extends DatabaseBroker implements BrokerInterface
 			else
 			{
 				LogController.write (this, "Product bean has no identification number!");
+				super.returnConnection (connection);
 				return null;
 			}
 
@@ -72,15 +74,17 @@ public class ProductBroker extends DatabaseBroker implements BrokerInterface
 			else
 			{
 				LogController.write (this, "There were no results for this load! Product not loaded.");
+				super.returnConnection (connection);
 				return null;
 			}
-
-			super.returnConnection (connection);
 		}
 		catch (SQLException sqlEx)
 		{
 			LogController.write (this, "SQL Exception during search: " + sqlEx.getMessage ());
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		LogController.write (this, "Loaded product bean: "+product.getProductNo ());
 		
@@ -92,10 +96,11 @@ public class ProductBroker extends DatabaseBroker implements BrokerInterface
 	{
 		ProductBean product = (ProductBean) data;
 		ArrayList<ProductBean> results = new ArrayList<ProductBean> ();
-
+		Connection connection = null;
+		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement statement = connection.prepareCall ("{call SearchProduct(?,?,?,?,?,?,?,?,?)}");
 			int index = 1;
 			
@@ -118,13 +123,14 @@ public class ProductBroker extends DatabaseBroker implements BrokerInterface
 			{
 				results.add ((ProductBean) getBean (set));
 			}
-
-			super.returnConnection (connection);
 		}
 		catch (SQLException sqlEx)
 		{
 			LogController.write (this, "SQL Exception during search: " + sqlEx.getMessage ());
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		LogController.write (this, "Found product beans: "+results.size ());
 		
@@ -137,10 +143,11 @@ public class ProductBroker extends DatabaseBroker implements BrokerInterface
 	{
 		ProductBean product = (ProductBean) data;
 		boolean result = false;
+		Connection connection = null;
 		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement statement = null;
 			int index = 1;
 			
@@ -193,14 +200,15 @@ public class ProductBroker extends DatabaseBroker implements BrokerInterface
 					result = false;
 				}
 			}
-			
-			super.returnConnection (connection);
 		}
 		catch (SQLException e)
 		{
 			LogController.write (this, "SQL Exception: "+e.toString ());
 			result = false;
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		if (result)
 			LogController.write (this, "Commit product bean: "+product.getProductNo ());
@@ -213,12 +221,13 @@ public class ProductBroker extends DatabaseBroker implements BrokerInterface
 	{
 		ProductBean product = (ProductBean) data;
 		boolean result = false;
+		Connection connection = null;
 		
 		try
 		{
 			if (product.getProductNo () != null)
 			{
-				Connection connection = super.getConnection ();
+				connection = super.getConnection ();
 				CallableStatement statement = connection.prepareCall ("{call DeleteProduct(?)}");
 
 				int updated = statement.executeUpdate ();
@@ -227,8 +236,6 @@ public class ProductBroker extends DatabaseBroker implements BrokerInterface
 					result = true;
 				else
 					result = false;
-				
-				super.returnConnection (connection);
 			}
 			else
 			{
@@ -239,6 +246,9 @@ public class ProductBroker extends DatabaseBroker implements BrokerInterface
 		{
 			result = false;
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		if (result)
 			LogController.write (this, "Deleted product bean: "+product.getProductNo ());

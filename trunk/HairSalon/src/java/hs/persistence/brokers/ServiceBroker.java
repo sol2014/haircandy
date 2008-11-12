@@ -44,10 +44,11 @@ public class ServiceBroker extends DatabaseBroker implements BrokerInterface
 	public DataBean load (DataBean data)
 	{
 		ServiceBean service = (ServiceBean) data;
+		Connection connection = null;
 		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement statement = connection.prepareCall ("{call LoadService(?)}");
 
 			// Check which search parameters this object provides
@@ -59,6 +60,7 @@ public class ServiceBroker extends DatabaseBroker implements BrokerInterface
 			else
 			{
 				LogController.write (this, "Service bean has no identification number!");
+				super.returnConnection (connection);
 				return null;
 			}
 
@@ -72,6 +74,7 @@ public class ServiceBroker extends DatabaseBroker implements BrokerInterface
 			else
 			{
 				LogController.write (this, "There were no results for this load! Service not loaded.");
+				super.returnConnection (connection);
 				return null;
 			}
 			
@@ -92,14 +95,14 @@ public class ServiceBroker extends DatabaseBroker implements BrokerInterface
 					LogController.write (this, "Loaded a product into service: "+service.getServiceNo()+" amount: "+amount);
 				}
 			}
-			
-			
-			super.returnConnection (connection);
 		}
 		catch (SQLException sqlEx)
 		{
 			LogController.write (this, "SQL Exception during search: " + sqlEx.getMessage ());
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		LogController.write (this, "Loaded service bean: "+service.getServiceNo ());
 		
@@ -111,10 +114,11 @@ public class ServiceBroker extends DatabaseBroker implements BrokerInterface
 	{
 		ServiceBean service = (ServiceBean) data;
 		ArrayList<ServiceBean> results = new ArrayList<ServiceBean> ();
-
+		Connection connection = null;
+		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement statement = connection.prepareCall ("{call SearchService(?,?,?,?,?)}");
 			int index = 1;
 			
@@ -131,13 +135,14 @@ public class ServiceBroker extends DatabaseBroker implements BrokerInterface
 			{
 				results.add ((ServiceBean) getBean (set));
 			}
-
-			super.returnConnection (connection);
 		}
 		catch (SQLException sqlEx)
 		{
 			LogController.write (this, "SQL Exception during search: " + sqlEx.getMessage ());
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		LogController.write (this, "Found service beans: "+results.size());
 		
@@ -150,10 +155,11 @@ public class ServiceBroker extends DatabaseBroker implements BrokerInterface
 	{
 		ServiceBean service = (ServiceBean) data;
 		boolean result = true;
+		Connection connection = null;
 		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement statement = null;
 			int index = 1;
 			
@@ -191,8 +197,6 @@ public class ServiceBroker extends DatabaseBroker implements BrokerInterface
 			{
 				result = false;
 			}
-			
-			super.returnConnection (connection);
 		}
 		catch (SQLException e)
 		{
@@ -206,8 +210,6 @@ public class ServiceBroker extends DatabaseBroker implements BrokerInterface
 			// table data.
 			try
 			{
-				Connection connection = super.getConnection ();
-				
 				// Erase any existing products for this service.
 				CallableStatement statement = connection.prepareCall ("{call DeleteServiceProducts(?)}");
 				statement.setInt (1, service.getServiceNo ());
@@ -250,8 +252,6 @@ public class ServiceBroker extends DatabaseBroker implements BrokerInterface
 				{
 					LogController.write (this, "There are no products to store for this service.");
 				}
-				
-				super.returnConnection (connection);
 			}
 			catch (SQLException e2)
 			{
@@ -259,6 +259,9 @@ public class ServiceBroker extends DatabaseBroker implements BrokerInterface
 				result = false;
 			}
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		if (result)
 			LogController.write (this, "Commit service bean: "+service.getServiceNo ());
@@ -271,12 +274,13 @@ public class ServiceBroker extends DatabaseBroker implements BrokerInterface
 	{
 		ServiceBean service = (ServiceBean) data;
 		boolean result = false;
+		Connection connection = null;
 		
 		try
 		{
 			if (service.getServiceNo () != null)
 			{
-				Connection connection = super.getConnection ();
+				connection = super.getConnection ();
 				CallableStatement statement = connection.prepareCall ("{call DeleteService(?)}");
 
 				statement.setInt (1, service.getServiceNo ());
@@ -287,8 +291,6 @@ public class ServiceBroker extends DatabaseBroker implements BrokerInterface
 					result = true;
 				else
 					result = false;
-				
-				super.returnConnection (connection);
 			}
 			else
 			{
@@ -299,6 +301,9 @@ public class ServiceBroker extends DatabaseBroker implements BrokerInterface
 		{
 			result = false;
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		if (result)
 			LogController.write (this, "Deleted service bean: "+service.getServiceNo());

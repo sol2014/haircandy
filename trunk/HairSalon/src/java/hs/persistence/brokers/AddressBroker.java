@@ -45,10 +45,11 @@ public class AddressBroker extends DatabaseBroker implements BrokerInterface
 	public DataBean load (DataBean data)
 	{
 		AddressBean address = (AddressBean) data;
-
+		Connection connection = null;
+		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement statement = connection.prepareCall ("{call LoadAddress(?)}");
 
 			// Check which search parameters this object provides
@@ -60,6 +61,8 @@ public class AddressBroker extends DatabaseBroker implements BrokerInterface
 			else
 			{
 				LogController.write (this, "Address bean has no identification number!");
+				
+				super.returnConnection (connection);
 				return null;
 			}
 
@@ -73,15 +76,18 @@ public class AddressBroker extends DatabaseBroker implements BrokerInterface
 			else
 			{
 				LogController.write (this, "There were no results for this load! Address not loaded.");
+				
+				super.returnConnection (connection);
 				return null;
 			}
-
-			super.returnConnection (connection);
 		}
 		catch (SQLException sqlEx)
 		{
 			LogController.write (this, "SQL Exception during search: " + sqlEx.getMessage ());
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		LogController.write (this, "Loaded address bean: "+address.getAddressNo ());
 		
@@ -93,10 +99,11 @@ public class AddressBroker extends DatabaseBroker implements BrokerInterface
 	{
 		AddressBean address = (AddressBean) data;
 		ArrayList<AddressBean> results = new ArrayList<AddressBean> ();
+		Connection connection = null;
 		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement statement = connection.prepareCall ("{call SearchAddress(?,?,?,?,?,?)}");
 			int index = 1;
 			
@@ -115,13 +122,14 @@ public class AddressBroker extends DatabaseBroker implements BrokerInterface
 			{
 				results.add ((AddressBean) getBean (set));
 			}
-			
-			super.returnConnection (connection);
 		}
 		catch (SQLException sqlEx)
 		{
 			LogController.write (this, "SQL Exception during search: " + sqlEx.getMessage ());
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		LogController.write (this, "Found address beans: "+results.size());
 		
@@ -134,10 +142,11 @@ public class AddressBroker extends DatabaseBroker implements BrokerInterface
 	{
 		AddressBean address = (AddressBean) data;
 		boolean result = true;
+		Connection connection = null;
 		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			
 			if (address.getAddressNo () == null)
 			{
@@ -161,8 +170,6 @@ public class AddressBroker extends DatabaseBroker implements BrokerInterface
 				}
 				else
 					result = false;
-				
-				super.returnConnection (connection);
 			}
 			else
 			{
@@ -183,8 +190,6 @@ public class AddressBroker extends DatabaseBroker implements BrokerInterface
 					result = false;
 				else
 					result = true;
-				
-				super.returnConnection (connection);
 			}
 		}
 		catch (SQLException e)
@@ -192,6 +197,9 @@ public class AddressBroker extends DatabaseBroker implements BrokerInterface
 			LogController.write (this, "SQLException: "+e.toString());
 			result = false;
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		if (result)
 			LogController.write (this, "Commit address bean: "+address.getAddressNo ());
@@ -204,12 +212,13 @@ public class AddressBroker extends DatabaseBroker implements BrokerInterface
 	{
 		AddressBean address = (AddressBean) data;
 		boolean result = false;
+		Connection connection = null;
 		
 		try
 		{
 			if (address.getAddressNo () != null)
 			{
-				Connection connection = super.getConnection ();
+				connection = super.getConnection ();
 				CallableStatement statement = connection.prepareCall ("{call UpdateAddress}");
 				
 				statement.setInt (1, address.getAddressNo ());
@@ -220,14 +229,15 @@ public class AddressBroker extends DatabaseBroker implements BrokerInterface
 					result = true;
 				else
 					result = false;
-				
-				super.returnConnection (connection);
 			}
 		}
 		catch (SQLException e)
 		{
 			result = false;
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		if (result)
 			LogController.write (this, "Deleted address bean: "+address.getAddressNo ());

@@ -19,9 +19,6 @@ Unresolved
 - FEATURE: Search and Delete Sale need to work.
   > This must work. Nov 10th, 2008
 
-- FEATURE: Make the preferences dialog actually work to set availability and password update.
-  > This must work for user session control and scheduling limits for employees.
-
 - FEATURE: Finish any alerts that we need to create for the user throughout the app.
   > Non essential at this point. We have inventory alerts, and more could be created
     but there are time constraints. Nov 10th, 2008
@@ -146,4 +143,8 @@ Resolved
 
 - BUG (RESOLVED): Do not let scheduler or appointment drag cells outside of bounds (dissapear on drop).
   > Joey fixed this bug. Nov 11th, 2008
+
+- FEATURE (RESOLVED): Make the preferences dialog actually work to set availability and password update.
+  > This must work for user session control and scheduling limits for employees.
+  > Split dialog into change password and change availability. Nov 12th, 2008
 

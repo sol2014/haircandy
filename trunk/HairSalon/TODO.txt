@@ -10,21 +10,7 @@ Unresolved
   by the employees and managers. Technically exceptions should not have
   years, if they do, we should have a flag for "Once" or "Repeat" so that
   when the exception passes, we create a new one.
-  > We concidered this flaw a minor issue. Nov 10th, 2008
-
-- FLAW: We should be taking the Salon business hours and storing them into a new schedule table
-  that stores only the hours of operations for any given day. We should use this table instead
-  to load business hours in all places in the code. If business hour data is not available in
-  the DB, we should create a new entry on-the-fly that uses the salon business hours. This
-  makes sure that we store salon hours for all days, and makes sure changing  business hours
-  after entering data does not change the rendering of previously set days. If we do this though
-  we will then have to allow a way to change business hours for previous days (this requires
-  a new interface somehow to change hours of operation for 1 business day).
-  > This flaw has been concidered as high priority as this is a negative aspect of the schedule
-    information that could cause serious problems in rendering each day. Nov 10th, 2008
-  > Philippe resolved this issue by providing a new bean ScheduleHoursBean and mechanisms
-    to store the business hours based on salon defaults when schedule entries are created. Nov 10th, 2008
-  > Found that this flaw extended to the available hours for employees as well. Nov 11th, 2008
+  > We concidered this a minor issue, we do not have time to resolve. Nov 10th, 2008
 
 - FEATURE: The manager should have a quick way to book a schedule day quickly based on
   the employee availability records.
@@ -51,6 +37,12 @@ Unresolved
 
 - FEATURE: User HELP icon that opens seperate page for help in all screens/dialogs.
   > This is for user friendliness. Nov 10th, 2008
+
+- BUG: When someone is changing Salon Hours or Employee Hours, we should never allow them
+  to edit them outside the limits based on existing scheduled data.
+
+- BUG: Managers and employees should not be able to change Salon Hours or Employee Hours within
+  the already existing schedule entries that exist in the system.
 
 - BUG: Only show alert for 1 record type, always keep latest. Show date column in alert list too.
 
@@ -124,6 +116,22 @@ Resolved
   for the staff scheduler, so that the manager does not book outside of the available time.
   > This flaw has been concidered as absolutely necessary. Joey will work on this. Nov 10th, 2008
   > Joey and Philippe fixed this flaw, Nov 11th 2008
+
+- FLAW (RESOLVED): We should be taking the Salon business hours and storing them into a new schedule table
+  that stores only the hours of operations for any given day. We should use this table instead
+  to load business hours in all places in the code. If business hour data is not available in
+  the DB, we should create a new entry on-the-fly that uses the salon business hours. This
+  makes sure that we store salon hours for all days, and makes sure changing  business hours
+  after entering data does not change the rendering of previously set days. If we do this though
+  we will then have to allow a way to change business hours for previous days (this requires
+  a new interface somehow to change hours of operation for 1 business day).
+  > This flaw has been concidered as high priority as this is a negative aspect of the schedule
+    information that could cause serious problems in rendering each day. Nov 10th, 2008
+  > Philippe resolved this issue by providing a new bean ScheduleHoursBean and mechanisms
+    to store the business hours based on salon defaults when schedule entries are created. Nov 10th, 2008
+  > Found that this flaw extended to the available hours for employees as well. Nov 11th, 2008
+  > Philippe fixed the problem completely by also taking a snapshot of employee hours and storing
+    them for future lookups for old or future days.
 
 - BUG (RESOLVED): Employees can move schedule entries around, only Managers should be able to.
   > Joey fixed this bug Nov 10th, 2008

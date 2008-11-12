@@ -23,12 +23,32 @@
 <%
 // Retrieve the UserSession object from the http session.
 UserSession userSession = (UserSession) session.getAttribute("user_session");
+EmployeeBean employee = userSession.getEmployee();
 int recordNo = 0;
 
 userSession.setCurrentPosition(SessionPositions.SchScheduler);
 String page_title = "Employee Schedule";
 
 Date date = CoreTools.getDate (request.getParameter("date"));
+
+EmployeeHoursBean ehb = new EmployeeHoursBean ();
+ehb.setEmployeeNo (userSession.getEmployee().getEmployeeNo ());
+ehb.setDate (date);
+ehb = SessionController.loadEmployeeHours (userSession, ehb);
+
+Date myStartTime = null;
+Date myEndTime = null;
+
+if (ehb != null)
+{
+    myStartTime = ehb.getStartTime ();
+    myEndTime = ehb.getEndTime ();
+}
+else
+{
+    myStartTime = employee.getWeekdayStartTime (CoreTools.getWeekDay (date));
+    myEndTime = employee.getWeekdayEndTime (CoreTools.getWeekDay (date));
+}
 %>
 
 <%-- Use the pre-set header file. --%>
@@ -40,6 +60,19 @@ Date date = CoreTools.getDate (request.getParameter("date"));
 
 <font face="Trebuchet MS" size="2">
     <div align="left" id="matrix"></div>
+    <br/>
+    <table>
+	<tr>
+	    <td align="right"><img border="0" src="/HairSalon/images/icons/small/availability_white.gif" width="16" height="16"></td>
+	    <td align="left"><u><b>Today's Schedule</b></u></td>
+	</tr>
+	<tr>
+	    <td align="right" nowrap="nowrap"><b>My Hours:</b></td>
+	    <td width="100%" align="left" nowrap="nowrap">
+		<%=ServletHelper.generateHourPicker("employee_start_time", myStartTime)%> to <%=ServletHelper.generateHourPicker("employee_end_time", myEndTime)%> <input id="update_employee_hours_button" type="button" value="Update" onclick="updateEmployeeHours(<%=employee.getEmployeeNo()%>,'<%=request.getParameter("date")%>')" title="This will update your availability hours for today.">
+	    </td>
+	</tr>
+    </table>
 </font>
 
 <%@ include file="dialogs/schedule-dialog.jsp" %>
@@ -47,6 +80,7 @@ Date date = CoreTools.getDate (request.getParameter("date"));
 <%@ include file="WEB-INF/jspf/footer.jspf" %>
 
 <script language="javascript" src="js/scheduler-employees-addin.js"></script>
+<script language="javascript" src="js/time-addin.js"></script>
 
 <script>
     function getMatrix()

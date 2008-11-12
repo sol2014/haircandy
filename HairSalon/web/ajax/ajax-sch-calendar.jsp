@@ -17,21 +17,6 @@
 <%@ page import="java.text.*" %>
 <%@ page import="java.io.*" %>
 
-<%!
-    private int getTotalDaysOfGivenMonth(int year, int month) {
-        int[] daysInMonths = new int[]{31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-        if (month == 1) {
-            if ((year % 400 == 0) || ((year % 4 == 0) && (year % 100 != 0))) {
-                return 28;
-            } else {
-                return 29;
-            }
-        } else {
-            return daysInMonths[month];
-        }
-    }
-%>
-
 <%
 UserSession userSession = (UserSession) session.getAttribute("user_session");
 
@@ -47,7 +32,7 @@ Calendar calendar = Calendar.getInstance();
 calendar.set(year, month, 1);
 int weekDayOfFirstDayOfTheGivenMonth = calendar.get(Calendar.DAY_OF_WEEK) - 1;
 int dayIndexOfTheGivenMonth = 0;
-int totalDaysOfGivenMonth = getTotalDaysOfGivenMonth(year, month);
+int totalDaysOfGivenMonth = CoreTools.getDaysInMonth(year, month);
 %>
 
 <font face="Trebuchet MS">

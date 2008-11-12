@@ -66,13 +66,13 @@ function refillExceptionsList()
 
 function showAddException()
 {
-    document.getElementById("blackout").style.display="block";
+    showBlackout (true);
     document.getElementById("salon_exception_dialog").style.display="block";
 }
         
 function closeAddException()
 {
-    document.getElementById("blackout").style.display="none";
+    showBlackout (false);
     document.getElementById("salon_exception_dialog").style.display="none";
 }
     

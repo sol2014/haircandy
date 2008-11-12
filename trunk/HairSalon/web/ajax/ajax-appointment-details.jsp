@@ -72,7 +72,7 @@ if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo
     
     function doClose ()
     {
-	document.getElementById("blackout").style.display="none";
+	showBlackout (false);
         document.getElementById("appointment_dialog_shell").style.display="none";
     }
     

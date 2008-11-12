@@ -420,7 +420,7 @@ function getAbsolutePositions(object)//function to get the absolute position of 
 
 function closeDialog()
 {
-    document.getElementById("blackout").style.display="none";
+    showBlackout (false);
     document.getElementById("dialog").style.display="none";
     document.getElementById("hourDuration").selectedIndex = 0;
     document.getElementById("minuteDuration").selectedIndex = 0;
@@ -462,7 +462,7 @@ function cellDoubleClickHandler(element)//function to deal with double click
         if(cell.state == emptyState)
         {
             document.getElementById("deleteButton").style.display = "none";
-            document.getElementById("blackout").style.display="block";
+            showBlackout (true);
             document.getElementById("dialog").style.display="block";
             previousFirstCell = document.getElementById(element.id);
             document.getElementById("sch_employee_name").innerHTML = employeeNameArray[parseInt(getColumnId(element.id))];
@@ -471,7 +471,7 @@ function cellDoubleClickHandler(element)//function to deal with double click
         else if(cell.state == bookingState)
         {
             document.getElementById("deleteButton").style.display = "inline";
-            document.getElementById("blackout").style.display="block";
+            showBlackout (true);
             document.getElementById("dialog").style.display="block";
             previousFirstCell = document.getElementById(element.id); 
             var appointment = findSelectedAppointment(element.id);

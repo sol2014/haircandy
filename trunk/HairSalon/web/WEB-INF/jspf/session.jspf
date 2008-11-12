@@ -18,8 +18,34 @@
 <div id="blackout" style="display:none; position: absolute;left: 0px; top: 0px; background-color: #000000;opacity: .5; filter: alpha(opacity=70); z-index: 1000;"></div>
 
 <script>
-    document.getElementById("blackout").style.width = getScreenWidth() + "px";
-    document.getElementById("blackout").style.height = getScreenHeight() + "px";
+    function moveBlackout()
+    {
+	var screenHeight = getScreenHeight();
+	var screenWidth = getScreenWidth();
+	
+	if (screenHeight > document.body.scrollHeight)
+	    document.getElementById("blackout").style.height = screenHeight + "px";
+	else
+	    document.getElementById("blackout").style.height = document.body.scrollHeight + "px";
+	
+	if (screenWidth > document.body.scrollWidth)
+	    document.getElementById("blackout").style.width = screenWidth + "px";
+	else
+	    document.getElementById("blackout").style.width = document.body.scrollWidth + "px";
+    }
+    
+    function showBlackout(value)
+    {
+	if (value == true)
+	{
+	    moveBlackout();
+	    document.getElementById("blackout").style.display="block";
+        }
+	else
+	{
+	    document.getElementById("blackout").style.display="none";
+	}
+    }
 </script>
 
 <% if (!userSession.isGuest ()) { %>

@@ -17,7 +17,6 @@ import hs.core.*;
 import hs.objects.*;
 import hs.app.*;
 import hs.presentation.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -173,22 +172,20 @@ public class EmployeeServlet extends DispatcherServlet
 			userSession.setAttribute ("employee_new_province", salon.getProvince ());
 			userSession.setAttribute ("employee_new_country", salon.getCountry ());
 			
-			SimpleDateFormat sdf = new SimpleDateFormat (CoreTools.TimeFormat);
-			
-			userSession.setAttribute ("employee_new_monday_start", sdf.format (salon.getMondayStart ()));
-			userSession.setAttribute ("employee_new_monday_end", sdf.format (salon.getMondayEnd ()));
-			userSession.setAttribute ("employee_new_tuesday_start", sdf.format (salon.getTuesdayStart ()));
-			userSession.setAttribute ("employee_new_tuesday_end", sdf.format (salon.getTuesdayEnd ()));
-			userSession.setAttribute ("employee_new_wednesday_start", sdf.format (salon.getWednesdayStart ()));
-			userSession.setAttribute ("employee_new_wednesday_end", sdf.format (salon.getWednesdayEnd ()));
-			userSession.setAttribute ("employee_new_thursday_start", sdf.format (salon.getThursdayStart ()));
-			userSession.setAttribute ("employee_new_thursday_end", sdf.format (salon.getThursdayEnd ()));
-			userSession.setAttribute ("employee_new_friday_start", sdf.format (salon.getFridayStart ()));
-			userSession.setAttribute ("employee_new_friday_end", sdf.format (salon.getFridayEnd ()));
-			userSession.setAttribute ("employee_new_saturday_start", sdf.format (salon.getSaturdayStart ()));
-			userSession.setAttribute ("employee_new_saturday_end", sdf.format (salon.getSaturdayEnd ()));
-			userSession.setAttribute ("employee_new_sunday_start", sdf.format (salon.getSundayStart ()));
-			userSession.setAttribute ("employee_new_sunday_end", sdf.format (salon.getSundayEnd ()));
+			userSession.setAttribute ("employee_new_monday_start", CoreTools.showTime (salon.getMondayStart ()));
+			userSession.setAttribute ("employee_new_monday_end", CoreTools.showTime (salon.getMondayEnd ()));
+			userSession.setAttribute ("employee_new_tuesday_start", CoreTools.showTime (salon.getTuesdayStart ()));
+			userSession.setAttribute ("employee_new_tuesday_end", CoreTools.showTime (salon.getTuesdayEnd ()));
+			userSession.setAttribute ("employee_new_wednesday_start", CoreTools.showTime (salon.getWednesdayStart ()));
+			userSession.setAttribute ("employee_new_wednesday_end", CoreTools.showTime (salon.getWednesdayEnd ()));
+			userSession.setAttribute ("employee_new_thursday_start", CoreTools.showTime (salon.getThursdayStart ()));
+			userSession.setAttribute ("employee_new_thursday_end", CoreTools.showTime (salon.getThursdayEnd ()));
+			userSession.setAttribute ("employee_new_friday_start", CoreTools.showTime (salon.getFridayStart ()));
+			userSession.setAttribute ("employee_new_friday_end", CoreTools.showTime (salon.getFridayEnd ()));
+			userSession.setAttribute ("employee_new_saturday_start", CoreTools.showTime (salon.getSaturdayStart ()));
+			userSession.setAttribute ("employee_new_saturday_end", CoreTools.showTime (salon.getSaturdayEnd ()));
+			userSession.setAttribute ("employee_new_sunday_start", CoreTools.showTime (salon.getSundayStart ()));
+			userSession.setAttribute ("employee_new_sunday_end", CoreTools.showTime (salon.getSundayEnd ()));
 		}
 		
 		userSession.setAttribute ("employee_new_phone_number", "");

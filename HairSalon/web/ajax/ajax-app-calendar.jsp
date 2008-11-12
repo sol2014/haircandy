@@ -41,7 +41,6 @@ int year = Integer.parseInt(yearS);
 int month = Integer.parseInt(monthS);
 
 Date date2 = CoreTools.getDate ("01/"+(month+1)+"/"+year);
-SimpleDateFormat sdf2 = new SimpleDateFormat(CoreTools.MonthYearFormat);
 
 Calendar calendar = Calendar.getInstance();
 calendar.set(year, month, 1);
@@ -58,7 +57,7 @@ int totalDaysOfGivenMonth = getTotalDaysOfGivenMonth(year, month);
 		<table border="0" cellspacing="5" cellpadding="0">
 		    <tr>
 			<td align="right" valign="top"><img border="0" src="/HairSalon/images/icons/big/schedule_white.gif" width="48" height="48"></td>
-			<td align="left"><font size="3"><b>Appointment Calendar: <%=sdf2.format(date2)%></b></font><br>
+			<td align="left"><font size="3"><b>Appointment Calendar: <%=CoreTools.showDate (date2, CoreTools.MonthYearFormat)%></b></font><br>
 			    You may browse through the calendar and select a day that you would like to view 
 			    the appointments for.
 			</td>

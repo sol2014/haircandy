@@ -19,8 +19,7 @@ public class ServletHelper
 		{
 			if (o instanceof Date)
 			{
-				DateFormat df = new SimpleDateFormat (CoreTools.DateFormat);
-				return df.format ((Date) o);
+				return CoreTools.showDate ((Date) o);
 			}
 			else
 			{

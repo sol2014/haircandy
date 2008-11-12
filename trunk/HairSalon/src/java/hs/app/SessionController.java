@@ -18,7 +18,7 @@ import hs.persistence.*;
 /**
  * Responsible for controller all actions that are taken by the user session
  * browsing the site. Allows a range of activities from logging in to loading
- * and saving records or performing useful actions.
+ * and saving records or performing schedule and appointment algorithms.
  * 
  * @author Philippe Durand
  */

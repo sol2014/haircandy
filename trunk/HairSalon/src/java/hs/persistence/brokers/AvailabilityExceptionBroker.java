@@ -236,7 +236,7 @@ public class AvailabilityExceptionBroker extends DatabaseBroker implements Broke
 					}
 					else
 					{
-						LogController.write (this, "Was unable to delete all exceptions for employee.");
+						LogController.write (this, "No exceptions were deleted for this employee.");
 						result = false;
 					}
 				}

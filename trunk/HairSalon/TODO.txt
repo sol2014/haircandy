@@ -38,6 +38,8 @@ Unresolved
 - FEATURE: User HELP icon that opens seperate page for help in all screens/dialogs.
   > This is for user friendliness. Nov 10th, 2008
 
+- BUG: The cells in Employee Schedule view turn from Blue to Green after first refresh.
+
 - BUG: When someone is changing Salon Hours or Employee Hours, we should never allow them
   to edit them outside the limits based on existing scheduled data.
 

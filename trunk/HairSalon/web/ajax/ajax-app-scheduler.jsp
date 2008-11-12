@@ -13,6 +13,7 @@
 <%@page import="hs.objects.*" %>
 <%@page import="hs.app.*" %>
 <%@page import="hs.presentation.*" %>
+<%@page import="hs.presentation.tags.*" %>
 <%@page import="java.util.*" %>
 <%@page import="java.text.*" %>
 
@@ -63,6 +64,25 @@ int rowCount = 0;
     </tr>
     <tr>
         <td>
+	    <table border="0" cellspacing="5" cellpadding="0">
+		<tr>
+		    <td align="center">
+			<input type="button" value="Last Week" name="LastWeek" onclick="" class="StandardButton"/>
+		    </td>
+
+		    <td align="center">
+			<input type="button" value="Last Day" name="LastDay" onclick="" class="StandardButton"/>
+		    </td>
+
+		    <td align="center">
+			<input type="button" value="Next Day" name="NextDay" onclick="" class="StandardButton"/>
+		    </td>
+
+		    <td align="center">
+			<input type="button" value="Next Week" name="NextWeek" onclick="" class="StandardButton"/>
+		    </td>
+		</tr>
+	    </table>
             <% if (startTime.equals(endTime)) {%>
             <font size="3"><b>The salon is not taking any appointments on this date.</b></font>
             <% } else {%>
@@ -70,29 +90,6 @@ int rowCount = 0;
             <font size="3"><b>There are no scheduled employees to book appointments with on this date.</b></font>
             <% } else {%>
             <table border="0" cellspacing="0" cellpadding="0">
-		<tr>
-		    <td colspan="3">
-			<table align="center" valign="top" border="0" cellspacing="5" cellpadding="0">
-			    <tr>
-				<td align="center">
-				    <input type="button" value="Last Week" name="LastWeek" onclick="" class="StandardButton"/>
-				</td>
-
-				<td align="center">
-				    <input type="button" value="Last Day" name="LastDay" onclick="" class="StandardButton"/>
-				</td>
-
-				<td align="center">
-				    <input type="button" value="Next Day" name="NextDay" onclick="" class="StandardButton"/>
-				</td>
-
-				<td align="center">
-				    <input type="button" value="Next Week" name="NextWeek" onclick="" class="StandardButton"/>
-				</td>
-			    </tr>
-			</table>
-		    </td>
-		</tr>
                 <tr>
                     <td class="SchedulerTopLeft"></td>
                     <td class="SchedulerHeader">

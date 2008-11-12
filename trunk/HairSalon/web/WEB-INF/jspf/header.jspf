@@ -12,13 +12,13 @@
         <link href="css/Calendar.css" rel="stylesheet" type="text/css">
 	<link href="css/epoch_styles.css" rel="stylesheet" type="text/css" />
 	
-	<script type="text/javascript" language="javascript" src="js/preferences-addin.js"></script>
+	<script type="text/javascript" language="javascript" src="js/availability-addin.js"></script>
+	<script type="text/javascript" language="javascript" src="js/password-addin.js"></script>
         <script type="text/javascript" language="javascript" src="js/tools.js"></script>
         <script type="text/javascript" language="javascript" src="js/ajax.js"></script>
 	<script type="text/javascript" language="javascript" src="js/epoch_classes.js"></script>
     </head>
     
-    <!--<body onLoad="document.forms.form.firstfield.focus ()" class="SiteBody"> -->
     <body class="SiteBody"> 
     
     <noscript>

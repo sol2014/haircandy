@@ -178,13 +178,13 @@ function findAppointmentIndex(appointmentId)
             return parseInt(i);
         }
     }
-    return false;
+    return -1;
 }
 
 function saveAppointment(appointmentId, duration)
 {
     var index = findAppointmentIndex(appointmentId);
-    if(index)
+    if(index != -1)
     {
         removeAppointment(index);
     }
@@ -194,9 +194,10 @@ function saveAppointment(appointmentId, duration)
 function deleteAppointment(appointmentId)
 {
     var index = findAppointmentIndex(appointmentId);
-    if(index)
+    if(index != -1)
     {
         removeAppointment(index);
+        closeDialog();
     }
 }
 
@@ -504,7 +505,8 @@ function cellDoubleClickHandler(element)//function to deal with double click
             var appointmentId = getCellAppointmentId(element.id);
             if(appointmentId!=-1)
             {
-                draggableDiv.appointmentId=appointmentId;
+                draggableDiv.appointmentId = appointmentId;
+                previousFirstCell = document.getElementById(appointments[findAppointmentIndex(appointmentId)][0]);
             }
             getDialogShell();
         } 

@@ -43,10 +43,11 @@ public class AppointmentBroker extends DatabaseBroker implements BrokerInterface
 	public DataBean load (DataBean data)
 	{
 		AppointmentBean appointment = (AppointmentBean) data;
+		Connection connection = null;
 		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement proc = connection.prepareCall ("{call LoadAppointment(?)}");
 
 			if (appointment.getAppointmentNo () != null)
@@ -56,6 +57,7 @@ public class AppointmentBroker extends DatabaseBroker implements BrokerInterface
 			else
 			{
 				LogController.write (this, "Appointment bean has no identification number!");
+				super.returnConnection (connection);
 				return null;
 			}
 			
@@ -68,6 +70,7 @@ public class AppointmentBroker extends DatabaseBroker implements BrokerInterface
 			else
 			{
 				LogController.write (this, "There were no results for this load! Employee not loaded.");
+				super.returnConnection (connection);
 				return null;
 			}
 			
@@ -104,14 +107,16 @@ public class AppointmentBroker extends DatabaseBroker implements BrokerInterface
 					LogController.write (this, "Loaded a product into appointment:" + product.getProductNo ());
 				}
 			}
-			
-			super.returnConnection (connection);
 		}
 		catch (SQLException e)
 		{
 			LogController.write (this, "Exception while loading appointment bean: "+appointment.getAppointmentNo ());
+			super.returnConnection (connection);
 			return null;
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		LogController.write (this, "Loaded appointment bean: "+appointment.getAppointmentNo ());
 		
@@ -122,10 +127,11 @@ public class AppointmentBroker extends DatabaseBroker implements BrokerInterface
 	{
 		AppointmentBean appointment = (AppointmentBean) data;
 		ArrayList<AppointmentBean> appointmentAL = new ArrayList<AppointmentBean> ();
-
+		Connection connection = null;
+		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement proc = connection.prepareCall ("{call SearchAppointment(?,?,?,?,?,?)}");
 			int index = 1;
 			
@@ -162,13 +168,14 @@ public class AppointmentBroker extends DatabaseBroker implements BrokerInterface
 			{
 				appointmentAL.add ((AppointmentBean) getBean (result));
 			}
-
-			super.returnConnection (connection);
 		}
 		catch (SQLException r)
 		{
 			LogController.write (this, "SQL Exception during search: " + r.getMessage ());
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		LogController.write (this, "Found appointment beans: "+appointmentAL.size());
 		
@@ -203,10 +210,11 @@ public class AppointmentBroker extends DatabaseBroker implements BrokerInterface
 	{
 		AppointmentBean appointment = (AppointmentBean) data;
 		boolean result = false;
+		Connection connection = null;
 		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement proc = null;
 			int index = 1;
 			
@@ -255,8 +263,6 @@ public class AppointmentBroker extends DatabaseBroker implements BrokerInterface
 		{
 			try
 			{
-				Connection connection = super.getConnection ();
-
 				// Erase any existing products for this service.
 				CallableStatement proc = connection.prepareCall ("{call DeleteAppointmentProducts(?)}");
 
@@ -349,8 +355,6 @@ public class AppointmentBroker extends DatabaseBroker implements BrokerInterface
 				{
 					LogController.write (this, "There are no services to store for this appointment.");
 				}
-
-				super.returnConnection (connection);
 			}
 			catch (SQLException e2)
 			{
@@ -358,6 +362,9 @@ public class AppointmentBroker extends DatabaseBroker implements BrokerInterface
 				result = false;
 			}
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		if (result)
 			LogController.write (this, "Commit appointment bean: "+appointment.getAppointmentNo ());
@@ -369,12 +376,13 @@ public class AppointmentBroker extends DatabaseBroker implements BrokerInterface
 	{
 		AppointmentBean appointment = (AppointmentBean) data;
 		boolean result = false;
+		Connection connection = null;
 		
 		if (appointment.getAppointmentNo () != null)
 		{
 			try
 			{
-				Connection connection = super.getConnection ();
+				connection = super.getConnection ();
 				CallableStatement proc = connection.prepareCall ("{call DeleteAppointment(?)}");
 				
 				proc.setInt (1, appointment.getAppointmentNo ());
@@ -385,8 +393,6 @@ public class AppointmentBroker extends DatabaseBroker implements BrokerInterface
 					result = true;
 				else
 					result = false;
-				
-				super.returnConnection (connection);
 			}
 			catch (SQLException e)
 			{
@@ -397,6 +403,9 @@ public class AppointmentBroker extends DatabaseBroker implements BrokerInterface
 		{
 			result = false;
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		if (result)
 			LogController.write (this, "Deleted appointment bean: "+appointment.getAppointmentNo ());

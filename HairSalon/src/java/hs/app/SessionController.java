@@ -363,7 +363,17 @@ public class SessionController
 		address = (AddressBean) PersistenceController.load (address);
 		return address;
 	}
-
+	
+	public static EmployeeHoursBean loadEmployeeHours (UserSession session, EmployeeHoursBean employeeHours)
+	{
+		LogController.write ("SessionController->Loading employee hours entry...");
+		Date date = employeeHours.getDate ();
+		
+		employeeHours = (EmployeeHoursBean) PersistenceController.load (employeeHours);
+		
+		return employeeHours;
+	}
+	
 	public static ScheduleHoursBean loadScheduleHours (UserSession session, ScheduleHoursBean scheduleHours)
 	{
 		LogController.write ("SessionController->Loading schedule hours entry...");
@@ -504,6 +514,14 @@ public class SessionController
 		return result;
 	}
 	
+	public static boolean saveEmployeeHours (UserSession session, EmployeeHoursBean employeeHours)
+	{
+		LogController.write ("SessionController->Saving employee hours entry...");
+		boolean result = false;
+		result = PersistenceController.commit (employeeHours);
+		return result;
+	}
+	
 	public static boolean saveScheduleHours (UserSession session, ScheduleHoursBean scheduleHours)
 	{
 		LogController.write ("SessionController->Saving schedule hours entry...");
@@ -517,6 +535,40 @@ public class SessionController
 	public static boolean saveSchedule (UserSession session, ScheduleBean schedule)
 	{
 		LogController.write ("SessionController->Saving schedule entry...");
+		
+		// When we save a schedule entry, this is the time we want to see if
+		// we already have employee hours set out for that date. If we dont
+		// we need to create them so that the future changes wont affect this
+		// day of schedule entries.
+		
+		EmployeeHoursBean ehb = new EmployeeHoursBean ();
+		ehb.setEmployeeNo (schedule.getEmployee ().getEmployeeNo ());
+		ehb.setDate (schedule.getDate ());
+		
+		ehb = loadEmployeeHours (session, ehb);
+		
+		if (ehb == null)
+		{
+			// We do not have employee hours available, we need to create them.
+			ehb = new EmployeeHoursBean ();
+			ehb.setEmployeeNo (schedule.getEmployee().getEmployeeNo ());
+			ehb.setDate (schedule.getDate ());
+			
+			// Make sure we have the latest employee data.
+			EmployeeBean employee = schedule.getEmployee();
+			employee = loadEmployee (session, employee);
+			
+			int weekday = CoreTools.getWeekDay (ehb.getDate ());
+			Date startTime = employee.getWeekdayStartTime (weekday);
+			Date endTime = employee.getWeekdayEndTime (weekday);
+			ehb.setStartTime (startTime);
+			ehb.setEndTime (endTime);
+			
+			if (!saveEmployeeHours (session, ehb))
+			{
+				LogController.write ("SessionController->Unable to store employee hours! This is bad.");
+			}
+		}
 		
 		boolean result = false;
 		result = PersistenceController.commit (schedule);
@@ -907,8 +959,29 @@ public class SessionController
 		
 		for (EmployeeBean cycle : employees)
 		{
-			Date workStart = cycle.getWeekdayStartTime (CoreTools.getWeekDay (date));
-			Date workEnd = cycle.getWeekdayEndTime (CoreTools.getWeekDay (date));
+			Date workStart = null;
+			Date workEnd = null;
+			
+			// Here we want to see if there is already existing employee hours data.
+			EmployeeHoursBean ehb = new EmployeeHoursBean ();
+			ehb.setEmployeeNo (cycle.getEmployeeNo ());
+			ehb.setDate (date);
+			
+			ehb = loadEmployeeHours (session, ehb);
+			
+			if (ehb == null)
+			{
+				// We have never stored the hours before, just use the regular.
+				workStart = cycle.getWeekdayStartTime (CoreTools.getWeekDay (date));
+				workEnd = cycle.getWeekdayEndTime (CoreTools.getWeekDay (date));
+			}
+			else
+			{
+				// We do have employee hours for this day, lets use those.
+				workStart = ehb.getStartTime ();
+				workEnd = ehb.getEndTime ();
+			}
+			
 			ArrayList<ScheduleBean> unschedulable = new ArrayList<ScheduleBean> ();
 			
 			if (!CoreTools.isTimeBefore (workStart, startTime))

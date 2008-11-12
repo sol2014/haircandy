@@ -46,10 +46,11 @@ public class AlertBroker extends DatabaseBroker implements BrokerInterface
 	{
 		AlertBean alert = (AlertBean) data;
 		ArrayList<AlertBean> results = new ArrayList<AlertBean> ();
-
+		Connection connection = null;
+		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement statement = connection.prepareCall ("{call ListAlerts()}");
 			
 			ResultSet set = statement.executeQuery ();
@@ -58,13 +59,14 @@ public class AlertBroker extends DatabaseBroker implements BrokerInterface
 			{
 				results.add ((AlertBean) getBean (set));
 			}
-
-			super.returnConnection (connection);
 		}
 		catch (SQLException sqlEx)
 		{
 			LogController.write (this, "SQL Exception during search: " + sqlEx.getMessage ());
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		LogController.write (this, "Found alert beans: "+results.size());
 		
@@ -77,6 +79,7 @@ public class AlertBroker extends DatabaseBroker implements BrokerInterface
 	{
 		AlertBean alert = (AlertBean) data;
 		boolean result = true;
+		Connection connection = null;
 		
 		if (alert == null)
 		{
@@ -86,7 +89,7 @@ public class AlertBroker extends DatabaseBroker implements BrokerInterface
 		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 
 			CallableStatement statement = connection.prepareCall ("{call CreateAlert(?,?,?,?,?,?,?)}");
 			int index = 1;
@@ -105,8 +108,6 @@ public class AlertBroker extends DatabaseBroker implements BrokerInterface
 				result = true;
 			else
 				result = false;
-			
-			super.returnConnection (connection);
 		}
 		catch (SQLException e)
 		{
@@ -115,6 +116,9 @@ public class AlertBroker extends DatabaseBroker implements BrokerInterface
 			
 			result = false;
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		if (result)
 			LogController.write (this, "Commit alert bean: "+alert.getAlertNo ());
@@ -127,10 +131,11 @@ public class AlertBroker extends DatabaseBroker implements BrokerInterface
 	{
 		AlertBean alert = (AlertBean) data;
 		boolean result = false;
+		Connection connection = null;
 		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			
 			if (alert.getAlertNo () != null)
 			{
@@ -155,13 +160,14 @@ public class AlertBroker extends DatabaseBroker implements BrokerInterface
 				LogController.write (this, "Attempted to delete an alert with no ID.");
 				result = false;
 			}
-			
-			super.returnConnection (connection);
 		}
 		catch (SQLException e)
 		{
 			result = false;
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		if (result)
 			LogController.write (this, "Deleted alert bean: "+alert.getAlertNo ());

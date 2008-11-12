@@ -44,10 +44,11 @@ public class ScheduleExceptionBroker extends DatabaseBroker implements BrokerInt
 	public DataBean load (DataBean data)
 	{
 		ScheduleExceptionBean scheduleException = (ScheduleExceptionBean) data;
+		Connection connection = null;
 		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement statement = connection.prepareCall ("{call LoadScheduleException(?,?)}");
 
 			// Check which search parameters this object provides
@@ -59,6 +60,7 @@ public class ScheduleExceptionBroker extends DatabaseBroker implements BrokerInt
 			else
 			{
 				LogController.write (this, "ScheduleException bean has no date!");
+				super.returnConnection (connection);
 				return null;
 			}
 			
@@ -72,18 +74,20 @@ public class ScheduleExceptionBroker extends DatabaseBroker implements BrokerInt
 			else
 			{
 				LogController.write (this, "There were no results for this load! ScheduleException not loaded.");
+				super.returnConnection (connection);
 				return null;
 			}
-
-			super.returnConnection (connection);
 		}
 		catch (SQLException sqlEx)
 		{
 			LogController.write (this, "SQL Exception during load: " + sqlEx.getMessage ());
-			
+			super.returnConnection (connection);
 			return null;
 		}
-
+		
+		if (connection != null)
+			super.returnConnection (connection);
+		
 		LogController.write (this, "Loaded schedule exception bean: "+scheduleException.getDate ());
 		
 		return scheduleException;
@@ -94,10 +98,11 @@ public class ScheduleExceptionBroker extends DatabaseBroker implements BrokerInt
 	{
 		ScheduleExceptionBean scheduleException = (ScheduleExceptionBean) data;
 		ArrayList<ScheduleExceptionBean> results = new ArrayList<ScheduleExceptionBean> ();
-
+		Connection connection = null;
+		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement statement = connection.prepareCall ("{call SearchScheduleException(?,?)}");
 
 			// Check which search parameters this object provides
@@ -129,13 +134,14 @@ public class ScheduleExceptionBroker extends DatabaseBroker implements BrokerInt
 			{
 				results.add ((ScheduleExceptionBean) getBean (set));
 			}
-
-			super.returnConnection (connection);
 		}
 		catch (SQLException sqlEx)
 		{
 			LogController.write (this, "SQL Exception during search: " + sqlEx.getMessage ());
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		LogController.write (this, "Found schedule exception beans: "+results.size());
 		
@@ -148,10 +154,11 @@ public class ScheduleExceptionBroker extends DatabaseBroker implements BrokerInt
 	{
 		ScheduleExceptionBean scheduleException = (ScheduleExceptionBean) data;
 		boolean result = true;
+		Connection connection = null;
 		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 
 			CallableStatement statement = connection.prepareCall ("{call CreateScheduleException(?,?)}");
 			
@@ -164,8 +171,6 @@ public class ScheduleExceptionBroker extends DatabaseBroker implements BrokerInt
 				result = true;
 			else
 				result = false;
-			
-			super.returnConnection (connection);
 		}
 		catch (SQLException e)
 		{
@@ -175,6 +180,9 @@ public class ScheduleExceptionBroker extends DatabaseBroker implements BrokerInt
 			result = false;
 		}
 		
+		if (connection != null)
+			super.returnConnection (connection);
+		
 		return result;
 	}
 	
@@ -183,10 +191,11 @@ public class ScheduleExceptionBroker extends DatabaseBroker implements BrokerInt
 	{
 		ScheduleExceptionBean scheduleException = (ScheduleExceptionBean) data;
 		boolean result = false;
+		Connection connection = null;
 		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			
 			if (scheduleException.getDate () == null)
 			{
@@ -226,8 +235,6 @@ public class ScheduleExceptionBroker extends DatabaseBroker implements BrokerInt
 					result = false;
 				}
 			}
-			
-			super.returnConnection (connection);
 		}
 		catch (SQLException e)
 		{
@@ -236,6 +243,9 @@ public class ScheduleExceptionBroker extends DatabaseBroker implements BrokerInt
 			
 			result = false;
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		if (result)
 			LogController.write (this, "Deleted schedule exception bean: "+scheduleException.getDate ());

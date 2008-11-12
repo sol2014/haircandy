@@ -57,6 +57,9 @@ Unresolved
 - BUG: Make sure that all search result cells are top aligned, and use nowrap and have
   proper result images.
 
+- BUG: When deleting schedule entries, or moving them, we are not even checking if there
+  is already booked appointments data for those entries.
+
 - BUG: Input checking in all Dialogs must highlight fields RED when finishing.
 
 - BUG: Delete button in appointment dialog needs to be hidden when creating new entry.

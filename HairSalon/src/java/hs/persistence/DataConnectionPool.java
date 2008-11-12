@@ -12,7 +12,8 @@ package hs.persistence;
 
 import java.sql.*;
 import java.util.*;
-import java.io.*;
+
+import hs.core.*;
 
 /**
  * Creates and manages database connections, distributing them as required.
@@ -133,6 +134,8 @@ public class DataConnectionPool
         // First we want to see if there is a connection available for us to use.
         if (unusedConnections.isEmpty())
         {
+			LogController.write (this, "DB: Creating new connection: "+unusedConnections.size ()+" open connections.");
+			
             // We have no unused connections left, make a new one. This is where
             // we would take a performance hit. Perhaps our initial number is too low?
             conn = DriverManager.getConnection(url, user, password);
@@ -141,15 +144,18 @@ public class DataConnectionPool
         {
             conn = unusedConnections.remove(0);
         }
-
+		
         usedConnections.add(conn);
-
+		
         return conn;
     }
 
     public synchronized void returnConnection(Connection conn)
     {
-        usedConnections.remove(conn);
-        unusedConnections.add(conn);
+		if (conn != null)
+		{
+			usedConnections.remove(conn);
+			unusedConnections.add(conn);
+		}
     }
 }

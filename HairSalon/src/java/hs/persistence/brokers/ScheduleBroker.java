@@ -45,10 +45,11 @@ public class ScheduleBroker extends DatabaseBroker implements BrokerInterface
 	public DataBean load (DataBean data)
 	{
 		ScheduleBean schedule = (ScheduleBean) data;
-
+		Connection connection = null;
+		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement statement = connection.prepareCall ("{call LoadSchedule(?)}");
 
 			// Check which search parameters this object provides
@@ -60,6 +61,7 @@ public class ScheduleBroker extends DatabaseBroker implements BrokerInterface
 			else
 			{
 				LogController.write (this, "Schedule bean has no identification number!");
+				super.returnConnection (connection);
 				return null;
 			}
 
@@ -73,18 +75,20 @@ public class ScheduleBroker extends DatabaseBroker implements BrokerInterface
 			else
 			{
 				LogController.write (this, "There were no results for this load! Schedule not loaded.");
+				super.returnConnection (connection);
 				return null;
 			}
-
-			super.returnConnection (connection);
 		}
 		catch (SQLException sqlEx)
 		{
 			LogController.write (this, "SQL Exception during search: " + sqlEx.getMessage ());
-			
+			super.returnConnection (connection);
 			return null;
 		}
 
+		if (connection != null)
+			super.returnConnection (connection);
+		
 		LogController.write (this, "Loaded schedule bean: "+schedule.getScheduleNo ());
 		
 		return schedule;
@@ -95,10 +99,11 @@ public class ScheduleBroker extends DatabaseBroker implements BrokerInterface
 	{
 		ScheduleBean schedule = (ScheduleBean) data;
 		ArrayList<ScheduleBean> results = new ArrayList<ScheduleBean> ();
+		Connection connection = null;
 		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement statement = connection.prepareCall ("{call SearchSchedule(?,?,?,?)}");	
 			int index = 1;
 			
@@ -141,13 +146,14 @@ public class ScheduleBroker extends DatabaseBroker implements BrokerInterface
 			{
 				results.add ((ScheduleBean) getBean (set));
 			}
-			
-			super.returnConnection (connection);
 		}
 		catch (SQLException sqlEx)
 		{
 			LogController.write (this, "SQL Exception during search: " + sqlEx.getMessage ());
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		LogController.write (this, "Found schedule beans: "+results.size());
 		
@@ -160,10 +166,11 @@ public class ScheduleBroker extends DatabaseBroker implements BrokerInterface
 	{
 		ScheduleBean schedule = (ScheduleBean) data;
 		boolean result = false;
+		Connection connection = null;
 		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement statement = null;
 			int index = 1;
 			
@@ -201,8 +208,6 @@ public class ScheduleBroker extends DatabaseBroker implements BrokerInterface
 			{
 				result = false;
 			}
-			
-			super.returnConnection (connection);
 		}
 		catch (SQLException e)
 		{
@@ -210,6 +215,9 @@ public class ScheduleBroker extends DatabaseBroker implements BrokerInterface
 			e.printStackTrace ();
 			result = false;
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		return result;
 	}
@@ -219,12 +227,13 @@ public class ScheduleBroker extends DatabaseBroker implements BrokerInterface
 	{
 		ScheduleBean schedule = (ScheduleBean) data;
 		boolean result = false;
+		Connection connection = null;
 		
 		try
 		{
 			if (schedule.getScheduleNo () != null)
 			{
-				Connection connection = super.getConnection ();
+				connection = super.getConnection ();
 				CallableStatement statement = connection.prepareCall ("{call DeleteSchedule(?)}");
 				
 				statement.setInt (1, schedule.getScheduleNo ());
@@ -235,8 +244,6 @@ public class ScheduleBroker extends DatabaseBroker implements BrokerInterface
 					result = false;
 				else
 					result = true;
-				
-				super.returnConnection (connection);
 			}
 			else
 			{
@@ -250,6 +257,9 @@ public class ScheduleBroker extends DatabaseBroker implements BrokerInterface
 			
 			result = false;
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		if (result)
 			LogController.write (this, "Deleted schedule bean: "+schedule.getScheduleNo ());

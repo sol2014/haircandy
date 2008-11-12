@@ -40,10 +40,11 @@ public class SalonBroker extends DatabaseBroker implements BrokerInterface
 	public DataBean load (DataBean data)
 	{
 		SalonBean salon = (SalonBean) data;
-
+		Connection connection = null;
+		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement statement = connection.prepareCall ("{call LoadSalon()}");
 			
 			// The first result set should be the employee record.
@@ -56,6 +57,7 @@ public class SalonBroker extends DatabaseBroker implements BrokerInterface
 			else
 			{
 				LogController.write (this, "There were no results for this load! Salon not loaded.");
+				super.returnConnection (connection);
 				return null;
 			}
 			
@@ -73,16 +75,17 @@ public class SalonBroker extends DatabaseBroker implements BrokerInterface
 					LogController.write (this, "Added an exception to salon.");
 				}
 			}
-			
-			super.returnConnection (connection);
 		}
 		catch (SQLException sqlEx)
 		{
 			LogController.write (this, "SQL Exception during search: " + sqlEx.toString ());
 			sqlEx.printStackTrace();
-			
+			super.returnConnection (connection);
 			return null;
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		LogController.write (this, "Loaded salon bean.");
 		
@@ -100,10 +103,11 @@ public class SalonBroker extends DatabaseBroker implements BrokerInterface
 	{
 		SalonBean salon = (SalonBean) data;
 		boolean result = false;
+		Connection connection = null;
 		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			
 			CallableStatement statement = connection.prepareCall ("{call UpdateSalon(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 			int index = 1;
@@ -139,13 +143,14 @@ public class SalonBroker extends DatabaseBroker implements BrokerInterface
 				result = true;
 			else
 				result = false;
-			
-			super.returnConnection (connection);
 		}
 		catch (SQLException e)
 		{
 			result = false;
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		if (result)
 			LogController.write (this, "Commit salon bean.");

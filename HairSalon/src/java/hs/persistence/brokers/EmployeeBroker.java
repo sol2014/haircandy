@@ -43,10 +43,11 @@ public class EmployeeBroker extends DatabaseBroker implements BrokerInterface
 	public DataBean load (DataBean data)
 	{
 		EmployeeBean employee = (EmployeeBean) data;
-
+		Connection connection = null;
+		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement statement = connection.prepareCall ("{call LoadEmployee(?)}");
 
 			// Check which search parameters this object provides
@@ -58,6 +59,7 @@ public class EmployeeBroker extends DatabaseBroker implements BrokerInterface
 			else
 			{
 				LogController.write (this, "Employee bean has no identification number!");
+				super.returnConnection (connection);
 				return null;
 			}
 
@@ -71,6 +73,7 @@ public class EmployeeBroker extends DatabaseBroker implements BrokerInterface
 			else
 			{
 				LogController.write (this, "There were no results for this load! Employee not loaded.");
+				super.returnConnection (connection);
 				return null;
 			}
 			
@@ -106,13 +109,14 @@ public class EmployeeBroker extends DatabaseBroker implements BrokerInterface
 					LogController.write (this, "Loaded a exception into employee: "+exception.getDate ().toString());
 				}
 			}
-			
-			super.returnConnection (connection);
 		}
 		catch (SQLException sqlEx)
 		{
 			LogController.write (this, "SQL Exception during load: " + sqlEx.getMessage ());
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		LogController.write (this, "Loaded employee bean: "+employee.getEmployeeNo ());
 		
@@ -124,12 +128,12 @@ public class EmployeeBroker extends DatabaseBroker implements BrokerInterface
 	{
 		EmployeeBean employee = (EmployeeBean) data;
 		AddressBean address = employee.getAddress();
-		
+		Connection connection = null;
 		ArrayList<EmployeeBean> results = new ArrayList<EmployeeBean> ();
 		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement statement = connection.prepareCall ("{call SearchEmployee(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 			int index = 1;
 			
@@ -155,13 +159,14 @@ public class EmployeeBroker extends DatabaseBroker implements BrokerInterface
 			{
 				results.add ((EmployeeBean) getBean (set));
 			}
-
-			super.returnConnection (connection);
 		}
 		catch (SQLException sqlEx)
 		{
 			LogController.write (this, "SQL Exception during search: " + sqlEx.getMessage ());
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		LogController.write (this, "Found employee beans: " + results.size ());
 		
@@ -174,10 +179,11 @@ public class EmployeeBroker extends DatabaseBroker implements BrokerInterface
 	{
 		EmployeeBean employee = (EmployeeBean) data;
 		boolean result = true;
+		Connection connection = null;
 		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement statement = null;
 			int index = 1;
 			
@@ -235,8 +241,6 @@ public class EmployeeBroker extends DatabaseBroker implements BrokerInterface
 				result = false;
 			else
 				result = true;
-			
-			super.returnConnection (connection);
 		}
 		catch (SQLException e)
 		{
@@ -249,8 +253,6 @@ public class EmployeeBroker extends DatabaseBroker implements BrokerInterface
 			// table data.
 			try
 			{
-				Connection connection = super.getConnection ();
-				
 				// Erase any existing services for this employee.
 				CallableStatement statement = connection.prepareCall ("{call DeleteEmployeeServices(?)}");
 				statement.setInt (1, employee.getEmployeeNo ());
@@ -292,14 +294,15 @@ public class EmployeeBroker extends DatabaseBroker implements BrokerInterface
 				{
 					LogController.write (this, "There are no services to store for this employee.");
 				}
-				
-				super.returnConnection (connection);
 			}
 			catch (SQLException e2)
 			{
 				result = false;
 			}
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		LogController.write (this, "Commit employee bean: "+employee.getEmployeeNo ());
 		
@@ -311,12 +314,13 @@ public class EmployeeBroker extends DatabaseBroker implements BrokerInterface
 	{
 		EmployeeBean employee = (EmployeeBean) data;
 		boolean result = false;
+		Connection connection = null;
 		
 		try
 		{
 			if (employee.getEmployeeNo () != null)
 			{
-				Connection connection = super.getConnection ();
+				connection = super.getConnection ();
 				CallableStatement statement = connection.prepareCall ("{call DeleteEmployee(?)}");
 				
 				statement.setInt (1, employee.getEmployeeNo ());
@@ -327,7 +331,6 @@ public class EmployeeBroker extends DatabaseBroker implements BrokerInterface
 					result = true;
 				else
 					result = false;
-				super.returnConnection (connection);
 			}
 			else
 			{
@@ -338,6 +341,9 @@ public class EmployeeBroker extends DatabaseBroker implements BrokerInterface
 		{
 			result = false;
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		return result;
 	}

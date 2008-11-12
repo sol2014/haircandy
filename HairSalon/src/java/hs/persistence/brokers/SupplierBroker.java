@@ -43,12 +43,12 @@ public class SupplierBroker extends DatabaseBroker implements BrokerInterface
 	{
 		SupplierBean supplier = (SupplierBean) data;
 		AddressBean address = supplier.getAddress ();
-
+		Connection connection = null;
 		ArrayList<SupplierBean> supplierAL = new ArrayList<SupplierBean> ();
 
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement proc = connection.prepareCall ("{call SearchSupplier(?,?,?,?,?,?,?,?,?,?,?)}");
 			int index = 1;
 
@@ -65,16 +65,19 @@ public class SupplierBroker extends DatabaseBroker implements BrokerInterface
 			addToStatement (proc, supplier.getEnabled (), index++, Boolean.class);
 
 			ResultSet result = proc.executeQuery ();
+			
 			while (result.next ())
 			{
 				supplierAL.add ((SupplierBean) getBean (result));
 			}
-			super.returnConnection (connection);
 		}
 		catch (SQLException sqlEx)
 		{
 			LogController.write (this, "SQL Exception during search: " + sqlEx.getMessage ());
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		LogController.write (this, "Found supplier beans: "+supplierAL.size());
 		
@@ -87,9 +90,11 @@ public class SupplierBroker extends DatabaseBroker implements BrokerInterface
 	{
 		SupplierBean supplier = (SupplierBean) data;
 		boolean result = false;
+		Connection connection = null;
+		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement proc;
 			int index = 1;
 			
@@ -140,110 +145,161 @@ public class SupplierBroker extends DatabaseBroker implements BrokerInterface
 			if (supplier.getSupplierNo () == null)
 			{
 				proc.registerOutParameter ("p_supplier_no", Types.INTEGER);
-				proc.executeUpdate ();
-				supplier.setSupplierNo (proc.getInt ("p_supplier_no"));
+			}
+			
+			int updated = proc.executeUpdate ();
+			
+			if (updated > 0)
+			{
+				result = true;
+				
+				if (supplier.getSupplierNo () == null)
+					supplier.setSupplierNo (proc.getInt ("p_supplier_no"));
 			}
 			else
-			{
-				proc.executeUpdate ();
-			}
+				result = false;
 			
-			result = deleteProducts (supplier);
-			if (!result)
+			if (result)
 			{
-				LogController.write (this, "Unable to delete products: "+supplier.getSupplierNo());
-				return false;
-			}
-			for (ProductBean pb : supplier.getProducts ())
-			{
-				result = addProduct (supplier, pb);
+				result = deleteProducts (supplier);
+			
 				if (!result)
 				{
-					LogController.write (this, "Unable to add product to: "+supplier.getSupplierNo());
-					return false;
+					LogController.write (this, "Unable to delete products: "+supplier.getSupplierNo());
+					result = false;
+				}
+				else
+				{
+					for (ProductBean pb : supplier.getProducts ())
+					{
+						result = addProduct (supplier, pb);
+
+						if (!result)
+						{
+							LogController.write (this, "Unable to add product to: "+supplier.getSupplierNo());
+							result = false;
+						}
+					}
 				}
 			}
-			super.returnConnection (connection);
-			
-			LogController.write (this, "Commit supplier bean: "+supplier.getSupplierNo ());
-			
-			return true;
 		}
 		catch (SQLException e)
 		{
 			LogController.write (this, "SQL Exception: "+e.toString());
 			e.printStackTrace();
-			
-			return false;
+			result = false;
 		}
-
+		
+		if (connection != null)
+			super.returnConnection (connection);
+		
+		if (result)
+			LogController.write (this, "Commit supplier bean: "+supplier.getSupplierNo ());
+		
+		return result;
 	}
 
 	private boolean deleteProducts (SupplierBean sb)
 	{
+		Connection connection = null;
+		boolean result = false;
+		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement proc = connection.prepareCall ("{call DeleteSupplierProducts(?)}");
+			
 			proc.setInt (1, sb.getSupplierNo ());
-			proc.execute ();
-			super.returnConnection (connection);
-			return true;
+			
+			int updated = proc.executeUpdate ();
+			
+			if (updated > 0)
+				result = true;
+			else
+				result = false;
 		}
 		catch (Exception e)
 		{
-			return false;
+			LogController.write (this, "SQL Exception: "+e.toString());
+			result = false;
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
+		
+		return result;
 	}
 
 	private boolean addProduct (SupplierBean sb, ProductBean pb)
 	{
+		Connection connection = null;
+		boolean result = false;
+		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement proc = connection.prepareCall ("{call AddSupplierProduct(?,?)}");
+			
 			proc.setInt (1, sb.getSupplierNo ());
 			proc.setInt (2, pb.getProductNo ());
-			proc.execute ();
-			super.returnConnection (connection);
-			return true;
+			
+			int updated = proc.executeUpdate ();
+			
+			if (updated > 0)
+				result = true;
+			else
+				result = false;
 		}
 		catch (Exception e)
 		{
-			return false;
+			LogController.write (this, "SQL Exception: "+e.toString());
+			result = false;
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
+		
+		return result;
 	}
 
 	@Override
 	public boolean delete (DataBean data)
 	{
 		SupplierBean supplier = (SupplierBean) data;
-
+		Connection connection = null;
+		boolean result = false;
+		
 		try
 		{
 			if (supplier.getSupplierNo () != null)
 			{
-				Connection connection = super.getConnection ();
+				connection = super.getConnection ();
 				CallableStatement proc = connection.prepareCall ("{call DeleteSupplier(?)}");
 
 				proc.setInt (1, supplier.getSupplierNo ());
 
-				boolean result = proc.execute ();
+				int updated = proc.executeUpdate ();
 
-				super.returnConnection (connection);
-
-				return result;
+				if (updated > 0)
+					result = true;
+				else
+					result = false;
 			}
 			else
 			{
-				return false;
+				result = false;
 			}
-
 		}
 		catch (SQLException e)
 		{
-			return false;
+			LogController.write (this, "SQL Excpetion: "+e.toString());
+			result = false;
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
+		
+		return result;
 	}
 
 	@Override
@@ -275,10 +331,11 @@ public class SupplierBroker extends DatabaseBroker implements BrokerInterface
 	{
 		SupplierBean supplier = (SupplierBean) data;
 		ArrayList<ProductBean> products = new ArrayList<ProductBean> ();
-
+		Connection connection = null;
+		
 		try
 		{
-			Connection connection = super.getConnection ();
+			connection = super.getConnection ();
 			CallableStatement proc = connection.prepareCall ("{call LoadSupplier(?)}");
 
 			// Check which search parameters this object provides
@@ -290,6 +347,7 @@ public class SupplierBroker extends DatabaseBroker implements BrokerInterface
 			else
 			{
 				LogController.write (this, "Employee bean has no identification number!");
+				super.returnConnection (connection);
 				return null;
 			}
 
@@ -303,6 +361,7 @@ public class SupplierBroker extends DatabaseBroker implements BrokerInterface
 			else
 			{
 				LogController.write (this, "There were no results for this load! Employee not loaded.");
+				super.returnConnection (connection);
 				return null;
 			}
 
@@ -315,14 +374,16 @@ public class SupplierBroker extends DatabaseBroker implements BrokerInterface
 					products.add (pb);
 				}
 			}
+			
 			supplier.setProducts (products);
-
-			super.returnConnection (connection);
 		}
 		catch (SQLException sqlEx)
 		{
 			LogController.write (this, "SQL Exception during search: " + sqlEx.getMessage ());
 		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
 		
 		LogController.write (this, "Loaded supplier bean: "+supplier.getSupplierNo ());
 

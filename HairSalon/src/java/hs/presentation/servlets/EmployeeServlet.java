@@ -44,8 +44,51 @@ public class EmployeeServlet extends DispatcherServlet
 		addExternalAction ("Save", "performSave");
 		addExternalAction ("Finish", "performSave");
 		addExternalAction ("Revert", "performRevert");
+		addExternalAction ("UpdateHours", "performUpdateHours");
 	}
 
+	public void performUpdateHours (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException
+	{
+		String employeeNo = request.getParameter ("employee_no");
+		String date = request.getParameter ("date");
+		String startTime = request.getParameter ("start_time");
+		String endTime = request.getParameter ("end_time");
+		
+		EmployeeHoursBean ehb = new EmployeeHoursBean ();
+		
+		try
+		{
+			ehb.setEmployeeNo (Integer.parseInt (employeeNo));
+			ehb.setDate (CoreTools.getDate (date));
+			ehb.setStartTime (CoreTools.getTime (startTime));
+			ehb.setEndTime (CoreTools.getTime (endTime));
+		}
+		catch (Exception e)
+		{
+			LogController.write (this, "Attemped to update employee hours with invalid data!");
+			return;
+		}
+		
+		LogController.write (this, "[USER REQUEST] Performing employee hours update: "+CoreTools.showDate (ehb.getDate()));
+		
+		if (!ehb.getStartTime ().equals (ehb.getEndTime ()) && !ehb.getStartTime ().before (ehb.getEndTime ()))
+		{
+			LogController.write (this, "We cannot apply employee hours unless start time occurs before end time.");
+		}
+		else
+		{
+			if (!SessionController.saveEmployeeHours (userSession, ehb))
+			{
+				LogController.write (this, "Unable to save employee hours.");
+			}
+			else
+			{
+				LogController.write (this, "Saved employee hours successfully.");
+			}
+		}
+	}
+	
 	/**
 	 * Used to search for employee records and then show the results to the
 	 * page for the user to select one.

@@ -23,12 +23,40 @@
 <%
 // Retrieve the UserSession object from the http session.
 UserSession userSession = (UserSession) session.getAttribute("user_session");
+EmployeeBean employee = userSession.getEmployee();
+
 int recordNo = 0;
 
 userSession.setCurrentPosition(SessionPositions.SchScheduler);
 String page_title = "Employee Schedule";
 
 Date date = CoreTools.getDate (request.getParameter("date"));
+
+ScheduleHoursBean shb = new ScheduleHoursBean();
+shb.setDate(date);
+shb = SessionController.loadScheduleHours(userSession, shb);
+
+EmployeeHoursBean ehb = new EmployeeHoursBean ();
+ehb.setEmployeeNo (userSession.getEmployee().getEmployeeNo ());
+ehb.setDate (date);
+ehb = SessionController.loadEmployeeHours (userSession, ehb);
+
+Date myStartTime = null;
+Date myEndTime = null;
+
+if (ehb != null)
+{
+    myStartTime = ehb.getStartTime ();
+    myEndTime = ehb.getEndTime ();
+}
+else
+{
+    myStartTime = employee.getWeekdayStartTime (CoreTools.getWeekDay (date));
+    myEndTime = employee.getWeekdayEndTime (CoreTools.getWeekDay (date));
+}
+
+Date startTime = shb.getStartTime();
+Date endTime = shb.getEndTime();
 %>
 
 <%-- Use the pre-set header file. --%>
@@ -40,69 +68,36 @@ Date date = CoreTools.getDate (request.getParameter("date"));
 
 <font face="Trebuchet MS" size="2">
     <div align="left" id="matrix"></div>
-    
+    <br/>
+    <table>
+	<tr>
+	    <td align="right"><img border="0" src="/HairSalon/images/icons/small/availability_white.gif" width="16" height="16"></td>
+	    <td align="left"><u><b>Today's Schedule</b></u></td>
+	</tr>
+	<% if (userSession.getEmployee().getRole().equals("Manager")) {%>
+	<tr>
+	    <td align="right" nowrap="nowrap"><b>Salon Hours:</b></td>
+	    <td width="100%" align="left" nowrap="nowrap">
+	        <%=ServletHelper.generateHourPicker("start_time", startTime)%> to <%=ServletHelper.generateHourPicker("end_time", endTime)%> <input id="update_salon_hours_button" type="button" value="Update" onclick="updateSalonHours()" title="This will update today's salon business hours.">
+	    </td>
+	</tr>
+	<% }%>
+	<tr>
+	    <td align="right" nowrap="nowrap"><b>My Hours:</b></td>
+	    <td width="100%" align="left" nowrap="nowrap">
+		<%=ServletHelper.generateHourPicker("employee_start_time", myStartTime)%> to <%=ServletHelper.generateHourPicker("employee_end_time", myEndTime)%> <input id="update_employee_hours_button" type="button" value="Update" onclick="updateEmployeeHours(<%=employee.getEmployeeNo()%>,'<%=request.getParameter("date")%>')" title="This will update your availability hours for today.">
+	    </td>
+	</tr>
+    </table>
 </font>
 
 <%@ include file="dialogs/schedule-dialog.jsp" %>
 
 <%@ include file="WEB-INF/jspf/footer.jspf" %>
 
-<script language="javascript" src="js/scheduler-managers-addin.js"></script>
 
-<script>
-    function updatePage ()
-    {
-        getMatrix();
-    }
-    
-    function updateHours ()
-    {
-        var start_hour = parseInt(document.getElementById ("start_time_hour").value);
-        var start_min = parseInt(document.getElementById ("start_time_min").value);
-        var start_ampm = document.getElementById ("start_time_ampm").value;
-        
-        if (start_ampm != null && start_ampm == "PM")
-        {
-            if (start_hour != 12)
-                start_hour += 12;
-        }
-        else
-        {
-            if (start_hour == 12)
-                start_hour = 0;
-        }
-        
-        var start = start_hour+":"+start_min;
-        
-        var end_hour = parseInt(document.getElementById ("end_time_hour").value);
-        var end_min = parseInt(document.getElementById ("end_time_min").value);
-        var end_ampm = document.getElementById ("end_time_ampm").value;
-        
-        if (end_ampm != null && end_ampm == "PM")
-        {
-            if (end_hour != 12)
-                end_hour += 12;
-        }
-        else
-        {
-            if (end_hour == 12)
-                end_hour = 0;
-        }
-        
-        var end = end_hour+":"+end_min;
-        
-        var ajax = new Ajaxer("text",null,updatePage,null);
-        var queryString="schedule_action=UpdateHours&";
-        
-        queryString+="date="+'<%=request.getParameter("date")%>'+"&";
-        queryString+="start_time="+start+"&";
-        queryString+="end_time="+end+"&";
-        
-        alert (queryString);
-        
-        ajax.request("schedule", queryString);
-    }
-</script>
+<script language="javascript" src="js/scheduler-managers-addin.js"></script>
+<script language="javascript" src="js/time-addin.js"></script>
 
 <script>
     function getMatrix()

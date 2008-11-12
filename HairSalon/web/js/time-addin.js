@@ -100,3 +100,101 @@ function switchDayStatus (day)
     
     setDayStatus (day.value, enabled);
 }
+
+function updatePage ()
+{
+    getMatrix();
+}
+
+function updateSalonHours ()
+{
+    var start_hour = parseInt(document.getElementById ("start_time_hour").value);
+    var start_min = parseInt(document.getElementById ("start_time_min").value);
+    var start_ampm = document.getElementById ("start_time_ampm").value;
+
+    if (start_ampm != null && start_ampm == "PM")
+    {
+        if (start_hour != 12)
+            start_hour += 12;
+    }
+    else
+    {
+        if (start_hour == 12)
+            start_hour = 0;
+    }
+
+    var start = start_hour+":"+start_min;
+
+    var end_hour = parseInt(document.getElementById ("end_time_hour").value);
+    var end_min = parseInt(document.getElementById ("end_time_min").value);
+    var end_ampm = document.getElementById ("end_time_ampm").value;
+
+    if (end_ampm != null && end_ampm == "PM")
+    {
+        if (end_hour != 12)
+            end_hour += 12;
+    }
+    else
+    {
+        if (end_hour == 12)
+            end_hour = 0;
+    }
+
+    var end = end_hour+":"+end_min;
+
+    var ajax = new Ajaxer("text",null,updatePage,null);
+    var queryString="schedule_action=UpdateHours&";
+
+    queryString+="date="+'<%=request.getParameter("date")%>'+"&";
+    queryString+="start_time="+start+"&";
+    queryString+="end_time="+end+"&";
+
+    ajax.request("schedule", queryString);
+}
+
+function updateEmployeeHours (employee, date)
+{
+    var start_hour = parseInt(document.getElementById ("employee_start_time_hour").value);
+    var start_min = parseInt(document.getElementById ("employee_start_time_min").value);
+    var start_ampm = document.getElementById ("employee_start_time_ampm").value;
+
+    if (start_ampm != null && start_ampm == "PM")
+    {
+        if (start_hour != 12)
+            start_hour += 12;
+    }
+    else
+    {
+        if (start_hour == 12)
+            start_hour = 0;
+    }
+
+    var start = start_hour+":"+start_min;
+
+    var end_hour = parseInt(document.getElementById ("employee_end_time_hour").value);
+    var end_min = parseInt(document.getElementById ("employee_end_time_min").value);
+    var end_ampm = document.getElementById ("employee_end_time_ampm").value;
+
+    if (end_ampm != null && end_ampm == "PM")
+    {
+        if (end_hour != 12)
+            end_hour += 12;
+    }
+    else
+    {
+        if (end_hour == 12)
+            end_hour = 0;
+    }
+
+    var end = end_hour+":"+end_min;
+
+    var ajax = new Ajaxer("text",null,updatePage,null);
+    var queryString="employee_action=UpdateHours&";
+
+    queryString+="employee_no="+employee+"&";
+    queryString+="date="+date+"&";
+    queryString+="start_time="+start+"&";
+    queryString+="end_time="+end+"&";
+
+    ajax.request("employee", queryString);
+}

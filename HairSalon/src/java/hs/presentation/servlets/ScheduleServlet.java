@@ -53,13 +53,21 @@ public class ScheduleServlet extends DispatcherServlet
 		
 		LogController.write (this, "[USER REQUEST] Performing schedule hours update: "+CoreTools.showDate (shb.getDate()));
 		
-		if (!SessionController.saveScheduleHours (userSession, shb))
+		if (!shb.getStartTime ().equals (shb.getEndTime ()) && !shb.getStartTime ().before (shb.getEndTime ()))
 		{
-			LogController.write (this, "Unable to save schedule hours.");
-			return;
+			LogController.write (this, "We cannot apply schedule hours unless start time occurs before end time.");
 		}
-		
-		LogController.write (this, "Saved schedule hours successfully.");
+		else
+		{
+			if (!SessionController.saveScheduleHours (userSession, shb))
+			{
+				LogController.write (this, "Unable to save schedule hours.");
+			}
+			else
+			{
+				LogController.write (this, "Saved schedule hours successfully.");
+			}
+		}
 	}
 	
 	public void performDelete (UserSession userSession, HttpServletRequest request, HttpServletResponse response)

@@ -22,7 +22,6 @@
 UserSession userSession = (UserSession) session.getAttribute("user_session");
 userSession.setCurrentPosition(SessionPositions.SchScheduler);
 
-
 Date date = CoreTools.getDate(request.getParameter("date"));
 
 EmployeeBean ebb = new EmployeeBean();
@@ -142,6 +141,29 @@ int rowCount = 0;
             <font size="3"><b>The salon is not open on this date.</b></font>
             <% } else {%>
             <table border="0" cellspacing="0" cellpadding="0">
+		<tr>
+		    <td colspan="3">
+			<table align="center" valign="top" border="0" cellspacing="5" cellpadding="0">
+			    <tr>
+				<td align="center">
+				    <input type="button" value="Last Week" name="LastWeek" onclick="" class="StandardButton"/>
+				</td>
+
+				<td align="center">
+				    <input type="button" value="Last Day" name="LastDay" onclick="" class="StandardButton"/>
+				</td>
+
+				<td align="center">
+				    <input type="button" value="Next Day" name="NextDay" onclick="" class="StandardButton"/>
+				</td>
+
+				<td align="center">
+				    <input type="button" value="Next Week" name="NextWeek" onclick="" class="StandardButton"/>
+				</td>
+			    </tr>
+			</table>
+		    </td>
+		</tr>
                 <tr>
                     <td class="SchedulerTopLeft"></td>
                     <td class="SchedulerHeader">
@@ -195,36 +217,6 @@ int rowCount = 0;
                 </tr>
             </table>
             <% }%>
-        </td>
-    </tr>
-    <tr>
-        <td width="100%" align="left" nowrap="nowrap">
-            <% if (userSession.getEmployee().getRole().equals("Manager")) {%>
-            Open: <%=ServletHelper.generateHourPicker("start_time", startTime)%> Close: <%=ServletHelper.generateHourPicker("end_time", endTime)%> <input id="update_button" type="button" value="Update" onclick="updateHours()">
-            <% }%>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <table align="left" valign="top" border="0" cellspacing="5" cellpadding="0">
-                <tr>
-                    <td align="center">
-                        <input type="button" value="Last Week" name="LastWeek" onclick="" class="StandardButton"/>
-                    </td>
-                    
-                    <td align="center">
-                        <input type="button" value="Last Day" name="LastDay" onclick="" class="StandardButton"/>
-                    </td>
-                    
-                    <td align="center">
-                        <input type="button" value="Next Day" name="NextDay" onclick="" class="StandardButton"/>
-                    </td>
-                    
-                    <td align="center">
-                        <input type="button" value="Next Week" name="NextWeek" onclick="" class="StandardButton"/>
-                    </td>
-                </tr>
-            </table>
         </td>
     </tr>
 </table>

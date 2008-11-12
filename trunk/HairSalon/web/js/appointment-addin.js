@@ -19,20 +19,13 @@ function setTaxPercent (percent)
 
 function finishDeleting(content)
 {
-    try
-    {
-        if(isNaN(content))
-        {
-            //screwed
-        }
-        else
-        {
-            deleteAppointment(appointmentNo);
-        }
-    }
-    catch(e)
+    if(isNaN(content))
     {
         document.getElementById("operResult").innerHTML=content; 
+    }
+    else
+    {
+        deleteAppointment(content);
     }
 }
 

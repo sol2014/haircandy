@@ -24,8 +24,7 @@
 
 
 		Date date = CoreTools.getDate(request.getParameter("date"));
-		SimpleDateFormat sdf = new SimpleDateFormat(CoreTools.DayMonthYearFormat);
-
+		
 		EmployeeBean ebb = new EmployeeBean();
 		AddressBean ab = new AddressBean();
 		ebb.setAddress(ab);
@@ -129,7 +128,7 @@
             <table border="0" cellspacing="5" cellpadding="0">
                 <tr>
                     <td align="right" valign="top"><img border="0" src="/HairSalon/images/icons/big/schedule_white.gif" width="48" height="48"></td>
-                    <td align="left"><font size="3"><b>Employee Schedule: <%=sdf.format(date)%></b></font><br>
+                    <td align="left"><font size="3"><b>Employee Schedule: <%=CoreTools.showDate (date, CoreTools.DayMonthYearFormat)%></b></font><br>
                         You may either create, delete or move schedule entries for different employees. Some areas may be
                         darkened which means there are exceptions blocking those employee.
                     </td>

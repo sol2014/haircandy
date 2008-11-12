@@ -226,7 +226,14 @@ public class CoreTools
 			return "AM";
 		}
 	}
-
+	
+	public static Date getDate (String datestr, String format)
+			throws ParseException
+	{
+		SimpleDateFormat sdf = new SimpleDateFormat (format);
+		return sdf.parse (datestr);
+	}
+	
 	public static Date getDate (String datestr)
 			throws ParseException
 	{
@@ -234,6 +241,13 @@ public class CoreTools
 		return sdf.parse (datestr);
 	}
 
+	public static Date getTime (String timestr, String format)
+			throws ParseException
+	{
+		SimpleDateFormat sdf = new SimpleDateFormat (format);
+		return sdf.parse (timestr);
+	}
+	
 	public static Date getTime (String timestr)
 			throws ParseException
 	{
@@ -241,12 +255,24 @@ public class CoreTools
 		return sdf.parse (timestr);
 	}
 
+	public static String showDate (Date date, String format)
+	{
+		SimpleDateFormat sdf = new SimpleDateFormat (format);
+		return sdf.format (date);
+	}
+	
 	public static String showDate (Date date)
 	{
-		SimpleDateFormat format = new SimpleDateFormat (CoreTools.DateFormat);
-		return format.format (date);
+		SimpleDateFormat sdf = new SimpleDateFormat (CoreTools.DateFormat);
+		return sdf.format (date);
 	}
 
+	public static String showTime (Date date, String format)
+	{
+		SimpleDateFormat sdf = new SimpleDateFormat (format);
+		return sdf.format (date);
+	}
+	
 	public static String showTime (Date date)
 	{
 		SimpleDateFormat format = new SimpleDateFormat (CoreTools.TimeFormat);

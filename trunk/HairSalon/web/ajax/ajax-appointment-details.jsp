@@ -38,12 +38,6 @@ if (appointment == null)
 ClientBean client = appointment.getClient();
 EmployeeBean employee = appointment.getEmployee();
 
-SimpleDateFormat tf = new SimpleDateFormat (CoreTools.AMPMFormat);
-SimpleDateFormat df = new SimpleDateFormat (CoreTools.DateFormat);
-
-SimpleDateFormat tf2 = new SimpleDateFormat (CoreTools.TimeFormat);
-SimpleDateFormat df2 = new SimpleDateFormat (CoreTools.DateFormat);
-
 String employeeNo = "";
 if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo () != null)
 	employeeNo = Integer.toString (appointment.getEmployee().getEmployeeNo());
@@ -89,9 +83,9 @@ if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo
     <% LogController.write ("APPOINTMENT: "+appointment.getAppointmentNo()); %>
     <input type="hidden" id="app_no" value="<%=appointment.getAppointmentNo()%>">
     <input type="hidden" id="app_employee" value="<%=employeeNo%>">
-    <input type="hidden" id="app_date" value="<%=df2.format(appointment.getDate())%>">
-    <input type="hidden" id="app_start_time" value="<%=tf2.format (appointment.getStartTime())%>">
-    <input type="hidden" id="app_end_time" value="<%=tf2.format (appointment.getEndTime())%>">
+    <input type="hidden" id="app_date" value="<%=CoreTools.showDate (appointment.getDate(), CoreTools.DateFormat)%>">
+    <input type="hidden" id="app_start_time" value="<%=CoreTools.showTime (appointment.getStartTime(), CoreTools.TimeFormat)%>">
+    <input type="hidden" id="app_end_time" value="<%=CoreTools.showTime (appointment.getEndTime(), CoreTools.TimeFormat)%>">
     
     <table id="dialog_table" bgcolor="#FFFFFF" height="100%" width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
@@ -151,15 +145,15 @@ if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo
                                     </tr>
                                     <tr>
                                         <td nowrap="nowrap" align="right">Date:</td>
-					<td nowrap="nowrap" align="left"><b><%=df.format (appointment.getDate())%></b></td>
+					<td nowrap="nowrap" align="left"><b><%=CoreTools.showDate (appointment.getDate(), CoreTools.DateFormat)%></b></td>
                                     </tr>
                                     <tr>
                                         <td nowrap="nowrap" align="right">Start Time:</td>
-					<td nowrap="nowrap" align="left"><b><%=tf.format (appointment.getStartTime())%></b></td>
+					<td nowrap="nowrap" align="left"><b><%=CoreTools.showTime (appointment.getStartTime(), CoreTools.AMPMFormat)%></b></td>
                                     </tr>
                                     <tr>
                                         <td nowrap="nowrap" align="right">End Time:</td>
-                                        <td nowrap="nowrap" align="left"><b><%=tf.format (appointment.getEndTime())%></b></td>
+                                        <td nowrap="nowrap" align="left"><b><%=CoreTools.showTime (appointment.getEndTime(), CoreTools.AMPMFormat)%></b></td>
                                     </tr>
                                 </table>
 				</td>

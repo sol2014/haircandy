@@ -22,7 +22,6 @@ UserSession userSession = (UserSession) session.getAttribute("user_session");
 userSession.setCurrentPosition(SessionPositions.AppScheduler);
 
 Date date = CoreTools.getDate(request.getParameter("date"));
-SimpleDateFormat sdf = new SimpleDateFormat(CoreTools.DayMonthYearFormat);
 
 Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions = SessionController.getAvailabilityExceptions(userSession, date);
 ArrayList<ScheduleExceptionBean> scheduleExceptions = SessionController.getScheduleExceptions(userSession, date);
@@ -54,7 +53,7 @@ int rowCount = 0;
             <table border="0" cellspacing="5" cellpadding="0">
                 <tr>
                     <td align="right" valign="top"><img border="0" src="/HairSalon/images/icons/big/appointment_white.gif" width="48" height="48"></td>
-                    <td align="left"><font size="3"><b>Appointment Schedule: <%=sdf.format(date)%></b></font><br>
+                    <td align="left"><font size="3"><b>Appointment Schedule: <%=CoreTools.showDate (date, CoreTools.DayMonthYearFormat)%></b></font><br>
                         You may either create, delete or move appointment entries for different employees. Some areas may be
                         darkened which means that the employee is not available for appointments.
                     </td>

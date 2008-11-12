@@ -114,7 +114,7 @@
 					int endOffset = (scheduleEndHour - startHour) * 4 + scheduleEndMinutes / 15;
 					int duration = endOffset - startOffset;
 					if (row >= startOffset && row < endOffset) {
-						return "SchedulerCellSectionMiddle_Unavailable";
+						return "SchedulerCellSection_Unavailable";
 					}
 				}
 			}

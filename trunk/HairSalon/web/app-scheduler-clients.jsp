@@ -42,7 +42,7 @@ String page_title = "Appointments";
 
 <%@ include file="WEB-INF/jspf/footer.jspf" %>
 
-<script language="javascript" src="js/appointment.js"></script>
+<script language="javascript" src="js/appointment-clients-addin.js"></script>
 <script language="javascript" src="js/appointment-addin.js"></script>
 
 <script>

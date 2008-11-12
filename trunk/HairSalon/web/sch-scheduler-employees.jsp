@@ -46,7 +46,7 @@ Date date = CoreTools.getDate (request.getParameter("date"));
 
 <%@ include file="WEB-INF/jspf/footer.jspf" %>
 
-<script language="javascript" src="js/scheduler.js"></script>
+<script language="javascript" src="js/scheduler-employees-addin.js"></script>
 
 <script>
     function getMatrix()

@@ -113,7 +113,7 @@ function doneObtainingAvailability (content)
     
     updateDays ("availability");
     
-    document.getElementById("blackout").style.display="block";
+    showBlackout (true);
     document.getElementById("availability_dialog_shell").style.display="block";
     
     var screen_width = getScreenWidth () / 2;
@@ -143,6 +143,6 @@ function doneApplyingAvailability (content)
 }
 function cancelAvailability()
 {
-    document.getElementById("blackout").style.display="none";
+    showBlackout (false);
     document.getElementById("availability_dialog_shell").style.display="none";
 }

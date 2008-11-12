@@ -258,26 +258,26 @@ function findServiceIndex(id)
 }
 
 function showAddProduct(){
-    document.getElementById("blackout").style.display="block";
+    showBlackout (true);
     document.getElementById("sale_product_dialog").style.display="block";
     document.getElementById("searchResult").innerHTML="";
     searchProducts();
 }
 
 function showAddService(){
-    document.getElementById("blackout").style.display="block";
+    showBlackout (true);
     document.getElementById("sale_service_dialog").style.display="block";
     document.getElementById("searchResult").innerHTML="";
     searchServices();
 }
 
 function closeAddProduct(){
-    document.getElementById("blackout").style.display="none";
+    showBlackout (false);
     document.getElementById("sale_product_dialog").style.display="none";
 }
 
 function closeAddService(){
-    document.getElementById("blackout").style.display="none";
+    showBlackout (false);
     document.getElementById("sale_service_dialog").style.display="none";
 }
 

@@ -417,7 +417,7 @@ function getAbsolutePositions(object)//function to get the absolute position of 
 
 function closeDialog()
 {
-    document.getElementById("blackout").style.display="none";
+    showBlackout (false);
     document.getElementById("appointment_dialog_shell").style.display="none";
 }
 
@@ -499,7 +499,7 @@ function cellDoubleClickHandler(element)//function to deal with double click
         var cell = findCell(element.id);
         if(cell.state == emptyState||cell.state == bookingState)
         {
-            document.getElementById("blackout").style.display="block";
+            showBlackout (true);
             document.getElementById("appointment_dialog_shell").style.display="block";
             previousFirstCell = document.getElementById(element.id);
             var appointmentId = getCellAppointmentId(element.id);

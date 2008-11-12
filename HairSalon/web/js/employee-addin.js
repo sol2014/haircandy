@@ -121,7 +121,7 @@ function refillExceptionsList()
 
 function showAddService()
 {
-    document.getElementById("blackout").style.display="block";
+    showBlackout (true);
     document.getElementById("employee_service_dialog").style.display="block";
     document.getElementById("serviceResult").innerHTML="";
     searchServices ();
@@ -129,19 +129,19 @@ function showAddService()
         
 function closeAddService()
 {
-    document.getElementById("blackout").style.display="none";
+    showBlackout (false);
     document.getElementById("employee_service_dialog").style.display="none";
 }
 
 function showAddException()
 {
-    document.getElementById("blackout").style.display="block";
+    showBlackout (true);
     document.getElementById("employee_exception_dialog").style.display="block";
 }
         
 function closeAddException()
 {
-    document.getElementById("blackout").style.display="none";
+    showBlackout (false);
     document.getElementById("employee_exception_dialog").style.display="none";
 }
 

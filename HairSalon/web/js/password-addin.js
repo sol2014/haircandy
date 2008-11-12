@@ -18,7 +18,7 @@ function showPassword(employee)
     document.getElementById ("repeat_label").innerHTML = "Repeat Password:";
     document.getElementById ("old_label").innerHTML = "Old Password:";
     
-    document.getElementById("blackout").style.display="block";
+    showBlackout (true);
     document.getElementById("password_dialog").style.display="block";
     
     var screen_width = getScreenWidth () / 2;
@@ -125,6 +125,6 @@ function doneApplyingPassword (content)
 }
 function cancelPassword()
 {
-    document.getElementById("blackout").style.display="none";
+    showBlackout (false);
     document.getElementById("password_dialog").style.display="none";
 }

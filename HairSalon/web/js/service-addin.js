@@ -96,14 +96,14 @@ function findIndex (id)
 }
 function showAddProduct ()
 {
-    document.getElementById ("blackout").style.display = "block";
+    showBlackout (true);
     document.getElementById ("service_product_dialog").style.display = "block";
     searchProducts();
 }
 
 function closeAddProduct ()
 {
-    document.getElementById ("blackout").style.display = "none";
+    showBlackout (false);
     document.getElementById ("service_product_dialog").style.display = "none";
 }
 

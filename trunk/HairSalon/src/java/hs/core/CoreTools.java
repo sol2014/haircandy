@@ -131,6 +131,29 @@ public class CoreTools
 		return true;
 	}
 
+	public static int getDaysInMonth (int year, int month)
+	{
+		int[] daysInMonths = new int[]
+		{
+			31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+		};
+		if (month == 1)
+		{
+			if ((year % 400 == 0) || ((year % 4 == 0) && (year % 100 != 0)))
+			{
+				return 28;
+			}
+			else
+			{
+				return 29;
+			}
+		}
+		else
+		{
+			return daysInMonths[month];
+		}
+	}
+
 	public static int getEndHour (Date date)
 	{
 		Calendar calendar = Calendar.getInstance ();
@@ -203,7 +226,7 @@ public class CoreTools
 			return "AM";
 		}
 	}
-	
+
 	public static Date getDate (String datestr)
 			throws ParseException
 	{
@@ -217,58 +240,70 @@ public class CoreTools
 		SimpleDateFormat sdf = new SimpleDateFormat (TimeFormat);
 		return sdf.parse (timestr);
 	}
-	
+
 	public static String showDate (Date date)
 	{
 		SimpleDateFormat format = new SimpleDateFormat (CoreTools.DateFormat);
 		return format.format (date);
 	}
-	
+
 	public static String showTime (Date date)
 	{
 		SimpleDateFormat format = new SimpleDateFormat (CoreTools.TimeFormat);
 		return format.format (date);
 	}
-	
+
 	public static boolean isDateBefore (Date first, Date second)
 	{
 		Calendar c = Calendar.getInstance ();
 		c.setTime (first);
 		int firstDay = c.get (Calendar.DATE);
 		int firstMonth = c.get (Calendar.MONTH);
-		int firstYear = c.get(Calendar.YEAR);
+		int firstYear = c.get (Calendar.YEAR);
 		c.setTime (second);
 		int secondDay = c.get (Calendar.DATE);
 		int secondMonth = c.get (Calendar.MONTH);
 		int secondYear = c.get (Calendar.YEAR);
-		
+
 		if (firstYear > secondYear)
+		{
 			return false;
+		}
 		else if (firstYear == secondYear)
 		{
 			if (firstMonth > secondMonth)
+			{
 				return false;
+			}
 			else if (firstMonth == secondMonth)
 			{
 				if (firstDay > secondDay)
+				{
 					return false;
+				}
 				else
+				{
 					return true;
+				}
 			}
 			else
+			{
 				return true;
+			}
 		}
 		else
+		{
 			return true;
+		}
 	}
-	
+
 	public static boolean isTimeBefore (Date first, Date second)
 	{
 		int firstHour = getHour (first);
 		int secondHour = getHour (second);
 		int firstMinutes = getMinutes (first);
 		int secondMinutes = getMinutes (second);
-		
+
 		if (firstHour > secondHour)
 		{
 			return false;
@@ -277,11 +312,17 @@ public class CoreTools
 		{
 			// its the same hour, check minutes
 			if (firstMinutes > secondMinutes)
+			{
 				return false;
+			}
 			else
+			{
 				return true;
+			}
 		}
 		else
+		{
 			return true;
+		}
 	}
 }

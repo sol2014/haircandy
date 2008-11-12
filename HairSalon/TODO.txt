@@ -1,5 +1,5 @@
-TODO List - Flaws, Bugs, Features and Tasks, oh my!
----------
+TODO List - Flaws, Bugs, Features and Tasks
+-------------------------------------------
 
 Updated: Sunday, Nov 12th, 2008
 

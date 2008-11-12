@@ -65,7 +65,7 @@ String error_string = (String) userSession.moveAttribute ("alert_error");
 	<tr>
 	    <td align="left" valign="top">
 	    <img border="0" src="/HairSalon/images/icons/big/welcome_white.gif" width="48" height="48"></td>
-	    <td align="left" valign="top"><b><font size="3">Welcome to: <%=salon.getName()%></font></b><br />
+	    <td width="100%" align="left" valign="top"><b><font size="3">Welcome to: <%=salon.getName()%></font></b><br />
 		<b>Telephone: </b><%=ServletHelper.displayPhoneNumber(salon.getPhoneNumber())%><br />
 		<b>Address: </b><%=ServletHelper.display (salon.getAddress1())%>, <%=ServletHelper.display (salon.getAddress2())%><br />
 		<b>City: </b><%=ServletHelper.display (salon.getCity ())%><br/><br/>

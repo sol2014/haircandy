@@ -45,8 +45,198 @@ public class EmployeeServlet extends DispatcherServlet
 		addExternalAction ("Finish", "performSave");
 		addExternalAction ("Revert", "performRevert");
 		addExternalAction ("UpdateHours", "performUpdateHours");
+		addExternalAction ("LoadAvailability", "performLoadAvailability");
+		addExternalAction ("UpdateAvailability", "performUpdateAvailability");
+		addExternalAction ("UpdatePassword", "performUpdatePassword");
 	}
+	
+	public void performUpdatePassword (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException
+	{
+		String employeeNo = request.getParameter ("employee_no");
+		String oldPassword = request.getParameter ("old_password");
+		String newPassword = request.getParameter ("new_password");
+		
+		EmployeeBean employee = new EmployeeBean ();
+		PrintWriter pw = response.getWriter ();
+		
+		try
+		{
+			employee.setEmployeeNo (Integer.parseInt (employeeNo));
+		}
+		catch (Exception e)
+		{
+			LogController.write (this, "Unable to load availability for invalid employee number: "+employeeNo);
+			return;
+		}
+		
+		employee = SessionController.loadEmployee (userSession, employee);
+		
+		if (employee != null)
+		{
+			if (employee.getPassword ().equals (oldPassword))
+			{
+				employee.setPassword (newPassword);
+				SessionController.saveEmployee (userSession, employee);
+				pw.write ("ok");
+			}
+			else
+			{
+				pw.write ("bad");
+			}
+		}
+		else
+		{
+			LogController.write (this, "Unable to find employee by number for availability load.");
+			return;
+		}
+	}
+	
+	public void performUpdateAvailability (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException
+	{
+		PrintWriter pw = response.getWriter ();
+		
+		String employeeNo = request.getParameter ("employee_no");
+		String monday_start = request.getParameter ("monday_start");
+		String monday_end = request.getParameter ("monday_end");
+		String tuesday_start = request.getParameter ("tuesday_start");
+		String tuesday_end = request.getParameter ("tuesday_end");
+		String wednesday_start = request.getParameter ("wednesday_start");
+		String wednesday_end = request.getParameter ("wednesday_end");
+		String thursday_start = request.getParameter ("thursday_start");
+		String thursday_end = request.getParameter ("thursday_end");
+		String friday_start = request.getParameter ("friday_start");
+		String friday_end = request.getParameter ("friday_end");
+		String saturday_start = request.getParameter ("saturday_start");
+		String saturday_end = request.getParameter ("saturday_end");
+		String sunday_start = request.getParameter ("sunday_start");
+		String sunday_end = request.getParameter ("sunday_end");
+		
+		EmployeeBean employee = new EmployeeBean ();
+		
+		try
+		{
+			employee.setEmployeeNo (Integer.parseInt (employeeNo));
+		}
+		catch (Exception e)
+		{
+			LogController.write (this, "Unable to load availability for invalid employee number: "+employeeNo);
+			return;
+		}
+		
+		employee = SessionController.loadEmployee (userSession, employee);
+		
+		if (employee != null)
+		{
+			try
+			{
+				employee.setMondayStart (CoreTools.getTime (monday_start));
+				employee.setMondayEnd (CoreTools.getTime (monday_end));
+				employee.setTuesdayStart (CoreTools.getTime (tuesday_start));
+				employee.setTuesdayEnd (CoreTools.getTime (tuesday_end));
+				employee.setWednesdayStart (CoreTools.getTime (wednesday_start));
+				employee.setWednesdayEnd (CoreTools.getTime (wednesday_end));
+				employee.setThursdayStart (CoreTools.getTime (thursday_start));
+				employee.setThursdayEnd (CoreTools.getTime (thursday_end));
+				employee.setFridayStart (CoreTools.getTime (friday_start));
+				employee.setFridayEnd (CoreTools.getTime (friday_end));
+				employee.setSaturdayStart (CoreTools.getTime (saturday_start));
+				employee.setSaturdayEnd (CoreTools.getTime (saturday_end));
+				employee.setSundayStart (CoreTools.getTime (sunday_start));
+				employee.setSundayEnd (CoreTools.getTime (sunday_end));
+			}
+			catch (Exception e)
+			{
+				LogController.write (this, "Invalid availability data found from form.");
+				return;
+			}
+			
+			String wrongHours = "";
+			
+			if (!employee.getMondayStart ().equals (employee.getMondayEnd ()) && !employee.getMondayStart ().before (employee.getMondayEnd ()))
+			{
+				wrongHours += "monday:";
+			}
 
+			if (!employee.getTuesdayStart ().equals (employee.getTuesdayEnd ()) && !employee.getTuesdayStart ().before (employee.getTuesdayEnd ()))
+			{
+				wrongHours += "tuesday:";
+			}
+
+			if (!employee.getWednesdayStart ().equals (employee.getWednesdayEnd ()) && !employee.getWednesdayStart ().before (employee.getWednesdayEnd ()))
+			{
+				wrongHours += "wednesday:";
+			}
+
+			if (!employee.getThursdayStart ().equals (employee.getThursdayEnd ()) && !employee.getThursdayStart ().before (employee.getThursdayEnd ()))
+			{
+				wrongHours += "thursday:";
+			}
+
+			if (!employee.getFridayStart ().equals (employee.getFridayEnd ()) && !employee.getFridayStart ().before (employee.getFridayEnd ()))
+			{
+				wrongHours += "friday:";
+			}
+
+			if (!employee.getSaturdayStart ().equals (employee.getSaturdayEnd ()) && !employee.getSaturdayStart ().before (employee.getSaturdayEnd ()))
+			{
+				wrongHours += "saturday:";
+			}
+
+			if (!employee.getSundayStart ().equals (employee.getSundayEnd ()) && !employee.getSundayStart ().before (employee.getSundayEnd ()))
+			{
+				wrongHours += "sunday:";
+			}
+			
+			if (wrongHours.length () > 0)
+			{
+				// We had some errors with the times, lets send this to the page.
+				pw.write (wrongHours);
+			}
+			else
+			{
+				SessionController.saveEmployee (userSession, employee);
+				pw.write ("ok");
+			}
+		}
+		else
+		{
+			LogController.write (this, "Unable to find employee by number for availability load.");
+			return;
+		}
+	}
+	
+	public void performLoadAvailability (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException
+	{
+		String employeeNo = request.getParameter ("employee_no");
+		EmployeeBean employee = new EmployeeBean ();
+		
+		try
+		{
+			employee.setEmployeeNo (Integer.parseInt (employeeNo));
+		}
+		catch (Exception e)
+		{
+			LogController.write (this, "Unable to load availability for invalid employee number: "+employeeNo);
+			return;
+		}
+		
+		employee = SessionController.loadEmployee (userSession, employee);
+		
+		if (employee != null)
+		{
+			userSession.setAttribute ("employee_load_result", employee);
+			forward ("ajax/ajax-availability.jsp", request, response);
+		}
+		else
+		{
+			LogController.write (this, "Unable to find employee by number for availability load.");
+			return;
+		}
+	}
+	
 	public void performUpdateHours (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{

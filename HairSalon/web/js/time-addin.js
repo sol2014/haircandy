@@ -6,29 +6,29 @@ var friday = false;
 var saturday = false;
 var sunday = false;
 
-function updateDays ()
+function updateDays (identity)
 {
-    updateDay ("monday");
-    updateDay ("tuesday");
-    updateDay ("wednesday");
-    updateDay ("thursday");
-    updateDay ("friday");
-    updateDay ("saturday");
-    updateDay ("sunday");
+    updateDay ("monday", identity);
+    updateDay ("tuesday", identity);
+    updateDay ("wednesday", identity);
+    updateDay ("thursday", identity);
+    updateDay ("friday", identity);
+    updateDay ("saturday", identity);
+    updateDay ("sunday", identity);
 }
 
-function updateDay (day)
+function updateDay (day, identity)
 {
-    var hour1 = parseInt (document.getElementById (day+"_start_hour").value);
-    var hour2 = parseInt (document.getElementById (day+"_end_hour").value);
+    var hour1 = parseInt (document.getElementById (identity+"_"+day+"_start_hour").value);
+    var hour2 = parseInt (document.getElementById (identity+"_"+day+"_end_hour").value);
     
-    var min1 = parseInt (document.getElementById (day+"_start_min").value);
-    var min2 = parseInt (document.getElementById (day+"_end_min").value);
+    var min1 = parseInt (document.getElementById (identity+"_"+day+"_start_min").value);
+    var min2 = parseInt (document.getElementById (identity+"_"+day+"_end_min").value);
     
-    var ampm1 = document.getElementById (day+"_start_ampm").value;
-    var ampm2 = document.getElementById (day+"_end_ampm").value;
+    var ampm1 = document.getElementById (identity+"_"+day+"_start_ampm").value;
+    var ampm2 = document.getElementById (identity+"_"+day+"_end_ampm").value;
     
-    var enable = false;;
+    var enable = false;
     
     if (ampm2.attr != ampm1.attr)
         enable = true;
@@ -39,29 +39,29 @@ function updateDay (day)
     if (min1 != min2)
         enable = true;
     
-    setDayStatus (day, enable);
+    setDayStatus (day, enable, identity);
 }
 
-function setDayStatus (day, enabled)
+function setDayStatus (day, enabled, identity)
 {
-    document.getElementById (day+"_start_hour").disabled = !enabled;
-    document.getElementById (day+"_start_min").disabled = !enabled;
-    document.getElementById (day+"_start_ampm").disabled = !enabled;
-    document.getElementById (day+"_end_hour").disabled = !enabled;
-    document.getElementById (day+"_end_min").disabled = !enabled;
-    document.getElementById (day+"_end_ampm").disabled = !enabled;
+    document.getElementById (identity+"_"+day+"_start_hour").disabled = !enabled;
+    document.getElementById (identity+"_"+day+"_start_min").disabled = !enabled;
+    document.getElementById (identity+"_"+day+"_start_ampm").disabled = !enabled;
+    document.getElementById (identity+"_"+day+"_end_hour").disabled = !enabled;
+    document.getElementById (identity+"_"+day+"_end_min").disabled = !enabled;
+    document.getElementById (identity+"_"+day+"_end_ampm").disabled = !enabled;
     
     if (enabled == false)
     {
-        document.getElementById (day+"_start_hour").value = "0";
-        document.getElementById (day+"_start_min").value = "00";
-        document.getElementById (day+"_start_ampm").value = "AM";
-        document.getElementById (day+"_end_hour").value = "0";
-        document.getElementById (day+"_end_min").value = "00";
-        document.getElementById (day+"_end_ampm").value = "AM";
+        document.getElementById (identity+"_"+day+"_start_hour").value = "0";
+        document.getElementById (identity+"_"+day+"_start_min").value = "00";
+        document.getElementById (identity+"_"+day+"_start_ampm").value = "AM";
+        document.getElementById (identity+"_"+day+"_end_hour").value = "0";
+        document.getElementById (identity+"_"+day+"_end_min").value = "00";
+        document.getElementById (identity+"_"+day+"_end_ampm").value = "AM";
     }
     
-    document.getElementById (day+"_check").checked = enabled;
+    document.getElementById (identity+"_"+day+"_check").checked = enabled;
     
     if (day == "monday")
         monday = enabled;
@@ -79,7 +79,7 @@ function setDayStatus (day, enabled)
         sunday = enabled;
 }
 
-function switchDayStatus (day)
+function switchDayStatus (day, identity)
 {
     var enabled = true;
     
@@ -98,7 +98,7 @@ function switchDayStatus (day)
     else if (day.value == "sunday")
         enabled = !sunday;
     
-    setDayStatus (day.value, enabled);
+    setDayStatus (day.value, enabled, identity);
 }
 
 function updatePage ()
@@ -106,7 +106,7 @@ function updatePage ()
     getMatrix();
 }
 
-function updateSalonHours ()
+function updateSalonHours (date)
 {
     var start_hour = parseInt(document.getElementById ("start_time_hour").value);
     var start_min = parseInt(document.getElementById ("start_time_min").value);
@@ -145,7 +145,7 @@ function updateSalonHours ()
     var ajax = new Ajaxer("text",null,updatePage,null);
     var queryString="schedule_action=UpdateHours&";
 
-    queryString+="date="+'<%=request.getParameter("date")%>'+"&";
+    queryString+="date="+date+"&";
     queryString+="start_time="+start+"&";
     queryString+="end_time="+end+"&";
 

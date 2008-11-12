@@ -187,20 +187,20 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red">Monday:</font></td>
 			    <% } %>
-			    <td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this)" id="monday_check" value="monday"></td>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'salon')" id="salon_monday_check" value="monday"></td>
 			</tr>
 			
 			<tr>
 			    <td nowrap="nowrap" align="right">Open:</td>
 			    <td nowrap="nowrap" align="left">
-				<%=ServletHelper.generateHourPicker ("monday_start", salon.getMondayStart())%>
+				<%=ServletHelper.generateHourPicker ("salon_monday_start", salon.getMondayStart())%>
 				
 			    </td>
 			</tr>
 			<tr>
 			    <td nowrap="nowrap" align="right">Close:</td>
 			    <td nowrap="nowrap" align="left">
-				<%=ServletHelper.generateHourPicker ("monday_end", salon.getMondayEnd())%>
+				<%=ServletHelper.generateHourPicker ("salon_monday_end", salon.getMondayEnd())%>
 			    </td>
 			</tr>
 			
@@ -215,18 +215,18 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red">Tuesday:</font></td>
 			    <% } %>
-			    <td nowrap="nowrap" align="left"><input type="checkbox" onChange="switchDayStatus(this)" id="tuesday_check" value="tuesday"></td>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'salon')" id="salon_tuesday_check" value="tuesday"></td>
 			</tr>
 			<tr>
 			    <td nowrap="nowrap" align="right">Open:</td>
 			    <td nowrap="nowrap" align="left">
-				<%=ServletHelper.generateHourPicker ("tuesday_start", salon.getTuesdayStart())%>
+				<%=ServletHelper.generateHourPicker ("salon_tuesday_start", salon.getTuesdayStart())%>
 			    </td>
 			</tr>
 			<tr>
 			    <td nowrap="nowrap" align="right">Close:</td>
 			    <td nowrap="nowrap" align="left">
-				<%=ServletHelper.generateHourPicker ("tuesday_end", salon.getTuesdayEnd())%>
+				<%=ServletHelper.generateHourPicker ("salon_tuesday_end", salon.getTuesdayEnd())%>
 			    </td>
 			</tr>
 			
@@ -241,18 +241,18 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red">Wednesday:</font></td>
 			    <% } %>
-			    <td nowrap="nowrap" align="left"><input type="checkbox" onChange="switchDayStatus(this)" id="wednesday_check" value="wednesday"></td>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'salon')" id="salon_wednesday_check" value="wednesday"></td>
 			</tr>
 			<tr>
 			    <td nowrap="nowrap" align="right">Open:</td>
 			    <td nowrap="nowrap" align="left">
-				<%=ServletHelper.generateHourPicker ("wednesday_start", salon.getWednesdayStart())%>
+				<%=ServletHelper.generateHourPicker ("salon_wednesday_start", salon.getWednesdayStart())%>
 			    </td>
 			</tr>
 			<tr>
 			    <td nowrap="nowrap" align="right">Close:</td>
 			    <td nowrap="nowrap" align="left">
-				<%=ServletHelper.generateHourPicker ("wednesday_end", salon.getWednesdayEnd())%>
+				<%=ServletHelper.generateHourPicker ("salon_wednesday_end", salon.getWednesdayEnd())%>
 			    </td>
 			</tr>
 			
@@ -267,18 +267,18 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red">Thursday:</font></td>
 			    <% } %>
-			    <td nowrap="nowrap" align="left"><input type="checkbox" onChange="switchDayStatus(this)" id="thursday_check" value="thursday"></td>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'salon')" id="salon_thursday_check" value="thursday"></td>
 			</tr>
 			<tr>
 			    <td nowrap="nowrap" align="right">Open:</td>
 			    <td nowrap="nowrap" align="left">
-				<%=ServletHelper.generateHourPicker ("thursday_start", salon.getThursdayStart())%>
+				<%=ServletHelper.generateHourPicker ("salon_thursday_start", salon.getThursdayStart())%>
 			    </td>
 			</tr>
 			<tr>
 			    <td nowrap="nowrap" align="right">Close:</td>
 			    <td nowrap="nowrap" align="left">
-				<%=ServletHelper.generateHourPicker ("thursday_end", salon.getThursdayEnd())%>
+				<%=ServletHelper.generateHourPicker ("salon_thursday_end", salon.getThursdayEnd())%>
 			    </td>
 			</tr>
 			
@@ -293,18 +293,18 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red">Friday:</font></td>
 			    <% } %>
-			    <td nowrap="nowrap" align="left"><input type="checkbox" onChange="switchDayStatus(this)" id="friday_check" value="friday"></td>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'salon')" id="salon_friday_check" value="friday"></td>
 			</tr>
 			<tr>
 			    <td nowrap="nowrap" align="right">Open:</td>
 			    <td nowrap="nowrap" align="left">
-				<%=ServletHelper.generateHourPicker ("friday_start", salon.getFridayStart())%>
+				<%=ServletHelper.generateHourPicker ("salon_friday_start", salon.getFridayStart())%>
 			    </td>
 			</tr>
 			<tr>
 			    <td nowrap="nowrap" align="right">Close:</td>
 			    <td nowrap="nowrap" align="left">
-				<%=ServletHelper.generateHourPicker ("friday_end", salon.getFridayEnd())%>
+				<%=ServletHelper.generateHourPicker ("salon_friday_end", salon.getFridayEnd())%>
 			    </td>
 			</tr>
 			
@@ -319,18 +319,18 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red">Saturday:</font></td>
 			    <% } %>
-			    <td nowrap="nowrap" align="left"><input type="checkbox" onChange="switchDayStatus(this)" id="saturday_check" value="saturday"></td>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'salon')" id="salon_saturday_check" value="saturday"></td>
 			</tr>
 			<tr>
 			    <td nowrap="nowrap" align="right">Open:</td>
 			    <td nowrap="nowrap" align="left">
-				<%=ServletHelper.generateHourPicker ("saturday_start", salon.getSaturdayStart())%>
+				<%=ServletHelper.generateHourPicker ("salon_saturday_start", salon.getSaturdayStart())%>
 			    </td>
 			</tr>
 			<tr>
 			    <td nowrap="nowrap" align="right">Close:</td>
 			    <td nowrap="nowrap" align="left">
-				<%=ServletHelper.generateHourPicker ("saturday_end", salon.getSaturdayEnd())%>
+				<%=ServletHelper.generateHourPicker ("salon_saturday_end", salon.getSaturdayEnd())%>
 			    </td>
 			</tr>
 			
@@ -345,18 +345,18 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red">Sunday:</font></td>
 			    <% } %>
-			    <td nowrap="nowrap" align="left"><input type="checkbox" onChange="switchDayStatus(this)" id="sunday_check" value="sunday"></td>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'salon')" id="salon_sunday_check" value="sunday"></td>
 			</tr>
 			<tr>
 			    <td nowrap="nowrap" align="right">Open:</td>
 			    <td nowrap="nowrap" align="left">
-				<%=ServletHelper.generateHourPicker ("sunday_start", salon.getSundayStart())%>
+				<%=ServletHelper.generateHourPicker ("salon_sunday_start", salon.getSundayStart())%>
 			    </td>
 			</tr>
 			<tr>
 			    <td nowrap="nowrap" align="right">Close:</td>
 			    <td nowrap="nowrap" align="left">
-				<%=ServletHelper.generateHourPicker ("sunday_end", salon.getSundayEnd())%>
+				<%=ServletHelper.generateHourPicker ("salon_sunday_end", salon.getSundayEnd())%>
 			    </td>
 			</tr>
 		    </table>
@@ -388,7 +388,7 @@ window.onload = function () {
  </script>
  
  <script>
-     updateDays ();
+     updateDays ("salon");
  </script>
  
  <script>refillExceptionsList();</script>

@@ -78,7 +78,7 @@ Date endTime = shb.getEndTime();
 	<tr>
 	    <td align="right" nowrap="nowrap"><b>Salon Hours:</b></td>
 	    <td width="100%" align="left" nowrap="nowrap">
-	        <%=ServletHelper.generateHourPicker("start_time", startTime)%> to <%=ServletHelper.generateHourPicker("end_time", endTime)%> <input id="update_salon_hours_button" type="button" value="Update" onclick="updateSalonHours()" title="This will update today's salon business hours.">
+	        <%=ServletHelper.generateHourPicker("start_time", startTime)%> to <%=ServletHelper.generateHourPicker("end_time", endTime)%> <input id="update_salon_hours_button" type="button" value="Update" onclick="updateSalonHours('<%=request.getParameter("date")%>')" title="This will update today's salon business hours.">
 	    </td>
 	</tr>
 	<% }%>

@@ -1,5 +1,3 @@
-<%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
-<taglib:ValidateEmployee minimum="Manager" />
 <div id="availability_dialog_shell" class="DialogBox">
 </div>
 

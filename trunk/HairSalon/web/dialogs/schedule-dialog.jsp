@@ -9,8 +9,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
-<taglib:ValidateEmployee minimum="Manager" />
 
 <font face="Trebuchet MS" size="2">
 <div id="dialog" class="DialogBox" style="width: 300px;height:150px;">

@@ -132,7 +132,7 @@ public class SaleBroker extends DatabaseBroker implements BrokerInterface
 		try
 		{
 			connection = super.getConnection ();
-			CallableStatement proc = connection.prepareCall ("{call SearchSale(?,?,?,?,?,?,?,?)}");
+			CallableStatement proc = connection.prepareCall ("{call SearchSale(?,?,?,?,?,?,?,?,?,?)}");
 
 			int index = 1;
 
@@ -144,7 +144,12 @@ public class SaleBroker extends DatabaseBroker implements BrokerInterface
 			addToStatement (proc, sale.getDiscount (), index++, Integer.class);
 			addToStatement (proc, sale.getPayment (), index++, Double.class);
 			addToStatement (proc, sale.getIsComplete (), index++, Boolean.class);
-
+			addToStatement (proc, sale.getIsVoid (), index++, Boolean.class);
+			if (sale.getTimestamp () == null)
+				addToStatement (proc, null, index++, Boolean.class);
+			else
+				addToStatement (proc, new java.sql.Timestamp (sale.getTimestamp ().getTime ()), index++, Boolean.class);
+			
 			ResultSet result = proc.executeQuery ();
 
 			while (result.next ())
@@ -182,7 +187,7 @@ public class SaleBroker extends DatabaseBroker implements BrokerInterface
 
 			if (sale.getTransactionNo () == null)
 			{
-				proc = connection.prepareCall ("{call CreateSale(?,?,?,?,?,?,?,?,?)}");
+				proc = connection.prepareCall ("{call CreateSale(?,?,?,?,?,?,?,?,?,?)}");
 				
 				proc.registerOutParameter ("p_key", java.sql.Types.BIGINT);
 			}
@@ -201,6 +206,7 @@ public class SaleBroker extends DatabaseBroker implements BrokerInterface
 			addToStatement (proc, sale.getDiscount (), index++, Integer.class);
 			addToStatement (proc, sale.getPayment (), index++, Double.class);
 			addToStatement (proc, sale.getIsComplete (), index++, Boolean.class);
+			addToStatement (proc, sale.getIsVoid (), index++, Boolean.class);
 			
 			int updated = proc.executeUpdate ();
 
@@ -403,7 +409,9 @@ public class SaleBroker extends DatabaseBroker implements BrokerInterface
 		sale.setDiscount (result.getInt ("discount"));
 		sale.setPayment (result.getDouble ("payment"));
 		sale.setIsComplete (result.getBoolean ("is_complete"));
-
+		sale.setIsVoid (result.getBoolean ("is_void"));
+		sale.setTimestamp (result.getTimestamp ("timestamp"));
+		
 		sale.setLoaded ();
 
 		ClientBean clientBean = new ClientBean ();

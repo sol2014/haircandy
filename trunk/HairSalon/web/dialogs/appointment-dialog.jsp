@@ -14,6 +14,9 @@
 <div id="appointment_dialog_shell" class="DialogBox">
 </div>
 
+<%@ include file="../dialogs/appointment-product-dialog.jsp" %>
+<%@ include file="../dialogs/appointment-service-dialog.jsp" %>
+
 <script>
     function getDialogShell()
     {

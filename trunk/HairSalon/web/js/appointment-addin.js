@@ -213,14 +213,14 @@ function findServiceIndex(id)
 }
 
 function showAddProduct(){
-    //document.getElementById("appointment_product_dialog").style.display="block";
     document.getElementById("searchResult").innerHTML="";
+    document.getElementById("appointment_product_dialog").style.display="block";
     searchProducts();
 }
 
 function showAddService(){
-    //document.getElementById("appointment_service_dialog").style.display="block";
-    document.getElementById("searchResult").innerHTML="";
+    document.getElementById("serviceResult").innerHTML="";
+    document.getElementById("appointment_service_dialog").style.display="block";
     searchServices();
 }
 

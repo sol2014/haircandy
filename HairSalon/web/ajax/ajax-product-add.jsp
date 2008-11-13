@@ -12,6 +12,8 @@
 <%@page import="hs.objects.*" %>
 <%@page import="hs.presentation.*" %>
 <%@page import="hs.core.*" %>
+<%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
+<taglib:ValidateEmployee minimum="Manager" />
 
 <% 
     ProductBean[] searchResults = (ProductBean[])request.getAttribute("searchResults");

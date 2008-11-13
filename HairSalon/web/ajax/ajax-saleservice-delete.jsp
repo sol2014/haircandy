@@ -13,6 +13,8 @@
 <%@page import="hs.presentation.*" %>
 <%@ page import="java.util.*" %>
 <%@page import="hs.core.*" %>
+<%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
+<taglib:ValidateEmployee minimum="Receptionist" />
 
 <% Hashtable<ServiceBean, Integer> searchResults = (Hashtable<ServiceBean, Integer>) request.getAttribute("searchResults");%>
 

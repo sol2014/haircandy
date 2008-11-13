@@ -35,22 +35,22 @@ int left = positions.size(); %>
 		case AppScheduler:
 		    icon = "appointment_gray.gif";
 		    resource = "";
-		    title = "Appointments";
+		    title = "Appointment Scheduler";
 		    break;
 		case AppCalendar:
 		    icon = "appointment_gray.gif";
 		    resource = "";
-		    title = "Calendar";
+		    title = "Appointment Calendar";
 		    break;
 		case SchScheduler:
 		    icon = "schedule_gray.gif";
 		    resource = "";
-		    title = "Schedule";
+		    title = "Employee Scheduler";
 		    break;
 		case SchCalendar:
 		    icon = "schedule_gray.gif";
 		    resource = "";
-		    title = "Calendar";
+		    title = "Schedule Calendar";
 		    break;
 		case Sales:
 		    icon = "sale_gray.gif";

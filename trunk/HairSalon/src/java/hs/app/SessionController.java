@@ -640,7 +640,6 @@ public class SessionController
 		if (result && isnew)
 		{
 			// This is a first time commit of this sale. We should update inventory.
-			
 			ArrayList<ProductBean> lowProducts = new ArrayList<ProductBean> ();
 			
 			for (ProductBean product : sale.getProductSold ().keySet ())

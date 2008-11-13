@@ -132,16 +132,11 @@ public class SaleBroker extends DatabaseBroker implements BrokerInterface
 		try
 		{
 			connection = super.getConnection ();
-			CallableStatement proc = connection.prepareCall ("{call SearchSale(?,?,?,?,?,?,?,?,?,?)}");
-
+			CallableStatement proc = connection.prepareCall ("{call SearchSale(?,?,?,?,?,?)}");
 			int index = 1;
-
-			addToStatement (proc, sale.getClient (), index++, Object.class);
-			addToStatement (proc, sale.getEmployee (), index++, Object.class);
+			
 			addToStatement (proc, sale.getPaymentType (), index++, String.class);
 			addToStatement (proc, sale.getTotalDue (), index++, Double.class);
-			addToStatement (proc, sale.getTotalTax (), index++, Double.class);
-			addToStatement (proc, sale.getDiscount (), index++, Integer.class);
 			addToStatement (proc, sale.getPayment (), index++, Double.class);
 			addToStatement (proc, sale.getIsComplete (), index++, Boolean.class);
 			addToStatement (proc, sale.getIsVoid (), index++, Boolean.class);

@@ -90,7 +90,7 @@ function saveEntry(appointment)//function used to save the entry
     messager.request("schedule",queryString);
 }
 
-function addIntialEntry(duration, row, column, id)//function used to add entry on page load
+function addUnmovableSchedulesIntialEntry(duration, row, column, id)//function used to add entry on page load
 {
     ratio = duration;
     if(ratio != 0)

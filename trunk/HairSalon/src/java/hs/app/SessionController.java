@@ -1019,7 +1019,7 @@ public class SessionController
 		LogController.write ("SessionController->Getting filtered unavailable time...");
 		
 		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> hash = new Hashtable<EmployeeBean, ArrayList<ScheduleBean>> ();
-		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedule = getSchedule (session, date, availabilityExceptions, scheduleExceptions);
+		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedule = getAllSchedule (session, date, availabilityExceptions, scheduleExceptions);
 		
 		Date startTime = hours.getStartTime ();
 		Date endTime = hours.getEndTime ();
@@ -1028,7 +1028,7 @@ public class SessionController
 		{
 			ScheduleBean sch = new ScheduleBean ();
 			sch.setDate (date);
-
+			
 			ScheduleBean[] scheduleEntries = searchSchedule (session, sch);
 
 			ArrayList<EmployeeBean> employees = new ArrayList<EmployeeBean> ();
@@ -1184,7 +1184,81 @@ public class SessionController
 		return hash;
 	}
 	
-	public static Hashtable<EmployeeBean, ArrayList<ScheduleBean>> getSchedule (UserSession session, java.util.Date date, Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions, ArrayList<ScheduleExceptionBean> scheduleExceptions)
+	public static Hashtable<EmployeeBean, ArrayList<ScheduleBean>> getUnmovableSchedule (UserSession session, java.util.Date date, Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedule)
+	{
+		LogController.write ("SessionController->Getting filtered unmovable schedule...");
+		
+		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> hash = new Hashtable<EmployeeBean, ArrayList<ScheduleBean>> ();
+		
+		// We need to come up with the schedule entries that cannot be moved.
+		
+		for (EmployeeBean employee : schedule.keySet ())
+		{
+			ArrayList<ScheduleBean> list = schedule.get (employee);
+			ArrayList<ScheduleBean> newList = new ArrayList <ScheduleBean> ();
+			
+			for (ScheduleBean entry : list)
+			{
+				// now that we are looking at one schedule entry for 1 person, find out if there are 
+				// appointments booked during this time.
+				AppointmentBean app = new AppointmentBean ();
+				app.setDate (date);
+				app.setEmployee (employee);
+				
+				AppointmentBean[] apps = searchAppointments (session, app);
+				
+				// If we have appointment entries, include this schedule entry for the final list.
+				if (apps != null && apps.length > 0)
+				{
+					// We have entries! Its unmovable!
+					newList.add (entry);
+				}
+			}
+			
+			hash.put (employee, newList);
+		}
+		
+		return hash;
+	}
+	
+	public static Hashtable<EmployeeBean, ArrayList<ScheduleBean>> getMovableSchedule (UserSession session, java.util.Date date, Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedule)
+	{
+		LogController.write ("SessionController->Getting filtered unmovable schedule...");
+		
+		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> hash = new Hashtable<EmployeeBean, ArrayList<ScheduleBean>> ();
+		
+		// We need to come up with the schedule entries that can be moved.
+		
+		for (EmployeeBean employee : schedule.keySet ())
+		{
+			ArrayList<ScheduleBean> list = schedule.get (employee);
+			ArrayList<ScheduleBean> newList = new ArrayList <ScheduleBean> ();
+			
+			for (ScheduleBean entry : list)
+			{
+				// now that we are looking at one schedule entry for 1 person, find out if there are 
+				// appointments booked during this time.
+				AppointmentBean app = new AppointmentBean ();
+				app.setDate (date);
+				app.setEmployee (employee);
+				
+				AppointmentBean[] apps = searchAppointments (session, app);
+				
+				// If we have appointment entries, include this schedule entry for the final list.
+				if (apps == null || apps.length < 1)
+				{
+					// We have no entries! Its movable!
+					newList.add (entry);
+				}
+			}
+			
+			hash.put (employee, newList);
+		}
+		
+		return hash;
+	}
+	
+	public static Hashtable<EmployeeBean, ArrayList<ScheduleBean>> getAllSchedule (UserSession session, java.util.Date date, Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions, ArrayList<ScheduleExceptionBean> scheduleExceptions)
 	{
 		LogController.write ("SessionController->Getting filtered schedule...");
 		

@@ -1,3 +1,5 @@
+<%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
+<taglib:ValidateEmployee minimum="Manager" />
 <div id="employee_exception_dialog" class="DialogBox" style="width: 250px;height: 125px;">
     <table bgcolor="#FFFFFF" height="125" width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>

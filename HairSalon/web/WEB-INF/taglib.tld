@@ -11,7 +11,7 @@
     <info>Validate employee</info>
     <tag>
         <name>ValidateEmployee</name>
-        <tagclass>hs.presentation.tags.ValidateEmployee</tagclass>
+        <tagclass>hs.presentation.ValidateEmployee</tagclass>
         <bodycontent>empty</bodycontent>
         <info>validate employee</info>
         <attribute>

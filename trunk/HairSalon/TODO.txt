@@ -61,7 +61,7 @@ Unresolved
 ! BUG: Dialog repositioning and sizing must be fixed for all dialogs, its horrible
   right now.
 
-! BUG: Add the duration Hour+Minute Combo boxes for Services search, maintain and create pages.
+! BUG: Add the duration Hour+Minute Combo boxes for Services maintain and create pages.
 
 - BUG: Pages are not protected by the TAG that is supposed to validate employees.
 
@@ -69,14 +69,10 @@ Unresolved
   services that MOST salons would have. We could also make the starter wizard let the people
   pick what product brands they carrie, and we insert only that data.
 
-- TASK: Complete server and client side checking, especially for numerical values. (dont allow alpha in number box)
-
 - TASK: Create a wizard application for installation that will also allow the installer to
   set the basic Salon information to be inserted into the database before people start to log in.
   > I think it would be a LOT easier to detect the salon record on the first user login, and this will
     allow the first user to setup their account, and salon details to start the app off. Nov 12th, 2008
-
-- TASK: Make sure we are using the proper search parameters for all search screens and dialogs.
 
 - TASK: Make sure all pages have proper TITLE, Navigation Position, Menu entry.
 
@@ -126,6 +122,10 @@ Resolved
   > Philippe fixed the problem completely by also taking a snapshot of employee hours and storing
     them for future lookups for old or future days.
 
+- FEATURE (RESOLVED): Make the preferences dialog actually work to set availability and password update.
+  > This must work for user session control and scheduling limits for employees.
+  > Split dialog into change password and change availability. Nov 12th, 2008
+
 - BUG (RESOLVED): Employees can move schedule entries around, only Managers should be able to.
   > Joey fixed this bug Nov 10th, 2008
 
@@ -146,7 +146,8 @@ Resolved
 - BUG (RESOLVED): The cells in Employee Schedule view turn from Blue to Green after first refresh.
   > Joey fixed this bug. Nov 12th, 2008
 
-- FEATURE (RESOLVED): Make the preferences dialog actually work to set availability and password update.
-  > This must work for user session control and scheduling limits for employees.
-  > Split dialog into change password and change availability. Nov 12th, 2008
+- TASK (RESOLVED): Complete server and client side checking, especially for numerical values. (dont allow alpha in number box)
+  > Philippe resolved this task by adding a decimal/number checker in tools.js. Nov 12th, 2008
 
+- TASK (RESOLVED): Make sure we are using the proper search parameters for all search screens and dialogs.
+  > Philippe completed this and removed some in services and products. Nov 12th, 2008

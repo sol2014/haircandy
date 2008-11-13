@@ -99,7 +99,7 @@ String error_string = (String) userSession.moveAttribute ("service_error");
 			    <% } else { %>
 			    <td align="right"><font color="red">Duration:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="duration" value="<%=service.getDuration ()%>" size="5"  style="text-align:right"> min</td>
+			    <td align="left"><input type="text" name="duration" value="<%=service.getDuration ()%>" size="5"  onkeypress="return isNumberTyped (event)" style="text-align:right"> min</td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("service_error_price") == null) { %>
@@ -107,7 +107,7 @@ String error_string = (String) userSession.moveAttribute ("service_error");
 			    <% } else { %>
 			    <td align="right"><font color="red">Price:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="price" style="text-align:right" value="<%=ServletHelper.display(service.getPrice ())%>" size="5">$</td>
+			    <td align="left"><input type="text" name="price" style="text-align:right" onkeypress="return isDecimalTyped (event)" value="<%=ServletHelper.display(service.getPrice ())%>" size="5">$</td>
 			</tr>
 			<tr>
 			    <td align="right">Enabled:</td>

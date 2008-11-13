@@ -29,7 +29,32 @@ var setInnerHTML = function (el, htmlCode) {
     }
 }
 
-function   NoEnterKey(e)
+function isDecimalTyped (key)
+{
+    var code = (key.which) ? key.which : key.keyCode;
+    
+    alert (code);
+    
+    if (code == 46)
+        return true;
+    
+    if (code > 31 && (code < 48 || code > 57))
+        return false;
+    
+    return true;
+}
+
+function isNumberTyped (key)
+{
+    var code = (key.which) ? key.which : key.keyCode;
+    
+    if (code > 31 && (code < 48 || code > 57))
+        return false;
+    
+    return true;
+}
+
+function NoEnterKey(e)
 {   
     if(!e)
     {

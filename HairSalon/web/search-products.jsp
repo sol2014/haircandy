@@ -85,23 +85,6 @@ String error_string = (String) userSession.moveAttribute ("product_search_error"
 			    <td align="left"><select size="1" name="type"><%= ServletHelper.generateProductTypeOptions ((String) userSession.moveAttribute ("product_search_type"), true)%></select></td>			   
 			</tr>
 			<tr>
-			    <td nowrap="nowrap" align="right">Units Per Item:</td>
-			    <td align="left"><input type="text" name="product_quantity" size="5" style="text-align:right" value="<%=ServletHelper.display (userSession.moveAttribute ("product_search_product_quantity"))%>">
-			    <select size="1" name="unit"><%=ServletHelper.generateProductUnitOptions ((String)userSession.moveAttribute("product_search_unit"), true)%></select></td>
-			</tr>
-			<tr>
-			    <td nowrap="nowrap" align="right">Stocked Units:</td>
-			    <td align="left"><input type="text" name="stock" size="5" style="text-align:right" value="<%=ServletHelper.display (userSession.moveAttribute ("product_search_stock"))%>"></td>
-			</tr>			
-			<tr>
-			    <td nowrap="nowrap" align="right">Minimum:</td>
-			    <td align="left"><input type="text" name="minimum_level" size="5" style="text-align:right" value="<%=ServletHelper.display (userSession.moveAttribute ("product_search_minimum_level"))%>"></td>
-			</tr>
-			<tr>
-			    <td nowrap="nowrap" align="right">Item Price:</td>
-			    <td align="left"><input type="text" name="price" size="5" style="text-align:right" value="<%=ServletHelper.display (userSession.moveAttribute ("product_search_price"))%>">$</td>
-			</tr>
-			<tr>
 			    <td align="right">Enabled:</td>
 			    <td align="left"><%=ServletHelper.generateTrueFalseOptions ("enabled", (String) userSession.moveAttribute ("product_search_enabled"))%></td>
 			</tr>

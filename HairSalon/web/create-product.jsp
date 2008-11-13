@@ -126,12 +126,12 @@ function calculateItems()
 			    <% } else { %>
 			    <td nowrap="nowrap" align="right"><font color="red">Units Per Item:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="product_quantity" id="product_quantity" onKeyUp="return calculateUnits()" size="5" style="text-align:right" value="<%=ServletHelper.display (userSession.moveAttribute ("product_new_product_quantity"))%>">
+			    <td align="left"><input type="text" name="product_quantity" id="product_quantity" onkeypress="return isNumberTyped (event)" onKeyUp="return calculateUnits()" size="5" style="text-align:right" value="<%=ServletHelper.display (userSession.moveAttribute ("product_new_product_quantity"))%>">
 			    <select size="1" name="unit"><%=ServletHelper.generateProductUnitOptions ((String) userSession.moveAttribute ("product_new_unit"), false)%></select></td>
 			</tr>
 			<tr>
 			    <td align="right">Stocked Items:</td>
-			    <td align="left"><b><input type="text" id="total_items" onKeyUp="return calculateUnits()" style="text-align:right" value="0.00" size="5">
+			    <td align="left"><b><input type="text" id="total_items" onkeypress="return isDecimalTyped (event)" onKeyUp="return calculateUnits()" style="text-align:right" value="0.00" size="5">
 				<input type="hidden" name="stock" id="stock" size="5" style="text-align:right" value="<%=ServletHelper.display (userSession.moveAttribute ("product_new_stock"))%>" style="text-align:right"></b></td>
 			</tr>
 			<tr>
@@ -140,7 +140,7 @@ function calculateItems()
 			    <% } else { %>
 			    <td nowrap="nowrap" align="right"><font color="red">Minimum:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" id="minimum_items" onKeyUp="return calculateUnits()" size="5" style="text-align:right" value="" style="text-align:right">
+			    <td align="left"><input type="text" id="minimum_items" onkeypress="return isDecimalTyped (event)" onKeyUp="return calculateUnits()" size="5" style="text-align:right" value="" style="text-align:right">
 			    <input type="hidden" name="minimum_level" id="minimum_level" style="text-align:right" value="<%=ServletHelper.display ((String) userSession.moveAttribute ("product_new_minimum_level"))%>" size="5"></td>
 			</tr>
 			<tr>
@@ -149,7 +149,7 @@ function calculateItems()
 			    <% } else { %>
 			    <td align="right"><font color="red">Item Price:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="price" size="5" style="text-align:right" value="<%=ServletHelper.display (userSession.moveAttribute ("product_new_price"))%>">$</td>
+			    <td align="left"><input type="text" name="price" size="5" onkeypress="return isDecimalTyped (event)" style="text-align:right" value="<%=ServletHelper.display (userSession.moveAttribute ("product_new_price"))%>">$</td>
 			</tr>
 			<tr>
 			    <td align="right">Enabled:</td>

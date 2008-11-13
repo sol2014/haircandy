@@ -149,7 +149,7 @@ function calculateItems()
 			<tr>
 			    <td align="right">Stocked Items:</td>
 			    <td align="left">
-				<input type="text" id="total_items" onKeyUp="return calculateUnits()" style="text-align:right" value="0.0" size="5">
+				<input type="text" id="total_items" onkeypress="return isDecimalTyped (event)" onKeyUp="return calculateUnits()" style="text-align:right" value="0.0" size="5">
 				<input type="hidden" name="stock" id="stock" style="text-align:right" value="<%=ServletHelper.display (product.getStockQty ())%>" size="5">
 			    </td>
 			</tr>
@@ -159,7 +159,7 @@ function calculateItems()
 			    <% } else { %>
 			    <td nowrap="nowrap" align="right"><font color="red">Minimum:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="minimum_items" id="minimum_items" onKeyUp="return calculateUnits()" style="text-align:right" value="0.0" size="5">
+			    <td align="left"><input type="text" name="minimum_items" id="minimum_items" onkeypress="return isDecimalTyped (event)" onKeyUp="return calculateUnits()" style="text-align:right" value="0.0" size="5">
 			    <input type="hidden" name="minimum_level" id="minimum_level" style="text-align:right" value="<%=ServletHelper.display (product.getMinLevel ())%>" size="5"></td>
 			</tr>
 			<tr>
@@ -168,7 +168,7 @@ function calculateItems()
 			    <% } else { %>
 			    <td align="right"><font color="red">Unit Price:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="price" style="text-align:right" value="<%=ServletHelper.display(product.getPrice ())%>" size="5">$</td>
+			    <td align="left"><input type="text" name="price" onkeypress="return isDecimalTyped (event)" style="text-align:right" value="<%=ServletHelper.display(product.getPrice ())%>" size="5">$</td>
 			</tr>
 			<tr>
 			    <td align="right">Enabled:</td>

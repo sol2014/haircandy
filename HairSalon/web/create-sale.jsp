@@ -126,7 +126,7 @@ String error_string = (String) userSession.moveAttribute("sale_error");
                             <% } else {%>
                             <td nowrap="nowrap" align="right"><font color="red"><div id="telephone_label">Telephone:</div></font></td>
                             <% }%>
-                            <td nowrap="nowrap" align="left"><input type="text" name="phone_number" id="phone_number" onKeyUp="return checkTelephone(this)" size="10" value="<%=ServletHelper.display(userSession.moveAttribute("sale_new_phone_number"))%>">
+                            <td nowrap="nowrap" align="left"><input type="text" name="phone_number" id="phone_number" onkeypress="return isNumberTyped (event)" onkeyup="return checkTelephone(this)" size="10" value="<%=ServletHelper.display(userSession.moveAttribute("sale_new_phone_number"))%>">
                                 <img style="cursor:pointer" align="absmiddle" src="images/icons/small/find_white.gif" onclick="findClient()" title="Find and load client from this phone number."/>
                                 <img style="cursor:pointer" align="absmiddle" src="images/icons/small/personal_white.gif" onclick="setGuest()" title="Use a guest identity."/>
                             </td>
@@ -145,7 +145,7 @@ String error_string = (String) userSession.moveAttribute("sale_error");
                             <% } else {%>
                             <td nowrap="nowrap" align="right"><font color="red">Employee ID:</font></td>
                             <% }%>
-                            <td nowrap="nowrap" align="left"><input type="text" name="employee_no" size="6" style="text-align:right" value="<%=ServletHelper.display(userSession.moveAttribute("sale_new_employee_no"))%>"></td>
+                            <td nowrap="nowrap" align="left"><input type="text" name="employee_no" onkeypress="return isNumberTyped (event)" size="6" style="text-align:right" value="<%=ServletHelper.display(userSession.moveAttribute("sale_new_employee_no"))%>"></td>
                         </tr>
                         <tr>
                             <td nowrap="nowrap" align="right">Sub-Total:</td>
@@ -157,7 +157,7 @@ String error_string = (String) userSession.moveAttribute("sale_error");
                         </tr>
                         <tr>
                             <td nowrap="nowrap" align="right">Discount:</td>
-                            <td nowrap="nowrap" align="left"><input type="text" name="discount" id="discount" size="3" onKeyUp="return calculateTotal()" style="text-align:right" value="<%=ServletHelper.display(userSession.moveAttribute("sale_new_discount"))%>">%</td>
+                            <td nowrap="nowrap" align="left"><input type="text" name="discount" onkeypress="return isNumberTyped (event)" id="discount" size="3" onKeyUp="return calculateTotal()" style="text-align:right" value="<%=ServletHelper.display(userSession.moveAttribute("sale_new_discount"))%>">%</td>
                         </tr>
                         <tr>
                             <td nowrap="nowrap" align="right">Discount:</td>
@@ -177,7 +177,7 @@ String error_string = (String) userSession.moveAttribute("sale_error");
                             <% } else {%>
                             <td nowrap="nowrap" align="right"><font color="red">Payment:</font></td>
                             <% }%>
-                            <td nowrap="nowrap" align="left"><input type="text" name="payment" id="payment" size="6" onKeyUp="return calculateTotal()" style="text-align:right" value="<%=ServletHelper.display(userSession.moveAttribute("sale_new_payment"))%>">$
+                            <td nowrap="nowrap" align="left"><input type="text" name="payment" id="payment" onkeypress="return isDecimalTyped (event)" size="6" onKeyUp="return calculateTotal()" style="text-align:right" value="<%=ServletHelper.display(userSession.moveAttribute("sale_new_payment"))%>">$
                             &nbsp;<img style="cursor:pointer" align="absmiddle" src="images/icons/small/setfield_white.gif" onclick="setTotalPayment()" title="Use total as payment."/></td>
                         </tr>
                         <tr>

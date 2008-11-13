@@ -106,7 +106,7 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red"><div id="telephone_label">Telephone:</div></font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="phone_number" id="phone_number" onKeyUp="return checkTelephone(this)" value="<%=ServletHelper.display(employee.getPhoneNumber())%>" size="10"></td>
+			    <td align="left"><input type="text" name="phone_number" id="phone_number" onkeypress="return isNumberTyped (event)" onKeyUp="return checkTelephone(this)" value="<%=ServletHelper.display(employee.getPhoneNumber())%>" size="10"></td>
 			</tr>
 			<tr>
 			    <td align="right">Role:</td>

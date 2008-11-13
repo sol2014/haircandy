@@ -71,7 +71,7 @@ String error_string = (String) userSession.moveAttribute ("client_error_feedback
 			    </tr>
 			    <tr>
 				<td align="right">Telephone:</td>
-				<td align="left"><input type="text" name="phone_number" size="10" value="<%=ServletHelper.display (userSession.moveAttribute ("client_search_phone_number"))%>"></td>
+				<td align="left"><input type="text" name="phone_number" size="10" onkeypress="return isNumberTyped (event)" value="<%=ServletHelper.display (userSession.moveAttribute ("client_search_phone_number"))%>"></td>
 			    </tr>
 			    <tr>
 				<td align="right">Enabled:</td>

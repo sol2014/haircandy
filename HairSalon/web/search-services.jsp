@@ -78,14 +78,6 @@ String error_string = (String) userSession.moveAttribute ("service_error");
 			    <td align="left"><input type="text" name="description" size="20" value="<%=ServletHelper.display (userSession.moveAttribute ("service_search_description"))%>"></td>
 			</tr>
 			<tr>
-			    <td align="right">Duration:</td>
-			    <td align="left"><input type="text" name="duration" size="5" style="text-align:right" value="<%=ServletHelper.display (userSession.moveAttribute ("service_search_duration"))%>">min</td>
-			</tr>
-			<tr>
-			    <td align="right">Price:</td>
-			    <td align="left"><input type="text" name="price" size="5" style="text-align:right" value="<%=ServletHelper.display (userSession.moveAttribute ("service_search_price"))%>">$</td>
-			</tr>
-			<tr>
 			    <td align="right">Enabled:</td>
 			    <td align="left"><%=ServletHelper.generateTrueFalseOptions ("enabled", (String) userSession.moveAttribute ("service_search_enabled"))%></td>
 			</tr>

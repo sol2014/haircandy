@@ -87,7 +87,7 @@ String error_string = (String) userSession.moveAttribute ("supplier_error");
 			    <% } else { %>
 			    <td align="right"><font color="red"><div id="telephone_label">Telephone:</div></font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="phone_number" id="phone_number" onKeyUp="return checkTelephone(this)" size="10" value="<%=ServletHelper.display (userSession.moveAttribute ("supplier_new_phone_number"))%>"></td>
+			    <td align="left"><input type="text" name="phone_number" id="phone_number" onkeypress="return isNumberTyped (event)" onKeyUp="return checkTelephone(this)" size="10" value="<%=ServletHelper.display (userSession.moveAttribute ("supplier_new_phone_number"))%>"></td>
 			</tr>
 			<tr>
 			    <td align="right">Enabled:</td>

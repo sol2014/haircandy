@@ -47,7 +47,57 @@ public class ServletHelper
 		return value;
 	}
 	
-	
+	public static String generateDurationPicker (String name, int duration)
+	{
+		int hours = duration / 60;
+		int minutes = duration % 60;
+		
+		String str = "";
+		
+		// Now do the Hour Selection
+		str += "<select name=\""+name+"_hour\" id=\""+name+"_hour\">";
+		
+		for (int i = 0; i <= 8; i++)
+		{
+			if (hours == i)
+				str += "<option selected=\"selected\" value=\""+i+"\">"+i+"</option>";
+			else
+				str += "<option value=\""+i+"\">"+i+"</option>";
+		}
+		
+		str += "</select>";
+		
+		str += "&nbsp;hr&nbsp;";
+		
+		// Now do the Minutes Selection
+		str += "<select name=\""+name+"_min\" id=\""+name+"_min\">";
+		
+		if (minutes == 0)
+			str += "<option selected=\"selected\" value=\"00\">00</option>";
+		else
+			str += "<option value=\"00\">00</option>";
+		
+		if (minutes == 15)
+			str += "<option selected=\"selected\" value=\"15\">15</option>";
+		else
+			str += "<option value=\"15\">15</option>";
+		
+		if (minutes == 30)
+			str += "<option selected=\"selected\" value=\"30\">30</option>";
+		else
+			str += "<option value=\"30\">30</option>";
+		
+		if (minutes == 45)
+			str += "<option selected=\"selected\" value=\"45\">45</option>";
+		else
+			str += "<option value=\"45\">45</option>";
+		
+		str += "</select>";
+		
+		str += "&nbsp;min";
+		
+		return str;
+	}
 	
 	public static String generateHourPicker (String name, Date selected)
 	{

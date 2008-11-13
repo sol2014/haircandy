@@ -180,24 +180,6 @@ public class ServiceServlet extends DispatcherServlet
 			service.setDescription (description);
 		}
 
-		String duration = request.getParameter ("duration");
-		if (!duration.equals (""))
-		{
-			try
-			{
-				service.setDuration (Integer.parseInt (duration));
-			}
-			catch (Exception e)
-			{
-			}
-		}
-
-		String price = request.getParameter ("price");
-		if (!price.equals (""))
-		{
-			service.setPrice (Double.parseDouble (price));
-		}
-
 		String used = request.getParameter ("enabled");
 		if (!used.equals ("None"))
 		{
@@ -210,8 +192,6 @@ public class ServiceServlet extends DispatcherServlet
 
 		userSession.setAttribute ("service_search_name", name);
 		userSession.setAttribute ("service_search_description", description);
-		userSession.setAttribute ("service_search_duration", duration);
-		userSession.setAttribute ("service_search_price", price);
 		userSession.setAttribute ("service_search_enabled", used);
 
 		redirect ("search-services.jsp", request, response);
@@ -404,16 +384,36 @@ public class ServiceServlet extends DispatcherServlet
 		{
 			service.setDescription (description);
 		}
-		String duration = request.getParameter ("duration").trim ();
-		try
+		
+		int hours = 0;
+		int minutes = 0;
+		
+		String durationHours = request.getParameter ("duration_hour");
+		if (!durationHours.equals (""))
 		{
-			service.setDuration (Integer.parseInt (duration));
+			try
+			{
+				hours = Integer.parseInt (durationHours);
+			}
+			catch (Exception e)
+			{
+			}
 		}
-		catch (Exception e)
+
+		String durationMinutes = request.getParameter ("duration_min");
+		if (!durationMinutes.equals (""))
 		{
-			userSession.setAttribute ("service_error_duration", "");
-			inputFailed = true;
+			try
+			{
+				minutes = Integer.parseInt (durationMinutes);
+			}
+			catch (Exception e)
+			{
+			}
 		}
+		
+		int duration = (hours*60)+minutes;
+		service.setDuration (duration);
 		
 		String price = request.getParameter ("price");
 		try

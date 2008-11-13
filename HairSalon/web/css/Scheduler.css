@@ -175,28 +175,28 @@
 {
 	width:90px;
 	height:8px;
-	background-image:url(../images/scheduler/scheduler_bluecell2.gif);
+	background-image:url(../images/scheduler/scheduler_purplecell2.gif);
 }
 
 .SchedulerCellSectionMiddle_Booked
 {
 	width:90px;
 	height:8px;
-	background-image:url(../images/scheduler/scheduler_bluecell4.gif);
+	background-image:url(../images/scheduler/scheduler_purplecell4.gif);
 }
 
 .SchedulerCellSectionBottom_Booked
 {
 	width:90px;
 	height:8px;
-	background-image:url(../images/scheduler/scheduler_bluecell3.gif);
+	background-image:url(../images/scheduler/scheduler_purplecell3.gif);
 }
 
 .SchedulerCellSectionSingle_Booked
 {
 	width:90px;
 	height:8px;
-	background-image:url(../images/scheduler/scheduler_bluecell1.gif);
+	background-image:url(../images/scheduler/scheduler_purplecell1.gif);
 }
 
 .SchedulerCellSectionTop_Error

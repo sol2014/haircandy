@@ -35,8 +35,6 @@ Unresolved
 - FEATURE: User HELP icon that opens seperate page for help in all screens/dialogs.
   > This is for user friendliness. Nov 10th, 2008
 
-- BUG: The cells in Employee Schedule view turn from Blue to Green after first refresh.
-
 - BUG: When someone is changing Salon Hours or Employee Hours, we should never allow them
   to edit them outside the limits based on existing scheduled data.
 
@@ -142,6 +140,9 @@ Resolved
 
 - BUG (RESOLVED): Do not let scheduler or appointment drag cells outside of bounds (dissapear on drop).
   > Joey fixed this bug. Nov 11th, 2008
+
+- BUG: The cells in Employee Schedule view turn from Blue to Green after first refresh.
+  > Joey fixed this bug. Nov 12th, 2008
 
 - FEATURE (RESOLVED): Make the preferences dialog actually work to set availability and password update.
   > This must work for user session control and scheduling limits for employees.

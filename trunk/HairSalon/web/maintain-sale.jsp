@@ -145,7 +145,7 @@ String error_string = (String) userSession.moveAttribute ("sale_save_error");
                             <% } else {%>
                             <td align="right"><font color="red"><div id="telephone_label">Telephone:</div></font></td>
                             <% }%>
-                            <td align="left"><input type="text" name="phone_number" id="phone_number" onKeyUp="return checkTelephone(this)" size="10" value="<%=ServletHelper.display (client.getPhoneNumber ())%>">
+                            <td align="left"><input type="text" name="phone_number" id="phone_number" onkeypress="return isNumberTyped (event)" onKeyUp="return checkTelephone(this)" size="10" value="<%=ServletHelper.display (client.getPhoneNumber ())%>">
                                 <img style="cursor:pointer" align="absmiddle" src="images/icons/small/find_white.gif" onclick="findClient()" title="Find and load client from this phone number."/>
                                 <img style="cursor:pointer" align="absmiddle" src="images/icons/small/personal_white.gif" onclick="setGuest()" title="Use a guest identity."/>
                             </td>
@@ -164,7 +164,7 @@ String error_string = (String) userSession.moveAttribute ("sale_save_error");
                             <% } else {%>
                             <td align="right"><font color="red">Employee ID:</font></td>
                             <% }%>
-                            <td align="left"><input type="text" name="employee_no" size="6" style="text-align:right" value="<%=ServletHelper.display (sale.getEmployee ().getEmployeeNo ())%>"></td>
+                            <td align="left"><input type="text" name="employee_no" size="6" onkeypress="return isNumberTyped (event)" style="text-align:right" value="<%=ServletHelper.display (sale.getEmployee ().getEmployeeNo ())%>"></td>
                         </tr>
                         <tr>
                             <td align="right">Sub-Total:</td>
@@ -176,7 +176,7 @@ String error_string = (String) userSession.moveAttribute ("sale_save_error");
                         </tr>
                         <tr>
                             <td align="right">Discount:</td>
-                            <td align="left"><input type="text" name="discount" id="discount" size="3" onKeyUp="return calculateTotal()" style="text-align:right" value="<%=ServletHelper.display (sale.getDiscount ())%>">%</td>
+                            <td align="left"><input type="text" name="discount" id="discount" onkeypress="return isNumberTyped (event)" size="3" onKeyUp="return calculateTotal()" style="text-align:right" value="<%=ServletHelper.display (sale.getDiscount ())%>">%</td>
                         </tr>
                         <tr>
                             <td align="right">Discount:</td>
@@ -196,7 +196,7 @@ String error_string = (String) userSession.moveAttribute ("sale_save_error");
                             <% } else {%>
                             <td align="right"><font color="red">Payment:</font></td>
                             <% }%>
-                            <td align="left"><input type="text" name="payment" id="payment" size="6" onKeyUp="return calculateTotal()" style="text-align:right" value="<%=ServletHelper.display (sale.getPayment())%>">$
+                            <td align="left"><input type="text" name="payment" id="payment" size="6" onkeypress="return isDecimalTyped (event)" onKeyUp="return calculateTotal()" style="text-align:right" value="<%=ServletHelper.display (sale.getPayment())%>">$
                             &nbsp;<img style="cursor:pointer" align="absmiddle" src="images/icons/small/setfield_white.gif" onclick="setTotalPayment()" title="Use total as payment."/></td>
                         </tr>
                         <tr>

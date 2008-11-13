@@ -98,7 +98,7 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red"><div id="telephone_label">Telephone:</div></font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="phone_number" id="phone_number" onKeyUp="return checkTelephone(this)" size="10" value="<%=ServletHelper.display (salon.getPhoneNumber())%>"></td>
+			    <td align="left"><input type="text" name="phone_number" id="phone_number" onkeypress="return isNumberTyped (event)" onKeyUp="return checkTelephone(this)" size="10" value="<%=ServletHelper.display (salon.getPhoneNumber())%>"></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("salon_error_tax") == null) { %>
@@ -106,7 +106,7 @@ window.onload = function () {
 			    <% } else { %>
 			    <td align="right"><font color="red">Tax Rate:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="tax" style="text-align:right" value="<%=ServletHelper.display(salon.getTaxRate())%>" size="5">%</td>
+			    <td align="left"><input type="text" name="tax" onkeypress="return isDecimalTyped (event)" style="text-align:right" value="<%=ServletHelper.display(salon.getTaxRate())%>" size="5">%</td>
 			</tr>
 			<tr>
 			    <td align="right">&nbsp;</td>

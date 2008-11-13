@@ -99,7 +99,7 @@ String error_string = (String) userSession.moveAttribute ("service_error");
 			    <% } else { %>
 			    <td align="right"><font color="red">Duration:</font></td>
 			    <% } %>
-			    <td align="left"><input type="text" name="duration" value="<%=service.getDuration ()%>" size="5"  onkeypress="return isNumberTyped (event)" style="text-align:right"> min</td>
+			    <td align="left"><%=ServletHelper.generateDurationPicker ("duration", service.getDuration ())%></td>
 			</tr>
 			<tr>
 			    <% if (userSession.moveAttribute ("service_error_price") == null) { %>

@@ -33,8 +33,6 @@ function isDecimalTyped (key)
 {
     var code = (key.which) ? key.which : key.keyCode;
     
-    alert (code);
-    
     if (code == 46)
         return true;
     

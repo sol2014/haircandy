@@ -117,58 +117,7 @@ window.onload = function () {
 			    <td align="right"><img border="0" src="/HairSalon/images/icons/small/address_white.gif" width="16" height="16"></td>
 			    <td align="left"><u><b>Address Details</b></u></td>
 			</tr>
-			<tr>
-			    <% if (userSession.moveAttribute ("salon_error_address1") == null) { %>
-			    <td align="right">Address 1:</td>
-			    <% } else { %>
-			    <td align="right"><font color="red">Address 1:</font></td>
-			    <% } %>
-			    <td align="left"><input type="text" name="address1" value="<%=ServletHelper.display(salon.getAddress1())%>" size="20"></td>
-			</tr>
-			<tr>
-			    <td align="right">Address 2:</td>
-			    <td align="left"><input type="text" name="address2" value="<%=ServletHelper.display(salon.getAddress2())%>" size="20"></td>
-			</tr>
-			<tr>
-			    <% if (userSession.moveAttribute ("salon_error_email") == null) { %>
-			    <td align="right">Email:</td>
-			    <% } else { %>
-			    <td align="right"><font color="red">Email:</font></td>
-			    <% } %>
-			    <td align="left"><input type="text" name="email" value="<%=ServletHelper.display(salon.getEmail())%>" size="20"></td>
-			</tr>
-			<tr>
-			    <% if (userSession.moveAttribute ("salon_error_city") == null) { %>
-			    <td align="right">City:</td>
-			    <% } else { %>
-			    <td align="right"><font color="red">City:</font></td>
-			    <% } %>
-			    <td align="left"><input type="text" name="city" value="<%=ServletHelper.display(salon.getCity())%>" size="15"></td>
-			</tr>
-			<tr>
-			    <% if (userSession.moveAttribute ("salon_error_province") == null) { %>
-			    <td align="right">Province:</td>
-			    <% } else { %>
-			    <td align="right"><font color="red">Province:</font></td>
-			    <% } %>
-			    <td align="left"><input type="text" name="province" value="<%=ServletHelper.display(salon.getProvince())%>" size="15"></td>
-			</tr>
-			<tr>
-			    <% if (userSession.moveAttribute ("salon_error_country") == null) { %>
-			    <td align="right">Country:</td>
-			    <% } else { %>
-			    <td align="right"><font color="red">Country:</font></td>
-			    <% } %>
-			    <td align="left"><input type="text" name="country" value="<%=ServletHelper.display(salon.getCountry())%>" size="15"></td>
-			</tr>
-			<tr>
-			    <% if (userSession.moveAttribute ("salon_error_postal_code") == null) { %>
-			    <td align="right"><div id="postal_code_label">Postal Code:</div></td>
-			    <% } else { %>
-			    <td align="right"><font color="red"><div id="postal_code_label">Postal Code:</div></font></td>
-			    <% } %>
-			    <td align="left"><input type="text" name="postal_code" id="postal_code" onKeyUp="return checkPostalCode(this)" value="<%=ServletHelper.display(salon.getPostalCode())%>" size="6"><i>(ie. N4N4N4)</i></td>
-			</tr>
+			
 
 			<tr>
 			    <td align="right">&nbsp;</td>

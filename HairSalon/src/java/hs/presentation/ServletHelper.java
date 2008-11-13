@@ -100,6 +100,19 @@ public class ServletHelper
 	public static String generateHourPicker (String name, Date selected)
 	{
 		Calendar calendar = Calendar.getInstance ();
+		
+		if (selected == null)
+		{
+			try
+			{
+				selected = CoreTools.getTime ("8:00");
+			}
+			catch (Exception e)
+			{
+				selected = new Date();
+			}
+		}
+		
 		calendar.setTime (selected);
 		int hour = calendar.get (Calendar.HOUR);
 		int minutes = calendar.get(Calendar.MINUTE);

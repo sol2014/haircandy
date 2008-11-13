@@ -14,8 +14,6 @@
 <%@page import="hs.presentation.*" %>
 <%@page import="hs.app.*" %>
 <%@page import="java.util.*" %>
-<%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
-<taglib:ValidateEmployee minimum="Receptionist" />
 
 <%
 EmployeeBean employee2 = (EmployeeBean)userSession.getEmployee();

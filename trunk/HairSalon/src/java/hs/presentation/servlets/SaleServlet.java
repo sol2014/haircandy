@@ -42,57 +42,67 @@ public class SaleServlet extends DispatcherServlet
 
         sale.setClient (client);
         sale.setEmployee (employee);
-
-        String paymentType = request.getParameter ("payment_type");
+		
+        String paymentType = request.getParameter ("search_payment_type");
+		if (paymentType == null) paymentType = "";
         if (!paymentType.equals (""))
         {
             sale.setPaymentType (paymentType);
         }
-
-        String totalDue = request.getParameter ("total_due");
+		
+        String totalDue = request.getParameter ("search_total_due");
+		if (totalDue == null) totalDue = "";
         if (!totalDue.equals (""))
         {
             sale.setTotalDue (Double.parseDouble (totalDue));
         }
 		
-		String totalTax = request.getParameter ("total_tax");
-        if (!totalTax.equals (""))
-        {
-            sale.setTotalTax (Double.parseDouble (totalTax));
-        }
-
-		String discount = request.getParameter ("discount");
-        if (!discount.equals (""))
-        {
-            Integer discountI = Integer.parseInt (discount);
-            sale.setDiscount (discountI);
-
-        }
-		
-        String payment = request.getParameter ("payment");
-        if (!payment.equals (""))
-        {
-            Double paymentD = Double.parseDouble (payment);
-            sale.setPayment (paymentD);
-
-        }
-
-        String isComplete = request.getParameter ("is_complete");
+        String isComplete = request.getParameter ("search_is_complete");
+		if (isComplete == null) isComplete = "";
         if (!isComplete.equals ("None"))
         {
             sale.setIsComplete (isComplete.equals ("true"));
         }
-
+		
+		String isVoid = request.getParameter ("search_is_void");
+		if (isVoid == null) isVoid = "";
+        if (!isComplete.equals ("None"))
+        {
+            sale.setIsComplete (isComplete.equals ("true"));
+        }
+		
+		String timestamp = request.getParameter ("search_timestamp");
+		if (timestamp == null) timestamp = "";
+        if (!timestamp.equals (""))
+        {
+			try
+			{
+				sale.setTimestamp (CoreTools.getTimestamp (timestamp));
+			}
+			catch (Exception e)
+			{
+				LogController.write (this, "Timestamp data was invalid in request: "+timestamp);
+			}
+        }
+		
         SaleBean[] searchResults = SessionController.searchSales (userSession, sale);
 
         userSession.setAttribute ("sale_search_result", searchResults);
 
-        userSession.setAttribute ("sale_search_payment_type", paymentType);
-        userSession.setAttribute ("sale_search_total_due", totalDue);
-		userSession.setAttribute ("sale_search_total_tax", totalTax);
-		userSession.setAttribute ("sale_search_discount", discount);
-        userSession.setAttribute ("sale_search_payment", payment);
-        userSession.setAttribute ("sale_search_is_complete", isComplete);
+        if (paymentType != null)
+			userSession.setAttribute ("sale_search_payment_type", paymentType);
+		
+        if (totalDue != null)
+			userSession.setAttribute ("sale_search_total_due", totalDue);
+		
+		if (isComplete != null)
+			userSession.setAttribute ("sale_search_is_complete", isComplete);
+		
+		if (isVoid != null)
+			userSession.setAttribute ("sale_search_is_void", isVoid);
+		
+		if (timestamp != null)
+			userSession.setAttribute ("sale_search_timestamp", timestamp);
 
         redirect ("search-sale.jsp", request, response);
     }
@@ -393,6 +403,9 @@ public class SaleServlet extends DispatcherServlet
         String isComplete = request.getParameter ("is_complete");
         sale.setIsComplete (Boolean.parseBoolean (isComplete));
 		
+		String isVoid = request.getParameter ("is_void");
+        sale.setIsVoid (Boolean.parseBoolean (isVoid));
+		
 		boolean failed = false;
 		
 		// Now check some basics for the sale, did we get enough payment?
@@ -426,6 +439,7 @@ public class SaleServlet extends DispatcherServlet
 				userSession.setAttribute ("sale_new_discount", discount);
                 userSession.setAttribute ("sale_new_payment", payment);
                 userSession.setAttribute ("sale_new_is_complete", isComplete);
+				userSession.setAttribute ("sale_new_is_void", isVoid);
 
                 redirect ("create-sale.jsp", request, response);
             }
@@ -458,7 +472,8 @@ public class SaleServlet extends DispatcherServlet
 				userSession.setAttribute ("sale_new_discount", discount);
                 userSession.setAttribute ("sale_new_payment", payment);
                 userSession.setAttribute ("sale_new_is_complete", isComplete);
-
+				userSession.setAttribute ("sale_new_is_void", isVoid);
+				
                 redirect ("create-sale.jsp", request, response);
             }
             else
@@ -499,7 +514,8 @@ public class SaleServlet extends DispatcherServlet
 				userSession.setAttribute ("sale_new_discount", discount);
                 userSession.setAttribute ("sale_new_payment", payment);
                 userSession.setAttribute ("sale_new_is_complete", isComplete);
-
+				userSession.setAttribute ("sale_new_is_void", isVoid);
+				
                 redirect ("create-sale.jsp", request, response);
             }
             else

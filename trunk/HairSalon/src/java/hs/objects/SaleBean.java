@@ -30,40 +30,48 @@ public class SaleBean extends DataBean implements Comparable
 	/**
 	 * The client bean involved in this sale.
 	 */
-	private ClientBean client;
+	private ClientBean client = null;
 	/**
 	 * The employee bean this sale is processed by.
 	 */
-	private EmployeeBean employee;
+	private EmployeeBean employee = null;
 	/**
 	 * The payment method the client used.
 	 */
-	private String paymentType;
+	private String paymentType = null;
 	/**
 	 * The total amount client paid for this sale.
 	 */
-	private Double payment;
+	private Double payment = null;
 	/**
 	 * The total tax amount claimed on this sale.
 	 */
-	private Double totalTax;
+	private Double totalTax = null;
 	/**
 	 * The discount percentage that is applied to this sale.
 	 */
-	private Integer discount;
+	private Integer discount = null;
 	/**
 	 * A flag to indicate if this transaction is completed.
 	 */
-	private Boolean isComplete;
+	private Boolean isComplete = null;
+	/**
+	 * A flag to indicate that the sale is void and not modifyable.
+	 */
+	private Boolean isVoid = null;
 	/**
 	 * This is the sale transaction idenification number.
 	 */
-	private Integer transactionNo;
+	private Integer transactionNo = null;
 	/**
 	 * The total amount due for this sale.
 	 */
-	private Double totalDue;
-
+	private Double totalDue = null;
+	/**
+	 * The timestamp the sales was produced on.
+	 */
+	private Date timestamp = null;
+	
 	/**
 	 *  Default constructor for the sale bean.
 	 */
@@ -94,6 +102,26 @@ public class SaleBean extends DataBean implements Comparable
 	public void setClient (ClientBean client)
 	{
 		this.client = client;
+	}
+
+	public Boolean getIsVoid ()
+	{
+		return isVoid;
+	}
+
+	public void setIsVoid (Boolean isVoid)
+	{
+		this.isVoid = isVoid;
+	}
+
+	public Date getTimestamp ()
+	{
+		return timestamp;
+	}
+
+	public void setTimestamp (Date timestamp)
+	{
+		this.timestamp = timestamp;
 	}
 
 	public void setEmployee (EmployeeBean employee)

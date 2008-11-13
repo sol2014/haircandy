@@ -64,21 +64,24 @@ String error_string = (String) userSession.moveAttribute ("sale_search_error");
 				<td align="right"><img border="0" src="/HairSalon/images/icons/small/personal_white.gif" width="16" height="16"></td>
 			    </tr>
 			    <tr>
+				<td align="right">Date/Time:</td>
+				<td align="left"><input type="text" name="search_timestamp" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("sale_search_timestamp"))%>"></td>
+			    </tr>
+			    <tr>
 				<td align="right">Payment Type:</td>
-				<td align="left"><input type="text" name="payment_type" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("sale_search_payment_type"))%>"></td>
+				<td align="left"><select name="search_payment_type" size="1"><%=ServletHelper.generatePaymentTypeOptions((String) userSession.moveAttribute("sale_search_payment_type"), true)%></select></td>
 			    </tr>
 			    <tr>
 				<td align="right">Total Due:</td>
-				<td align="left"><input type="text" name="total_due" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("sale_search_total_due"))%>"></td>
-			    </tr>
-
-			    <tr>
-				<td align="right">Payment:</td>
-				<td align="left"><input type="text" name="payment" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("sale_search_payment"))%>"></td>
+				<td align="left"><input type="text" name="search_total_due" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("sale_search_total_due"))%>"></td>
 			    </tr>
 			    <tr>
 				<td align="right">Is Complete:</td>
-				<td align="left"><input type="text" name="is_complete" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("sale_search_is_complete"))%>"></td>
+				<td align="left"><input type="text" name="search_is_complete" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("sale_search_is_complete"))%>"></td>
+			    </tr>
+			    <tr>
+				<td align="right">Is Void:</td>
+				<td align="left"><input type="text" name="search_is_void" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("sale_search_is_void"))%>"></td>
 			    </tr>
 			</table>
 		    </div>

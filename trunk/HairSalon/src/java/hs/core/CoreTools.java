@@ -19,6 +19,7 @@ public class CoreTools
 {
 	public static final String DateFormat = "dd/MM/yyyy";
 	public static final String TimeFormat = "HH:mm";
+	public static final String TimestampFormat = "yyyy-MM-dd HH:mm";
 	public static final String AMPMFormat = "KK:mm a";
 	public static final String FullTimeFormat = "KK:mm:ss";
 	public static final String MonthYearFormat = "MMMMMMMM, yyyy";
@@ -225,6 +226,20 @@ public class CoreTools
 		{
 			return "AM";
 		}
+	}
+	
+	public static Date getTimestamp (String str)
+			throws ParseException
+	{
+		SimpleDateFormat sdf = new SimpleDateFormat (TimestampFormat);
+		return sdf.parse (str);
+	}
+	
+	public static Date getTimestamp (String str, String format)
+			throws ParseException
+	{
+		SimpleDateFormat sdf = new SimpleDateFormat (format);
+		return sdf.parse (str);
 	}
 	
 	public static Date getDate (String datestr, String format)

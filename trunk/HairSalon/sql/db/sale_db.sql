@@ -10,7 +10,9 @@ CREATE TABLE sale
 	`total_tax` DECIMAL(9,2),
 	`discount` TINYINT,
 	`is_complete` BOOLEAN,
+	`is_void` BOOLEAN,
 	`payment` DECIMAL(9,2),
+    `timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	
 	CONSTRAINT `client_sale_no_fk` FOREIGN KEY(`client_no`) REFERENCES client(`client_no`),
 	CONSTRAINT `employee_sale_no_fk` FOREIGN KEY(`employee_no`) REFERENCES employee(`employee_no`),

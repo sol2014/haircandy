@@ -1195,6 +1195,9 @@ public class SessionController
 		
 		// We need to come up with the schedule entries that cannot be moved.
 		
+		if (schedule == null)
+			return null;
+		
 		for (EmployeeBean employee : schedule.keySet ())
 		{
 			ArrayList<ScheduleBean> list = schedule.get (employee);
@@ -1234,6 +1237,8 @@ public class SessionController
 		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> hash = new Hashtable<EmployeeBean, ArrayList<ScheduleBean>> ();
 		
 		// We need to come up with the schedule entries that can be moved.
+		if (schedule == null)
+			return null;
 		
 		for (EmployeeBean employee : schedule.keySet ())
 		{

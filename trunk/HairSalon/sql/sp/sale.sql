@@ -27,7 +27,9 @@ CREATE PROCEDURE SearchSale(IN p_client_no BIGINT(20),
 							IN p_total_tax DECIMAL(9,2),
 							IN p_discount TINYINT,
 							IN p_payment DECIMAL(9,2),
-							IN p_is_complete BOOLEAN)
+							IN p_is_complete BOOLEAN,
+							IN p_is_void BOOLEAN,
+							IN p_timestamp TIMESTAMP)
 BEGIN
 	SELECT * 
 	FROM sale
@@ -38,7 +40,9 @@ BEGIN
 		AND ((p_total_tax IS NULL) OR (total_tax = p_total_tax))
 		AND ((p_discount IS NULL) OR (discount = p_discount))
         AND ((p_payment IS NULL) OR (payment = p_payment))
-        AND ((p_is_complete IS NULL) OR (is_complete = p_is_complete));
+        AND ((p_is_complete IS NULL) OR (is_complete = p_is_complete))
+		AND ((p_is_void IS NULL) OR (is_void = p_is_void))
+		AND ((p_timestamp IS NULL) OR (is_timestamp = p_timestamp));
 END
 //
 
@@ -52,10 +56,11 @@ CREATE PROCEDURE CreateSale(IN p_client_no BIGINT(20),
 							IN p_discount TINYINT,
 							IN p_payment DECIMAL(9,2),
 							IN p_is_complete BOOLEAN,
+							IN p_is_void BOOLEAN,
                             OUT p_key BIGINT(20))
 BEGIN
-    INSERT INTO sale(client_no,employee_no,payment_type,total_due,total_tax,discount,payment,is_complete)
-    VALUES(p_client_no,p_employee_no,p_payment_type,p_total_due,p_total_tax,p_discount,p_payment,p_is_complete);
+    INSERT INTO sale(client_no,employee_no,payment_type,total_due,total_tax,discount,payment,is_complete, is_void)
+    VALUES(p_client_no,p_employee_no,p_payment_type,p_total_due,p_total_tax,p_discount,p_payment,p_is_complete, p_is_void);
 
     SET p_key = LAST_INSERT_ID();
 END
@@ -80,7 +85,8 @@ CREATE PROCEDURE UpdateSale(IN p_transaction_no BIGINT(20),
 							IN p_total_tax DECIMAL(9,2),
 							IN p_discount TINYINT,
 							IN p_payment DECIMAL(9,2),
-							IN p_is_complete BOOLEAN)
+							IN p_is_complete BOOLEAN,
+							IN p_is_void BOOLEAN)
 BEGIN
 	UPDATE sale
 	SET client_no = p_client_no,
@@ -90,7 +96,8 @@ BEGIN
 		total_tax = p_total_tax,
 		discount = p_discount,
 		payment =p_payment,
-		is_complete = p_is_complete
+		is_complete = p_is_complete,
+		is_void = p_is_void
 	WHERE transaction_no = p_transaction_no;
 END
 //

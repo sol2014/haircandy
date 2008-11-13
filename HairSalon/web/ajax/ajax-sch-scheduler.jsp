@@ -19,41 +19,41 @@
 
 <%
 // Retrieve the UserSession object from the http session.
-UserSession userSession = (UserSession) session.getAttribute("user_session");
-userSession.setCurrentPosition(SessionPositions.SchScheduler);
+		UserSession userSession = (UserSession) session.getAttribute("user_session");
+		userSession.setCurrentPosition(SessionPositions.SchScheduler);
 
-Date date = CoreTools.getDate(request.getParameter("date"));
+		Date date = CoreTools.getDate(request.getParameter("date"));
 
-EmployeeBean ebb = new EmployeeBean();
-AddressBean ab = new AddressBean();
-ebb.setAddress(ab);
+		EmployeeBean ebb = new EmployeeBean();
+		AddressBean ab = new AddressBean();
+		ebb.setAddress(ab);
 
-EmployeeBean[] arrayEmployees = SessionController.searchEmployees(userSession, ebb);
-ArrayList<EmployeeBean> employees = new ArrayList<EmployeeBean>();
+		EmployeeBean[] arrayEmployees = SessionController.searchEmployees(userSession, ebb);
+		ArrayList<EmployeeBean> employees = new ArrayList<EmployeeBean>();
 
-for (int i = 0; i < arrayEmployees.length; i++) {
-	employees.add(arrayEmployees[i]);
-}
-Collections.sort(employees, new EmployeeLastNameComparator());
+		for (int i = 0; i < arrayEmployees.length; i++) {
+			employees.add(arrayEmployees[i]);
+		}
+		Collections.sort(employees, new EmployeeLastNameComparator());
 
-ScheduleHoursBean shb = new ScheduleHoursBean();
-shb.setDate(date);
-shb = SessionController.loadScheduleHours(userSession, shb);
+		ScheduleHoursBean shb = new ScheduleHoursBean();
+		shb.setDate(date);
+		shb = SessionController.loadScheduleHours(userSession, shb);
 
-Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions = SessionController.getAvailabilityExceptions(userSession, date);
-ArrayList<ScheduleExceptionBean> scheduleExceptions = SessionController.getScheduleExceptions(userSession, date);
-Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedules = SessionController.getSchedule(userSession, date, availabilityExceptions, scheduleExceptions);
-Hashtable<EmployeeBean, ArrayList<ScheduleBean>> unschedulables = SessionController.getUnschedulable(userSession, date, shb);
+		Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions = SessionController.getAvailabilityExceptions(userSession, date);
+		ArrayList<ScheduleExceptionBean> scheduleExceptions = SessionController.getScheduleExceptions(userSession, date);
+		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedules = SessionController.getSchedule(userSession, date, availabilityExceptions, scheduleExceptions);
+		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> unschedulables = SessionController.getUnschedulable(userSession, date, shb);
 
-Date startTime = shb.getStartTime();
-Date endTime = shb.getEndTime();
-int startHour = CoreTools.getStartHour(startTime);
-int endHour = CoreTools.getEndHour(endTime);
-int rowCount = 0;
+		Date startTime = shb.getStartTime();
+		Date endTime = shb.getEndTime();
+		int startHour = CoreTools.getStartHour(startTime);
+		int endHour = CoreTools.getEndHour(endTime);
+		int rowCount = 0;
 %>
 
 <%!
-	private String getCSSClass(int startHour, int row, EmployeeBean eb, Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedules, Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions, ArrayList<ScheduleExceptionBean> scheduleExceptions, Hashtable<EmployeeBean, ArrayList<ScheduleBean>> unschedulables) {
+	private String getCSSClass(UserSession userSession, int startHour, int row, EmployeeBean eb, Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedules, Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions, ArrayList<ScheduleExceptionBean> scheduleExceptions, Hashtable<EmployeeBean, ArrayList<ScheduleBean>> unschedulables) {
 		if (scheduleExceptions != null) {
 			return "SchedulerCellSection_Unavailable";
 		}
@@ -81,14 +81,30 @@ int rowCount = 0;
 					int endOffset = (scheduleEndHour - startHour) * 4 + scheduleEndMinutes / 15;
 					if (row >= startOffset && row < endOffset) {
 						if (startOffset == endOffset - 1) {
-							return "SchedulerCellSectionSingle";
+							if (userSession.getEmployee().getRole().equals("Manager")) {
+								return "SchedulerCellSectionSingle";
+							} else {
+								return "SchedulerCellSectionSingle_Booked";
+							}
 						}
 						if (row == startOffset) {
-							return "SchedulerCellSectionTop";
+							if (userSession.getEmployee().getRole().equals("Manager")) {
+								return "SchedulerCellSectionTop";
+							} else {
+								return "SchedulerCellSectionTop_Booked";
+							}
 						} else if (row == endOffset - 1) {
-							return "SchedulerCellSectionBottom";
+							if (userSession.getEmployee().getRole().equals("Manager")) {
+								return "SchedulerCellSectionBottom";
+							} else {
+								return "SchedulerCellSectionBottom_Booked";
+							}
 						} else {
-							return "SchedulerCellSectionMiddle";
+							if (userSession.getEmployee().getRole().equals("Manager")) {
+								return "SchedulerCellSectionMiddle";
+							} else {
+								return "SchedulerCellSectionMiddle_Booked";
+							}
 						}
 					}
 				}
@@ -127,7 +143,7 @@ int rowCount = 0;
             <table border="0" cellspacing="5" cellpadding="0">
                 <tr>
                     <td align="right" valign="top"><img border="0" src="/HairSalon/images/icons/big/schedule_white.gif" width="48" height="48"></td>
-                    <td align="left"><font size="3"><b>Employee Schedule: <%=CoreTools.showDate (date, CoreTools.DayMonthYearFormat)%></b></font><br>
+                    <td align="left"><font size="3"><b>Employee Schedule: <%=CoreTools.showDate(date, CoreTools.DayMonthYearFormat)%></b></font><br>
                         You may either create, delete or move schedule entries for different employees. Some areas may be
                         darkened which means there are exceptions blocking those employee.
                     </td>
@@ -167,7 +183,7 @@ int rowCount = 0;
                             <tr>
                                 <td class="SchedulerTimeHeader">&nbsp;</td>
                                 <% for (int i = 0; i < employees.size(); i++) {
-				    EmployeeBean eb = employees.get(i);%>
+		 EmployeeBean eb = employees.get(i);%>
                                 <td class="SchedulerColumn"><span class="HeaderFont"><%=eb.getFirstName()%></span></td>
                                 <% if (i != employees.size() - 1) {%>
                                 <td class="SchedulerHeaderSeparator"></td>
@@ -191,7 +207,7 @@ int rowCount = 0;
                                     <table border="0" width="100%" cellspacing="0" cellpadding="0" height="100%">
                                         <% for (int k = 0; k < 4; k++) {%>
                                         <tr>
-                                            <td id="<%=rowCount + k%>^-^<%=j%>" onclick="cellSingleClickHandler(this)" ondblclick="cellDoubleClickHandler(this)"  onmousedown="cellMouseDownHandler(event, this)" class="<%=getCSSClass(startHour, rowCount + k, employees.get(j), schedules, availabilityExceptions, scheduleExceptions, unschedulables)%>"><img src="images/site_blank.gif"></td>
+                                            <td id="<%=rowCount + k%>^-^<%=j%>" onclick="cellSingleClickHandler(this)" ondblclick="cellDoubleClickHandler(this)"  onmousedown="cellMouseDownHandler(event, this)" class="<%=getCSSClass(userSession, startHour, rowCount + k, employees.get(j), schedules, availabilityExceptions, scheduleExceptions, unschedulables)%>"><img src="images/site_blank.gif"></td>
                                         </tr>
                                         <% }%>
                                     </table>

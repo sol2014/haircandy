@@ -90,6 +90,65 @@ function saveEntry(appointment)//function used to save the entry
     messager.request("schedule",queryString);
 }
 
+function addUnmovableSchedulesIntialEntry(duration, row, column, id)//function used to add entry on page load
+{
+    ratio = duration;
+    if(ratio != 0)
+    {
+        draggableDiv.style.height = heightUnit * ratio;
+    }
+    var appointmentCells = new Array();
+    var start = row;
+    var end = parseInt(start) + parseInt(ratio);
+    var ok = true;
+    if(end > rowCount)
+    {
+        ok = false;
+    }
+    if(isUsed(start, end, column))
+    {
+        ok = false;
+    }
+    if(isBooked(start, end, column))
+    {
+        ok = false;
+    }
+    var add;
+    if(ok)//save the current position
+    {
+        previousLastCell=document.getElementById(end-1);
+        for(var j = start; j < end; j++)
+        {
+            add  = findCell(j+"^-^"+column);
+            if(j == start)//appointment start
+            {
+                document.getElementById(add.id).className = bookedHeadClass;
+            }
+            else if(j == end - 1)//appointment tail
+            {
+                document.getElementById(add.id).className = bookedTailClass;
+            }
+            else//appointment body
+            {
+                document.getElementById(add.id).className = bookedBodyClass;
+            }
+            if(start == end -1)//only one cell
+            {
+                document.getElementById(add.id).className = bookedComboClass;
+            }
+            add.state = bookedState;
+            appointmentCells.push(add.id);
+        }
+        appointmentCells.scheduleNo = id;
+        appointments.push(appointmentCells);
+        document.getElementById("errorMessage").innerHTML = "";
+    }
+    else
+    {
+        document.getElementById("errorMessage").innerHTML = "Cannot overlap shifts.";
+    }
+}
+
 function addIntialEntry(duration, row, column, id)//function used to add entry on page load
 {
     ratio = duration;

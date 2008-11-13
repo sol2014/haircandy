@@ -164,7 +164,14 @@ if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo
 					<tr>
 					    <td>
 						<input type="button" onclick="doFinish()" value="Finish" class="StandardButton" /><br/>
-						<input type="button" onclick="doDelete()" id="deleteButton" value="Delete" class="StandardButton" /><br/>
+                                                <% 
+                                                if (appointment.getAppointmentNo() != null)
+                                                {
+                                                    %> 
+                                                    <input type="button" onclick="doDelete()" id="deleteButton" value="Delete" class="StandardButton" /><br/>
+                                                    <%
+						}
+                                                %>
 						<input type="button" onclick="doClose()" value="Close" class="StandardButton" /><br/>
 						<div id="operResult"></div>
 					    </td>

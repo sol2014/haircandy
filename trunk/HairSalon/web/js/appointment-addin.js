@@ -234,6 +234,13 @@ function closeAddService(){
 
 function doSubmit()
 {
+    if(services.length==0)
+    {
+        document.getElementById("operResult").innerHTML="Must pick up at least one service";
+        return;
+    }
+    
+    
     var productQuery = "";
     
     for(var i = 0; i < products.length; i++)

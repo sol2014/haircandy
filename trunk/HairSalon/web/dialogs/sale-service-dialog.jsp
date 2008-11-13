@@ -1,3 +1,5 @@
+<%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
+<taglib:ValidateEmployee minimum="Receptionist" />
 <div id="sale_service_dialog" class="DialogBox" style="width: 600px;height: 350px;">
      <table bgcolor="#FFFFFF" height="100%" width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>

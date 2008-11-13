@@ -11,7 +11,6 @@ CREATE TABLE sale
 	`discount` TINYINT,
 	`is_complete` BOOLEAN,
 	`payment` DECIMAL(9,2),
-
 	
 	CONSTRAINT `client_sale_no_fk` FOREIGN KEY(`client_no`) REFERENCES client(`client_no`),
 	CONSTRAINT `employee_sale_no_fk` FOREIGN KEY(`employee_no`) REFERENCES employee(`employee_no`),

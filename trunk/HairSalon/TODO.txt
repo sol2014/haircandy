@@ -16,55 +16,52 @@ Unresolved
   the employee availability records.
   > This feature would certainly be useful, however is lower priority at this point. Nov 10th, 2008
 
-- FEATURE: Search and Delete Sale need to work.
+! FEATURE: Search and Delete Sale need to work.
   > This must work. Nov 10th, 2008
 
 - FEATURE: Finish any alerts that we need to create for the user throughout the app.
   > Non essential at this point. We have inventory alerts, and more could be created
     but there are time constraints. Nov 10th, 2008
 
-- FEATURE: Make sure alerts can be deleted one by one, or all at once (or by type?)
+! FEATURE: Make sure alerts can be deleted one by one, or all at once (or by type?)
   > Must have this available to managers. Nov 10th, 2008
 
-- FEATURE: Add a legend for cell types in the scheduler and calendar views.
+! FEATURE: Add a legend for cell types in the scheduler and calendar views.
   > This is necessary for good user friendliness. Single images can be made. Nov 10th, 2008
 
 - FEATURE: Add a tooltip on cells to show the date/start/end time (if possible).
   > This feature is non-essential and will make it in if we have time. Nov 10th, 2008
 
-- FEATURE: User HELP icon that opens seperate page for help in all screens/dialogs.
+! FEATURE: User HELP icon that opens seperate page for help in all screens/dialogs.
   > This is for user friendliness. Nov 10th, 2008
 
-- BUG: When someone is changing Salon Hours or Employee Hours, we should never allow them
+! BUG: When someone is changing Salon Hours or Employee Hours, we should never allow them
   to edit them outside the limits based on existing scheduled data.
 
-- BUG: Only show alert for 1 record type, always keep latest. Show date column in alert list too.
+! BUG: Only show alert for 1 record type, always keep latest. Show date column in alert list too.
 
 - BUG: Make sure that all search result table cells are top aligned, and use nowrap and have
   proper result images.
 
-- BUG: When deleting schedule entries, or moving them, we are not even checking if there
+! BUG: When deleting schedule entries, or moving them, we are not even checking if there
   is already booked appointments data for those entries.
 
 - BUG: Input checking in all Dialogs must highlight fields RED when finishing.
 
-- BUG: Delete button in appointment dialog needs to be hidden when creating new entry.
+! BUG: Delete button in appointment dialog needs to be hidden when creating new entry.
 
-- BUG: Start Time/End Time do not render in the Employee scheduler dialog.
+! BUG: Start Time/End Time do not render in the Employee scheduler dialog.
 
-- BUG: Dialog boxes need to have input fields cleared if used twice or more.
+! BUG: Dialog boxes need to have input fields cleared if used twice or more.
 
-- BUG: Make errors in appointment creation/edit dialog more obvious.
+! BUG: Make errors in appointment creation/edit dialog more obvious.
 
-- BUG: Do not allow anyone to create an appointment if no services are selected.
+! BUG: Do not allow anyone to create an appointment if no services are selected.
 
-- BUG: Dialog repositioning and sizing must be fixed for all dialogs, its horrible
+! BUG: Dialog repositioning and sizing must be fixed for all dialogs, its horrible
   right now.
 
-- BUG: Add the duration Hour+Minute Combo boxes for Services search, maintain and create pages.
-
-- BUG: Fix blackout so that it uses the document height/width, not the browser viewing area, also, make
-  blackout everytime we show a popup, do not use the same blackout each time.
+! BUG: Add the duration Hour+Minute Combo boxes for Services search, maintain and create pages.
 
 - BUG: Pages are not protected by the TAG that is supposed to validate employees.
 
@@ -141,7 +138,12 @@ Resolved
 - BUG (RESOLVED): Do not let scheduler or appointment drag cells outside of bounds (dissapear on drop).
   > Joey fixed this bug. Nov 11th, 2008
 
-- BUG: The cells in Employee Schedule view turn from Blue to Green after first refresh.
+- BUG (RESOLVED): Fix blackout so that it uses the document height/width, not the browser viewing area, also, make
+  blackout everytime we show a popup, do not use the same blackout each time.
+  > Philippe fixed this issue well enough for our purposes, the blackouts now take the full
+    size of he browser window, but it does not resize with the browser. Nov 12th, 2008
+
+- BUG (RESOLVED): The cells in Employee Schedule view turn from Blue to Green after first refresh.
   > Joey fixed this bug. Nov 12th, 2008
 
 - FEATURE (RESOLVED): Make the preferences dialog actually work to set availability and password update.

@@ -17,6 +17,8 @@
 <%@page import="hs.objects.*" %>
 <%@page import="hs.app.*" %>
 <%@page import="hs.presentation.*" %>
+<%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
+<taglib:ValidateEmployee minimum="Manager" />
 
 <%
 UserSession userSession = (UserSession) session.getAttribute ("user_session");

@@ -1188,6 +1188,9 @@ public class SessionController
 	{
 		LogController.write ("SessionController->Getting filtered unmovable schedule...");
 		
+		if (!session.getEmployee ().getRole ().equals ("Manager"))
+			return schedule;
+		
 		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> hash = new Hashtable<EmployeeBean, ArrayList<ScheduleBean>> ();
 		
 		// We need to come up with the schedule entries that cannot be moved.
@@ -1224,6 +1227,9 @@ public class SessionController
 	public static Hashtable<EmployeeBean, ArrayList<ScheduleBean>> getMovableSchedule (UserSession session, java.util.Date date, Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedule)
 	{
 		LogController.write ("SessionController->Getting filtered unmovable schedule...");
+		
+		if (!session.getEmployee ().getRole ().equals ("Manager"))
+			return null;
 		
 		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> hash = new Hashtable<EmployeeBean, ArrayList<ScheduleBean>> ();
 		

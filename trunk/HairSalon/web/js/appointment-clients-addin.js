@@ -508,6 +508,10 @@ function cellDoubleClickHandler(element)//function to deal with double click
                 draggableDiv.appointmentId = appointmentId;
                 previousFirstCell = document.getElementById(appointments[findAppointmentIndex(appointmentId)][0]);
             }
+            else
+            {
+                draggableDiv.appointmentId = undefined;
+            }
             getDialogShell();
         } 
     }

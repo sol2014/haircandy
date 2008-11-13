@@ -61,8 +61,6 @@ Unresolved
 ! BUG: Dialog repositioning and sizing must be fixed for all dialogs, its horrible
   right now.
 
-! BUG: Add the duration Hour+Minute Combo boxes for Services maintain and create pages.
-
 - BUG: Pages are not protected by the TAG that is supposed to validate employees.
 
 - TASK: Fill product and services database with basic salon data! (we need lots of producs and
@@ -145,6 +143,9 @@ Resolved
 
 - BUG (RESOLVED): The cells in Employee Schedule view turn from Blue to Green after first refresh.
   > Joey fixed this bug. Nov 12th, 2008
+
+- BUG: Add the duration Hour+Minute Combo boxes for Services maintain and create pages.
+  > Philippe resolved this. Nov 12th, 2008
 
 - TASK (RESOLVED): Complete server and client side checking, especially for numerical values. (dont allow alpha in number box)
   > Philippe resolved this task by adding a decimal/number checker in tools.js. Nov 12th, 2008

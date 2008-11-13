@@ -16,7 +16,7 @@
 <%@page import="java.util.*" %>
 
 <%
-EmployeeBean employee = (EmployeeBean)userSession.getEmployee();
+EmployeeBean employee2 = (EmployeeBean)userSession.getEmployee();
 %>
 
 <font face="Trebuchet MS" size="2">
@@ -48,7 +48,7 @@ EmployeeBean employee = (EmployeeBean)userSession.getEmployee();
 			</tr>
 			<tr>
 			    <td colspan="2" width="100%" align="center">
-				<br/><input type="button" onclick="applyPassword(<%=employee.getEmployeeNo ()%>)" value="Apply" class="StandardButton"/>&nbsp;
+				<br/><input type="button" onclick="applyPassword(<%=employee2.getEmployeeNo ()%>)" value="Apply" class="StandardButton"/>&nbsp;
 				<input type="button" onclick="cancelPassword()" value="Cancel" class="StandardButton"/>
 			    </td>
 			</tr>

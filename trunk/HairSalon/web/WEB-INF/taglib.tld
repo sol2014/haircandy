@@ -16,7 +16,7 @@
         <info>validate employee</info>
         <attribute>
             <name>minimum</name>
-            <required>false</required>
+            <required>true</required>
             <rtexprvalue>false</rtexprvalue>
         </attribute>
     </tag>

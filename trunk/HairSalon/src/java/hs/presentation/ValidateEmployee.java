@@ -8,7 +8,7 @@
  * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
  */
 
-package hs.presentation.tags;
+package hs.presentation;
 
 import hs.core.UserSession;
 import hs.objects.EmployeeBean;
@@ -20,10 +20,6 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.*;
 import javax.servlet.jsp.tagext.*;
 
-/**
- *
- * @author Joey
- */
 public class ValidateEmployee implements Tag
 {
 	private PageContext pageContext;
@@ -49,11 +45,9 @@ public class ValidateEmployee implements Tag
 	{
 		HttpSession session = pageContext.getSession ();
 		UserSession userSession = (UserSession)session.getAttribute ("user_session");
-		
 		if (userSession.isGuest())
 		{
 			HttpServletResponse response = (HttpServletResponse) pageContext.getResponse ();
-			
 			try
 			{
 				response.sendRedirect (response.encodeRedirectURL ("welcome-guest.jsp"));
@@ -62,13 +56,11 @@ public class ValidateEmployee implements Tag
 			{
 				Logger.getLogger (ValidateEmployee.class.getName ()).log (Level.SEVERE, null, ex);
 			}
-			
 			return SKIP_PAGE;
 		}
 		else
 		{
 			EmployeeBean employee = userSession.getEmployee();
-			
 			if (minimum.equals ("Manager") && employee.getRole ().equals ("Manager"))
 			{
 				// Needs a manager, and is a manager.
@@ -80,7 +72,6 @@ public class ValidateEmployee implements Tag
 			else
 			{
 				HttpServletResponse response = (HttpServletResponse) pageContext.getResponse ();
-				
 				try
 				{
 					response.sendRedirect (response.encodeRedirectURL ("welcome-employee.jsp"));
@@ -89,10 +80,8 @@ public class ValidateEmployee implements Tag
 				{
 					Logger.getLogger (ValidateEmployee.class.getName ()).log (Level.SEVERE, null, ex);
 				}
-
 				return SKIP_PAGE;
 			}
-			
 			return EVAL_PAGE;
 		}
 	}

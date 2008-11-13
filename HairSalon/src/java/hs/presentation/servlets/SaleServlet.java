@@ -45,7 +45,7 @@ public class SaleServlet extends DispatcherServlet
 		
         String paymentType = request.getParameter ("search_payment_type");
 		if (paymentType == null) paymentType = "";
-        if (!paymentType.equals (""))
+        if (!paymentType.equals ("") && !paymentType.equals("None"))
         {
             sale.setPaymentType (paymentType);
         }
@@ -61,14 +61,14 @@ public class SaleServlet extends DispatcherServlet
 		if (isComplete == null) isComplete = "";
         if (!isComplete.equals ("None"))
         {
-            sale.setIsComplete (isComplete.equals ("true"));
+            sale.setIsComplete (isComplete.toLowerCase ().equals ("true"));
         }
 		
 		String isVoid = request.getParameter ("search_is_void");
 		if (isVoid == null) isVoid = "";
-        if (!isComplete.equals ("None"))
+        if (!isVoid.equals ("None"))
         {
-            sale.setIsComplete (isComplete.equals ("true"));
+            sale.setIsVoid (isVoid.toLowerCase ().equals ("true"));
         }
 		
 		String timestamp = request.getParameter ("search_timestamp");

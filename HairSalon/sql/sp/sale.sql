@@ -20,12 +20,8 @@ END
 
 DROP PROCEDURE IF EXISTS SearchSale //
 
-CREATE PROCEDURE SearchSale(IN p_client_no BIGINT(20),
-							IN p_employee_no BIGINT(20),
-							IN p_payment_type VARCHAR(10),
+CREATE PROCEDURE SearchSale(IN p_payment_type VARCHAR(10),
 							IN p_total_due DECIMAL(9,2),
-							IN p_total_tax DECIMAL(9,2),
-							IN p_discount TINYINT,
 							IN p_payment DECIMAL(9,2),
 							IN p_is_complete BOOLEAN,
 							IN p_is_void BOOLEAN,
@@ -33,16 +29,12 @@ CREATE PROCEDURE SearchSale(IN p_client_no BIGINT(20),
 BEGIN
 	SELECT * 
 	FROM sale
-        WHERE ((p_client_no IS NULL) OR (client_no = p_client_no))
-        AND ((p_employee_no IS NULL) OR (employee_no = p_employee_no))
-        AND ((p_payment_type IS NULL) OR (payment_type = p_payment_type))
+        WHERE ((p_payment_type IS NULL) OR (payment_type = p_payment_type))
         AND ((p_total_due IS NULL )OR (total_due = p_total_due))
-		AND ((p_total_tax IS NULL) OR (total_tax = p_total_tax))
-		AND ((p_discount IS NULL) OR (discount = p_discount))
         AND ((p_payment IS NULL) OR (payment = p_payment))
         AND ((p_is_complete IS NULL) OR (is_complete = p_is_complete))
 		AND ((p_is_void IS NULL) OR (is_void = p_is_void))
-		AND ((p_timestamp IS NULL) OR (is_timestamp = p_timestamp));
+		AND ((p_timestamp IS NULL) OR (timestamp = p_timestamp));
 END
 //
 

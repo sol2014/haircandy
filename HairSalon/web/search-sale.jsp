@@ -42,10 +42,11 @@ String error_string = (String) userSession.moveAttribute ("sale_search_error");
 	<table border="0" cellspacing="5" cellpadding="0">
 	    <tr>
 		<td align="right" valign="top"><img border="0" src="/HairSalon/images/icons/big/search_white.gif" width="48" height="48"></td>
-		<td align="left"><font size="3"><b>Search for Sales</b><br>
-			Sales.
+		<td align="left"><font size="3"><b>Search for Sales</b></font><br>
+		    Provide the search parameters you would like to use and then press the search button to get a list
+		    of sales that are in the salon database. A new sale can also be created if needed.
 		    <br><br>
-		
+		    
 		    <input type="submit" value="Search" name="sale_action" class="StandardButton"/>
 		    <input type="reset" value="Clear Fields" name="reset_button" class="StandardButton"/>
 		    <input type="submit" value="New Sale" name="sale_action" class="StandardButton"/>
@@ -64,6 +65,7 @@ String error_string = (String) userSession.moveAttribute ("sale_search_error");
 			<table border="0" cellpadding="0" width="250">
 			    <tr>
 				<td align="right"><img border="0" src="/HairSalon/images/icons/small/personal_white.gif" width="16" height="16"></td>
+				<td align="left"><u><b>Sale Details</b></u></td>
 			    </tr>
 			    <tr>
 				<td align="right">Date/Time:</td>
@@ -79,11 +81,11 @@ String error_string = (String) userSession.moveAttribute ("sale_search_error");
 			    </tr>
 			    <tr>
 				<td align="right">Is Complete:</td>
-				<td align="left"><input type="text" name="search_is_complete" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("sale_search_is_complete"))%>"></td>
+				<td align="left"><%=ServletHelper.generateTrueFalseOptions("search_is_complete", ServletHelper.display (userSession.moveAttribute ("sale_search_is_complete")))%></td>
 			    </tr>
 			    <tr>
 				<td align="right">Is Void:</td>
-				<td align="left"><input type="text" name="search_is_void" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("sale_search_is_void"))%>"></td>
+				<td align="left"><%=ServletHelper.generateTrueFalseOptions("search_is_void", ServletHelper.display (userSession.moveAttribute ("sale_search_is_void")))%></td>
 			    </tr>
 			</table>
 		    </div>
@@ -104,9 +106,9 @@ String error_string = (String) userSession.moveAttribute ("sale_search_error");
 			<table width="100%" cellspacing="0" cellpadding="0" class="SearchLine">
 			    <tr align="left">
 				<% if (sales != null && sales.length > 0) { %>
-				<td height="25" nowrap="nowrap" class="Row4"><b><font color="#FFFFFF">&nbsp; Search Results (<%=sales.length%>)</font></b></td>
+				<td height="25" nowrap="nowrap" class="Row4"><b><font color="#FFFFFF">&nbsp;Search Results (<%=sales.length%>)</font></b></td>
 				<% } else { %>
-				<td height="25" nowrap="nowrap" class="Row4"><b><font color="#FFFFFF">&nbsp; Search Results (None)</font></b></td>
+				<td height="25" nowrap="nowrap" class="Row4"><b><font color="#FFFFFF">&nbsp;Search Results (None)</font></b></td>
 				<% } %>
 			    </tr>
 			 <tr>
@@ -114,7 +116,6 @@ String error_string = (String) userSession.moveAttribute ("sale_search_error");
 				    <table width="100%" cellspacing="1" cellpadding="4" border="0">
 					<% if (sales == null || sales.length < 1) { %>
 					<tr align="center" valign="middle">
-					    <td height="30" class="Row7" nowrap="nowrap"></td>
 					    <td colspan="3" align="left" class="Row2"><b>The search generated no results.</b></td>
 					</tr>
 					<% } else { %>

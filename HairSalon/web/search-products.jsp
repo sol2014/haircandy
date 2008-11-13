@@ -50,7 +50,7 @@ String error_string = (String) userSession.moveAttribute ("product_search_error"
 	    <tr>
 		<td align="right" valign="top"><img border="0" src="/HairSalon/images/icons/big/search_white.gif" width="48" height="48"></td>
 		<td align="left"><font size="3"><b>Search for Products</b></font><br>
-		    Provide the search parameters you would like to use and then press the search button to get list
+		    Provide the search parameters you would like to use and then press the search button to get a list
 		    of products that are in the salon database. A new product can also be created if needed.
 		    <br><br>
 

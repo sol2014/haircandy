@@ -71,7 +71,7 @@ public class SaleBean extends DataBean implements Comparable
 	 * The timestamp the sales was produced on.
 	 */
 	private Date timestamp = null;
-	
+
 	/**
 	 *  Default constructor for the sale bean.
 	 */

@@ -114,6 +114,15 @@
     background-image:url(../images/calendar/calendar_cell5.gif);
 }
 
+.CalendarCellException
+{
+    width:80px;
+    height:73px;
+    text-align:right;
+    vertical-align:bottom;
+    background-image:url(../images/calendar/calendar_cell6.gif);
+}
+
 .CalendarCellBottom
 {
     width:80px;

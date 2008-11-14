@@ -374,6 +374,14 @@ public class SessionController
 		return employeeHours;
 	}
 	
+	public static ScheduleExceptionBean loadScheduleException (UserSession session, ScheduleExceptionBean ex)
+	{
+		LogController.write ("SessionController->Loading schedule exception bean...");
+		
+		ScheduleExceptionBean result = (ScheduleExceptionBean)PersistenceController.load (ex);
+		return result;
+	}
+	
 	public static ScheduleHoursBean loadScheduleHours (UserSession session, ScheduleHoursBean scheduleHours)
 	{
 		LogController.write ("SessionController->Loading schedule hours entry...");

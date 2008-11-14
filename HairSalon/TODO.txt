@@ -1,5 +1,11 @@
 TODO List - Flaws, Bugs, Features and Tasks
 -------------------------------------------
+This document was created to keep track of bugs found and resolved during the
+testing phase. Some features were evaluated throughout the process, and some
+were left undone or unresolved because of time constraints. They will be
+analyzed and entered into the defficiency list of our system document. We have
+seperated the resolved and unresolved issues for convenience.
+
 Updated: Sunday, Nov 14th, 2008
 
 Unresolved
@@ -11,163 +17,194 @@ J BUG: Start Time/End Time do not render in the Employee scheduler dialog.
 
 J BUG: Make errors in appointment creation/edit dialog more obvious.
 
-J BUG: Appointment view does not refresh. Nov 14th, 2008
+J BUG: Appointment view does not refresh.
 
-P BUG: Dialog repositioning and sizing must be fixed for all dialogs, its horrible
-  right now.
+P BUG: Dialog repositioning and sizing must be fixed for all dialogs, its
+  horrible right now.
 
-P BUG: Only show alert for 1 record type, always keep latest. Show date column in alert list too.
+P BUG: Only show alert for 1 record type, always keep latest. Show date column
+  in alert list too.
 
 P BUG: Search sale need to work. It currently returns no results.
   > We need to have this working, its going to be needed. Nov 10th, 2008
-  > Thinking of making sales search work in the same way as all other record types. Nov 13th, 2008
+  > Thinking of making sales search work in the same way as all other record
+    types. Nov13
 
-P BUG: When someone is changing Salon Hours or Employee Hours, we should never allow them
-  to edit them outside the limits based on existing scheduled data.
+P BUG: When someone is changing Salon Hours or Employee Hours, we should never
+  allow them to edit them outside the limits based on existing scheduled data.
 
 - FEATURE: Cells need to highlight blue when selected.
 
-- FEATURE: Add a tooltip on cells to show the date/start/end time (if possible).
-  > This feature is non-essential and will make it in if we have time. Nov 10th, 2008
+- FEATURE: Add a tooltip on cells to show the date/start/end time.
+  > This feature is non-essential and will make it in if we have time. Nov10
 
-! FEATURE: User HELP icon that opens seperate page for help in all screens/dialogs.
-  > This is for user friendliness. Nov 10th, 2008
+! FEATURE: User HELP icon that opens seperate page for help in all screens.
+  > This is for user friendliness. Nov10
 
-- TASK: Servlets are unprotected from non-authorizes calls, if we have time we need
-  to also get this done like the tag does.
+- TASK: Servlets are unprotected from non-authorizes calls, if we have time we
+  need to also get this done like the tag does.
 
-- TASK: Fill product and services database with basic salon data! (we need lots of producs and
-  services that MOST salons would have. We could also make the starter wizard let the people
-  pick what product brands they carrie, and we insert only that data.
+- TASK: Fill product and services database with basic salon data! (we need lots
+  of producs and services that MOST salons would have. We could also make the
+  starter wizard let the people pick what product brands they carrie, and we
+  insert only that data.
 
-- TASK: Create a wizard application for installation that will also allow the installer to
-  set the basic Salon information to be inserted into the database before people start to log in.
-  > I think it would be a LOT easier to detect the salon record on the first user login, and this will
-    allow the first user to setup their account, and salon details to start the app off. Nov 12th, 2008
-  > Philippe created the First Time Setup page that we will use as part 2 of the setup procedure. Nov 13th, 2008
+- TASK: Create a wizard application for installation that will also allow the
+  installer to set the basic Salon information to be inserted into the database
+  before people start to log in.
+  > I think it would be a LOT easier to detect the salon record on the first
+    user login, and this will allow the first user to setup their account, and
+    salon details to start the app off. Nov12
+  > Philippe created the First Time Setup page that we will use as part 2 of the
+    setup procedure. Nov13
 
 - TASK: Make sure all pages have proper TITLE, Navigation Position, Menu entry.
 
 - TASK: JavaDoc everything and document javascript to some degree.
-  > Philippe has gone over all hs.objects.* classes, cleaned up javadoc and formatting.
+  > Philippe has gone over all hs.objects.* classes, cleaned up javadoc and
+    formatting. Nov10
 
 - TASK: Check all file headers.
-  > Philippe checked all file headers in hs.objects.* classes.
+  > Philippe checked all file headers in hs.objects.* classes. Nov10
 
 - TASK: Clean up any unwanted code, and WTFs or others...
-  > Philippe cleaned up all unwanted code from hs.objects.* classes.
+  > Philippe cleaned up all unwanted code from hs.objects.* classes. Nov10
 
 Resolved
 --------
 
-- FLAW (RESOLVED): Enforce Limit of Hair Stations (when creating schedule entries) we cannot
-  allow booking of more stylists than we can fit into the salon. Do we really
-  need beauty stations? We have no way to tell the difference between hair
-  and beauty stations right now, so we should just have Stations period.
-  > Philippe fixed by removing the concept of hair stations and beauty stations. This limit
-    would only provide some probably non-essential control to running a business. Most
-    managers would be able to make sure they do not schedule too many people for their
-    salon capacity. Nov 10th, 2008
+- FLAW (RESOLVED): Enforce Limit of Hair Stations (when creating schedule
+  entries) we cannot allow booking of more stylists than we can fit into the
+  salon. Do we really need beauty stations? We have no way to tell the
+  difference between hair and beauty stations right now, so we should just have
+  Stations period.
+  > Philippe fixed by removing the concept of hair stations and beauty stations.
+    This limit would only provide some probably non-essential control to running
+    a business. Most managers would be able to make sure they do not schedule
+    too many people for their salon capacity. Nov10
 
-- FLAW (RESOLVED): We totally forgot to use Employee Availability in the scheduler. It should be displaying
-  something like we use in the appointment schedule (unavailable time). But instead this would be
-  for the staff scheduler, so that the manager does not book outside of the available time.
-  > This flaw has been concidered as absolutely necessary. Joey will work on this. Nov 10th, 2008
-  > Joey and Philippe fixed this flaw, Nov 11th 2008
+- FLAW (RESOLVED): We totally forgot to use Employee Availability in the
+  scheduler. It should be displaying something like we use in the appointment
+  schedule (unavailable time). But instead this would be for the staff 
+  scheduler, so that the manager does not book outside of the available time.
+  > This flaw has been concidered Urgent. Nov10
+  > Joey and Philippe fixed this flaw, Nov11
 
-- FLAW (RESOLVED): We should be taking the Salon business hours and storing them into a new schedule table
-  that stores only the hours of operations for any given day. We should use this table instead
-  to load business hours in all places in the code. If business hour data is not available in
-  the DB, we should create a new entry on-the-fly that uses the salon business hours. This
-  makes sure that we store salon hours for all days, and makes sure changing  business hours
-  after entering data does not change the rendering of previously set days. If we do this though
-  we will then have to allow a way to change business hours for previous days (this requires
-  a new interface somehow to change hours of operation for 1 business day).
-  > This flaw has been concidered as high priority as this is a negative aspect of the schedule
-    information that could cause serious problems in rendering each day. Nov 10th, 2008
-  > Philippe resolved this issue by providing a new bean ScheduleHoursBean and mechanisms
-    to store the business hours based on salon defaults when schedule entries are created. Nov 10th, 2008
-  > Found that this flaw extended to the available hours for employees as well. Nov 11th, 2008
-  > Philippe fixed the problem completely by also taking a snapshot of employee hours and storing
-    them for future lookups for old or future days.
+- FLAW (RESOLVED): We should be taking the Salon business hours and storing 
+  them into a new schedule table that stores only the hours of operations for
+  any given day. We should use this table instead to load business hours in all
+  places in the code. If business hour data is not available in the DB, we
+  should create a new entry on-the-fly that uses the salon business hours. This
+  makes sure that we store salon hours for all days, and makes sure changing 
+  business hours after entering data does not change the rendering of previously
+  set days. If we do this though we will then have to allow a way to change
+  business hours for previous days (this requires a new interface somehow to
+  change hours of operation for 1 business day).
+  > This flaw has been concidered as high priority as this is a negative aspect
+    of the schedule information that could cause serious problems in rendering
+    each day. Nov10
+  > Philippe resolved this issue by providing a new bean ScheduleHoursBean and
+    mechanisms to store the business hours based on salon defaults when schedule
+    entries are created. Nov10
+  > Found that this flaw extended to the available hours for employees. Nov11
+  > Philippe fixed the problem completely by also taking a snapshot of
+    employee hours and storing them for future lookups for old or future days.
 
-- FEATURE (RESOLVED): Make the preferences dialog actually work to set availability and password update.
+- FEATURE (RESOLVED): Make the preferences dialog actually work to set 
+  availability and password update.
   > This must work for user session control and scheduling limits for employees.
-  > Split dialog into change password and change availability. Nov 12th, 2008
+  > Split dialog into change password and change availability. Nov12
 
-! FEATURE (RESOLVED): Add a legend for cell types in the scheduler and calendar views.
-  > This is necessary for good user friendliness. Single images can be made. Nov 10th, 2008
-  > Philippe completed the legends in calendar and scheduler. Nov 14th, 2008
+! FEATURE (RESOLVED): Add a legend for cell types in the scheduler and calendar
+  views.
+  > This is necessary for good user friendliness. Nov10
+  > Philippe completed the legends in calendar and scheduler. Nov14
 
-! BUG (RESOLVED): Do not allow anyone to create an appointment if no services are selected.
-  > Joey fixed this. Nov 13th, 2008
+! BUG (RESOLVED): Do not allow anyone to create an appointment if no services
+  are selected.
+  > Joey fixed this. Nov13
 
-- BUG (RESOLVED): Employees can move schedule entries around, only Managers should be able to.
-  > Joey fixed this bug Nov 10th, 2008
+- BUG (RESOLVED): Employees can move schedule entries around, only Managers
+  should be able to.
+  > Joey fixed this bug Nov10
 
-- BUG (RESOLVED): Fix all the form pages from taking ENTER keystroke to "SAVE" records.
-  > Joey fixed this bug on Nov 10th, 2008
+- BUG (RESOLVED): Fix all the form pages from taking ENTER keystroke to "SAVE"
+  records.
+  > Joey fixed this bug on Nov10
 
 - BUG (RESOLVED): Remove comparator from all the beans.
-  > Philippe cleaned all that up and used Comparable instead. Nov 10th, 2008
+  > Philippe cleaned all that up and used Comparable instead. Nov10
 
-- BUG (RESOLVED): Do not let scheduler or appointment drag cells outside of bounds (dissapear on drop).
-  > Joey fixed this bug. Nov 11th, 2008
+- BUG (RESOLVED): Do not let scheduler or appointment drag cells outside of
+  bounds (dissapear on drop).
+  > Joey fixed this bug. Nov11
 
-- BUG (RESOLVED): Fix blackout so that it uses the document height/width, not the browser viewing area, also, make
-  blackout everytime we show a popup, do not use the same blackout each time.
-  > Philippe fixed this issue well enough for our purposes, the blackouts now take the full
-    size of he browser window, but it does not resize with the browser. Nov 12th, 2008
+- BUG (RESOLVED): Fix blackout so that it uses the document height/width, not
+  the browser viewing area, also, make blackout everytime we show a popup, do
+  not use the same blackout each time.
+  > Philippe fixed this issue well enough for our purposes, the blackouts now
+    take the full size of he browser window, but it does not resize with the 
+    browser. Nov12
 
-- BUG (RESOLVED): The cells in Employee Schedule view turn from Blue to Green after first refresh.
-  > Joey fixed this bug. Nov 12th, 2008
+- BUG (RESOLVED): The cells in Employee Schedule view turn from Blue to Green 
+  after first refresh.
+  > Joey fixed this bug. Nov12
 
-- BUG (RESOLVED): Add the duration Hour+Minute Combo boxes for Services maintain and create pages.
-  > Philippe resolved this. Nov 12th, 2008
+- BUG (RESOLVED): Add the duration Hour+Minute Combo boxes for Services 
+  maintain and create pages.
+  > Philippe resolved this. Nov12
 
-- BUG (RESOLVED): Make sure alerts can be deleted one by one, or all at once (or by type?)
-  > Must have this available to managers. Nov 10th, 2008
-  > Deleting one works. Nov 14th, 2008
-  > Delete all works for manager, Nov 14th, 2008
+- BUG (RESOLVED): Make sure alerts can be deleted one by one, or all at once.
+  > Must have this available to managers. Nov10
+  > Deleting one works. Nov14
+  > Delete all works for manager, Nov14
 
-- BUG (RESOLVED): Pages are not protected by the TAG that is supposed to validate employees.
+- BUG (RESOLVED): Pages are not protected by the TAG that is supposed to
+  validate employees.
   > Joey fixed this one by adding to all JSPs.
 
-! BUG (RESOLVED): Dialog boxes need to have input fields cleared if used twice or more.
-  > Joey resolved these issues. Nov 12th, 2008
+! BUG (RESOLVED): Dialog boxes need to have input fields cleared if used twice
+  or more.
+  > Joey resolved these issues. Nov12
 
-! BUG (RESOLVED): Delete button in appointment dialog needs to be hidden when creating new entry.
-  > Joey fixed this. Nov 12, 2008
+! BUG (RESOLVED): Delete button in appointment dialog needs to be hidden when 
+  creating new entry.
+  > Joey fixed this. Nov12
 
-! BUG (RESOLVED): In a one hour availability, if we use 45 minutes in an appointment, then we try
-  and add a 15 minute service, it will not allow us.
-  > Philippe fixed the bug in the servlet that was causing this. Nov 13th, 2008
+! BUG (RESOLVED): In a one hour availability, if we use 45 minutes in an
+  appointment, then we try and add a 15 minute service, it will not allow us.
+  > Philippe fixed the bug in the servlet that was causing this. Nov13
 
-! BUG (RESOLVED): When deleting schedule entries, or moving them, we are not even checking if there
-  is already booked appointments data for those entries.
-  > Philippe and Joey fixed this bug together. Nov 13th, 2008
+! BUG (RESOLVED): When deleting schedule entries, or moving them, we are not
+  even checking if there is already booked appointments data for those entries.
+  > Philippe and Joey fixed this bug together. Nov13
 
-- TASK (RESOLVED): Complete server and client side checking, especially for numerical values. (dont allow alpha in number box)
-  > Philippe resolved this task by adding a decimal/number checker in tools.js. Nov 12th, 2008
+- TASK (RESOLVED): Complete server and client side checking, especially for 
+  numerical values. (dont allow alpha in number box)
+  > Philippe resolved this task by adding a decimal/number checker in 
+    tools.js. Nov12
 
-- TASK (RESOLVED): Make sure we are using the proper search parameters for all search screens and dialogs.
-  > Philippe completed this and removed some in services and products. Nov 12th, 2008
+- TASK (RESOLVED): Make sure we are using the proper search parameters for all
+  search screens and dialogs.
+  > Philippe completed this and removed some in services and products. Nov12
 
 
 Backburner
 ----------
 
-- FEATURE: The manager should have a quick way to book a schedule day quickly based on
-  the employee availability records.
-  > This feature would certainly be useful, however is lower priority at this point. Nov 10th, 2008
+- FEATURE: The manager should have a quick way to book a schedule day quickly 
+  based on the employee availability records.
+  > This feature would certainly be useful, however is lower priority at this 
+    point. Nov10
 
-- FEATURE: Finish any alerts that we need to create for the user throughout the app.
-  > Non essential at this point. We have inventory alerts, and more could be created
-    but there are time constraints. Nov 10th, 2008
-  > Inventory alerts will be the only ones based on time. Nov 14th, 2008
+- FEATURE: Finish any alerts that we need to create for the user throughout 
+  the app.
+  > Non essential at this point. We have inventory alerts, and more could be
+    created but there are time constraints. Nov10
+  > Inventory alerts will be the only ones based on time. Nov14
 
 - FLAW: Exceptions are non-repeatable, and they must be constantly managed
   by the employees and managers. Technically exceptions should not have
   years, if they do, we should have a flag for "Once" or "Repeat" so that
   when the exception passes, we create a new one.
-  > We concidered this a minor issue, we do not have time to resolve. Nov 10th, 2008
+  > We concidered this a minor issue, we do not have time to resolve. Nov10

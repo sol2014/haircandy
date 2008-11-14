@@ -11,6 +11,9 @@ Updated: Sunday, Nov 14th, 2008
 Unresolved
 ----------
 
+J BUG: Refresh is causing almost unusable performance in appointment
+  and scheduler screens.
+
 J BUG: Input checking in all Dialogs must highlight fields RED when finishing.
 
 J BUG: Start Time/End Time do not render in the Employee scheduler dialog.

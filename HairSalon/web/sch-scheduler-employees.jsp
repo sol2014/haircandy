@@ -83,14 +83,14 @@ else
 
 <script language="javascript" src="js/scheduler-employees-addin.js"></script>
 <script language="javascript" src="js/time-addin.js"></script>
-
 <script>
     function getMatrix()
     {
         function fillMatrix(content)
         {
             //document.getElementById("matrix").innerHTML = "";
-            setInnerHTML(document.getElementById("matrix"),content);
+            //setInnerHTML(document.getElementById("matrix"),content);
+            set_innerHTML("matrix",content);
         }
         var messager = new Ajaxer("text",null,fillMatrix,null);
         var queryString="date=<%=request.getParameter("date")%>";

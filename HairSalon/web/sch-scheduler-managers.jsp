@@ -107,7 +107,8 @@ Date endTime = shb.getEndTime();
         function fillMatrix(content)
         {
             //document.getElementById("matrix").innerHTML = "";
-            setInnerHTML(document.getElementById("matrix"),content);
+            //setInnerHTML(document.getElementById("matrix"),content);
+            set_innerHTML("matrix",content);
         }
         var messager = new Ajaxer("text",null,fillMatrix,null);
         var queryString="date=<%=request.getParameter("date")%>";

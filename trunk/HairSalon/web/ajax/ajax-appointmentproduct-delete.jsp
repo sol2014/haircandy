@@ -43,11 +43,11 @@
 		</tr>
 		<% for(ProductBean pb: searchResults.keySet ()) { %>
 		<tr align="right" valign="middle">
-		    <td height="30" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/product_white.gif" width="16" height="16" />&nbsp;</td>
-		    <td align="left" class="Row2"><span class="SearchLink"><%=ServletHelper.display (pb.getName ())%></span></td>
-		    <td nowrap="nowrap" class="Row7"><input type="text" size="4" onKeyUp="return calculateProductSubTotal()" id="sr_<%=ServletHelper.display(pb.getProductNo())%>" value="<%=ServletHelper.display(searchResults.get (pb))%>" style="text-align:right" /></td>
-		    <td nowrap="nowrap" class="Row7"><%=ServletHelper.displayPrice (pb.getPrice ())%></td>
-		    <td nowrap="nowrap" class="Row7"><img style="cursor:pointer" src="/HairSalon/images/icons/small/remove_white.gif" onclick="deleteProduct('<%=ServletHelper.display(pb.getProductNo())%>')" title="Delete this product from the list." /></td>
+		    <td height="30" valign="top" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/product_white.gif" width="16" height="16" />&nbsp;</td>
+		    <td align="left" valign="top" class="Row2"><span class="SearchLink"><%=ServletHelper.display (pb.getName ())%></span></td>
+		    <td nowrap="nowrap" valign="top" class="Row7"><input type="text" size="4" onKeyUp="return calculateProductSubTotal()" id="sr_<%=ServletHelper.display(pb.getProductNo())%>" value="<%=ServletHelper.display(searchResults.get (pb))%>" style="text-align:right" /></td>
+		    <td nowrap="nowrap" valign="top" class="Row7"><%=ServletHelper.displayPrice (pb.getPrice ())%></td>
+		    <td nowrap="nowrap" valign="top" class="Row7"><img style="cursor:pointer" src="/HairSalon/images/icons/small/remove_white.gif" onclick="deleteProduct('<%=ServletHelper.display(pb.getProductNo())%>')" title="Delete this product from the list." /></td>
 		</tr>
 		<% } %>
 	    </table>

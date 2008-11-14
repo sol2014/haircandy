@@ -61,10 +61,10 @@
                 
                 <% for (AvailabilityExceptionBean e : searchResults) {%>
                 <tr align="right" valign="middle">
-                    <td height="30" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/exception_white.gif" width="16" height="16" />&nbsp;</td>
-                    <td align="left" class="Row2"><span class="SearchLink"><%=ServletHelper.display(e.getDate())%></span></td>
-                    <td align="left" nowrap="nowrap" class="Row7"><%=ServletHelper.display(e.getReason ())%></td>
-		    <td nowrap="nowrap" class="Row7"><img style="cursor:pointer" src="/HairSalon/images/icons/small/remove_white.gif" onclick="deleteException('<%=ServletHelper.display(e.getDate())%>','<%=ServletHelper.display(e.getReason())%>')" title="Delete this availability exception from the list." /></td>
+                    <td height="30" valign="top" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/exception_white.gif" width="16" height="16" />&nbsp;</td>
+                    <td align="left" valign="top" class="Row2"><span class="SearchLink"><%=ServletHelper.display(e.getDate())%></span></td>
+                    <td align="left" valign="top" nowrap="nowrap" class="Row7"><%=ServletHelper.display(e.getReason ())%></td>
+		    <td nowrap="nowrap" valign="top" class="Row7"><img style="cursor:pointer" src="/HairSalon/images/icons/small/remove_white.gif" onclick="deleteException('<%=ServletHelper.display(e.getDate())%>','<%=ServletHelper.display(e.getReason())%>')" title="Delete this availability exception from the list." /></td>
                 </tr>
                 <% }%>
                 <% }%>

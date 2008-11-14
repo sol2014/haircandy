@@ -14,6 +14,8 @@ Unresolved
 J BUG: Refresh is causing almost unusable performance in appointment
   and scheduler screens.
 
+- BUG: Next/Previous buttons in Calendar/Scheduler need to all work.
+
 J BUG: Input checking in all Dialogs must highlight fields RED when finishing.
 
 J BUG: Start Time/End Time do not render in the Employee scheduler dialog.
@@ -25,9 +27,6 @@ J BUG: Appointment view does not refresh.
 P BUG: Dialog repositioning and sizing must be fixed for all dialogs, its
   horrible right now.
 
-P BUG: Only show alert for 1 record type, always keep latest. Show date column
-  in alert list too.
-
 P BUG: Search sale need to work. It currently returns no results.
   > We need to have this working, its going to be needed. Nov 10th, 2008
   > Thinking of making sales search work in the same way as all other record
@@ -35,8 +34,6 @@ P BUG: Search sale need to work. It currently returns no results.
 
 P BUG: When someone is changing Salon Hours or Employee Hours, we should never
   allow them to edit them outside the limits based on existing scheduled data.
-
-- FEATURE: Cells need to highlight blue when selected.
 
 - FEATURE: Add a tooltip on cells to show the date/start/end time.
   > This feature is non-essential and will make it in if we have time. Nov10
@@ -118,12 +115,16 @@ Resolved
   > This must work for user session control and scheduling limits for employees.
   > Split dialog into change password and change availability. Nov12
 
-! FEATURE (RESOLVED): Add a legend for cell types in the scheduler and calendar
+- FEATURE (RESOLVED): Add a legend for cell types in the scheduler and calendar
   views.
   > This is necessary for good user friendliness. Nov10
   > Philippe completed the legends in calendar and scheduler. Nov14
 
-! BUG (RESOLVED): Do not allow anyone to create an appointment if no services
+- BUG (RESOLVED): Only show alert for 1 record type, always keep latest. Show date column
+  in alert list too.
+  > Fixed, it will delete any type+record alert. Nov14
+
+- BUG (RESOLVED): Do not allow anyone to create an appointment if no services
   are selected.
   > Joey fixed this. Nov13
 
@@ -166,19 +167,19 @@ Resolved
   validate employees.
   > Joey fixed this one by adding to all JSPs.
 
-! BUG (RESOLVED): Dialog boxes need to have input fields cleared if used twice
+- BUG (RESOLVED): Dialog boxes need to have input fields cleared if used twice
   or more.
   > Joey resolved these issues. Nov12
 
-! BUG (RESOLVED): Delete button in appointment dialog needs to be hidden when 
+- BUG (RESOLVED): Delete button in appointment dialog needs to be hidden when 
   creating new entry.
   > Joey fixed this. Nov12
 
-! BUG (RESOLVED): In a one hour availability, if we use 45 minutes in an
+- BUG (RESOLVED): In a one hour availability, if we use 45 minutes in an
   appointment, then we try and add a 15 minute service, it will not allow us.
   > Philippe fixed the bug in the servlet that was causing this. Nov13
 
-! BUG (RESOLVED): When deleting schedule entries, or moving them, we are not
+- BUG (RESOLVED): When deleting schedule entries, or moving them, we are not
   even checking if there is already booked appointments data for those entries.
   > Philippe and Joey fixed this bug together. Nov13
 

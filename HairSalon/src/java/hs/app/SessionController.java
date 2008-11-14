@@ -489,6 +489,14 @@ public class SessionController
 		return result;
 	}
 
+	public static boolean deleteAlerts (UserSession session)
+	{
+		LogController.write ("SessionController->Deleting alerts...");
+		boolean result = false;
+		result = PersistenceController.delete (new AlertBean ());
+		return result;
+	}
+	
 	public static boolean deleteAlert (UserSession session, AlertBean alert)
 	{
 		LogController.write ("SessionController->Deleting alert...");
@@ -1418,5 +1426,10 @@ public class SessionController
 			return null;
 		
 		return hash;
+	}
+	
+	public static Hashtable<int, CalendarDayStatus> getCalendarStatus (UserSession session, int month, int year)
+	{
+		Hashtable<int, CalendarDayStatus> 
 	}
 }

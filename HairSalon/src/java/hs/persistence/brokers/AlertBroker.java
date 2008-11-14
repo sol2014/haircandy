@@ -55,7 +55,6 @@ public class AlertBroker extends DatabaseBroker implements BrokerInterface
 			else
 			{
 				LogController.write (this, "Alert bean has no identification type!");
-				
 				super.returnConnection (connection);
 				return null;
 			}
@@ -197,7 +196,6 @@ public class AlertBroker extends DatabaseBroker implements BrokerInterface
 			
 			if (alert.getAlertNo () != null)
 			{
-				// We are going to be deleting all of them.
 				CallableStatement statement = connection.prepareCall ("{call DeleteAlert(?)}");
 				
 				statement.setInt (1, alert.getAlertNo ());
@@ -215,8 +213,12 @@ public class AlertBroker extends DatabaseBroker implements BrokerInterface
 			}
 			else
 			{
-				LogController.write (this, "Attempted to delete an alert with no ID.");
-				result = false;
+				// We are going to be deleting all of them.
+				CallableStatement statement = connection.prepareCall ("{call DeleteAlerts()}");
+				
+				statement.executeUpdate ();
+				
+				result = true;
 			}
 		}
 		catch (SQLException e)

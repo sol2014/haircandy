@@ -31,6 +31,8 @@ calendar.set(year, month, 1);
 int firstWeekday = calendar.get(Calendar.DAY_OF_WEEK) - 1;
 int dayIndex = 0;
 int totalDays = CoreTools.getDaysInMonth(year, month);
+
+Hashtable<int, CalendarDayStatus> statusTable = SessionController.getCalendarStatus (userSession, month, year);
 %>
 
 <font face="Trebuchet MS">
@@ -121,7 +123,7 @@ for (int row = 0; row < 6; row++)
 	    String datestr = (dayIndex - firstWeekday + 1)+"/"+(month+1)+"/"+year;
 	    AppointmentBean appointment = new AppointmentBean ();
 	    appointment.setDate (CoreTools.getDate (datestr));
-	    AppointmentBean[] appointments = SessionController.searchAppointments (userSession, appointment);
+	    AppointmentBean[] appointments = SessionController.searchAppointmentsByMonth (userSession, appointment);
 	    ScheduleExceptionBean exception2 = new ScheduleExceptionBean ();
 	    exception2.setDate (CoreTools.getDate (datestr));
 	    ScheduleExceptionBean[] exceptions = SessionController.searchScheduleExceptions (userSession, exception2);

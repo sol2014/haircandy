@@ -44,6 +44,13 @@ String error_string = (String) userSession.moveAttribute ("alert_error");
 	queryString+="alert_no="+escape(element.id)+"&";
 	messager.request ("alert", queryString);
     }
+    
+    function deleteAllAlerts ()
+    {
+	var messager = new Ajaxer("text",null,doneDeletingAlert,null);
+	var queryString="alert_action=DeleteAll&";
+	messager.request ("alert", queryString);
+    }
 </script>
 
 <font face="Trebuchet MS" size="2">
@@ -114,7 +121,10 @@ String error_string = (String) userSession.moveAttribute ("alert_error");
 		<td></td>
 		<td width="100%" align="right">
 		    <br />
-		    <div align="right"><input type="button" onclick="deleteAllAlerts()" value="Delete All" class="StandardButton"/></div>
+		    <div align="right"><input type="button" id="delete_button" onclick="deleteAllAlerts()" value="Delete All" class="StandardButton"/></div>
+		    <% if (alerts == null || alerts.length < 1) { %>
+		    <script>document.getElementById("delete_button").disabled = true;</script>
+		    <% } %>
 		</td>
 	    </tr>
 	    <% }%>

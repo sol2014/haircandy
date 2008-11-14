@@ -38,6 +38,14 @@ BEGIN
 END
 //
 
+DROP PROCEDURE IF EXISTS DeleteAlerts//
+
+CREATE PROCEDURE DeleteAlerts ()
+BEGIN
+    DELETE FROM alert;e
+END
+//
+
 DROP PROCEDURE IF EXISTS DeleteAlert//
 
 CREATE PROCEDURE DeleteAlert (IN p_alert_no BIGINT(20))

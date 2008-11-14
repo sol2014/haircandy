@@ -22,17 +22,20 @@ import java.sql.*;
  */
 public abstract class DatabaseBroker implements BrokerInterface
 {
-	protected DataConnectionPool connectionPool;
+	//protected DataConnectionPool connectionPool;
+	protected MultithreadedJDBCConnectionPool connectionPool;
 
 	public DatabaseBroker ()
 	{
-		connectionPool = DataConnectionPool.getInstance ();
+		//connectionPool = DataConnectionPool.getInstance ();
+		connectionPool = MultithreadedJDBCConnectionPool.getConnectionPool();
 	}
 
-	protected Connection getConnection () throws SQLException
+	protected Connection getConnection () throws Exception
 	{
 		return connectionPool.getConnection ();
 	}
+	
 
 	protected void returnConnection (Connection connection)
 	{

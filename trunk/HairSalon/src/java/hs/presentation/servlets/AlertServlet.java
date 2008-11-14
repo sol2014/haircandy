@@ -25,8 +25,19 @@ public class AlertServlet extends DispatcherServlet
 	{
 		setActionAttribute ("alert_action");
 		addExternalAction ("Delete", "performDelete");
+		addExternalAction ("DeleteAll", "performDeleteAll");
 	}
 
+	public void performDeleteAll (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException
+	{
+		LogController.write (this, "[USER REQUEST] Performing all alert delete.");
+		
+		SessionController.deleteAlerts(userSession);
+		
+		forward ("welcome-employee.jsp", request, response);
+	}
+	
 	public void performDelete (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -46,14 +57,7 @@ public class AlertServlet extends DispatcherServlet
 			return;
 		}
 		
-		if (SessionController.deleteAlert (userSession, alert))
-		{
-			
-		}
-		else
-		{
-			
-		}
+		SessionController.deleteAlert (userSession, alert);
 		
 		forward ("welcome-employee.jsp", request, response);
 	}

@@ -74,7 +74,7 @@ Date endTime = shb.getEndTime();
     <table>
 	<tr>
 	    <td align="right"><img border="0" src="/HairSalon/images/icons/small/availability_white.gif" width="16" height="16"></td>
-	    <td align="left"><u><b>Today's Schedule</b></u></td>
+	    <td align="left"><u><b>Change Today's Hours</b></u></td>
 	</tr>
 	<% if (userSession.getEmployee().getRole().equals("Manager")) {%>
 	<tr>

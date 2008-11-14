@@ -73,7 +73,7 @@ int totalDays = CoreTools.getDaysInMonth(year, month);
 	</tr>
 	<tr>
 	    <td>
-		<table align="left" valign="top" border="0" cellspacing="0" cellpadding="0">
+		<table border="0" cellspacing="0" cellpadding="0">
 		    <tr>
 			<td class="CalendarTopLeft"></td>
 			<td class="CalendarHeader">
@@ -186,6 +186,10 @@ for (int row = 0; row < 6; row++)
 			<td class="CalendarBottomRight"></td>
 		    </tr>
 		</table>
+		<br/>&nbsp;<img src="/HairSalon/images/calendar/legend_white.gif">&nbsp;Empty&nbsp;
+		<img src="/HairSalon/images/calendar/legend_dark.gif">&nbsp;Unavailable&nbsp;
+		<img src="/HairSalon/images/calendar/legend_green.gif">&nbsp;Unlocked&nbsp;
+		<img src="/HairSalon/images/calendar/legend_exception.gif">&nbsp;Exception&nbsp;
 	    </td>
 	</tr>
     </table>

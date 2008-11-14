@@ -66,7 +66,7 @@ else
     <table>
 	<tr>
 	    <td align="right"><img border="0" src="/HairSalon/images/icons/small/availability_white.gif" width="16" height="16"></td>
-	    <td align="left"><u><b>Today's Schedule</b></u></td>
+	    <td align="left"><u><b>Change Today's Hours</b></u></td>
 	</tr>
 	<tr>
 	    <td align="right" nowrap="nowrap"><b>My Hours:</b></td>

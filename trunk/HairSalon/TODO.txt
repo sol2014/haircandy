@@ -34,16 +34,10 @@ Unresolved
 ! FEATURE: User HELP icon that opens seperate page for help in all screens/dialogs.
   > This is for user friendliness. Nov 10th, 2008
 
-! BUG: In a one hour availability, if we use 45 minutes in an appointment, then we try
-  and add a 15 minute service, it will not allow us.
-
 ! BUG: When someone is changing Salon Hours or Employee Hours, we should never allow them
   to edit them outside the limits based on existing scheduled data.
 
 ! BUG: Only show alert for 1 record type, always keep latest. Show date column in alert list too.
-
-- BUG: Make sure that all search result table cells are top aligned, and use nowrap and have
-  proper result images.
 
 ! BUG: When deleting schedule entries, or moving them, we are not even checking if there
   is already booked appointments data for those entries.
@@ -53,8 +47,6 @@ Unresolved
 ! BUG: Delete button in appointment dialog needs to be hidden when creating new entry.
 
 ! BUG: Start Time/End Time do not render in the Employee scheduler dialog.
-
-! BUG: Dialog boxes need to have input fields cleared if used twice or more.
 
 ! BUG: Make errors in appointment creation/edit dialog more obvious.
 
@@ -74,6 +66,7 @@ Unresolved
   set the basic Salon information to be inserted into the database before people start to log in.
   > I think it would be a LOT easier to detect the salon record on the first user login, and this will
     allow the first user to setup their account, and salon details to start the app off. Nov 12th, 2008
+  > Philippe created the First Time Setup page that we will use as part 2 of the setup procedure. Nov 13th, 2008
 
 - TASK: Make sure all pages have proper TITLE, Navigation Position, Menu entry.
 
@@ -147,11 +140,18 @@ Resolved
 - BUG (RESOLVED): The cells in Employee Schedule view turn from Blue to Green after first refresh.
   > Joey fixed this bug. Nov 12th, 2008
 
-- BUG: Add the duration Hour+Minute Combo boxes for Services maintain and create pages.
+- BUG (RESOLVED): Add the duration Hour+Minute Combo boxes for Services maintain and create pages.
   > Philippe resolved this. Nov 12th, 2008
 
 - BUG (RESOLVED): Pages are not protected by the TAG that is supposed to validate employees.
   > Joey fixed this one by adding to all JSPs.
+
+! BUG: Dialog boxes need to have input fields cleared if used twice or more.
+  > Joey resolved these issues. Nov 12th, 2008
+
+! BUG (RESOLVED): In a one hour availability, if we use 45 minutes in an appointment, then we try
+  and add a 15 minute service, it will not allow us.
+  > Philippe fixed the bug in the servlet that was causing this. Nov 13th, 2008
 
 - TASK (RESOLVED): Complete server and client side checking, especially for numerical values. (dont allow alpha in number box)
   > Philippe resolved this task by adding a decimal/number checker in tools.js. Nov 12th, 2008

@@ -260,6 +260,11 @@
                     <td class="SchedulerBottomRight"></td>
                 </tr>
             </table>
+	    <br/>
+	    &nbsp;<img src="/HairSalon/images/scheduler/legend_available.gif">&nbsp;Available&nbsp;
+	    <img src="/HairSalon/images/scheduler/legend_unavailable.gif">&nbsp;Unavailable&nbsp;
+	    <img src="/HairSalon/images/scheduler/legend_green.gif">&nbsp;Unlocked&nbsp;
+	    <img src="/HairSalon/images/scheduler/legend_gray.gif">&nbsp;Locked&nbsp;
             <% }%>
         </td>
     </tr>

@@ -199,6 +199,34 @@
 	background-image:url(../images/scheduler/scheduler_graycell1.gif);
 }
 
+.SchedulerCellSectionTop_Booked2
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_purplecell2.gif);
+}
+
+.SchedulerCellSectionMiddle_Booked2
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_purplecell4.gif);
+}
+
+.SchedulerCellSectionBottom_Booked2
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_purplecell3.gif);
+}
+
+.SchedulerCellSectionSingle_Booked2
+{
+	width:90px;
+	height:8px;
+	background-image:url(../images/scheduler/scheduler_purplecell1.gif);
+}
+
 .SchedulerCellSectionTop_Error
 {
 	width:90px;

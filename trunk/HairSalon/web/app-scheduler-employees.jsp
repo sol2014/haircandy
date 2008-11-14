@@ -28,7 +28,7 @@
 UserSession userSession = (UserSession) session.getAttribute("user_session");
 int recordNo = 0;
 
-userSession.setCurrentPosition(SessionPositions.SchScheduler);
+userSession.setCurrentPosition(SessionPositions.AppScheduler);
 String page_title = "Appointments";
 
 Date date = CoreTools.getDate (request.getParameter("date"));

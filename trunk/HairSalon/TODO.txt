@@ -34,6 +34,9 @@ Unresolved
 ! FEATURE: User HELP icon that opens seperate page for help in all screens/dialogs.
   > This is for user friendliness. Nov 10th, 2008
 
+! BUG: In a one hour availability, if we use 45 minutes in an appointment, then we try
+  and add a 15 minute service, it will not allow us.
+
 ! BUG: When someone is changing Salon Hours or Employee Hours, we should never allow them
   to edit them outside the limits based on existing scheduled data.
 

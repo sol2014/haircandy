@@ -1023,6 +1023,9 @@ public class SessionController
 		Date startTime = hours.getStartTime ();
 		Date endTime = hours.getEndTime ();
 		
+		if (startTime.equals (endTime))
+			return null;
+		
 		if (schedule == null)
 		{
 			ScheduleBean sch = new ScheduleBean ();
@@ -1051,6 +1054,11 @@ public class SessionController
 				entry.setEndTime (endTime);
 				unavailable.add (entry);
 				
+				for (ScheduleBean sb : unavailable)
+				{
+					LogController.write ("NO SCHEDULE, Unavailable: "+sb.getStartTime ()+":"+sb.getEndTime());
+				}
+
 				hash.put (employee, unavailable);
 			}
 			
@@ -1059,68 +1067,44 @@ public class SessionController
 		
 		for (EmployeeBean employee : schedule.keySet ())
 		{
-			
-			Date currentTime = null;
-			
-			ArrayList<ScheduleBean> working = schedule.get(employee);
 			ArrayList<Date> times = new ArrayList<Date> ();
+			ArrayList<ScheduleBean> working = schedule.get(employee);
 			ArrayList<ScheduleBean> unavailable = new ArrayList<ScheduleBean> ();
 			
-			LogController.write ("Adding Start Time of Day: "+startTime);
+			Date lastTime = null;
+			
 			times.add (startTime);
+			lastTime = startTime;
+			
+			Collections.sort(working, new ScheduleStartTimeComparator());
+			
+			boolean addedStart = false;
 			
 			if (working != null && !startTime.equals (endTime))
 			{
-				LogController.write ("We have schedule data, and the daytime hours are valid.");
 				for (ScheduleBean entry : working)
 				{
-					LogController.write ("Processing slot.");
-					// This is 1 schedule entry.
-					Date st = entry.getStartTime ();
-					Date et = entry.getEndTime ();
-					
-					if (currentTime == null)
+					if (!lastTime.equals (entry.getStartTime ()))
 					{
-						LogController.write ("Setting current time as end time of slot found: "+et);
-						currentTime = et;
-						
-						LogController.write ("Adding schedule slot: "+st+":"+et);
-						times.add (st);
-						times.add (et);
+						times.add (entry.getStartTime ());
+						addedStart = true;
 					}
 					else
-					{
-						boolean added = false;
-						
-						// we have inserted a time before, we will need to see where this fits in.
-						for (int i = 0; i < times.size (); i++)
-						{
-							Date cycle = times.get (i);
-							int index = times.indexOf (cycle);
-							
-							if (!st.after (cycle))
-							{
-								// This should be inserted before cycle
-								
-								LogController.write ("Adding schedule slot: "+st+":"+et);
-								
-								times.add (index, et);
-								times.add (index, st);
-								i += 2;
-								added = true;
-							}
-						}
-						
-						if (!added)
-						{
-							times.add (st);
-							times.add (et);
-						}
-					}
+						addedStart = false;
+					
+					if (!addedStart)
+						times.remove (times.size()-1);
+					
+					times.add (entry.getEndTime ());
+					lastTime = entry.getEndTime ();
 				}
 			}
 			
-			times.add (endTime);
+			// Now, we will have our final unavailable slot either 
+			if (lastTime != null && !lastTime.equals (endTime))
+				times.add (endTime);
+			else
+				times.remove (times.size()-1);
 			
 			// Now we have all the times in order, lets make the unavailable time entries.
 			while (!times.isEmpty ())
@@ -1134,6 +1118,11 @@ public class SessionController
 				// Make sure this entry has actual time.
 				if (!entry.getStartTime ().equals (entry.getEndTime()) && entry.getStartTime ().before (entry.getEndTime ()))
 					unavailable.add (entry);
+			}
+			
+			for (ScheduleBean sb : unavailable)
+			{
+				LogController.write ("WITH SCHEDULE, Unavailable ["+employee.getEmployeeNo ()+"]:"+sb.getStartTime ()+":"+sb.getEndTime());
 			}
 			
 			hash.put (employee, unavailable);
@@ -1212,10 +1201,20 @@ public class SessionController
 				
 				AppointmentBean[] apps = searchAppointments (session, app);
 				
+				boolean fails = false;
+				
 				// If we have appointment entries, include this schedule entry for the final list.
-				if (apps != null && apps.length > 0)
+				for (AppointmentBean ab : apps)
 				{
-					// We have entries! Its unmovable!
+					if (ab.getStartTime ().after (entry.getStartTime ()) && ab.getStartTime ().before (entry.getEndTime ()))
+						fails = true;
+					
+					if (ab.getEndTime ().after (entry.getStartTime ()) && ab.getEndTime ().before (entry.getEndTime ()))
+						fails = true;
+				}
+				
+				if (fails)
+				{
 					newList.add (entry);
 				}
 			}
@@ -1254,11 +1253,28 @@ public class SessionController
 				
 				AppointmentBean[] apps = searchAppointments (session, app);
 				
-				// If we have appointment entries, include this schedule entry for the final list.
 				if (apps == null || apps.length < 1)
 				{
 					// We have no entries! Its movable!
 					newList.add (entry);
+				}
+				else
+				{
+					boolean fails = false;
+					
+					for (AppointmentBean ab : apps)
+					{
+						if (ab.getStartTime ().after (entry.getStartTime ()) && ab.getStartTime ().before (entry.getEndTime ()))
+							fails = true;
+
+						if (ab.getEndTime ().after (entry.getStartTime ()) && ab.getEndTime ().before (entry.getEndTime ()))
+							fails = true;
+					}
+
+					if (!fails)
+					{
+						newList.add (entry);
+					}
 				}
 			}
 			

@@ -120,9 +120,9 @@ String error_string = (String) userSession.moveAttribute ("service_error");
 					<% for (ServiceBean service : services) { %>
 					<tr align="right" valign="middle">
 					    <td height="30" valign="top" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/result.gif" width="16" height="16" />&nbsp;</td>
-					    <td align="left" nowrap="nowrap" class="Row2"><span class="SearchLink"><a href="service?service_action=Load&service_no=<%= service.getServiceNo ()%>" class="SearchLink"><%= service.getName ()%></a></span></td>
+					    <td align="left" valign="top" nowrap="nowrap" class="Row2"><span class="SearchLink"><a href="service?service_action=Load&service_no=<%= service.getServiceNo ()%>" class="SearchLink"><%= service.getName ()%></a></span></td>
 					    <td align="left" valign="top" class="Row7"><%=ServletHelper.display (service.getDescription ())%></td>
-					    <td nowrap="nowrap" class="Row7"><%=ServletHelper.display (service.getDuration ())%>m</td>
+					    <td nowrap="nowrap" valign="top" class="Row7"><%=ServletHelper.display (service.getDuration ())%>m</td>
 					    <td nowrap="nowrap" valign="top" class="Row7"><%=ServletHelper.displayPrice (service.getPrice ())%></td>
 					</tr>
 					<% }%>

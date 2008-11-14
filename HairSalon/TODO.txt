@@ -5,15 +5,11 @@ Updated: Sunday, Nov 12th, 2008
 Unresolved
 ----------
 
-- FLAW: Exceptions are non-repeatable, and they must be constantly managed
-  by the employees and managers. Technically exceptions should not have
-  years, if they do, we should have a flag for "Once" or "Repeat" so that
-  when the exception passes, we create a new one.
-  > We concidered this a minor issue, we do not have time to resolve. Nov 10th, 2008
-
 ! BUG: Search sale need to work. It currently returns no results.
   > We need to have this working, its going to be needed. Nov 10th, 2008
   > Thinking of making sales search work in the same way as all other record types. Nov 13th, 2008
+
+! BUG: Salon is not saving.
 
 ! BUG: When someone is changing Salon Hours or Employee Hours, we should never allow them
   to edit them outside the limits based on existing scheduled data.
@@ -31,16 +27,12 @@ Unresolved
 ! BUG: Dialog repositioning and sizing must be fixed for all dialogs, its horrible
   right now.
 
-- FEATURE: The manager should have a quick way to book a schedule day quickly based on
-  the employee availability records.
-  > This feature would certainly be useful, however is lower priority at this point. Nov 10th, 2008
-
-- FEATURE: Finish any alerts that we need to create for the user throughout the app.
-  > Non essential at this point. We have inventory alerts, and more could be created
-    but there are time constraints. Nov 10th, 2008
-
-! FEATURE: Make sure alerts can be deleted one by one, or all at once (or by type?)
+! BUG: Make sure alerts can be deleted one by one, or all at once (or by type?)
   > Must have this available to managers. Nov 10th, 2008
+
+- BUG: Appointment view does not refresh. Nov 14th, 2008
+
+- FEATURE: Cells need to highlight blue when selected.
 
 - FEATURE: Add a tooltip on cells to show the date/start/end time (if possible).
   > This feature is non-essential and will make it in if we have time. Nov 10th, 2008
@@ -63,8 +55,6 @@ Unresolved
 
 - TASK: Make sure all pages have proper TITLE, Navigation Position, Menu entry.
 
-- TASK: Check ALL Links on the page for dead links.
-
 - TASK: JavaDoc everything and document javascript to some degree.
   > Philippe has gone over all hs.objects.* classes, cleaned up javadoc and formatting.
 
@@ -73,7 +63,6 @@ Unresolved
 
 - TASK: Clean up any unwanted code, and WTFs or others...
   > Philippe cleaned up all unwanted code from hs.objects.* classes.
-
 
 Resolved
 --------
@@ -162,3 +151,22 @@ Resolved
 
 - TASK (RESOLVED): Make sure we are using the proper search parameters for all search screens and dialogs.
   > Philippe completed this and removed some in services and products. Nov 12th, 2008
+
+
+Backburner
+----------
+
+- FEATURE: The manager should have a quick way to book a schedule day quickly based on
+  the employee availability records.
+  > This feature would certainly be useful, however is lower priority at this point. Nov 10th, 2008
+
+- FEATURE: Finish any alerts that we need to create for the user throughout the app.
+  > Non essential at this point. We have inventory alerts, and more could be created
+    but there are time constraints. Nov 10th, 2008
+  > Inventory alerts will be the only ones based on time. Nov 14th, 2008
+
+- FLAW: Exceptions are non-repeatable, and they must be constantly managed
+  by the employees and managers. Technically exceptions should not have
+  years, if they do, we should have a flag for "Once" or "Repeat" so that
+  when the exception passes, we create a new one.
+  > We concidered this a minor issue, we do not have time to resolve. Nov 10th, 2008

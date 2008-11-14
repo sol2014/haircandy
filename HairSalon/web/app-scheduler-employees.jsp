@@ -59,7 +59,7 @@ Date date = CoreTools.getDate (request.getParameter("date"));
         function fillMatrix(content)
         {
             document.getElementById("matrix").innerHTML = "";
-            set_innerHTML(document.getElementById("matrix"),content);
+            setInnerHTML(document.getElementById("matrix"),content);
         }
         var messager = new Ajaxer("text",null,fillMatrix,null);
         var queryString="date=<%=request.getParameter("date")%>";

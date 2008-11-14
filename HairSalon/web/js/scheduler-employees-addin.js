@@ -461,12 +461,12 @@ function cellDoubleClickHandler(element)//function to deal with double click
         var cell = findCell(element.id);
         if(cell.state == emptyState)
         {
-            document.getElementById("deleteButton").style.display = "none";
-            showBlackout (true);
-            document.getElementById("dialog").style.display="block";
-            previousFirstCell = document.getElementById(element.id);
-            document.getElementById("sch_employee_name").innerHTML = employeeNameArray[parseInt(getColumnId(element.id))];
-            document.getElementById("sch_date").innerHTML = date;
+            //document.getElementById("deleteButton").style.display = "none";
+            //showBlackout (true);
+            //document.getElementById("dialog").style.display="block";
+            //previousFirstCell = document.getElementById(element.id);
+            //document.getElementById("sch_employee_name").innerHTML = employeeNameArray[parseInt(getColumnId(element.id))];
+            //document.getElementById("sch_date").innerHTML = date;
         }
         else if(cell.state == bookingState)
         {

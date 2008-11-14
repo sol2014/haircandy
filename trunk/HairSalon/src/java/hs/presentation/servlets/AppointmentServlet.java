@@ -399,7 +399,7 @@ public class AppointmentServlet extends DispatcherServlet
 		hours.setDate (date);
 		hours = SessionController.loadScheduleHours (userSession, hours);
 		
-		if (CoreTools.isTimeBefore(hours.getEndTime(), appointment.getEndTime()))
+		if (!hours.getEndTime().equals (appointment.getEndTime()) && CoreTools.isTimeBefore(hours.getEndTime(), appointment.getEndTime()))
 		{
 			// You cannot schedule the end time past the business hours.
 			LogController.write (this, "You cannot book an appointment that ends after the business hours.");
@@ -448,7 +448,7 @@ public class AppointmentServlet extends DispatcherServlet
 				{
 					for (AppointmentBean apb : appointments.get (e))
 					{
-						if (CoreTools.isTimeBefore (apb.getStartTime (), appointment.getEndTime ()) && CoreTools.isTimeBefore (appointment.getEndTime (), apb.getEndTime ()))
+						if ((!appointment.getEndTime().equals(apb.getStartTime()) && CoreTools.isTimeBefore (apb.getStartTime (), appointment.getEndTime ())) && (!appointment.getEndTime().equals(apb.getEndTime()) && CoreTools.isTimeBefore (appointment.getEndTime (), apb.getEndTime ())))
 						{
 							LogController.write (this, "Clients cannot book an appointment that ends within another appointment block.");
 

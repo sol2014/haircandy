@@ -1196,10 +1196,10 @@ public class SessionController
 				// If we have appointment entries, include this schedule entry for the final list.
 				for (AppointmentBean ab : apps)
 				{
-					if (ab.getStartTime ().after (entry.getStartTime ()) && ab.getStartTime ().before (entry.getEndTime ()))
+					if (ab.getStartTime ().equals (entry.getStartTime()) || (ab.getStartTime ().after (entry.getStartTime ())) && (ab.getStartTime().equals (entry.getEndTime ()) || (ab.getStartTime ().before (entry.getEndTime ()))))
 						fails = true;
 					
-					if (ab.getEndTime ().after (entry.getStartTime ()) && ab.getEndTime ().before (entry.getEndTime ()))
+					if (ab.getEndTime ().equals (entry.getEndTime()) || ab.getEndTime ().after (entry.getStartTime ()) && (ab.getEndTime ().before (entry.getEndTime ())))
 						fails = true;
 				}
 				
@@ -1254,10 +1254,10 @@ public class SessionController
 					
 					for (AppointmentBean ab : apps)
 					{
-						if (ab.getStartTime ().after (entry.getStartTime ()) && ab.getStartTime ().before (entry.getEndTime ()))
+						if (ab.getStartTime ().equals (entry.getStartTime()) || (ab.getStartTime ().after (entry.getStartTime ())) && (ab.getStartTime().equals (entry.getEndTime ()) || (ab.getStartTime ().before (entry.getEndTime ()))))
 							fails = true;
-
-						if (ab.getEndTime ().after (entry.getStartTime ()) && ab.getEndTime ().before (entry.getEndTime ()))
+					
+						if (ab.getEndTime ().equals (entry.getEndTime()) || ab.getEndTime ().after (entry.getStartTime ()) && (ab.getEndTime ().before (entry.getEndTime ())))
 							fails = true;
 					}
 

@@ -16,7 +16,7 @@
 <%@page import="hs.presentation.tags.*" %>
 <%@page import="java.util.*" %>
 <%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
-<taglib:ValidateEmployee minimum="Manager" />
+<taglib:ValidateEmployee minimum="Receptionist" />
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">

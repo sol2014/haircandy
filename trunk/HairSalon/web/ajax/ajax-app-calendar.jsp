@@ -186,9 +186,8 @@ for (int row = 0; row < 6; row++)
 			<td class="CalendarBottomRight"></td>
 		    </tr>
 		</table>
-		<br/>&nbsp;<img src="/HairSalon/images/calendar/legend_white.gif">&nbsp;Empty&nbsp;
-		<img src="/HairSalon/images/calendar/legend_dark.gif">&nbsp;Unavailable&nbsp;
-		<img src="/HairSalon/images/calendar/legend_green.gif">&nbsp;Unlocked&nbsp;
+		<br/>&nbsp;<img src="/HairSalon/images/calendar/legend_white.gif">&nbsp;Available&nbsp;
+		<img src="/HairSalon/images/calendar/legend_green.gif">&nbsp;Booked Appointments&nbsp;
 		<img src="/HairSalon/images/calendar/legend_exception.gif">&nbsp;Exception&nbsp;
 	    </td>
 	</tr>

@@ -718,10 +718,19 @@ public class SessionController
 			for (ProductBean lowProd : lowProducts)
 			{
 				AlertBean alert = new AlertBean ();
-				alert.setDate (new Date());
+				alert.setType (AlertTypes.Inventory.toString ());
 				alert.setRecordNo (lowProd.getProductNo ());
 				
-				alert.setType (AlertTypes.Inventory.toString ());
+				alert = loadAlert (session, alert);
+				
+				if (alert == null)
+				{
+					alert = new AlertBean ();
+					alert.setDate (new Date());
+					alert.setRecordNo (lowProd.getProductNo ());
+					alert.setType (AlertTypes.Inventory.toString ());
+				}
+				
 				alert.setLink ("product?product_action=Load&product_no="+alert.getRecordNo ());
 				
 				double min = lowProd.getMinLevel ();
@@ -743,10 +752,6 @@ public class SessionController
 					alert.setLevel ("Low");
 					alert.setMessage ("Product ["+lowProd.getName ()+"] is under the minimum quantity ["+current+"/"+min+"].");
 				}
-				
-				EmployeeBean manager = new EmployeeBean ();
-				manager.setRole ("Manager");
-				manager.setAddress (new AddressBean ());
 				
 				saveAlert (session, alert);
 			}
@@ -879,6 +884,15 @@ public class SessionController
 		return result;
 	}
 
+	public static AlertBean loadAlert (UserSession session, AlertBean alert)
+	{
+		LogController.write ("SessionController->Loading alert...");
+		
+		alert = (AlertBean)PersistenceController.load (alert);
+		
+		return alert;
+	}
+	
 	public static AlertBean[] loadAlerts (UserSession session)
 	{
 		LogController.write ("SessionController->Loading alerts...");

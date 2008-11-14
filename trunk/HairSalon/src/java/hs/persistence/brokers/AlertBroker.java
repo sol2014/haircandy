@@ -38,7 +38,65 @@ public class AlertBroker extends DatabaseBroker implements BrokerInterface
 	@Override
 	public DataBean load (DataBean data)
 	{
-		throw new UnsupportedOperationException ("Not supported by this broker.");
+		AlertBean alert = (AlertBean) data;
+		Connection connection = null;
+		
+		try
+		{
+			connection = super.getConnection ();
+			CallableStatement statement = connection.prepareCall ("{call LoadAlert(?,?)}");
+
+			// Check which search parameters this object provides
+
+			if (alert.getType () != null)
+			{
+				statement.setString (1, alert.getType ());
+			}
+			else
+			{
+				LogController.write (this, "Alert bean has no identification type!");
+				
+				super.returnConnection (connection);
+				return null;
+			}
+			
+			if (alert.getRecordNo () != null)
+			{
+				statement.setInt (2, alert.getRecordNo ());
+			}
+			else
+			{
+				LogController.write (this, "Alert bean has no identification record!");
+				super.returnConnection (connection);
+				return null;
+			}
+			
+			// The first result set should be the record.
+			ResultSet set = statement.executeQuery ();
+
+			if (set.next ())
+			{
+				alert = (AlertBean) getBean (set);
+			}
+			else
+			{
+				LogController.write (this, "There were no results for this load! Alert not loaded.");
+				
+				super.returnConnection (connection);
+				return null;
+			}
+		}
+		catch (SQLException sqlEx)
+		{
+			LogController.write (this, "SQL Exception during search: " + sqlEx.getMessage ());
+		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
+		
+		LogController.write (this, "Loaded alert bean: "+alert.getRecordNo ());
+		
+		return alert;
 	}
 
 	@Override

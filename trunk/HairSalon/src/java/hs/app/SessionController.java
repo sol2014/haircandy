@@ -1054,11 +1054,6 @@ public class SessionController
 				entry.setEndTime (endTime);
 				unavailable.add (entry);
 				
-				for (ScheduleBean sb : unavailable)
-				{
-					LogController.write ("NO SCHEDULE, Unavailable: "+sb.getStartTime ()+":"+sb.getEndTime());
-				}
-
 				hash.put (employee, unavailable);
 			}
 			
@@ -1118,11 +1113,6 @@ public class SessionController
 				// Make sure this entry has actual time.
 				if (!entry.getStartTime ().equals (entry.getEndTime()) && entry.getStartTime ().before (entry.getEndTime ()))
 					unavailable.add (entry);
-			}
-			
-			for (ScheduleBean sb : unavailable)
-			{
-				LogController.write ("WITH SCHEDULE, Unavailable ["+employee.getEmployeeNo ()+"]:"+sb.getStartTime ()+":"+sb.getEndTime());
 			}
 			
 			hash.put (employee, unavailable);

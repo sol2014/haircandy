@@ -165,6 +165,7 @@ function addUnavailableEntry(duration, row, column)//function used to add entry 
         var cell = findCell(j+"^-^"+column);
         cell.state = bookedState;
         document.getElementById(cell.id).className = exceptionClass;
+        alert(document.getElementById(cell.id).className);
     }
 }
 

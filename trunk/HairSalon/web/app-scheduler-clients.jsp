@@ -51,7 +51,7 @@ String page_title = "Appointments";
         function fillMatrix(content)
         {
             document.getElementById("matrix").innerHTML = "";
-            setInnerHTML(document.getElementById("matrix"),content);
+            set_innerHTML(document.getElementById("matrix"),content);
         }
         var messager = new Ajaxer("text",null,fillMatrix,null);
         var queryString="date=<%=request.getParameter("date")%>";
@@ -69,4 +69,4 @@ String page_title = "Appointments";
         getMatrix();
     }
 </script>
-<script>//window.setTimeout(repeat, 10000, "JavaScript");</script>
+<script>window.setTimeout(repeat, 10000, "JavaScript");</script>

@@ -424,7 +424,8 @@ public class AppointmentServlet extends DispatcherServlet
 				for (ScheduleBean sch : unavailables.get (e))
 				{
 					
-					if (CoreTools.isTimeBefore (sch.getStartTime (), appointment.getEndTime ()) && CoreTools.isTimeBefore (appointment.getEndTime (), sch.getEndTime ()))
+					// Now we want to know if the schedule entry finishes
+					if ((!appointment.getEndTime().equals(sch.getStartTime()) && CoreTools.isTimeBefore (sch.getStartTime (), appointment.getEndTime ())) && (!appointment.getEndTime().equals(sch.getEndTime()) && CoreTools.isTimeBefore (appointment.getEndTime (), sch.getEndTime ())))
 					{
 						LogController.write (this, "You cannot book an appointment that ends within an unavailable block.");
 						

@@ -49,7 +49,7 @@ public class ScheduleExceptionBroker extends DatabaseBroker implements BrokerInt
 		try
 		{
 			connection = super.getConnection ();
-			CallableStatement statement = connection.prepareCall ("{call LoadScheduleException(?,?)}");
+			CallableStatement statement = connection.prepareCall ("{call LoadScheduleException(?)}");
 
 			// Check which search parameters this object provides
 

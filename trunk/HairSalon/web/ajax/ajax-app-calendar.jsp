@@ -50,6 +50,29 @@ int totalDays = CoreTools.getDaysInMonth(year, month);
 	</tr>
 	<tr>
 	    <td>
+		<table align="left" valign="top" border="0" cellspacing="5" cellpadding="0">
+		    <tr>
+			<td align="center">
+			    <input type="button" value="Last Year" name="LastYear" onclick="showPreviousYear(<%=year%>,<%=month%>)" class="StandardButton"/>
+			</td>
+
+			<td align="center">
+			    <input type="button" value="Last Month" name="LastMonth" onclick="showPreviousMonth(<%=year%>,<%=month%>)" class="StandardButton"/>
+			</td>
+
+			<td align="center">
+			    <input type="button" value="Next Month" name="NextMonth" onclick="showNextMonth(<%=year%>,<%=month%>)" class="StandardButton"/>
+			</td>
+
+			<td align="center">
+			    <input type="button" value="Next Year" name="NextYear" onclick="showNextYear(<%=year%>,<%=month%>)" class="StandardButton"/>
+			</td>
+		    </tr>
+		</table>
+	    </td>
+	</tr>
+	<tr>
+	    <td>
 		<table align="left" valign="top" border="0" cellspacing="0" cellpadding="0">
 		    <tr>
 			<td class="CalendarTopLeft"></td>
@@ -99,8 +122,22 @@ for (int row = 0; row < 6; row++)
 	    AppointmentBean appointment = new AppointmentBean ();
 	    appointment.setDate (CoreTools.getDate (datestr));
 	    AppointmentBean[] appointments = SessionController.searchAppointments (userSession, appointment);
-
-	    if (appointments != null && appointments.length > 0)
+	    ScheduleExceptionBean exception2 = new ScheduleExceptionBean ();
+	    exception2.setDate (CoreTools.getDate (datestr));
+	    ScheduleExceptionBean[] exceptions = SessionController.searchScheduleExceptions (userSession, exception2);
+	    
+	    if (exceptions != null && exceptions.length > 0)
+	    {
+			exception2 = exceptions[0];
+			exception2.setDate (CoreTools.getDate (datestr));
+%>
+				    <td id="<%=datestr%>" onmouseover="highlightDay('<%=datestr%>')" onmouseout="unlightDay('<%=datestr%>')" onclick="goToCalendarDay('<%=datestr%>')" class="CalendarCellException">
+					<% exception2 = SessionController.loadScheduleException (userSession, exception2);
+					if (exception2 != null) { %>
+					<div valign="top" align="right"><font size="1"><%=ServletHelper.display (exception2.getReason ())%></font></div><% }%>
+<%
+	    }
+	    else if (appointments != null && appointments.length > 0)
 	    {
 %>
 				    <td id="<%=datestr%>" onmouseover="highlightDay('<%=datestr%>')" onmouseout="unlightDay('<%=datestr%>')" onclick="goToCalendarDay('<%=datestr%>')" class="CalendarCellValid">
@@ -147,29 +184,6 @@ for (int row = 0; row < 6; row++)
 			<td class="CalendarBottomLeft"></td>
 			<td class="CalendarBottom"></td>
 			<td class="CalendarBottomRight"></td>
-		    </tr>
-		</table>
-	    </td>
-	</tr>
-	<tr>
-	    <td>
-		<table align="left" valign="top" border="0" cellspacing="5" cellpadding="0">
-		    <tr>
-			<td align="center">
-			    <input type="button" value="Last Year" name="LastYear" onclick="showPreviousYear(<%=year%>,<%=month%>)" class="StandardButton"/>
-			</td>
-
-			<td align="center">
-			    <input type="button" value="Last Month" name="LastMonth" onclick="showPreviousMonth(<%=year%>,<%=month%>)" class="StandardButton"/>
-			</td>
-
-			<td align="center">
-			    <input type="button" value="Next Month" name="NextMonth" onclick="showNextMonth(<%=year%>,<%=month%>)" class="StandardButton"/>
-			</td>
-
-			<td align="center">
-			    <input type="button" value="Next Year" name="NextYear" onclick="showNextYear(<%=year%>,<%=month%>)" class="StandardButton"/>
-			</td>
 		    </tr>
 		</table>
 	    </td>

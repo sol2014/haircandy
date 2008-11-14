@@ -50,6 +50,29 @@ int totalDays = CoreTools.getDaysInMonth(year, month);
 	</tr>
 	<tr>
 	    <td>
+		<table align="left" valign="top" border="0" cellspacing="5" cellpadding="0">
+		    <tr>
+			<td align="center">
+			    <input type="button" value="Last Year" name="LastYear" onclick="showPreviousYear(<%=year%>,<%=month%>)" class="StandardButton"/>
+			</td>
+
+			<td align="center">
+			    <input type="button" value="Last Month" name="LastMonth" onclick="showPreviousMonth(<%=year%>,<%=month%>)" class="StandardButton"/>
+			</td>
+
+			<td align="center">
+			    <input type="button" value="Next Month" name="NextMonth" onclick="showNextMonth(<%=year%>,<%=month%>)" class="StandardButton"/>
+			</td>
+
+			<td align="center">
+			    <input type="button" value="Next Year" name="NextYear" onclick="showNextYear(<%=year%>,<%=month%>)" class="StandardButton"/>
+			</td>
+		    </tr>
+		</table>
+	    </td>
+	</tr>
+	<tr>
+	    <td>
 		<table align="left" valign="top" border="0" cellspacing="0" cellpadding="0">
 		    <tr>
 			<td class="CalendarTopLeft"></td>
@@ -101,11 +124,16 @@ for (int row = 0; row < 6; row++)
 	    ScheduleExceptionBean ex = new ScheduleExceptionBean ();
 	    ex.setDate (date2);
 	    ScheduleExceptionBean[] exceptions = SessionController.searchScheduleExceptions (userSession, ex);
-
+	    
 	    if (exceptions != null && exceptions.length > 0)
 	    {
+			ex = exceptions[0];
+			ex.setDate (date2);
 %>
-				    <td id="<%=datestr%>" onmouseover="highlightDay('<%=datestr%>')" onmouseout="unlightDay('<%=datestr%>')" onclick="goToCalendarDay('<%=datestr%>')" class="CalendarCellUnused">
+				    <td id="<%=datestr%>" onmouseover="highlightDay('<%=datestr%>')" onmouseout="unlightDay('<%=datestr%>')" onclick="goToCalendarDay('<%=datestr%>')" class="CalendarCellException">
+					<% ex = SessionController.loadScheduleException (userSession, ex);
+					if (ex != null)
+			{ %><div valign="top" align="right"><font size="1"><%=ServletHelper.display (ex.getReason ())%></font></div><% }%>
 <%
 	    }
 	    else
@@ -162,29 +190,6 @@ for (int row = 0; row < 6; row++)
 			<td class="CalendarBottomLeft"></td>
 			<td class="CalendarBottom"></td>
 			<td class="CalendarBottomRight"></td>
-		    </tr>
-		</table>
-	    </td>
-	</tr>
-	<tr>
-	    <td>
-		<table align="left" valign="top" border="0" cellspacing="5" cellpadding="0">
-		    <tr>
-			<td align="center">
-			    <input type="button" value="Last Year" name="LastYear" onclick="showPreviousYear(<%=year%>,<%=month%>)" class="StandardButton"/>
-			</td>
-
-			<td align="center">
-			    <input type="button" value="Last Month" name="LastMonth" onclick="showPreviousMonth(<%=year%>,<%=month%>)" class="StandardButton"/>
-			</td>
-
-			<td align="center">
-			    <input type="button" value="Next Month" name="NextMonth" onclick="showNextMonth(<%=year%>,<%=month%>)" class="StandardButton"/>
-			</td>
-
-			<td align="center">
-			    <input type="button" value="Next Year" name="NextYear" onclick="showNextYear(<%=year%>,<%=month%>)" class="StandardButton"/>
-			</td>
 		    </tr>
 		</table>
 	    </td>

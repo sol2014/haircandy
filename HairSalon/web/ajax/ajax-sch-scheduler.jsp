@@ -16,8 +16,6 @@
 <%@page import="hs.presentation.tags.*" %>
 <%@page import="java.util.*" %>
 <%@page import="java.text.*" %>
-<%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
-<taglib:ValidateEmployee minimum="Receptionist" />
 
 <%
 // Retrieve the UserSession object from the http session.

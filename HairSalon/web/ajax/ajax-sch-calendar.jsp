@@ -16,8 +16,6 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.*" %>
 <%@ page import="java.io.*" %>
-<%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
-<taglib:ValidateEmployee minimum="Receptionist" />
 
 <%
 UserSession userSession = (UserSession) session.getAttribute("user_session");

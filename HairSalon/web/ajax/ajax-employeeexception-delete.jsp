@@ -14,8 +14,6 @@
 <%@page import="hs.core.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.*" %>
-<%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
-<taglib:ValidateEmployee minimum="Manager" />
 
 <%
             ArrayList<AvailabilityExceptionBean> searchResults = new ArrayList<AvailabilityExceptionBean>();

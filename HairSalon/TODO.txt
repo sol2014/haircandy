@@ -11,12 +11,29 @@ Unresolved
   when the exception passes, we create a new one.
   > We concidered this a minor issue, we do not have time to resolve. Nov 10th, 2008
 
+! BUG: Search sale need to work. It currently returns no results.
+  > We need to have this working, its going to be needed. Nov 10th, 2008
+  > Thinking of making sales search work in the same way as all other record types. Nov 13th, 2008
+
+! BUG: When someone is changing Salon Hours or Employee Hours, we should never allow them
+  to edit them outside the limits based on existing scheduled data.
+
+! BUG: Only show alert for 1 record type, always keep latest. Show date column in alert list too.
+
+- BUG: Input checking in all Dialogs must highlight fields RED when finishing.
+
+! BUG: Start Time/End Time do not render in the Employee scheduler dialog.
+
+! BUG: Make errors in appointment creation/edit dialog more obvious.
+
+! BUG: Do not allow anyone to create an appointment if no services are selected.
+
+! BUG: Dialog repositioning and sizing must be fixed for all dialogs, its horrible
+  right now.
+
 - FEATURE: The manager should have a quick way to book a schedule day quickly based on
   the employee availability records.
   > This feature would certainly be useful, however is lower priority at this point. Nov 10th, 2008
-
-! FEATURE: Search sale need to work.
-  > This must work. Nov 10th, 2008
 
 - FEATURE: Finish any alerts that we need to create for the user throughout the app.
   > Non essential at this point. We have inventory alerts, and more could be created
@@ -33,27 +50,6 @@ Unresolved
 
 ! FEATURE: User HELP icon that opens seperate page for help in all screens/dialogs.
   > This is for user friendliness. Nov 10th, 2008
-
-! BUG: When someone is changing Salon Hours or Employee Hours, we should never allow them
-  to edit them outside the limits based on existing scheduled data.
-
-! BUG: Only show alert for 1 record type, always keep latest. Show date column in alert list too.
-
-! BUG: When deleting schedule entries, or moving them, we are not even checking if there
-  is already booked appointments data for those entries.
-
-- BUG: Input checking in all Dialogs must highlight fields RED when finishing.
-
-! BUG: Delete button in appointment dialog needs to be hidden when creating new entry.
-
-! BUG: Start Time/End Time do not render in the Employee scheduler dialog.
-
-! BUG: Make errors in appointment creation/edit dialog more obvious.
-
-! BUG: Do not allow anyone to create an appointment if no services are selected.
-
-! BUG: Dialog repositioning and sizing must be fixed for all dialogs, its horrible
-  right now.
 
 - TASK: Servlets are unprotected from non-authorizes calls, if we have time we need
   to also get this done like the tag does.
@@ -146,12 +142,19 @@ Resolved
 - BUG (RESOLVED): Pages are not protected by the TAG that is supposed to validate employees.
   > Joey fixed this one by adding to all JSPs.
 
-! BUG: Dialog boxes need to have input fields cleared if used twice or more.
+! BUG (RESOLVED): Dialog boxes need to have input fields cleared if used twice or more.
   > Joey resolved these issues. Nov 12th, 2008
+
+! BUG (RESOLVED): Delete button in appointment dialog needs to be hidden when creating new entry.
+  > Joey fixed this. Nov 12, 2008
 
 ! BUG (RESOLVED): In a one hour availability, if we use 45 minutes in an appointment, then we try
   and add a 15 minute service, it will not allow us.
   > Philippe fixed the bug in the servlet that was causing this. Nov 13th, 2008
+
+! BUG (RESOLVED): When deleting schedule entries, or moving them, we are not even checking if there
+  is already booked appointments data for those entries.
+  > Philippe and Joey fixed this bug together. Nov 13th, 2008
 
 - TASK (RESOLVED): Complete server and client side checking, especially for numerical values. (dont allow alpha in number box)
   > Philippe resolved this task by adding a decimal/number checker in tools.js. Nov 12th, 2008

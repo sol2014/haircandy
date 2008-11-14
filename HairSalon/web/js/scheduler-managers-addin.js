@@ -27,6 +27,10 @@ var bookedHeadClass = "SchedulerCellSectionTop_Booked";//used to indicate the bo
 var bookedTailClass = "SchedulerCellSectionBottom_Booked";//used to indicate the booked tail cell's class name
 var bookedBodyClass = "SchedulerCellSectionMiddle_Booked";//used to indicate the booked body cell's class name
 var bookedComboClass = "SchedulerCellSectionSingle_Booked";//used to indicate the booked combo cell's class name
+var highlightedHeadClass = "SchedulerCellSectionTop_Selected";//used to indicate the highlighted head cell's class name
+var highlightedTailClass = "SchedulerCellSectionBottom_Selected";//used to indicate the highlighted tail cell's class name
+var highlightedBodyClass = "SchedulerCellSectionMiddle_Selected";//used to indicate the highlighted body cell's class name
+var highlightedComboClass = "SchedulerCellSectionSingle_Selected";//used to indicate the highlighted combo cell's class name
 var exceptionClass = "SchedulerCellSection_Unavailable";//used to indicate the exception cell's class name
 var emptyState = "empty";//used to indicate the cell element in the cells array's empty state
 var bookingState = "booking";//used to indicate the cell element in the cells array's booking state
@@ -42,6 +46,69 @@ document.body.appendChild(draggableDiv);
 var cells = new Array();//cells array that holds all cells' information
 //cells[cells.length] = new Cell("00", "empty"); needs to be initialized in jsp
 var appointments = new Array();//array that holds all the appointments' information
+
+function unHighlightAllAppointments()
+{
+    for(var i=0;i<appointments.length;i++)
+    {
+        var appointment = appointments[i];
+        unHighlightOneAppointment(appointment);
+    }
+}
+
+function unHighlightOneAppointment(appointment)
+{
+    for(var i = 0; i < appointment.length; i++) 
+    {
+        var cell = findCell(appointment[i]);
+        if(cell.state == bookingState)
+        {
+            if(i == 0)
+            {
+                document.getElementById(cell.id).className = bookingHeadClass;
+            }
+            else if(i == appointment.length - 1)
+            {
+                document.getElementById(cell.id).className = bookingTailClass;
+            }
+            else
+            {
+                document.getElementById(cell.id).className = bookingBodyClass;
+            }
+            if(appointment.length == 1)
+            {
+                document.getElementById(cell.id).className = bookingComboClass;
+            }
+        }
+    }
+}
+
+function highlightOneAppointment(appointment)
+{
+    for(var i = 0; i < appointment.length; i++) 
+    {
+        var cell = findCell(appointment[i]);
+        if(cell.state == bookingState)
+        {
+            if(i == 0)
+            {
+                document.getElementById(cell.id).className = highlightedHeadClass;
+            }
+            else if(i == appointment.length - 1)
+            {
+                document.getElementById(cell.id).className = highlightedTailClass;
+            }
+            else
+            {
+                document.getElementById(cell.id).className = highlightedBodyClass;
+            }
+            if(appointment.length == 1)
+            {
+                document.getElementById(cell.id).className = highlightedComboClass;
+            }
+        }
+    }
+}
 
 function getColumnIDFromEmployeeNo(id)
 {
@@ -491,6 +558,16 @@ function cellRealSingleClickHandler(element)
     {
         element.postponement = undefined;
         element.doRealOneClick = undefined;
+        var cell = findCell(element.id);
+        if(cell.state == bookingState)
+        {
+            var appointment = findSelectedAppointment(cell.id);
+            if(appointment != -1)
+            {
+                //unHighlightAllAppointments();
+                //highlightOneAppointment(appointment);
+            }
+        }
     }
 }
 

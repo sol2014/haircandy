@@ -34,7 +34,7 @@
 		</tr>
 		<% } else { %>
 		<tr align="right">
-		    <td height="20" nowrap="nowrap" class="Row1"></td>
+		    <td nowrap="nowrap" class="Row1"></td>
 		    <td width="100%" nowrap="nowrap" align="left" class="Row1"><b>Name</b></td>
 		    <td align="left" nowrap="nowrap" class="Row1"><b>Brand</b></td>
 		    <td align="left" nowrap="nowrap" class="Row1"><b>Type</b></td>
@@ -44,7 +44,7 @@
 
 		<% for (ProductBean product : searchResults) { %>
 		<tr align="right" valign="middle">
-		    <td height="30" valign="top" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/result.gif" width="16" height="16" />&nbsp;</td>
+		    <td valign="top" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/result.gif" width="16" height="16" />&nbsp;</td>
 		    <td align="left" valign="top" class="Row2"><%=ServletHelper.display (product.getName ())%></td>
 		    <td align="left" valign="top" nowrap="nowrap" class="Row7"><%=ServletHelper.display (product.getBrand ())%></td>
 		    <td align="left" valign="top" nowrap="nowrap" class="Row7"><%=ServletHelper.display (product.getType ())%></td>

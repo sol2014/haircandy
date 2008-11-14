@@ -120,13 +120,13 @@ String error_string = (String) userSession.moveAttribute ("sale_search_error");
 					</tr>
 					<% } else { %>
 					<tr align="center">
-					    <td height="20" nowrap="nowrap" class="Row1"></td>
+					    <td nowrap="nowrap" class="Row1"></td>
 					    <td width="100%" nowrap="nowrap" align="left" class="Row1">Payment Type</td>
 					    <td width="100%" nowrap="nowrap" align="left" class="Row1">Amount</td>
 					</tr>
 					<% for (SaleBean sale : sales) { %>
 					<tr align="center" valign="middle">
-					    <td height="30" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/result.gif" width="16" height="16" />&nbsp;</td>
+					    <td class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/result.gif" width="16" height="16" />&nbsp;</td>
 					    <td align="left" nowrap="nowrap" class="Row2"><span class="SearchLink"><a href="sale?sale_action=Load&transaction_no=<%= sale.getTransactionNo ()%>" class="SearchLink"><%= sale.getPaymentType ()%></a></span></td>
 					    <td nowrap="nowrap" class="Row7">&nbsp;<%= sale.getPayment ()%></td>
 					</tr>

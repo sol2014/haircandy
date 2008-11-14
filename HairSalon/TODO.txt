@@ -5,32 +5,29 @@ Updated: Sunday, Nov 12th, 2008
 Unresolved
 ----------
 
-! BUG: Search sale need to work. It currently returns no results.
+J BUG: Input checking in all Dialogs must highlight fields RED when finishing.
+
+J BUG: Start Time/End Time do not render in the Employee scheduler dialog.
+
+J BUG: Make errors in appointment creation/edit dialog more obvious.
+
+J BUG: Appointment view does not refresh. Nov 14th, 2008
+
+P BUG: Dialog repositioning and sizing must be fixed for all dialogs, its horrible
+  right now.
+
+P BUG: Make sure alerts can be deleted one by one, or all at once (or by type?)
+  > Must have this available to managers. Nov 10th, 2008
+  > Deleting one works. Nov 14th, 2008
+
+P BUG: Only show alert for 1 record type, always keep latest. Show date column in alert list too.
+
+P BUG: Search sale need to work. It currently returns no results.
   > We need to have this working, its going to be needed. Nov 10th, 2008
   > Thinking of making sales search work in the same way as all other record types. Nov 13th, 2008
 
-! BUG: Salon is not saving.
-
-! BUG: When someone is changing Salon Hours or Employee Hours, we should never allow them
+P BUG: When someone is changing Salon Hours or Employee Hours, we should never allow them
   to edit them outside the limits based on existing scheduled data.
-
-! BUG: Only show alert for 1 record type, always keep latest. Show date column in alert list too.
-
-- BUG: Input checking in all Dialogs must highlight fields RED when finishing.
-
-! BUG: Start Time/End Time do not render in the Employee scheduler dialog.
-
-! BUG: Make errors in appointment creation/edit dialog more obvious.
-
-! BUG: Do not allow anyone to create an appointment if no services are selected.
-
-! BUG: Dialog repositioning and sizing must be fixed for all dialogs, its horrible
-  right now.
-
-! BUG: Make sure alerts can be deleted one by one, or all at once (or by type?)
-  > Must have this available to managers. Nov 10th, 2008
-
-- BUG: Appointment view does not refresh. Nov 14th, 2008
 
 - FEATURE: Cells need to highlight blue when selected.
 
@@ -105,6 +102,9 @@ Resolved
 ! FEATURE (RESOLVED): Add a legend for cell types in the scheduler and calendar views.
   > This is necessary for good user friendliness. Single images can be made. Nov 10th, 2008
   > Philippe completed the legends in calendar and scheduler. Nov 14th, 2008
+
+! BUG (RESOLVED): Do not allow anyone to create an appointment if no services are selected.
+  > Joey fixed this. Nov 13th, 2008
 
 - BUG (RESOLVED): Employees can move schedule entries around, only Managers should be able to.
   > Joey fixed this bug Nov 10th, 2008

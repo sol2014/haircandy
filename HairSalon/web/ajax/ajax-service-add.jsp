@@ -35,7 +35,7 @@ ArrayList<ServiceBean> searchResults = (ArrayList<ServiceBean>) request.getAttri
                 </tr>
                 <% } else { %>
                 <tr align="right">
-                    <td height="20" nowrap="nowrap" class="Row1"></td>
+                    <td nowrap="nowrap" class="Row1"></td>
                     <td width="100%" nowrap="nowrap" align="left" class="Row1"><b>Name</b></td>
 		    <td nowrap="nowrap" class="Row1">Duration</td>
 		    <td nowrap="nowrap" class="Row1">Price</td>
@@ -44,7 +44,7 @@ ArrayList<ServiceBean> searchResults = (ArrayList<ServiceBean>) request.getAttri
                 
 		    <% for (ServiceBean service : searchResults) {%>
 		    <tr align="right" valign="middle">
-			<td height="30" valign="top" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/result.gif" width="16" height="16" />&nbsp;</td>
+			<td valign="top" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/result.gif" width="16" height="16" />&nbsp;</td>
 			<td align="left" valign="top" class="Row2"><%=ServletHelper.display(service.getName())%></td>
 			<td nowrap="nowrap" valign="top" class="Row7"><%=ServletHelper.display (service.getDuration())%>m</td>
 			<td nowrap="nowrap" valign="top" class="Row7"><%=ServletHelper.displayPrice (service.getPrice ())%></td>

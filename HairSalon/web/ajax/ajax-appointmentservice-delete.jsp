@@ -33,7 +33,7 @@
                 </tr>
                 <% } else {%>
                 <tr align="right">
-                    <td height="20" nowrap="nowrap" class="Row1"></td>
+                    <td nowrap="nowrap" class="Row1"></td>
                     <td width="100%" nowrap="nowrap" align="left" class="Row1"><b>Name</b></td>
 		    <td nowrap="nowrap" class="Row1"><b>Duration</b></td>
 		    <td nowrap="nowrap" class="Row1"><b>Quantity</b></td>
@@ -43,7 +43,7 @@
                 
                 <% for (ServiceBean service : searchResults.keySet ()) {%>
                 <tr align="right" valign="middle">
-                    <td height="30" valign="top" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/service_white.gif" width="16" height="16" />&nbsp;</td>
+                    <td valign="top" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/service_white.gif" width="16" height="16" />&nbsp;</td>
                     <td align="left" valign="top" class="Row2"><span class="SearchLink"><%=ServletHelper.display(service.getName())%></span></td>
 		    <td nowrap="nowrap" valign="top" class="Row7"><%=ServletHelper.display (service.getDuration ())%>m</td>
 		    <td nowrap="nowrap" valign="top" class="Row7"><input type="text" onKeyUp="return calculateServiceSubTotal()" id="st_<%=ServletHelper.display(service.getServiceNo())%>" value="<%=ServletHelper.display(searchResults.get(service))%>" size="4" style="text-align:right"/></td>

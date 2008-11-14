@@ -154,14 +154,14 @@ String error_string = (String) userSession.moveAttribute("supplier_error_feedbac
 					</tr>
 					<% } else {%>
 					<tr align="right">
-					    <td height="20" nowrap="nowrap" class="Row1"></td>
+					    <td nowrap="nowrap" class="Row1"></td>
 					    <td nowrap="nowrap" align="left" class="Row1"><b>Name</b></td>
 					    <td width="100%" nowrap="nowrap" align="left" class="Row1"><b>Description</b></td>
 					    <td nowrap="nowrap" class="Row1"><b>Telephone</b></td>
 					</tr>
 					<% for (SupplierBean supplier : suppliers) {%>
 					<tr align="right">
-					    <td height="30" valign="top" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/result.gif" width="16" height="16" />&nbsp;</td>
+					    <td valign="top" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/result.gif" width="16" height="16" />&nbsp;</td>
 					    <td align="left" valign="top" nowrap="nowrap" class="Row2"><span class="SearchLink"><a href="supplier?supplier_action=Load&supplier_no=<%= supplier.getSupplierNo()%>" class="SearchLink"><%= supplier.getName()%></a></span></td>
 					    <td align="left" valign="top" class="Row7"><%=ServletHelper.display (supplier.getDescription ())%></td>
 					    <td nowrap="nowrap" valign="top" class="Row7"><%=ServletHelper.displayPhoneNumber(supplier.getPhoneNumber())%></td>

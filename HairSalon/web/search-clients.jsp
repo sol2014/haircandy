@@ -142,13 +142,13 @@ String error_string = (String) userSession.moveAttribute ("client_error_feedback
 					</tr>
 					<% } else { %>
 					<tr align="right">
-					    <td height="20" nowrap="nowrap" class="Row1"></td>
+					    <td nowrap="nowrap" class="Row1"></td>
 					    <td width="100%" nowrap="nowrap" align="left" class="Row1"><b>Name</b></td>
 					    <td nowrap="nowrap" class="Row1"><b>Telephone</b></td>
 					</tr>
 					    <% for (ClientBean client : clients) { %>
 					    <tr align="right" valign="middle">
-						<td height="30" valign="top" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/result.gif" width="16" height="16" />&nbsp;</td>
+						<td valign="top" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/result.gif" width="16" height="16" />&nbsp;</td>
 						<td align="left" valign="top" class="Row2"><span class="SearchLink"><a href="client?client_action=Load&client_no=<%= client.getClientNo ()%>" class="SearchLink"><%= client.getName ()%></a></span></td>
 						<td nowrap="nowrap" valign="top" class="Row7"><%=ServletHelper.displayPhoneNumber(client.getPhoneNumber ())%></td>
 					    </tr>

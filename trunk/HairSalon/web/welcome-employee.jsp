@@ -48,70 +48,78 @@ String error_string = (String) userSession.moveAttribute ("alert_error");
 
 <font face="Trebuchet MS" size="2">
     <form onsubmit="deleteAlert()" method="POST" action="product">
-    <table height="100%" width="100%" border="0" cellspacing="5" cellpadding="0">
-	<tr>
-	    <td align="left" valign="top">
-	    <img border="0" src="/HairSalon/images/icons/big/welcome_white.gif" width="48" height="48"></td>
-	    <td width="100%" align="left" valign="top"><b><font size="3">Welcome to: <%=salon.getName()%></font></b><br />
-		<b>Telephone: </b><%=ServletHelper.displayPhoneNumber(salon.getPhoneNumber())%><br />
-		<b>Address: </b><%=ServletHelper.display (salon.getAddress1())%>, <%=ServletHelper.display (salon.getAddress2())%><br />
-		<b>City: </b><%=ServletHelper.display (salon.getCity ())%><br/><br/>
-	    </td>
-	</tr>
-	<tr>
-	    <td align="left" valign="top"></td>
-	    <td align="left" valign="top">
-		<font size="3"><b>System Alerts</b></font><br/>
-    The alerts listed below are created by events that occur in the system that you need to be aware of.<br/>
-    <br/>
-    <% AlertBean[] alerts = SessionController.loadAlerts (userSession); %>
-    
-<% if (error_string != null) {%>
+	<table height="100%" width="100%" border="0" cellspacing="5" cellpadding="0">
+	    <tr>
+		<td align="left" valign="top">
+		<img border="0" src="/HairSalon/images/icons/big/welcome_white.gif" width="48" height="48"></td>
+		<td width="100%" align="left" valign="top"><b><font size="3">Welcome to: <%=salon.getName()%></font></b><br />
+		    <b>Telephone: </b><%=ServletHelper.displayPhoneNumber(salon.getPhoneNumber())%><br />
+		    <b>Address: </b><%=ServletHelper.display (salon.getAddress1())%>, <%=ServletHelper.display (salon.getAddress2())%><br />
+		    <b>City: </b><%=ServletHelper.display (salon.getCity ())%><br/><br/>
+		</td>
+	    </tr>
+	    <tr>
+		<td align="left" valign="top"></td>
+		<td align="left" valign="top">
+		    <font size="3"><b>System Alerts</b></font><br/>
+		    The alerts listed below are created by events that occur in the system that you need to be aware of.<br/>
+		    <br/>
+		    <% AlertBean[] alerts = SessionController.loadAlerts (userSession);
+		    if (error_string != null) {%>
 		    <font color="red"><%=ServletHelper.display (error_string)%></font>
 		    <% }%>
 		    
-    <table align="left" width="100%" cellspacing="0" cellpadding="0" class="SearchLine">
-	<tr align="left">
-	    <% if (alerts != null && alerts.length > 0) { %>
-	    <td height="25" nowrap="nowrap" class="Row4"><b><font color="#FFFFFF">&nbsp;Alerts Generated (<%=alerts.length%>)</b></td>
-	    <% } else { %>
-	    <td height="25" nowrap="nowrap" class="Row4"><b><font color="#FFFFFF">&nbsp;Alerts Generated (None)</b></td>
-	    <% }%>
-	</tr>
-	<tr>
-	    <td>
-		<table width="100%" cellspacing="1" cellpadding="4" border="0">
-		    <% if (alerts == null || alerts.length < 1) { %>
-		    <tr align="right" valign="middle">
-			<td colspan="3" align="left" class="Row2"><b>There are currently no alerts.</b></td>
-		    </tr>
-		    <% } else { %>
-		    <tr align="right">
-			<td nowrap="nowrap" class="Row1"></td>
-			<td width="100%" nowrap="nowrap" align="left" class="Row1"><b>Message</b></td>
-			<% if (userSession.getEmployee ().getRole ().equals ("Manager")) { %>
-			<td nowrap="nowrap" class="Row1"></td>
-			<% } %>
-		    </tr>
+		    <table align="left" width="100%" cellspacing="0" cellpadding="0" class="SearchLine">
+			<tr align="left">
+			    <% if (alerts != null && alerts.length > 0) { %>
+			    <td height="25" nowrap="nowrap" class="Row4"><b><font color="#FFFFFF">&nbsp;Alerts Generated (<%=alerts.length%>)</b></td>
+			    <% } else { %>
+			    <td height="25" nowrap="nowrap" class="Row4"><b><font color="#FFFFFF">&nbsp;Alerts Generated (None)</b></td>
+			    <% }%>
+			</tr>
+			<tr>
+			    <td>
+				<table width="100%" cellspacing="1" cellpadding="4" border="0">
+				    <% if (alerts == null || alerts.length < 1) { %>
+				    <tr align="right" valign="middle">
+					<td colspan="3" align="left" class="Row2"><b>There are currently no alerts.</b></td>
+				    </tr>
+				    <% } else { %>
+				    <tr align="right">
+					<td nowrap="nowrap" class="Row1"></td>
+					<td width="100%" nowrap="nowrap" align="left" class="Row1"><b>Message</b></td>
+					<% if (userSession.getEmployee ().getRole ().equals ("Manager")) { %>
+					<td nowrap="nowrap" class="Row1"></td>
+					<% } %>
+				    </tr>
 
-		    <% for (AlertBean alert : alerts) { %>
-		    <tr align="right" valign="middle">
-			<td class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/medium/<%=ServletHelper.displayAlertIcon (alert.getLevel())%>.gif" width="22" height="22" />&nbsp;</td>
-			<td align="left" class="Row2"><span class="SearchLink"><a href="<%=ServletHelper.display (alert.getLink ())%>" class="SearchLink"><%=ServletHelper.display (alert.getMessage ())%></a></span></td>
-			<% if (userSession.getEmployee ().getRole ().equals ("Manager")) { %>
-			    <td nowrap="nowrap" class="Row7"><img style="cursor:pointer" id="<%=alert.getAlertNo ()%>" src="/HairSalon/images/icons/small/remove_white.gif" onclick="deleteAlert(this)" title="Delete this alert from the list." /></td>
-			<% } %>
-		    </tr>
-		    <% }%>
-		    <% }%>
-		</table>
-	    </td>
-	</tr>
-    </table>
-	    </td>
-	</tr>
-    </table>
-</form>
+				    <% for (AlertBean alert : alerts) { %>
+				    <tr align="right" valign="middle">
+					<td class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/medium/<%=ServletHelper.displayAlertIcon (alert.getLevel())%>.gif" width="22" height="22" />&nbsp;</td>
+					<td align="left" class="Row2"><span class="SearchLink"><a href="<%=ServletHelper.display (alert.getLink ())%>" class="SearchLink"><%=ServletHelper.display (alert.getMessage ())%></a></span></td>
+					<% if (userSession.getEmployee ().getRole ().equals ("Manager")) { %>
+					    <td nowrap="nowrap" class="Row7"><img style="cursor:pointer" id="<%=alert.getAlertNo ()%>" src="/HairSalon/images/icons/small/remove_white.gif" onclick="deleteAlert(this)" title="Delete this alert from the list." /></td>
+					<% } %>
+				    </tr>
+				    <% }%>
+				    <% }%>
+				</table>
+			    </td>
+			</tr>
+		    </table>
+		</td>
+	    </tr>
+	    <% if (userSession.getEmployee ().getRole ().equals ("Manager")) { %>
+	    <tr>
+		<td></td>
+		<td width="100%" align="right">
+		    <br />
+		    <div align="right"><input type="button" onclick="deleteAllAlerts()" value="Delete All" class="StandardButton"/></div>
+		</td>
+	    </tr>
+	    <% }%>
+	</table>
+    </form>
 </font>
 
 <%@ include file="WEB-INF/jspf/footer.jspf" %>

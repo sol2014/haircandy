@@ -16,10 +16,6 @@ J BUG: Appointment view does not refresh. Nov 14th, 2008
 P BUG: Dialog repositioning and sizing must be fixed for all dialogs, its horrible
   right now.
 
-P BUG: Make sure alerts can be deleted one by one, or all at once (or by type?)
-  > Must have this available to managers. Nov 10th, 2008
-  > Deleting one works. Nov 14th, 2008
-
 P BUG: Only show alert for 1 record type, always keep latest. Show date column in alert list too.
 
 P BUG: Search sale need to work. It currently returns no results.
@@ -128,6 +124,11 @@ Resolved
 
 - BUG (RESOLVED): Add the duration Hour+Minute Combo boxes for Services maintain and create pages.
   > Philippe resolved this. Nov 12th, 2008
+
+- BUG (RESOLVED): Make sure alerts can be deleted one by one, or all at once (or by type?)
+  > Must have this available to managers. Nov 10th, 2008
+  > Deleting one works. Nov 14th, 2008
+  > Delete all works for manager, Nov 14th, 2008
 
 - BUG (RESOLVED): Pages are not protected by the TAG that is supposed to validate employees.
   > Joey fixed this one by adding to all JSPs.

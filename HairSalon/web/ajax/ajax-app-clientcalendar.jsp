@@ -50,7 +50,30 @@ int totalDays = CoreTools.getDaysInMonth(year, month);
 	</tr>
 	<tr>
 	    <td>
-		<table align="left" valign="top" border="0" cellspacing="0" cellpadding="0">
+		<table align="left" valign="top" border="0" cellspacing="5" cellpadding="0">
+		    <tr>
+			<td align="center">
+			    <input type="button" value="Last Year" name="LastYear" onclick="showPreviousYear(<%=year%>,<%=month%>)" class="StandardButton"/>
+			</td>
+
+			<td align="center">
+			    <input type="button" value="Last Month" name="LastMonth" onclick="showPreviousMonth(<%=year%>,<%=month%>)" class="StandardButton"/>
+			</td>
+
+			<td align="center">
+			    <input type="button" value="Next Month" name="NextMonth" onclick="showNextMonth(<%=year%>,<%=month%>)" class="StandardButton"/>
+			</td>
+
+			<td align="center">
+			    <input type="button" value="Next Year" name="NextYear" onclick="showNextYear(<%=year%>,<%=month%>)" class="StandardButton"/>
+			</td>
+		    </tr>
+		</table>
+	    </td>
+	</tr>
+	<tr>
+	    <td>
+		<table border="0" cellspacing="0" cellpadding="0">
 		    <tr>
 			<td class="CalendarTopLeft"></td>
 			<td class="CalendarHeader">
@@ -149,29 +172,10 @@ for (int row = 0; row < 6; row++)
 			<td class="CalendarBottomRight"></td>
 		    </tr>
 		</table>
-	    </td>
-	</tr>
-	<tr>
-	    <td>
-		<table align="left" valign="top" border="0" cellspacing="5" cellpadding="0">
-		    <tr>
-			<td align="center">
-			    <input type="button" value="Last Year" name="LastYear" onclick="showPreviousYear(<%=year%>,<%=month%>)" class="StandardButton"/>
-			</td>
-
-			<td align="center">
-			    <input type="button" value="Last Month" name="LastMonth" onclick="showPreviousMonth(<%=year%>,<%=month%>)" class="StandardButton"/>
-			</td>
-
-			<td align="center">
-			    <input type="button" value="Next Month" name="NextMonth" onclick="showNextMonth(<%=year%>,<%=month%>)" class="StandardButton"/>
-			</td>
-
-			<td align="center">
-			    <input type="button" value="Next Year" name="NextYear" onclick="showNextYear(<%=year%>,<%=month%>)" class="StandardButton"/>
-			</td>
-		    </tr>
-		</table>
+		<br/>&nbsp;<img src="/HairSalon/images/calendar/legend_white.gif">&nbsp;Empty&nbsp;
+		<img src="/HairSalon/images/calendar/legend_dark.gif">&nbsp;Unavailable&nbsp;
+		<img src="/HairSalon/images/calendar/legend_green.gif">&nbsp;Unlocked&nbsp;
+		<img src="/HairSalon/images/calendar/legend_exception.gif">&nbsp;Exception&nbsp;
 	    </td>
 	</tr>
     </table>

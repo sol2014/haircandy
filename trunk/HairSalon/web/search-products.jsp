@@ -114,7 +114,7 @@ String error_string = (String) userSession.moveAttribute ("product_search_error"
 					</tr>
 					<% } else { %>
 					<tr align="right">
-					    <td height="20" nowrap="nowrap" class="Row1"></td>
+					    <td nowrap="nowrap" class="Row1"></td>
 					    <td width="100%" nowrap="nowrap" align="left" class="Row1"><b>Product Name</b></td>
 					    <td align="left" nowrap="nowrap" class="Row1"><b>Brand</b></td>
 					    <td align="left" nowrap="nowrap" class="Row1"><b>Type</b></td>
@@ -123,7 +123,7 @@ String error_string = (String) userSession.moveAttribute ("product_search_error"
 
 					<% for (ProductBean product : products) { %>
 					<tr align="right" valign="middle">
-					    <td height="30" valign="top" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/result.gif" width="16" height="16" />&nbsp;</td>
+					    <td valign="top" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/result.gif" width="16" height="16" />&nbsp;</td>
 					    <td align="left" valign="top" nowrap="nowrap" class="Row2"><span class="SearchLink"><a href="product?product_action=Load&product_no=<%= product.getProductNo ()%>" class="SearchLink"><%= product.getName ()%></a></span></td>
 					    <td align="left" valign="top" nowrap="nowrap" class="Row7"><%=ServletHelper.display(product.getBrand ())%></td>
 					    <td align="left" valign="top" nowrap="nowrap" class="Row7"><%=ServletHelper.display(product.getType ())%></td>

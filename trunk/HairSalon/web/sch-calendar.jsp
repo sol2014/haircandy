@@ -44,9 +44,9 @@ UserSession userSession = (UserSession) session.getAttribute ("user_session");
 function goToCalendarDay (day)
 {
     <% if (userSession.getEmployee().getRole ().equals ("Manager")) { %>
-    location.replace ("sch-scheduler-managers.jsp?date="+day);
+    window.location = "sch-scheduler-managers.jsp?date="+day;
     <% } else { %>
-    location.replace ("sch-scheduler-employees.jsp?date="+day);
+    window.location = "sch-scheduler-employees.jsp?date="+day;
     <% } %>
 }
 

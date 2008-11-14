@@ -42,9 +42,9 @@ int recordNo = 0;
     function goToCalendarDay (day)
     {
 	<% if (userSession.isGuest ()) { %>
-	location.replace ("app-scheduler-clients.jsp?date="+day);
+	window.location = "app-scheduler-clients.jsp?date="+day;
 	<% } else { %>
-	location.replace ("app-scheduler-employees.jsp?date="+day);
+	window.location = "app-scheduler-employees.jsp?date="+day;
 	<% } %>
     }
 

@@ -156,7 +156,7 @@ String error_string = (String) userSession.moveAttribute ("employee_search_error
 					</tr>
 					<% } else { %>
 					<tr align="right">
-					    <td height="20" nowrap="nowrap" class="Row1"></td>
+					    <td nowrap="nowrap" class="Row1"></td>
 					    <td width="100%" nowrap="nowrap" align="left" class="Row1"><b>Name</b></td>
 					    <td align="left" nowrap="nowrap" class="Row1"><b>Role</b></td>
 					    <td nowrap="nowrap" class="Row1"><b>Telephone</b></td>
@@ -164,7 +164,7 @@ String error_string = (String) userSession.moveAttribute ("employee_search_error
 
 					<% for (EmployeeBean employee : employees) { %>
 					<tr align="right" valign="middle">
-					    <td height="30" valign="top" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/result.gif" width="16" height="16" />&nbsp;</td>
+					    <td valign="top" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/result.gif" width="16" height="16" />&nbsp;</td>
 					    <td align="left" valign="top" nowrap="nowrap" class="Row2"><span class="SearchLink"><a href="employee?employee_action=Load&employee_no=<%= employee.getEmployeeNo ()%>" class="SearchLink"><%= employee.getName ()%></a></span></td>
 					    <td align="left" valign="top" nowrap="nowrap" class="Row7"><%= employee.getRole ()%></td>
 					    <td nowrap="nowrap" valign="top" class="Row7"><%=ServletHelper.displayPhoneNumber(employee.getPhoneNumber ())%></td>

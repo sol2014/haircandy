@@ -32,30 +32,17 @@ String error_string = (String) userSession.moveAttribute ("alert_error");
 <%@ include file="WEB-INF/jspf/header.jspf" %>
 
 <script>
-    var request;
-    try {
-        request = new XMLHttpRequest();
-    } catch (trymicrosoft) {
-        try {
-            request = new ActiveXObject("Msxml2.XMLHTTP.5.0");
-        } catch (othermicrosoft) {
-            try {
-                request = new ActiveXObject("Microsoft.XMLHTTP");
-            } catch (failed) {
-                request = false;
-            }
-        }
-    }
-    if(!request){
-        alert("Oh my, are you using safari?Come on, use a normal browser like CMonkey");
+    function doneDeletingAlert (content)
+    {
+	window.location = "welcome-employee.jsp";
     }
     
     function deleteAlert (element)
     {
+	var messager = new Ajaxer("text",null,doneDeletingAlert,null);
 	var queryString="alert_action=Delete&";
 	queryString+="alert_no="+escape(element.id)+"&";
-	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=utf-8');
-        request.send(queryString);
+	messager.request ("alert", queryString);
     }
 </script>
 
@@ -100,16 +87,16 @@ String error_string = (String) userSession.moveAttribute ("alert_error");
 		    </tr>
 		    <% } else { %>
 		    <tr align="right">
-			<td height="20" nowrap="nowrap" class="Row1"></td>
+			<td nowrap="nowrap" class="Row1"></td>
 			<td width="100%" nowrap="nowrap" align="left" class="Row1"><b>Message</b></td>
 			<% if (userSession.getEmployee ().getRole ().equals ("Manager")) { %>
-			<td height="20" nowrap="nowrap" class="Row1"></td>
+			<td nowrap="nowrap" class="Row1"></td>
 			<% } %>
 		    </tr>
 
 		    <% for (AlertBean alert : alerts) { %>
 		    <tr align="right" valign="middle">
-			<td height="30" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/medium/<%=ServletHelper.displayAlertIcon (alert.getLevel())%>.gif" width="22" height="22" />&nbsp;</td>
+			<td class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/medium/<%=ServletHelper.displayAlertIcon (alert.getLevel())%>.gif" width="22" height="22" />&nbsp;</td>
 			<td align="left" class="Row2"><span class="SearchLink"><a href="<%=ServletHelper.display (alert.getLink ())%>" class="SearchLink"><%=ServletHelper.display (alert.getMessage ())%></a></span></td>
 			<% if (userSession.getEmployee ().getRole ().equals ("Manager")) { %>
 			    <td nowrap="nowrap" class="Row7"><img style="cursor:pointer" id="<%=alert.getAlertNo ()%>" src="/HairSalon/images/icons/small/remove_white.gif" onclick="deleteAlert(this)" title="Delete this alert from the list." /></td>

@@ -40,7 +40,7 @@ if (!isGuest)
 
 <table border="0" width="130" cellspacing="0" cellpadding="0" height="100%">
     <tr>
-	<% if (position == SessionPositions.AppCalendar) { %>
+	<% if (position == SessionPositions.AppCalendar || position == SessionPositions.AppScheduler) { %>
 	<td class="SiteNavigationOptionSelected">
 	<% } else { %>
 	<td class="SiteNavigationOption">
@@ -56,7 +56,7 @@ if (!isGuest)
     
     <% if (!isGuest && (role == UserRoles.Stylist || role == UserRoles.Manager || role == UserRoles.Receptionist)) { %>
     <tr>
-	<% if (position == SessionPositions.SchCalendar) { %>
+	<% if (position == SessionPositions.SchCalendar || position == SessionPositions.SchScheduler) { %>
 	<td class="SiteNavigationOptionSelected">
 	<% } else { %>
 	<td class="SiteNavigationOption">

@@ -142,6 +142,16 @@ int rowCount = 0;
                     <td class="SchedulerBottomRight"></td>
                 </tr>
             </table>
+	    <br/>&nbsp;<img src="/HairSalon/images/scheduler/legend_available.gif">&nbsp;Available&nbsp;
+	    <img src="/HairSalon/images/scheduler/legend_unavailable.gif">&nbsp;Unavailable&nbsp;
+	    <% if (!userSession.isGuest()) { %>
+	    <img src="/HairSalon/images/scheduler/legend_green.gif">&nbsp;Unlocked&nbsp;
+	    <img src="/HairSalon/images/scheduler/legend_yellow.gif">&nbsp;Overlap&nbsp;
+	    <img src="/HairSalon/images/scheduler/legend_red.gif">&nbsp;Double Overlap&nbsp;
+	    <img src="/HairSalon/images/scheduler/legend_gray.gif">&nbsp;Locked&nbsp;
+	    <% } else { %>
+	    <img src="/HairSalon/images/scheduler/legend_purple.gif">&nbsp;Appointment&nbsp;
+	    <% } %>
             <% }%>
             <% }%>
         </td>

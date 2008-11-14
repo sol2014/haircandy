@@ -56,33 +56,31 @@
 
 <%!
 	private String getCSSClass(UserSession userSession, int startHour, int row, EmployeeBean eb, Hashtable<EmployeeBean, ArrayList<ScheduleBean>> movableSchedules, Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions, ArrayList<ScheduleExceptionBean> scheduleExceptions, Hashtable<EmployeeBean, ArrayList<ScheduleBean>> unschedulables, Hashtable<EmployeeBean, ArrayList<ScheduleBean>> unmovableSchedules) {
-		if (userSession.getEmployee().getRole().equals("Manager")) {
-			if (unmovableSchedules != null) {
-				ArrayList<ScheduleBean> sbs = null;
-				for (EmployeeBean cycle : unmovableSchedules.keySet()) {
-					if (cycle.getEmployeeNo().equals(eb.getEmployeeNo())) {
-						sbs = unmovableSchedules.get(cycle);
-					}
+		if (unmovableSchedules != null) {
+			ArrayList<ScheduleBean> sbs = null;
+			for (EmployeeBean cycle : unmovableSchedules.keySet()) {
+				if (cycle.getEmployeeNo().equals(eb.getEmployeeNo())) {
+					sbs = unmovableSchedules.get(cycle);
 				}
-				if (sbs != null) {
-					for (ScheduleBean sbb : sbs) {
-						int scheduleStartHour = CoreTools.getHour(sbb.getStartTime());
-						int scheduleStartMinutes = CoreTools.getMinutes(sbb.getStartTime());
-						int scheduleEndHour = CoreTools.getHour(sbb.getEndTime());
-						int scheduleEndMinutes = CoreTools.getMinutes(sbb.getEndTime());
-						int startOffset = (scheduleStartHour - startHour) * 4 + scheduleStartMinutes / 15;
-						int endOffset = (scheduleEndHour - startHour) * 4 + scheduleEndMinutes / 15;
-						if (row >= startOffset && row < endOffset) {
-							if (startOffset == endOffset - 1) {
-								return "SchedulerCellSectionSingle_Booked";
-							}
-							if (row == startOffset) {
-								return "SchedulerCellSectionTop_Booked";
-							} else if (row == endOffset - 1) {
-								return "SchedulerCellSectionBottom_Booked";
-							} else {
-								return "SchedulerCellSectionMiddle_Booked";
-							}
+			}
+			if (sbs != null) {
+				for (ScheduleBean sbb : sbs) {
+					int scheduleStartHour = CoreTools.getHour(sbb.getStartTime());
+					int scheduleStartMinutes = CoreTools.getMinutes(sbb.getStartTime());
+					int scheduleEndHour = CoreTools.getHour(sbb.getEndTime());
+					int scheduleEndMinutes = CoreTools.getMinutes(sbb.getEndTime());
+					int startOffset = (scheduleStartHour - startHour) * 4 + scheduleStartMinutes / 15;
+					int endOffset = (scheduleEndHour - startHour) * 4 + scheduleEndMinutes / 15;
+					if (row >= startOffset && row < endOffset) {
+						if (startOffset == endOffset - 1) {
+							return "SchedulerCellSectionSingle_Booked";
+						}
+						if (row == startOffset) {
+							return "SchedulerCellSectionTop_Booked";
+						} else if (row == endOffset - 1) {
+							return "SchedulerCellSectionBottom_Booked";
+						} else {
+							return "SchedulerCellSectionMiddle_Booked";
 						}
 					}
 				}
@@ -234,7 +232,7 @@
                         <table border="0" width="100%" cellspacing="0" cellpadding="0">
                             <% for (int i = startHour; i < endHour; i++) {%>
                             <tr>
-                                <td class="SchedulerTime"><span class="TimeFont"><%=CoreTools.getAMPMHour(i+1)%>:00<%=CoreTools.getAMPM(i+1)%></span></td>
+                                <td class="SchedulerTime"><span class="TimeFont"><%=CoreTools.getAMPMHour(i + 1)%>:00<%=CoreTools.getAMPM(i + 1)%></span></td>
                                 
                                 <% for (int j = 0; j < employees.size(); j++) {%>
                                 <td class="SchedulerCell" style="text-align: center; vertical-align: middle">

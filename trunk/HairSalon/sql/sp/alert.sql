@@ -42,7 +42,7 @@ DROP PROCEDURE IF EXISTS DeleteAlerts//
 
 CREATE PROCEDURE DeleteAlerts ()
 BEGIN
-    DELETE FROM alert;e
+    DELETE FROM alert;
 END
 //
 

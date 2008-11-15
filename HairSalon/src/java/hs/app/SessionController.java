@@ -1428,8 +1428,12 @@ public class SessionController
 		return hash;
 	}
 	
-	public static Hashtable<int, CalendarDayStatus> getCalendarStatus (UserSession session, int month, int year)
+	public static Hashtable<Integer, CalendarDayStatus> getCalendarStatus (UserSession session, int month, int year)
 	{
-		Hashtable<int, CalendarDayStatus> 
+		Hashtable<Integer, CalendarDayStatus> hash = new Hashtable<Integer, CalendarDayStatus> ();
+		
+		
+		
+		return hash;
 	}
 }

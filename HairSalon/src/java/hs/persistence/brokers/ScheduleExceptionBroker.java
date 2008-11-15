@@ -84,6 +84,10 @@ public class ScheduleExceptionBroker extends DatabaseBroker implements BrokerInt
 			super.returnConnection (connection);
 			return null;
 		}
+		catch (Exception e)
+		{
+			
+		}
 		
 		if (connection != null)
 			super.returnConnection (connection);
@@ -139,7 +143,10 @@ public class ScheduleExceptionBroker extends DatabaseBroker implements BrokerInt
 		{
 			LogController.write (this, "SQL Exception during search: " + sqlEx.getMessage ());
 		}
-		
+		catch (Exception e)
+		{
+			
+		}
 		if (connection != null)
 			super.returnConnection (connection);
 		
@@ -179,7 +186,10 @@ public class ScheduleExceptionBroker extends DatabaseBroker implements BrokerInt
 			
 			result = false;
 		}
-		
+		catch (Exception e)
+		{
+			
+		}
 		if (connection != null)
 			super.returnConnection (connection);
 		
@@ -243,7 +253,10 @@ public class ScheduleExceptionBroker extends DatabaseBroker implements BrokerInt
 			
 			result = false;
 		}
-		
+		catch (Exception e)
+		{
+			
+		}
 		if (connection != null)
 			super.returnConnection (connection);
 		

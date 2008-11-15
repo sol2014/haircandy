@@ -52,6 +52,18 @@ var cells = new Array();//cells array that holds all cells' information
 //cells[cells.length] = new Cell("00", "empty"); needs to be initialized in jsp
 var appointments = new Array();//array that holds all the appointments' information
 
+function formatZero(input)
+{
+    if(input==0)
+    {
+        return "00";
+    }
+    else
+    {
+        return input;
+    }
+}
+
 function cellMouseOverHandler(e, element)//function to deal with the mouse over event on cells inside the scheduler table, that remove the appoint from the array and reset all the tds' class back to empty if its state is booking and allow draggable div to drag
 {
     if(!e)

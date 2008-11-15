@@ -236,8 +236,41 @@ function doSubmit()
 {
     if(services.length==0)
     {
-        document.getElementById("operResult").innerHTML="Must pick up at least one service";
+        document.getElementById("operResult").innerHTML="<span style='color: red;'>Must pick up at least one service</span>";
         return;
+    }
+    
+    if(document.getElementById("first_name").value=="")
+    {
+        document.getElementById("first_name_label").innerHTML="<span style='color: red;'>First Name:</span>";
+        document.getElementById("operResult").innerHTML="<span style='color: red;'>Must choose a first name</span>";
+        return;
+    }
+    else
+    {
+        document.getElementById("first_name_label").innerHTML="First Name:";
+    }
+    
+    if(document.getElementById("last_name").value=="")
+    {
+        document.getElementById("last_name_label").innerHTML="<span style='color: red;'>Last Name:</span>";
+        document.getElementById("operResult").innerHTML="<span style='color: red;'>Must choose a last name</span>";
+        return;
+    }
+    else
+    {
+        document.getElementById("last_name_label").innerHTML="Last Name:";
+    }
+    
+    if(document.getElementById("phone_number").value=="")
+    {
+        document.getElementById("phone_number_label").innerHTML="<span style='color: red;'>Telephone:</span>";
+        document.getElementById("operResult").innerHTML="<span style='color: red;'>Must choose a telephone number</span>";
+        return;
+    }
+    else
+    {
+        document.getElementById("phone_number_label").innerHTML="Telephone:";
     }
     
     

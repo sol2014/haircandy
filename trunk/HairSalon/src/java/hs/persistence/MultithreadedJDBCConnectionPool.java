@@ -69,9 +69,9 @@ public class MultithreadedJDBCConnectionPool {
 	 * Method that returns a connection to the requester
 	 * 
 	 * @return
-	 * @throws Exception
+	 * @throws SQLException
 	 */
-	public Connection getConnection() {
+	public Connection getConnection() throws SQLException {
 		Connection connection = this.jcd.getConnection();
 		if (connection == null) {
 			return null;

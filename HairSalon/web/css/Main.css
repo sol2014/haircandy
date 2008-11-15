@@ -37,9 +37,21 @@
     cursor: pointer;
 }
 
+.SmallButton
+{
+    width: 75px;
+    cursor:pointer;
+}
+
 .StandardButton
 {
     width: 110px;
+    cursor:pointer;
+}
+
+.LargeButton
+{
+    width: 150px;
     cursor:pointer;
 }
 

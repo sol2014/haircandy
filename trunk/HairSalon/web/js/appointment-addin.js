@@ -110,8 +110,8 @@ function refillServicesList()
     {
         document.getElementById ("servicesList").innerHTML = content;
         
-        document.getElementById("appointment_dialog_shell").style.left = (getScreenWidth() / 2) - (document.getElementById("appointment_dialog_shell").clientWidth / 2) + "px";
-        document.getElementById("appointment_dialog_shell").style.top = (getScreenHeight() / 2) - (document.getElementById("appointment_dialog_shell").clientHeight / 2) + "px";
+        //document.getElementById("appointment_dialog_shell").style.left = (getScreenWidth() / 2) - (document.getElementById("appointment_dialog_shell").clientWidth / 2) + "px";
+        //document.getElementById("appointment_dialog_shell").style.top = (getScreenHeight() / 2) - (document.getElementById("appointment_dialog_shell").clientHeight / 2) + "px";
     }
     var messager = new Ajaxer("text",null,refill,null);
     var queryString="service_action=AppointmentServiceRefill&";
@@ -142,8 +142,8 @@ function refillProductsList ()
     
     function refill(content){
         document.getElementById ("productsList").innerHTML = content;
-        document.getElementById("appointment_dialog_shell").style.left = (getScreenWidth() / 2) - (document.getElementById("appointment_dialog_shell").clientWidth / 2) + "px";
-        document.getElementById("appointment_dialog_shell").style.top = (getScreenHeight() / 2) - (document.getElementById("appointment_dialog_shell").clientHeight / 2) + "px";
+        //document.getElementById("appointment_dialog_shell").style.left = (getScreenWidth() / 2) - (document.getElementById("appointment_dialog_shell").clientWidth / 2) + "px";
+        //document.getElementById("appointment_dialog_shell").style.top = (getScreenHeight() / 2) - (document.getElementById("appointment_dialog_shell").clientHeight / 2) + "px";
     }
     
     var messager = new Ajaxer("text",null,refill,null);

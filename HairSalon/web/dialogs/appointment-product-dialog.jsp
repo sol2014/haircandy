@@ -1,4 +1,4 @@
-<div id="appointment_product_dialog" class="DialogBox">
+<div id="appointment_product_dialog" class="DialogBox" style="width: 600px;height: 350px;">
     <table bgcolor="#FFFFFF" height="100%" width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 	    <td><img src="images/scheduler/scheduler_topleft.gif" width="2" height="33" /></td>
@@ -9,7 +9,7 @@
 	    <td height="100%" background="images/scheduler/scheduler_left.gif"><img src="images/scheduler/scheduler_left.gif" width="2" height="32" /></td>
 	    <td width="100%">
 		<div style="height:350px; overflow:auto; overflow-y: scroll; overflow-x: hidden;">
-		<table height="100%" width="98%" border="0" cellspacing="5" cellpadding="0">
+		<table height="100%" width="98%" border="0" cellspacing="10" cellpadding="0">
 		    <tr>
 			<td colspan="2">
 			    <table border="0" width="100%">
@@ -91,6 +91,6 @@
 </div>
 
 <script>
-    document.getElementById("appointment_product_dialog").style.left = (document.getElementById("appointment_dialog_shell").clientWidth / 2) - (document.getElementById("appointment_product_dialog").clientWidth / 2) + "px";
-    document.getElementById("appointment_product_dialog").style.top = (document.getElementById("appointment_dialog_shell").clientHeight / 2) - (document.getElementById("appointment_product_dialog").clientHeight / 2)  + "px";
+    document.getElementById("appointment_product_dialog").style.left = (getScreenWidth() / 2) - 300 + "px";
+    document.getElementById("appointment_product_dialog").style.top = (getScreenHeight() / 2) - 175 + "px";
 </script>

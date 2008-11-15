@@ -70,8 +70,14 @@ int rowCount = 0;
                 <tr>
                     <td align="right" valign="top"><img border="0" src="/HairSalon/images/icons/big/appointment_white.gif" width="48" height="48"></td>
                     <td align="left"><font size="3"><b>Appointment Schedule: <%=CoreTools.showDate (date, CoreTools.DayMonthYearFormat)%></b></font><br>
-                        You may either create, delete or move appointment entries for different employees. Some areas may be
-                        darkened which means that the employee is not available for appointments.
+                        <% if (userSession.isGuest()) { %>
+			Double-click the available areas of the schedule in order to create an appointment with the salon. If you make
+			a mistake, you will need to contact us to make changes so choose your appointment carefully. You cannot overlap
+			appointments, however the employees can, so contact the salon for extra availability.
+			<% } else { %>
+			Double-click any appointment cell or available area to create, edit or delete the appointments in the schedule.
+			You may overlap appointments, and you will be notified of these overlaps by the color in the legend below.
+			<% } %>
                     </td>
                 </tr>
             </table>

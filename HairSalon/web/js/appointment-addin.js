@@ -21,7 +21,7 @@ function finishDeleting(content)
 {
     if(isNaN(content))
     {
-        document.getElementById("operResult").innerHTML=content; 
+        document.getElementById("operResult").innerHTML="<span style='color: red;'>"+content+"</span>";  
     }
     else
     {
@@ -35,7 +35,7 @@ function operResultTable(content){
     var duration = parseInt(array[1]);
     if(isNaN(appointmentNo)|| isNaN(duration))
     {
-        document.getElementById("operResult").innerHTML=content;
+        document.getElementById("operResult").innerHTML="<span style='color: red;'>"+content+"</span>"; 
     }
     else
     {

@@ -19,39 +19,55 @@
 
 <%
 // Retrieve the UserSession object from the http session.
-		UserSession userSession = (UserSession) session.getAttribute("user_session");
-		userSession.setCurrentPosition(SessionPositions.SchScheduler);
+UserSession userSession = (UserSession) session.getAttribute("user_session");
+userSession.setCurrentPosition(SessionPositions.SchScheduler);
 
-		Date date = CoreTools.getDate(request.getParameter("date"));
+Date date = CoreTools.getDate(request.getParameter("date"));
 
-		EmployeeBean ebb = new EmployeeBean();
-		AddressBean ab = new AddressBean();
-		ebb.setAddress(ab);
+Calendar calendar = Calendar.getInstance ();
+calendar.setTime (date);
+calendar.add (Calendar.DAY_OF_YEAR, 1);
+Date nextDay = calendar.getTime ();
+calendar.roll (Calendar.DAY_OF_YEAR, false);
+calendar.roll (Calendar.DAY_OF_YEAR, false);
+Date lastDay = calendar.getTime ();
 
-		EmployeeBean[] arrayEmployees = SessionController.searchEmployees(userSession, ebb);
-		ArrayList<EmployeeBean> employees = new ArrayList<EmployeeBean>();
+calendar.setTime (date);
 
-		for (int i = 0; i < arrayEmployees.length; i++) {
-			employees.add(arrayEmployees[i]);
-		}
-		Collections.sort(employees, new EmployeeLastNameComparator());
+calendar.add (Calendar.WEEK_OF_YEAR, 1);
+Date nextWeek = calendar.getTime ();
+calendar.roll (Calendar.WEEK_OF_YEAR, false);
+calendar.roll (Calendar.WEEK_OF_YEAR, false);
+Date lastWeek = calendar.getTime ();
 
-		ScheduleHoursBean shb = new ScheduleHoursBean();
-		shb.setDate(date);
-		shb = SessionController.loadScheduleHours(userSession, shb);
+EmployeeBean ebb = new EmployeeBean();
+AddressBean ab = new AddressBean();
+ebb.setAddress(ab);
 
-		Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions = SessionController.getAvailabilityExceptions(userSession, date);
-		ArrayList<ScheduleExceptionBean> scheduleExceptions = SessionController.getScheduleExceptions(userSession, date);
-		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedules = SessionController.getAllSchedule(userSession, date, availabilityExceptions, scheduleExceptions);
-		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> unmovableSchedules = SessionController.getUnmovableSchedule(userSession, date, schedules);
-		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> movableSchedules = SessionController.getMovableSchedule(userSession, date, schedules);
-		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> unschedulables = SessionController.getUnschedulable(userSession, date, shb);
+EmployeeBean[] arrayEmployees = SessionController.searchEmployees(userSession, ebb);
+ArrayList<EmployeeBean> employees = new ArrayList<EmployeeBean>();
 
-		Date startTime = shb.getStartTime();
-		Date endTime = shb.getEndTime();
-		int startHour = CoreTools.getStartHour(startTime);
-		int endHour = CoreTools.getEndHour(endTime);
-		int rowCount = 0;
+for (int i = 0; i < arrayEmployees.length; i++) {
+	employees.add(arrayEmployees[i]);
+}
+Collections.sort(employees, new EmployeeLastNameComparator());
+
+ScheduleHoursBean shb = new ScheduleHoursBean();
+shb.setDate(date);
+shb = SessionController.loadScheduleHours(userSession, shb);
+
+Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions = SessionController.getAvailabilityExceptions(userSession, date);
+ArrayList<ScheduleExceptionBean> scheduleExceptions = SessionController.getScheduleExceptions(userSession, date);
+Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedules = SessionController.getAllSchedule(userSession, date, availabilityExceptions, scheduleExceptions);
+Hashtable<EmployeeBean, ArrayList<ScheduleBean>> unmovableSchedules = SessionController.getUnmovableSchedule(userSession, date, schedules);
+Hashtable<EmployeeBean, ArrayList<ScheduleBean>> movableSchedules = SessionController.getMovableSchedule(userSession, date, schedules);
+Hashtable<EmployeeBean, ArrayList<ScheduleBean>> unschedulables = SessionController.getUnschedulable(userSession, date, shb);
+
+Date startTime = shb.getStartTime();
+Date endTime = shb.getEndTime();
+int startHour = CoreTools.getStartHour(startTime);
+int endHour = CoreTools.getEndHour(endTime);
+int rowCount = 0;
 %>
 
 <%!
@@ -188,19 +204,19 @@
             <table border="0" cellspacing="5" cellpadding="0">
                 <tr>
                     <td align="center">
-                        <input type="button" value="Last Week" name="LastWeek" onclick="" class="StandardButton"/>
+                        <input type="button" value="Last Week" name="LastWeek" onclick="goDate('<%=CoreTools.showDate (lastWeek)%>')" class="StandardButton"/>
                     </td>
                     
                     <td align="center">
-                        <input type="button" value="Last Day" name="LastDay" onclick="" class="StandardButton"/>
+                        <input type="button" value="Last Day" name="LastDay" onclick="goDate('<%=CoreTools.showDate (lastDay)%>')" class="StandardButton"/>
                     </td>
                     
                     <td align="center">
-                        <input type="button" value="Next Day" name="NextDay" onclick="" class="StandardButton"/>
+                        <input type="button" value="Next Day" name="NextDay" onclick="goDate('<%=CoreTools.showDate (nextDay)%>')" class="StandardButton"/>
                     </td>
                     
                     <td align="center">
-                        <input type="button" value="Next Week" name="NextWeek" onclick="" class="StandardButton"/>
+                        <input type="button" value="Next Week" name="NextWeek" onclick="goDate('<%=CoreTools.showDate (nextWeek)%>')" class="StandardButton"/>
                     </td>
                 </tr>
             </table>

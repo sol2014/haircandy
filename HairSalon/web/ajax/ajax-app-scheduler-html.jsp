@@ -13,7 +13,6 @@
 <%@page import="hs.objects.*" %>
 <%@page import="hs.app.*" %>
 <%@page import="hs.presentation.*" %>
-<%@page import="hs.presentation.tags.*" %>
 <%@page import="java.util.*" %>
 <%@page import="java.text.*" %>
 
@@ -23,6 +22,22 @@ UserSession userSession = (UserSession) session.getAttribute("user_session");
 userSession.setCurrentPosition(SessionPositions.AppScheduler);
 
 Date date = CoreTools.getDate(request.getParameter("date"));
+
+Calendar calendar = Calendar.getInstance ();
+calendar.setTime (date);
+calendar.add (Calendar.DAY_OF_YEAR, 1);
+Date nextDay = calendar.getTime ();
+calendar.roll (Calendar.DAY_OF_YEAR, false);
+calendar.roll (Calendar.DAY_OF_YEAR, false);
+Date lastDay = calendar.getTime ();
+
+calendar.setTime (date);
+
+calendar.add (Calendar.WEEK_OF_YEAR, 1);
+Date nextWeek = calendar.getTime ();
+calendar.roll (Calendar.WEEK_OF_YEAR, false);
+calendar.roll (Calendar.WEEK_OF_YEAR, false);
+Date lastWeek = calendar.getTime ();
 
 Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions = SessionController.getAvailabilityExceptions(userSession, date);
 ArrayList<ScheduleExceptionBean> scheduleExceptions = SessionController.getScheduleExceptions(userSession, date);
@@ -67,19 +82,19 @@ int rowCount = 0;
 	    <table border="0" cellspacing="5" cellpadding="0">
 		<tr>
 		    <td align="center">
-			<input type="button" value="Last Week" name="LastWeek" onclick="" class="StandardButton"/>
+			<input type="button" value="Last Week" name="LastWeek" onclick="goDate('<%=CoreTools.showDate (lastWeek)%>')" class="StandardButton"/>
 		    </td>
 
 		    <td align="center">
-			<input type="button" value="Last Day" name="LastDay" onclick="" class="StandardButton"/>
+			<input type="button" value="Last Day" name="LastDay" onclick="goDate('<%=CoreTools.showDate (lastDay)%>')" class="StandardButton"/>
 		    </td>
 
 		    <td align="center">
-			<input type="button" value="Next Day" name="NextDay" onclick="" class="StandardButton"/>
+			<input type="button" value="Next Day" name="NextDay" onclick="goDate('<%=CoreTools.showDate (nextDay)%>')" class="StandardButton"/>
 		    </td>
 
 		    <td align="center">
-			<input type="button" value="Next Week" name="NextWeek" onclick="" class="StandardButton"/>
+			<input type="button" value="Next Week" name="NextWeek" onclick="goDate('<%=CoreTools.showDate (nextWeek)%>')" class="StandardButton"/>
 		    </td>
 		</tr>
 	    </table>

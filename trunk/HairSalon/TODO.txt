@@ -11,7 +11,7 @@ Updated: Sunday, Nov 14th, 2008
 Unresolved
 ----------
 
-- BUG: We forgot to let appointments convert to sales for final processing.
+- FEATURE: We forgot to let appointments convert to sales for final processing.
 
 P BUG: Dialog repositioning and sizing must be fixed for all dialogs, its
   horrible right now.

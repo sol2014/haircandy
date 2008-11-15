@@ -13,8 +13,6 @@ Unresolved
 
 - BUG: Next/Previous buttons in Calendar/Scheduler need to all work.
 
-J BUG: Input checking in all Dialogs must highlight fields RED when finishing.
-
 P BUG: Dialog repositioning and sizing must be fixed for all dialogs, its
   horrible right now.
 
@@ -186,6 +184,9 @@ Resolved
 
 - BUG: Make errors in appointment creation/edit dialog more obvious.
   > Joey fixed this by showing red color on errors. Nov14
+
+- BUG: Input checking in all Dialogs must highlight fields RED when finishing and stop processing.
+  > Joey fixed this. Nov14
 
 - TASK (RESOLVED): Complete server and client side checking, especially for 
   numerical values. (dont allow alpha in number box)

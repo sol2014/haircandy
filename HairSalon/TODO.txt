@@ -24,6 +24,8 @@ P BUG: Search sale need to work. It currently returns no results.
 P BUG: When someone is changing Salon Hours or Employee Hours, we should never
   allow them to edit them outside the limits based on existing scheduled data.
 
+P Bug: Fix the end time render for appointments dialog.
+
 - FEATURE: Add a tooltip on cells to show the date/start/end time.
   > This feature is non-essential and will make it in if we have time. Nov10
 

@@ -32,7 +32,7 @@ int firstWeekday = calendar.get(Calendar.DAY_OF_WEEK) - 1;
 int dayIndex = 0;
 int totalDays = CoreTools.getDaysInMonth(year, month);
 
-Hashtable<int, CalendarDayStatus> statusTable = SessionController.getCalendarStatus (userSession, month, year);
+//Hashtable<int, CalendarDayStatus> statusTable = SessionController.getCalendarStatus (userSession, month, year);
 %>
 
 <font face="Trebuchet MS">

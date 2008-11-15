@@ -52,6 +52,47 @@ var cells = new Array();//cells array that holds all cells' information
 //cells[cells.length] = new Cell("00", "empty"); needs to be initialized in jsp
 var appointments = new Array();//array that holds all the appointments' information
 
+function cellMouseOverHandler(e, element)//function to deal with the mouse over event on cells inside the scheduler table, that remove the appoint from the array and reset all the tds' class back to empty if its state is booking and allow draggable div to drag
+{
+    if(!e)
+    {
+        e = window.event;
+    }
+    try
+    {
+        var appointment = findSelectedAppointment(element.id);
+        if(appointment!=-1)
+        {
+            document.getElementById("infoWindow").style.display = "block";
+            var positions = getAbsolutePositions(document.getElementById(appointment[0]));
+            document.getElementById("infoWindow").style.left = (parseInt(positions.absoluteLeft)) + "px"; 
+            document.getElementById("infoWindow").style.top = (parseInt(positions.absoluteTop) - 105) + "px"; 
+            var startTime = parseInt(salonStartTime.split(":")[0])*60+parseInt(salonStartTime.split(":")[1])+parseInt(getRowId(appointment[0]))*15;
+            var endTime = parseInt(salonStartTime.split(":")[0])*60+parseInt(salonStartTime.split(":")[1])+(parseInt(getRowId(appointment[appointment.length-1]))+1)*15;
+            document.getElementById("infoStartTime").innerHTML = "Start Time:" + ((startTime - startTime%60)/60)+":"+formatZero(startTime%60);
+            document.getElementById("infoEndTime").innerHTML = "End Time:" + ((endTime - endTime%60)/60)+":"+formatZero(endTime%60);
+        } 
+    }
+    catch(error)
+    {
+    }
+}
+
+function cellMouseOutHandler(e, element)//function to deal with the mouse out event on cells inside the scheduler table, that remove the appoint from the array and reset all the tds' class back to empty if its state is booking and allow draggable div to drag
+{
+    if(!e)
+    {
+        e = window.event;
+    }
+    try
+    {
+        document.getElementById("infoWindow").style.display = "none";
+    }
+    catch(error)
+    {
+    }
+}
+
 function getColumnIDFromEmployeeNo(id)
 {
     for(var i = 0;i<employeeIDArray.length;i++)
@@ -1147,4 +1188,31 @@ function searchServices()
     var queryString="service_action=ServiceSearch&";
     queryString+="service_name="+escape(document.getElementById("searchServiceName").value)+"&";
     ajax.request("service",queryString);
+}
+
+function findSelectedAppointment(cellID)
+{
+    var appointment = -1;
+    for(var i=appointments.length -1; i>=0;i--)
+    {
+        appointment = appointments[i];
+        var find = false;
+        for(var j = 0; j < appointment.length; j++)
+        {
+            if(appointment[j] == cellID)
+            {
+                find = true;
+                break;
+            }
+        }
+        if(find)
+        {
+            break;
+        }
+        else
+        {
+            appointment = -1;
+        }
+    }
+    return appointment;
 }

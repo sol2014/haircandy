@@ -9,6 +9,16 @@ BEGIN
 END
 //
 
+DROP PROCEDURE IF EXISTS SearchScheduleExceptionRange//
+
+CREATE PROCEDURE SearchScheduleExceptionRange (IN p_start_date DATE,
+										IN p_end_date DATE)
+BEGIN
+    SELECT * from scheduleexception
+		WHERE ((p_start_date IS NULL || p_end_Date IS NULL) OR (date BETWEEN p_start_date AND p_end_date));
+END
+//
+
 DROP PROCEDURE IF EXISTS SearchScheduleException//
 
 CREATE PROCEDURE SearchScheduleException (IN p_date DATE,

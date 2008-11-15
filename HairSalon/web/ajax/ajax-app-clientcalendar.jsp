@@ -31,6 +31,8 @@ calendar.set(year, month, 1);
 int firstWeekday = calendar.get(Calendar.DAY_OF_WEEK) - 1;
 int dayIndex = 0;
 int totalDays = CoreTools.getDaysInMonth(year, month);
+
+ArrayList<CalendarDayStatus> calStatus = SessionController.getAppCalendarStatus (userSession, month, year);
 %>
 
 <font face="Trebuchet MS">
@@ -119,11 +121,16 @@ for (int row = 0; row < 6; row++)
 	if ((firstWeekday <= dayIndex) && (dayIndex < totalDays + firstWeekday))
 	{
 	    String datestr = (dayIndex - firstWeekday + 1)+"/"+(month+1)+"/"+year;
-	    AppointmentBean appointment = new AppointmentBean ();
-	    appointment.setDate (CoreTools.getDate (datestr));
-	    AppointmentBean[] appointments = SessionController.searchAppointments (userSession, appointment);
-
-	    if (appointments != null && appointments.length > 0)
+	    CalendarDayStatus status = calStatus.get (dayIndex - firstWeekday);
+	    
+	    if (status.isHasExceptions ())
+	    {
+%>
+				    <td id="<%=datestr%>" onmouseover="highlightDay('<%=datestr%>')" onmouseout="unlightDay('<%=datestr%>')" onclick="goToCalendarDay('<%=datestr%>')" class="CalendarCellException">
+					<div valign="top" align="right"><font size="1"><%=ServletHelper.display (status.getExceptionLabel ())%></font></div>
+<%
+	    }
+	    else if (status.isHasData ())
 	    {
 %>
 				    <td id="<%=datestr%>" onmouseover="highlightDay('<%=datestr%>')" onmouseout="unlightDay('<%=datestr%>')" onclick="goToCalendarDay('<%=datestr%>')" class="CalendarCellValid">

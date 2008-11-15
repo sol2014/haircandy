@@ -3,19 +3,19 @@ package hs.app;
 /**
  * Used to hold calendar state for one day.
  * 
- * @author pdurand
+ * @author Philippe Durand
  */
 public class CalendarDayStatus
 {
 	private int day = 0;
-	private boolean hasAppointments = false;
+	private boolean hasData = false;
 	private boolean hasExceptions = false;
 	private String exceptionLabel = "";
 	
-	public CalendarDayStatus (int day, boolean hasApp, boolean hasEx, String label)
+	public CalendarDayStatus (int day, boolean hasData, boolean hasEx, String label)
 	{
 		this.day = day;
-		this.hasAppointments = hasApp;
+		this.hasData = hasData;
 		this.hasExceptions = hasEx;
 		this.exceptionLabel = label;
 	}
@@ -30,14 +30,14 @@ public class CalendarDayStatus
 		this.day = day;
 	}
 
-	public boolean isHasAppointments ()
+	public boolean isHasData ()
 	{
-		return hasAppointments;
+		return hasData;
 	}
 
-	public void setHasAppointments (boolean hasAppointments)
+	public void setHasData (boolean hasData)
 	{
-		this.hasAppointments = hasAppointments;
+		this.hasData = hasData;
 	}
 
 	public boolean isHasExceptions ()

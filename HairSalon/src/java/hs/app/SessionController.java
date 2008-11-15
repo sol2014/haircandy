@@ -14,6 +14,8 @@ import java.util.*;
 import hs.core.*;
 import hs.objects.*;
 import hs.persistence.*;
+import hs.persistence.brokers.*;
+import java.text.ParseException;
 
 /**
  * Responsible for controller all actions that are taken by the user session
@@ -1428,12 +1430,99 @@ public class SessionController
 		return hash;
 	}
 	
-	public static Hashtable<Integer, CalendarDayStatus> getCalendarStatus (UserSession session, int month, int year)
+	public static ArrayList<CalendarDayStatus> getAppCalendarStatus (UserSession session, int month, int year)
 	{
-		Hashtable<Integer, CalendarDayStatus> hash = new Hashtable<Integer, CalendarDayStatus> ();
+		ArrayList<CalendarDayStatus> list = new ArrayList<CalendarDayStatus> ();
+		int totalDays = CoreTools.getDaysInMonth(year, month);
 		
+		java.util.Date startDate;
+		java.util.Date endDate;
 		
+		try
+		{
+			startDate = CoreTools.getDate ("01/"+(month+1)+"/"+year);
+			endDate = CoreTools.getDate (totalDays+"/"+(month+1)+"/"+year);
+		}
+		catch (ParseException e)
+		{
+			return null;
+		}
 		
-		return hash;
+		ScheduleExceptionBean[] exs = (ScheduleExceptionBean [])ScheduleExceptionBroker.getInstance ().searchDateRange (new ScheduleExceptionBean (), startDate, endDate);
+		AppointmentBean [] apps = (AppointmentBean [])AppointmentBroker.getInstance ().searchDateRange (new AppointmentBean (), startDate, endDate);
+		Calendar calendar = Calendar.getInstance ();
+		calendar.setTime (startDate);
+		
+		for (int i = 1; i <= totalDays; i++)
+		{
+			String exString = "";
+			boolean hasEx = false;
+			boolean hasApps = false;
+			
+			for (ScheduleExceptionBean ex : exs)
+				if (ex.getDate ().equals (calendar.getTime ()))
+				{
+					exString = ex.getReason ();
+					hasEx = true;
+				}
+			
+			for (AppointmentBean app : apps)
+				if (app.getDate ().equals (calendar.getTime ()))
+					hasApps = true;
+			
+			CalendarDayStatus status = new CalendarDayStatus (i, hasApps, hasEx, exString);
+			list.add (status);
+			calendar.add (Calendar.DAY_OF_YEAR, 1);
+		}
+		
+		return list;
+	}
+	
+	public static ArrayList<CalendarDayStatus> getSchCalendarStatus (UserSession session, int month, int year)
+	{
+		ArrayList<CalendarDayStatus> list = new ArrayList<CalendarDayStatus> ();
+		int totalDays = CoreTools.getDaysInMonth(year, month);
+		
+		Date startDate;
+		Date endDate;
+		
+		try
+		{
+			startDate = CoreTools.getDate ("01/"+(month+1)+"/"+year);
+			endDate = CoreTools.getDate (totalDays+"/"+(month+1)+"/"+year);
+		}
+		catch (ParseException e)
+		{
+			return null;
+		}
+		
+		ScheduleExceptionBean[] exs = (ScheduleExceptionBean [])ScheduleExceptionBroker.getInstance ().searchDateRange (new ScheduleExceptionBean (), startDate, endDate);
+		ScheduleBean [] scheds = (ScheduleBean [])ScheduleBroker.getInstance ().searchDateRange (new ScheduleBean (), startDate, endDate);
+		Calendar calendar = Calendar.getInstance ();
+		calendar.setTime (startDate);
+		
+		for (int i = 1; i <= totalDays; i++)
+		{
+			String exString = "";
+			boolean hasEx = false;
+			boolean hasSched = false;
+			
+			for (ScheduleExceptionBean ex : exs)
+				if (ex.getDate ().equals (calendar.getTime ()))
+				{
+					exString = ex.getReason ();
+					hasEx = true;
+				}
+			
+			for (ScheduleBean sched : scheds)
+				if (sched.getDate ().equals (calendar.getTime ()))
+					hasSched = true;
+			
+			CalendarDayStatus status = new CalendarDayStatus (i, hasSched, hasEx, exString);
+			list.add (status);
+			calendar.add (Calendar.DAY_OF_YEAR, 1);
+		}
+		
+		return list;
 	}
 }

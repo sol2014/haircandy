@@ -1,13 +1,3 @@
-/*
- * HairSalon: Scheduling and Management System
- * Systems II - Southern Alberta Institute of Technology
- * 
- * File Author: Joey Ren
- * 
- * System Developed by:
- * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
- */
-
 package hs.persistence.brokers;
 
 import java.sql.*;
@@ -19,7 +9,7 @@ import java.util.Hashtable;
 
 /**
  *
- * @author Nuha Bazara
+ * @author Philippe Durand
  */
 public class AppointmentBroker extends DatabaseBroker implements BrokerInterface
 {
@@ -121,6 +111,71 @@ public class AppointmentBroker extends DatabaseBroker implements BrokerInterface
 		LogController.write (this, "Loaded appointment bean: "+appointment.getAppointmentNo ());
 		
 		return appointment;
+	}
+	
+	public DataBean[] searchDateRange (DataBean data, java.util.Date start, java.util.Date end)
+	{
+		AppointmentBean appointment = (AppointmentBean) data;
+		ArrayList<AppointmentBean> appointmentAL = new ArrayList<AppointmentBean> ();
+		Connection connection = null;
+		
+		try
+		{
+			connection = super.getConnection ();
+			CallableStatement proc = connection.prepareCall ("{call SearchAppointmentRange(?,?,?,?,?,?,?)}");
+			int index = 1;
+			
+			if (appointment.getClient () != null)
+				addToStatement (proc, appointment.getClient ().getClientNo (), index++, Integer.class);
+			else
+				addToStatement (proc, null, index++, Integer.class);
+			
+			if (appointment.getEmployee () != null)
+				addToStatement (proc, appointment.getEmployee ().getEmployeeNo (), index++, Integer.class);
+			else
+				addToStatement (proc, null, index++, Integer.class);
+			
+			if (start == null)
+				addToStatement (proc, null, index++, java.sql.Date.class);
+			else
+				addToStatement (proc, new java.sql.Date(start.getTime()), index++, java.sql.Date.class);
+			
+			if (end == null)
+				addToStatement (proc, null, index++, java.sql.Date.class);
+			else
+				addToStatement (proc, new java.sql.Date(end.getTime()), index++, java.sql.Date.class);
+			
+			if (appointment.getStartTime () == null)
+				addToStatement (proc, null, index++, java.sql.Time.class);
+			else
+				addToStatement (proc, new java.sql.Time(appointment.getStartTime().getTime ()), index++, java.sql.Time.class);
+			
+			if (appointment.getEndTime () == null)
+				addToStatement (proc, null, index++, java.sql.Time.class);
+			else
+				addToStatement (proc, new java.sql.Time(appointment.getEndTime().getTime ()), index++, java.sql.Time.class);
+			
+			addToStatement (proc, appointment.getIsComplete (), index++, Boolean.class);
+			
+			ResultSet result = proc.executeQuery ();
+
+			while (result.next ())
+			{
+				appointmentAL.add ((AppointmentBean) getBean (result));
+			}
+		}
+		catch (SQLException r)
+		{
+			LogController.write (this, "SQL Exception during search: " + r.getMessage ());
+		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
+		
+		LogController.write (this, "Found appointment bean range of: "+appointmentAL.size());
+		
+		AppointmentBean[] appointementBean = new AppointmentBean[appointmentAL.size ()];
+		return appointmentAL.toArray (appointementBean);
 	}
 
 	public DataBean[] search (DataBean data)

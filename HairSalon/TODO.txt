@@ -136,6 +136,11 @@ Resolved
   bounds (dissapear on drop).
   > Joey fixed this bug. Nov11
 
+- BUG (RESOLVED): Calendar is extremely slow to load up because of inefficient
+  database usage.
+  > Philippe resolved by making custom range queries to build calendar. Nov15
+  > Philippe also did the same loading for schedule data. Nov15
+
 - BUG (RESOLVED): Fix blackout so that it uses the document height/width, not
   the browser viewing area, also, make blackout everytime we show a popup, do
   not use the same blackout each time.

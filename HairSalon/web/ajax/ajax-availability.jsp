@@ -42,9 +42,6 @@ EmployeeBean employee = (EmployeeBean)userSession.moveAttribute ("employee_load_
 					<td colspan="2" align="left">Provide your work availability so that the managers can schedule shifts appropriately.</td>
 				    </tr>
 				    <tr>
-					<td colspan="2" align="left">&nbsp;</td>
-				    </tr>
-				    <tr>
 					<td align="right"></td>
 					<td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'availability')" id="availability_monday_check" value="monday"><b>Available on Monday</b></td>
 				    </tr>

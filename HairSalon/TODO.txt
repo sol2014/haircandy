@@ -11,6 +11,11 @@ Updated: Sunday, Nov 14th, 2008
 Unresolved
 ----------
 
+- BUG: Records that are "disabled" should not be used by the applications.
+
+J BUG: The labels for start/end time in the appointment window do not render
+  time correctly for 12:00PM (noon), it shows 00:00PM.
+
 P BUG: Search sale need to work. It currently returns no results.
   > We need to have this working, its going to be needed. Nov 10th, 2008
   > Thinking of making sales search work in the same way as all other record

@@ -54,16 +54,16 @@ function cellMouseOverHandler(e, element)//function to deal with the mouse over 
         var appointment = findSelectedAppointment(element.id);
         if(appointment!=-1)
         {
-            document.getElementById("infoWindow").style.display = "block";
             var positions = getAbsolutePositions(document.getElementById(appointment[0]));
-            document.getElementById("infoWindow").style.left = (parseInt(positions.absoluteLeft) - 12) + "px"; 
-            document.getElementById("infoWindow").style.top = (parseInt(positions.absoluteTop) - 44) + "px"; 
+            document.getElementById("infoWindow").style.left = (parseInt(positions.absoluteLeft) - 20) + "px"; 
+            document.getElementById("infoWindow").style.top = (parseInt(positions.absoluteTop) - 40) + "px"; 
             var startTime = parseInt(salonStartTime.split(":")[0])*60+parseInt(salonStartTime.split(":")[1])+parseInt(getRowId(appointment[0]))*15;
             var endTime = parseInt(salonStartTime.split(":")[0])*60+parseInt(salonStartTime.split(":")[1])+(parseInt(getRowId(appointment[appointment.length-1]))+1)*15;
             var finalStartHour = (startTime - startTime%60)/60;
             var finalStartMin = startTime%60;
             var finalEndHour = (endTime - endTime%60)/60;
             var finalEndMin = endTime%60;
+            
             var startAMPM = "AM";
             var endAMPM = "AM";
             
@@ -72,14 +72,24 @@ function cellMouseOverHandler(e, element)//function to deal with the mouse over 
                 startAMPM = "PM";
                 finalStartHour = finalStartHour - 12;
             }
+            else if (finalStartHour == 12)
+            {
+                startAMPM = "PM";
+            }
             
             if (finalEndHour > 12)
             {
                 endAMPM = "PM";
                 finalEndHour = finalEndHour - 12;
             }
+            else if (finalEndHour == 12)
+            {
+                endAMPM = "PM";
+            }
+            
             document.getElementById("infoStartTime").innerHTML = "Start: " + finalStartHour +":"+formatZero(finalStartMin)+""+startAMPM;
-            document.getElementById("infoEndTime").innerHTML = "End: " + finalEndHour +":"+formatZero(finalEndMin)+""+startAMPM;
+            document.getElementById("infoEndTime").innerHTML = "End: " + finalEndHour +":"+formatZero(finalEndMin)+""+endAMPM;
+            document.getElementById("infoWindow").style.display = "block";
         } 
     }
     catch(error)

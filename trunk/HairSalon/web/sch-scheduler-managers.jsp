@@ -125,8 +125,8 @@ Date endTime = shb.getEndTime();
 <script>
     function repeat()
     {
-        window.setTimeout(repeat, 10000, "JavaScript");
+        window.setTimeout(repeat, 60000, "JavaScript");
         getMatrix();
     }
 </script>
-<script>window.setTimeout(repeat, 10000, "JavaScript");</script>
+<script>window.setTimeout(repeat, 60000, "JavaScript");</script>

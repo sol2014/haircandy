@@ -123,7 +123,7 @@ for (int row = 0; row < 6; row++)
 	    String datestr = (dayIndex - firstWeekday + 1)+"/"+(month+1)+"/"+year;
 	    AppointmentBean appointment = new AppointmentBean ();
 	    appointment.setDate (CoreTools.getDate (datestr));
-	    AppointmentBean[] appointments = SessionController.searchAppointmentsByMonth (userSession, appointment);
+	    AppointmentBean[] appointments = SessionController.searchAppointments (userSession, appointment);
 	    ScheduleExceptionBean exception2 = new ScheduleExceptionBean ();
 	    exception2.setDate (CoreTools.getDate (datestr));
 	    ScheduleExceptionBean[] exceptions = SessionController.searchScheduleExceptions (userSession, exception2);

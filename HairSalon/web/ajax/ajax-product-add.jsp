@@ -46,7 +46,7 @@
 		<tr align="right" valign="middle">
 		    <td valign="top" class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/result.gif" width="16" height="16" />&nbsp;</td>
 		    <td align="left" valign="top" class="Row2"><%=ServletHelper.display (product.getName ())%></td>
-		    <td align="left" valign="top" nowrap="nowrap" class="Row7"><%=ServletHelper.display (product.getBrand ())%></td>
+		    <td align="left" valign="top" class="Row7"><%=ServletHelper.display (product.getBrand ())%></td>
 		    <td align="left" valign="top" nowrap="nowrap" class="Row7"><%=ServletHelper.display (product.getType ())%></td>
 		    <td align="left" valign="top" nowrap="nowrap" class="Row7"><%=ServletHelper.displayPrice (product.getPrice ())%></td>
 		    <td nowrap="nowrap" valign="top" class="Row7"><img style="cursor:pointer" src="images/icons/small/add_white.gif" onclick="addProduct('<%=product.getProductNo ()%>','<%=product.getName ()%>','<%=product.getPrice()%>')" title="Add the product to the list." /></td>

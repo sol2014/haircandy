@@ -15,8 +15,6 @@ Unresolved
 
 J BUG: Input checking in all Dialogs must highlight fields RED when finishing.
 
-J BUG: Start Time/End Time do not render in the Employee scheduler dialog.
-
 J BUG: Make errors in appointment creation/edit dialog more obvious.
 
 P BUG: Dialog repositioning and sizing must be fixed for all dialogs, its
@@ -184,6 +182,9 @@ Resolved
 - BUG: Refresh is causing almost unusable performance in appointment
   and scheduler screens.
   > Joey fixed this by allowing 1 minute refresh, the previous one refreshes too often. Nov14
+
+- BUG: Start Time/End Time do not render in the Employee scheduler dialog.
+  > Joey fixed this. Nov14
 
 - TASK (RESOLVED): Complete server and client side checking, especially for 
   numerical values. (dont allow alpha in number box)

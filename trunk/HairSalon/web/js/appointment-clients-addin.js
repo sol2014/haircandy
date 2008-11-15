@@ -158,13 +158,20 @@ function addIntialAppointment(duration, row, column, appointmentId)//function us
 function addUnavailableEntry(duration, row, column)//function used to add entry on page load
 {
     ratio = duration;
-    var start = row;
+    var start = parseInt(row);
     var end = parseInt(start) + parseInt(ratio);
     for(var j = start; j < end; j++)
     {
         var cell = findCell(j+"^-^"+column);
         cell.state = bookedState;
-        document.getElementById(cell.id).className = exceptionClass;
+        try
+        {
+            document.getElementById(cell.id).className = exceptionClass;
+        }
+        catch(e)
+        {
+            alert(j+"^-^"+column);
+        }
     }
 }
 
@@ -1121,7 +1128,7 @@ function findCell(id)//function to return the correct cell based on id
     for(var i = 0; i<cells.length;i++)
     {
         var cell = cells[i];
-        if(cell.id == id)
+        if(cell.id+"" == id+"")
         {
             return cell;
         }

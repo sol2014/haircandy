@@ -139,8 +139,6 @@ public class AvailabilityExceptionBroker extends DatabaseBroker implements Broke
 				statement.setString (index++, availabilityException.getReason ());
 			}
 			
-			LogController.write ("SQL: "+statement.toString());
-			
 			// The first result set should be the availabilityException record.
 			ResultSet set = statement.executeQuery ();
 
@@ -157,7 +155,7 @@ public class AvailabilityExceptionBroker extends DatabaseBroker implements Broke
 		if (connection != null)
 			super.returnConnection (connection);
 		
-		LogController.write ("Found availability exception beans: "+results.size());
+		LogController.write (this, "Found availability exception beans: "+results.size());
 		
 		AvailabilityExceptionBean[] resultarray = new AvailabilityExceptionBean[results.size ()];
 		return results.toArray (resultarray);

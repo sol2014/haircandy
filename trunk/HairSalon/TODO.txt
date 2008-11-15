@@ -6,15 +6,18 @@ were left undone or unresolved because of time constraints. They will be
 analyzed and entered into the defficiency list of our system document. We have
 seperated the resolved and unresolved issues for convenience.
 
-Updated: Sunday, Nov 14th, 2008
+Updated: Sunday, Nov 15th, 2008
 
 Unresolved
 ----------
 
 - BUG: Records that are "disabled" should not be used by the applications.
 
-J BUG: The labels for start/end time in the appointment window do not render
+- BUG: The labels for start/end time in the appointment window do not render
   time correctly for 12:00PM (noon), it shows 00:00PM.
+
+- BUG: Servlets are unprotected from non-authorizes calls, if we have time we
+  need to also get this done like the tag does.
 
 P BUG: Search sale need to work. It currently returns no results.
   > We need to have this working, its going to be needed. Nov 10th, 2008
@@ -24,15 +27,10 @@ P BUG: Search sale need to work. It currently returns no results.
 P BUG: When someone is changing Salon Hours or Employee Hours, we should never
   allow them to edit them outside the limits based on existing scheduled data.
 
-P BUG: Fix the end time render for appointments dialog.
-
 ! FEATURE: We forgot to let appointments convert to sales for final processing.
 
 ! FEATURE: User HELP icon that opens seperate page for help in all screens.
   > This is for user friendliness. Nov10
-
-- TASK: Servlets are unprotected from non-authorizes calls, if we have time we
-  need to also get this done like the tag does.
 
 - TASK: Fill product and services database with basic salon data! (we need lots
   of producs and services that MOST salons would have. We could also make the

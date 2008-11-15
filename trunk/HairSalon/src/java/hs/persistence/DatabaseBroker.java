@@ -31,7 +31,7 @@ public abstract class DatabaseBroker implements BrokerInterface
 		connectionPool = MultithreadedJDBCConnectionPool.getConnectionPool();
 	}
 
-	protected Connection getConnection () throws Exception
+	protected Connection getConnection ()
 	{
 		return connectionPool.getConnection ();
 	}

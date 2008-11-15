@@ -18,16 +18,16 @@
 <%@page import="java.text.*" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+"http://www.w3.org/TR/html4/loose.dtd">
 
 <%-- Retrieve the UserSession object from the http session. --%>
 <%
-UserSession userSession = (UserSession) session.getAttribute ("user_session");
-int recordNo = 0;
+		UserSession userSession = (UserSession) session.getAttribute("user_session");
+		int recordNo = 0;
 
-userSession.setCurrentPosition (SessionPositions.AppScheduler);
+		userSession.setCurrentPosition(SessionPositions.AppScheduler);
 
-String page_title = "Appointments";
+		String page_title = "Appointments";
 %>
 
 <%-- Use the pre-set header file. --%>
@@ -44,18 +44,33 @@ String page_title = "Appointments";
 
 <script language="javascript" src="js/appointment-clients-addin.js"></script>
 <script language="javascript" src="js/appointment-addin.js"></script>
-
+<div id="justForReExecutue" style="display:none;"></div>
 <script>
+    function fillJS(content)
+    {
+        set_innerHTML("justForReExecutue",content);
+        //setInnerHTML(document.getElementById("justForReExecutue"), content);
+    }
+    function fillHTML(content)
+    {
+        set_innerHTML("matrix",content);
+        //setInnerHTML(document.getElementById("matrix"), content);
+        requestJS();
+    }
+    function requestJS()
+    {
+        var messager = new Ajaxer("text",null,fillJS,null);
+        var queryString="date=<%=request.getParameter("date")%>";
+        messager.request("ajax/ajax-app-scheduler-js.jsp",queryString);
+    }
     function getMatrix()
     {
-        function fillMatrix(content)
-        {
-            //set_innerHTML("matrix",content);
-            setInnerHTML(document.getElementById("matrix"), content);
-        }
-        var messager = new Ajaxer("text",null,fillMatrix,null);
+        var messager = new Ajaxer("text",null,fillHTML,null);
         var queryString="date=<%=request.getParameter("date")%>";
-        messager.request("ajax/ajax-app-scheduler.jsp",queryString);
+        if(draggableDiv.style.display!="block")
+        {
+            messager.request("ajax/ajax-app-scheduler-html.jsp",queryString);
+        }
     }
     getMatrix();
 </script>
@@ -69,4 +84,4 @@ String page_title = "Appointments";
         getMatrix();
     }
 </script>
-<script>//window.setTimeout(repeat, 10000, "JavaScript");</script>
+<script>window.setTimeout(repeat, 10000, "JavaScript");</script>

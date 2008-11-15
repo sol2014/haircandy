@@ -11,7 +11,7 @@ Updated: Sunday, Nov 14th, 2008
 Unresolved
 ----------
 
-- BUG: Next/Previous buttons in Calendar/Scheduler need to all work.
+- BUG: We forgot to let appointments convert to sales for final processing.
 
 P BUG: Dialog repositioning and sizing must be fixed for all dialogs, its
   horrible right now.
@@ -25,9 +25,6 @@ P BUG: When someone is changing Salon Hours or Employee Hours, we should never
   allow them to edit them outside the limits based on existing scheduled data.
 
 P Bug: Fix the end time render for appointments dialog.
-
-- FEATURE: Add a tooltip on cells to show the date/start/end time.
-  > This feature is non-essential and will make it in if we have time. Nov10
 
 ! FEATURE: User HELP icon that opens seperate page for help in all screens.
   > This is for user friendliness. Nov10
@@ -48,8 +45,6 @@ P Bug: Fix the end time render for appointments dialog.
     salon details to start the app off. Nov12
   > Philippe created the First Time Setup page that we will use as part 2 of the
     setup procedure. Nov13
-
-- TASK: Make sure all pages have proper TITLE, Navigation Position, Menu entry.
 
 - TASK: JavaDoc everything and document javascript to some degree.
   > Philippe has gone over all hs.objects.* classes, cleaned up javadoc and
@@ -110,6 +105,13 @@ Resolved
   views.
   > This is necessary for good user friendliness. Nov10
   > Philippe completed the legends in calendar and scheduler. Nov14
+
+- FEATURE (RESOLVED): Add a tooltip on cells to show the date/start/end time.
+  > This feature is non-essential and will make it in if we have time. Nov10
+  > Joey and Philippe completed this. Nov14
+
+- FEATURE (RESOLVED): Next/Previous buttons in Calendar/Scheduler need to all work.
+  > Philippe finished this task. Nov14
 
 - BUG (RESOLVED): Only show alert for 1 record type, always keep latest. Show date column
   in alert list too.

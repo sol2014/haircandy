@@ -100,3 +100,10 @@
     }
 </script>
 <script>window.setTimeout(repeat, 60000, "JavaScript");</script>
+
+<script>
+    function goDate (date)
+    {
+	window.location = "app-scheduler-employees.jsp?date="+date;
+    }
+</script>

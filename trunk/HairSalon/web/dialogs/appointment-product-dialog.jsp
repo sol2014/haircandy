@@ -1,4 +1,5 @@
-<div id="appointment_product_dialog" class="DialogBox" style="width: 600px;height: 350px;">
+
+<div id="appointment_product_dialog" class="DialogBox" style="width: 600px;height: 400px; z-index:3010;">
     <table bgcolor="#FFFFFF" height="100%" width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 	    <td><img src="images/scheduler/scheduler_topleft.gif" width="2" height="33" /></td>
@@ -8,7 +9,7 @@
 	<tr>
 	    <td height="100%" background="images/scheduler/scheduler_left.gif"><img src="images/scheduler/scheduler_left.gif" width="2" height="32" /></td>
 	    <td width="100%">
-		<div style="height:350px; overflow:auto; overflow-y: scroll; overflow-x: hidden;">
+		<div style="height:400px; overflow:auto; overflow-y: scroll; overflow-x: hidden;">
 		<table height="100%" width="98%" border="0" cellspacing="10" cellpadding="0">
 		    <tr>
 			<td colspan="2">
@@ -92,5 +93,5 @@
 
 <script>
     document.getElementById("appointment_product_dialog").style.left = (getScreenWidth() / 2) - 300 + "px";
-    document.getElementById("appointment_product_dialog").style.top = (getScreenHeight() / 2) - 175 + "px";
+    document.getElementById("appointment_product_dialog").style.top = (getScreenHeight() / 2) - 200 + "px";
 </script>

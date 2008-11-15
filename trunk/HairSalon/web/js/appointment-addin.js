@@ -44,12 +44,14 @@ function operResultTable(content){
 }
 
 function builtResultTable(content){
+    showSecondaryBlackout(true);
     document.getElementById("appointment_product_dialog").style.display="block";
     document.getElementById("searchResult").innerHTML=content;
 }
 
 function builtServiceResultTable(content)
 {
+    showSecondaryBlackout(true);
     document.getElementById("appointment_service_dialog").style.display="block";
     document.getElementById("serviceResult").innerHTML=content;
 }
@@ -212,24 +214,32 @@ function findServiceIndex(id)
     return -1;
 }
 
-function showAddProduct(){
+function showAddProduct()
+{
+    showSecondaryBlackout(true);
     document.getElementById("searchResult").innerHTML="";
     document.getElementById("appointment_product_dialog").style.display="block";
     searchProducts();
 }
 
-function showAddService(){
+function showAddService()
+{
+    showSecondaryBlackout(true);
     document.getElementById("serviceResult").innerHTML="";
     document.getElementById("appointment_service_dialog").style.display="block";
     searchServices();
 }
 
-function closeAddProduct(){
+function closeAddProduct()
+{
     document.getElementById("appointment_product_dialog").style.display="none";
+    showSecondaryBlackout(false);
 }
 
-function closeAddService(){
+function closeAddService()
+{
     document.getElementById("appointment_service_dialog").style.display="none";
+    showSecondaryBlackout(false);
 }
 
 function doSubmit()

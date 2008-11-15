@@ -4,7 +4,7 @@ int left = positions.size(); %>
 <table align="left" border="0" cellpadding="0" cellspacing="6">
     <tr>
 	<td align="left"><img border="0" src="/HairSalon/images/icons/small/home_gray.gif" width="16" height="16"></td>
-	<td align="left"><a class="NavigationFont" href="/HairSalon/application">Home</a></td>
+	<td nowrap="nowrap" align="left"><a class="NavigationFont" href="/HairSalon/application">Home</a></td>
 	<td align="left"><span class="NavigationFont">&gt;</span></td>
 	
 	<% for (SessionPositions position : positions) {
@@ -35,7 +35,7 @@ int left = positions.size(); %>
 		case AppScheduler:
 		    icon = "appointment_gray.gif";
 		    resource = "";
-		    title = "Appointment Scheduler";
+		    title = "Appointment Schedule";
 		    break;
 		case AppCalendar:
 		    icon = "appointment_gray.gif";
@@ -45,7 +45,7 @@ int left = positions.size(); %>
 		case SchScheduler:
 		    icon = "schedule_gray.gif";
 		    resource = "";
-		    title = "Employee Scheduler";
+		    title = "Employee Schedule";
 		    break;
 		case SchCalendar:
 		    icon = "schedule_gray.gif";
@@ -160,7 +160,7 @@ int left = positions.size(); %>
 	    } %>
 	    
 	<td align="left"><img border="0" src="/HairSalon/images/icons/small/<%= icon %>" width="16" height="16"></td>
-	<td align="left">
+	<td nowrap="nowrap" align="left">
 	    <% if (left > 0) { %>
 	<a class="NavigationFont" href="/HairSalon/<%= resource %>">
 	    <% } else { %>

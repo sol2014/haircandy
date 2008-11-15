@@ -99,6 +99,20 @@ if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo
 		    <div valign="top" style="height:350px; overflow:auto; overflow-y: auto; overflow-x: hidden;">
 			<table valign="top" border="0" width="100%" cellspacing="10" cellpadding="0">
 			    <tr>
+				<td colspan="2">
+				    <% if (userSession.isGuest ()) { %>
+					Please type in your telephone number and click the search icon. If you have never booked an appointment with
+					us in the past, simply provide your first and last name, along with your phone number. Make sure to select
+					the appropriate services and products you would like to purchase.
+				    <% } else { %>
+					Provide the first and last name of the client that will be coming into the salon.
+					Make to select at least one service to create the appointment. As an employee of
+					the salon, you are able to make overlapping appointments.
+				    <% } %>
+				    <br/>
+				</td>
+			    </tr>
+			    <tr>
 				<td valign="top">
 				    <table>
 					<tr>

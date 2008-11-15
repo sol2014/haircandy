@@ -97,7 +97,7 @@ Date endTime = shb.getEndTime();
 
 <%@ include file="WEB-INF/jspf/footer.jspf" %>
 
-<div id="infoWindow" class="infoWindow" style="border-width: 2px; border-color: #CCC; border-style: solid; background-color: #ffffff; width: 80px; height:28px;">
+<div id="infoWindow" class="infoWindow" style="border-width: 2px; border-color: #CCC; border-style: solid; background-color: #fffccc; width: 80px; height:28px;">
     <font face="Trebuchet MS" size="1"><b>
     <div width="100%" align="center" id="infoStartTime"></div>
     <div width="100%" align="center" id="infoEndTime"></div>

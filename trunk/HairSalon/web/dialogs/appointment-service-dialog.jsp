@@ -1,4 +1,29 @@
-<div id="appointment_service_dialog" class="DialogBox" style="width: 600px;height: 350px;">
+<div id="secondary_blackout" style="display:none; position: absolute;left: 0px; top: 0px; background-color: #000000;opacity: .5; filter: alpha(opacity=70); z-index: 3009;"></div>
+
+<script>
+    var screenHeight = getScreenHeight();
+    var screenWidth = getScreenWidth();
+	
+    if (screenHeight > document.body.scrollHeight)
+        document.getElementById("secondary_blackout").style.height = screenHeight + "px";
+    else
+        document.getElementById("secondary_blackout").style.height = document.body.scrollHeight + "px";
+	
+    if (screenWidth > document.body.scrollWidth)
+        document.getElementById("secondary_blackout").style.width = screenWidth + "px";
+    else
+        document.getElementById("secondary_blackout").style.width = document.body.scrollWidth + "px";
+    
+    function showSecondaryBlackout(value)
+    {
+	if (value == true)
+	    document.getElementById("secondary_blackout").style.display="block";
+	else
+	    document.getElementById("secondary_blackout").style.display="none";
+    }
+</script>
+
+<div id="appointment_service_dialog" class="DialogBox" style="width: 600px;height: 400px; z-index:3010;">
      <table bgcolor="#FFFFFF" height="100%" width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 	    <td><img src="images/scheduler/scheduler_topleft.gif" width="2" height="33" /></td>
@@ -8,7 +33,7 @@
 	<tr>
 	    <td height="100%" background="images/scheduler/scheduler_left.gif"><img src="images/scheduler/scheduler_left.gif" width="2" height="32" /></td>
 	    <td width="100%">
-		<div style="height:350px; overflow:auto; overflow-y: scroll; overflow-x: hidden;">
+		<div style="height:400px; overflow:auto; overflow-y: scroll; overflow-x: hidden;">
 		<table height="100%" width="98%" border="0" cellspacing="10" cellpadding="0">
 		    <tr>
 			<td colspan="2">
@@ -84,5 +109,5 @@
 
 <script>
     document.getElementById("appointment_service_dialog").style.left = (getScreenWidth() / 2) - 300 + "px";
-    document.getElementById("appointment_service_dialog").style.top = (getScreenHeight() / 2) - 175 + "px";
+    document.getElementById("appointment_service_dialog").style.top = (getScreenHeight() / 2) - 200 + "px";
 </script>

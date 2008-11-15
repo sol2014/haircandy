@@ -37,13 +37,14 @@
     <div align="left" id="matrix"></div>
 </font>
 
-
 <%@ include file="dialogs/appointment-dialog.jsp" %>
 
 <%@ include file="WEB-INF/jspf/footer.jspf" %>
-<div id="infoWindow" class="infoWindow" style="width: 90px;height:100px;">
-    <div id="infoStartTime"></div>
-    <div id="infoEndTime"></div>
+<div id="infoWindow" class="infoWindow" style="border-width: 2px; border-color: #CCC; border-style: solid; background-color: #ffffff; width: 80px; height:28px;">
+    <font face="Trebuchet MS" size="1"><b>
+    <div width="100%" align="center" id="infoStartTime"></div></p>
+    <div width="100%" align="center" id="infoEndTime"></div></p>
+    </b></font>
 </div>
 
 <script language="javascript" src="js/appointment-clients-addin.js"></script>

@@ -15,7 +15,10 @@
 <%@page import="hs.presentation.*" %>
 <%@page import="hs.presentation.tags.*" %>
 <%@page import="java.util.*" %>
-<%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
+<%@page errorPage="/defaultError.jsp?from=index.jsp" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
+
 <taglib:ValidateEmployee minimum="Receptionist" />
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -48,14 +51,17 @@ int recordNo = 0;
 	    <tr>
 		<td align="right" valign="top"><img border="0" src="/HairSalon/images/icons/big/report_white.gif" width="48" height="48"></td>	    
 		<td align="left"><font size="3"><b>Generate Reports</b><br>
-		    A manager can generate and print various reports from the information in the database. Click the button that you want to make a report about.
+		    A manager can generate and print various reports from the information in the database. You can also export reports to Microsoft Excel documents.
 		    <br><br>
 
 		    <%-- Now we want to add the button that will allow the user to make reports --%>
-		    <input type="submit" value="Report Order List" name="report_order_list"><br><br>
-		    <input type="submit" value="Report Order" name="report_order"><br><br>
-		    <input type="submit" value="Report Product Usage" name="report_product_usage"><br><br>
-		    <input type="submit" value="Report Service Usage" name="report_service_usage">
+		    <h3>Please choose one of the following report:</h3>
+		    <p align="center">
+			    <a href="reports/ClientRepMenu.jsp">Client</a><br/><br/>
+			    <a href="reports/EmployeeRepMenu.jsp">Employee</a><br/><br/>
+			    <a href="reports/ProductRepMenu.jsp">Product</a><br/><br/>
+			    <a href="reports/SaleRepMenu.jsp">Sale</a><br/><br/>
+		    </p>
 		    
 		    <%-- This is the feedback section, any errors or messages should be displayed here --%>
 		    <% if (error_string != null) { %><br><font color="red"><%=error_string%></font><% }%>

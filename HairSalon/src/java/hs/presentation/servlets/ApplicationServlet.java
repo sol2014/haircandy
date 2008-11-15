@@ -13,9 +13,10 @@ package hs.presentation.servlets;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
-import java.lang.reflect.*;
 
+import hs.app.*;
 import hs.core.*;
+import hs.objects.*;
 import hs.presentation.*;
 
 /**
@@ -38,6 +39,7 @@ public class ApplicationServlet extends DispatcherServlet
 		//setInternalActionAttribute ("internal_application_action");
 		setActionAttribute ("application_action");
 		setDefaultExternalAction ("performWelcome");
+		addExternalAction ("Finish", "performSetupFinish");
 	}
 	
 	/**
@@ -53,6 +55,16 @@ public class ApplicationServlet extends DispatcherServlet
 		throws ServletException, IOException
 	{
 		LogController.write (this, "[USER REQUEST] Performing welcome.");
+		
+		SalonBean salon = new SalonBean ();
+		salon = SessionController.loadSalon (session, salon);
+		
+		// We need to check if we have a Salon record, otherwise we go to first time setup.
+		if (salon == null)
+		{
+			redirect ("hairsalon-setup.jsp", request, response);
+			return;
+		}
 		
 		if (session.isGuest())
 		{

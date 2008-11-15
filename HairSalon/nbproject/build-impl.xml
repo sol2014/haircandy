@@ -509,11 +509,20 @@ or ant -Dj2ee.platform.classpath=&lt;server_classpath&gt; (where no properties f
     </target>
     <target depends="init,compile,compile-jsps,-pre-dist,-do-dist-with-manifest,-do-dist-without-manifest" name="do-dist"/>
     <target depends="init" if="dist.ear.dir" name="library-inclusion-in-manifest">
+        <basename file="${file.reference.jstl.jar}" property="included.lib.file.reference.jstl.jar"/>
+        <copy-ear-war file="${file.reference.jstl.jar}" propname="included.lib.file.reference.jstl.jar.X"/>
+        <basename file="${file.reference.standard.jar}" property="included.lib.file.reference.standard.jar"/>
+        <copy-ear-war file="${file.reference.standard.jar}" propname="included.lib.file.reference.standard.jar.X"/>
         <mkdir dir="${build.web.dir}/META-INF"/>
-        <manifest file="${build.web.dir}/META-INF/MANIFEST.MF" mode="update"/>
+        <manifest file="${build.web.dir}/META-INF/MANIFEST.MF" mode="update">
+            <attribute name="Class-Path" value="${included.lib.file.reference.jstl.jar} ${included.lib.file.reference.standard.jar} "/>
+        </manifest>
         <delete dir="${dist.ear.dir}/temp"/>
     </target>
-    <target depends="init" name="library-inclusion-in-archive" unless="dist.ear.dir"/>
+    <target depends="init" name="library-inclusion-in-archive" unless="dist.ear.dir">
+        <copy file="${file.reference.jstl.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
+        <copy file="${file.reference.standard.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
+    </target>
     <target depends="init,compile,compile-jsps,-pre-dist,library-inclusion-in-manifest" name="do-ear-dist">
         <dirname file="${dist.ear.war}" property="dist.jar.dir"/>
         <mkdir dir="${dist.jar.dir}"/>

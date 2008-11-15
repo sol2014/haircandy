@@ -108,16 +108,17 @@ UserSession userSession = (UserSession) session.getAttribute("user_session");
 										<font size="4"><b>HairSalon: Scheduling & Management System</b></font><br/>
 										<font size="3"><i>Welcome to First Time Setup</i></font>
 
-										<p>This page will help you start up your new scheduling and management system for your hair salon! Please fill out the form below and
-										you can get started.</p>
+										<p>This page will help you start up your new scheduling and management system for your hair salon! Please fill out the 
+										four sections of the form below and you can get started.</p>
 
-										<p><b>Salon Identification</b><br/>
+										<p><b><u>1. Salon Identification</u></b><br/>
 										Your salon has some identification information that is useful for clients and employees. These values will be used throughout
-										the application.</p>
+										the application. You need to provide the address information of your salon so that clients will know where to find you 
+										using the site.</p>
 
 										<table border="0" cellpadding="0" cellspacing="3" width="260">
 										    <tr>
-											<% if (userSession.moveAttribute ("salon_new_salon_name") == null) { %>
+											<% if (userSession.moveAttribute ("setup_salon_name") == null) { %>
 											<td width="100px" align="right">Salon Name:</td>
 											<% } else { %>
 											<td align="right"><font color="red">Salon Name:</font></td>
@@ -125,21 +126,27 @@ UserSession userSession = (UserSession) session.getAttribute("user_session");
 											<td width="100px" align="left"><input type="text" name="salon_name" value="" size="20"></td>
 										    </tr>
 										    <tr>
-											<% if (userSession.moveAttribute ("salon_new_phone_number") == null) { %>
+											<% if (userSession.moveAttribute ("setup_new_phone_number") == null) { %>
 											<td width="100px" align="right"><div id="telephone_label">Telephone:</div></td>
 											<% } else { %>
 											<td width="100px" align="right"><font color="red"><div id="telephone_label">Telephone:</div></font></td>
 											<% } %>
 											<td align="left"><input type="text" name="phone_number" id="phone_number" onkeypress="return isNumberTyped (event)" onKeyUp="return checkTelephone(this)" size="10" value=""></td>
 										    </tr>
-										</table>
-										
-										<p><b>Location Information</b>
-										You need to provide the address information of your salon so that clients will know where to find you using the site.</p>
-										
-										<table>
 										    <tr>
-											<% if (userSession.moveAttribute ("salon_error_address1") == null) { %>
+											<% if (userSession.moveAttribute ("setup_error_email") == null) { %>
+											<td width="95px" align="right">Email:</td>
+											<% } else { %>
+											<td width="95px" align="right"><font color="red">Email:</font></td>
+											<% } %>
+											<td align="left"><input type="text" name="email" value="" size="20"></td>
+										    </tr>
+										    <tr>
+											<td nowrap="nowrap" align="right">&nbsp;</td>
+											<td nowrap="nowrap" align="left">&nbsp;</td>
+										    </tr>
+										    <tr>
+											<% if (userSession.moveAttribute ("setup_error_address1") == null) { %>
 											<td width="95px" align="right">Address 1:</td>
 											<% } else { %>
 											<td width="95px" align="right"><font color="red">Address 1:</font></td>
@@ -151,15 +158,7 @@ UserSession userSession = (UserSession) session.getAttribute("user_session");
 											<td align="left"><input type="text" name="address2" value="" size="20"></td>
 										    </tr>
 										    <tr>
-											<% if (userSession.moveAttribute ("salon_error_email") == null) { %>
-											<td width="95px" align="right">Email:</td>
-											<% } else { %>
-											<td width="95px" align="right"><font color="red">Email:</font></td>
-											<% } %>
-											<td align="left"><input type="text" name="email" value="" size="20"></td>
-										    </tr>
-										    <tr>
-											<% if (userSession.moveAttribute ("salon_error_city") == null) { %>
+											<% if (userSession.moveAttribute ("setup_error_city") == null) { %>
 											<td width="95px" align="right">City:</td>
 											<% } else { %>
 											<td width="95px" align="right"><font color="red">City:</font></td>
@@ -167,7 +166,7 @@ UserSession userSession = (UserSession) session.getAttribute("user_session");
 											<td align="left"><input type="text" name="city" value="" size="15"></td>
 										    </tr>
 										    <tr>
-											<% if (userSession.moveAttribute ("salon_error_province") == null) { %>
+											<% if (userSession.moveAttribute ("setup_error_province") == null) { %>
 											<td width="95px" align="right">Province:</td>
 											<% } else { %>
 											<td width="95px" align="right"><font color="red">Province:</font></td>
@@ -175,7 +174,7 @@ UserSession userSession = (UserSession) session.getAttribute("user_session");
 											<td align="left"><input type="text" name="province" value="" size="15"></td>
 										    </tr>
 										    <tr>
-											<% if (userSession.moveAttribute ("salon_error_country") == null) { %>
+											<% if (userSession.moveAttribute ("setup_error_country") == null) { %>
 											<td width="95px" align="right">Country:</td>
 											<% } else { %>
 											<td width="95px" align="right"><font color="red">Country:</font></td>
@@ -183,7 +182,7 @@ UserSession userSession = (UserSession) session.getAttribute("user_session");
 											<td align="left"><input type="text" name="country" value="" size="15"></td>
 										    </tr>
 										    <tr>
-											<% if (userSession.moveAttribute ("salon_error_postal_code") == null) { %>
+											<% if (userSession.moveAttribute ("setup_error_postal_code") == null) { %>
 											<td width="95px" align="right"><div id="postal_code_label">Postal Code:</div></td>
 											<% } else { %>
 											<td width="95px" align="right"><font color="red"><div id="postal_code_label">Postal Code:</div></font></td>
@@ -191,13 +190,14 @@ UserSession userSession = (UserSession) session.getAttribute("user_session");
 											<td align="left"><input type="text" name="postal_code" id="postal_code" onKeyUp="return checkPostalCode(this)" value="" size="6"><i>(ie. N4N4N4)</i></td>
 										    </tr>
 										</table>
-										<p><b>Sales Tax</b><br/>
+										
+										<p><b><u>2. Sales Tax</u></b><br/>
 										The tax rate may be vary from place to place. Provide accurate values as your sales will use this information to calculate tax
-										and bill your customers.</p>
+										and bill your customers. Sales tax can still be modified by managers in the salon maintenance page.</p>
 										
 										<table border="0" cellpadding="0" cellspacing="3" width="260">
 										    <tr>
-											<% if (userSession.moveAttribute ("salon_error_tax") == null) { %>
+											<% if (userSession.moveAttribute ("setup_error_tax") == null) { %>
 											<td width="96px" align="right">Tax Rate:</td>
 											<% } else { %>
 											<td width="96px" align="right"><font color="red">Tax Rate:</font></td>
@@ -206,32 +206,33 @@ UserSession userSession = (UserSession) session.getAttribute("user_session");
 										    </tr>
 										</table>
 										
-										<p><b>Business Hours</b><br/>
-										Your salon has interfaces that will allow you to maintain your employee schedule and your client appointments. Provide the hours
+										<p><b><u>3. Business Hours</u></b><br/>
+										This software has interfaces that will allow you to maintain your employee schedule and your client appointments. Provide the hours
 										of operation of your salon. The employee and appointment schedules will be using these values to save data, and these hours will
-										restrict client appointment bookings.</p>
+										restrict client appointment bookings and employee schedule shifts. You may still modify these default settings later, as well
+										as change the hours of any individual day if necessary.</p>
 										
 										<table border="0" cellpadding="0" cellspacing="3" width="260">
 										    <tr>
-											<% if (userSession.moveAttribute ("salon_error_monday") == null) { %>
+											<% if (userSession.moveAttribute ("setup_error_monday") == null) { %>
 											<td align="right">Monday:</td>
 											<% } else { %>
 											<td align="right"><font color="red">Monday:</font></td>
 											<% } %>
-											<td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'salon')" id="salon_monday_check" value="monday"></td>
+											<td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'salon')" id="setup_monday_check" value="monday"></td>
 										    </tr>
 
 										    <tr>
 											<td nowrap="nowrap" align="right">Open:</td>
 											<td nowrap="nowrap" align="left">
-											    <%=ServletHelper.generateHourPicker ("salon_monday_start", null)%>
+											    <%=ServletHelper.generateHourPicker ("setup_monday_start", null)%>
 
 											</td>
 										    </tr>
 										    <tr>
 											<td nowrap="nowrap" align="right">Close:</td>
 											<td nowrap="nowrap" align="left">
-											    <%=ServletHelper.generateHourPicker ("salon_monday_end", null)%>
+											    <%=ServletHelper.generateHourPicker ("setup_monday_end", null)%>
 											</td>
 										    </tr>
 
@@ -241,23 +242,23 @@ UserSession userSession = (UserSession) session.getAttribute("user_session");
 										    </tr>
 
 										    <tr>
-											<% if (userSession.moveAttribute ("salon_error_tuesday") == null) { %>
+											<% if (userSession.moveAttribute ("setup_error_tuesday") == null) { %>
 											<td align="right">Tuesday:</td>
 											<% } else { %>
 											<td align="right"><font color="red">Tuesday:</font></td>
 											<% } %>
-											<td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'salon')" id="salon_tuesday_check" value="tuesday"></td>
+											<td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'salon')" id="setup_tuesday_check" value="tuesday"></td>
 										    </tr>
 										    <tr>
 											<td nowrap="nowrap" align="right">Open:</td>
 											<td nowrap="nowrap" align="left">
-											    <%=ServletHelper.generateHourPicker ("salon_tuesday_start", null)%>
+											    <%=ServletHelper.generateHourPicker ("setup_tuesday_start", null)%>
 											</td>
 										    </tr>
 										    <tr>
 											<td nowrap="nowrap" align="right">Close:</td>
 											<td nowrap="nowrap" align="left">
-											    <%=ServletHelper.generateHourPicker ("salon_tuesday_end", null)%>
+											    <%=ServletHelper.generateHourPicker ("setup_tuesday_end", null)%>
 											</td>
 										    </tr>
 
@@ -267,23 +268,23 @@ UserSession userSession = (UserSession) session.getAttribute("user_session");
 										    </tr>
 
 										    <tr>
-											<% if (userSession.moveAttribute ("salon_error_wednesday") == null) { %>
+											<% if (userSession.moveAttribute ("setup_error_wednesday") == null) { %>
 											<td align="right">Wednesday:</td>
 											<% } else { %>
 											<td align="right"><font color="red">Wednesday:</font></td>
 											<% } %>
-											<td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'salon')" id="salon_wednesday_check" value="wednesday"></td>
+											<td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'salon')" id="setup_wednesday_check" value="wednesday"></td>
 										    </tr>
 										    <tr>
 											<td nowrap="nowrap" align="right">Open:</td>
 											<td nowrap="nowrap" align="left">
-											    <%=ServletHelper.generateHourPicker ("salon_wednesday_start", null)%>
+											    <%=ServletHelper.generateHourPicker ("setup_wednesday_start", null)%>
 											</td>
 										    </tr>
 										    <tr>
 											<td nowrap="nowrap" align="right">Close:</td>
 											<td nowrap="nowrap" align="left">
-											    <%=ServletHelper.generateHourPicker ("salon_wednesday_end", null)%>
+											    <%=ServletHelper.generateHourPicker ("setup_wednesday_end", null)%>
 											</td>
 										    </tr>
 
@@ -293,23 +294,23 @@ UserSession userSession = (UserSession) session.getAttribute("user_session");
 										    </tr>
 
 										    <tr>
-											<% if (userSession.moveAttribute ("salon_error_thursday") == null) { %>
+											<% if (userSession.moveAttribute ("setup_error_thursday") == null) { %>
 											<td align="right">Thursday:</td>
 											<% } else { %>
 											<td align="right"><font color="red">Thursday:</font></td>
 											<% } %>
-											<td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'salon')" id="salon_thursday_check" value="thursday"></td>
+											<td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'salon')" id="setup_thursday_check" value="thursday"></td>
 										    </tr>
 										    <tr>
 											<td nowrap="nowrap" align="right">Open:</td>
 											<td nowrap="nowrap" align="left">
-											    <%=ServletHelper.generateHourPicker ("salon_thursday_start", null)%>
+											    <%=ServletHelper.generateHourPicker ("setup_thursday_start", null)%>
 											</td>
 										    </tr>
 										    <tr>
 											<td nowrap="nowrap" align="right">Close:</td>
 											<td nowrap="nowrap" align="left">
-											    <%=ServletHelper.generateHourPicker ("salon_thursday_end", null)%>
+											    <%=ServletHelper.generateHourPicker ("setup_thursday_end", null)%>
 											</td>
 										    </tr>
 
@@ -319,23 +320,23 @@ UserSession userSession = (UserSession) session.getAttribute("user_session");
 										    </tr>
 
 										    <tr>
-											<% if (userSession.moveAttribute ("salon_error_friday") == null) { %>
+											<% if (userSession.moveAttribute ("setup_error_friday") == null) { %>
 											<td align="right">Friday:</td>
 											<% } else { %>
 											<td align="right"><font color="red">Friday:</font></td>
 											<% } %>
-											<td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'salon')" id="salon_friday_check" value="friday"></td>
+											<td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'salon')" id="setup_friday_check" value="friday"></td>
 										    </tr>
 										    <tr>
 											<td nowrap="nowrap" align="right">Open:</td>
 											<td nowrap="nowrap" align="left">
-											    <%=ServletHelper.generateHourPicker ("salon_friday_start", null)%>
+											    <%=ServletHelper.generateHourPicker ("setup_friday_start", null)%>
 											</td>
 										    </tr>
 										    <tr>
 											<td nowrap="nowrap" align="right">Close:</td>
 											<td nowrap="nowrap" align="left">
-											    <%=ServletHelper.generateHourPicker ("salon_friday_end", null)%>
+											    <%=ServletHelper.generateHourPicker ("setup_friday_end", null)%>
 											</td>
 										    </tr>
 
@@ -345,23 +346,23 @@ UserSession userSession = (UserSession) session.getAttribute("user_session");
 										    </tr>
 
 										    <tr>
-											<% if (userSession.moveAttribute ("salon_error_saturday") == null) { %>
+											<% if (userSession.moveAttribute ("setup_error_saturday") == null) { %>
 											<td align="right">Satuday:</td>
 											<% } else { %>
 											<td align="right"><font color="red">Saturday:</font></td>
 											<% } %>
-											<td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'salon')" id="salon_saturday_check" value="saturday"></td>
+											<td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'salon')" id="setup_saturday_check" value="saturday"></td>
 										    </tr>
 										    <tr>
 											<td nowrap="nowrap" align="right">Open:</td>
 											<td nowrap="nowrap" align="left">
-											    <%=ServletHelper.generateHourPicker ("salon_saturday_start", null)%>
+											    <%=ServletHelper.generateHourPicker ("setup_saturday_start", null)%>
 											</td>
 										    </tr>
 										    <tr>
 											<td nowrap="nowrap" align="right">Close:</td>
 											<td nowrap="nowrap" align="left">
-											    <%=ServletHelper.generateHourPicker ("salon_saturday_end", null)%>
+											    <%=ServletHelper.generateHourPicker ("setup_saturday_end", null)%>
 											</td>
 										    </tr>
 
@@ -371,29 +372,125 @@ UserSession userSession = (UserSession) session.getAttribute("user_session");
 										    </tr>
 
 										    <tr>
-											<% if (userSession.moveAttribute ("salon_error_sunday") == null) { %>
+											<% if (userSession.moveAttribute ("setup_error_sunday") == null) { %>
 											<td align="right">Sunday:</td>
 											<% } else { %>
 											<td align="right"><font color="red">Sunday:</font></td>
 											<% } %>
-											<td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'salon')" id="salon_sunday_check" value="sunday"></td>
+											<td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'salon')" id="setup_sunday_check" value="sunday"></td>
 										    </tr>
 										    <tr>
 											<td nowrap="nowrap" align="right">Open:</td>
 											<td nowrap="nowrap" align="left">
-											    <%=ServletHelper.generateHourPicker ("salon_sunday_start", null)%>
+											    <%=ServletHelper.generateHourPicker ("setup_sunday_start", null)%>
 											</td>
 										    </tr>
 										    <tr>
 											<td nowrap="nowrap" align="right">Close:</td>
 											<td nowrap="nowrap" align="left">
-											    <%=ServletHelper.generateHourPicker ("salon_sunday_end", null)%>
+											    <%=ServletHelper.generateHourPicker ("setup_sunday_end", null)%>
 											</td>
 										    </tr>
 										</table>
 										
-										<p>You have provided all of the information that we need to get started! Please click the continue button to start using the application.</p>
-										<input type="button" value="Continue">
+										<p><b><u>4. Manager Account</u></b><br/>
+										Finally you will need to create the manager account that you will use to access the system as a Manager role. Once you
+										have logged into this role, you can create as many other manager, stylist, or receptionist roles as you wish.</p>
+										
+										<table>
+										    <tr>
+											<% if (userSession.moveAttribute ("setup_error_first_name") == null) { %>
+											<td align="right">First Name:</td>
+											<% } else { %>
+											<td align="right"><font color="red">First Name:</font></td>
+											<% } %>
+											<td align="left"><input type="text" name="first_name" size="20" value="<%=ServletHelper.display (userSession.moveAttribute ("setup_manager_first_name"))%>"></td>
+										    </tr>
+										    <tr>
+											<% if (userSession.moveAttribute ("setup_error_last_name") == null) { %>
+											<td align="right">Last Name:</td>
+											<% } else { %>
+											<td align="right"><font color="red">Last Name:</font></td>
+											<% } %>
+											<td align="left"><input type="text" name="last_name" size="20" value="<%=ServletHelper.display (userSession.moveAttribute ("setup_manager_last_name"))%>"></td>
+										    </tr>
+										    <tr>
+											<% if (userSession.moveAttribute ("setup_error_manager_phone_number") == null) { %>
+											<td align="right"><div id="manager_telephone_label">Telephone:</div></td>
+											<% } else { %>
+											<td align="right"><font color="red"><div id="manager_telephone_label">Telephone:</div></font></td>
+											<% } %>
+											<td align="left"><input type="text" name="manager_phone_number" id="manager_phone_number" onkeypress="return isNumberTyped (event)" onKeyUp="return checkTelephone(this)" size="10" value="<%=ServletHelper.display (userSession.moveAttribute ("setup_manager_phone_number"))%>"></td>
+										    </tr>
+										    <tr>
+											<% if (userSession.moveAttribute ("setup_error_manager_password") == null) { %>
+											<td align="right">Password:</td>
+											<% } else { %>
+											<td align="right"><font color="red">Password:</font></td>
+											<% } %>
+											<td align="left"><input type="password" name="manager_password" size="15"></td>
+										    </tr>
+										    <tr>
+											<td nowrap="nowrap" align="right">&nbsp;</td>
+											<td nowrap="nowrap" align="left">&nbsp;</td>
+										    </tr>
+										    <tr>
+											<% if (userSession.moveAttribute ("setup_error_employee_address1") == null) { %>
+											<td align="right">Address 1:</td>
+											<% } else { %>
+											<td align="right"><font color="red">Address 1:</font></td>
+											<% } %>
+											<td align="left"><input type="text" name="manager_address1" size="20" value="<%=ServletHelper.display (userSession.moveAttribute ("setup_manager_address1"))%>"></td>
+										    </tr>
+										    <tr>
+											<td align="right">Address 2:</td>
+											<td align="left"><input type="text" name="manager_address2" size="20" value="<%=ServletHelper.display (userSession.moveAttribute ("setup_manager_address2"))%>"></td>
+										    </tr>
+										    <tr>
+											<% if (userSession.moveAttribute ("setup_error_employee_email") == null) { %>
+											<td align="right">Email:</td>
+											<% } else { %>
+											<td align="right"><font color="red">Email:</font></td>
+											<% } %>
+											<td align="left"><input type="text" name="manager_email" size="20" value="<%=ServletHelper.display (userSession.moveAttribute ("setup_manager_email"))%>"></td>
+										    </tr>
+										    <tr>
+											<% if (userSession.moveAttribute ("setup_error_employee_city") == null) { %>
+											<td align="right">City:</td>
+											<% } else { %>
+											<td align="right"><font color="red">City:</font></td>
+											<% } %>
+											<td align="left"><input type="text" name="manager_city" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("setup_manager_city"))%>"></td>
+										    </tr>
+										    <tr>
+											<% if (userSession.moveAttribute ("setup_error_employee_province") == null) { %>
+											<td align="right">Province:</td>
+											<% } else { %>
+											<td align="right"><font color="red">Province:</font></td>
+											<% } %>
+											<td align="left"><input type="text" name="manager_province" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("setup_manager_province"))%>"></td>
+										    </tr>
+										    <tr>
+											<% if (userSession.moveAttribute ("setup_error_employee_country") == null) { %>
+											<td align="right">Country:</td>
+											<% } else { %>
+											<td align="right"><font color="red">Country:</font></td>
+											<% } %>
+											<td align="left"><input type="text" name="manager_country" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("setup_manager_country"))%>"></td>
+										    </tr>
+										    <tr>
+											<% if (userSession.moveAttribute ("setup_error_employee_postal_code") == null) { %>
+											<td align="right"><div id="manager_postal_code_label">Postal Code:</div></td>
+											<% } else { %>
+											<td align="right"><font color="red"><div id="manager_postal_code_label">Postal Code:</div></font></td>
+											<% } %>
+											<td align="left"><input type="text" name="manager_postal_code" id="manager_postal_code" onKeyUp="return checkPostalCode(this)" size="6" value="<%=ServletHelper.display (userSession.moveAttribute ("setup_manager_postal_code"))%>"><i>(ie. N4N4N4)</i></td>
+										    </tr>
+										</table>
+										<br/>
+										<p>Congratulations! You have provided all of the information that we need to get started! Please click the finish button to start using the application.</p>
+										<input type="button" value="Finish" class="StandardButton">
+										<br/><br/>
 									    </td>
 									</tr>
 								    </table>

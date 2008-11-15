@@ -96,7 +96,64 @@ public class ScheduleExceptionBroker extends DatabaseBroker implements BrokerInt
 		
 		return scheduleException;
 	}
+	
+	public DataBean[] searchDateRange (DataBean data, java.util.Date start, java.util.Date end)
+	{
+		ScheduleExceptionBean scheduleException = (ScheduleExceptionBean) data;
+		ArrayList<ScheduleExceptionBean> results = new ArrayList<ScheduleExceptionBean> ();
+		Connection connection = null;
+		
+		try
+		{
+			connection = super.getConnection ();
+			CallableStatement statement = connection.prepareCall ("{call SearchScheduleExceptionRange(?,?)}");
 
+			// Check which search parameters this object provides
+			
+			if (start == null)
+			{
+				statement.setNull (1, java.sql.Types.DATE);
+			}
+			else
+			{
+				statement.setDate (1, new java.sql.Date (start.getTime ()));
+			}
+			
+			if (end == null)
+			{
+				statement.setNull (2, java.sql.Types.DATE);
+			}
+			else
+			{
+				statement.setDate (2, new java.sql.Date (end.getTime ()));
+			}
+			
+			// The first result set should be the availabilityException record.
+			ResultSet set = statement.executeQuery ();
+
+			while (set.next ())
+			{
+				results.add ((ScheduleExceptionBean) getBean (set));
+			}
+		}
+		catch (SQLException sqlEx)
+		{
+			LogController.write (this, "SQL Exception during search: " + sqlEx.getMessage ());
+		}
+		catch (Exception e)
+		{
+			
+		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
+		
+		LogController.write (this, "Found schedule exception bean range of: "+results.size());
+		
+		ScheduleExceptionBean[] resultarray = new ScheduleExceptionBean[results.size ()];
+		return results.toArray (resultarray);
+	}
+	
 	@Override
 	public DataBean[] search (DataBean data)
 	{
@@ -128,8 +185,6 @@ public class ScheduleExceptionBroker extends DatabaseBroker implements BrokerInt
 			{
 				statement.setString (2, scheduleException.getReason ());
 			}
-			
-			LogController.write ("SQL: "+statement.toString());
 			
 			// The first result set should be the availabilityException record.
 			ResultSet set = statement.executeQuery ();

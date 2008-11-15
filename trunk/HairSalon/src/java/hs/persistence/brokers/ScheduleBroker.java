@@ -93,7 +93,82 @@ public class ScheduleBroker extends DatabaseBroker implements BrokerInterface
 		
 		return schedule;
 	}
-
+	
+	public DataBean[] searchDateRange (DataBean data, java.util.Date start, java.util.Date end)
+	{
+		ScheduleBean schedule = (ScheduleBean) data;
+		ArrayList<ScheduleBean> results = new ArrayList<ScheduleBean> ();
+		Connection connection = null;
+		
+		try
+		{
+			connection = super.getConnection ();
+			CallableStatement statement = connection.prepareCall ("{call SearchScheduleRange(?,?,?,?,?)}");	
+			int index = 1;
+			
+			if (schedule.getEmployee() == null)
+				addToStatement (statement, null, index++, Integer.class);
+			else
+				addToStatement (statement, schedule.getEmployee().getEmployeeNo (), index++, Integer.class);
+			
+			if (schedule.getDate () == null)
+			{
+				addToStatement (statement, null, index++, java.sql.Date.class);
+			}
+			else
+			{
+				addToStatement (statement, new java.sql.Date (schedule.getDate ().getTime()), index++, java.sql.Date.class);
+			}
+			
+			if (schedule.getDate () == null)
+			{
+				addToStatement (statement, null, index++, java.sql.Date.class);
+			}
+			else
+			{
+				addToStatement (statement, new java.sql.Date (schedule.getDate ().getTime()), index++, java.sql.Date.class);
+			}
+			
+			if (schedule.getStartTime() == null)
+			{
+				addToStatement (statement, null, index++, java.sql.Time.class);
+			}
+			else
+			{
+				addToStatement (statement, new java.sql.Time (schedule.getStartTime().getTime()), index++, java.sql.Time.class);
+			}
+			
+			if (schedule.getEndTime () == null)
+			{
+				addToStatement (statement, null, index++, java.sql.Time.class);
+			}
+			else
+			{
+				addToStatement (statement, new java.sql.Time (schedule.getEndTime().getTime()), index++, java.sql.Time.class);
+			}
+			
+			// The first result set should be the schedule record.
+			ResultSet set = statement.executeQuery ();
+			
+			while (set.next ())
+			{
+				results.add ((ScheduleBean) getBean (set));
+			}
+		}
+		catch (SQLException sqlEx)
+		{
+			LogController.write (this, "SQL Exception during search: " + sqlEx.getMessage ());
+		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
+		
+		LogController.write (this, "Found schedule beans range of: "+results.size());
+		
+		ScheduleBean[] ra = new ScheduleBean[results.size ()];
+		return results.toArray (ra);
+	}
+	
 	@Override
 	public DataBean[] search (DataBean data)
 	{

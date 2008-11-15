@@ -15,6 +15,27 @@ BEGIN
 END
 //
 
+DROP PROCEDURE IF EXISTS SearchAppointmentRange//
+
+CREATE PROCEDURE SearchAppointmentRange (IN p_client_no BIGINT(20),
+									IN p_employee_no BIGINT(20),
+									IN p_start_date DATE,
+									IN p_end_date DATE,
+									IN p_start_time TIME,
+									IN p_end_time TIME,
+									IN p_is_complete BOOLEAN)
+BEGIN
+	SELECT * FROM appointment
+		WHERE ((p_client_no IS NULL) OR (client_no =p_client_no))
+		AND ((p_employee_no IS NULL) OR (employee_no =p_employee_no))
+		AND ((p_start_date IS NULL || p_end_date IS NULL) OR (ap_date BETWEEN p_start_date AND p_end_date))
+		AND ((p_start_time IS NULL) OR (start_time = p_start_time))
+		AND ((p_end_time IS NULL) OR (end_time = p_end_time))
+		AND ((p_is_complete IS NULL) OR (is_complete = p_is_complete))
+		ORDER BY ap_date DESC;
+END
+//
+
 DROP PROCEDURE IF EXISTS SearchAppointment//
 
 CREATE PROCEDURE SearchAppointment (IN p_client_no BIGINT(20),
@@ -31,7 +52,8 @@ BEGIN
 	AND ((p_ap_date IS NULL) OR (ap_date = p_ap_date))
 	AND ((p_start_time IS NULL) OR (start_time = p_start_time))
 	AND ((p_end_time IS NULL) OR (end_time = p_end_time))
-	AND ((p_is_complete IS NULL) OR (is_complete = p_is_complete));
+	AND ((p_is_complete IS NULL) OR (is_complete = p_is_complete))
+	ORDER BY ap_date DESC;
 END
 //
 

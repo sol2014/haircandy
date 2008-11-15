@@ -32,7 +32,7 @@ int firstWeekday = calendar.get(Calendar.DAY_OF_WEEK) - 1;
 int dayIndex = 0;
 int totalDays = CoreTools.getDaysInMonth(year, month);
 
-//Hashtable<int, CalendarDayStatus> statusTable = SessionController.getCalendarStatus (userSession, month, year);
+ArrayList<CalendarDayStatus> calStatus = SessionController.getAppCalendarStatus (userSession, month, year);
 %>
 
 <font face="Trebuchet MS">
@@ -121,25 +121,16 @@ for (int row = 0; row < 6; row++)
 	if ((firstWeekday <= dayIndex) && (dayIndex < totalDays + firstWeekday))
 	{
 	    String datestr = (dayIndex - firstWeekday + 1)+"/"+(month+1)+"/"+year;
-	    AppointmentBean appointment = new AppointmentBean ();
-	    appointment.setDate (CoreTools.getDate (datestr));
-	    AppointmentBean[] appointments = SessionController.searchAppointments (userSession, appointment);
-	    ScheduleExceptionBean exception2 = new ScheduleExceptionBean ();
-	    exception2.setDate (CoreTools.getDate (datestr));
-	    ScheduleExceptionBean[] exceptions = SessionController.searchScheduleExceptions (userSession, exception2);
+	    CalendarDayStatus status = calStatus.get (dayIndex - firstWeekday);
 	    
-	    if (exceptions != null && exceptions.length > 0)
+	    if (status.isHasExceptions ())
 	    {
-			exception2 = exceptions[0];
-			exception2.setDate (CoreTools.getDate (datestr));
 %>
 				    <td id="<%=datestr%>" onmouseover="highlightDay('<%=datestr%>')" onmouseout="unlightDay('<%=datestr%>')" onclick="goToCalendarDay('<%=datestr%>')" class="CalendarCellException">
-					<% exception2 = SessionController.loadScheduleException (userSession, exception2);
-					if (exception2 != null) { %>
-					<div valign="top" align="right"><font size="1"><%=ServletHelper.display (exception2.getReason ())%></font></div><% }%>
+					<div valign="top" align="right"><font size="1"><%=ServletHelper.display (status.getExceptionLabel ())%></font></div>
 <%
 	    }
-	    else if (appointments != null && appointments.length > 0)
+	    else if (status.isHasData ())
 	    {
 %>
 				    <td id="<%=datestr%>" onmouseover="highlightDay('<%=datestr%>')" onmouseout="unlightDay('<%=datestr%>')" onclick="goToCalendarDay('<%=datestr%>')" class="CalendarCellValid">

@@ -9,6 +9,23 @@ BEGIN
 END
 //
 
+DROP PROCEDURE IF EXISTS SearchScheduleRange//
+
+CREATE PROCEDURE SearchScheduleRange(IN p_employee_no BIGINT(20),
+								   IN p_start_date DATE,
+								   IN p_end_date DATE,
+								   IN p_start_time TIME,
+								   IN p_end_time TIME)
+BEGIN
+	SELECT * FROM schedule
+        WHERE ((p_employee_no IS NULL) OR (employee_no = p_employee_no))
+        AND ((p_start_date IS NULL || p_end_date IS NULL) OR (date BETWEEN p_start_date AND p_end_date))
+        AND ((p_start_time IS NULL) OR (start_time = p_start_time))
+        AND ((p_end_time IS NULL) OR (end_time = p_end_time))
+	ORDER BY date DESC;
+END
+//
+
 DROP PROCEDURE IF EXISTS SearchSchedule//
 
 CREATE PROCEDURE SearchSchedule(IN p_employee_no BIGINT(20),
@@ -21,7 +38,7 @@ BEGIN
         AND ((p_date IS NULL) OR (date = p_date))
         AND ((p_start_time IS NULL) OR (start_time = p_start_time))
         AND ((p_end_time IS NULL) OR (end_time = p_end_time))
-	ORDER BY p_employee_no DESC;
+	ORDER BY date DESC;
 END
 //
 

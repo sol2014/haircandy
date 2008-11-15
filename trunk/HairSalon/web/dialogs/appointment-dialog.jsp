@@ -11,11 +11,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="hs.core.*" %>
 
-<div id="appointment_dialog_shell" class="DialogBox">
-</div>
-
-<%@ include file="../dialogs/appointment-product-dialog.jsp" %>
-<%@ include file="../dialogs/appointment-service-dialog.jsp" %>
+<font face="Trebuchet MS" size="2">
+    <div id="appointment_dialog_shell" class="DialogBox"></div>
+    
+    <%@ include file="../dialogs/appointment-product-dialog.jsp" %>
+    <%@ include file="../dialogs/appointment-service-dialog.jsp" %>
+</font>
 
 <script>
     function getDialogShell()

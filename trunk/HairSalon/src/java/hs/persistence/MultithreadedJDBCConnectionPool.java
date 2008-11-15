@@ -71,11 +71,10 @@ public class MultithreadedJDBCConnectionPool {
 	 * @return
 	 * @throws Exception
 	 */
-	public Connection getConnection() throws SQLException {
+	public Connection getConnection() {
 		Connection connection = this.jcd.getConnection();
 		if (connection == null) {
-			throw new SQLException(
-					"The database is done, what are you gonna do about it?");
+			return null;
 		} else {
 			return connection;
 		}

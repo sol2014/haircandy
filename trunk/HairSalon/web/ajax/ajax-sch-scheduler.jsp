@@ -239,7 +239,7 @@
                                     <table border="0" width="100%" cellspacing="0" cellpadding="0" height="100%">
                                         <% for (int k = 0; k < 4; k++) {%>
                                         <tr>
-                                            <td id="<%=rowCount + k%>^-^<%=j%>" onclick="cellSingleClickHandler(this)" ondblclick="cellDoubleClickHandler(this)"  onmousedown="cellMouseDownHandler(event, this)" class="<%=getCSSClass(userSession, startHour, rowCount + k, employees.get(j), movableSchedules, availabilityExceptions, scheduleExceptions, unschedulables, unmovableSchedules)%>"><img src="images/site_blank.gif"></td>
+                                            <td id="<%=rowCount + k%>^-^<%=j%>" onclick="cellSingleClickHandler(this)" ondblclick="cellDoubleClickHandler(this)" onmouseover="cellMouseOverHandler(event, this)" onmouseout="cellMouseOutHandler(event, this)"  onmousedown="cellMouseDownHandler(event, this)" class="<%=getCSSClass(userSession, startHour, rowCount + k, employees.get(j), movableSchedules, availabilityExceptions, scheduleExceptions, unschedulables, unmovableSchedules)%>"><img src="images/site_blank.gif"></td>
                                         </tr>
                                         <% }%>
                                     </table>

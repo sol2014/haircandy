@@ -16,6 +16,16 @@
     z-index: 3008;
 }
 
+.infoWindow
+{
+    display:none;
+    position: absolute;
+    background-color:#ffffff;
+    z-index: 1989;
+    padding: 0px 0px 0px 0px;
+    text-align: left;
+}
+
 .draggable
 {
     position:absolute;

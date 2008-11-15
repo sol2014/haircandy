@@ -97,6 +97,10 @@ Date endTime = shb.getEndTime();
 
 <%@ include file="WEB-INF/jspf/footer.jspf" %>
 
+<div id="infoWindow" class="infoWindow" style="width: 90px;height:100px;">
+    <div id="infoStartTime"></div>
+    <div id="infoEndTime"></div>
+</div>
 
 <script language="javascript" src="js/scheduler-managers-addin.js"></script>
 <script language="javascript" src="js/time-addin.js"></script>

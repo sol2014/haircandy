@@ -11,9 +11,6 @@ Updated: Sunday, Nov 14th, 2008
 Unresolved
 ----------
 
-J BUG: Refresh is causing almost unusable performance in appointment
-  and scheduler screens.
-
 - BUG: Next/Previous buttons in Calendar/Scheduler need to all work.
 
 J BUG: Input checking in all Dialogs must highlight fields RED when finishing.
@@ -21,8 +18,6 @@ J BUG: Input checking in all Dialogs must highlight fields RED when finishing.
 J BUG: Start Time/End Time do not render in the Employee scheduler dialog.
 
 J BUG: Make errors in appointment creation/edit dialog more obvious.
-
-J BUG: Appointment view does not refresh.
 
 P BUG: Dialog repositioning and sizing must be fixed for all dialogs, its
   horrible right now.
@@ -182,6 +177,13 @@ Resolved
 - BUG (RESOLVED): When deleting schedule entries, or moving them, we are not
   even checking if there is already booked appointments data for those entries.
   > Philippe and Joey fixed this bug together. Nov13
+
+- BUG (RESOLVED): Appointment view does not refresh.
+  > Joey fixed this. Nov14
+
+- BUG: Refresh is causing almost unusable performance in appointment
+  and scheduler screens.
+  > Joey fixed this by allowing 1 minute refresh, the previous one refreshes too often. Nov14
 
 - TASK (RESOLVED): Complete server and client side checking, especially for 
   numerical values. (dont allow alpha in number box)

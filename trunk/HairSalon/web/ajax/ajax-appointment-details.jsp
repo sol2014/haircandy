@@ -96,7 +96,7 @@ if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo
 	    <tr>
 		<td height="100%" background="images/scheduler/scheduler_left.gif"><img src="images/scheduler/scheduler_left.gif" width="2" height="32" /></td>
 		<td align="left" valign="top" width="100%">
-		    <div valign="top" style="height:400px; overflow:auto; overflow-y: auto; overflow-x: hidden;">
+		    <div valign="top" style="height:350px; overflow:auto; overflow-y: auto; overflow-x: hidden;">
 			<table valign="top" border="0" width="100%" cellspacing="10" cellpadding="0">
 			    <tr>
 				<td valign="top">

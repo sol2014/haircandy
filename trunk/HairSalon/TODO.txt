@@ -11,11 +11,6 @@ Updated: Sunday, Nov 14th, 2008
 Unresolved
 ----------
 
-- FEATURE: We forgot to let appointments convert to sales for final processing.
-
-P BUG: Dialog repositioning and sizing must be fixed for all dialogs, its
-  horrible right now.
-
 P BUG: Search sale need to work. It currently returns no results.
   > We need to have this working, its going to be needed. Nov 10th, 2008
   > Thinking of making sales search work in the same way as all other record
@@ -24,7 +19,9 @@ P BUG: Search sale need to work. It currently returns no results.
 P BUG: When someone is changing Salon Hours or Employee Hours, we should never
   allow them to edit them outside the limits based on existing scheduled data.
 
-P Bug: Fix the end time render for appointments dialog.
+P BUG: Fix the end time render for appointments dialog.
+
+! FEATURE: We forgot to let appointments convert to sales for final processing.
 
 ! FEATURE: User HELP icon that opens seperate page for help in all screens.
   > This is for user friendliness. Nov10
@@ -171,6 +168,12 @@ Resolved
 - BUG (RESOLVED): Delete button in appointment dialog needs to be hidden when 
   creating new entry.
   > Joey fixed this. Nov12
+
+- BUG (RESOLVED): Dialog repositioning and sizing must be fixed for all dialogs, its
+  horrible right now.
+  > This is resolved to a minimum requirement level. Windows are one size and
+    use scrollers in case they get too big. No dynamic resize and only center
+    positions for all. Nov15
 
 - BUG (RESOLVED): In a one hour availability, if we use 45 minutes in an
   appointment, then we try and add a 15 minute service, it will not allow us.

@@ -12,7 +12,7 @@
 <%@page import="hs.core.*" %>
 
 <font face="Trebuchet MS" size="2">
-    <div id="appointment_dialog_shell" class="DialogBox" style="width: 700px;height: 400px;"></div>
+    <div id="appointment_dialog_shell" class="DialogBox" style="width: 700px;height: 350px;"></div>
     
     <%@ include file="../dialogs/appointment-product-dialog.jsp" %>
     <%@ include file="../dialogs/appointment-service-dialog.jsp" %>
@@ -20,7 +20,7 @@
 
 <script>
     document.getElementById("appointment_dialog_shell").style.left = (getScreenWidth() / 2) - 350 + "px";
-    document.getElementById("appointment_dialog_shell").style.top = (getScreenHeight() / 2) - 200 + "px";
+    document.getElementById("appointment_dialog_shell").style.top = (getScreenHeight() / 2) - 175 + "px";
 </script>
 
 <script>

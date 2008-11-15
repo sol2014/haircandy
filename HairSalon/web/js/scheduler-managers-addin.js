@@ -661,6 +661,10 @@ function cellDoubleClickHandler(element)//function to deal with double click
                 document.getElementById("minuteDuration").selectedIndex = jMinute;
                 document.getElementById("sch_employee_name").innerHTML = employeeNameArray[parseInt(getColumnId(element.id))];
                 document.getElementById("sch_date").innerHTML = date;
+                var startTime = parseInt(salonStartTime.split(":")[0])*60+parseInt(salonStartTime.split(":")[1])+parseInt(getRowId(appointment[0]))*15;
+                var endTime = parseInt(salonStartTime.split(":")[0])*60+parseInt(salonStartTime.split(":")[1])+(parseInt(getRowId(appointment[appointment.length-1]))+1)*15;
+                document.getElementById("sch_start_time").innerHTML = "Start Time:" + ((startTime - startTime%60)/60)+":"+formatZero(startTime%60);
+                document.getElementById("sch_end_time").innerHTML = "End Time:" + ((endTime - endTime%60)/60)+":"+formatZero(endTime%60);
             }
         }
     }

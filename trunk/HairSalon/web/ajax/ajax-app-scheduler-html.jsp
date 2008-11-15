@@ -47,8 +47,8 @@ ScheduleHoursBean shb = new ScheduleHoursBean ();
 shb.setDate (date);
 shb = SessionController.loadScheduleHours (userSession, shb);
 
-Hashtable<EmployeeBean, ArrayList<ScheduleBean>> unavailables = SessionController.getUnavailable(userSession, date, availabilityExceptions, scheduleExceptions, shb);
-Hashtable<EmployeeBean, ArrayList<AppointmentBean>> appointments = SessionController.getAppointments(userSession, date, availabilityExceptions, scheduleExceptions);
+Hashtable<EmployeeBean, ArrayList<ScheduleBean>> unavailables = SessionController.getUnavailable (userSession, date, availabilityExceptions, scheduleExceptions, shb);
+Hashtable<EmployeeBean, ArrayList<AppointmentBean>> appointments = SessionController.getAppointments (userSession, date, availabilityExceptions, scheduleExceptions);
 ArrayList<EmployeeBean> employees = new ArrayList<EmployeeBean>();
 
 for (EmployeeBean employee : unavailables.keySet()) {

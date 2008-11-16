@@ -116,6 +116,7 @@ UserSession userSession = (UserSession) session.getAttribute("user_session");
 										the application. You need to provide the address information of your salon so that clients will know where to find you 
 										using the site.</p>
 
+										<form method="POST" action="application">
 										<table border="0" cellpadding="0" cellspacing="3" width="260">
 										    <tr>
 											<% if (userSession.moveAttribute ("setup_salon_name") == null) { %>
@@ -491,6 +492,7 @@ UserSession userSession = (UserSession) session.getAttribute("user_session");
 										<p>Congratulations! You have provided all of the information that we need to get started! Please click the finish button to start using the application.</p>
 										<input type="button" value="Finish" class="StandardButton">
 										<br/><br/>
+										</form>
 									    </td>
 									</tr>
 								    </table>

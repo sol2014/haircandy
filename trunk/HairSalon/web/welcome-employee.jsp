@@ -103,9 +103,11 @@ String error_string = (String) userSession.moveAttribute ("alert_error");
 				    <% for (AlertBean alert : alerts) { %>
 				    <tr align="right" valign="middle">
 					<td class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/medium/<%=ServletHelper.displayAlertIcon (alert.getLevel())%>.gif" width="22" height="22" />&nbsp;</td>
-					<td align="left" class="Row2"><span class="SearchLink"><a href="<%=ServletHelper.display (alert.getLink ())%>" class="SearchLink"><%=ServletHelper.display (alert.getMessage ())%></a></span></td>
 					<% if (userSession.getEmployee ().getRole ().equals ("Manager")) { %>
+					    <td align="left" class="Row2"><span class="SearchLink"><a href="<%=ServletHelper.display (alert.getLink ())%>" class="SearchLink"><%=ServletHelper.display (alert.getMessage ())%></a></span></td>
 					    <td nowrap="nowrap" class="Row7"><img style="cursor:pointer" id="<%=alert.getAlertNo ()%>" src="/HairSalon/images/icons/small/remove_white.gif" onclick="deleteAlert(this)" title="Delete this alert from the list." /></td>
+					<% } else { %>
+					    <td align="left" class="Row2"><span class="SearchLink"><%=ServletHelper.display (alert.getMessage ())%></span></td>
 					<% } %>
 				    </tr>
 				    <% }%>

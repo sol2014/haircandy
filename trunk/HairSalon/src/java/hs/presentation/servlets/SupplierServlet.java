@@ -20,11 +20,19 @@ import hs.app.*;
 import java.util.ArrayList;
 
 /**
- *
- * @author Joey
+ * The supplier servlet will handle all http requests that will deal with
+ * manipulation of supplier information in the system.
+ * 
+ * @author Joey Ren
  */
 public class SupplierServlet extends DispatcherServlet
 {
+	/**
+	 * Sets up defaults for action handling used by this servlet. See the
+	 * DispatcherServlet for more details.
+	 * 
+	 * @throws java.lang.NoSuchMethodException
+	 */
 	@Override
 	public void setupActionMethods ()
 			throws NoSuchMethodException
@@ -37,7 +45,18 @@ public class SupplierServlet extends DispatcherServlet
 		addExternalAction ("New Supplier", "performCreate");
 		addExternalAction ("Finish", "performSave");
 	}
-
+	
+	/**
+	 * This action will allow the creation of new suppliers. It deals with
+	 * any server side information checking and relays information back
+	 * about success or failures to the requestor.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performCreate (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{

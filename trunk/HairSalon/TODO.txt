@@ -6,23 +6,16 @@ were left undone or unresolved because of time constraints. They will be
 analyzed and entered into the defficiency list of our system document. We have
 seperated the resolved and unresolved issues for convenience.
 
-Updated: Sunday, Nov 15th, 2008
+Updated: Sunday, Nov 16th, 2008
 
 Unresolved
 ----------
-
-- BUG: Records that are "disabled" should not be used by the applications.
 
 - BUG: The labels for start/end time in the appointment window do not render
   time correctly for 12:00PM (noon), it shows 00:00PM.
 
 - BUG: Servlets are unprotected from non-authorizes calls, if we have time we
   need to also get this done like the tag does.
-
-P BUG: Search sale need to work. It currently returns no results.
-  > We need to have this working, its going to be needed. Nov 10th, 2008
-  > Thinking of making sales search work in the same way as all other record
-    types. Nov13
 
 P BUG: When someone is changing Salon Hours or Employee Hours, we should never
   allow them to edit them outside the limits based on existing scheduled data.
@@ -45,6 +38,8 @@ P BUG: When someone is changing Salon Hours or Employee Hours, we should never
     salon details to start the app off. Nov12
   > Philippe created the First Time Setup page that we will use as part 2 of the
     setup procedure. Nov13
+  > Phil added to the first time setup page so we can create a manager account
+    as well as salon info. Made page work when salon data is not there. Nov15
 
 - TASK: JavaDoc everything and document javascript to some degree.
   > Philippe has gone over all hs.objects.* classes, cleaned up javadoc and
@@ -146,6 +141,10 @@ Resolved
   > Philippe fixed this issue well enough for our purposes, the blackouts now
     take the full size of he browser window, but it does not resize with the 
     browser. Nov12
+
+- BUG (RESOLVED): Search sale need to work. It currently returns no results.
+  > We need to have this working, its going to be needed. Nov10
+  > Phil fixed the sales searching using date range. Nov16
 
 - BUG (RESOLVED): The cells in Employee Schedule view turn from Blue to Green 
   after first refresh.

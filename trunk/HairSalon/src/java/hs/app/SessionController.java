@@ -169,6 +169,20 @@ public class SessionController
 	}
 
 	/**
+	 * Allows a user session to search for sales from the persistence
+	 * controller using a date range.
+	 * 
+	 * @param session the session that is doing the search.
+	 * @param sale the sale data that is being used for the search.
+	 * @return the sale array containing the results.
+	 */
+	public static SaleBean[] searchSalesRange (UserSession userSession, SaleBean sale, Date start, Date end)
+	{
+		LogController.write ("SessionController->Searching for sales within a date range...");
+		return (SaleBean[]) SaleBroker.getInstance().searchRange (sale, start, end);
+	}
+	
+	/**
 	 * Allows a user session to search for suppliers from the persistence
 	 * controller.
 	 * 
@@ -980,8 +994,8 @@ public class SessionController
 		
 		Hashtable<EmployeeBean, ArrayList<ScheduleBean>> hash = new Hashtable<EmployeeBean, ArrayList<ScheduleBean>> ();
 		
-		Date startTime = hours.getStartTime ();
-		Date endTime = hours.getEndTime ();
+		Date salonStart = hours.getStartTime ();
+		Date salonEnd = hours.getEndTime ();
 		
 		EmployeeBean employee = new EmployeeBean ();
 		employee.setAddress (new AddressBean ());
@@ -990,8 +1004,8 @@ public class SessionController
 		
 		for (EmployeeBean cycle : employees)
 		{
-			Date workStart = null;
-			Date workEnd = null;
+			Date employeeStart = null;
+			Date employeeEnd = null;
 			
 			// Here we want to see if there is already existing employee hours data.
 			EmployeeHoursBean ehb = new EmployeeHoursBean ();
@@ -1003,40 +1017,53 @@ public class SessionController
 			if (ehb == null)
 			{
 				// We have never stored the hours before, just use the regular.
-				workStart = cycle.getWeekdayStartTime (CoreTools.getWeekDay (date));
-				workEnd = cycle.getWeekdayEndTime (CoreTools.getWeekDay (date));
+				employeeStart = cycle.getWeekdayStartTime (CoreTools.getWeekDay (date));
+				employeeEnd = cycle.getWeekdayEndTime (CoreTools.getWeekDay (date));
 			}
 			else
 			{
 				// We do have employee hours for this day, lets use those.
-				workStart = ehb.getStartTime ();
-				workEnd = ehb.getEndTime ();
+				employeeStart = ehb.getStartTime ();
+				employeeEnd = ehb.getEndTime ();
 			}
 			
 			ArrayList<ScheduleBean> unschedulable = new ArrayList<ScheduleBean> ();
 			
-			if (!CoreTools.isTimeBefore (workStart, startTime))
+			if (employeeStart.equals (employeeEnd))
 			{
-				// The employee's start time is after the day start time.
+				// The employee does not work today.
 				ScheduleBean entry = new ScheduleBean ();
 				entry.setEmployee (cycle);
 				entry.setDate (date);
-				entry.setStartTime (startTime);
-				entry.setEndTime (workStart);
-				
+				entry.setStartTime (salonStart);
+				entry.setEndTime (salonEnd);
 				unschedulable.add (entry);
 			}
-			
-			if (!CoreTools.isTimeBefore (endTime, workEnd))
+			else
 			{
-				// The end time is not before the available end time.
-				ScheduleBean entry = new ScheduleBean ();
-				entry.setEmployee (cycle);
-				entry.setDate (date);
-				entry.setStartTime (workEnd);
-				entry.setEndTime (endTime);
-				
-				unschedulable.add (entry);
+				if (!CoreTools.isTimeBefore (employeeStart, salonStart))
+				{
+					// The employee's start time is after the day start time.
+					ScheduleBean entry = new ScheduleBean ();
+					entry.setEmployee (cycle);
+					entry.setDate (date);
+					entry.setStartTime (salonStart);
+					entry.setEndTime (employeeStart);
+
+					unschedulable.add (entry);
+				}
+
+				if (!CoreTools.isTimeBefore (salonEnd, employeeEnd))
+				{
+					// The end time is not before the available end time.
+					ScheduleBean entry = new ScheduleBean ();
+					entry.setEmployee (cycle);
+					entry.setDate (date);
+					entry.setStartTime (employeeEnd);
+					entry.setEndTime (salonEnd);
+
+					unschedulable.add (entry);
+				}
 			}
 			
 			hash.put (cycle, unschedulable);
@@ -1228,7 +1255,7 @@ public class SessionController
 				// If we have appointment entries, include this schedule entry for the final list.
 				for (AppointmentBean ab : apps)
 				{
-					if (ab.getStartTime ().equals (entry.getStartTime()) || (ab.getStartTime ().after (entry.getStartTime ())) && (ab.getStartTime().equals (entry.getEndTime ()) || (ab.getStartTime ().before (entry.getEndTime ()))))
+					if (ab.getStartTime ().equals (entry.getStartTime()) || (ab.getStartTime ().after (entry.getStartTime ())) && ((ab.getStartTime ().before (entry.getEndTime ()))))
 						fails = true;
 					
 					if (ab.getEndTime ().equals (entry.getEndTime()) || ab.getEndTime ().after (entry.getStartTime ()) && (ab.getEndTime ().before (entry.getEndTime ())))

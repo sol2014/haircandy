@@ -18,9 +18,30 @@ BEGIN
 END
 //
 
+DROP PROCEDURE IF EXISTS SearchSaleRange //
+
+CREATE PROCEDURE SearchSaleRange (IN p_payment_type VARCHAR(10),
+							IN p_total_due DECIMAL(9,2),
+							IN p_payment DECIMAL(9,2),
+							IN p_is_complete BOOLEAN,
+							IN p_is_void BOOLEAN,
+							IN p_start_time DATE,
+							IN p_end_time DATE)
+BEGIN
+	SELECT * 
+	FROM sale
+        WHERE ((p_payment_type IS NULL) OR (payment_type = p_payment_type))
+        AND ((p_total_due IS NULL )OR (total_due = p_total_due))
+        AND ((p_payment IS NULL) OR (payment = p_payment))
+        AND ((p_is_complete IS NULL) OR (is_complete = p_is_complete))
+		AND ((p_is_void IS NULL) OR (is_void = p_is_void))
+		AND ((p_start_time IS NULL || p_end_time IS NULL) OR (timestamp BETWEEN p_start_time AND p_end_time));
+END
+//
+
 DROP PROCEDURE IF EXISTS SearchSale //
 
-CREATE PROCEDURE SearchSale(IN p_payment_type VARCHAR(10),
+CREATE PROCEDURE SearchSale (IN p_payment_type VARCHAR(10),
 							IN p_total_due DECIMAL(9,2),
 							IN p_payment DECIMAL(9,2),
 							IN p_is_complete BOOLEAN,

@@ -350,9 +350,15 @@ function addExceptionEntry(duration, row, column)//function used to add entry on
     var end = parseInt(start) + parseInt(ratio);
     for(var j = start; j < end; j++)
     {
-        var cell = findCell(j+"^-^"+column);
-        cell.state = bookedState;
-        document.getElementById(cell.id).className = exceptionClass;
+        try
+        {
+            var cell = findCell(j+"^-^"+column);
+            cell.state = bookedState;
+            document.getElementById(cell.id).className = exceptionClass;
+        }
+        catch(e)
+        {
+        }
     }
 }
 

@@ -264,6 +264,9 @@ public class ServletHelper
 
 		for (UserRoles role : UserRoles.values ())
 		{
+			if (role == UserRoles.Guest)
+				continue;
+			
 			html += "<option value=\"" + role + "\"";
 
 			if (selected != null && selected.toLowerCase ().equals (role.toString ().toLowerCase ()))

@@ -121,7 +121,56 @@ public class SaleBroker extends DatabaseBroker implements BrokerInterface
 		
 		return sale;
 	}
+	
+	public DataBean[] searchRange (DataBean data, java.util.Date start, java.util.Date end)
+	{
+		SaleBean sale = (SaleBean) data;
+		ArrayList<SaleBean> saleAL = new ArrayList<SaleBean> ();
+		Connection connection = null;
+		
+		try
+		{
+			connection = super.getConnection ();
+			CallableStatement proc = connection.prepareCall ("{call SearchSaleRange(?,?,?,?,?,?,?)}");
+			int index = 1;
+			
+			addToStatement (proc, sale.getPaymentType (), index++, String.class);
+			addToStatement (proc, sale.getTotalDue (), index++, Double.class);
+			addToStatement (proc, sale.getPayment (), index++, Double.class);
+			addToStatement (proc, sale.getIsComplete (), index++, Boolean.class);
+			addToStatement (proc, sale.getIsVoid (), index++, Boolean.class);
+			
+			if (start == null)
+				addToStatement (proc, null, index++, Boolean.class);
+			else
+				addToStatement (proc, new java.sql.Date (start.getTime ()), index++, java.sql.Date.class);
+			
+			if (end == null)
+				addToStatement (proc, null, index++, Boolean.class);
+			else
+				addToStatement (proc, new java.sql.Date (end.getTime ()), index++, java.sql.Date.class);
+			
+			ResultSet result = proc.executeQuery ();
 
+			while (result.next ())
+			{
+				saleAL.add ((SaleBean) getBean (result));
+			}
+		}
+		catch (SQLException r)
+		{
+			LogController.write (this, "SQL Exception during search: " + r.getMessage ());
+		}
+		
+		if (connection != null)
+			super.returnConnection (connection);
+		
+		LogController.write (this, "Found sale beans: "+saleAL.size());
+		
+		SaleBean[] saleBean = new SaleBean[saleAL.size ()];
+		return saleAL.toArray (saleBean);
+	}
+	
 	@Override
 	public DataBean[] search (DataBean data)
 	{

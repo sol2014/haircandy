@@ -696,8 +696,35 @@ function cellDoubleClickHandler(element)//function to deal with double click
                 document.getElementById("sch_date").innerHTML = date;
                 var startTime = parseInt(salonStartTime.split(":")[0])*60+parseInt(salonStartTime.split(":")[1])+parseInt(getRowId(appointment[0]))*15;
                 var endTime = parseInt(salonStartTime.split(":")[0])*60+parseInt(salonStartTime.split(":")[1])+(parseInt(getRowId(appointment[appointment.length-1]))+1)*15;
-                document.getElementById("sch_start_time").innerHTML = "Start Time:" + ((startTime - startTime%60)/60)+":"+formatZero(startTime%60);
-                document.getElementById("sch_end_time").innerHTML = "End Time:" + ((endTime - endTime%60)/60)+":"+formatZero(endTime%60);
+                var finalStartHour = (startTime - startTime%60)/60;
+                var finalStartMin = startTime%60;
+                var finalEndHour = (endTime - endTime%60)/60;
+                var finalEndMin = endTime%60;
+                var startAMPM = "AM";
+                var endAMPM = "AM";
+
+                if (finalStartHour > 12)
+                {
+                    startAMPM = "PM";
+                    finalStartHour = finalStartHour - 12;
+                }
+                else if (finalStartHour == 12)
+                {
+                    startAMPM = "PM";
+                }
+
+                if (finalEndHour > 12)
+                {
+                    endAMPM = "PM";
+                    finalEndHour = finalEndHour - 12;
+                }
+                else if (finalEndHour == 12)
+                {
+                    endAMPM = "PM";
+                }
+                
+                document.getElementById("sch_start_time").innerHTML = finalStartHour +":"+formatZero(finalStartMin)+""+startAMPM;
+                document.getElementById("sch_end_time").innerHTML = finalEndHour +":"+formatZero(finalEndMin)+""+endAMPM;
             }
         }
     }

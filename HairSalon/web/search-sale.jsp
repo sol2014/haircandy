@@ -37,6 +37,14 @@ String error_string = (String) userSession.moveAttribute ("sale_search_error");
 
 <%@ include file="WEB-INF/jspf/header.jspf" %>
 
+<script type="text/javascript">
+var dp_cal;
+window.onload = function () {
+	dp_cal  = new Epoch('epoch_popup','popup',document.getElementById('search_start_date'));
+	dp_cal  = new Epoch('epoch_popup','popup',document.getElementById('search_end_date'));
+};
+</script>
+
 <font face="Trebuchet MS" size="2">
     <form method="POST" action="sale">
 	<table border="0" cellspacing="5" cellpadding="0">
@@ -68,8 +76,12 @@ String error_string = (String) userSession.moveAttribute ("sale_search_error");
 				<td align="left"><u><b>Sale Details</b></u></td>
 			    </tr>
 			    <tr>
-				<td align="right">Date/Time:</td>
-				<td align="left"><input type="text" name="search_timestamp" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("sale_search_timestamp"))%>"></td>
+				<td align="right">Start Date:</td>
+				<td align="left"><input type="text" name="search_start_date" id="search_start_date" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("sale_search_start_date"))%>"></td>
+			    </tr>
+			    <tr>
+				<td align="right">End Date:</td>
+				<td align="left"><input type="text" name="search_end_date" id="search_end_date" size="15" value="<%=ServletHelper.display (userSession.moveAttribute ("sale_search_end_date"))%>"></td>
 			    </tr>
 			    <tr>
 				<td align="right">Payment Type:</td>
@@ -81,11 +93,13 @@ String error_string = (String) userSession.moveAttribute ("sale_search_error");
 			    </tr>
 			    <tr>
 				<td align="right">Is Complete:</td>
-				<td align="left"><%=ServletHelper.generateTrueFalseOptions("search_is_complete", ServletHelper.display (userSession.moveAttribute ("sale_search_is_complete")))%></td>
+				<% String isComplete = (String)userSession.moveAttribute ("sale_search_is_complete"); %>
+				<td align="left"><%=ServletHelper.generateTrueFalseOptions("search_is_complete",  isComplete == null || isComplete.equals ("") ? "False" : ServletHelper.display (isComplete))%></td>
 			    </tr>
 			    <tr>
 				<td align="right">Is Void:</td>
-				<td align="left"><%=ServletHelper.generateTrueFalseOptions("search_is_void", ServletHelper.display (userSession.moveAttribute ("sale_search_is_void")))%></td>
+				<% String isVoid = (String)userSession.moveAttribute ("sale_search_is_void"); %>
+				<td align="left"><%=ServletHelper.generateTrueFalseOptions("search_is_void", isVoid == null || isVoid.equals ("") ? "False" : ServletHelper.display (isVoid))%></td>
 			    </tr>
 			</table>
 		    </div>
@@ -94,6 +108,8 @@ String error_string = (String) userSession.moveAttribute ("sale_search_error");
 		 <%-- This is the auto-search that will do a basic empty search for convenience --%>
 		<% if (sales == null) {
 			    SaleBean emptySearch = new SaleBean ();
+			    emptySearch.setIsVoid (false);
+			    emptySearch.setIsComplete (false);
 			    EmployeeBean emptyEmployee = new EmployeeBean ();
 			    emptySearch.setEmployee (emptyEmployee);
 
@@ -119,16 +135,18 @@ String error_string = (String) userSession.moveAttribute ("sale_search_error");
 					    <td colspan="3" align="left" class="Row2"><b>The search generated no results.</b></td>
 					</tr>
 					<% } else { %>
-					<tr align="center">
+					<tr align="right">
 					    <td nowrap="nowrap" class="Row1"></td>
-					    <td width="100%" nowrap="nowrap" align="left" class="Row1">Payment Type</td>
-					    <td width="100%" nowrap="nowrap" align="left" class="Row1">Amount</td>
+					    <td width="100%" nowrap="nowrap" align="left" class="Row1">Timestamp</td>
+					    <td nowrap="nowrap" align="left" class="Row1">Payment Type</td>
+					    <td nowrap="nowrap" class="Row1">Total</td>
 					</tr>
 					<% for (SaleBean sale : sales) { %>
-					<tr align="center" valign="middle">
+					<tr align="right" valign="middle">
 					    <td class="Row7" nowrap="nowrap">&nbsp;<img src="/HairSalon/images/icons/small/result.gif" width="16" height="16" />&nbsp;</td>
-					    <td align="left" nowrap="nowrap" class="Row2"><span class="SearchLink"><a href="sale?sale_action=Load&transaction_no=<%= sale.getTransactionNo ()%>" class="SearchLink"><%= sale.getPaymentType ()%></a></span></td>
-					    <td nowrap="nowrap" class="Row7">&nbsp;<%= sale.getPayment ()%></td>
+					    <td align="left" nowrap="nowrap" class="Row2"><span class="SearchLink"><a href="sale?sale_action=Load&transaction_no=<%= sale.getTransactionNo ()%>" class="SearchLink"><%= CoreTools.showTime (sale.getTimestamp (), CoreTools.TimestampFormat)%></a></span></td>
+					    <td align="left" nowrap="nowrap" class="Row2"><%= sale.getPaymentType ()%></td>
+					    <td nowrap="nowrap" class="Row7"><%= sale.getPayment ()%></td>
 					</tr>
 					<% }%>
 					<% }%>

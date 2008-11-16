@@ -71,22 +71,40 @@ public class SaleServlet extends DispatcherServlet
             sale.setIsVoid (isVoid.toLowerCase ().equals ("true"));
         }
 		
-		String timestamp = request.getParameter ("search_timestamp");
-		if (timestamp == null) timestamp = "";
-        if (!timestamp.equals (""))
+		java.util.Date start = null;
+		String start_date = request.getParameter ("search_start_date");
+		if (start_date == null) start_date = "";
+        if (!start_date.equals (""))
         {
 			try
 			{
-				sale.setTimestamp (CoreTools.getTimestamp (timestamp));
+				start = CoreTools.getDate (start_date);
 			}
 			catch (Exception e)
 			{
-				LogController.write (this, "Timestamp data was invalid in request: "+timestamp);
+				LogController.write (this, "Start date was invalid in request: "+start_date);
+				return;
 			}
         }
 		
-        SaleBean[] searchResults = SessionController.searchSales (userSession, sale);
-
+		java.util.Date end = null;
+		String end_date = request.getParameter ("search_end_date");
+		if (end_date == null) end_date = "";
+        if (!end_date.equals (""))
+        {
+			try
+			{
+				end = CoreTools.getDate (end_date);
+			}
+			catch (Exception e)
+			{
+				LogController.write (this, "End date was invalid in request: "+end_date);
+				return;
+			}
+        }
+		
+        SaleBean[] searchResults = SessionController.searchSalesRange (userSession, sale, start, end);
+		
         userSession.setAttribute ("sale_search_result", searchResults);
 
         if (paymentType != null)
@@ -101,9 +119,12 @@ public class SaleServlet extends DispatcherServlet
 		if (isVoid != null)
 			userSession.setAttribute ("sale_search_is_void", isVoid);
 		
-		if (timestamp != null)
-			userSession.setAttribute ("sale_search_timestamp", timestamp);
-
+		if (start_date != null)
+			userSession.setAttribute ("sale_search_start_date", start_date);
+		
+		if (end_date != null)
+			userSession.setAttribute ("sale_search_end_date", end_date);
+		
         redirect ("search-sale.jsp", request, response);
     }
 	
@@ -401,10 +422,24 @@ public class SaleServlet extends DispatcherServlet
         }
 		
         String isComplete = request.getParameter ("is_complete");
-        sale.setIsComplete (Boolean.parseBoolean (isComplete));
+		try
+		{
+			sale.setIsComplete (Boolean.parseBoolean (isComplete));
+		}
+		catch (Exception e)
+		{
+			sale.setIsComplete (false);
+		}
 		
 		String isVoid = request.getParameter ("is_void");
-        sale.setIsVoid (Boolean.parseBoolean (isVoid));
+		try
+		{
+			sale.setIsVoid (Boolean.parseBoolean (isVoid));
+		}
+		catch (Exception e)
+		{
+			sale.setIsVoid (false);
+		}
 		
 		boolean failed = false;
 		

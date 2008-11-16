@@ -21,7 +21,7 @@
                                 </tr>
                                 <tr>
                                     <td id="lblDate" align="right">Date:</td>
-                                    <td align="left"><input onKeyUp="checkExceptionFields()" type="text" id="exceptionDate" name="product_name" size="10">(DD/MM/YYYY)</td>
+                                    <td align="left"><input onKeyUp="checkExceptionFields()" type="text" id="exceptionDate" name="product_name" size="10">&nbsp;DD/MM/YYYY</td>
                                 </tr>
                                 <tr>
                                     <td id="lblReason" align="right">Reason:</td>

@@ -691,20 +691,20 @@ public class EmployeeServlet extends DispatcherServlet
 		String used = request.getParameter ("enabled");
 		employee.setEnabled (Boolean.parseBoolean (used));
 		
-		String monday_start = ServletHelper.readTimeRequest (request, "monday_start");
-		String monday_end = ServletHelper.readTimeRequest (request, "monday_end");
-		String tuesday_start = ServletHelper.readTimeRequest (request, "tuesday_start");
-		String tuesday_end = ServletHelper.readTimeRequest (request, "tuesday_end");
-		String wednesday_start = ServletHelper.readTimeRequest (request, "wednesday_start");
-		String wednesday_end = ServletHelper.readTimeRequest (request, "wednesday_end");
-		String thursday_start = ServletHelper.readTimeRequest (request, "thursday_start");
-		String thursday_end = ServletHelper.readTimeRequest (request, "thursday_end");
-		String friday_start = ServletHelper.readTimeRequest (request, "friday_start");
-		String friday_end = ServletHelper.readTimeRequest (request, "friday_end");
-		String saturday_start = ServletHelper.readTimeRequest (request, "saturday_start");
-		String saturday_end = ServletHelper.readTimeRequest (request, "saturday_end");
-		String sunday_start = ServletHelper.readTimeRequest (request, "sunday_start");
-		String sunday_end = ServletHelper.readTimeRequest (request, "sunday_end");
+		String monday_start = ServletHelper.readTimeRequest (request, "employee_monday_start");
+		String monday_end = ServletHelper.readTimeRequest (request, "employee_monday_end");
+		String tuesday_start = ServletHelper.readTimeRequest (request, "employee_tuesday_start");
+		String tuesday_end = ServletHelper.readTimeRequest (request, "employee_tuesday_end");
+		String wednesday_start = ServletHelper.readTimeRequest (request, "employee_wednesday_start");
+		String wednesday_end = ServletHelper.readTimeRequest (request, "employee_wednesday_end");
+		String thursday_start = ServletHelper.readTimeRequest (request, "employee_thursday_start");
+		String thursday_end = ServletHelper.readTimeRequest (request, "employee_thursday_end");
+		String friday_start = ServletHelper.readTimeRequest (request, "employee_friday_start");
+		String friday_end = ServletHelper.readTimeRequest (request, "employee_friday_end");
+		String saturday_start = ServletHelper.readTimeRequest (request, "employee_saturday_start");
+		String saturday_end = ServletHelper.readTimeRequest (request, "employee_saturday_end");
+		String sunday_start = ServletHelper.readTimeRequest (request, "employee_sunday_start");
+		String sunday_end = ServletHelper.readTimeRequest (request, "employee_sunday_end");
 		
 		try
 		{
@@ -878,84 +878,6 @@ public class EmployeeServlet extends DispatcherServlet
 
 				redirect ("employee?employee_action=Load&employee_no=" + employee.getEmployeeNo (), request, response);
 			}
-		}
-	}
-
-	private void populateBean (EmployeeBean employee, AddressBean address, HttpServletRequest request)
-	{
-		String firstName = request.getParameter ("first_name");
-		employee.setFirstName (firstName);
-
-		String lastName = request.getParameter ("last_name");
-		employee.setLastName (lastName);
-
-		String phoneNumber = request.getParameter ("phone_number");
-		employee.setPhoneNumber (phoneNumber);
-
-		employee.setRole (request.getParameter ("role"));
-
-		employee.setPassword (request.getParameter ("password"));
-
-		String address1 = request.getParameter ("address1");
-		address.setAddress1 (address1);
-
-		String address2 = request.getParameter ("address2");
-		address.setAddress2 (address2);
-
-		String city = request.getParameter ("city");
-		address.setCity (city);
-
-		String province = request.getParameter ("province");
-		address.setProvince (province);
-
-		String country = request.getParameter ("country");
-		address.setCountry (country);
-
-		String postalCode = request.getParameter ("postal_code");
-		address.setPostalCode (postalCode);
-
-		String email = request.getParameter ("email");
-		address.setEmail (email);
-		
-		String enabled = request.getParameter ("enabled");
-		employee.setEnabled (Boolean.valueOf(enabled));
-		
-		String monday_start = request.getParameter ("monday_start");
-		String monday_end = request.getParameter ("monday_end");
-		String tuesday_start = request.getParameter ("tuesday_start");
-		String tuesday_end = request.getParameter ("tuesday_end");
-		String wednesday_start = request.getParameter ("wednesday_start");
-		String wednesday_end = request.getParameter ("wednesday_end");
-		String thursday_start = request.getParameter ("thursday_start");
-		String thursday_end = request.getParameter ("thursday_end");
-		String friday_start = request.getParameter ("friday_start");
-		String friday_end = request.getParameter ("friday_end");
-		String saturday_start = request.getParameter ("saturday_start");
-		String saturday_end = request.getParameter ("saturday_end");
-		String sunday_start = request.getParameter ("sunday_start");
-		String sunday_end = request.getParameter ("sunday_end");
-
-		try
-		{
-			employee.setMondayStart (CoreTools.getTime (monday_start));
-			employee.setMondayEnd (CoreTools.getTime (monday_end));
-			employee.setTuesdayStart (CoreTools.getTime (tuesday_start));
-			employee.setTuesdayEnd (CoreTools.getTime (tuesday_end));
-			employee.setWednesdayStart (CoreTools.getTime (wednesday_start));
-			employee.setWednesdayEnd (CoreTools.getTime (wednesday_end));
-			employee.setThursdayStart (CoreTools.getTime (thursday_start));
-			employee.setThursdayEnd (CoreTools.getTime (thursday_end));
-			employee.setFridayStart (CoreTools.getTime (friday_start));
-			employee.setFridayEnd (CoreTools.getTime (friday_end));
-			employee.setSaturdayStart (CoreTools.getTime (saturday_start));
-			employee.setSaturdayEnd (CoreTools.getTime (saturday_end));
-			employee.setSundayStart (CoreTools.getTime (sunday_start));
-			employee.setSundayEnd (CoreTools.getTime (sunday_end));
-		}
-		catch (Exception e)
-		{
-			LogController.write (this, "Invalid availability data found from form.");
-			return;
 		}
 	}
 }

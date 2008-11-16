@@ -167,44 +167,186 @@ String error_string = (String) userSession.moveAttribute ("employee_error");
 			    <td align="left">&nbsp;</td>
 			</tr>
 			<tr>
-			    <td align="right">
-			    <img border="0" src="/HairSalon/images/icons/small/availability_white.gif" width="16" height="16"></td>
-			    <td align="left"><b><u>Availability</u></b></td>
+			    <td align="right"><img border="0" src="/HairSalon/images/icons/small/availability_white.gif" width="16" height="16"></td>
+			    <td align="left"><b><u>Availability Hours</u></b></td>
 			</tr>
 			<tr>
+			    <% if (userSession.moveAttribute ("employee_error_monday") == null) { %>
 			    <td align="right">Monday:</td>
-			    <td align="left"><input type="text" name="monday_start" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_monday_start"))%>"> to
-			    <input type="text" name="monday_end" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_monday_end"))%>"></td>
+			    <% } else { %>
+			    <td align="right"><font color="red">Monday:</font></td>
+			    <% } %>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'employee')" id="employee_monday_check" value="monday"></td>
+			</tr>
+			
+			<tr>
+			    <td nowrap="nowrap" align="right">Open:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("employee_monday_start", CoreTools.getTime((String)userSession.moveAttribute ("employee_new_monday_start")))%>
+				
+			    </td>
 			</tr>
 			<tr>
+			    <td nowrap="nowrap" align="right">Close:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("employee_monday_end", CoreTools.getTime((String)userSession.moveAttribute ("employee_new_monday_end")))%>
+			    </td>
+			</tr>
+			
+			<tr>
+			    <td nowrap="nowrap" align="right">&nbsp;</td>
+			    <td nowrap="nowrap" align="left">&nbsp;</td>
+			</tr>
+			
+			<tr>
+			    <% if (userSession.moveAttribute ("employee_error_tuesday") == null) { %>
 			    <td align="right">Tuesday:</td>
-			    <td align="left"><input type="text" name="tuesday_start" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_tuesday_start"))%>"> to
-			    <input type="text" name="tuesday_end" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_tuesday_end"))%>"></td>
+			    <% } else { %>
+			    <td align="right"><font color="red">Tuesday:</font></td>
+			    <% } %>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'employee')" id="employee_tuesday_check" value="tuesday"></td>
 			</tr>
 			<tr>
+			    <td nowrap="nowrap" align="right">Open:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("employee_tuesday_start", CoreTools.getTime((String)userSession.moveAttribute ("employee_new_tuesday_start")))%>
+			    </td>
+			</tr>
+			<tr>
+			    <td nowrap="nowrap" align="right">Close:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("employee_tuesday_end", CoreTools.getTime((String)userSession.moveAttribute ("employee_new_tuesday_end")))%>
+			    </td>
+			</tr>
+			
+			<tr>
+			    <td nowrap="nowrap" align="right">&nbsp;</td>
+			    <td nowrap="nowrap" align="left">&nbsp;</td>
+			</tr>
+			
+			<tr>
+			    <% if (userSession.moveAttribute ("employee_error_wednesday") == null) { %>
 			    <td align="right">Wednesday:</td>
-			    <td align="left"><input type="text" name="wednesday_start" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_wednesday_start"))%>"> to
-			    <input type="text" name="wednesday_end" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_wednesday_end"))%>"></td>
+			    <% } else { %>
+			    <td align="right"><font color="red">Wednesday:</font></td>
+			    <% } %>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'employee')" id="employee_wednesday_check" value="wednesday"></td>
 			</tr>
 			<tr>
+			    <td nowrap="nowrap" align="right">Open:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("employee_wednesday_start", CoreTools.getTime((String)userSession.moveAttribute ("employee_new_wednesday_start")))%>
+			    </td>
+			</tr>
+			<tr>
+			    <td nowrap="nowrap" align="right">Close:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("employee_wednesday_end", CoreTools.getTime((String)userSession.moveAttribute ("employee_new_wednesday_end")))%>
+			    </td>
+			</tr>
+			
+			<tr>
+			    <td nowrap="nowrap" align="right">&nbsp;</td>
+			    <td nowrap="nowrap" align="left">&nbsp;</td>
+			</tr>
+			
+			<tr>
+			    <% if (userSession.moveAttribute ("employee_error_thursday") == null) { %>
 			    <td align="right">Thursday:</td>
-			    <td align="left"><input type="text" name="thursday_start" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_thursday_start"))%>"> to
-			    <input type="text" name="thursday_end" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_thursday_end"))%>"></td>
+			    <% } else { %>
+			    <td align="right"><font color="red">Thursday:</font></td>
+			    <% } %>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'employee')" id="employee_thursday_check" value="thursday"></td>
 			</tr>
 			<tr>
+			    <td nowrap="nowrap" align="right">Open:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("employee_thursday_start", CoreTools.getTime((String)userSession.moveAttribute ("employee_new_thursday_start")))%>
+			    </td>
+			</tr>
+			<tr>
+			    <td nowrap="nowrap" align="right">Close:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("employee_thursday_end", CoreTools.getTime((String)userSession.moveAttribute ("employee_new_thursday_end")))%>
+			    </td>
+			</tr>
+			
+			<tr>
+			    <td nowrap="nowrap" align="right">&nbsp;</td>
+			    <td nowrap="nowrap" align="left">&nbsp;</td>
+			</tr>
+			
+			<tr>
+			    <% if (userSession.moveAttribute ("employee_error_friday") == null) { %>
 			    <td align="right">Friday:</td>
-			    <td align="left"><input type="text" name="friday_start" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_friday_start"))%>"> to
-			    <input type="text" name="friday_end" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_friday_end"))%>"></td>
+			    <% } else { %>
+			    <td align="right"><font color="red">Friday:</font></td>
+			    <% } %>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'employee')" id="employee_friday_check" value="friday"></td>
 			</tr>
 			<tr>
-			    <td align="right">Saturday:</td>
-			    <td align="left"><input type="text" name="saturday_start" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_saturday_start"))%>"> to
-			    <input type="text" name="saturday_end" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_saturday_end"))%>"></td>
+			    <td nowrap="nowrap" align="right">Open:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("employee_friday_start", CoreTools.getTime((String)userSession.moveAttribute ("employee_new_friday_start")))%>
+			    </td>
 			</tr>
 			<tr>
+			    <td nowrap="nowrap" align="right">Close:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("employee_friday_end", CoreTools.getTime((String)userSession.moveAttribute ("employee_new_friday_end")))%>
+			    </td>
+			</tr>
+			
+			<tr>
+			    <td nowrap="nowrap" align="right">&nbsp;</td>
+			    <td nowrap="nowrap" align="left">&nbsp;</td>
+			</tr>
+			
+			<tr>
+			    <% if (userSession.moveAttribute ("employee_error_saturday") == null) { %>
+			    <td align="right">Satuday:</td>
+			    <% } else { %>
+			    <td align="right"><font color="red">Saturday:</font></td>
+			    <% } %>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'employee')" id="employee_saturday_check" value="saturday"></td>
+			</tr>
+			<tr>
+			    <td nowrap="nowrap" align="right">Open:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("employee_saturday_start", CoreTools.getTime((String)userSession.moveAttribute ("employee_new_saturday_start")))%>
+			    </td>
+			</tr>
+			<tr>
+			    <td nowrap="nowrap" align="right">Close:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("employee_saturday_end", CoreTools.getTime((String)userSession.moveAttribute ("employee_new_saturday_end")))%>
+			    </td>
+			</tr>
+			
+			<tr>
+			    <td nowrap="nowrap" align="right">&nbsp;</td>
+			    <td nowrap="nowrap" align="left">&nbsp;</td>
+			</tr>
+			
+			<tr>
+			    <% if (userSession.moveAttribute ("employee_error_sunday") == null) { %>
 			    <td align="right">Sunday:</td>
-			    <td align="left"><input type="text" name="sunday_start" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_sunday_start"))%>"> to
-			    <input type="text" name="sunday_end" size="5" value="<%=ServletHelper.display (userSession.moveAttribute ("employee_new_sunday_end"))%>"></td>
+			    <% } else { %>
+			    <td align="right"><font color="red">Sunday:</font></td>
+			    <% } %>
+			    <td nowrap="nowrap" align="left"><input type="checkbox" onclick="switchDayStatus(this, 'employee')" id="employee_sunday_check" value="sunday"></td>
+			</tr>
+			<tr>
+			    <td nowrap="nowrap" align="right">Open:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("employee_sunday_start", CoreTools.getTime((String)userSession.moveAttribute ("employee_new_sunday_start")))%>
+			    </td>
+			</tr>
+			<tr>
+			    <td nowrap="nowrap" align="right">Close:</td>
+			    <td nowrap="nowrap" align="left">
+				<%=ServletHelper.generateHourPicker ("employee_sunday_end", CoreTools.getTime((String)userSession.moveAttribute ("employee_new_sunday_end")))%>
+			    </td>
 			</tr>
 		    </table>
 		</td>
@@ -214,3 +356,8 @@ String error_string = (String) userSession.moveAttribute ("employee_error");
 </font>
 
 <%@ include file="WEB-INF/jspf/footer.jspf" %>
+
+ <script>
+     updateDays ("employee");
+ </script>
+ 

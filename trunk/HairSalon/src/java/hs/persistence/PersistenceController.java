@@ -26,6 +26,14 @@ public class PersistenceController
 {
 	private static Hashtable<Class, BrokerInterface> brokers = new Hashtable<Class, BrokerInterface> ();
 
+	/**
+	 * Initializes the JDBC connection pool as well as connects all of the
+	 * data beans with their respective persistence brokers.
+	 * 
+	 * @param url the JDBC database URL to use for the connection pool.
+	 * @param username the username to use with the connection pool.
+	 * @param password the password to use with the connection pool.
+	 */
 	public static void initialize (String url, String username, String password)
 	{
 		MultithreadedJDBCConnectionPool connectionPool = MultithreadedJDBCConnectionPool.getConnectionPool ("com.mysql.jdbc.Driver", url, username, password);
@@ -59,12 +67,22 @@ public class PersistenceController
 
 		LogController.write ("PersistenceController->Done registering the brokers.");
 	}
-
+	
+	/**
+	 * Performs any cleanup that must be done when shutting down.
+	 */
 	public static void shutdown ()
 	{
 		
 	}
 
+	/**
+	 * Obtains the broker for the following data bean class type.
+	 * 
+	 * @param type the data bean type to use.
+	 * @return the broker interface to use for this data bean type.
+	 * @throws hs.persistence.BrokerNotFoundException
+	 */
 	private static BrokerInterface getBrokerForType (Class type) throws BrokerNotFoundException
 	{
 		if (brokers.containsKey (type))
@@ -79,6 +97,12 @@ public class PersistenceController
 		}
 	}
 
+	/**
+	 * Performs loading of any data bean.
+	 * 
+	 * @param data the data bean to load.
+	 * @return the loaded data bean.
+	 */
 	public static DataBean load (DataBean data)
 	{
 		try
@@ -92,6 +116,12 @@ public class PersistenceController
 		}
 	}
 
+	/**
+	 * Performs searching of data beans using data bean as criteria.
+	 * 
+	 * @param data the data bean to search with.
+	 * @return the array of data beans that is found.
+	 */
 	public static DataBean[] search (DataBean data)
 	{
 		try
@@ -105,6 +135,12 @@ public class PersistenceController
 		}
 	}
 
+	/**
+	 * Performs a check to see if the data bean exists in the database.
+	 * 
+	 * @param data the data bean to check for.
+	 * @return whether the data bean exists in the database.
+	 */
 	public static boolean exists (DataBean data)
 	{
 		try
@@ -118,6 +154,12 @@ public class PersistenceController
 		}
 	}
 
+	/**
+	 * Performs commit of a data bean to the database.
+	 * 
+	 * @param data the data bean to commit.
+	 * @return whether the data bean was commit successfully.
+	 */
 	public static boolean commit (DataBean data)
 	{
 		try
@@ -131,6 +173,12 @@ public class PersistenceController
 		}
 	}
 
+	/**
+	 * Performs deletion of a data bean from the database.
+	 * 
+	 * @param data the data bean to delete.
+	 * @return whether the data bean was deleted or not.
+	 */
 	public static boolean delete (DataBean data)
 	{
 		try

@@ -19,93 +19,108 @@ import java.sql.*;
  * 
  * @author Philippe Durand
  */
-public abstract class DatabaseBroker implements BrokerInterface {
+public abstract class DatabaseBroker implements BrokerInterface
+{
 	//protected DataConnectionPool connectionPool;
-
 	protected MultithreadedJDBCConnectionPool connectionPool;
 
-	public DatabaseBroker() {
+	public DatabaseBroker ()
+	{
 		//connectionPool = DataConnectionPool.getInstance ();
-		connectionPool = MultithreadedJDBCConnectionPool.getConnectionPool();
+		connectionPool = MultithreadedJDBCConnectionPool.getConnectionPool ();
 	}
 
-	protected Connection getConnection() throws SQLException {
-		return connectionPool.getConnection();
+	protected Connection getConnection () throws SQLException
+	{
+		return connectionPool.getConnection ();
 	}
 
-	protected void returnConnection(Connection connection) {
-		connectionPool.returnConnection(connection);
+	protected void returnConnection (Connection connection)
+	{
+		connectionPool.returnConnection (connection);
 	}
 
-	public abstract DataBean load(DataBean data);
+	public abstract DataBean load (DataBean data);
 
-	public abstract DataBean[] search(DataBean data);
+	public abstract DataBean[] search (DataBean data);
 
-	public abstract boolean commit(DataBean data);
+	public abstract boolean commit (DataBean data);
 
-	public abstract boolean delete(DataBean data);
+	public abstract boolean delete (DataBean data);
 
-	public abstract boolean exists(DataBean data);
+	public abstract boolean exists (DataBean data);
 
-	public abstract DataBean getBean(ResultSet set) throws SQLException;
+	public abstract DataBean getBean (ResultSet set) throws SQLException;
 
-	public void addToStatement(CallableStatement statement, Object object, int index, Class type)
-			throws SQLException {
-		int sqlType = getSqlType(type, object);
+	public void addToStatement (CallableStatement statement, Object object, int index, Class type)
+			throws SQLException
+	{
+		int sqlType = getSqlType (type, object);
 
-		if (object == null) {
-			statement.setNull(index, sqlType);
-		} else {
-			switch (sqlType) {
+		if (object == null)
+		{
+			statement.setNull (index, sqlType);
+		}
+		else
+		{
+			switch (sqlType)
+			{
 				case java.sql.Types.BOOLEAN:
-					statement.setBoolean(index, (Boolean) object);
+					statement.setBoolean (index, (Boolean) object);
 					break;
 				case java.sql.Types.CHAR:
 				case java.sql.Types.VARCHAR:
-					statement.setString(index, (String) object);
+					statement.setString (index, (String) object);
 					break;
 				case java.sql.Types.DATE:
-					statement.setDate(index, (java.sql.Date) object);
+					statement.setDate (index, (java.sql.Date) object);
 					break;
 				case java.sql.Types.TIME:
-					statement.setTime(index, (java.sql.Time) object);
+					statement.setTime (index, (java.sql.Time) object);
 					break;
 				case java.sql.Types.DOUBLE:
 				case java.sql.Types.DECIMAL:
-					statement.setDouble(index, (Double) object);
+					statement.setDouble (index, (Double) object);
 					break;
 				case java.sql.Types.BIGINT:
 				case java.sql.Types.SMALLINT:
 				case java.sql.Types.TINYINT:
 				case java.sql.Types.INTEGER:
-					statement.setInt(index, (Integer) object);
+					statement.setInt (index, (Integer) object);
 					break;
 				default:
-					LogController.write(this, "Unable to determine the SQL Type: " + sqlType);
+					LogController.write (this, "Unable to determine the SQL Type: " + sqlType);
 					break;
 			}
 		}
 	}
 
-	private int getSqlType(Class type, Object object) {
+	private int getSqlType (Class type, Object object)
+	{
 		int sqlType = java.sql.Types.NULL;
 
-		if (type == Boolean.class) {
+		if (type == Boolean.class)
+		{
 			return java.sql.Types.BOOLEAN;
 		}
-		if (type == Integer.class) {
+		if (type == Integer.class)
+		{
 			return java.sql.Types.INTEGER;
 		}
-		if (type == Double.class) {
+		if (type == Double.class)
+		{
 			return java.sql.Types.DOUBLE;
 		}
-		if (type == String.class) {
+		if (type == String.class)
+		{
 			return java.sql.Types.VARCHAR;
 		}
-		if (type == Date.class) {
+		if (type == Date.class)
+		{
 			return java.sql.Types.DATE;
 		}
-		if (type == Time.class) {
+		if (type == Time.class)
+		{
 			return java.sql.Types.TIME;
 		}
 		return sqlType;

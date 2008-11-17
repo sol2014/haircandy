@@ -18,6 +18,7 @@ import java.util.Date;
  * to the logging of the application in case console output is not preferred.
  * Some formatting is also adopted to give the output more direction as to
  * what is happening in the application and when it has happened.
+ * 
  * @author Philippe Durand
  */
 public class LogController

@@ -11,8 +11,10 @@
 package hs.core;
 
 /**
- *
- * @author draek
+ * Enumerator used to define the different user roles that can be identified
+ * in the system.
+ * 
+ * @author Philippe Durand
  */
 public enum UserRoles
 {

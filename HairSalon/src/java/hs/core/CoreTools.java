@@ -7,6 +7,7 @@
  * System Developed by:
  * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
  */
+
 package hs.core;
 
 import java.util.*;
@@ -15,6 +16,13 @@ import java.text.*;
 
 import hs.objects.*;
 
+/**
+ * This class provides miscellaneous tools that are used throughout the 
+ * application to perform rendering/serialization/formatting tasks. Also
+ * date manipulation and calculations are done here.
+ * 
+ * @author Philippe Durand
+ */
 public class CoreTools
 {
 	public static final String DateFormat = "dd/MM/yyyy";
@@ -25,6 +33,12 @@ public class CoreTools
 	public static final String MonthYearFormat = "MMMMMMMM, yyyy";
 	public static final String DayMonthYearFormat = "EEEEEEEEE, MMMMMMMMM d, yyyy";
 
+	/**
+	 * Used to determine if a string contains only numbers.
+	 * 
+	 * @param str the string to analyze.
+	 * @return whether the string contains numbers or not.
+	 */
 	public static boolean containsOnlyNumbers (String str)
 	{
 
@@ -46,6 +60,12 @@ public class CoreTools
 		return true;
 	}
 
+	/**
+	 * Used to serialize a databean into a base 64 encoded string.
+	 * 
+	 * @param bean the data bean to serialize and encode.
+	 * @return the encoded string containing the object.
+	 */
 	public static String serializeBase64 (DataBean bean)
 	{
 		try
@@ -67,6 +87,12 @@ public class CoreTools
 		}
 	}
 
+	/**
+	 * Used to deserialize a database from base 64 encoded string.
+	 * 
+	 * @param data the data bean string to deserialize and decode.
+	 * @return the databean that resulted from the operation.
+	 */
 	public static DataBean deserializeBase64 (String data)
 	{
 		try
@@ -93,6 +119,12 @@ public class CoreTools
 		}
 	}
 
+	/**
+	 * Used to determine if the provided string is alphanumeric.
+	 * 
+	 * @param text the string to analyze.
+	 * @return whether the string is alphanumeric or not.
+	 */
 	public static boolean isLettersOrNumbers (String text)
 	{
 		for (int i = text.length (); i-- > 0;)
@@ -106,6 +138,12 @@ public class CoreTools
 		return true;
 	}
 
+	/**
+	 * Used to determine if the provided string is numerical.
+	 * 
+	 * @param text the string to analyze.
+	 * @return whether the string is numerical or not.
+	 */
 	public static boolean isNumbers (String text)
 	{
 		for (int i = text.length (); i-- > 0;)
@@ -119,6 +157,12 @@ public class CoreTools
 		return true;
 	}
 
+	/**
+	 * Used to determine if the provided string is alphabetical.
+	 * 
+	 * @param text the string to analyze.
+	 * @return whether the string is alphabetical or not.
+	 */
 	public static boolean isLetters (String text)
 	{
 		for (int i = text.length (); i-- > 0;)
@@ -132,6 +176,13 @@ public class CoreTools
 		return true;
 	}
 
+	/**
+	 * Used to obtain the days that are present in the specified month and year.
+	 * 
+	 * @param year the year to analyze.
+	 * @param month the month to analyze.
+	 * @return the number of days found in the month specified.
+	 */
 	public static int getDaysInMonth (int year, int month)
 	{
 		int[] daysInMonths = new int[]
@@ -155,6 +206,12 @@ public class CoreTools
 		}
 	}
 
+	/**
+	 * Used to obtain the rounded up hour from the date object.
+	 * 
+	 * @param date the date to analyze.
+	 * @return the rounded up hour.
+	 */
 	public static int getEndHour (Date date)
 	{
 		Calendar calendar = Calendar.getInstance ();
@@ -169,6 +226,12 @@ public class CoreTools
 		}
 	}
 
+	/**
+	 * Used to obtain the hour from the date object.
+	 * 
+	 * @param date the date to analyze.
+	 * @return the hour.
+	 */
 	public static int getStartHour (Date date)
 	{
 		Calendar calendar = Calendar.getInstance ();
@@ -176,6 +239,12 @@ public class CoreTools
 		return calendar.get (Calendar.HOUR_OF_DAY);
 	}
 
+	/**
+	 * Used to obtain the hour from the date object.
+	 * 
+	 * @param date the date to analyze.
+	 * @return the hour.
+	 */
 	public static int getHour (Date date)
 	{
 		Calendar calendar = Calendar.getInstance ();
@@ -183,6 +252,12 @@ public class CoreTools
 		return calendar.get (Calendar.HOUR_OF_DAY);
 	}
 
+	/**
+	 * Used to obtain the minutes from the date object.
+	 * 
+	 * @param date the date to analyze.
+	 * @return the minutes.
+	 */
 	public static int getMinutes (Date date)
 	{
 		Calendar calendar = Calendar.getInstance ();
@@ -190,6 +265,12 @@ public class CoreTools
 		return calendar.get (Calendar.MINUTE);
 	}
 
+	/**
+	 * Used to obtain whether the day hour given lays in the AM or PM.
+	 * 
+	 * @param dayHour the daytime hour to analyze.
+	 * @return a 1 if PM or 0 if AM.
+	 */
 	public static int getAMPMHour (int dayHour)
 	{
 		if (dayHour == 12)
@@ -201,7 +282,13 @@ public class CoreTools
 		calendar.set (Calendar.HOUR_OF_DAY, dayHour);
 		return calendar.get (Calendar.HOUR);
 	}
-
+	
+	/**
+	 * Used to obtain the weekday integer of the date provided.
+	 * 
+	 * @param date the date to analyze.
+	 * @return the weekday integer.
+	 */
 	public static int getWeekDay (Date date)
 	{
 		Calendar calendar = Calendar.getInstance ();
@@ -209,6 +296,12 @@ public class CoreTools
 		return calendar.get (Calendar.DAY_OF_WEEK);
 	}
 
+	/**
+	 * Used to obtain the AM/PM string based on the day hour provided.
+	 * 
+	 * @param dayHour the hour between 1-24.
+	 * @return the string "AM" or "PM" based on the hour provided.
+	 */
 	public static String getAMPM (int dayHour)
 	{
 		if (dayHour == 12)
@@ -228,6 +321,13 @@ public class CoreTools
 		}
 	}
 	
+	/**
+	 * Used to obtain the date from a timestamp string using the default format.
+	 * 
+	 * @param str the timestamp string to analyze.
+	 * @return the date object produced.
+	 * @throws java.text.ParseException
+	 */
 	public static Date getTimestamp (String str)
 			throws ParseException
 	{
@@ -235,6 +335,14 @@ public class CoreTools
 		return sdf.parse (str);
 	}
 	
+	/**
+	 * Used to obtain the date from a timestamp string using the following format.
+	 * 
+	 * @param str the timestamp string to analyze.
+	 * @param format the format to be used.
+	 * @return the date object produced.
+	 * @throws java.text.ParseException
+	 */
 	public static Date getTimestamp (String str, String format)
 			throws ParseException
 	{
@@ -242,6 +350,14 @@ public class CoreTools
 		return sdf.parse (str);
 	}
 	
+	/**
+	 * Used to obtain the date from a date string using the specified format.
+	 * 
+	 * @param str the date string to analyze.
+	 * @param format the format to be used.
+	 * @return the date object produced.
+	 * @throws java.text.ParseException
+	 */
 	public static Date getDate (String datestr, String format)
 			throws ParseException
 	{
@@ -249,6 +365,13 @@ public class CoreTools
 		return sdf.parse (datestr);
 	}
 	
+	/**
+	 * Used to obtain the date from a date string using the default format.
+	 * 
+	 * @param str the date string to analyze.
+	 * @return the date object produced.
+	 * @throws java.text.ParseException
+	 */
 	public static Date getDate (String datestr)
 			throws ParseException
 	{
@@ -256,6 +379,14 @@ public class CoreTools
 		return sdf.parse (datestr);
 	}
 
+	/**
+	 * Used to obtain the date from a time string using the specified format.
+	 * 
+	 * @param str the time string to analyze.
+	 * @param format the format to be used.
+	 * @return the date object produced.
+	 * @throws java.text.ParseException
+	 */
 	public static Date getTime (String timestr, String format)
 			throws ParseException
 	{
@@ -263,6 +394,13 @@ public class CoreTools
 		return sdf.parse (timestr);
 	}
 	
+	/**
+	 * Used to obtain the date from a time string using the default format.
+	 * 
+	 * @param str the time string to analyze.
+	 * @return the date object produced.
+	 * @throws java.text.ParseException
+	 */
 	public static Date getTime (String timestr)
 			throws ParseException
 	{
@@ -270,30 +408,64 @@ public class CoreTools
 		return sdf.parse (timestr);
 	}
 
+	/**
+	 * Used to obtain the date string from a date object using the specified format.
+	 * 
+	 * @param date the date object to convert to string.
+	 * @param format the format to be used.
+	 * @return the string resulting from the conversion.
+	 */
 	public static String showDate (Date date, String format)
 	{
 		SimpleDateFormat sdf = new SimpleDateFormat (format);
 		return sdf.format (date);
 	}
 	
+	/**
+	 * Used to obtain the date string from a date object using the default format.
+	 * 
+	 * @param date the date object to convert to string.
+	 * @return the string resulting from the conversion.
+	 */
 	public static String showDate (Date date)
 	{
 		SimpleDateFormat sdf = new SimpleDateFormat (CoreTools.DateFormat);
 		return sdf.format (date);
 	}
 
+	/**
+	 * Used to obtain the time string from a date object using the specified format.
+	 * 
+	 * @param date the date object to convert to string.
+	 * @param format the format to be used.
+	 * @return the resulting string from the conversion.
+	 */
 	public static String showTime (Date date, String format)
 	{
 		SimpleDateFormat sdf = new SimpleDateFormat (format);
 		return sdf.format (date);
 	}
 	
+	/**
+	 * Used to obtain the time string from a date object using the default format.
+	 * 
+	 * @param date the date object to convert to string.
+	 * @return the resulting string from the conversion.
+	 */
 	public static String showTime (Date date)
 	{
 		SimpleDateFormat format = new SimpleDateFormat (CoreTools.TimeFormat);
 		return format.format (date);
 	}
 
+	/**
+	 * Used to obtain whether the first date occurs before the second date with
+	 * using the date portions of the date object, only time.
+	 * 
+	 * @param first the first date to compare.
+	 * @param second the second date to compare.
+	 * @return whether the first date occurs before the second date or not.
+	 */
 	public static boolean isDateBefore (Date first, Date second)
 	{
 		Calendar c = Calendar.getInstance ();
@@ -338,6 +510,14 @@ public class CoreTools
 		}
 	}
 
+	/**
+	 * Used to obtain whether the first date occurs after the second date with
+	 * using the date portions of the date object, only time.
+	 * 
+	 * @param first the first date to compare.
+	 * @param second the second date to compare.
+	 * @return whether the first date occurs after the second date or not.
+	 */
 	public static boolean isTimeBefore (Date first, Date second)
 	{
 		int firstHour = getHour (first);

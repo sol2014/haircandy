@@ -546,20 +546,98 @@ public class SessionController
 		return result;
 	}
 	
-	public static boolean saveEmployeeHours (UserSession session, EmployeeHoursBean employeeHours)
+	public static boolean saveEmployeeHours (UserSession session, EmployeeHoursBean hours)
 	{
 		LogController.write ("SessionController->Saving employee hours entry...");
-		boolean result = false;
-		result = PersistenceController.commit (employeeHours);
+		boolean result = true;
+		
+		// We have to make sure that these hours do not cause any issues.
+		ArrayList<ScheduleBean> schedule = getSchedule (session, hours.getDate ());
+		
+		Date earliest = null;
+		Date latest = null;
+		boolean found = false;
+		
+		if (schedule != null)
+		{
+			for (ScheduleBean entry : schedule)
+			{
+				if (entry.getEmployee ().getEmployeeNo ().equals (hours.getEmployeeNo ()))
+				{
+					found = true;
+					
+					if (earliest == null)
+						earliest = entry.getStartTime ();
+					else if (earliest.after (entry.getStartTime()))
+						earliest = entry.getStartTime ();
+
+					if (latest == null)
+						latest = entry.getEndTime();
+					else if (earliest.before (entry.getEndTime ()))
+						latest = entry.getEndTime();
+				}
+			}
+			
+			if (!found)
+			{
+				result = true;
+			}
+			else
+			{
+				if (hours.getStartTime ().after (earliest))
+					result = false;
+
+				if (hours.getEndTime ().before (latest))
+					result = false;
+			}
+		}
+		else
+			result = true;
+		
+		if (result)
+			result = PersistenceController.commit (hours);
+		
 		return result;
 	}
 	
-	public static boolean saveScheduleHours (UserSession session, ScheduleHoursBean scheduleHours)
+	public static boolean saveScheduleHours (UserSession session, ScheduleHoursBean hours)
 	{
 		LogController.write ("SessionController->Saving schedule hours entry...");
 		
-		boolean result = false;
-		result = PersistenceController.commit (scheduleHours);
+		boolean result = true;
+		
+		// We have to make sure that these hours do not cause any issues.
+		ArrayList<ScheduleBean> schedule = getSchedule (session, hours.getDate ());
+		
+		Date earliest = null;
+		Date latest = null;
+		
+		if (schedule != null)
+		{
+			for (ScheduleBean entry : schedule)
+			{
+				if (earliest == null)
+					earliest = entry.getStartTime ();
+				else if (earliest.after (entry.getStartTime()))
+					earliest = entry.getStartTime ();
+
+				if (latest == null)
+					latest = entry.getEndTime();
+				else if (earliest.before (entry.getEndTime ()))
+					latest = entry.getEndTime();
+			}
+
+			if (hours.getStartTime ().after (earliest))
+				result = false;
+
+			if (hours.getEndTime ().before (latest))
+				result = false;
+		}
+		else
+			result = true;
+		
+		if (result)
+			result = PersistenceController.commit (hours);
 		
 		return result;
 	}

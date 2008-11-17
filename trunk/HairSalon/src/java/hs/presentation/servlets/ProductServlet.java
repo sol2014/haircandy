@@ -21,16 +21,16 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 /**
- * Product presentation servlet that deals with searching, maintaining and
- * creating product record requests from the user.
+ * The product servlet will handle all http requests that will deal with
+ * manipulation and lookup of product information in the system.
  * 
  * @author Miyoung Han
  */
 public class ProductServlet extends DispatcherServlet
 {
 	/**
-	 * Sets up internal and external action attribute tags used for this servlet
-	 * as well as setting the action methods using reflection.
+	 * Sets up defaults for action handling used by this servlet. See the
+	 * DispatcherServlet for more details.
 	 * 
 	 * @throws java.lang.NoSuchMethodException
 	 */
@@ -55,6 +55,16 @@ public class ProductServlet extends DispatcherServlet
 		addExternalAction ("Revert", "performRevert");
 	}
 
+	/**
+	 * This action will pull product information to be used for the appointment
+	 * products ajax page generated in the appointment dialog.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performAppointmentProductRefill (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -80,6 +90,17 @@ public class ProductServlet extends DispatcherServlet
 		forward ("ajax/ajax-appointmentproduct-delete.jsp", request, response);
 	}
 
+	/**
+	 * This action will pull product information to be used by the sale
+	 * create and maintain pages. The ajax page is used to render the 
+	 * resulting information to the page.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performSaleProductRefill (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -105,6 +126,17 @@ public class ProductServlet extends DispatcherServlet
 		forward ("ajax/ajax-saleproduct-delete.jsp", request, response);
 	}
 
+	/**
+	 * This action will pull product information to be used by the service
+	 * maintain pages. The ajax page is used to render the resulting information
+	 * to the page.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performServiceProductRefill (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -130,6 +162,17 @@ public class ProductServlet extends DispatcherServlet
 		forward ("ajax/ajax-serviceproduct-delete.jsp", request, response);
 	}
 
+	/**
+	 * This action will pull product information to be used by the supplier
+	 * maintain pages. The ajax page is used to render the resulting information
+	 * to the page.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performSupplierProductRefill (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -154,6 +197,17 @@ public class ProductServlet extends DispatcherServlet
 		forward ("ajax/ajax-supplierproduct-delete.jsp", request, response);
 	}
 
+	/**
+	 * This action will pull product information to be used by the search
+	 * dialog boxes. The ajax page is used to render the resulting information
+	 * to the page.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performProductSearch (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -190,9 +244,9 @@ public class ProductServlet extends DispatcherServlet
 	 * Used to search for product records and then show the results to the
 	 * page for the user to select one.
 	 * 
-	 * @param session the user session that is requesting the action.
-	 * @param request the http request used.
-	 * @param response the http response used.
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
 	 * @throws javax.servlet.ServletException
 	 * @throws java.io.IOException
 	 */
@@ -275,6 +329,16 @@ public class ProductServlet extends DispatcherServlet
 		redirect ("search-products.jsp", request, response);
 	}
 	
+	/**
+	 * This action allows the reverting of product information in the page
+	 * by scrapping all live data, and loading from the system.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performRevert (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException
 	{
@@ -315,6 +379,16 @@ public class ProductServlet extends DispatcherServlet
 		}
 	}
 	
+	/**
+	 * This action will call the product creation page for the user to
+	 * create new products into the system.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performNewProduct (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -325,9 +399,9 @@ public class ProductServlet extends DispatcherServlet
 	 * Loads the product record from the database and show the information
 	 * in a product maintenance page.
 	 * 
-	 * @param session the user session that is requesting the action.
-	 * @param request the http request used.
-	 * @param response the http response used.
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
 	 * @throws javax.servlet.ServletException
 	 * @throws java.io.IOException
 	 */
@@ -367,11 +441,12 @@ public class ProductServlet extends DispatcherServlet
 	}
 
 	/**
-	 * Saves the product details into the database.
+	 * This action allows the saving of a product record from the maintain
+	 * page.
 	 * 
-	 * @param session
-	 * @param request
-	 * @param response
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
 	 * @throws javax.servlet.ServletException
 	 * @throws java.io.IOException
 	 */

@@ -18,8 +18,20 @@ import hs.app.*;
 import hs.objects.*;
 import hs.presentation.*;
 
+/**
+ * The client servlet will handle all http requests that will deal with
+ * manipulation and lookup of client information in the system.
+ * 
+ * @author Nuha Bazara
+ */
 public class ClientServlet extends DispatcherServlet
 {
+	/**
+	 * Sets up defaults for action handling used by this servlet. See the
+	 * DispatcherServlet for more details.
+	 * 
+	 * @throws java.lang.NoSuchMethodException
+	 */
 	@Override
 	public void setupActionMethods () throws NoSuchMethodException
 	{
@@ -33,6 +45,17 @@ public class ClientServlet extends DispatcherServlet
 		addExternalAction ("Revert", "performRevert");
 	}
 
+	/**
+	 * This action will do a quick client lookup and return the first and last
+	 * name for the interface. Used to quickly access client records for
+	 * sales and appointment creation.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performClientLookup (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -64,6 +87,16 @@ public class ClientServlet extends DispatcherServlet
 		}
 	}
 
+	/**
+	 * This action allows the search of clients in the system and returns the
+	 * result set to the page for rendering.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performSearch (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -159,6 +192,16 @@ public class ClientServlet extends DispatcherServlet
 		redirect ("search-clients.jsp", request, response);
 	}
 
+	/**
+	 * This action allows the reverting of client information in the page
+	 * by scrapping all live data, and loading from the system.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performRevert (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -199,6 +242,16 @@ public class ClientServlet extends DispatcherServlet
 		}
 	}
 
+	/**
+	 * This action allows the loading of a client record for display in the
+	 * maintenance page.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performLoad (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -234,6 +287,16 @@ public class ClientServlet extends DispatcherServlet
 		}
 	}
 
+	/**
+	 * This action allows the saving of a new or existing client, then it sends
+	 * the success or failure message to the page.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performSave (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -392,6 +455,16 @@ public class ClientServlet extends DispatcherServlet
 		}
 	}
 
+	/**
+	 * This action will request a create client page with some default
+	 * values already passed into memory.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performNewClient (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{

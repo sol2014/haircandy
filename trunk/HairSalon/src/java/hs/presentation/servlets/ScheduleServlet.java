@@ -7,6 +7,7 @@
  * System Developed by:
  * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
  */
+
 package hs.presentation.servlets;
 
 import java.io.*;
@@ -19,8 +20,20 @@ import hs.objects.*;
 import hs.presentation.*;
 import java.util.Date;
 
+/**
+ * The schedule servlet will handle all http requests that will deal with
+ * manipulation and lookup of schedule information in the system.
+ * 
+ * @author Philippe Durand
+ */
 public class ScheduleServlet extends DispatcherServlet
 {
+	/**
+	 * Sets up defaults for action handling used by this servlet. See the
+	 * DispatcherServlet for more details.
+	 * 
+	 * @throws java.lang.NoSuchMethodException
+	 */
 	@Override
 	public void setupActionMethods () throws NoSuchMethodException
 	{
@@ -30,6 +43,16 @@ public class ScheduleServlet extends DispatcherServlet
 		addExternalAction ("UpdateHours", "performUpdateHours");
 	}
 
+	/**
+	 * This action allows the user to update the hours for a schedule date
+	 * in the system. Only managers have access to this interface.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performUpdateHours (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -76,6 +99,17 @@ public class ScheduleServlet extends DispatcherServlet
 		}
 	}
 	
+	/**
+	 * This action allows the managers to delete employee schedule entries
+	 * from the scheduler interface. Succcess or failure is sent to the
+	 * schedule entry dialog box.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performDelete (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -93,12 +127,12 @@ public class ScheduleServlet extends DispatcherServlet
 
 		if (SessionController.deleteSchedule (userSession, schedule))
 		{
-			pw.print ("it works");
+			pw.print ("good");
 			LogController.write ("Delete successfull.");
 		}
 		else
 		{
-			pw.print ("screwed");
+			pw.print ("bad");
 			LogController.write ("Delete unsuccessfull.");
 		}
 
@@ -106,6 +140,16 @@ public class ScheduleServlet extends DispatcherServlet
 		pw.close ();
 	}
 
+	/**
+	 * This action allows the user to save a new or existing schedule entry
+	 * into the system. Any errors about values will be sent back to the dialog.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performSave (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{

@@ -7,6 +7,7 @@
  * System Developed by:
  * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
  */
+
 package hs.presentation.servlets;
 
 import java.io.*;
@@ -19,11 +20,17 @@ import hs.presentation.*;
 import hs.app.*;
 import java.util.ArrayList;
 
+/**
+ * The salon servlet will handle all http requests that will deal with
+ * manipulation of salon information in the system.
+ * 
+ * @author Philippe Durand
+ */
 public class SalonServlet extends DispatcherServlet
 {
 	/**
-	 * Sets up internal and external action attribute tags used for this
-	 * servlet as well as setting the action methods using reflection.
+	 * Sets up defaults for action handling used by this servlet. See the
+	 * DispatcherServlet for more details.
 	 * 
 	 * @throws java.lang.NoSuchMethodException
 	 */
@@ -35,6 +42,16 @@ public class SalonServlet extends DispatcherServlet
 		addExternalAction ("Revert", "performRevert");
 	}
 
+	/**
+	 * This action allows the user to revert all of the salon information
+	 * on the page by loading the information from the system.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performRevert (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException
 	{
@@ -46,11 +63,13 @@ public class SalonServlet extends DispatcherServlet
 	}
 	
 	/**
-	 * Saves the salon details into the database.
+	 * This action allows the user to save the salon information into the 
+	 * system. Any errors about the business hours or any other values will
+	 * be sent back to the page to be displayed to the user.
 	 * 
-	 * @param session
-	 * @param request
-	 * @param response
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
 	 * @throws javax.servlet.ServletException
 	 * @throws java.io.IOException
 	 */

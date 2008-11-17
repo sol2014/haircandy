@@ -19,8 +19,20 @@ import hs.objects.*;
 import hs.presentation.*;
 import java.util.*;
 
+/**
+ * The appointment servlet will handle all http requests that will deal with
+ * manipulation and lookup of appointment information in the system.
+ * 
+ * @author Philippe Durand
+ */
 public class AppointmentServlet extends DispatcherServlet
 {
+	/**
+	 * Sets up defaults for action handling used by this servlet. See the
+	 * DispatcherServlet for more details.
+	 * 
+	 * @throws java.lang.NoSuchMethodException
+	 */
 	@Override
 	public void setupActionMethods () throws NoSuchMethodException
 	{
@@ -32,6 +44,17 @@ public class AppointmentServlet extends DispatcherServlet
 		addExternalAction ("Load", "performLoad");
 	}
 
+	/**
+	 * Allows the quick saving of a appointment by passing specific information
+	 * like start/end time, employee and appointment number. This is used when
+	 * the appointments are drag/dropped.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performQuickSave (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -110,6 +133,16 @@ public class AppointmentServlet extends DispatcherServlet
 		}
 	}
 	
+	/**
+	 * This action loads a appointment record from the system and sends it
+	 * to the appointment details dialog box page.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performLoad (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -183,6 +216,17 @@ public class AppointmentServlet extends DispatcherServlet
 		forward ("ajax/ajax-appointment-details.jsp", request, response);
 	}
 
+	/**
+	 * This action will allow the deletion of an appointment by passing the
+	 * appointment number as a parameter. No output is sent unless there
+	 * is a problem.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performDelete (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -202,12 +246,22 @@ public class AppointmentServlet extends DispatcherServlet
 		}
 		else
 		{
-			pw.print ("screwed");
+			pw.print ("bad");
 		}
 
 		pw.close ();
 	}
 
+	/**
+	 * Allows the full saving of an appointment either new or existing into
+	 * the system. Success will notify the interface for visual updates.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performSave (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{

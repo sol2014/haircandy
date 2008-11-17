@@ -21,16 +21,16 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Employee presentation servlet that deals with searching, maintaining and
- * creating employee record requests from the user.
+ * The employee servlet will handle all http requests that will deal with
+ * manipulation and lookup of employee information in the system.
  * 
  * @author Philippe Durand
  */
 public class EmployeeServlet extends DispatcherServlet
 {
 	/**
-	 * Sets up internal and external action attribute tags used for this servlet
-	 * as well as setting the action methods using reflection.
+	 * Sets up defaults for action handling used by this servlet. See the
+	 * DispatcherServlet for more details.
 	 * 
 	 * @throws java.lang.NoSuchMethodException
 	 */
@@ -50,6 +50,17 @@ public class EmployeeServlet extends DispatcherServlet
 		addExternalAction ("UpdatePassword", "performUpdatePassword");
 	}
 	
+	/**
+	 * This action will allow a employee to update their password using the
+	 * change password dialog. If the passwords match, the new information
+	 * is saved, otherwise some error is sent back to the dialog.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performUpdatePassword (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -92,6 +103,16 @@ public class EmployeeServlet extends DispatcherServlet
 		}
 	}
 	
+	/**
+	 * This action allows the updating of an employees availability information.
+	 * Any errors in the information are sent back to the page.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performUpdateAvailability (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -207,6 +228,16 @@ public class EmployeeServlet extends DispatcherServlet
 		}
 	}
 	
+	/**
+	 * This action allows the loading of availability information to be put
+	 * into the availability dialog for employees.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performLoadAvailability (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -237,6 +268,18 @@ public class EmployeeServlet extends DispatcherServlet
 		}
 	}
 	
+	/**
+	 * This action allows the updating of an employees working hours for a
+	 * specific date. This action will return any error messages for invalid
+	 * data entered, which also checks to make sure it does not conflict with
+	 * existing scheduled shifts.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performUpdateHours (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -397,6 +440,16 @@ public class EmployeeServlet extends DispatcherServlet
 		redirect ("search-employees.jsp", request, response);
 	}
 
+	/**
+	 * This action will request a create employee page with some default
+	 * values already passed into memory.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performNewEmployee (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -433,6 +486,16 @@ public class EmployeeServlet extends DispatcherServlet
 		forward ("create-employee.jsp", request, response);
 	}
 
+	/**
+	 * This action allows the reverting of employee information in the page
+	 * by scrapping all live data, and loading from the system.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performRevert (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -477,9 +540,9 @@ public class EmployeeServlet extends DispatcherServlet
 	 * Loads the employee record from the database and show the information
 	 * in a employee maintenance page.
 	 * 
-	 * @param session the user session that is requesting the action.
-	 * @param request the http request used.
-	 * @param response the http response used.
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
 	 * @throws javax.servlet.ServletException
 	 * @throws java.io.IOException
 	 */
@@ -519,11 +582,13 @@ public class EmployeeServlet extends DispatcherServlet
 	}
 
 	/**
-	 * Saves the employee details into the database.
+	 * This action allows the saving of employee information into the system.
+	 * Any errors in the information that is found will be sent back to the
+	 * page so user can be notified.
 	 * 
-	 * @param session
-	 * @param request
-	 * @param response
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
 	 * @throws javax.servlet.ServletException
 	 * @throws java.io.IOException
 	 */

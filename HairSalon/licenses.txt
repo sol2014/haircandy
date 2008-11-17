@@ -1,0 +1,9 @@
+JavaScript tools:
+There are javascript licenses also provided in the tools.js file. All software
+used marked using appropriate GPL license or otherwise.
+
+Tango Icon Library:
+The actual icons are licensed under the Creative Commons Attribution Share-Alike license.
+
+Base64 Class:
+Author has placed the code in the Public Domain. See Base64.java for full license text.

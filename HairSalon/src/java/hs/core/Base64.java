@@ -1,13 +1,3 @@
-/*
- * HairSalon: Scheduling and Management System
- * Systems II - Southern Alberta Institute of Technology
- * 
- * File Author: Obtained Externally, see License below.
- * 
- * System Developed by:
- * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
- */
-
 package hs.core;
 
 /**

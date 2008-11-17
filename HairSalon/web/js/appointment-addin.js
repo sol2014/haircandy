@@ -56,12 +56,13 @@ function builtServiceResultTable(content)
     document.getElementById("serviceResult").innerHTML=content;
 }
 
-function service(id, name, price, quantity)
+function service (id, name, price, quantity, duration)
 {
     this.id = id;
     this.name = escape(name);
     this.quantity = quantity;
     this.price = price;
+    this.duration = duration;
 }
 
 function product (id, name, price, quantity)
@@ -72,16 +73,16 @@ function product (id, name, price, quantity)
     this.price = price;
 }
 
-function addInitialService(id, name, price, quantity)
+function addInitialService(id, name, price, quantity, duration)
 {
     var index = findServiceIndex(id);
     if(index==-1)
     {
-        services.push(new service(id, name, price, quantity));
+        services.push(new service(id, name, price, quantity, duration));
     }
 }
 
-function addService(id, name, price, quantity)
+function addService(id, name, price, quantity, duration)
 {
     var index = findServiceIndex(id);
     if(index==-1)
@@ -90,7 +91,7 @@ function addService(id, name, price, quantity)
         {
             quantity = 1;    
         }
-        services.push(new service(id, name, price, quantity));
+        services.push(new service(id, name, price, quantity, duration));
         refillServicesList();
     }
 }
@@ -127,15 +128,14 @@ function refillServicesList()
             service.quantity = document.getElementById("st_"+service.id).value;
         }
         queryString+="quantity="+service.quantity+"&";
-        queryString+="price="+service.price+"&";
     }
     
     messager.request("service",queryString);
 }
 
-function addInitialProduct (id, name, quantity)
+function addInitialProduct (id, name, price, quantity)
 {
-    products.push (new product (id, name, quantity));
+    products.push (new product (id, name, price, quantity));
 }
 
 function refillProductsList ()
@@ -160,7 +160,6 @@ function refillProductsList ()
             product.quantity = document.getElementById("sr_"+product.id).value;
         }
         queryString+="quantity="+product.quantity+"&";
-        queryString+="price="+product.price+"&";
     }
     
     messager.request("product",queryString);
@@ -348,4 +347,58 @@ function searchServices()
     var queryString="service_action=ServiceSearch&";
     queryString+="service_name="+escape(document.getElementById("searchServiceName").value)+"&";
     ajax.request("service",queryString);
+}
+
+var startHour;
+var startMin;
+
+function setStartTime (hour, minutes)
+{
+    startHour = hour;
+    startMin = minutes;
+}
+
+function calculateProductSubTotal ()
+{
+    for (var i = 0; i < products.length; i++)
+    {
+        products[i].quantity = document.getElementById ("sr_"+products[i].id).value;
+        
+        var total = products[i].quantity * products[i].price;
+        
+        var a = new ToFmt(total);
+        document.getElementById("sub_total_product_"+products[i].id).innerHTML = "$"+a.fmtF(9,2);
+    }
+}
+
+function calculateServiceSubTotal ()
+{
+    var bigTotal = 0;
+    
+    for (var i = 0; i < services.length; i++)
+    {
+        services[i].quantity = document.getElementById ("st_"+services[i].id).value;
+        
+        var total = services[i].quantity * services[i].duration;
+        bigTotal += total;
+        
+        document.getElementById("sub_total_service_"+services[i].id).innerHTML = total+"m";
+    }
+    
+    var totalMin = startMin + bigTotal;
+    var leftHour = parseInt((totalMin/60)+startHour);
+    var leftMin = totalMin%60;
+    var ampm = "AM";
+    
+    if (leftHour > 12)
+    {
+        ampm = "PM";
+        leftHour = leftHour - 12;
+    }
+    else if (leftHour == 12)
+    {
+        ampm = "PM";
+    }
+    
+    document.getElementById("end_time_label").innerHTML = leftHour+":"+leftMin+" "+ampm;
 }

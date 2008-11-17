@@ -7,6 +7,7 @@
  * System Developed by:
  * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
  */
+
 package hs.presentation.servlets;
 
 import java.io.*;
@@ -20,16 +21,16 @@ import hs.app.*;
 import hs.presentation.*;
 
 /**
- * Service presentation servlet that deals with searching, maintaining and
- * creating service record requests from the user.
+ * The service servlet will handle all http requests that will deal with
+ * manipulation and lookup of service information in the system.
  * 
  * @author Philippe Durand
  */
 public class ServiceServlet extends DispatcherServlet
 {
 	/**
-	 * Sets up internal and external action attribute tags used for this servlet
-	 * as well as setting the action methods using reflection.
+	 * Sets up defaults for action handling used by this servlet. See the
+	 * DispatcherServlet for more details.
 	 * 
 	 * @throws java.lang.NoSuchMethodException
 	 */
@@ -53,6 +54,16 @@ public class ServiceServlet extends DispatcherServlet
 		addExternalAction ("New Service", "performNewService");
 	}
 	
+	/**
+	 * This action allows the population of information in the appointment
+	 * service ajax page that is rendered on the appointment dialog.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performAppointmentServiceRefill (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -78,6 +89,16 @@ public class ServiceServlet extends DispatcherServlet
 		forward ("ajax/ajax-appointmentservice-delete.jsp", request, response);
 	}
 	
+	/**
+	 * This action populates the ajax page that is used to show service
+	 * information to the sales page.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performSaleServiceRefill (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -103,6 +124,16 @@ public class ServiceServlet extends DispatcherServlet
 		forward ("ajax/ajax-saleservice-delete.jsp", request, response);
 	}
 
+	/**
+	 * This action is used to populate service information into the ajax page
+	 * that renders services on the employee page.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performEmployeeServiceRefill (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -127,6 +158,16 @@ public class ServiceServlet extends DispatcherServlet
 		forward ("ajax/ajax-employeeservice-delete.jsp", request, response);
 	}
 
+	/**
+	 * This action allows the populating of service ajax page that shows
+	 * search results in the dialog box.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performServiceSearch (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -152,12 +193,12 @@ public class ServiceServlet extends DispatcherServlet
 	}
 
 	/**
-	 * Used to search for service records and then show the results to the
-	 * page for the user to select one.
+	 * This action allows he user to search for services and see the results
+	 * in the service search page.
 	 * 
-	 * @param session the user session that is requesting the action.
-	 * @param request the http request used.
-	 * @param response the http response used.
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
 	 * @throws javax.servlet.ServletException
 	 * @throws java.io.IOException
 	 */
@@ -197,6 +238,16 @@ public class ServiceServlet extends DispatcherServlet
 		redirect ("search-services.jsp", request, response);
 	}
 
+	/**
+	 * This action allows the user to revert a service record with the 
+	 * current information in the system.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performRevert (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -238,12 +289,12 @@ public class ServiceServlet extends DispatcherServlet
 	}
 
 	/**
-	 * Loads the service record from the database and show the information
-	 * in a maintenance page.
+	 * This action allows the user to load a service record and show it in
+	 * the service maintenance page.
 	 * 
-	 * @param session the user session that is requesting the action.
-	 * @param request the http request used.
-	 * @param response the http response used.
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
 	 * @throws javax.servlet.ServletException
 	 * @throws java.io.IOException
 	 */
@@ -282,6 +333,16 @@ public class ServiceServlet extends DispatcherServlet
 		}
 	}
 
+	/**
+	 * This action allows the user to create a new service by displaying
+	 * a service creation page with some default values.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performNewService (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -293,11 +354,13 @@ public class ServiceServlet extends DispatcherServlet
 	}
 
 	/**
-	 * Saves the service details into the database.
+	 * This action allows the user to save the service record information
+	 * into the system. Any errors in the information are sent back to the page
+	 * to be displayed to the user.
 	 * 
-	 * @param session
-	 * @param request
-	 * @param response
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
 	 * @throws javax.servlet.ServletException
 	 * @throws java.io.IOException
 	 */

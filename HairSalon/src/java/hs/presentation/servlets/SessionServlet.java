@@ -7,6 +7,7 @@
  * System Developed by:
  * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
  */
+
 package hs.presentation.servlets;
 
 import java.io.*;
@@ -18,16 +19,16 @@ import hs.app.*;
 import hs.presentation.*;
 
 /**
- * Session presentation servlet that deals with the session aspect of
- * requests for login/logout.
+ * The session servlet will handle all http requests that will deal with
+ * logging in and out of the system.
  * 
  * @author Philippe Durand
  */
 public class SessionServlet extends DispatcherServlet
 {
 	/**
-	 * Sets up internal and external action attribute tags used for this servlet
-	 * as well as setting the action methods using reflection.
+	 * Sets up defaults for action handling used by this servlet. See the
+	 * DispatcherServlet for more details.
 	 * 
 	 * @throws java.lang.NoSuchMethodException
 	 */
@@ -41,11 +42,11 @@ public class SessionServlet extends DispatcherServlet
 	}
 
 	/**
-	 * Used to show the user the login page.
+	 * This action brings up the page to allow the user to login.
 	 * 
-	 * @param session
-	 * @param request
-	 * @param response
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
 	 * @throws javax.servlet.ServletException
 	 * @throws java.io.IOException
 	 */
@@ -59,12 +60,12 @@ public class SessionServlet extends DispatcherServlet
 	}
 
 	/**
-	 * Perform the login action, uses the "login_username" and "login_password"
-	 * attribute tags to obtain the login request parameters.
+	 * This action allows a user to log into the system using their employee
+	 * id and their password.
 	 * 
-	 * @param session the user session that is requesting the action.
-	 * @param request the http request used.
-	 * @param response the http response used.
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
 	 * @throws javax.servlet.ServletException
 	 * @throws java.io.IOException
 	 */
@@ -80,11 +81,7 @@ public class SessionServlet extends DispatcherServlet
 		Cookie idCookie = new Cookie ("USERNAME", id);
 		idCookie.setMaxAge (365 * 24 * 60 * 60);
 
-		Cookie passCookie = new Cookie ("PASSWORD", password);
-		passCookie.setMaxAge (365 * 24 * 60 * 60);
-
 		response.addCookie (idCookie);
-		response.addCookie (passCookie);
 
 		// Now we use the controller to authenticate the session using those values.
 		if (SessionController.authenticateSession (session, id, password))
@@ -102,12 +99,12 @@ public class SessionServlet extends DispatcherServlet
 	}
 
 	/**
-	 * Performs the logout for an employee session. Uses no attributes to perform
-	 * this action.
+	 * This action allows an employee to log out of the system and sends them
+	 * back to the login page.
 	 * 
-	 * @param session
-	 * @param request
-	 * @param response
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
 	 * @throws javax.servlet.ServletException
 	 * @throws java.io.IOException
 	 */

@@ -116,6 +116,10 @@ public abstract class DispatcherServlet extends HttpServlet
 		this.externalActions.remove (action);
 	}
 
+	/**
+	 * Initializes the dispatcher servlet. This sets the post/get to true and
+	 * calls the abstract setup actions method.
+	 */
 	@Override
 	public void init ()
 	{

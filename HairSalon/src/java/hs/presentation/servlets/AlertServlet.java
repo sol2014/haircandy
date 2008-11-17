@@ -2,7 +2,7 @@
  * HairSalon: Scheduling and Management System
  * Systems II - Southern Alberta Institute of Technology
  * 
- * File Author: Nuha Bazara
+ * File Author: Philippe Durand
  * 
  * System Developed by:
  * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
@@ -18,8 +18,20 @@ import hs.app.*;
 import hs.objects.*;
 import hs.presentation.*;
 
+/**
+ * The alert servlet will handle all http requests that will deal with
+ * manipulation and lookup of alert information in the system.
+ * 
+ * @author Philippe Durand
+ */
 public class AlertServlet extends DispatcherServlet
 {
+	/**
+	 * Sets up defaults for action handling used by this servlet. See the
+	 * DispatcherServlet for more details.
+	 * 
+	 * @throws java.lang.NoSuchMethodException
+	 */
 	@Override
 	public void setupActionMethods () throws NoSuchMethodException
 	{
@@ -28,6 +40,15 @@ public class AlertServlet extends DispatcherServlet
 		addExternalAction ("DeleteAll", "performDeleteAll");
 	}
 
+	/**
+	 * This action deletes all alerts from the system.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performDeleteAll (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -38,6 +59,15 @@ public class AlertServlet extends DispatcherServlet
 		forward ("welcome-employee.jsp", request, response);
 	}
 	
+	/**
+	 * This action deletes a single alert from the system.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performDelete (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{

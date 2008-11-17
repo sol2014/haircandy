@@ -408,7 +408,7 @@ function deleteEntry(id)
 {
     function showResult(result)
     {
-        if(result=="it works")
+        if(result=="good")
         {
             closeDialog();     
         }

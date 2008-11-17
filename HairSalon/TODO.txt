@@ -11,9 +11,6 @@ Updated: Sunday, Nov 16th, 2008
 Unresolved
 ----------
 
-- BUG: The labels for start/end time in the appointment window do not render
-  time correctly for 12:00PM (noon), it shows 00:00PM.
-
 - BUG: Servlets are unprotected from non-authorizes calls, if we have time we
   need to also get this done like the tag does.
 
@@ -144,6 +141,11 @@ Resolved
 - BUG (RESOLVED): The cells in Employee Schedule view turn from Blue to Green 
   after first refresh.
   > Joey fixed this bug. Nov12
+
+- BUG: The labels for start/end time in the appointment window do not render
+  time correctly for 12:00PM (noon), it shows 00:00PM.
+  > Philippe fixed this by adding dynamic calculations between dialog
+    and javascript data. Nov16
 
 - BUG (RESOLVED): Add the duration Hour+Minute Combo boxes for Services 
   maintain and create pages.

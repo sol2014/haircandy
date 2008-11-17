@@ -20,16 +20,16 @@ import hs.objects.*;
 import hs.presentation.*;
 
 /**
- * Application presentation servlet that deals with the application aspects
- * of requests for moving about the site including the welcome page.
+ * The application servlet will handle all http requests that will deal with
+ * welcoming users to the system and first time setup.
  * 
  * @author Philippe Durand
  */
 public class ApplicationServlet extends DispatcherServlet
 {
 	/**
-	 * Sets up internal and external action attribute tags used for this servlet
-	 * as well as setting the action methods using reflection.
+	 * Sets up defaults for action handling used by this servlet. See the
+	 * DispatcherServlet for more details.
 	 * 
 	 * @throws java.lang.NoSuchMethodException
 	 */
@@ -76,6 +76,17 @@ public class ApplicationServlet extends DispatcherServlet
 		}
 	}
 	
+	/**
+	 * This action is used during first time setup to pass all the necessary
+	 * information to the system so the salon and manager can be created. This
+	 * should only occur when the application is first installed.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performSetupFinish (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{

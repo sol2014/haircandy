@@ -7,6 +7,7 @@
  * System Developed by:
  * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
  */
+
 package hs.presentation.servlets;
 
 import hs.presentation.*;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 
 /**
  * The supplier servlet will handle all http requests that will deal with
- * manipulation of supplier information in the system.
+ * manipulation and lookup of supplier information in the system.
  * 
  * @author Joey Ren
  */
@@ -47,9 +48,8 @@ public class SupplierServlet extends DispatcherServlet
 	}
 	
 	/**
-	 * This action will allow the creation of new suppliers. It deals with
-	 * any server side information checking and relays information back
-	 * about success or failures to the requestor.
+	 * This action will allow the user to create a new supplier by sending
+	 * them to the supplier creation page with some default values.
 	 * 
 	 * @param userSession the user session that is performing the action.
 	 * @param request the http request object related to the action.
@@ -75,6 +75,16 @@ public class SupplierServlet extends DispatcherServlet
 		redirect ("create-supplier.jsp", request, response);
 	}
 	
+	/**
+	 * This action allows the user to revert a supplier maintain page back
+	 * to default values by reloading the information from the system.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performRevert (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException
 	{
@@ -115,6 +125,16 @@ public class SupplierServlet extends DispatcherServlet
 		}
 	}
 	
+	/**
+	 * This action allows the user to load the supplier information and 
+	 * display it to the page.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performLoad (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -149,6 +169,17 @@ public class SupplierServlet extends DispatcherServlet
 		}
 	}
 
+	/**
+	 * This action allows a user to save new or existing supplier information
+	 * into the system. Any invalid information is sent back to the page to 
+	 * notify the user of errors.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performSave (UserSession userSession, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		String serialized_supplier = (String) request.getParameter ("temp_supplier");
@@ -354,6 +385,16 @@ public class SupplierServlet extends DispatcherServlet
 		}
 	}
 
+	/**
+	 * This action allows a user to search for supplier records and display
+	 * them on the search page.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performSearch (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{

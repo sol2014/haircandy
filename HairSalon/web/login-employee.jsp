@@ -33,33 +33,10 @@ String username = "", password = "";
 
 for (Cookie cookie : cookies)
 {
-    LogController.write ("Cookie: " + cookie.getName ());
     if (cookie.getName ().equals ("USERNAME"))
     {
 	// This is the username cookie
 	username = cookie.getValue ();
-    }
-    else if (cookie.getName ().equals ("PASSWORD"))
-    {
-	try
-	{
-	    // Reading value from the cookie, decrypt.
-	    if (cookie.getValue () != null)
-	    {
-		password = cookie.getValue ();
-	    }
-	    else
-	    {
-		password = "";
-	    }
-	    
-	    LogController.write (this, "PASSWORD STRING: " + password);
-	}
-	catch (Exception e)
-	{
-	    LogController.write (this, "Cannot decode cookie data: " + cookie.getValue ());
-	    password = "";
-	}
     }
 }
 %>
@@ -80,7 +57,7 @@ for (Cookie cookie : cookies)
 		    <table>
 			<tr>
 			    <td align="right">Employee ID:</td>
-			    <td><input type="text" value="<%=ServletHelper.display (username)%>" size="5" name="login_id" /></td>
+			    <td><input type="text" value="<%=ServletHelper.display (username)%>" size="15" name="login_id" /></td>
 			</tr>
 			<tr>
 			    <td align="right">Password:</td>

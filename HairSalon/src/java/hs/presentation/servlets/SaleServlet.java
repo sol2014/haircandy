@@ -1,7 +1,13 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * HairSalon: Scheduling and Management System
+ * Systems II - Southern Alberta Institute of Technology
+ * 
+ * File Author: Nuha Bazara
+ * 
+ * System Developed by:
+ * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
  */
+
 package hs.presentation.servlets;
 
 import java.io.*;
@@ -15,11 +21,19 @@ import hs.presentation.*;
 import java.util.Hashtable;
 
 /**
- *
+ * The sale servlet will handle all http requests that will deal with
+ * manipulation and lookup of sale information in the system.
+ * 
  * @author Nuha Bazara
  */
 public class SaleServlet extends DispatcherServlet
 {
+	/**
+	 * Sets up defaults for action handling used by this servlet. See the
+	 * DispatcherServlet for more details.
+	 * 
+	 * @throws java.lang.NoSuchMethodException
+	 */
     public void setupActionMethods () throws NoSuchMethodException
     {
         setActionAttribute ("sale_action");
@@ -31,6 +45,16 @@ public class SaleServlet extends DispatcherServlet
         addExternalAction ("New Sale", "performNewSale");
     }
 
+	/**
+	 * This action allows the user to search for sales using certain criteria
+	 * and a date range. The results are rendered back to the search page.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
     public void performSearch (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException
     {
@@ -128,6 +152,16 @@ public class SaleServlet extends DispatcherServlet
         redirect ("search-sale.jsp", request, response);
     }
 	
+	/**
+	 * This action allows the reverting of a sales record back to its original
+	 * information present in the system.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	public void performRevert (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -156,18 +190,28 @@ public class SaleServlet extends DispatcherServlet
 			LogController.write (this, "[USER REQUEST] Performing revert: "+sale.getTransactionNo ());
 			
 			userSession.setAttribute ("sale_load_result", sale);
-			userSession.setAttribute ("employee_feedback", "Employee was reverted successfully.");
+			userSession.setAttribute ("sale_feedback", "Sale was reverted successfully.");
 
-			forward ("/maintain-employee.jsp", request, response);
+			forward ("/maintain-sale.jsp", request, response);
 		}
 		else
 		{
-			userSession.setAttribute ("employee_error", "Unable to revert employee from the database!");
+			userSession.setAttribute ("sale_error", "Unable to revert sale from the database!");
 
-			forward ("/search-employee.jsp", request, response);
+			forward ("/search-sale.jsp", request, response);
 		}
 	}
 	
+	/**
+	 * This action allows the user to load a sale record and display it in
+	 * a sale maintenance page.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
     public void performLoad (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException
     {
@@ -205,6 +249,15 @@ public class SaleServlet extends DispatcherServlet
         }
     }
 
+	/**
+	 * This action allows the user to create a new sale with some default values.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
     public void performNewSale (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException
     {
@@ -219,6 +272,16 @@ public class SaleServlet extends DispatcherServlet
         forward ("create-sale.jsp", request, response);
     }
 
+	/**
+	 * This action allows the saving of new or existing sales. It determines all
+	 * the products and services being sold.
+	 * 
+	 * @param userSession the user session that is performing the action.
+	 * @param request the http request object related to the action.
+	 * @param response the http response object related to the action.
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
     public void performSave (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException
     {

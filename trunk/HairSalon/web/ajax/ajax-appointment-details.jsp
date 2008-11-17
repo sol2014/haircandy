@@ -75,7 +75,6 @@ if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo
 	showBlackout (false);
         document.getElementById("appointment_dialog_shell").style.display="none";
     }
-    
 </script>
 
 <font face="Trebuchet MS" size="2">
@@ -167,7 +166,7 @@ if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo
 						    </tr>
 						    <tr>
 							<td nowrap="nowrap" align="right">End Time:</td>
-							<td nowrap="nowrap" align="left"><b><%=CoreTools.showTime (appointment.getEndTime(), CoreTools.AMPMFormat)%></b></td>
+							<td nowrap="nowrap" align="left"><b><div id="end_time_label"><%=CoreTools.showTime (appointment.getEndTime (), CoreTools.AMPMFormat)%></div></b></td>
 						    </tr>
 						    <tr>
 							<td nowrap="nowrap" align="right">&nbsp;</td>
@@ -238,10 +237,21 @@ if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo
 </font>
 
 <script>
+    <% Calendar calendar = Calendar.getInstance ();
+	calendar.setTime (appointment.getStartTime ());
+	int hours = calendar.get (Calendar.HOUR_OF_DAY);
+	int minutes = calendar.get (Calendar.MINUTE);%>
+	
+	setStartTime (<%=hours%>, <%=minutes%>);
+</script>
+
+<script>
         <%
             Enumeration<ProductBean> pe = appointment.getProducts().keys();
+			
             while (pe.hasMoreElements()) {
                 ProductBean pb = pe.nextElement();%>
+			
                     addInitialProduct ('<%=pb.getProductNo()%>', '<%=pb.getName()%>', '<%=pb.getPrice()%>', '<%=appointment.getProducts().get(pb)%>');
         <% }%>
             
@@ -249,7 +259,7 @@ if (appointment.getEmployee() != null && appointment.getEmployee().getEmployeeNo
             Enumeration<ServiceBean> se = appointment.getServices().keys();
             while (se.hasMoreElements()) {
                 ServiceBean sb = se.nextElement();%>
-                    addInitialService ('<%=sb.getServiceNo()%>', '<%=sb.getName()%>', '<%=sb.getPrice()%>','<%=appointment.getServices().get(sb)%>');
+                    addInitialService ('<%=sb.getServiceNo()%>', '<%=sb.getName()%>', '<%=sb.getPrice()%>','<%=appointment.getServices().get(sb)%>','<%=sb.getDuration()%>');
         <% }%>
 </script>
 <script>window.setTimeout(refillProductsList, 500, "JavaScript");</script>

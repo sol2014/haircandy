@@ -331,6 +331,16 @@ public class SessionController
 			appointment.setEmployee (employee);
 		}
 		
+		for (ProductBean product : appointment.getProducts ().keySet ())
+		{
+			product.clone (loadProduct (session, product));
+		}
+		
+		for (ServiceBean service : appointment.getServices ().keySet ())
+		{
+			service.clone (loadService (session, service));
+		}
+		
 		return appointment;
 	}
 	

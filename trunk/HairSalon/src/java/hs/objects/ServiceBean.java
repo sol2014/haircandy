@@ -68,6 +68,8 @@ public class ServiceBean extends DataBean implements Comparable
 		this.setDescription (bean.getDescription ());
 		this.setDuration (bean.getDuration ());
 		this.setProductUse (bean.getProductUse ());
+		this.setPrice (bean.getPrice());
+		this.setEnabled (bean.getEnabled());
 	}
 
 	public Double getPrice ()

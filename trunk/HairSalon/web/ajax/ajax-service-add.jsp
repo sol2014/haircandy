@@ -48,7 +48,7 @@ ArrayList<ServiceBean> searchResults = (ArrayList<ServiceBean>) request.getAttri
 			<td align="left" valign="top" class="Row2"><%=ServletHelper.display(service.getName())%></td>
 			<td nowrap="nowrap" valign="top" class="Row7"><%=ServletHelper.display (service.getDuration())%>m</td>
 			<td nowrap="nowrap" valign="top" class="Row7"><%=ServletHelper.displayPrice (service.getPrice ())%></td>
-			<td nowrap="nowrap" valign="top" class="Row7"><img style="cursor:pointer" src="images/icons/small/add_white.gif" onclick="addService('<%=ServletHelper.display(service.getServiceNo())%>','<%=ServletHelper.display(service.getName())%>','<%=ServletHelper.display(service.getPrice())%>')" title="Add the service to the list." /></td>
+			<td nowrap="nowrap" valign="top" class="Row7"><img style="cursor:pointer" src="images/icons/small/add_white.gif" onclick="addService('<%=ServletHelper.display(service.getServiceNo())%>','<%=ServletHelper.display(service.getName())%>','<%=ServletHelper.display(service.getPrice())%>',1, '<%=ServletHelper.display(service.getDuration())%>')" title="Add the service to the list." /></td>
 		    </tr>
 		    <% }%>
                 <% }%>

@@ -20,8 +20,8 @@ public class CoreTools
 	public static final String DateFormat = "dd/MM/yyyy";
 	public static final String TimeFormat = "HH:mm";
 	public static final String TimestampFormat = "yyyy-MM-dd HH:mm";
-	public static final String AMPMFormat = "KK:mm a";
-	public static final String FullTimeFormat = "KK:mm:ss";
+	public static final String AMPMFormat = "hh:mm a";
+	public static final String FullTimeFormat = "HH:mm:ss";
 	public static final String MonthYearFormat = "MMMMMMMM, yyyy";
 	public static final String DayMonthYearFormat = "EEEEEEEEE, MMMMMMMMM d, yyyy";
 

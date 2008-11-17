@@ -49,7 +49,7 @@
 		    <td align="left" valign="top" class="Row7"><%=ServletHelper.display (product.getBrand ())%></td>
 		    <td align="left" valign="top" nowrap="nowrap" class="Row7"><%=ServletHelper.display (product.getType ())%></td>
 		    <td align="left" valign="top" nowrap="nowrap" class="Row7"><%=ServletHelper.displayPrice (product.getPrice ())%></td>
-		    <td nowrap="nowrap" valign="top" class="Row7"><img style="cursor:pointer" src="images/icons/small/add_white.gif" onclick="addProduct('<%=product.getProductNo ()%>','<%=product.getName ()%>','<%=product.getPrice()%>')" title="Add the product to the list." /></td>
+		    <td nowrap="nowrap" valign="top" class="Row7"><img style="cursor:pointer" src="images/icons/small/add_white.gif" onclick="addProduct('<%=product.getProductNo ()%>','<%=product.getName ()%>','<%=product.getPrice()%>',1)" title="Add the product to the list." /></td>
 		</tr>
 		<% }%>
 		<% }%>

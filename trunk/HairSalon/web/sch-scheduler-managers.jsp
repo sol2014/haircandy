@@ -90,6 +90,12 @@ Date endTime = shb.getEndTime();
 		<%=ServletHelper.generateHourPicker("employee_start_time", myStartTime)%> to <%=ServletHelper.generateHourPicker("employee_end_time", myEndTime)%> <input id="update_employee_hours_button" type="button" value="Update" onclick="updateEmployeeHours(<%=employee.getEmployeeNo()%>,'<%=request.getParameter("date")%>')" title="This will update your availability hours for today.">
 	    </td>
 	</tr>
+	<tr>
+	    <td align="right" nowrap="nowrap"></td>
+	    <td width="100%" align="left" nowrap="nowrap">
+		<font color="red"><div id="hours_error"></div></font>
+	    </td>
+	</tr>
     </table>
 </font>
 

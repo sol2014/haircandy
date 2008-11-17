@@ -33,6 +33,8 @@ public class ScheduleServlet extends DispatcherServlet
 	public void performUpdateHours (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
+		PrintWriter pw = response.getWriter ();
+		
 		String date = request.getParameter ("date");
 		String startTime = request.getParameter ("start_time");
 		String endTime = request.getParameter ("end_time");
@@ -47,6 +49,7 @@ public class ScheduleServlet extends DispatcherServlet
 		}
 		catch (Exception e)
 		{
+			pw.write ("Internal Error! Contact system administrator!");
 			LogController.write (this, "Attemped to update schedule hours with invalid data!");
 			return;
 		}
@@ -55,6 +58,7 @@ public class ScheduleServlet extends DispatcherServlet
 		
 		if (!shb.getStartTime ().equals (shb.getEndTime ()) && !shb.getStartTime ().before (shb.getEndTime ()))
 		{
+			pw.write ("Start time must preceed end time.");
 			LogController.write (this, "We cannot apply schedule hours unless start time occurs before end time.");
 		}
 		else
@@ -62,10 +66,12 @@ public class ScheduleServlet extends DispatcherServlet
 			if (!SessionController.saveScheduleHours (userSession, shb))
 			{
 				LogController.write (this, "Unable to save schedule hours.");
+				pw.write ("Invalid changes! Check the above schedule for existing schedule entries.");
 			}
 			else
 			{
 				LogController.write (this, "Saved schedule hours successfully.");
+				pw.write ("");
 			}
 		}
 	}
@@ -73,6 +79,8 @@ public class ScheduleServlet extends DispatcherServlet
 	public void performDelete (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
+		PrintWriter pw = response.getWriter ();
+		
 		String scheduleNo = request.getParameter ("schedule_no");
 
 		LogController.write (this, "[USER REQUEST] Performing delete: "+scheduleNo);
@@ -83,7 +91,6 @@ public class ScheduleServlet extends DispatcherServlet
 		response.setContentType ("text/html");
 		response.setCharacterEncoding ("UTF-8");
 
-		PrintWriter pw = response.getWriter ();
 		if (SessionController.deleteSchedule (userSession, schedule))
 		{
 			pw.print ("it works");

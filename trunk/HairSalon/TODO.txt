@@ -17,11 +17,6 @@ Unresolved
 - BUG: Servlets are unprotected from non-authorizes calls, if we have time we
   need to also get this done like the tag does.
 
-P BUG: When someone is changing Salon Hours or Employee Hours, we should never
-  allow them to edit them outside the limits based on existing scheduled data.
-
-! FEATURE: We forgot to let appointments convert to sales for final processing.
-
 ! FEATURE: User HELP icon that opens seperate page for help in all screens.
   > This is for user friendliness. Nov10
 
@@ -181,6 +176,10 @@ Resolved
   appointment, then we try and add a 15 minute service, it will not allow us.
   > Philippe fixed the bug in the servlet that was causing this. Nov13
 
+- BUG (RESOLVED): When someone is changing Salon Hours or Employee Hours, we should never
+  allow them to edit them outside the limits based on existing scheduled data.
+  > Phil applied limits in the session controller logic. Nov16
+
 - BUG (RESOLVED): When deleting schedule entries, or moving them, we are not
   even checking if there is already booked appointments data for those entries.
   > Philippe and Joey fixed this bug together. Nov13
@@ -213,6 +212,9 @@ Resolved
 
 Backburner
 ----------
+
+- FEATURE: Appointments should be convertable into sales so that they
+  can be completed. Nov16
 
 - FEATURE: The manager should have a quick way to book a schedule day quickly 
   based on the employee availability records.

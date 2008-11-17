@@ -240,6 +240,8 @@ public class EmployeeServlet extends DispatcherServlet
 	public void performUpdateHours (UserSession userSession, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
+		PrintWriter pw = response.getWriter ();
+		
 		String employeeNo = request.getParameter ("employee_no");
 		String date = request.getParameter ("date");
 		String startTime = request.getParameter ("start_time");
@@ -257,6 +259,7 @@ public class EmployeeServlet extends DispatcherServlet
 		catch (Exception e)
 		{
 			LogController.write (this, "Attemped to update employee hours with invalid data!");
+			pw.write ("Internal Error! Contact system administrator!");
 			return;
 		}
 		
@@ -264,6 +267,7 @@ public class EmployeeServlet extends DispatcherServlet
 		
 		if (!ehb.getStartTime ().equals (ehb.getEndTime ()) && !ehb.getStartTime ().before (ehb.getEndTime ()))
 		{
+			pw.write ("Start time must preceed end time.");
 			LogController.write (this, "We cannot apply employee hours unless start time occurs before end time.");
 		}
 		else
@@ -271,10 +275,12 @@ public class EmployeeServlet extends DispatcherServlet
 			if (!SessionController.saveEmployeeHours (userSession, ehb))
 			{
 				LogController.write (this, "Unable to save employee hours.");
+				pw.write ("Invalid changes! Check the above schedule for existing schedule entries.");
 			}
 			else
 			{
 				LogController.write (this, "Saved employee hours successfully.");
+				pw.write ("");
 			}
 		}
 	}

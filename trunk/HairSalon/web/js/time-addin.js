@@ -101,8 +101,17 @@ function switchDayStatus (day, identity)
     setDayStatus (day.value, enabled, identity);
 }
 
-function updatePage ()
+function updatePage (value)
 {
+    if (value != "")
+    {
+        document.getElementById("hours_error").innerHTML = value;
+    }
+    else
+    {
+        document.getElementById("hours_error").innerHTML = "";
+    }
+    
     getMatrix();
 }
 

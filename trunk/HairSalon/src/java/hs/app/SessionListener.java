@@ -10,18 +10,22 @@
 
 package hs.app;
 
-import javax.servlet.*;
 import javax.servlet.http.*;
 
 import hs.core.*;
 
 /**
- * This will assist in initializing user sessions.
+ * This will assist in initializing/destroying user sessions.
  * 
  * @author pdurand
  */
 public class SessionListener implements HttpSessionListener
 {
+	/**
+	 * Occurs when a new session is created in our web application.
+	 * 
+	 * @param event
+	 */
     public void sessionCreated(HttpSessionEvent event)
     {
         HttpSession session = event.getSession();
@@ -33,6 +37,11 @@ public class SessionListener implements HttpSessionListener
 		session.setAttribute ("user_session", userSession);
     }
 	
+	/**
+	 * Occurs when a session is destroyed and removed from the web application.
+	 * 
+	 * @param event
+	 */
     public void sessionDestroyed(HttpSessionEvent event)
     {
         HttpSession session = event.getSession();

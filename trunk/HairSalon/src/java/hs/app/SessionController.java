@@ -19,7 +19,7 @@ import java.text.ParseException;
 
 /**
  * Responsible for controller all actions that are taken by the user session
- * browsing the site. Allows a range of activities from logging in to loading
+ * using the site. Allows a range of activities from logging in to loading
  * and saving records or performing schedule and appointment algorithms.
  * 
  * @author Philippe Durand
@@ -139,10 +139,8 @@ public class SessionController
 		session.setEmployee (null);
 	}
 	
-	// SEARCH FUNCTIONS
 	/**
-	 * Allows a user session to search for employees from the persistence
-	 * controller.
+	 * Allows a user session to search for employees using specific criteria.
 	 * 
 	 * @param session the session that is doing the search.
 	 * @param employee the employee data that is being used for the search.
@@ -155,8 +153,7 @@ public class SessionController
 	}
 
 	/**
-	 * Allows a user session to search for sales from the persistence
-	 * controller.
+	 * Allows a user session to search for sales using specific criteria.
 	 * 
 	 * @param session the session that is doing the search.
 	 * @param sale the sale data that is being used for the search.
@@ -169,8 +166,8 @@ public class SessionController
 	}
 
 	/**
-	 * Allows a user session to search for sales from the persistence
-	 * controller using a date range.
+	 * Allows a user session to search for sales using specific criteria and
+	 * using a specific date range.
 	 * 
 	 * @param session the session that is doing the search.
 	 * @param sale the sale data that is being used for the search.
@@ -183,8 +180,7 @@ public class SessionController
 	}
 	
 	/**
-	 * Allows a user session to search for suppliers from the persistence
-	 * controller.
+	 * Allows a user session to search for suppliers using specific criteria.
 	 * 
 	 * @param session the session that is doing the search.
 	 * @param supplier the supplier data that is being used for the search.
@@ -197,8 +193,7 @@ public class SessionController
 	}
 
 	/**
-	 * Allows a user session to search for products from the persistence
-	 * controller.
+	 * Allows a user session to search for products using specific criteria.
 	 * 
 	 * @param session the session that is doing the search.
 	 * @param product the product data that is being used for the search.
@@ -211,8 +206,7 @@ public class SessionController
 	}
 
 	/**
-	 * Allows a user session to search for services from the persistence
-	 * controller.
+	 * Allows a user session to search for services using specific criteria.
 	 * 
 	 * @param session the session that is doing the search.
 	 * @param service the service data that is being used for the search.
@@ -225,8 +219,7 @@ public class SessionController
 	}
 
 	/**
-	 * Allows a user session to search for clients from the persistence
-	 * controller.
+	 * Allows a user session to search for clients using specific criteria.
 	 * 
 	 * @param session the session that is doing the search.
 	 * @param cient the client data that is being used for the search.
@@ -238,34 +231,60 @@ public class SessionController
 		return (ClientBean[]) PersistenceController.search (client);
 	}
 
+	/**
+	 * Allows searching for appointments using specific criteria.
+	 * 
+	 * @param session the session that is doing the search.
+	 * @param appointment the appointment criteria to use when searching.
+	 * @return the list of appointments found if any.
+	 */
 	public static AppointmentBean[] searchAppointments (UserSession session, AppointmentBean appointment)
 	{
 		LogController.write ("SessionController->Searching for appointments...");
 		return (AppointmentBean[]) PersistenceController.search (appointment);
 	}
 
+	/**
+	 * Allows searching of schedule entries using specific criteria.
+	 * 
+	 * @param session the session that is doing the search.
+	 * @param schedule the schedule criteria to use when searching.
+	 * @return the list of schedule entries found if any.
+	 */
 	public static ScheduleBean[] searchSchedule (UserSession session, ScheduleBean schedule)
 	{
 		LogController.write ("SessionController->Searching for schedule...");
 		return (ScheduleBean[]) PersistenceController.search (schedule);
 	}
 	
+	/**
+	 * Allows searching of schedule exceptions using specific criteria.
+	 * 
+	 * @param session the session that is doing the search.
+	 * @param exception the exception criteria to use when searching.
+	 * @return the list of schedule exceptions found if any.
+	 */
 	public static ScheduleExceptionBean[] searchScheduleExceptions (UserSession session, ScheduleExceptionBean exception)
 	{
 		LogController.write ("SessionController->Searching for schedule exceptions...");
 		return (ScheduleExceptionBean[]) PersistenceController.search (exception);
 	}
 	
+	/**
+	 * Allows searching of availability exceptions using specific criteria.
+	 * 
+	 * @param session the session doing the search.
+	 * @param exception the exception criteria to use when searching.
+	 * @return the list of availability exceptions found if any.
+	 */
 	public static AvailabilityExceptionBean[] searchAvailabilityExceptions (UserSession session, AvailabilityExceptionBean exception)
 	{
 		LogController.write ("SessionController->Searching for availability exceptions...");
 		return (AvailabilityExceptionBean[]) PersistenceController.search (exception);
 	}
 	
-	// LOAD FUNCTIONS
 	/**
-	 * Allows a user session to load a salon bean from the persistence
-	 * controller.
+	 * Allows a user session to load a salon bean using specific criteria.
 	 * 
 	 * @param session the session that is doing the load.
 	 * @param salon the salon data is that is being used for the load.
@@ -278,8 +297,7 @@ public class SessionController
 	}
 
 	/**
-	 * Allows a user session to load a client bean from the persistence
-	 * controller.
+	 * Allows a user session to load a client bean using specific criteria.
 	 * 
 	 * @param session the session that is doing the load.
 	 * @param client the client data is that is being used for the load.
@@ -298,8 +316,7 @@ public class SessionController
 	}
 
 	/**
-	 * Allows a user session to load a service bean from the persistence
-	 * controller.
+	 * Allows a user session to load a service bean using specific criteria.
 	 * 
 	 * @param session the session that is doing the load.
 	 * @param service the service data is that is being used for the load.
@@ -314,6 +331,13 @@ public class SessionController
 		return service;
 	}
 
+	/**
+	 * Allows the loading of an appointment record using the specific criteria.
+	 * 
+	 * @param session the session that is doing the load.
+	 * @param appointment the appointment criteria for the load.
+	 * @return the appointment that is loaded if any.
+	 */
 	public static AppointmentBean loadAppointment (UserSession session, AppointmentBean appointment)
 	{
 		LogController.write ("SessionController->Loading appointment...");
@@ -344,6 +368,13 @@ public class SessionController
 		return appointment;
 	}
 	
+	/**
+	 * Allows the loading of a sale record using the specified criteria.
+	 * 
+	 * @param session the user session doing the load.
+	 * @param sale the sale criteria to use when loading.
+	 * @return the sale that was loaded if any.
+	 */
 	public static SaleBean loadSale (UserSession session, SaleBean sale)
 	{
 		LogController.write ("SessionController->Loading sale...");
@@ -375,8 +406,7 @@ public class SessionController
 	}
 
 	/**
-	 * Allows a user session to load a address bean from the persistence
-	 * controller.
+	 * Allows the loading of an address record using the specific criteria.
 	 * 
 	 * @param session the session that is doing the load.
 	 * @param address the address data is that is being used for the load.
@@ -390,6 +420,13 @@ public class SessionController
 		return address;
 	}
 	
+	/**
+	 * Allows the loading of employee hours using the specific criteria.
+	 * 
+	 * @param session the session that is doing the load.
+	 * @param employeeHours the employee hours criteria to use when loading.
+	 * @return the employee hours loaded if any.
+	 */
 	public static EmployeeHoursBean loadEmployeeHours (UserSession session, EmployeeHoursBean employeeHours)
 	{
 		LogController.write ("SessionController->Loading employee hours entry...");
@@ -400,6 +437,13 @@ public class SessionController
 		return employeeHours;
 	}
 	
+	/**
+	 * Allows the loading of schedule exceptions using the specified criteria.
+	 * 
+	 * @param session the session that is doing the load.
+	 * @param ex the exception criteria used during the load.
+	 * @return the schedule exception loaded if any.
+	 */
 	public static ScheduleExceptionBean loadScheduleException (UserSession session, ScheduleExceptionBean ex)
 	{
 		LogController.write ("SessionController->Loading schedule exception bean...");
@@ -408,6 +452,13 @@ public class SessionController
 		return result;
 	}
 	
+	/**
+	 * Allows the loading of schedule hours using the specified criteria.
+	 * 
+	 * @param session the session that is doing the load.
+	 * @param scheduleHours the schedule hours criteria to use when loading.
+	 * @return the schedule hours loaded if any.
+	 */
 	public static ScheduleHoursBean loadScheduleHours (UserSession session, ScheduleHoursBean scheduleHours)
 	{
 		LogController.write ("SessionController->Loading schedule hours entry...");
@@ -432,6 +483,13 @@ public class SessionController
 		return scheduleHours;
 	}
 	
+	/**
+	 * Allows the loading of schedule entries using the specified criteria.
+	 * 
+	 * @param session the session that is doing the load.
+	 * @param schedule the schedule criteria that is used when loading.
+	 * @return the schedule entry loaded if any.
+	 */
 	public static ScheduleBean loadSchedule (UserSession session, ScheduleBean schedule)
 	{
 		LogController.write ("SessionController->Loading schedule entry...");
@@ -441,8 +499,7 @@ public class SessionController
 	}
 
 	/**
-	 * Allows a user session to load a product bean from the persistence
-	 * controller.
+	 * Allows the loading of product record using the specified criteria.
 	 * 
 	 * @param session the session that is doing the load.
 	 * @param product the product data is that is being used for the load.
@@ -457,8 +514,7 @@ public class SessionController
 	}
 
 	/**
-	 * Allows a user session to load a supplier bean from the persistence
-	 * controller.
+	 * Allows the loading a supplier bean using the specified criteria.
 	 * 
 	 * @param session the session that is doing the load.
 	 * @param supplier the supplier data is that is being used for the load.
@@ -473,8 +529,7 @@ public class SessionController
 	}
 
 	/**
-	 * Allows a user session to load a employee bean from the persistence
-	 * controller.
+	 * Allows the loading of an employee bean using the specified criteria.
 	 * 
 	 * @param session the session that is doing the load.
 	 * @param employee the employee data is that is being used for the load.
@@ -497,10 +552,8 @@ public class SessionController
 		return employee;
 	}
 
-	// SAVE FUNCTIONS
 	/**
-	 * Allows the user session to save a address bean using the persistence
-	 * controller.
+	 * Allows the saving of an address record using the specified bean.
 	 * 
 	 * @param session the session that is doing the save.
 	 * @param address the address data to be saved.
@@ -515,6 +568,12 @@ public class SessionController
 		return result;
 	}
 
+	/**
+	 * Allows deleting of all alerts that are in the system.
+	 * 
+	 * @param session the session that is performing the delete.
+	 * @return whether the alerts were deleted or not.
+	 */
 	public static boolean deleteAlerts (UserSession session)
 	{
 		LogController.write ("SessionController->Deleting alerts...");
@@ -523,6 +582,13 @@ public class SessionController
 		return result;
 	}
 	
+	/**
+	 * Allows the deletion of a single alert using the specified criteria.
+	 * 
+	 * @param session the session that is doing the delete.
+	 * @param alert the alert object to delete.
+	 * @return whether the alert was deleted or not.
+	 */
 	public static boolean deleteAlert (UserSession session, AlertBean alert)
 	{
 		LogController.write ("SessionController->Deleting alert...");
@@ -531,6 +597,13 @@ public class SessionController
 		return result;
 	}
 	
+	/**
+	 * Allows the deletion of an appointment record using the specified bean.
+	 * 
+	 * @param session the session that is doing the delete.
+	 * @param appointment the appointment to be deleted.
+	 * @return whether the appointment was deleted or not.
+	 */
 	public static boolean deleteAppointment (UserSession session, AppointmentBean appointment)
 	{
 		LogController.write ("SessionController->Deleting appointment entry...");
@@ -538,6 +611,14 @@ public class SessionController
 		result = PersistenceController.delete (appointment);
 		return result;
 	}
+	
+	/**
+	 * Allows the deletion of a schedule entry using the specified bean.
+	 * 
+	 * @param session the session doing the deletion.
+	 * @param schedule the schedule bean to delete.
+	 * @return whether the schedule entry was deleted or not.
+	 */
 	public static boolean deleteSchedule (UserSession session, ScheduleBean schedule)
 	{
 		LogController.write ("SessionController->Deleting schedule entry...");
@@ -547,6 +628,13 @@ public class SessionController
 		return result;
 	}
 	
+	/**
+	 * Allows the saving of an appointment record using the specified bean.
+	 * 
+	 * @param session the session doing the saving.
+	 * @param appointment the appointment to save.
+	 * @return whether the appointment was saved or not.
+	 */
 	public static boolean saveAppointment (UserSession session, AppointmentBean appointment)
 	{
 		LogController.write ("SessionController->Saving appointment entry...");
@@ -556,6 +644,15 @@ public class SessionController
 		return result;
 	}
 	
+	/**
+	 * Allows the saving of employee hour records using the specified bean.
+	 * This function will determine whether the data being saved is valid or
+	 * not.
+	 * 
+	 * @param session the session doing the save.
+	 * @param hours the employee hours to save.
+	 * @return whether the employee hours were saved or not.
+	 */
 	public static boolean saveEmployeeHours (UserSession session, EmployeeHoursBean hours)
 	{
 		LogController.write ("SessionController->Saving employee hours entry...");
@@ -610,6 +707,14 @@ public class SessionController
 		return result;
 	}
 	
+	/**
+	 * Allow the saving of schedule hours using the specified bean. This function
+	 * will check whether the data being saved is valid or not.
+	 * 
+	 * @param session the session doing the saving.
+	 * @param hours the schedule hours to be saved.
+	 * @return whether the schedule hours were saved or not.
+	 */
 	public static boolean saveScheduleHours (UserSession session, ScheduleHoursBean hours)
 	{
 		LogController.write ("SessionController->Saving schedule hours entry...");
@@ -652,6 +757,15 @@ public class SessionController
 		return result;
 	}
 	
+	/**
+	 * Allows saving of schedule entries using the specified bean. This will
+	 * make sure to use the available employee hours to check if the schedule
+	 * data is valid.
+	 * 
+	 * @param session the session doing the saving.
+	 * @param schedule the schedule entry to be saved.
+	 * @return whether the schedule entry was saved or not.
+	 */
 	public static boolean saveSchedule (UserSession session, ScheduleBean schedule)
 	{
 		LogController.write ("SessionController->Saving schedule entry...");
@@ -696,12 +810,11 @@ public class SessionController
 	}
 
 	/**
-	 * Allows the user session to save a service bean using the persistence
-	 * controller.
+	 * Allows the saving of service records using the specified service bean.
 	 * 
-	 * @param session the session that is doing the save.
-	 * @param service the service data to be saved.
-	 * @return whether the save was successfull or not.
+	 * @param session the session doing the saving.
+	 * @param service the service to be saved.
+	 * @return whether the service was saved or not.
 	 */
 	public static boolean saveService (UserSession session, ServiceBean service)
 	{
@@ -714,6 +827,16 @@ public class SessionController
 		return result;
 	}
 
+	/**
+	 * Allows the saving of sale records using the specified sale bean. This
+	 * function will also perform the consumption and sale of products by
+	 * removing them from the inventory. Inventory alerts are created during
+	 * this procedure if the inventory is getting low.
+	 * 
+	 * @param session the session doing the saving.
+	 * @param sale the sale to be saved.
+	 * @return whether the sale was saved or not.
+	 */
 	public static boolean saveSale (UserSession session, SaleBean sale)
 	{
 		LogController.write ("SessionController->Saving sale...");
@@ -873,12 +996,11 @@ public class SessionController
 	}
 
 	/**
-	 * Allows the user session to save a supplier bean using the persistence
-	 * controller.
+	 * Allows saving of supplier information using the specified bean.
 	 * 
-	 * @param session the session that is doing the save.
-	 * @param supplier the supplier data to be saved.
-	 * @return whether the save was successfull or not.
+	 * @param session the session doing the saving.
+	 * @param supplier the supplier to be saved.
+	 * @return whether the supplier was saved or not.
 	 */
 	public static boolean saveSupplier (UserSession session, SupplierBean supplier)
 	{
@@ -890,12 +1012,11 @@ public class SessionController
 	}
 
 	/**
-	 * Allows the user session to save an employee bean using the persistence
-	 * controller.
+	 * Allows saving of employee information using the specified bean.
 	 * 
-	 * @param session the session that is doing the save.
-	 * @param employee the employee data to be saved.
-	 * @return whether the save was successfull or not.
+	 * @param session the session doing the saving.
+	 * @param employee the employee to be saved.
+	 * @return whether the employee was saved or not.
 	 */
 	public static boolean saveEmployee (UserSession session, EmployeeBean employee)
 	{
@@ -928,12 +1049,11 @@ public class SessionController
 	}
 
 	/**
-	 * Allows the user session to save a product bean using the persistence
-	 * controller.
+	 * Allows the saving of product information using the specified bean.
 	 * 
-	 * @param session the session that is doing the save.
-	 * @param product the product data to be saved.
-	 * @return whether the save was successfull or not.
+	 * @param session the session doing the saving.
+	 * @param product the product to be saved.
+	 * @return whether the product was saved or not.
 	 */
 	public static boolean saveProduct (UserSession session, ProductBean product)
 	{
@@ -947,12 +1067,11 @@ public class SessionController
 	}
 
 	/**
-	 * Allows the user session to save a client bean using the persistence
-	 * controller.
+	 * Allows the saving of client information using the specified bean.
 	 * 
-	 * @param session the session that is doing the save.
-	 * @param client the client data to be saved.
-	 * @return whether the save was successfull or not.
+	 * @param session the session doing the saving.
+	 * @param client the client to be saved.
+	 * @return whether the client was saved or not.
 	 */
 	public static boolean saveClient (UserSession session, ClientBean client)
 	{
@@ -966,12 +1085,11 @@ public class SessionController
 	}
 
 	/**
-	 * Allows the user session to save a salon bean using the persistence
-	 * controller.
+	 * Allows the saving of salon information using the specified bean.
 	 * 
-	 * @param session the session that is doing the save.
-	 * @param salon the salon data to be saved.
-	 * @return whether the save was successfull or not.
+	 * @param session the session doing the saving.
+	 * @param salon the salon information to be saved.
+	 * @return whether the salon information was saved or not.
 	 */
 	public static boolean saveSalon (UserSession session, SalonBean salon)
 	{
@@ -996,6 +1114,13 @@ public class SessionController
 		return result;
 	}
 
+	/**
+	 * Allows the loading of an alert using the specified criteria.
+	 * 
+	 * @param session the session doing the loading.
+	 * @param alert the alert criteria to use when loading.
+	 * @return the alert that is loaded if any.
+	 */
 	public static AlertBean loadAlert (UserSession session, AlertBean alert)
 	{
 		LogController.write ("SessionController->Loading alert...");
@@ -1005,6 +1130,12 @@ public class SessionController
 		return alert;
 	}
 	
+	/**
+	 * Allows the loading of all alerts in the system.
+	 * 
+	 * @param session the session doing the loading.
+	 * @return the array of alerts that were loaded if any.
+	 */
 	public static AlertBean[] loadAlerts (UserSession session)
 	{
 		LogController.write ("SessionController->Loading alerts...");
@@ -1024,6 +1155,13 @@ public class SessionController
 		return alerts;
 	}
 	
+	/**
+	 * Allows the saving of alert information using the specified bean.
+	 * 
+	 * @param session the session doing the saving.
+	 * @param alert the alert to be saved.
+	 * @return whether the alert was saved or not.
+	 */
 	public static boolean saveAlert (UserSession session, AlertBean alert)
 	{
 		LogController.write ("SessionController->Saving alert...");
@@ -1033,6 +1171,17 @@ public class SessionController
 		return result;
 	}
 	
+	/**
+	 * Obtains all the appointments that are available for the specified date.
+	 * The availability exceptions and schedule exceptions are taken into
+	 * account when returning the list of appointments.
+	 * 
+	 * @param session the session doing the get.
+	 * @param date the date to obtain the appointments for.
+	 * @param availabilityExceptions the availability exceptions to concider.
+	 * @param scheduleExceptions the schedule exceptions to concider.
+	 * @return the hashtable of employee appointments obtained.
+	 */
 	public static Hashtable<EmployeeBean, ArrayList<AppointmentBean>> getAppointments (UserSession session, java.util.Date date, Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions, ArrayList<ScheduleExceptionBean> scheduleExceptions)
 	{
 		LogController.write ("SessionController->Getting filtered appointments...");
@@ -1076,6 +1225,15 @@ public class SessionController
 		return hash;
 	}
 	
+	/**
+	 * Obtains all the unschedulable time entries for a specific date. This takes
+	 * into account the specified schedule hours for that date.
+	 * 
+	 * @param session the session doing the get.
+	 * @param date the date to obtain the unschedulable time for.
+	 * @param hours the schedule hours to concider.
+	 * @return the hashtable of employee unschedulable time entries.
+	 */
 	public static Hashtable<EmployeeBean, ArrayList<ScheduleBean>> getUnschedulable (UserSession session, java.util.Date date, ScheduleHoursBean hours)
 	{
 		LogController.write ("SessionController->Getting filtered unschedulable time...");
@@ -1160,6 +1318,18 @@ public class SessionController
 		return hash;
 	}
 	
+	/**
+	 * Obtains the unavailable time entries for one date. This takes into account
+	 * the employee availability exceptions and schedule exceptions that
+	 * are passed into it.
+	 * 
+	 * @param session the session doing the get.
+	 * @param date the date to obtain the unavailable time for.
+	 * @param availabilityExceptions the availability exceptions to concider.
+	 * @param scheduleExceptions the schedule exceptions to concider.
+	 * @param hours the schedule hours to concider.
+	 * @return the hashtable of employee unavailable time entries.
+	 */
 	public static Hashtable<EmployeeBean, ArrayList<ScheduleBean>> getUnavailable (UserSession session, java.util.Date date, Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions, ArrayList<ScheduleExceptionBean> scheduleExceptions, ScheduleHoursBean hours)
 	{
 		LogController.write ("SessionController->Getting filtered unavailable time...");
@@ -1270,6 +1440,13 @@ public class SessionController
 		return hash;
 	}
 	
+	/**
+	 * Obtains the schedule entries from the system for a specific date.
+	 * 
+	 * @param session the session doing the get.
+	 * @param date the date to obtain the schedule entries for.
+	 * @return the schedule entries array obtained.
+	 */
 	public static ArrayList<ScheduleBean> getSchedule (UserSession session, java.util.Date date)
 	{
 		LogController.write ("SessionController->Getting unfiltered schedule...");
@@ -1289,6 +1466,14 @@ public class SessionController
 		return hash;
 	}
 	
+	/**
+	 * Obtains the schedule entries for a specific date and employee.
+	 * 
+	 * @param session the session doing the get.
+	 * @param employee the employee to obtain schedule entries for.
+	 * @param date the date to obtain the schedule entries for.
+	 * @return the array of schedule entries obtained.
+	 */
 	public static ArrayList<ScheduleBean> getEmployeeSchedule (UserSession session, EmployeeBean employee, java.util.Date date)
 	{
 		LogController.write ("SessionController->Getting employee schedule...");
@@ -1309,6 +1494,15 @@ public class SessionController
 		return hash;
 	}
 	
+	/**
+	 * Obtains the unmovable entries filtered from the hashtable of employee
+	 * schedule entries for a specified date.
+	 * 
+	 * @param session the session doing the get.
+	 * @param date the date to obtain the unmovable entries for.
+	 * @param schedule the hashtable of employee schedule entries.
+	 * @return the resulting hashtable of unmovable employee schedule entries.
+	 */
 	public static Hashtable<EmployeeBean, ArrayList<ScheduleBean>> getUnmovableSchedule (UserSession session, java.util.Date date, Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedule)
 	{
 		LogController.write ("SessionController->Getting filtered unmovable schedule...");
@@ -1362,6 +1556,15 @@ public class SessionController
 		return hash;
 	}
 	
+	/**
+	 * Obtains the movable entries filtered from the hashtable of employee
+	 * schedule entries for a specified date.
+	 * 
+	 * @param session the session doing the get.
+	 * @param date the date to obtain the movable entries for.
+	 * @param schedule the hashtable of employee schedule entries.
+	 * @return the resulting hashtable of movable employee schedule entries.
+	 */
 	public static Hashtable<EmployeeBean, ArrayList<ScheduleBean>> getMovableSchedule (UserSession session, java.util.Date date, Hashtable<EmployeeBean, ArrayList<ScheduleBean>> schedule)
 	{
 		LogController.write ("SessionController->Getting filtered unmovable schedule...");
@@ -1421,6 +1624,16 @@ public class SessionController
 		return hash;
 	}
 	
+	/**
+	 * Obtains all schedule entries for the specified date while concidering
+	 * the specified availability exceptions and schedule exceptions.
+	 * 
+	 * @param session the session doing the get.
+	 * @param date the date to obtain the schedule entries for.
+	 * @param availabilityExceptions the availability exceptions to concider.
+	 * @param scheduleExceptions the schedule exceptions to concider.
+	 * @return the hashtable of employee schedule entries.
+	 */
 	public static Hashtable<EmployeeBean, ArrayList<ScheduleBean>> getAllSchedule (UserSession session, java.util.Date date, Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> availabilityExceptions, ArrayList<ScheduleExceptionBean> scheduleExceptions)
 	{
 		LogController.write ("SessionController->Getting filtered schedule...");
@@ -1477,6 +1690,13 @@ public class SessionController
 		return hash;
 	}
 	
+	/**
+	 * Obtains the schedule exceptions for a specified date.
+	 * 
+	 * @param session the session doing the get.
+	 * @param date the date to obtain schedule exceptions for.
+	 * @return the schedule exceptions that were obtained if any.
+	 */
 	public static ArrayList<ScheduleExceptionBean> getScheduleExceptions (UserSession session, java.util.Date date)
 	{
 		LogController.write ("SessionController->Getting filtered schedule exceptions...");
@@ -1499,6 +1719,13 @@ public class SessionController
 		return list;
 	}
 	
+	/**
+	 * Obtains the availability exceptions for a specified date.
+	 * 
+	 * @param session the session doing the get.
+	 * @param date the date to obtain availability exceptions for.
+	 * @return the hashtable of employee availability exceptions.
+	 */
 	public static Hashtable<EmployeeBean, ArrayList<AvailabilityExceptionBean>> getAvailabilityExceptions (UserSession session, java.util.Date date)
 	{
 		LogController.write ("SessionController->Getting filtered availability exceptions...");
@@ -1545,6 +1772,16 @@ public class SessionController
 		return hash;
 	}
 	
+	/**
+	 * Obtains a quick structure to read when generating a calendar of appointment
+	 * schedule. This will obtain any information necessary to represent the
+	 * calendar with important information like exceptions or appointments.
+	 * 
+	 * @param session the session doing the get.
+	 * @param month the month to obtain information for.
+	 * @param year the year to obtain information for.
+	 * @return the array of calendar day status objects.
+	 */
 	public static ArrayList<CalendarDayStatus> getAppCalendarStatus (UserSession session, int month, int year)
 	{
 		ArrayList<CalendarDayStatus> list = new ArrayList<CalendarDayStatus> ();
@@ -1593,6 +1830,16 @@ public class SessionController
 		return list;
 	}
 	
+	/**
+	 * Obtains a quick structure to read when generating a calendar of employee
+	 * schedule. This will obtain any information necessary to represent the
+	 * calendar with important information like exceptions or schedule entries.
+	 * 
+	 * @param session the session doing the get.
+	 * @param month the month to obtain information for.
+	 * @param year the year to obtain information for.
+	 * @return the array of calendar day status objects.
+	 */
 	public static ArrayList<CalendarDayStatus> getSchCalendarStatus (UserSession session, int month, int year)
 	{
 		ArrayList<CalendarDayStatus> list = new ArrayList<CalendarDayStatus> ();

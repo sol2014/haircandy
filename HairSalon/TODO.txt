@@ -14,6 +14,8 @@ Unresolved
 - BUG: Servlets are unprotected from non-authorizes calls, if we have time we
   need to also get this done like the tag does.
 
+- FEATURE: We need to come up with a better "Product Type" list.
+
 ! FEATURE: User HELP icon that opens seperate page for help in all screens.
   > This is for user friendliness. Nov10
 

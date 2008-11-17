@@ -241,7 +241,7 @@ public class SaleServlet extends DispatcherServlet
         }
         else
         {
-            userSession.setAttribute ("sale_load_error", ErrorCodes.LoadError);
+            userSession.setAttribute ("sale_load_error", "The sale could not be loaded!");
 
             //forward ("/search-sale.jsp", request, response);
             forward ("/create-sale.jsp", request, response);

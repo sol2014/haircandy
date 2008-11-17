@@ -327,7 +327,7 @@ public class ServiceServlet extends DispatcherServlet
 		}
 		else
 		{
-			userSession.setAttribute ("service_error", ErrorCodes.LoadError);
+			userSession.setAttribute ("service_error", "The service could not be loaded!");
 
 			forward ("/search-service.jsp", request, response);
 		}

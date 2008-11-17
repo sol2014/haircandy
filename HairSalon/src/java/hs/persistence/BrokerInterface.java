@@ -16,6 +16,7 @@ import hs.objects.*;
 
 /**
  * Defines how the persistence brokers should deal with the data beans.
+ * 
  * @author Philippe Durand
  */
 public interface BrokerInterface

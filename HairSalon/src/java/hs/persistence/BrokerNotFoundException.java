@@ -11,8 +11,10 @@
 package hs.persistence;
 
 /**
- *
- * @author Draekz
+ * Exception that will occur if an invalid data bean type is attempted on
+ * the persistence controller.
+ * 
+ * @author Philippe Durand
  */
 public class BrokerNotFoundException extends Exception
 {

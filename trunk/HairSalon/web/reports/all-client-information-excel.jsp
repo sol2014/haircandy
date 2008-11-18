@@ -8,7 +8,7 @@
  * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
 --%>
 
-<%@ page contentType="application/vnd.ms-excel" %>
+<%@page contentType="application/vnd.ms-excel" %>
 <%@page import="java.sql.*" %>
 <%@page import="hs.persistence.*" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"

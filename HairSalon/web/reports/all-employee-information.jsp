@@ -14,7 +14,7 @@
 
 <%!
 	private String getPhoneNumberFormat(String phone) {
-                return "("+phone.substring(0, 3)+")"+phone.substring(3,6)+"-"+phone.substring(6,10);
+		return "(" + phone.substring(0, 3) + ")" + phone.substring(3, 6) + "-" + phone.substring(6, 10);
 	}
 %>
 
@@ -45,6 +45,9 @@
                     <td>
                         Role
                     </td>
+                    <td>
+                        Details
+                    </td>
                 </tr>
                 <%
 		StringBuilder sb = new StringBuilder();
@@ -66,6 +69,7 @@
                     <td><%=rs.getString("last_name")%></td>
                     <td><%=getPhoneNumberFormat(rs.getString("phone_number"))%></td>
                     <td><%=rs.getString("role")%></td>
+                    <td><a href="employee-details.jsp?id=<%=rs.getString("employee_no")%>" size=20 target="_blank">view</a></td>
                 </tr>
                 <%			}
 
@@ -84,7 +88,7 @@
         </div>
         <div>
             <input type="button" size=20 value="Export Excel"
-                   onclick="window.open('all-client-information-excel.jsp', '_blank');" />&nbsp;&nbsp;&nbsp;
+                   onclick="window.open('all-employee-information-excel.jsp', '_blank');" />&nbsp;&nbsp;&nbsp;
             <input type="button" size=20 value="Print this page"
                    onclick="window.print();return false;" />
         </div>

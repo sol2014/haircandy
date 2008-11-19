@@ -84,10 +84,10 @@
                 <input type="text" value="<%=getEmptyString(beginDate)%>" name="BeginDate">
                 <input type="text" value="<%=getEmptyString(endDate)%>" name="EndDate">
                 <%
-		if (beginDate == null || beginDate == "") {
+                if (beginDate == null || beginDate.equals("")) {
 			beginDate = "1900-01-01";
 		}
-		if (endDate == null || endDate == "") {
+                if (endDate == null || endDate.equals("")) {
 			endDate = "2100-01-01";
 		}
                 %>
@@ -163,6 +163,14 @@
                 </table>
             </div>
             <div>
+                <%
+                if (beginDate.equals("1900-01-01")) {
+			beginDate = "";
+		}
+                if (endDate.equals("2100-01-01")) {
+			endDate = "";
+		}
+                %>
                 <input type="button" size=20 value="Export Excel"
                        onclick="window.open('schedule-information-excel.jsp?EmployeeNo=<%=employeeNo%>&BeginDate=<%=beginDate%>&EndDate=<%=endDate%>', '_blank');" />&nbsp;&nbsp;&nbsp;
                 <input type="button" size=20 value="Print this page"

@@ -28,7 +28,7 @@
             <%
 		String supplierNo = request.getParameter("SupplierNo");
 		if (supplierNo == null) {
-			supplierNo = "";
+			supplierNo = "0";
 		}
 		sb = new StringBuilder();
 		sb.append(" SELECT *  ");
@@ -155,7 +155,7 @@
             </div>
             <div>
                 <input type="button" size=20 value="Export Excel"
-                       onclick="window.open('all-client-information-excel.jsp', '_blank');" />&nbsp;&nbsp;&nbsp;
+                       onclick="window.open('product-information-excel.jsp?SupplierNo=<%=supplierNo%>', '_blank');" />&nbsp;&nbsp;&nbsp;
                 <input type="button" size=20 value="Print this page"
                        onclick="window.print();return false;" />
             </div>

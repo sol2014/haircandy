@@ -121,7 +121,7 @@
 			conn = MultithreadedJDBCConnectionPool.getConnectionPool().getConnection();
 			PreparedStatement ps = conn.prepareStatement(sb.toString());
 			if ((!supplierNo.equals("")) && supplierNo != null && (!supplierNo.equals("0"))) {
-				ps.setInt(0, Integer.parseInt("supplierNo"));
+				ps.setInt(0, Integer.parseInt(supplierNo));
 			}
 			rs = ps.executeQuery();
 			while (rs.next()) {

@@ -209,7 +209,6 @@
             %>
         </tr>
     </table>
-    </div>
     <div>
         <%
 		if (beginDate.equals("1900-01-01")) {

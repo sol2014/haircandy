@@ -8,7 +8,7 @@
  * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="application/vnd.ms-excel" %>
 <%@page import="java.sql.*" %>
 <%@page import="java.util.*" %>
 <%@page import="java.text.*" %>
@@ -50,55 +50,7 @@
 		}
 		String beginDate = request.getParameter("BeginDate");
 		String endDate = request.getParameter("EndDate");
-		sb = new StringBuilder();
-		sb.append(" SELECT *  ");
-		sb.append(" FROM service se ");
-		sb.append(" WHERE se.enabled = true ");
-		sb.append(" ORDER BY se.service_no; ");
             %>
-            <div>
-                <select name="ServiceNo">
-                    <option value="0" >All</option>
-                    <%
-		try {
-			conn = MultithreadedJDBCConnectionPool.getConnectionPool().getConnection();
-			PreparedStatement ps = conn.prepareStatement(sb.toString());
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				if (rs.getString("service_no").equals(serviceNo)) {
-                    %>
-                    <option value="<%=rs.getInt("service_no")%>"  selected><%=rs.getString("name")%></option>
-                    <%	} else {
-                    %>
-                    <option value="<%=rs.getInt("service_no")%>"><%=rs.getString("name")%> </option>
-                    <%
-				}
-			}
-		} catch (Exception e) {
-		} finally {
-
-			if (conn != null) {
-				MultithreadedJDBCConnectionPool.getConnectionPool().returnConnection(conn);
-			}
-			if (rs != null) {
-				rs.close();
-				rs = null;
-			}
-		}
-                    %>
-                </select>
-                <input type="text" value="<%=getEmptyString(beginDate)%>" name="BeginDate">
-                <input type="text" value="<%=getEmptyString(endDate)%>" name="EndDate">
-                <%
-		if (beginDate == null || beginDate.equals("")) {
-			beginDate = "1900-01-01";
-		}
-		if (endDate == null || endDate.equals("")) {
-			endDate = "2100-01-01";
-		}
-                %>
-                <input type="submit" value="Search">
-            </div>
             <table>
                 <tr>
                     <td>
@@ -114,10 +66,7 @@
                         Total Usage
                     </td>
                 </tr>
-                
-                
                 <%
-
 		sb = new StringBuilder();
 		sb.append(" SELECT DISTINCT sa.timestamp, se.service_no, se.name,");
 		sb.append("  se.description, se.duration  ");
@@ -129,7 +78,6 @@
 		sb.append(" AND ss.transaction_no = sa.transaction_no ");
 		sb.append(" AND sa.timestamp BETWEEN ? AND ? ");
 		sb.append(" ORDER BY sa.timestamp; ");
-
 		try {
 			conn2 = MultithreadedJDBCConnectionPool.getConnectionPool().getConnection();
 			PreparedStatement ps = conn2.prepareStatement(sb.toString());
@@ -151,25 +99,25 @@
                     <td><%=rs.getString("description")%></td>
                     <td><%=rs.getString("duration")%></td>
                     <%
-											sb2 = new StringBuilder();
-											sb2.append(" SELECT COALESCE(SUM(ss.amount), 0) \"Total\" ");
-											sb2.append(" FROM sale sa, saleservice ss, service se ");
-											sb2.append(" WHERE se.service_no = ss.service_no ");
-											sb2.append(" AND se.service_no = " + rs.getInt("service_no"));
-											sb2.append(" AND ss.transaction_no = sa.transaction_no ");
-											sb2.append(" AND sa.timestamp BETWEEN ? AND ?; ");
+							sb2 = new StringBuilder();
+							sb2.append(" SELECT COALESCE(SUM(ss.amount), 0) \"Total\" ");
+							sb2.append(" FROM sale sa, saleservice ss, service se ");
+							sb2.append(" WHERE se.service_no = ss.service_no ");
+							sb2.append(" AND se.service_no = " + rs.getInt("service_no"));
+							sb2.append(" AND ss.transaction_no = sa.transaction_no ");
+							sb2.append(" AND sa.timestamp BETWEEN ? AND ?; ");
 
-											try {
-												conn2 = MultithreadedJDBCConnectionPool.getConnectionPool().getConnection();
-												PreparedStatement ps2 = conn2.prepareStatement(sb2.toString());
-												int index2 = 1;
-												SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");
-												ps2.setTimestamp(index2, new Timestamp((df2.parse(beginDate)).getTime()));
-												index2++;
-												ps2.setTimestamp(index2, new Timestamp((df2.parse(endDate)).getTime()));
-												index2++;
-												rs2 = ps2.executeQuery();
-												if (rs2.next()) {
+							try {
+								conn2 = MultithreadedJDBCConnectionPool.getConnectionPool().getConnection();
+								PreparedStatement ps2 = conn2.prepareStatement(sb2.toString());
+								int index2 = 1;
+								SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");
+								ps2.setTimestamp(index2, new Timestamp((df2.parse(beginDate)).getTime()));
+								index2++;
+								ps2.setTimestamp(index2, new Timestamp((df2.parse(endDate)).getTime()));
+								index2++;
+								rs2 = ps2.executeQuery();
+								if (rs2.next()) {
                     %>
                     <td><%=rs2.getString("Total")%></td>
                     <%
@@ -201,20 +149,6 @@
                     %>
                 </tr>
             </table>
-            <div>
-                <%
-		if (beginDate.equals("1900-01-01")) {
-			beginDate = "";
-		}
-		if (endDate.equals("2100-01-01")) {
-			endDate = "";
-		}
-                %>
-                <input type="button" size=20 value="Export Excel"
-                       onclick="window.open('service-usage-information-excel.jsp', '_blank');" />&nbsp;&nbsp;&nbsp;        
-                <input type="button" size=20 value="Print this page"
-                       onclick="window.print();return false;" />
-            </div>
         </form>
     </body>
 </html>

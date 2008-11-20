@@ -275,36 +275,6 @@ public class ProductServlet extends DispatcherServlet
 			product.setType (type);
 		}
 
-		String stock = request.getParameter ("stock");
-		if (!stock.equals (""))
-		{
-			product.setStockQty (Integer.parseInt (stock));
-		}
-
-		String minimumLevel = request.getParameter ("minimum_level");
-		if (!minimumLevel.equals (""))
-		{
-			product.setMinLevel (Integer.parseInt (minimumLevel));
-		}
-
-		String productQuantity = request.getParameter ("product_quantity");
-		if (!productQuantity.equals (""))
-		{
-			product.setQtyPer (Integer.parseInt (productQuantity));
-		}
-
-		String price = request.getParameter ("price");
-		if (!price.equals (""))
-		{
-			product.setPrice (Double.parseDouble (price));
-		}
-
-		String unit = request.getParameter ("unit");
-		if (!unit.equals ("") && !unit.equals ("None"))
-		{
-			product.setUnit (unit);
-		}
-
 		String used = request.getParameter ("enabled");
 		if (!used.equals ("") && !used.equals ("None"))
 		{
@@ -319,11 +289,6 @@ public class ProductServlet extends DispatcherServlet
 		userSession.setAttribute ("product_search_product_name", productName);
 		userSession.setAttribute ("product_search_brand", brand);
 		userSession.setAttribute ("product_search_type", type);
-		userSession.setAttribute ("product_search_stock", stock);
-		userSession.setAttribute ("product_search_minimum_level", minimumLevel);
-		userSession.setAttribute ("product_search_product_quantity", productQuantity);
-		userSession.setAttribute ("product_search_price", price);
-		userSession.setAttribute ("product_search_unit", unit);
 		userSession.setAttribute ("product_search_enabled", used);
 
 		redirect ("search-products.jsp", request, response);

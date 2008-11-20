@@ -42,7 +42,7 @@
     <title>product Usage information report</title>
 </head>
 <body>
-<form action="Product-usage-information.jsp">
+<form action="product-usage-information.jsp">
     <%
 		String productNo = request.getParameter("productNo");
 		if (productNo == null) {

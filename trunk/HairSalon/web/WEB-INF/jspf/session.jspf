@@ -15,8 +15,7 @@
     </tr>
 </table>
 
-<div id="blackout" style="display:none; position: absolute;left: 0px; top: 0px; background-color: #000000;opacity: .5; filter: alpha(opacity=70); z-index: 2000;">
-</div>
+<div id="blackout" style="display:none; position: absolute;left: 0px; top: 0px; background-color: #000000;opacity: .5; filter: alpha(opacity=70); z-index: 2000;"><iframe></iframe></div>
 
 <script>
     function moveBlackout()
@@ -41,12 +40,12 @@
 	{
 	    moveBlackout();
 	    document.getElementById("blackout").style.display="block";
-            showOrHideAllDropDowns("hidden");
+            //showOrHideAllDropDowns("hidden");
         }
 	else
 	{
 	    document.getElementById("blackout").style.display="none";
-            showOrHideAllDropDowns("visible");
+            //showOrHideAllDropDowns("visible");
 	}
     }
 </script>

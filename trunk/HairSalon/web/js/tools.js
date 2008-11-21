@@ -247,7 +247,6 @@ function getScreenHeight()//function to get screen height
 }
 
 function showOrHideAllDropDowns(newState) {
-        
         var elements = document.documentElement.getElementsByTagName('select');
      
         for (var i=0; i<elements.length; i++) {

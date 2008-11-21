@@ -41,10 +41,12 @@
 	{
 	    moveBlackout();
 	    document.getElementById("blackout").style.display="block";
+            showOrHideAllDropDowns("hidden");
         }
 	else
 	{
 	    document.getElementById("blackout").style.display="none";
+            showOrHideAllDropDowns("visible");
 	}
     }
 </script>

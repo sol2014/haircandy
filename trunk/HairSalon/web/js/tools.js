@@ -246,6 +246,16 @@ function getScreenHeight()//function to get screen height
     return height;
 }
 
+function showOrHideAllDropDowns(newState) {
+        
+        var elements = document.documentElement.getElementsByTagName('select');
+     
+        for (var i=0; i<elements.length; i++) {
+            elements[i].style.visibility = newState;
+        }
+    } 
+
+
 function checkPostalCode (zip)
 {
     if (zip.value.length < 1)

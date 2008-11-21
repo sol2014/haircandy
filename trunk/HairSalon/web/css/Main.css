@@ -18,7 +18,7 @@
     z-index:-1;/*must have*/
     filter:mask();/*must have*/
     width: 100%;/*must have for any big value*/
-    height: 100%;/*must have for any big value*/;
+    height: 100%;/*must have for any big value*/
 }
 
 .DialogBox

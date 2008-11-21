@@ -71,13 +71,9 @@ public class MultithreadedJDBCConnectionPool {
 	 * @return
 	 * @throws SQLException
 	 */
-	public Connection getConnection() throws SQLException {
+	public Connection getConnection() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		Connection connection = this.jcd.getConnection();
-		if (connection == null) {
-			return null;
-		} else {
-			return connection;
-		}
+		return connection;
 	}
 
 	/**

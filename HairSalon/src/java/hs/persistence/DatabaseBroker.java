@@ -12,6 +12,8 @@ package hs.persistence;
 import hs.core.LogController;
 import hs.objects.*;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This is the abstract broker that will access our database connection
@@ -32,7 +34,16 @@ public abstract class DatabaseBroker implements BrokerInterface
 
 	protected Connection getConnection () throws SQLException
 	{
-		return connectionPool.getConnection ();
+		try {
+			return connectionPool.getConnection();
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(DatabaseBroker.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (InstantiationException ex) {
+			Logger.getLogger(DatabaseBroker.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (IllegalAccessException ex) {
+			Logger.getLogger(DatabaseBroker.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
 	}
 
 	protected void returnConnection (Connection connection)

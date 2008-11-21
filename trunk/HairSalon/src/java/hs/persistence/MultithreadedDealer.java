@@ -50,9 +50,8 @@ public class MultithreadedDealer {
 	 * 
 	 * @return
 	 */
-	private Connection createConnection() {
-		try {
-			Class.forName(this.driver).newInstance();
+	private Connection createConnection() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+		Class.forName(this.driver).newInstance();
 			Connection connection = DriverManager.getConnection(this.server,
 					this.user, this.password);
 			MultithreadedConnection jc = new MultithreadedConnection(connection);
@@ -61,9 +60,6 @@ public class MultithreadedDealer {
 				this.jcc.increaseConnectionsInUse();
 			}
 			return connection;
-		} catch (Exception e) {
-			return null;
-		}
 	}
 
 	/**
@@ -71,7 +67,7 @@ public class MultithreadedDealer {
 	 * 
 	 * @return
 	 */
-	public Connection getConnection() {
+	public Connection getConnection() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 		Connection connection = null;
 		synchronized (pool) {
 			ArrayList<String> brokenKeys = new ArrayList<String>();

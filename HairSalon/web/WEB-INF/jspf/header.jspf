@@ -110,5 +110,3 @@
 								<td background="images/shadow_left.gif" height="100%"><img border="0" src="images/shadow_left.gif" width="15" height="15"></td>
 								<td valign="top" align="left" width="100%" bgcolor="#FFFFFF">
 <%--= End of Header, Do Not Add Below =--%>
-<div class='toolTip selectFree'>
-<div class='content'>

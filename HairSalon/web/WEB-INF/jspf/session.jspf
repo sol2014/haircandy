@@ -15,7 +15,9 @@
     </tr>
 </table>
 
-<div id="blackout" style="display:none; position: absolute;left: 0px; top: 0px; background-color: #000000;opacity: .5; filter: alpha(opacity=70); z-index: 2000;"></div>
+<div id="blackout" style="display:none; position: absolute;left: 0px; top: 0px; background-color: #000000;opacity: .5; filter: alpha(opacity=70); z-index: 2000;">
+    <!--[if lte IE 6.5]><iframe></iframe><![endif]-->
+</div>
 
 <script>
     function moveBlackout()

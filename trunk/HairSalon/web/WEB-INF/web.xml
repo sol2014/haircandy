@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee      http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
 <!-- Listeners -->
     <listener>
@@ -98,6 +101,11 @@
 	</servlet>
 	
 <!-- Servlet Mappings -->
+    <servlet>
+        <servlet-name>ServletAdaptor</servlet-name>
+        <servlet-class>com.sun.ws.rest.impl.container.servlet.ServletAdaptor</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SessionServlet</servlet-name>
         <url-pattern>/session</url-pattern>
@@ -168,6 +176,10 @@
     </servlet-mapping>
 	
 <!-- Session Configs -->
+    <servlet-mapping>
+        <servlet-name>ServletAdaptor</servlet-name>
+        <url-pattern>/resources/*</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
                 30
@@ -178,4 +190,13 @@
     <welcome-file-list>
             <welcome-file>application</welcome-file>
     </welcome-file-list>
+    
+<!-- Custom Tag -->
+    <jsp-config>
+        <taglib>
+            <taglib-uri>/taglib</taglib-uri>
+            <taglib-location>/WEB-INF/taglib.tld</taglib-location>
+        </taglib>
+    </jsp-config>
+    
 </web-app>

@@ -152,6 +152,6 @@
             There is no result return!  Please try again.<br/>
             <%} else {%>
             There are <%=rsCount%> result(s) in the list.<br/>
-            <br/><%}%>       
+            <%}%><br/>       
     </body>
 </html>

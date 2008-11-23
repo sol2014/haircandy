@@ -120,7 +120,7 @@
             }
                     %>
                 </select>&nbsp;&nbsp;
-                <input type="submit" value="Search">
+                <br/><br/><input type="submit" value="Search">
             </div><br/>
             <div>
                 <%--Table column headers.--%>
@@ -207,7 +207,7 @@
             There is no result return!  Please try again.<br/>
             <%} else {%>
             There are <%=rsCount%> result(s) in the list.<br/>
-            <br/><%}%>
+            <%}%><br/>
             <%
             //Set the URL link parameters for the input buttons.
             String params = "?SupplierNo=" + supplierNo;

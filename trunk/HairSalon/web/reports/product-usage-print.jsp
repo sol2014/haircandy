@@ -42,12 +42,13 @@
 
 <%
             //Define variables
-            Connection conn = null;
-            Connection conn2 = null;
-            ResultSet rs = null;
-            ResultSet rs2 = null;
-            StringBuilder sb = null;
-            StringBuilder sb2 = null;
+            Connection conn = null;     //SQL connector var.
+            Connection conn2 = null;     //SQL connector var.
+            ResultSet rs = null;        //SQL result set var.
+            ResultSet rs2 = null;       //SQL result set var.
+            StringBuilder sb = null;    //String builder for SQL statement.
+            StringBuilder sb2 = null;   //String builder for SQL statement.
+            int rsCount = 0;            //Result set row count.
 
             //Helper Variables for parameter value. 
             String productNo = request.getParameter("productNo");
@@ -61,77 +62,29 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Product Usage information report</title>
 </head>
+
     <%--Page Content--%>
-    <%--Calls javascript function to do the initial setup of the page.--%>
-    <body onLoad=selectTextField()>
+    <body>
+	<form>
+        <%--Button to send the report content to the printer.--%>
+	<input type="button" value="Print this page" class="StandardButton" 
+		onclick="window.print();return false;" />
+		&nbsp;&nbsp;&nbsp;
+        <%--Button to close the print report page.--%>
+	<input type="button" value="Close Window " class="StandardButton" 
+		onclick="javascript:window.close();" />
+	</form>
         <%--Report Header--%>
         <h3>Product Usage Report</h3>
         <%--Display the current date--%>
-        <h4>Date:  <taglib:datetime/> </h4>
-        
-    <form name="QueryInput" action="product-usage.jsp">
+        <h4>Date:  <taglib:datetime/> </h4>      
+
     <%
             //Initialize product number.
             if (productNo == null) {
                 productNo = "0";
             }
-            //Initialize variable to store the SQL statement.
-            sb = new StringBuilder();
-            //Store SQL statement for query.
-            sb.append(" SELECT *  ");
-            sb.append(" FROM product se ");
-            sb.append(" WHERE se.enabled = true ");
-            sb.append(" ORDER BY se.product_no; ");
-    %>
-    <div>
-        <%--Drop down box to collect the product number for query the 
-            report. Javascript function called to select the proper 
-        option, default selection is 0. --%>                
-        Select Product:&nbsp;
-        <select name="productNo">
-            <option value="0" >All</option>
-            <%
-            try {
-                //Create a connection to the database from the connection pool.
-                conn = MultithreadedJDBCConnectionPool.getConnectionPool().getConnection();
-                //Prepare the statement to query the database.
-                PreparedStatement ps = conn.prepareStatement(sb.toString());
-                rs = ps.executeQuery();  //Execute the query statement.
 
-                //Build the drop down list with the result set values.
-                while (rs.next()) {
-                    //Check if the product is previously selected.
-                    if (rs.getString("product_no").equals(productNo)) {
-                    %>
-                    <option value="<%=rs.getInt("product_no")%>"
-                    selected><%=rs.getString("product_name")%></option>
-                    <%	} else { %>
-                    <option value="<%=rs.getInt("product_no")%>">
-                    <%=rs.getString("product_name")%> </option>
-            <%
-                    }
-                }
-            } catch (Exception e) {
-            } finally {
-
-                if (conn != null) {
-                    //Return connection to the connection pool.
-                    MultithreadedJDBCConnectionPool.getConnectionPool().returnConnection(conn);
-                }
-                if (rs != null) {
-                    //Close and result the result set storage variable.
-                    rs.close();
-                    rs = null;
-                }
-            }
-            %>
-        </select><br/><br/>
-        Date range (yyyy-mm-dd to yyyy-mm-dd): <br/>
-        From:&nbsp;<input type="text" value="<%=getEmptyString(beginDate)%>"
-        size=15 name="BeginDate">
-        To:&nbsp;<input type="text" value="<%=getEmptyString(endDate)%>" 
-        size=15 name="EndDate">&nbsp;&nbsp;
-        <%
             //Modify begin date variable if no user input.
             if (beginDate == null || beginDate.equals("")) {
                 beginDate = "1900-01-01";
@@ -141,8 +94,7 @@
                 endDate = "2100-01-01";
             }
         %>
-        <input type="submit" value="Search">
-    </div><br/>
+        <div>
         <%--Table column headers.--%>
         <table border=1 width="700">
         <tr>
@@ -162,7 +114,7 @@
             sb.append(" pr.unit, pr.price, sp.amount ");
             sb.append(" FROM sale sa, saleproduct sp, product pr ");
             sb.append(" WHERE pr.product_no = sp.product_no ");
-            //If an individual supplier is chosen, execute the statement.
+            //If an individual product is chosen, execute the statement.
             if ((!productNo.equals("")) && productNo != null && (!productNo.equals("0"))) {
                 sb.append(" AND pr.product_no = ? ");
             }
@@ -194,12 +146,14 @@
                 
                 //While there is a row of data from the result set.
                 while (rs.next()) {
+                    rsCount++;
         %>
         <tr>
             <td align="left" width="30%"><%=rs.getString("brand")%></td>
             <td align="left" width="30%"><%=rs.getString("product_name")%></td>
             <td align="left" width="10%"><%=rs.getString("qty_per")%> <%=rs.getString("unit")%></td>
-            <td align="right" width="15%"><%=rs.getString("price")%></td>
+            <td align="right" width="15%"><taglib:FormatTag format="currency">
+            <%=rs.getString("price")%></taglib:FormatTag></td>
             <%
                 //Initialize variable to store the SQL statement.
                 sb2 = new StringBuilder();
@@ -226,7 +180,7 @@
                     //set time stamp for begin date search field.
                     ps2.setTimestamp(index2, new Timestamp((df2.parse(endDate)).getTime()));
                     index2++;  //Increment to the next ? location
-                    rs2 = ps2.executeQuery();
+                    rs2 = ps2.executeQuery(); //Execute the query statement.
                     //Return a total of the product sold.
                     if (rs2.next()) {
             %>
@@ -264,7 +218,14 @@
             %>
         </tr>
     </table>
-    </div><br/>
+    </div>
+        <%--Display the row count result.--%>
+        <%if(rsCount==0){%>
+        There is no result return!<br/>
+        <%}else{%>
+        There are <%=rsCount%> result(s) in the list.<br/>
+        <%}%>
+       <br/>  
     <%
             //Re-initialize the begin date value.
             if (beginDate.equals("1900-01-01")) {
@@ -274,32 +235,7 @@
             if (endDate.equals("2100-01-01")) {
                 endDate = "";
             }
-    %>
-    
-    <%
-            //Set the URL link parameters for the input buttons.
-            String params = "";
-            //Set the URL page name for the export excel input buttons.
-            String excelURL = "product-usage-excel.jsp" + params;
-            //Set the URL page name for the print report input buttons.
-            String printURL = "product-usage-print.jsp" + params;
-    %>
-     <%--Input buttons for additional report commends.--%>
-        <div>
-            <%--Input button for export report to an excel file.--%>
-            <input type="button" value="Export Excel" class="StandardButton" 
-           onclick="window.open('<%=excelURL%>', '_blank');return false;" />
-                   &nbsp;&nbsp;&nbsp;           
-            <%--Input button to send the report a printer.--%>
-            <input type="button" value="Print this page" class="StandardButton" 
-            onclick="window.open('<%=printURL%>', '_blank');return false;" />
-                   &nbsp;&nbsp;&nbsp;
-            <%--Input button return user to the report main menu.--%>
-            <input type="button" value="Back to Main" class="StandardButton" 
-            onclick="window.open('report-main-menu.jsp');return false;" />
-           <br/>
-        </div>
-    </form>
+    %>     
     </body>
 </html>
 

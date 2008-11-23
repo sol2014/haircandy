@@ -42,12 +42,13 @@
 
 <%
             //Define variables
-            Connection conn = null;
-            Connection conn2 = null;
-            ResultSet rs = null;
-            ResultSet rs2 = null;
-            StringBuilder sb = null;
-            StringBuilder sb2 = null;
+            Connection conn = null;     //SQL connector var.
+            Connection conn2 = null;     //SQL connector var.
+            ResultSet rs = null;        //SQL result set var.
+            ResultSet rs2 = null;       //SQL result set var.
+            StringBuilder sb = null;    //String builder for SQL statement.
+            StringBuilder sb2 = null;   //String builder for SQL statement.
+            int rsCount = 0;            //Result set row count.
 
             //Helper Variables for parameter value. 
             String productNo = request.getParameter("productNo");
@@ -62,9 +63,23 @@
     <title>Product Usage information report</title>
 </head>
 
+    <%--Javasript Functions.--%>
+    <script type="text/javascript">
+        <!--      
+        /*
+         *  This function to have the cursor start at the supplier name
+         *  drop down box when called, Then call the hide or display function.
+         **/
+        function selectTextField() {
+            document.QueryInput.productNo.focus();
+        }
+
+        -->
+    </script>
+    
     <%--Page Content--%>
     <%--Calls javascript function to do the initial setup of the page.--%>
-    <body>
+    <body onLoad=selectTextField()>
         <%--Report Header--%>
         <h3>Product Usage Report</h3>
         <%--Display the current date--%>
@@ -142,8 +157,9 @@
                 endDate = "2100-01-01";
             }
         %>
-        <input type="submit" value="Search">
+        <br/><br/><input type="submit" value="Search">
     </div><br/>
+        <div>
         <%--Table column headers.--%>
         <table border=1 width="700">
         <tr>
@@ -163,7 +179,7 @@
             sb.append(" pr.unit, pr.price, sp.amount ");
             sb.append(" FROM sale sa, saleproduct sp, product pr ");
             sb.append(" WHERE pr.product_no = sp.product_no ");
-            //If an individual supplier is chosen, execute the statement.
+            //If an individual product is chosen, execute the statement.
             if ((!productNo.equals("")) && productNo != null && (!productNo.equals("0"))) {
                 sb.append(" AND pr.product_no = ? ");
             }
@@ -187,7 +203,7 @@
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                 //set time stamp for begin date search field.
                 ps.setTimestamp(index, new Timestamp((df.parse(beginDate)).getTime()));
-                index++;//Increment to the next ? location
+                index++;    //Increment to the next ? location
                 //set time stamp for begin date search field.
                 ps.setTimestamp(index, new Timestamp((df.parse(endDate)).getTime()));
                 index++;  //Increment to the next ? location
@@ -195,12 +211,14 @@
                 
                 //While there is a row of data from the result set.
                 while (rs.next()) {
+                    rsCount++;
         %>
         <tr>
             <td align="left" width="30%"><%=rs.getString("brand")%></td>
             <td align="left" width="30%"><%=rs.getString("product_name")%></td>
             <td align="left" width="10%"><%=rs.getString("qty_per")%> <%=rs.getString("unit")%></td>
-            <td align="right" width="15%"><%=rs.getString("price")%></td>
+            <td align="right" width="15%"><taglib:FormatTag format="currency">
+            <%=rs.getString("price")%></taglib:FormatTag></td>
             <%
                 //Initialize variable to store the SQL statement.
                 sb2 = new StringBuilder();
@@ -227,7 +245,7 @@
                     //set time stamp for begin date search field.
                     ps2.setTimestamp(index2, new Timestamp((df2.parse(endDate)).getTime()));
                     index2++;  //Increment to the next ? location
-                    rs2 = ps2.executeQuery();
+                    rs2 = ps2.executeQuery(); //Execute the query statement.
                     //Return a total of the product sold.
                     if (rs2.next()) {
             %>
@@ -265,8 +283,23 @@
             %>
         </tr>
     </table>
-    </div><br/>
-    <%
+    </div>
+        <%--Display the row count result.--%>
+        <%if(rsCount==0){%>
+        There is no result return!<br/>
+        <%}else{%>
+        There are <%=rsCount%> result(s) in the list.<br/>
+        <%}%>
+       <br/>  
+    <% 
+            //Set the URL link parameters for the input buttons.
+            String params = "?productNo="+productNo+
+                    "&BeginDate=" + beginDate + "&EndDate=" + endDate;
+            //Set the URL page name for the export excel input buttons.
+            String excelURL = "product-usage-excel.jsp" + params;
+            //Set the URL page name for the print report input buttons.
+            String printURL = "product-usage-print.jsp" + params;
+            
             //Re-initialize the begin date value.
             if (beginDate.equals("1900-01-01")) {
                 beginDate = "";
@@ -274,16 +307,7 @@
             //Re-initialize the end date value.
             if (endDate.equals("2100-01-01")) {
                 endDate = "";
-            }
-    %>
-    
-    <%
-            //Set the URL link parameters for the input buttons.
-            String params = "";
-            //Set the URL page name for the export excel input buttons.
-            String excelURL = "product-usage-excel.jsp" + params;
-            //Set the URL page name for the print report input buttons.
-            String printURL = "product-usage-print.jsp" + params;
+            }          
     %>
      <%--Input buttons for additional report commends.--%>
         <div>

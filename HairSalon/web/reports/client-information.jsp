@@ -18,91 +18,103 @@
 <%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
 
 <%-- JSP Directives --%>
-<%@ page errorPage="/reports/report-error.jsp?from=client-information.jsp" %>
+<%--<%@ page errorPage="/reports/report-error.jsp?from=client-information.jsp" %>--%>
 
 <%!
-    /**
-     * This class return a blank string if the string input is null.
-     *
-     * @param input a string of input value to be check.
-     * @return the modify input value if necessary.
-     */
-    private String getEmptyString(String input) {
-        if (input == null) {
-            return "";
-        } else {
-            return input;
-        }
-    }
+	/**
+	 * This class return a blank string if the string input is null.
+	 *
+	 * @param input a string of input value to be check.
+	 * @return the modify input value if necessary.
+	 */
+	private String getEmptyString(String input) {
+		if (input == null) {
+			return "";
+		} else {
+			return input;
+		}
+	}
 
-    /**
-     * This class modifies the address string if it is null or blank.
-     *
-     * @param input a string for address to be modified.
-     * @return the modified value.
-     */
-    private String getNotAvailable(String input) {
-        if ((input == null) || (input.equals(""))) {
-            return "Not Available";
-        } else {
-            return input;
-        }
-    }
+	/**
+	 * This class modifies the address string if it is null or blank.
+	 *
+	 * @param input a string for address to be modified.
+	 * @return the modified value.
+	 */
+	private String getNotAvailable(String input) {
+		if ((input == null) || (input.equals(""))) {
+			return "Not Available";
+		} else {
+			return input;
+		}
+	}
 
-    /**
-     * This class modify the string value to a currency string value.
-     *
-     * @param input a string value to be modified to a currency string value.
-     * @return the modified value.
-     */
-    private String getCurrencyFormat(String input) {
-        double num = Double.parseDouble(input);
-        DecimalFormat dcf = (DecimalFormat) NumberFormat.getCurrencyInstance();
-        String formattedValue = dcf.format(num);
-        return formattedValue;
-    }
+	/**
+	 * This class modify the string value to a currency string value.
+	 *
+	 * @param input a string value to be modified to a currency string value.
+	 * @return the modified value.
+	 */
+	private String getCurrencyFormat(String input) {
+		try {
+			double num = Double.parseDouble(input);
+			DecimalFormat dcf = (DecimalFormat) NumberFormat.getCurrencyInstance();
+			String formattedValue = dcf.format(num);
+			return formattedValue;
+		} catch (Exception e) {
+			return null;
+		}
+	}
 
-    /**
-     * This class modify the string value to a phone number format.
-     *
-     * @param input a string value to be modified to a phone number format.
-     * @return the modified value.
-     */
-    private String getPhoneNumberFormat(String input) {
-        return "(" + input.substring(0, 3) + ") " + input.substring(3, 6) +
-                "-" + input.substring(6, 10);
-    }
+	/**
+	 * This class modify the string value to a phone number format.
+	 *
+	 * @param input a string value to be modified to a phone number format.
+	 * @return the modified value.
+	 */
+	private String getPhoneNumberFormat(String input) {
+		try {
+			return "(" + input.substring(0, 3) + ") " + input.substring(3, 6) +
+					"-" + input.substring(6, 10);
+		} catch (Exception e) {
+			return null;
+		}
+	}
 
-    /**
-     * This class modify the string value to a postal code format.
-     *
-     * @param input a string value to be modified to a postal code format.
-     * @return the modified value.
-     */
-    private String getPostalCodeFormat(String postCode) {
-        return postCode.substring(0, 3) + "-" + postCode.substring(3, 6);
-    }
-    
+	/**
+	 * This class modify the string value to a postal code format.
+	 *
+	 * @param input a string value to be modified to a postal code format.
+	 * @return the modified value.
+	 */
+	private String getPostalCodeFormat(String postCode) {
+		try {
+			return postCode.substring(0, 3) + "-" + postCode.substring(3, 6);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 
 <%
-            //Define Available
-            Connection conn = null;     //SQL connector var.
+//Define Available
+		Connection conn = null;     //SQL connector var.
 
-            ResultSet rs = null;        //SQL result set var.
+		ResultSet rs = null;        //SQL result set var.
 
-            int rsCount = 0;            //Result set row count.
+		int rsCount = 0;            //Result set row count.
 
-            StringBuilder sb = null;    //String builder for SQL statement.
+		StringBuilder sb = null;    //String builder for SQL statement.
 
-            //Helper Variables for parameter values.
-            String fName = request.getParameter("FirstName");
-            String lName = request.getParameter("LastName");
-            String phoneNum = request.getParameter("PhoneNum");
-            String pCode = request.getParameter("PostalCode");
+//Helper Variables for parameter values.
+		String fName = request.getParameter("FirstName");
+		String lName = request.getParameter("LastName");
+		String phoneNum = request.getParameter("PhoneNum");
+		String pCode = request.getParameter("PostalCode");
 %>
 <html>
     <%--Page Header--%>
@@ -120,11 +132,11 @@
         function hideOrDisplay()
         {
             //For all query, hide the input field table.
-            if(document.getElementById("QueryType").value=="All")
+            if(document.getElementById("QueryType").checked)
             {
                 document.getElementById("SearchInput").style.display = "none";
             }//For custom query, show the input field table.
-            else if(document.getElementById("QueryType").value=="Custom")
+            else
             {
                 document.getElementById("SearchInput").style.display = "inline";
             }
@@ -145,52 +157,62 @@
             <%--Radio buttons to select the query type to query the report.
                 Initial call to select the proper radio button depend on 
                 previous select, default selection is all.--%>
-            <%if (request.getParameter("QueryType").equals("All")) {%>
-            <input type="radio" name="QueryType" value="All" 
-            onclick="hideOrDisplay()" checked="checked" />All&nbsp;&nbsp;
+            <%
+		String queryType = request.getParameter("QueryType");
+		if (queryType != null) {
+            %>
+            <%if (queryType.equals("All")) {%>
+            <input id="QueryType" type="radio" name="QueryType" value="All" 
+                   onclick="hideOrDisplay()" checked="checked" />All&nbsp;&nbsp;
             <input type="radio" name="QueryType" value="Custom" 
-            onclick="hideOrDisplay()"/>Custom&nbsp;&nbsp;
-            <%} else if (request.getParameter("QueryType").equals("Custom"))
-            {%>
-            <input type="radio" name="QueryType" value="All" 
-            onclick="hideOrDisplay()"/>All&nbsp;&nbsp;
+                   onclick="hideOrDisplay()"/>Custom&nbsp;&nbsp;
+            <%} else if (queryType.equals("Custom")) {%>
+            <input id="QueryType" type="radio" name="QueryType" value="All" 
+                   onclick="hideOrDisplay()"/>All&nbsp;&nbsp;
             <input type="radio" name="QueryType" value="Custom" 
-            onclick="hideOrDisplay()" checked="checked" />Custom&nbsp;&nbsp;
-            <%}%><br/><br/>
+                   onclick="hideOrDisplay()" checked="checked" />Custom&nbsp;&nbsp;
+            <%}
+							} else {%>
+            <input id="QueryType" type="radio" name="QueryType" value="All" 
+                   onclick="hideOrDisplay()" checked="checked" />All&nbsp;&nbsp;
+            <input type="radio" name="QueryType" value="Custom" 
+                   onclick="hideOrDisplay()"/>Custom&nbsp;&nbsp;
+            <%}%>
+            <br/><br/>
             
             <%
-            //Initialize helper variables.
-            fName = null;
-            lName = null;
-            phoneNum = null;
-            pCode = null;
+		//Initialize helper variables.
+		fName = null;
+		lName = null;
+		phoneNum = null;
+		pCode = null;
             %>
             <%--Input text field to collect person's first and last name for 
-                query the report.--%>
+            query the report.--%>
             <table id="SearchInput">
                 <tr>
                     <td align="right" >First Name:</td>
                     <td align="left">
                         <input type="text" value="<%=getEmptyString(fName)%>" 
-                                            size=20 name="FirstName" /></td>
+                           size=20 name="FirstName" /></td>
                 </tr>
                 <tr>
                     <td align="right" >Last Name:</td>
                     <td align="left">
                         <input type="text" value="<%=getEmptyString(lName)%>" 
-                                            size=20 name="LastName" /></td>
+                           size=20 name="LastName" /></td>
                 </tr>
                 <tr align="right" >
                     <td>Phone Number:</td>
                     <td align="left">
                         <input type="text" value="<%=getEmptyString(phoneNum)%>" 
-                                            size=20 name="LastName" /></td>
+                           size=20 name="LastName" /></td>
                 </tr>
                 <tr>
                     <td align="right">Postal Code:</td>
                     <td align="left">
                         <input type="text" value="<%=getEmptyString(pCode)%>" 
-                                            size=8 name="PostalCode" /></td>
+                           size=8 name="PostalCode" /></td>
                 </tr>
             </table><br/>
             
@@ -217,22 +239,22 @@
                         <td align="center" width="10%"><b>E-mail</b></td>
                     </tr>
                     <%
-            sb = new StringBuilder();
-            sb.append(" SELECT c.first_name, c.last_name, ");
-            sb.append(" c.phone_number, a.address1, a.address2, ");
-            sb.append(" a.city, a.province, a.country, ");
-            sb.append(" a.postal_code, a.email ");
-            sb.append(" FROM client c, address a ");
-            sb.append(" WHERE c.address_no = a.address_no ");
-            sb.append(" AND c.enabled = true ");
-            sb.append(" ORDER BY client_no; ");
+		sb = new StringBuilder();
+		sb.append(" SELECT c.first_name, c.last_name, ");
+		sb.append(" c.phone_number, a.address1, a.address2, ");
+		sb.append(" a.city, a.province, a.country, ");
+		sb.append(" a.postal_code, a.email ");
+		sb.append(" FROM client c, address a ");
+		sb.append(" WHERE c.address_no = a.address_no ");
+		sb.append(" AND c.enabled = true ");
+		sb.append(" ORDER BY client_no; ");
 
-            try {
-                conn = MultithreadedJDBCConnectionPool.getConnectionPool().getConnection();
-                PreparedStatement ps = conn.prepareStatement(sb.toString());
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    rsCount++;
+		try {
+			conn = MultithreadedJDBCConnectionPool.getConnectionPool().getConnection();
+			PreparedStatement ps = conn.prepareStatement(sb.toString());
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				rsCount++;
                     %>
                     <tr>
                         <td align="left" width="15%"><%=rs.getString("first_name")%>
@@ -248,17 +270,17 @@
                     </tr>
                     <%	}
 
-            } catch (Exception e) {
-            } finally {
-                if (conn != null) {
-                    MultithreadedJDBCConnectionPool.getConnectionPool().returnConnection(conn);
-                }
+		} catch (Exception e) {
+		} finally {
+			if (conn != null) {
+				MultithreadedJDBCConnectionPool.getConnectionPool().returnConnection(conn);
+			}
 
-                if (rs != null) {
-                    rs.close();
-                    rs = null;
-                }
-            }
+			if (rs != null) {
+				rs.close();
+				rs = null;
+			}
+		}
                     %>
                 </table>
             </div><br/>
@@ -271,11 +293,11 @@
             <%}%>
             <br/>
             <%
-            String params = "";
+		String params = "";
 
-            String excelURL = "client-information-excel.jsp" + params;
+		String excelURL = "client-information-excel.jsp" + params;
 
-            String printURL = "client-information-print.jsp" + params;
+		String printURL = "client-information-print.jsp" + params;
             %>
             <div> 
                 <input type="button" value="Export Excel" class="StandardButton" 
@@ -285,6 +307,9 @@
                 <input type="button" value="Back to Main" class="StandardButton" 
                        onclick="window.open('report-main-menu.jsp');return false;" /><br/>
             </div>
+            <script>
+                hideOrDisplay();
+            </script>
         </form>
     </body>
 </html>

@@ -20,39 +20,39 @@
             <rtexprvalue>false</rtexprvalue>
         </attribute>
     </tag>
-		<tag>
- 	 	<name>productTag</name>
-  		<tagclass>hs.presentation.ProductTag</tagclass>
-  		<teiclass></teiclass>
-  		<bodycontent>scriptless</bodycontent>
-  		<info>takes an attribute and iterates over body</info>
-  		<attribute>
-    		<name>productList</name>
-	    	<required>true</required>
-    		<rtexprvalue>true</rtexprvalue>
-	  	</attribute>
-	</tag>
-	<tag>
-		<name>FormatTag</name>
-		<tagclass>hs.presentation.FormatTag</tagclass>
-		<teiclass></teiclass>
-		<bodycontent>JSP</bodycontent>
-		<info>
-			Tag library to format the value to be display.
-		</info>
-		<attribute>
-		  <name>format</name>
-		  <required>yes</required>
-		  <rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
-	  <name>datetime</name>
-	  <tagclass>hs.presentation.DateTimeTag</tagclass>
-	  <teiclass></teiclass>
-	  <bodycontent>empty</bodycontent>
-	  <info>
+    <tag>
+        <name>productTag</name>
+        <tagclass>hs.presentation.ProductTag</tagclass>
+        <teiclass></teiclass>
+        <bodycontent>scriptless</bodycontent>
+        <info>takes an attribute and iterates over body</info>
+        <attribute>
+            <name>productList</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>FormatTag</name>
+        <tagclass>hs.presentation.FormatTag</tagclass>
+        <teiclass></teiclass>
+        <bodycontent>JSP</bodycontent>
+        <info>
+                    Tag library to format the value to be display.
+        </info>
+        <attribute>
+            <name>format</name>
+            <required>yes</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>datetime</name>
+        <tagclass>hs.presentation.DateTimeTag</tagclass>
+        <teiclass></teiclass>
+        <bodycontent>empty</bodycontent>
+        <info>
 	    Outputs the current date and time to the page.
-	  </info>
-	</tag>
+        </info>
+    </tag>
 </taglib>

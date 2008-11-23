@@ -1,3 +1,13 @@
+/**
+ * HairSalon: Scheduling and Management System
+ * Systems II - Southern Alberta Institute of Technology
+ * 
+ * File Author: Horace Wan
+ * 
+ * System Developed by:
+ * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
+ */
+
 package hs.presentation;
 
 import javax.servlet.jsp.*;
@@ -20,6 +30,7 @@ public class FormatTag extends BodyTagSupport
 	private final static String NUMERIC_ROUNDED = "rounded";
 	private final static String NUMERIC_CURRENCY = "currency";
 	private final static String PHONE_NUMBER = "phone";
+	private final static String POSTAL_CODE = "postalCode";
 	
 	public FormatTag()
 	{
@@ -97,6 +108,11 @@ public class FormatTag extends BodyTagSupport
 				formattedValue = "(" + _input.substring(0, 3) 
 					+ ") " +	_input.substring(3, 6) + "-"
 					+ _input.substring(6, 10);
+			}
+			else if(format.equals(POSTAL_CODE))
+			{
+				formattedValue = _input.substring(0, 3) 
+					+ "-" +	_input.substring(3, 6);
 			}
 		}
 		catch(Exception e)

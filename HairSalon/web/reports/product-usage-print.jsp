@@ -19,7 +19,7 @@
 <%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
 
 <%-- JSP Directives --%>
-<%@ page errorPage="/reports/report-error.jsp?from=product-usage.jsp" %>
+<%@ page errorPage="/reports/report-error.jsp?from=product-usage-print.jsp" %>
 
 <%!
     /**
@@ -61,10 +61,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Product Usage information report</title>
 </head>
-
     <%--Page Content--%>
     <%--Calls javascript function to do the initial setup of the page.--%>
-    <body>
+    <body onLoad=selectTextField()>
         <%--Report Header--%>
         <h3>Product Usage Report</h3>
         <%--Display the current date--%>

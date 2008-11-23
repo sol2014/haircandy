@@ -58,6 +58,10 @@ SOURCE ./data/employee_data.sql
 SOURCE ./data/supplier_data.sql
 SOURCE ./data/schedule_data.sql
 
+SOURCE ./data/sale_data.sql
+SOURCE ./data/saleservice_data.sql
+SOURCE ./data/saleproduct_data.sql
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;

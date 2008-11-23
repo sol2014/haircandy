@@ -1,0 +1,17 @@
+
+    private String getCurrencyFormat(String value) {
+        double num = Double.parseDouble(value);
+        DecimalFormat dcf = (DecimalFormat) NumberFormat.getCurrencyInstance();
+        String formattedValue = dcf.format(num);
+        return formattedValue;
+    }
+
+                        <td align="left" width="10%" >Supplier Name</td>
+                        <td align="left" width="10%" >Phone Number</td>
+                        <td align="left" width="10%" >Product Name</td>
+                        <td align="left" width="10%" >Brand</td>
+                        <td align="left" width="10%" >Type</td>
+                        <td align="right" width="5%" >Unit</td>
+                        <td align="right" width="5%" >Min Qty</td>
+                        <td align="right" width="5%" >Stock Qty</td>
+                        <td align="right" width="10%" >Price</td>

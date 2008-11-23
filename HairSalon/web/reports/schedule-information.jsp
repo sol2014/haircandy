@@ -171,8 +171,10 @@
 			endDate = "";
 		}
                 %>
+                <%--
                 <input type="button" size=20 value="Export Excel"
                        onclick="window.open('schedule-information-excel.jsp?EmployeeNo=<%=employeeNo%>&BeginDate=<%=beginDate%>&EndDate=<%=endDate%>', '_blank');" />&nbsp;&nbsp;&nbsp;
+                --%>
                 <input type="button" size=20 value="Print this page"
                        onclick="window.print();return false;" />
             </div>

@@ -112,9 +112,29 @@
 
 //Helper Variables for parameter values.
 		String fName = request.getParameter("FirstName");
+		if (fName != null) {
+			if (fName.equals("")) {
+				fName = null;
+			}
+		}
 		String lName = request.getParameter("LastName");
+		if (lName != null) {
+			if (lName.equals("")) {
+				lName = null;
+			}
+		}
 		String phoneNum = request.getParameter("PhoneNum");
+		if (phoneNum != null) {
+			if (phoneNum.equals("")) {
+				phoneNum = null;
+			}
+		}
 		String pCode = request.getParameter("PostalCode");
+		if (pCode != null) {
+			if (pCode.equals("")) {
+				pCode = null;
+			}
+		}
 %>
 <html>
     <%--Page Header--%>
@@ -172,21 +192,13 @@
             <input type="radio" name="QueryType" value="Custom" 
                    onclick="hideOrDisplay()" checked="checked" />Custom&nbsp;&nbsp;
             <%}
-							} else {%>
+			} else {%>
             <input id="QueryType" type="radio" name="QueryType" value="All" 
                    onclick="hideOrDisplay()" checked="checked" />All&nbsp;&nbsp;
             <input type="radio" name="QueryType" value="Custom" 
                    onclick="hideOrDisplay()"/>Custom&nbsp;&nbsp;
             <%}%>
             <br/><br/>
-            
-            <%
-		//Initialize helper variables.
-		fName = null;
-		lName = null;
-		phoneNum = null;
-		pCode = null;
-            %>
             <%--Input text field to collect person's first and last name for 
             query the report.--%>
             <table id="SearchInput">
@@ -206,7 +218,7 @@
                     <td>Phone Number:</td>
                     <td align="left">
                         <input type="text" value="<%=getEmptyString(phoneNum)%>" 
-                           size=20 name="LastName" /></td>
+                           size=20 name="PhoneNum" /></td>
                 </tr>
                 <tr>
                     <td align="right">Postal Code:</td>
@@ -246,12 +258,41 @@
 		sb.append(" a.postal_code, a.email ");
 		sb.append(" FROM client c, address a ");
 		sb.append(" WHERE c.address_no = a.address_no ");
+		if (fName != null) {
+			sb.append(" And c.first_name LIKE CONCAT('%', ? ,'%')");
+		}
+		if (lName != null) {
+			sb.append(" And c.last_name LIKE CONCAT('%', ? ,'%')");
+		}
+		if (phoneNum != null) {
+			sb.append(" And c.phone_number LIKE CONCAT('%', ? ,'%')");
+		}
+		if (pCode != null) {
+			sb.append(" And a.postal_code LIKE CONCAT('%', ? ,'%')");
+		}
 		sb.append(" AND c.enabled = true ");
 		sb.append(" ORDER BY client_no; ");
 
 		try {
 			conn = MultithreadedJDBCConnectionPool.getConnectionPool().getConnection();
 			PreparedStatement ps = conn.prepareStatement(sb.toString());
+			int index = 1;
+			if (fName != null) {
+				ps.setString(index, fName);
+				index++;
+			}
+			if (lName != null) {
+				ps.setString(index, lName);
+				index++;
+			}
+			if (phoneNum != null) {
+				ps.setString(index, phoneNum);
+				index++;
+			}
+			if (pCode != null) {
+				ps.setString(index, pCode);
+				index++;
+			}
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				rsCount++;

@@ -12,7 +12,7 @@
  "http://www.w3.org/TR/html4/loose.dtd">
  
 <%-- JSP Directives --%>
-<%@ page errorPage="/report-error.jsp?from=report-main-menu.jsp" %>
+<%@ page errorPage="/reports/report-error.jsp?from=report-main-menu.jsp" %>
  
 <html>
 <head>
@@ -23,7 +23,7 @@
 	<h3 align="center">Please choose one of the following report:</h3>
 	<p align="center">
             <br/>
-            <a href="client-information.jsp">Client Information</a><br/><br/>
+            <a href="client-information.jsp?QueryType=All">Client Information</a><br/><br/>
             <a href="employee-information.jsp">Employee Information</a><br/><br/>
             <a href="product-order-list.jsp">Product Order List</a><br/><br/>
             <a href="product-usage.jsp">Product Usage</a><br/><br/>

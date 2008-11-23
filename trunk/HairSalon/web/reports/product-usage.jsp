@@ -142,9 +142,11 @@
         To:&nbsp;<input type="text" value="<%=getEmptyString(endDate)%>" 
         size=15 name="EndDate">&nbsp;&nbsp;
         <%
+            //Modify begin date variable if no user input.
             if (beginDate == null || beginDate.equals("")) {
                 beginDate = "1900-01-01";
             }
+            //Modify end date variable if no user input.
             if (endDate == null || endDate.equals("")) {
                 endDate = "2100-01-01";
             }
@@ -209,7 +211,9 @@
             <td align="left" width="10%"><%=rs.getString("qty_per")%> <%=rs.getString("unit")%></td>
             <td align="right" width="15%"><%=rs.getString("price")%></td>
             <%
+                //Initialize variable to store the SQL statement.
                 sb2 = new StringBuilder();
+                //Store SQL statement for query.
                 sb2.append(" SELECT COALESCE(SUM(sp.amount), 0) \"Total\" ");
                 sb2.append(" FROM sale sa, saleproduct sp, product pr ");
                 sb2.append(" WHERE sp.product_no = pr.product_no ");
@@ -218,14 +222,20 @@
                 sb2.append(" AND sa.timestamp BETWEEN ? AND ?; ");
 
                 try {
+                    //Create a connection to the database from the connection pool.
                     conn2 = MultithreadedJDBCConnectionPool.getConnectionPool().getConnection();
-                    PreparedStatement ps2 = conn2.prepareStatement(sb2.toString());
-                    int index2 = 1;
+                    //Prepare the statement to query the database.
+                    PreparedStatement ps2 = conn2.prepareStatement(sb2.toString());                    
+                    int index2 = 1; //index for ? search field.
+                    
+                    //Create a time format for date object.
                     SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");
+                    //set time stamp for begin date search field.                  
                     ps2.setTimestamp(index2, new Timestamp((df2.parse(beginDate)).getTime()));
-                    index2++;
+                    index2++;  //Increment to the next ? location
+                    //set time stamp for begin date search field.
                     ps2.setTimestamp(index2, new Timestamp((df2.parse(endDate)).getTime()));
-                    index2++;
+                    index2++;  //Increment to the next ? location
                     rs2 = ps2.executeQuery();
                     if (rs2.next()) {
             %>

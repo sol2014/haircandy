@@ -84,7 +84,6 @@
             if (productNo == null) {
                 productNo = "0";
             }
-
             //Modify begin date variable if no user input.
             if (beginDate == null || beginDate.equals("")) {
                 beginDate = "1900-01-01";

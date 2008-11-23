@@ -19,7 +19,7 @@
 <%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
 
 <%-- JSP Directives --%>
-<%@ page errorPage="/reports/report-error.jsp?from=product-usage.jsp" %>
+<%@ page errorPage="/reports/report-error.jsp?from=service-usage.jsp" %>
 
 <%!
     /**
@@ -41,22 +41,16 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 
 <%
-//Define variables
+            //Define variables
             Connection conn = null;     //SQL connector var.
-
             Connection conn2 = null;     //SQL connector var.
-
             ResultSet rs = null;        //SQL result set var.
-
             ResultSet rs2 = null;       //SQL result set var.
-
             StringBuilder sb = null;    //String builder for SQL statement.
-
             StringBuilder sb2 = null;   //String builder for SQL statement.
-
             int rsCount = 0;            //Result set row count.
 
-//Helper Variables for parameter value. 
+            //Helper Variables for parameter value. 
             String serviceNo = request.getParameter("ServiceNo");
             String beginDate = request.getParameter("BeginDate");
             String endDate = request.getParameter("EndDate");
@@ -66,7 +60,7 @@
     <%--Page Header--%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Service Usage information report</title>
+        <title>Service Usage Report</title>
     </head>
     
     <%--Javasript Functions.--%>
@@ -86,6 +80,11 @@
     <%--Page Content--%>
     <%--Calls javascript function to do the initial setup of the page.--%>
     <body onLoad=selectTextField()>
+        <%--Report Header--%>
+        <h3>Service Usage Report</h3>
+        <%--Display the current date--%>
+        <h4>Date:  <taglib:datetime/> </h4> 
+        
         <form name="QueryInput" action="service-usage.jsp">
             <%
             //Initialize service number.
@@ -149,6 +148,10 @@
             To:&nbsp;<input type="text" value="<%=getEmptyString(endDate)%>" 
                             size=15 name="EndDate">&nbsp;&nbsp;
                 <%
+            //Reload the date value to the variable.
+            beginDate = request.getParameter("BeginDate");
+            endDate = request.getParameter("EndDate");
+            
             //Modify begin date variable if no user input.    
             if (beginDate == null || beginDate.equals("")) {
                 beginDate = "1900-01-01";

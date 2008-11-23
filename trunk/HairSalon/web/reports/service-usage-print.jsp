@@ -9,7 +9,7 @@
 --%>
 
 <%-- Setup page content type and import java libraries. --%>
-<%@page contentType="application/vnd.ms-excel" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*" %>
 <%@page import="java.text.*" %>
 <%@page import="java.util.*" %>
@@ -19,7 +19,7 @@
 <%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
 
 <%-- JSP Directives --%>
-<%@ page errorPage="/reports/report-error.jsp?from=service-usage-excel.jsp" %>
+<%@ page errorPage="/reports/report-error.jsp?from=service-usage-print.jsp" %>
 
 <%!
     /**
@@ -66,16 +66,20 @@
     
     <%--Page Content--%>
     <body>
+        <form>
+            <%--Button to send the report content to the printer.--%>
+            <input type="button" value="Print this page" class="StandardButton" 
+                   onclick="window.print();return false;" />
+            &nbsp;&nbsp;&nbsp;
+            <%--Button to close the print report page.--%>
+            <input type="button" value="Close Window " class="StandardButton" 
+                   onclick="javascript:window.close();" />
+        </form>
         <%--Report Header--%>
         <h3>Service Usage Report</h3>
         <%--Display the current date--%>
         <h4>Date:  <taglib:datetime/> </h4> 
             <%
-            //Initial a filename.
-            String filename = "export_ser_use_data.xls";
-            //Setup the proper filename to be export.
-            response.setHeader("Content-Disposition", "attachment; filename=" + filename);
-            
             //Initialize service number.
             if (serviceNo == null) {
                 serviceNo = "0";

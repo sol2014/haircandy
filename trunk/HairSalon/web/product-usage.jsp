@@ -143,10 +143,24 @@
 		}
             %>
         </select><br/><br/>
+        <div id="test"></div>
+        <script>
+            var current;
+            function changeDateFormat(object)
+            {
+                current=object;
+                window.setTimeout(resetDateFormat, 500, "JavaScript");
+                return true;
+            }
+            function resetDateFormat()
+            {
+                
+            }
+        </script>
         Date range (yyyy-mm-dd to yyyy-mm-dd): <br/>
-        From:&nbsp;<input type="text" value="<%=getEmptyString(beginDate)%>"
+        From:&nbsp;<input onblur="changeDateFormat(this)" id="beginDate" type="text" value="<%=getEmptyString(beginDate)%>"
                           size=15 name="BeginDate">
-        To:&nbsp;<input type="text" value="<%=getEmptyString(endDate)%>" 
+        To:&nbsp;<input onblur="changeDateFormat(this)" id="endDate" type="text" value="<%=getEmptyString(endDate)%>" 
                         size=15 name="EndDate">&nbsp;&nbsp;
         <%
 		//Modify begin date variable if no user input.
@@ -224,37 +238,37 @@
                 <td align="right" width="15%"><taglib:FormatTag format="currency">
                 <%=rs.getString("price")%></taglib:FormatTag></td>
                 <%
-					//Initialize variable to store the SQL statement.
-					sb2 = new StringBuilder();
-					//Store SQL statement for query.
-					sb2.append(" SELECT COALESCE(SUM(sp.amount), 0) \"Total\" ");
-					sb2.append(" FROM sale sa, saleproduct sp, product pr ");
-					sb2.append(" WHERE sp.product_no = pr.product_no ");
-					sb2.append(" AND sp.product_no = " + rs.getInt("product_no"));
-					sb2.append(" AND sp.transaction_no = sa.transaction_no ");
-					sb2.append(" AND sa.timestamp BETWEEN ? AND ?; ");
+						//Initialize variable to store the SQL statement.
+						sb2 = new StringBuilder();
+						//Store SQL statement for query.
+						sb2.append(" SELECT COALESCE(SUM(sp.amount), 0) \"Total\" ");
+						sb2.append(" FROM sale sa, saleproduct sp, product pr ");
+						sb2.append(" WHERE sp.product_no = pr.product_no ");
+						sb2.append(" AND sp.product_no = " + rs.getInt("product_no"));
+						sb2.append(" AND sp.transaction_no = sa.transaction_no ");
+						sb2.append(" AND sa.timestamp BETWEEN ? AND ?; ");
 
-					try {
-						//Create a connection to the database from the connection pool.
-						conn2 = MultithreadedJDBCConnectionPool.getConnectionPool().getConnection();
-						//Prepare the statement to query the database.
-						PreparedStatement ps2 = conn2.prepareStatement(sb2.toString());
-						int index2 = 1; //index for ? search field.
+						try {
+							//Create a connection to the database from the connection pool.
+							conn2 = MultithreadedJDBCConnectionPool.getConnectionPool().getConnection();
+							//Prepare the statement to query the database.
+							PreparedStatement ps2 = conn2.prepareStatement(sb2.toString());
+							int index2 = 1; //index for ? search field.
 
-						//Create a time format for date object.
-						SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");
-						//set time stamp for begin date search field.                  
-						ps2.setTimestamp(index2, new Timestamp((df2.parse(beginDate)).getTime()));
-						index2++;  //Increment to the next ? location
-						//set time stamp for begin date search field.
+							//Create a time format for date object.
+							SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");
+							//set time stamp for begin date search field.                  
+							ps2.setTimestamp(index2, new Timestamp((df2.parse(beginDate)).getTime()));
+							index2++;  //Increment to the next ? location
+							//set time stamp for begin date search field.
 
-						ps2.setTimestamp(index2, new Timestamp((df2.parse(endDate)).getTime()));
-						index2++;  //Increment to the next ? location
+							ps2.setTimestamp(index2, new Timestamp((df2.parse(endDate)).getTime()));
+							index2++;  //Increment to the next ? location
 
-						rs2 = ps2.executeQuery(); //Execute the query statement.
-						//Return a total of the product sold.
+							rs2 = ps2.executeQuery(); //Execute the query statement.
+							//Return a total of the product sold.
 
-						if (rs2.next()) {
+							if (rs2.next()) {
                 %>
                 <td align="right" width="15%"><%=rs2.getString("Total")%></td>
                 <%
@@ -335,4 +349,9 @@
     </script>
 </form>
 <%@ include file="WEB-INF/jspf/footer.jspf" %>
+<script type="text/javascript">
+    var beginCal, endCal;
+    beginCal  = new Epoch('epoch_popup','popup',document.getElementById('beginDate'));
+    endCal  = new Epoch('epoch_popup','popup',document.getElementById('endDate'));
+</script>
 

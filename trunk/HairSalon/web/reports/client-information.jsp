@@ -346,6 +346,7 @@
 		}
             %>
             <div> 
+                <a href="<%=excelURL%>">excel</a>
                 <input type="button" value="Export Excel" class="StandardButton" 
                        onclick="window.open('<%=excelURL%>', '_blank');return false;" />&nbsp;&nbsp;&nbsp;           
                 <input type="button" value="Print this page" class="StandardButton" 

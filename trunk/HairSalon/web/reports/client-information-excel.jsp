@@ -131,31 +131,19 @@
 			}
 		}
 %>
-<html>
-    <%--Page Header--%>
-    <head>
-        <title>Client Information Report</title>
-    </head>
-    <%--Page Content--%>
-    <body>
-        <%--Report Header--%>
-        <h3>Client Information Report</h3>
-        <%--Display the current date--%>
-        <h4>Date:  <taglib:datetime/> </h4>
-        <%--Table column headers.--%>
-        <table border=1 width="900">
-            <tr>
-                <td align="center" width="15%"><b>Name</b></td>
-                <td align="center" width="10%"><b>Phone number</b></td>
-                <td align="center" width="20%"><b>Address1</b></td>
-                <td align="center" width="15%"><b>Address2</b></td>
-                <td align="center" width="10%"><b>City</b></td>
-                <td align="center" width="5%"><b>Province</b></td>
-                <td align="center" width="10%"><b>Country</b></td>
-                <td align="center" width="5%"><b>Postal-Code</b></td>
-                <td align="center" width="10%"><b>E-mail</b></td>
-            </tr>
-            <%
+<table>
+    <tr>
+        <td><b>Name</b></td>
+        <td><b>Phone number</b></td>
+        <td><b>Address1</b></td>
+        <td><b>Address2</b></td>
+        <td><b>City</b></td>
+        <td><b>Province</b></td>
+        <td><b>Country</b></td>
+        <td><b>Postal-Code</b></td>
+        <td><b>E-mail</b></td>
+    </tr>
+    <%
 		//Initialize variable to store the SQL statement.
 		sb = new StringBuilder();
 		sb.append(" SELECT c.first_name, c.last_name, ");
@@ -205,27 +193,27 @@
 			while (rs.next()) {
 				rsCount++;  //Increment the result set row count.
 %>
-            <tr>
-                <td align="left" width="15%"><%=rs.getString("first_name")%>
-                &nbsp;<%=rs.getString("last_name")%></td>
-                <td align="left" width="10%">
-                <%=getPhoneNumberFormat(rs.getString("phone_number"))%></td>
-                <td align="left" width="20%">
-                <%=getNotAvailable(rs.getString("address1"))%></td>
-                <td align="left" width="15%">
-                <%=getNotAvailable(rs.getString("address2"))%></td>
-                <td align="left" width="10%">
-                <%=rs.getString("city")%></td>
-                <td align="left" width="5%">
-                <%=rs.getString("province")%></td>
-                <td align="left" width="10%">
-                <%=rs.getString("country")%></td>
-                <td align="center" width="5%">
-                <%=getPostalCodeFormat(rs.getString("postal_code"))%></td>
-                <td align="left" width="10%">
-                <%=rs.getString("email")%></td>
-            </tr>
-            <%	}
+    <tr>
+        <td><%=rs.getString("first_name")%>
+        &nbsp;<%=rs.getString("last_name")%></td>
+        <td>
+        <%=getPhoneNumberFormat(rs.getString("phone_number"))%></td>
+        <td>
+        <%=getNotAvailable(rs.getString("address1"))%></td>
+        <td>
+        <%=getNotAvailable(rs.getString("address2"))%></td>
+        <td>
+        <%=rs.getString("city")%></td>
+        <td>
+        <%=rs.getString("province")%></td>
+        <td>
+        <%=rs.getString("country")%></td>
+        <td>
+        <%=getPostalCodeFormat(rs.getString("postal_code"))%></td>
+        <td>
+        <%=rs.getString("email")%></td>
+    </tr>
+    <%	}
 
 		} catch (Exception e) {
 		} finally {
@@ -239,7 +227,5 @@
 				rs = null;
 			}
 		}
-            %>
-        </table>
-    </body>
-</html>
+    %>
+</table>

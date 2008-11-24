@@ -9,7 +9,11 @@
 --%>
 
 <%-- Setup page content type and import java libraries. --%>
-<%@page contentType="application/vnd.ms-excel" %>
+<%@ page contentType="application/vnd.ms-excel" %>
+<%
+    String filename = "exp_emp_data.xls";
+    response.setHeader("Content-Disposition", "attachment; filename="+filename);
+%>
 <%@page import="java.sql.*" %>
 <%@page import="java.text.*" %>
 <%@page import="java.util.*" %>
@@ -22,10 +26,16 @@
 <%@ page errorPage="/reports/report-error.jsp?from=employee-information-excel.jsp" %>
 
 <%!
-	private String getPhoneNumberFormat(String phone) {
-		return "(" + phone.substring(0, 3) + ") " + phone.substring(3, 6)
-                        + "-" + phone.substring(6, 10);
-	}
+    /**
+     * This class modify the string value to a phone number format.
+     *
+     * @param input a string value to be modified to a phone number format.
+     * @return the modified value.
+     */
+    private String getPhoneNumberFormat(String phone) {
+        return "(" + phone.substring(0, 3) + ") " + phone.substring(3, 6) + 
+                "-" + phone.substring(6, 10);
+    }
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -34,11 +44,8 @@
 <%
             //Define Available
             Connection conn = null;     //SQL connector var.
-
             ResultSet rs = null;        //SQL result set var.
-
             int rsCount = 0;            //Result set row count.
-
             StringBuilder sb = null;    //String builder for SQL statement.
 %>
 
@@ -54,13 +61,7 @@
         <h3>Employee Information Report</h3>
         <%--Display the current date--%>
         <h4>Date:  <taglib:datetime/> </h4>
-        <%
-            //Initial a filename.
-            String filename = "export_emp_data.xls";
-            //Setup the proper filename to be export.
-            response.setHeader("Content-Disposition", "attachment; filename=" + filename);
-        %>
-
+        
         <div>
             <%--Table column headers.--%>
             <table border=1 width="600">
@@ -72,25 +73,25 @@
                     <td align="center" width="20%"><b>Role</b></td>
                 </tr>
                 <%
-                //Initialize variable to store the SQL statement.
-		sb = new StringBuilder();
-                //Store SQL statement for query.                
-		sb.append(" SELECT employee_no, first_name,  ");
-		sb.append(" last_name, role, phone_number  ");
-		sb.append(" FROM `employee` ");
-		sb.append(" ORDER by employee_no; ");
+            //Initialize variable to store the SQL statement.
+            sb = new StringBuilder();
+            //Store SQL statement for query.                
+            sb.append(" SELECT employee_no, first_name,  ");
+            sb.append(" last_name, role, phone_number  ");
+            sb.append(" FROM `employee` ");
+            sb.append(" ORDER by employee_no; ");
 
-		try {
-                    //Create a connection to the database from the connection pool.
-                    conn = MultithreadedJDBCConnectionPool.getConnectionPool().getConnection();
-                    //Prepare the statement to query the database.
-                    PreparedStatement ps = conn.prepareStatement(sb.toString());
-                    rs = ps.executeQuery();  //Execute the query statement.
-                    
-                    //While there is a row of data from the result set.
-                    while (rs.next()) {
-                        rsCount++;  //Increment the result set row count.
-                %>
+            try {
+                //Create a connection to the database from the connection pool.
+                conn = MultithreadedJDBCConnectionPool.getConnectionPool().getConnection();
+                //Prepare the statement to query the database.
+                PreparedStatement ps = conn.prepareStatement(sb.toString());
+                rs = ps.executeQuery();  //Execute the query statement.
+
+                //While there is a row of data from the result set.
+                while (rs.next()) {
+                    rsCount++;  //Increment the result set row count.
+%>
                 <%--Table row elements.--%>
                 <tr>
                     <td align="right" width="10%"><%=rs.getString("employee_no")%></td>
@@ -100,18 +101,18 @@
                     <td align="left" width="20%"><%=rs.getString("role")%></td>
                 </tr>
                 <%}
-		} catch (Exception e) {
-		} finally {
-                    if (conn != null) {
-                        //Return connection to the connection pool.
-                        MultithreadedJDBCConnectionPool.getConnectionPool().returnConnection(conn);
-                    }
-                    //Close and result the result set storage variable.
-                    if (rs != null) {
-                        rs.close();
-                        rs = null;
-                    }
-		}
+            } catch (Exception e) {
+            } finally {
+                if (conn != null) {
+                    //Return connection to the connection pool.
+                    MultithreadedJDBCConnectionPool.getConnectionPool().returnConnection(conn);
+                }
+                //Close and result the result set storage variable.
+                if (rs != null) {
+                    rs.close();
+                    rs = null;
+                }
+            }
                 %>
             </table>
         </div><br/>
@@ -122,6 +123,5 @@
         There are <%=rsCount%> result(s) in the list.<br/>
         <%}%>
         <br/>
-        <div>
     </body>
 </html>

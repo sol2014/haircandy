@@ -9,13 +9,7 @@
 --%>
 
 <%-- Setup page content type and import java libraries. --%>
-<%@page contentType="application/vnd.ms-excel" %>
-<%
-            //Initial a filename.
-            String filename = "exp_schedule_data.xls";
-            //Setup the proper filename to be export.
-            response.setHeader("Content-Disposition", "attachment; filename=" + filename);
-%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*" %>
 <%@page import="java.text.*" %>
 <%@page import="java.util.*" %>

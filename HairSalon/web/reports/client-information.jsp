@@ -334,11 +334,16 @@
             <%}%>
             <br/>
             <%
-		String params = "";
+		String params = request.getQueryString();
 
-		String excelURL = "client-information-excel.jsp" + params;
-
-		String printURL = "client-information-print.jsp" + params;
+		String excelURL = "client-information-excel.jsp";
+		if (params != null) {
+			excelURL += "?" + params;
+		}
+		String printURL = "client-information-print.jsp";
+		if (params != null) {
+			printURL += "?" + params;
+		}
             %>
             <div> 
                 <input type="button" value="Export Excel" class="StandardButton" 

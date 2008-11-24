@@ -18,9 +18,6 @@
 <%-- Load the tag library files. --%>
 <%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
 
-<%-- JSP Directives --%>
-<%@ page errorPage="/reports/report-error.jsp?from=product-order-list.jsp" %>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <%
@@ -56,7 +53,7 @@
     
     <%--Page Content--%>
     <%--Calls javascript function to do the initial setup of the page.--%>
-    <body onLoad=selectTextField()>
+    <body>
         <%--Report Header--%>
         <h3>Product Order List</h3>
         <%--Display the current date--%>
@@ -209,29 +206,31 @@
             There are <%=rsCount%> result(s) in the list.<br/>
             <%}%><br/>
             <%
-            //Set the URL link parameters for the input buttons.
-            String params = "?SupplierNo=" + supplierNo;
-
-            //Set the URL page name for the export excel input buttons.
-            String excelURL = "product-order-list-excel.jsp" + params;
-           //Set the URL page name for the print report input buttons.
-            String printURL = "product-order-list-print.jsp" + params;
+            //Set the URL link parameters.
+            String params = request.getQueryString();
+            //Set the URL page name for the export excel.
+            String excelURL = "product-order-list-excel.jsp";
+            if (params != null) {
+                excelURL += "?" + params;
+            }
+            //Set the URL page name for the print report.
+            String printURL = "product-order-list-print.jsp";
+            if (params != null) {
+                printURL += "?" + params;
+            }
             %>
-            <%--Input buttons for additional report commends.--%>
-            <div>
-                <%--Input button for export report to an excel file.--%>
-                <input type="button" value="Export Excel" class="StandardButton" 
-               onclick="window.open('<%=excelURL%>', '_blank');return false;" />
-                       &nbsp;&nbsp;&nbsp;           
-                <%--Input button to send the report a printer.--%>
-                <input type="button" value="Print this page" class="StandardButton" 
-                onclick="window.open('<%=printURL%>', '_blank');return false;" />
-                       &nbsp;&nbsp;&nbsp;
-                <%--Input button return user to the report main menu.--%>
-                <input type="button" value="Back to Main" class="StandardButton" 
-                onclick="window.open('report-main-menu.jsp');return false;" />
-               <br/>
-            </div>         
+        <%--Links for additional report commends.--%>
+        <div>
+            <%--Link for export report to an excel file.--%>
+            <a href="<%=excelURL%>">Export To Excel</a>
+            &nbsp;&nbsp;&nbsp;
+            <%--Link  to send the report a printer.--%>
+            <a href="<%=printURL%>" target="_blank">Print this page</a><br/>
+        </div>
+        <%--Calls javascript function to do the initial setup of the page.--%>
+        <script>
+            selectTextField();
+        </script>   
         </form>
     </body>
 </html>

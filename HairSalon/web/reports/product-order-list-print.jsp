@@ -18,9 +18,6 @@
 <%-- Load the tag library files. --%>
 <%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
 
-<%-- JSP Directives --%>
-<%@ page errorPage="/reports/report-error.jsp?from=product-order-list-print.jsp" %>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <%
@@ -56,16 +53,7 @@
     
     <%--Page Content--%>
     <%--Calls javascript function to do the initial setup of the page.--%>
-    <body onLoad=selectTextField()>
-	<form>
-        <%--Button to send the report content to the printer.--%>
-	<input type="button" value="Print this page" class="StandardButton" 
-		onclick="window.print();return false;" />
-		&nbsp;&nbsp;&nbsp;
-        <%--Button to close the print report page.--%>
-	<input type="button" value="Close Window " class="StandardButton" 
-		onclick="javascript:window.close();" />
-	</form>
+    <body>
         <%--Report Header--%>
         <h3>Product Order List</h3>
         <%--Display the current date--%>

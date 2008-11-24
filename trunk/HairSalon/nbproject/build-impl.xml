@@ -514,9 +514,6 @@ or ant -Dj2ee.platform.classpath=&lt;server_classpath&gt; (where no properties f
         <copy-ear-war file="${file.reference.jstl.jar}" propname="included.lib.file.reference.jstl.jar.X"/>
         <basename file="${file.reference.standard.jar}" property="included.lib.file.reference.standard.jar"/>
         <copy-ear-war file="${file.reference.standard.jar}" propname="included.lib.file.reference.standard.jar.X"/>
-        <basename file="${libs.restlib.classpath.libfile.18}" property="included.lib.libs.restlib.classpath.18"/>
-        <basename file="${libs.restlib.classpath.libfile.17}" property="included.lib.libs.restlib.classpath.17"/>
-        <basename file="${libs.restlib.classpath.libfile.16}" property="included.lib.libs.restlib.classpath.16"/>
         <basename file="${libs.restlib.classpath.libfile.15}" property="included.lib.libs.restlib.classpath.15"/>
         <basename file="${libs.restlib.classpath.libfile.14}" property="included.lib.libs.restlib.classpath.14"/>
         <basename file="${libs.restlib.classpath.libfile.13}" property="included.lib.libs.restlib.classpath.13"/>
@@ -532,9 +529,6 @@ or ant -Dj2ee.platform.classpath=&lt;server_classpath&gt; (where no properties f
         <basename file="${libs.restlib.classpath.libfile.3}" property="included.lib.libs.restlib.classpath.3"/>
         <basename file="${libs.restlib.classpath.libfile.2}" property="included.lib.libs.restlib.classpath.2"/>
         <basename file="${libs.restlib.classpath.libfile.1}" property="included.lib.libs.restlib.classpath.1"/>
-        <copy-ear-war file="${libs.restlib.classpath.libfile.18}" propname="included.lib.libs.restlib.classpath.18.X"/>
-        <copy-ear-war file="${libs.restlib.classpath.libfile.17}" propname="included.lib.libs.restlib.classpath.17.X"/>
-        <copy-ear-war file="${libs.restlib.classpath.libfile.16}" propname="included.lib.libs.restlib.classpath.16.X"/>
         <copy-ear-war file="${libs.restlib.classpath.libfile.15}" propname="included.lib.libs.restlib.classpath.15.X"/>
         <copy-ear-war file="${libs.restlib.classpath.libfile.14}" propname="included.lib.libs.restlib.classpath.14.X"/>
         <copy-ear-war file="${libs.restlib.classpath.libfile.13}" propname="included.lib.libs.restlib.classpath.13.X"/>
@@ -552,16 +546,13 @@ or ant -Dj2ee.platform.classpath=&lt;server_classpath&gt; (where no properties f
         <copy-ear-war file="${libs.restlib.classpath.libfile.1}" propname="included.lib.libs.restlib.classpath.1.X"/>
         <mkdir dir="${build.web.dir}/META-INF"/>
         <manifest file="${build.web.dir}/META-INF/MANIFEST.MF" mode="update">
-            <attribute name="Class-Path" value="${included.lib.file.reference.jstl.jar} ${included.lib.file.reference.standard.jar} ${included.lib.libs.restlib.classpath.1.X} ${included.lib.libs.restlib.classpath.2.X} ${included.lib.libs.restlib.classpath.3.X} ${included.lib.libs.restlib.classpath.4.X} ${included.lib.libs.restlib.classpath.5.X} ${included.lib.libs.restlib.classpath.6.X} ${included.lib.libs.restlib.classpath.7.X} ${included.lib.libs.restlib.classpath.8.X} ${included.lib.libs.restlib.classpath.9.X} ${included.lib.libs.restlib.classpath.10.X} ${included.lib.libs.restlib.classpath.11.X} ${included.lib.libs.restlib.classpath.12.X} ${included.lib.libs.restlib.classpath.13.X} ${included.lib.libs.restlib.classpath.14.X} ${included.lib.libs.restlib.classpath.15.X} ${included.lib.libs.restlib.classpath.16.X} ${included.lib.libs.restlib.classpath.17.X} ${included.lib.libs.restlib.classpath.18.X} "/>
+            <attribute name="Class-Path" value="${included.lib.file.reference.jstl.jar} ${included.lib.file.reference.standard.jar} ${included.lib.libs.restlib.classpath.1.X} ${included.lib.libs.restlib.classpath.2.X} ${included.lib.libs.restlib.classpath.3.X} ${included.lib.libs.restlib.classpath.4.X} ${included.lib.libs.restlib.classpath.5.X} ${included.lib.libs.restlib.classpath.6.X} ${included.lib.libs.restlib.classpath.7.X} ${included.lib.libs.restlib.classpath.8.X} ${included.lib.libs.restlib.classpath.9.X} ${included.lib.libs.restlib.classpath.10.X} ${included.lib.libs.restlib.classpath.11.X} ${included.lib.libs.restlib.classpath.12.X} ${included.lib.libs.restlib.classpath.13.X} ${included.lib.libs.restlib.classpath.14.X} ${included.lib.libs.restlib.classpath.15.X} "/>
         </manifest>
         <delete dir="${dist.ear.dir}/temp"/>
     </target>
     <target depends="init" name="library-inclusion-in-archive" unless="dist.ear.dir">
         <copy file="${file.reference.jstl.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copy file="${file.reference.standard.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copy file="${libs.restlib.classpath.libfile.18}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copy file="${libs.restlib.classpath.libfile.17}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copy file="${libs.restlib.classpath.libfile.16}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copy file="${libs.restlib.classpath.libfile.15}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copy file="${libs.restlib.classpath.libfile.14}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copy file="${libs.restlib.classpath.libfile.13}" todir="${build.web.dir}/WEB-INF/lib"/>

@@ -18,9 +18,6 @@
 <%-- Load the tag library files. --%>
 <%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
 
-<%-- JSP Directives --%>
-<%@ page errorPage="/reports/report-error.jsp?from=service-usage.jsp" %>
-
 <%!
     /**
      * This class return a blank string if the string input is null.
@@ -79,7 +76,7 @@
     
     <%--Page Content--%>
     <%--Calls javascript function to do the initial setup of the page.--%>
-    <body onLoad=selectTextField()>
+    <body>
         <%--Report Header--%>
         <h3>Service Usage Report</h3>
         <%--Display the current date--%>
@@ -294,13 +291,18 @@
             <%}%>
             <br/>
             <%
-            //Set the URL link parameters for the input buttons.
-            String params = "?ServiceNo="+serviceNo+
-                    "&BeginDate=" + beginDate + "&EndDate=" + endDate;
-            //Set the URL page name for the export excel input buttons.  
-            String excelURL = "service-usage-excel.jsp" + params;
-            //Set the URL page name for the print report input buttons.   
-            String printURL = "service-usage-print.jsp" + params;
+            //Set the URL link parameters.
+            String params = request.getQueryString();
+            //Set the URL page name for the export excel.
+            String excelURL = "service-usage-excel.jsp";
+            if (params != null) {
+                excelURL += "?" + params;
+            }
+            //Set the URL page name for the print report.
+            String printURL = "service-usage-print.jsp";
+            if (params != null) {
+                printURL += "?" + params;
+            }
 
             //Re-initialize the begin date value.
             if (beginDate.equals("1900-01-01")) {
@@ -311,21 +313,20 @@
                 endDate = "";
             }
             %>
-            <%--Input buttons for additional report commends.--%>
+            
+            <%--Links for additional report commends.--%>
             <div>
-                <%--Input button for export report to an excel file.--%>
-                <input type="button" value="Export Excel" class="StandardButton" 
-                       onclick="window.open('<%=excelURL%>', '_blank');return false;" />
-                &nbsp;&nbsp;&nbsp;           
-                <%--Input button to send the report a printer.--%>
-                <input type="button" value="Print this page" class="StandardButton" 
-                       onclick="window.open('<%=printURL%>', '_blank');return false;" />
+                <%--Link for export report to an excel file.--%>
+                <a href="<%=excelURL%>">Export To Excel</a>
+                &nbsp;&nbsp;&nbsp; 
+                 <%--Link to send the report a printer.--%>
+                <a href="<%=printURL%>">Print this Page</a>
                 &nbsp;&nbsp;&nbsp;
-                <%--Input button return user to the report main menu.--%>
-                <input type="button" value="Back to Main" class="StandardButton" 
-                       onclick="window.open('report-main-menu.jsp');return false;" />
-                <br/>
-            </div> 
+            </div>
+
+            <script>
+                selectTextField();
+            </script>
         </form>
     </body>
 </html>

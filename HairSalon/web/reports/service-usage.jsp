@@ -75,7 +75,6 @@
     </script>
     
     <%--Page Content--%>
-    <%--Calls javascript function to do the initial setup of the page.--%>
     <body>
         <%--Report Header--%>
         <h3>Service Usage Report</h3>

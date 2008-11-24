@@ -143,7 +143,6 @@
 		}
             %>
         </select><br/><br/>
-        <div id="test"></div>
         <script>
             var current;
             function changeDateFormat(object)
@@ -154,7 +153,17 @@
             }
             function resetDateFormat()
             {
-                
+                try
+                {
+                    var array = current.value.split("/");
+                    var dd = array[0];
+                    var mm = array[1];
+                    var yyyy = array[2];
+                    current.value=yyyy+"-"+mm+"-"+dd;
+                }
+                catch(e)
+                {
+                }
             }
         </script>
         Date range (yyyy-mm-dd to yyyy-mm-dd): <br/>

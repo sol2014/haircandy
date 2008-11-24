@@ -63,6 +63,7 @@
                         <a href="product-order-list.jsp">Product Order List</a><br/><br/>
                         <a href="product-usage.jsp">Product Usage</a><br/><br/>
                         <a href="sale-information.jsp?NameType=everyone&FirstName=&LastName=&DateType=Multiple&BeginDate=yyyy-mm-dd&EndDate=yyyy-mm-dd">Sale Information</a><br/><br/>
+                        <a href="schedule-information.jsp?EmployeeNo=0&BeginDate=&EndDate=">Schedule Information</a><br/><br/>
                         <a href="service-usage.jsp">Service Usage</a><br/><br/>
                         <br/>
                     </p>

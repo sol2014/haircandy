@@ -112,7 +112,7 @@
 
                 //Build the drop down list with the result set values.
                 while (rs.next()) {
-                    //Check if the product is previously selected.
+                    //Check if the service is previously selected.
                     if (rs.getString("service_no").equals(serviceNo)) {
                     %>
                     <option value="<%=rs.getInt("service_no")%>"  

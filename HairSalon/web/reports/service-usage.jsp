@@ -96,7 +96,7 @@
             sb.append(" ORDER BY se.service_no; ");
             %>
             <div>
-                <%--Drop down box to collect the product number for query the 
+                <%--Drop down box to collect the service number for query the 
                 report. Javascript function called to select the proper 
                 option, default selection is 0. --%>                
                 Select Service:&nbsp;

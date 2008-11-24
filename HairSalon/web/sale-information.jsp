@@ -253,10 +253,10 @@
         <%--Input text fields for start and end date information.--%>    
     </select>&nbsp;
     <span id="from">From:&nbsp;</span><span id="at">At:&nbsp;</span>
-    <input onblur="changeDateFormat(this)" id="BeginDate" type="text" 
+    <input onblur="changeDateFormat(this)" id="beginDate" type="text" 
            value="<%=getDefaultDate(beginDate)%>" size=15  name="BeginDate" 
            onclick="select()" />&nbsp;
-    <span id="to">To:&nbsp;</span><input id="EndDate" onblur="changeDateFormat(this)" type="text" 
+    <span id="to">To:&nbsp;</span><input id="endDate" onblur="changeDateFormat(this)" type="text" 
                                          value="<%=getDefaultDate(endDate)%>" size=15 name="EndDate"
                                          onclick="select()" /><br/><br/>
     

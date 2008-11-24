@@ -395,9 +395,6 @@
         <input type="button" value="Print this page" class="StandardButton" 
                onclick="window.open('<%=printURL%>', '_blank');return false;" />
         &nbsp;&nbsp;&nbsp;
-        <%--Input button return user to the report main menu.--%>
-        <input type="button" value="Back to Main" class="StandardButton" 
-               onclick="window.open('report-main-menu.jsp');return false;" />
         <br/>
     </div>
 </form>   

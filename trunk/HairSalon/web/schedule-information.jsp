@@ -13,11 +13,25 @@
 <%@page import="java.sql.*" %>
 <%@page import="java.text.*" %>
 <%@page import="java.util.*" %>
+<%@page import="hs.core.*" %>
+<%@page import="hs.objects.*" %>
+<%@page import="hs.app.*" %>
+<%@page import="hs.presentation.*" %>
 <%@page import="hs.persistence.*" %>
 
 <%-- Load the tag library files. --%>
 <%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<%
+		UserSession userSession = (UserSession) session.getAttribute("user_session");
 
+		userSession.setCurrentPosition(SessionPositions.Reports);
+
+		String page_title = "Schedule information report";
+		int recordNo = 0;
+%>
+<%@ include file="WEB-INF/jspf/header.jspf" %>
 <%!
     /**
      * This class return a blank string if the string input is null.
@@ -57,12 +71,6 @@
             String beginDate = request.getParameter("BeginDate");
             String endDate = request.getParameter("EndDate");
 %>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Schedule information report</title>
-    </head>
-    
     <%--Javasript Functions.--%>
     <script type="text/javascript">
         <!--      
@@ -75,9 +83,6 @@
         }
         -->
     </script>
- 
-     <%--Page Content--%>
-    <body>
         <%--Report Header--%>
         <h3>Schedule Information Report</h3>
         <%--Display the current date--%>
@@ -317,5 +322,4 @@
     beginCal  = new Epoch('epoch_popup','popup',document.getElementById('beginDate'));
     endCal  = new Epoch('epoch_popup','popup',document.getElementById('endDate'));
 </script>
-    </body>
-</html>
+<%@ include file="WEB-INF/jspf/footer.jspf" %>

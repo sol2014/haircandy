@@ -18,9 +18,6 @@
 <%-- Load the tag library files. --%>
 <%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
 
-<%-- JSP Directives --%>
-<%@ page errorPage="/reports/report-error.jsp?from=employee-information-print.jsp" %>
-
 <%!
 	private String getPhoneNumberFormat(String phone) {
 		return "(" + phone.substring(0, 3) + ") " + phone.substring(3, 6)

@@ -22,9 +22,6 @@
 <%-- Load the tag library files. --%>
 <%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
 
-<%-- JSP Directives --%>
-<%@ page errorPage="/reports/report-error.jsp?from=employee-information-excel.jsp" %>
-
 <%!
     /**
      * This class modify the string value to a phone number format.

@@ -354,7 +354,7 @@
             <%--Table row elements.--%>
             <tr>
                 <td align="center" width="10%">
-                    <a href="transaction-details.jsp?id=<%=rs.getString("sa.transaction_no")%>" 
+                    <a href="reports/transaction-details.jsp?id=<%=rs.getString("sa.transaction_no")%>" 
                    size=20 target="_blank"><%=rs.getString("sa.transaction_no")%></a></td>
                 <td align="center" width="10%">
                 <%=trimTimeStamp(rs.getString("sa.timestamp"))%></td>
@@ -410,17 +410,13 @@
 		//Set the URL page name for the print report input buttons.
 		String printURL = "reports/sale-information-print.jsp" + params;
     %>
-    <%--Input buttons for additional report commends.--%>
+    <%--Links for additional report commends.--%>
     <div>
-        <%--Input button for export report to an excel file.--%>
-        <input type="button" value="Export Excel" class="StandardButton" 
-               onclick="window.open('<%=excelURL%>', '_blank');return false;" />
-        &nbsp;&nbsp;&nbsp;           
-        <%--Input button to send the report a printer.--%>
-        <input type="button" value="Print this page" class="StandardButton" 
-               onclick="window.open('<%=printURL%>', '_blank');return false;" />
+        <%--Link for export report to an excel file.--%>
+        <a href="<%=excelURL%>">Export To Excel</a>
         &nbsp;&nbsp;&nbsp;
-        <br/>
+        <%--Link  to send the report a printer.--%>
+        <a href="<%=printURL%>" target="_blank">Print this page</a><br/>
     </div>
 </form>   
 <script>

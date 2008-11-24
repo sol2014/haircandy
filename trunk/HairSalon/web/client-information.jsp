@@ -21,7 +21,6 @@
 
 <%-- Load the tag library files. --%>
 <%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <%

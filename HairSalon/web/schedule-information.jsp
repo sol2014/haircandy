@@ -314,10 +314,10 @@
 
         </form>
         
+<%@ include file="WEB-INF/jspf/footer.jspf" %>
 <%-- -------------------------------------------------- --%>
 <script type="text/javascript">
     var beginCal, endCal;
     beginCal  = new Epoch('epoch_popup','popup',document.getElementById('beginDate'));
     endCal  = new Epoch('epoch_popup','popup',document.getElementById('endDate'));
 </script>
-<%@ include file="WEB-INF/jspf/footer.jspf" %>

@@ -349,7 +349,6 @@
     There is no result return!  Please try again.<br/>
     <%} else {%>
     There are <%=rsCount%> result(s) in the list.<br/>
-    You can click on the transaction number to view the detail.<br/>
     <%}%>
     <br/>
     <%

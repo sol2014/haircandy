@@ -8,6 +8,7 @@
  * Joey Ren, Philippe Durand, Miyoung Han, Horace Wan and Nuha Bazara
 --%>
 
+<%-- Setup page content type and import java libraries. --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*" %>
 <%@page import="java.text.*" %>
@@ -18,7 +19,7 @@
 <%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
 
 <%-- JSP Directives --%>
-<%--<%@ page errorPage="/reports/report-error.jsp?from=client-information.jsp" %>--%>
+<%@ page errorPage="/reports/report-error.jsp?from=client-information.jsp" %>
 
 <%!
 	/**
@@ -101,16 +102,14 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 
 <%
-//Define Available
+                //Define Available
 		Connection conn = null;     //SQL connector var.
-
 		ResultSet rs = null;        //SQL result set var.
-
 		int rsCount = 0;            //Result set row count.
-
 		StringBuilder sb = null;    //String builder for SQL statement.
 
-//Helper Variables for parameter values.
+                //Helper Variables for parameter values.
+                String queryType = request.getParameter("QueryType");
 		String fName = request.getParameter("FirstName");
 		if (fName != null) {
 			if (fName.equals("")) {
@@ -176,9 +175,8 @@
             Query type:&nbsp;
             <%--Radio buttons to select the query type to query the report.
                 Initial call to select the proper radio button depend on 
-                previous select, default selection is all.--%>
+                previous select, default selection is All.--%>
             <%
-		String queryType = request.getParameter("QueryType");
 		if (queryType != null) {
             %>
             <%if (queryType.equals("All")) {%>
@@ -206,25 +204,25 @@
                     <td align="right" >First Name:</td>
                     <td align="left">
                         <input type="text" value="<%=getEmptyString(fName)%>" 
-                           size=20 name="FirstName" /></td>
+                           size=22 name="FirstName" /></td>
                 </tr>
                 <tr>
                     <td align="right" >Last Name:</td>
                     <td align="left">
                         <input type="text" value="<%=getEmptyString(lName)%>" 
-                           size=20 name="LastName" /></td>
+                           size=22 name="LastName" /></td>
                 </tr>
                 <tr align="right" >
                     <td>Phone Number:</td>
                     <td align="left">
                         <input type="text" value="<%=getEmptyString(phoneNum)%>" 
-                           size=20 name="PhoneNum" /></td>
+                           size=15 name="PhoneNum" />&nbsp;Ex: 1234567890</td>
                 </tr>
                 <tr>
                     <td align="right">Postal Code:</td>
                     <td align="left">
                         <input type="text" value="<%=getEmptyString(pCode)%>" 
-                           size=8 name="PostalCode" /></td>
+                           size=8 name="PostalCode" />&nbsp;Ex: t2e3r3</td>
                 </tr>
             </table><br/>
             
@@ -251,13 +249,19 @@
                         <td align="center" width="10%"><b>E-mail</b></td>
                     </tr>
                     <%
+                //Initialize variable to store the SQL statement.   
 		sb = new StringBuilder();
+                //Store SQL statement for query.
 		sb.append(" SELECT c.first_name, c.last_name, ");
 		sb.append(" c.phone_number, a.address1, a.address2, ");
 		sb.append(" a.city, a.province, a.country, ");
 		sb.append(" a.postal_code, a.email ");
 		sb.append(" FROM client c, address a ");
 		sb.append(" WHERE c.address_no = a.address_no ");
+                
+                if(request.getParameter("QueryType").equals("Custom"))
+                {
+                /*Insert SQL statement when detected user input.*/
 		if (fName != null) {
 			sb.append(" And c.first_name LIKE CONCAT('%', ? ,'%')");
 		}
@@ -270,32 +274,40 @@
 		if (pCode != null) {
 			sb.append(" And a.postal_code LIKE CONCAT('%', ? ,'%')");
 		}
+                }
 		sb.append(" AND c.enabled = true ");
 		sb.append(" ORDER BY client_no; ");
 
 		try {
+                        //Create a connection to the database from the connection pool.
 			conn = MultithreadedJDBCConnectionPool.getConnectionPool().getConnection();
+                        //Prepare the statement to query the database.
 			PreparedStatement ps = conn.prepareStatement(sb.toString());
-			int index = 1;
+			int index = 1;  //index for ? search field.
+                        
+                        if(request.getParameter("QueryType").equals("Custom"))
+                        {
+                        /*Insert the value into the ? search field.*/    
 			if (fName != null) {
 				ps.setString(index, fName);
-				index++;
+				index++;  //Increment to the next ? location
 			}
 			if (lName != null) {
 				ps.setString(index, lName);
-				index++;
+				index++;  //Increment to the next ? location
 			}
 			if (phoneNum != null) {
 				ps.setString(index, phoneNum);
-				index++;
+				index++;  //Increment to the next ? location
 			}
 			if (pCode != null) {
 				ps.setString(index, pCode);
-				index++;
+				index++;  //Increment to the next ? location
 			}
+                        }
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				rsCount++;
+				rsCount++;  //Increment to the next ? location
                     %>
                     <tr>
                         <td align="left" width="15%"><%=rs.getString("first_name")%>
@@ -314,12 +326,14 @@
 		} catch (Exception e) {
 		} finally {
 			if (conn != null) {
-				MultithreadedJDBCConnectionPool.getConnectionPool().returnConnection(conn);
+                            //Return connection to the connection pool.
+                            MultithreadedJDBCConnectionPool.getConnectionPool().returnConnection(conn);
 			}
 
 			if (rs != null) {
-				rs.close();
-				rs = null;
+                            //Close and result the result set storage variable.
+                            rs.close();
+                            rs = null;
 			}
 		}
                     %>
@@ -334,26 +348,28 @@
             <%}%>
             <br/>
             <%
-		String params = request.getQueryString();
-
-		String excelURL = "client-information-excel.jsp";
-		if (params != null) {
-			excelURL += "?" + params;
-		}
-		String printURL = "client-information-print.jsp";
-		if (params != null) {
-			printURL += "?" + params;
-		}
+            //Set the URL link parameters.
+            String params = request.getQueryString();
+            //Set the URL page name for the export excel.
+            String excelURL = "client-information-excel.jsp";
+            if (params != null) {
+                excelURL += "?" + params;
+            }
+            //Set the URL page name for the print report.
+            String printURL = "client-information-print.jsp";
+            if (params != null) {
+                printURL += "?" + params;
+            }
             %>
-            <div> 
-                <a href="<%=excelURL%>">excel</a>
-                <input type="button" value="Export Excel" class="StandardButton" 
-                       onclick="window.open('<%=excelURL%>', '_blank');return false;" />&nbsp;&nbsp;&nbsp;           
-                <input type="button" value="Print this page" class="StandardButton" 
-                       onclick="window.open('<%=printURL%>', '_blank');return false;" />&nbsp;&nbsp;&nbsp;
-                <input type="button" value="Back to Main" class="StandardButton" 
-                       onclick="window.open('report-main-menu.jsp');return false;" /><br/>
+             <%--Links for additional report commends.--%>
+            <div>
+                <%--Link for export report to an excel file.--%>
+                <a href="<%=excelURL%>">Export To Excel</a>
+                &nbsp;&nbsp;&nbsp;
+                <%--Link  to send the report a printer.--%>
+                <a href="<%=printURL%>" target="_blank">Print this page</a><br/>
             </div>
+            <%--Calls javascript function to do the initial setup of the page.--%>
             <script>
                 hideOrDisplay();
             </script>

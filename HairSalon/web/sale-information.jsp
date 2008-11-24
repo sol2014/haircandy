@@ -224,14 +224,39 @@
         <option value="Multiple" SELECTED>Multiple</option>
         <option value="Single" >Single</option>
         <%}%>
+
+<%-- -------------------------------------------------- --%>
+	<script>
+            var current;
+            function changeDateFormat(object)
+            {
+                current=object;
+                window.setTimeout(resetDateFormat, 500, "JavaScript");
+                return true;
+            }
+            function resetDateFormat()
+            {
+                try
+                {
+                    var array = current.value.split("/");
+                    var dd = array[0];
+                    var mm = array[1];
+                    var yyyy = array[2];
+                    current.value=yyyy+"-"+mm+"-"+dd;
+                }
+                catch(e)
+                {
+                }
+            }
+        </script>
         
         <%--Input text fields for start and end date information.--%>    
     </select>&nbsp;
     <span id="from">From:&nbsp;</span><span id="at">At:&nbsp;</span>
-    <input id="BeginDate" type="text" 
+    <input onblur="changeDateFormat(this)" id="BeginDate" type="text" 
            value="<%=getDefaultDate(beginDate)%>" size=15  name="BeginDate" 
            onclick="select()" />&nbsp;
-    <span id="to">To:&nbsp;</span><input id="EndDate" type="text" 
+    <span id="to">To:&nbsp;</span><input id="EndDate" onblur="changeDateFormat(this)" type="text" 
                                          value="<%=getDefaultDate(endDate)%>" size=15 name="EndDate"
                                          onclick="select()" /><br/><br/>
     
@@ -402,3 +427,10 @@
     selectTextField();
 </script>
 <%@ include file="WEB-INF/jspf/footer.jspf" %>
+
+<%-- -------------------------------------------------- --%>
+<script type="text/javascript">
+    var beginCal, endCal;
+    beginCal  = new Epoch('epoch_popup','popup',document.getElementById('beginDate'));
+    endCal  = new Epoch('epoch_popup','popup',document.getElementById('endDate'));
+</script>

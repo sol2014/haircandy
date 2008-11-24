@@ -18,9 +18,6 @@
 <%-- Load the tag library files. --%>
 <%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
 
-<%-- JSP Directives --%>
-<%@ page errorPage="/reports/report-error.jsp?from=sale-information.jsp" %>
-
 <%!
     /**
      * This class increment the end date from the begin date by number of
@@ -159,7 +156,7 @@
     
     <%--Page Content--%>
     <%--Calls javascript function to do the initial setup of the page.--%>
-    <body onLoad=selectTextField()>
+    <body>
         <%--Report Header--%>
         <h3>Sale information report</h3>
         <%--Display the current date--%>
@@ -373,33 +370,32 @@
             There are <%=rsCount%> result(s) in the list.<br/>
             Click the transaction number to view the detail.<br/>
             <br/><%}%>
-            <%
-            //Set the URL link parameters for the input buttons.
-            String params = "?NameType=" + request.getParameter("NameType") +
-                    "&FirstName=" + fName + "&LastName=" + lName +
-                    "&DateType=" + request.getParameter("DateType") +
-                    "&BeginDate=" + beginDate + "&EndDate=" + endDate;
-            
-            //Set the URL page name for the export excel input buttons.
-            String excelURL = "sale-information-excel.jsp" + params;
-            //Set the URL page name for the print report input buttons.
-            String printURL = "sale-information-print.jsp" + params;
+            <%            
+           //Set the URL link parameters.
+            String params = request.getQueryString();
+            //Set the URL page name for the export excel.
+            String excelURL = "sale-information-excel.jsp";
+            if (params != null) {
+                excelURL += "?" + params;
+            }
+            //Set the URL page name for the print report.
+            String printURL = "sale-information-print.jsp";
+            if (params != null) {
+                printURL += "?" + params;
+            }
             %>
-            <%--Input buttons for additional report commends.--%>
+            <%--Links for additional report commends.--%>
             <div>
-                <%--Input button for export report to an excel file.--%>
-                <input type="button" value="Export Excel" class="StandardButton" 
-               onclick="window.open('<%=excelURL%>', '_blank');return false;" />
-                       &nbsp;&nbsp;&nbsp;           
-                <%--Input button to send the report a printer.--%>
-                <input type="button" value="Print this page" class="StandardButton" 
-                onclick="window.open('<%=printURL%>', '_blank');return false;" />
-                       &nbsp;&nbsp;&nbsp;
-                <%--Input button return user to the report main menu.--%>
-                <input type="button" value="Back to Main" class="StandardButton" 
-                onclick="window.open('report-main-menu.jsp');return false;" />
-               <br/>
+                <%--Link for export report to an excel file.--%>
+                <a href="<%=excelURL%>">Export To Excel</a>
+                &nbsp;&nbsp;&nbsp;
+                <%--Link  to send the report a printer.--%>
+                <a href="<%=printURL%>" target="_blank">Print this page</a><br/>
             </div>
+            <%--Calls javascript function to do the initial setup of the page.--%>
+            <script>
+                selectTextField();
+            </script>
         </form>   
     </body> 
 </html>   

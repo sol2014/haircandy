@@ -10,6 +10,12 @@
 
 <%-- Setup page content type and import java libraries. --%>
 <%@page contentType="application/vnd.ms-excel" %>
+<%
+            //Initial a filename.
+            String filename = "exp_sale_data.xls";
+            //Setup the proper filename to be export.
+            response.setHeader("Content-Disposition", "attachment; filename=" + filename);
+%>
 <%@page import="java.sql.*" %>
 <%@page import="java.text.*" %>
 <%@page import="java.util.*" %>
@@ -17,9 +23,6 @@
 
 <%-- Load the tag library files. --%>
 <%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
-
-<%-- JSP Directives --%>
-<%@ page errorPage="/reports/report-error.jsp?from=sale-information-excel.jsp" %>
 
 <%!
     /**
@@ -115,7 +118,6 @@
 <html>
     <%--Page Header--%>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Sale Information Report</title>
     </head>
     
@@ -127,11 +129,6 @@
         <h4>Date:  <taglib:datetime/> </h4>
         
         <%
-            //Initial a filename.
-            String filename = "export_sale_data.xls";
-            //Setup the proper filename to be export.
-            response.setHeader("Content-Disposition", "attachment; filename=" + filename);
-
             //Modify begin date variable if no user input.
             if (beginDate == null || beginDate.equals("") || beginDate.equals("yyyy-mm-dd")) {
                 beginDate = "1900-01-01";
@@ -215,9 +212,7 @@
                 <%--Table row elements.--%>
                 <tr>
                     <td align="center" width="10%">
-                        <a href="transaction-details.jsp?id=<%=rs.getString("sa.transaction_no")%>" 
-                       size=20 target="_blank">
-                       <%=rs.getString("sa.transaction_no")%></a></td>
+                       <%=rs.getString("sa.transaction_no")%></td>
                     <td align="center" width="10%">
                         <%=trimTimeStamp(rs.getString("sa.timestamp"))%></td>
                     <td align="left" width="25%">

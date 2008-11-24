@@ -139,10 +139,36 @@
 			}
 		}%>
             </select><br/><br/>
+            
+<%-- -------------------------------------------------- --%>
+	<script>
+            var current;
+            function changeDateFormat(object)
+            {
+                current=object;
+                window.setTimeout(resetDateFormat, 500, "JavaScript");
+                return true;
+            }
+            function resetDateFormat()
+            {
+                try
+                {
+                    var array = current.value.split("/");
+                    var dd = array[0];
+                    var mm = array[1];
+                    var yyyy = array[2];
+                    current.value=yyyy+"-"+mm+"-"+dd;
+                }
+                catch(e)
+                {
+                }
+            }
+        </script>
+            
             Date range (yyyy-mm-dd to yyyy-mm-dd): <br/>
-            From:&nbsp;<input type="text" value="<%=getEmptyString(beginDate)%>"
+            From:&nbsp;<input onblur="changeDateFormat(this)" id="beginDate" type="text" value="<%=getEmptyString(beginDate)%>"
                               size=15 name="BeginDate">
-            To:&nbsp;<input type="text" value="<%=getEmptyString(endDate)%>" 
+            To:&nbsp;<input onblur="changeDateFormat(this)" id="endDate" type="text" value="<%=getEmptyString(endDate)%>" 
                             size=15 name="EndDate">&nbsp;&nbsp;
                 <%
             //Reload the date value to the variable.
@@ -284,5 +310,12 @@
             </script>
 
         </form>
+        
+<%-- -------------------------------------------------- --%>
+<script type="text/javascript">
+    var beginCal, endCal;
+    beginCal  = new Epoch('epoch_popup','popup',document.getElementById('beginDate'));
+    endCal  = new Epoch('epoch_popup','popup',document.getElementById('endDate'));
+</script>
     </body>
 </html>

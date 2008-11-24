@@ -47,15 +47,6 @@
     </head>
     <%--Page Content--%>
     <body>
-        <form>
-            <%--Button to send the report content to the printer.--%>
-            <input type="button" value="Print this page" class="StandardButton" 
-                   onclick="window.print();return false;" />
-            &nbsp;&nbsp;&nbsp;
-            <%--Button to close the print report page.--%>
-            <input type="button" value="Close Window " class="StandardButton" 
-                   onclick="javascript:window.close();" />
-        </form>
         <%--Report Header--%>
         <h3>Employee Information Report</h3>
         <%--Display the current date--%>

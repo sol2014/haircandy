@@ -43,12 +43,6 @@
             ResultSet rs = null;        //SQL result set var.
             int rsCount = 0;            //Result set row count.
             StringBuilder sb = null;    //String builder for SQL statement.
-
-            //Helper Variables for parameter values.
-            String fName = request.getParameter("FirstName");
-            String lName = request.getParameter("LastName");
-            String beginDate = request.getParameter("BeginDate");
-            String endDate = request.getParameter("EndDate");
 %>
 
 <html>
@@ -129,29 +123,27 @@
         You can click on the View Link to see the detail.<br/>
         <%}%>
         <br/>
-        <div>
         <%
-            //Set the URL link parameters for the input buttons.
-            String params = "";
-            //Set the URL page name for the export excel input buttons.
-            String excelURL = "employee-information-excel.jsp" + params;
-            //Set the URL page name for the print report input buttons.            
-            String printURL = "employee-information-print.jsp" + params;
+            //Set the URL link parameters.
+            String params = request.getQueryString();
+            //Set the URL page name for the export excel.
+            String excelURL = "employee-information-excel.jsp";
+            if (params != null) {
+                excelURL += "?" + params;
+            }
+            //Set the URL page name for the print report.
+            String printURL = "employee-information-print.jsp";
+            if (params != null) {
+                printURL += "?" + params;
+            }
         %>
-        <%--Input buttons for additional report commends.--%>
+        <%--Links for additional report commends.--%>
         <div>
-            <%--Input button for export report to an excel file.--%>
-            <input type="button" value="Export Excel" class="StandardButton" 
-                   onclick="window.open('<%=excelURL%>', '_blank');return false;" />
-            &nbsp;&nbsp;&nbsp;           
-            <%--Input button to send the report a printer.--%>
-            <input type="button" value="Print this page" class="StandardButton" 
-                   onclick="window.open('<%=printURL%>', '_blank');return false;" />
+            <%--Link for export report to an excel file.--%>
+            <a href="<%=excelURL%>">Export To Excel</a>
             &nbsp;&nbsp;&nbsp;
-            <%--Input button return user to the report main menu.--%>
-            <input type="button" value="Back to Main" class="StandardButton" 
-                   onclick="window.open('report-main-menu.jsp');return false;" />
-            <br/>
-        </div>
-    </body>
+            <%--Link  to send the report a printer.--%>
+            <a href="<%=printURL%>" target="_blank">Print this page</a><br/>
+        </div> 
+        </body>
 </html>

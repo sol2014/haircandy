@@ -18,9 +18,6 @@
 <%-- Load the tag library files. --%>
 <%@ taglib prefix="taglib" uri="/WEB-INF/taglib.tld"%>
 
-<%-- JSP Directives --%>
-<%@ page errorPage="/reports/report-error.jsp?from=sale-information-print.jsp" %>
-
 <%!
     /**
      * This class increment the end date from the begin date by number of
@@ -121,15 +118,6 @@
 
     <%--Page Content--%>   
     <body>
-	<form>
-        <%--Button to send the report content to the printer.--%>
-	<input type="button" value="Print this page" class="StandardButton" 
-		onclick="window.print();return false;" />
-		&nbsp;&nbsp;&nbsp;
-        <%--Button to close the print report page.--%>
-	<input type="button" value="Close Window " class="StandardButton" 
-		onclick="javascript:window.close();" />
-	</form>
         <%--Report Header--%>
         <h3>Sale information report</h3>
         <%--Display the current date--%>
